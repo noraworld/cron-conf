@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# WARNING: Changing this file will affect cron immediately
+
+fullpath=$(dirname $(realpath $0))
+
+(
+  echo "=================================== $(date) ==================================="
+  export PATH="/usr/local/nginx/sbin:$PATH"
+  echo "PATH = $PATH"
+  echo
+  echo "Renew certificates... Start"
+  certbot renew --nginx-server-root /usr/local/nginx/conf --no-random-sleep-on-renew # --dry-run
+  echo "Renew certificates... Done"
+  echo
+  echo "Restart nginx... Start"
+  nginx -s reload
+  echo "Restart nginx... Done"
+  echo "===================================================================================================="
+  echo
+  echo
+  echo
+) >> $fullpath/log/`date '+%Y-%m-%d'`.log 2>&1
+
+# create symlink of the latest log file as file name "latest.log"
+ln -sf $fullpath/log/`date '+%Y-%m-%d'`.log $fullpath/log/latest.log
