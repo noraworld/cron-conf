@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ -n "$(ls /etc/dnsmasq.priv/toggle)" ]; then
+  find /etc/dnsmasq.priv/toggle/* -type l -exec unlink {} \;
+fi
+
+systemctl restart dnsmasq
