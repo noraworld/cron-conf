@@ -1,0 +1,44 @@
+#!/bin/bash
+
+PROGNAME=$(basename $0)
+FULLPATH=$(dirname $(realpath $0))
+CRON_FILENAME="cron.conf"
+ROOT_CRON_FILENAME="root_cron.conf"
+
+if [ $# -gt 1 ]; then
+  echo "$PROGNAME: Too many arguments" >&2
+  exit 1
+fi
+
+if [ -z $1 ]; then
+  echo "$PROGNAME: Missing argument" >&2
+  exit 1
+fi
+
+if ! [ -d "$FULLPATH/../$1" ]; then
+  echo "$PROGNAME: No such directory: $FULLPATH/../$1" >&2
+  exit 1
+fi
+
+if [ "$(whoami)" != "root" ]; then
+  filename=$CRON_FILENAME
+else
+  filename=$ROOT_CRON_FILENAME
+fi
+
+if ! [ -e "$FULLPATH/../$1/$filename" ]; then
+  echo "$PROGNAME: No such file: $FULLPATH/../$1/$filename"
+  exit 1
+fi
+
+crontab < "$FULLPATH/../$1/$ROOT_CRON_FILENAME"
+
+if [ "$(diff "$FULLPATH/../$1/$ROOT_CRON_FILENAME" <(crontab -l))" != "" ]; then
+  echo "$PROGNAME: It looks like something went wrong" >&2
+  echo >&2
+  echo "The diff shows here:" >&2
+  diff "$FULLPATH/../$1/$ROOT_CRON_FILENAME" <(crontab -l) >&2
+  exit 2
+fi
+
+exit 0

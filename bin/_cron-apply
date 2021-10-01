@@ -1,0 +1,18 @@
+#compdef cron-apply
+
+FULLPATH=$(dirname $(realpath $0))
+
+_cron-apply() {
+  local -a dirs
+  dirs=( ${(uf)"$(ls -1d $FULLPATH/../*/ | xargs -n 1 basename | grep -v bin)"} )
+
+  _arguments '*: :->dirs'
+
+  case "$state" in
+    dirs)
+      _values $state $dirs
+      ;;
+  esac
+}
+
+compdef _cron-apply cron-apply
