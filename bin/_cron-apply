@@ -1,6 +1,7 @@
 #compdef cron-apply
 
-FULLPATH=$(dirname $(realpath $0))
+# https://unix.stackexchange.com/questions/467412/how-do-i-grep-file-paths-out-of-a-text-file#answer-467415
+FULLPATH=$(type _cron-apply | grep -o '/[^"]*' | xargs -n 1 dirname)
 
 _cron-apply() {
   local -a dirs
