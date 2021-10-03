@@ -31,13 +31,13 @@ if ! [ -e "$FULLPATH/../$1/$filename" ]; then
   exit 1
 fi
 
-crontab < "$FULLPATH/../$1/$ROOT_CRON_FILENAME"
+crontab < "$FULLPATH/../$1/$filename"
 
-if [ "$(diff "$FULLPATH/../$1/$ROOT_CRON_FILENAME" <(crontab -l))" != "" ]; then
+if [ "$(diff "$FULLPATH/../$1/$filename" <(crontab -l))" != "" ]; then
   echo "$PROGNAME: It looks like something went wrong" >&2
   echo >&2
   echo "The diff shows here:" >&2
-  diff "$FULLPATH/../$1/$ROOT_CRON_FILENAME" <(crontab -l) >&2
+  diff "$FULLPATH/../$1/$filename" <(crontab -l) >&2
   exit 2
 fi
 
