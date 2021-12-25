@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# My Raspberry Pi suddenly loses its IP address for some reason periodically (maybe once a month?)
+# This script restores its IP address automatically if it loses
+
+if [ "$(ip route show)" = "" ]; then
+  netplan apply
+fi
