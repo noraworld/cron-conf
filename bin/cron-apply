@@ -39,6 +39,8 @@ if [ "$(diff "$FULLPATH/../$1/$filename" <(crontab -l))" != "" ]; then
   echo "The diff shows here:" >&2
   diff "$FULLPATH/../$1/$filename" <(crontab -l) >&2
   exit 2
+else
+  crontab -l
 fi
 
 exit 0
