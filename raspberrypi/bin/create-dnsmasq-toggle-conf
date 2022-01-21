@@ -1,5 +1,7 @@
 #!/bin/sh
 
-ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle/* /etc/dnsmasq.toggle
+if [ -z "$(ls /etc/dnsmasq.toggle)" ]; then
+  ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle/* /etc/dnsmasq.toggle
+fi
 
 systemctl restart dnsmasq
