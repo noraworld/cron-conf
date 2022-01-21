@@ -1,0 +1,49 @@
+#!/bin/sh
+
+# This script checks whether the period of internet fasting is left,
+# and if yes, it decreases the number of days representing the period
+# of internet fasting.
+#
+# Returns true if it could decrease the number of days
+# Otherwise returns false
+
+main() {
+  # argument (filepath) is missing
+  if [ -z $1 ]; then
+    echo false
+    exit 1
+  fi
+
+  FILEPATH=$1
+
+  # file not found
+  if [ ! -e $FILEPATH ]; then
+    echo false
+    exit 2
+  fi
+
+  DAYS_LEFT=$(cat $FILEPATH | head -1)
+
+  # content of file is not a integer
+  if ! $(is_integer $DAYS_LEFT && echo true || echo false); then
+    echo false
+    exit 3
+  fi
+
+  # no days left (internet fasting is done)
+  if [ $DAYS_LEFT -le 0 ]; then
+    echo false
+    exit 0
+  fi
+
+  expr $DAYS_LEFT - 1 > $FILEPATH
+  echo true
+  exit 0
+}
+
+# cf. https://ytyaru.hatenablog.com/entry/2020/02/02/111111
+is_integer() {
+  test 0 -eq $1 > /dev/null 2>&1 || expr $1 + 0 > /dev/null 2>&1
+}
+
+main "$@"

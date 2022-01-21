@@ -1,5 +1,15 @@
 #!/bin/sh
 
+FULLPATH=$(dirname $(realpath $0))
+INTERNET_FASTING_SCRIPT_FILEPATH=$FULLPATH/lib/is_internet_fasting
+INTERNET_FASTING_PERIOD_FILEPATH=/home/ubuntu/.internet_fasting_period
+
+# do not remove toggle files (continue to restrict distracting
+# websites and resources) if the period of internet fasting is left
+if [ "$(sh -c "$INTERNET_FASTING_SCRIPT_FILEPATH $INTERNET_FASTING_PERIOD_FILEPATH")" = true ]; then
+  exit 2
+fi
+
 if [ -n "$(ls /etc/dnsmasq.toggle)" ]; then
   find /etc/dnsmasq.toggle/* -type l -exec unlink {} \;
 fi
