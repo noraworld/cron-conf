@@ -1,0 +1,22 @@
+#!/bin/sh
+
+INTERNET_FASTING_PERIOD_FILEPATH=/home/ubuntu/.internet_fasting_period
+INTERNET_FASTING_PRIV_PERIOD_FILEPATH=/home/ubuntu/.internet_fasting_priv_period
+
+if [ -z $1 ]; then
+  echo "The argument, the period of internet fasting, is missing" >&2
+  exit 1
+fi
+
+echo $1 > $INTERNET_FASTING_PERIOD_FILEPATH
+echo $1 > $INTERNET_FASTING_PRIV_PERIOD_FILEPATH
+
+if [ "$(diff $INTERNET_FASTING_PERIOD_FILEPATH $INTERNET_FASTING_PRIV_PERIOD_FILEPATH)" != "" ]; then
+  echo "Something went wrong" >&2
+  exit 1
+fi
+
+echo -n "$(basename $INTERNET_FASTING_PERIOD_FILEPATH): "
+cat      $INTERNET_FASTING_PERIOD_FILEPATH
+echo -n "$(basename $INTERNET_FASTING_PRIV_PERIOD_FILEPATH): "
+cat      $INTERNET_FASTING_PRIV_PERIOD_FILEPATH
