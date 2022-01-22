@@ -21,3 +21,6 @@ To confirm what is executed by crontab, execute the following command.
 crontab -l      # for a normal user
 sudo crontab -l # for a root user
 ```
+
+## Useful tool
+* [Crontab.guru - The cron schedule expression editor](https://crontab.guru/#*_*_*_*_*)
