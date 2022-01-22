@@ -1,22 +1,67 @@
 #!/bin/sh
 
-INTERNET_FASTING_PERIOD_FILEPATH=/home/ubuntu/.internet_fasting_period
-INTERNET_FASTING_PRIV_PERIOD_FILEPATH=/home/ubuntu/.internet_fasting_priv_period
+PROGNAME=$(basename $0)
 
-if [ -z $1 ]; then
-  echo "The argument, the period of internet fasting, is missing" >&2
-  exit 1
-fi
+FILEPATH=/home/ubuntu/.internet_fasting_period
+PRIV_FILEPATH=/home/ubuntu/.internet_fasting_priv_period
 
-echo $1 > $INTERNET_FASTING_PERIOD_FILEPATH
-echo $1 > $INTERNET_FASTING_PRIV_PERIOD_FILEPATH
+main() {
+  subcommand=$1
+  period=$2
 
-if [ "$(diff $INTERNET_FASTING_PERIOD_FILEPATH $INTERNET_FASTING_PRIV_PERIOD_FILEPATH)" != "" ]; then
-  echo "Something went wrong" >&2
-  exit 1
-fi
+  case $subcommand in
+    get)
+      get_value
+      ;;
+    set)
+      validate_value
+      set_value
+      get_value
+      ;;
+    *)
+      usage
+      exit 1
+      ;;
+  esac
+}
 
-echo -n "$(basename $INTERNET_FASTING_PERIOD_FILEPATH): "
-cat      $INTERNET_FASTING_PERIOD_FILEPATH
-echo -n "$(basename $INTERNET_FASTING_PRIV_PERIOD_FILEPATH): "
-cat      $INTERNET_FASTING_PRIV_PERIOD_FILEPATH
+get_value() {
+  echo -n "$(basename $FILEPATH): "
+  cat      $FILEPATH
+  echo -n "$(basename $PRIV_FILEPATH): "
+  cat      $PRIV_FILEPATH
+}
+
+set_value() {
+  echo $period > $FILEPATH
+  echo $period > $PRIV_FILEPATH
+
+  if [ "$(diff $FILEPATH $PRIV_FILEPATH)" != "" ]; then
+    echo "Error: diff between two files exists" >&2
+    exit 2
+  fi
+}
+
+validate_value() {
+  if [ -z $period ]; then
+    usage
+    exit 1
+  fi
+
+  if ! $(is_integer $period && echo true || echo false); then
+    echo "Error: \"$period\" is not a integer value" >&2
+    exit 1
+  fi
+}
+
+is_integer() {
+  test 0 -eq $1 > /dev/null 2>&1 || expr $1 + 0 > /dev/null 2>&1
+}
+
+usage() {
+  echo "Usage:"
+  echo "	$PROGNAME get"
+  echo "	$PROGNAME set <NUMBER>"
+}
+
+main "$@"
