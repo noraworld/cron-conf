@@ -11,6 +11,8 @@ The purpose is to reduce the amount of the digital dopamine in your brain and re
 * You will feel good quite after you try it **for a month**
 * The longer you continue it, the more it can take effect
 
+For more details, see [a YouTube clip (Japanese)](https://www.youtube.com/watch?v=SWFRdY5E0B0).
+
 ## Usage
 
 ```shell
