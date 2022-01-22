@@ -11,9 +11,11 @@ You can write a job to `cron.conf` and load it instead.
 To reflect `cron.conf` to crontab, execute the following command.
 
 ```shell
-crontab      < cron.conf      # for a normal user
-sudo crontab < root_cron.conf # for a root user
+cron-apply <DEVICE_NAME>      # for a normal user
+sudo cron-apply <DEVICE_NAME> # for a root user
 ```
+
+`<DEVICE_NAME>` is the same as a directory name that is in this repository’s root, like `raspberrypi`.
 
 To confirm what is executed by crontab, execute the following command.
 
