@@ -3,7 +3,9 @@
 PROGNAME=$(basename $0)
 
 FILEPATH=/home/ubuntu/.internet_fasting_period
+DNSMASQ_TOGGLE_DIR=/etc/dnsmasq.toggle
 PRIV_FILEPATH=/home/ubuntu/.internet_fasting_priv_period
+DNSMASQ_PRIV_TOGGLE_DIR=/etc/dnsmasq.priv/toggle
 
 main() {
   subcommand=$1
@@ -26,10 +28,27 @@ main() {
 }
 
 get_value() {
-  echo -n "$(basename $FILEPATH): "
-  cat      $FILEPATH
-  echo -n "$(basename $PRIV_FILEPATH): "
-  cat      $PRIV_FILEPATH
+  echo    "$(basename $FILEPATH)"
+  echo -n "	Counter:  "
+  cat     $FILEPATH
+  echo -n "	Status:   "
+  if [ -n $(ls $DNSMASQ_TOGGLE_DIR) ]; then
+    echo "\033[38;05;10menabled\033[m"
+  else
+    echo "\033[38;05;9mdisabled\033[m"
+  fi
+
+  echo
+
+  echo    "$(basename $PRIV_FILEPATH)"
+  echo -n "	Counter:  "
+  cat     $PRIV_FILEPATH
+  echo -n "	Status:   "
+  if [ -n $(ls $DNSMASQ_PRIV_TOGGLE_DIR) ]; then
+    echo "\033[38;05;10menabled\033[m"
+  else
+    echo "\033[38;05;9mdisabled\033[m"
+  fi
 }
 
 set_value() {
