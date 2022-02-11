@@ -32,7 +32,7 @@ get_value() {
   echo -n "	Counter:  "
   cat     $FILEPATH
   echo -n "	Status:   "
-  if [ -n $(ls $DNSMASQ_TOGGLE_DIR) ]; then
+  if [ -n "$(ls $DNSMASQ_TOGGLE_DIR)" ]; then
     echo "\033[38;05;10menabled\033[m"
   else
     echo "\033[38;05;9mdisabled\033[m"
@@ -44,7 +44,7 @@ get_value() {
   echo -n "	Counter:  "
   cat     $PRIV_FILEPATH
   echo -n "	Status:   "
-  if [ -n $(ls $DNSMASQ_PRIV_TOGGLE_DIR) ]; then
+  if [ -n "$(ls $DNSMASQ_PRIV_TOGGLE_DIR)" ]; then
     echo "\033[38;05;10menabled\033[m"
   else
     echo "\033[38;05;9mdisabled\033[m"
