@@ -1,7 +1,21 @@
 #!/bin/sh
 
-if [ -z "$(ls /etc/dnsmasq.toggle)" ]; then
-  ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle/* /etc/dnsmasq.toggle
-fi
+ORIGINAL_TOGGLE_DIR=/home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle
+DNSMASQ_TOGGLE_DIR=/etc/dnsmasq.toggle
+
+ORIGINAL_PRIV_TOGGLE_DIR=/home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle
+DNSMASQ_PRIV_TOGGLE_DIR=/etc/dnsmasq.priv/toggle
+
+for file in $ORIGINAL_TOGGLE_DIR/*; do
+  if ! [ -e "$DNSMASQ_TOGGLE_DIR/$(basename "$file")" ]; then
+    ln -s "$file" $DNSMASQ_TOGGLE_DIR
+  fi
+done
+
+for file in $ORIGINAL_PRIV_TOGGLE_DIR/*; do
+  if ! [ -e "$DNSMASQ_PRIV_TOGGLE_DIR/$(basename "$file")" ]; then
+    ln -s "$file" $DNSMASQ_PRIV_TOGGLE_DIR
+  fi
+done
 
 systemctl restart dnsmasq

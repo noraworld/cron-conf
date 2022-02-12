@@ -1,7 +1,0 @@
-#!/bin/sh
-
-if [ -z "$(ls /etc/dnsmasq.priv/toggle)" ]; then
-  ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/* /etc/dnsmasq.priv/toggle
-fi
-
-systemctl restart dnsmasq
