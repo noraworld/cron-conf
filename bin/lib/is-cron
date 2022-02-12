@@ -1,16 +1,23 @@
 #!/bin/bash
 
+# https://teratail.com/questions/3379#reply-4599
+
 pid=$$
-while [ $pid -ne 1 ] ; do
-    ppid=`awk '{print $4}' /proc/$pid/stat`
-    pp_name=`awk '{print $2}' /proc/$ppid/stat`
-    echo "pid=$pid, ppid=$ppid $pp_name"
-    if [ "$pp_name" = "(crond)" ] ; then
-        echo "This process is executed by cron."
-        exit 0
-    fi
-    pid=$ppid
+
+while [ $pid -ne 1 ]; do
+  ppid=$(awk '{print $4}' /proc/$pid/stat)
+  pp_name=$(awk '{print $2}' /proc/$ppid/stat)
+
+  # DEBUG
+  # echo "pid=$pid, ppid=$ppid $pp_name"
+
+  if [ "$pp_name" = "(crond)" ] || [ "$pp_name" = "(cron)" ]; then
+    echo true
+    exit 0
+  fi
+
+  pid=$ppid
 done
 
-echo "This process is NOT executed by cron."
+echo false
 exit 1
