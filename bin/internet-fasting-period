@@ -34,11 +34,13 @@ get_value() {
 
     if [ $(echo "$file" | grep "public/$(basename "$file")") ]; then
       conf_file=$DNSMASQ_TOGGLE_DIR/$(basename "$file").conf
+      visibility=public
     elif [ $(echo "$file" | grep "private/$(basename "$file")") ]; then
       conf_file=$DNSMASQ_PRIV_TOGGLE_DIR/$(basename "$file").conf
+      visibility=private
     fi
 
-    echo    "\033[38;05;11m$(basename "$file")\033[m"
+    echo    "\033[38;05;11m$visibility/$(basename "$file")\033[m"
 
     echo -n "	Counter:  "
     cat     "$file"
