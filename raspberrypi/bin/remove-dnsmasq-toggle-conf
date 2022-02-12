@@ -1,17 +1,57 @@
 #!/bin/sh
 
-FULLPATH=$(dirname $(realpath $0))
-INTERNET_FASTING_SCRIPT_FILEPATH=$FULLPATH/lib/is_internet_fasting
-INTERNET_FASTING_PERIOD_FILEPATH=/home/ubuntu/.internet_fasting_period
+PROGNAME=$(basename $0)
+INTERNET_FASTING_SCRIPT=$(dirname $(realpath $0))/lib/is_internet_fasting
 
-# do not remove toggle files (continue to restrict distracting
-# websites and resources) if the period of internet fasting is left
-if [ "$(sh -c "$INTERNET_FASTING_SCRIPT_FILEPATH $INTERNET_FASTING_PERIOD_FILEPATH")" = true ]; then
-  exit 2
-fi
+main() {
+  visibility=$1
+  target=$2
 
-if [ -n "$(ls /etc/dnsmasq.toggle)" ]; then
-  find /etc/dnsmasq.toggle/* -type l -exec unlink {} \;
-fi
+  validate
 
-systemctl restart dnsmasq
+  if [ "$visibility" = "public" ]; then
+    TOGGLE_FILEPATH=/etc/dnsmasq.toggle/$target.conf
+    INTERNET_FASTING_PERIOD_FILEPATH=/home/ubuntu/.ifp_counter/public/$target
+  elif [ "$visibility" = "private" ]; then
+    TOGGLE_FILEPATH=/etc/dnsmasq.priv/toggle/$target.conf
+    INTERNET_FASTING_PERIOD_FILEPATH=/home/ubuntu/.ifp_counter/private/$target
+  fi
+
+  if ! [ -f $INTERNET_FASTING_PERIOD_FILEPATH ]; then
+    echo "Error: \"$INTERNET_FASTING_PERIOD_FILEPATH\" does not exist" >&2
+    exit 1
+  fi
+
+  # do not remove toggle files (continue to restrict distracting
+  # websites and resources) if the period of internet fasting is left
+  if [ "$(sh -c "$INTERNET_FASTING_SCRIPT $INTERNET_FASTING_PERIOD_FILEPATH")" = true ]; then
+    exit 2
+  fi
+
+  if [ -L "$TOGGLE_FILEPATH" ]; then
+    unlink $TOGGLE_FILEPATH
+  else
+    echo "Warning: \"$TOGGLE_FILEPATH\" does not exist" >&2
+  fi
+
+  systemctl restart dnsmasq
+}
+
+validate() {
+  if [ -z "$visibility" ] || [ -z "$target" ]; then
+    usage
+    exit 1
+  fi
+
+  if [ "$visibility" != "public" ] && [ "$visibility" != "private" ]; then
+    usage
+    exit 1
+  fi
+}
+
+usage() {
+  echo "Usage:"
+  echo "	$PROGNAME public|private <TARGET>"
+}
+
+main "$@"

@@ -17,7 +17,7 @@ For more details, see [a YouTube clip (Japanese)](https://www.youtube.com/watch?
 
 ```shell
 # set the period of internet fasting (<NUMBER> is the number of days)
-internet-fasting-period set <NUMBER>
+internet-fasting-period set <NUMBER> <TARGET_COUNTER_FILE>
 
 # confirm how many days left
 internet-fasting-period get

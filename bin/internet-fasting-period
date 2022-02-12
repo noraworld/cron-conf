@@ -2,14 +2,15 @@
 
 PROGNAME=$(basename $0)
 
-FILEPATH=/home/ubuntu/.internet_fasting_period
 DNSMASQ_TOGGLE_DIR=/etc/dnsmasq.toggle
-PRIV_FILEPATH=/home/ubuntu/.internet_fasting_priv_period
 DNSMASQ_PRIV_TOGGLE_DIR=/etc/dnsmasq.priv/toggle
+
+COUNTER_DIR=/home/ubuntu/.ifp_counter
 
 main() {
   subcommand=$1
   period=$2
+  target=$3
 
   case $subcommand in
     get)
@@ -28,47 +29,46 @@ main() {
 }
 
 get_value() {
-  echo    "$(basename $FILEPATH)"
-  echo -n "	Counter:  "
-  cat     $FILEPATH
-  echo -n "	Status:   "
-  if [ -n "$(ls $DNSMASQ_TOGGLE_DIR)" ]; then
-    echo "\033[38;05;10menabled\033[m"
-  else
-    echo "\033[38;05;9mdisabled\033[m"
-  fi
+  for file in $COUNTER_DIR/**/*; do
+    if [ $(echo "$file" | grep "public/$(basename "$file")") ]; then
+      conf_file=$DNSMASQ_TOGGLE_DIR/$(basename "$file").conf
+    elif [ $(echo "$file" | grep "private/$(basename "$file")") ]; then
+      conf_file=$DNSMASQ_PRIV_TOGGLE_DIR/$(basename "$file").conf
+    fi
 
-  echo
+    echo    "\033[38;05;11m$(basename "$file")\033[m"
 
-  echo    "$(basename $PRIV_FILEPATH)"
-  echo -n "	Counter:  "
-  cat     $PRIV_FILEPATH
-  echo -n "	Status:   "
-  if [ -n "$(ls $DNSMASQ_PRIV_TOGGLE_DIR)" ]; then
-    echo "\033[38;05;10menabled\033[m"
-  else
-    echo "\033[38;05;9mdisabled\033[m"
-  fi
+    echo -n "	Counter:  "
+    cat     "$file"
+
+    echo -n "	Status:   "
+    if [ -e "$conf_file" ]; then
+      echo "\033[38;05;10menabled\033[m (\033[38;05;11m$conf_file\033[m exists)"
+    else
+      echo "\033[38;05;9mdisabled\033[m (\033[38;05;11m$conf_file\033[m does not exist)"
+    fi
+
+    echo
+  done
 }
 
 set_value() {
-  echo $period > $FILEPATH
-  echo $period > $PRIV_FILEPATH
-
-  if [ "$(diff $FILEPATH $PRIV_FILEPATH)" != "" ]; then
-    echo "Error: diff between two files exists" >&2
-    exit 2
-  fi
+  echo $period > $target
 }
 
 validate_value() {
-  if [ -z $period ]; then
+  if [ -z $period ] || [ -z $target ]; then
     usage
     exit 1
   fi
 
   if ! $(is_integer $period && echo true || echo false); then
     echo "Error: \"$period\" is not a integer value" >&2
+    exit 1
+  fi
+
+  if [ ! -e $target ]; then
+    echo "Error: \"$target\" does not exist" >&2
     exit 1
   fi
 }
@@ -80,7 +80,7 @@ is_integer() {
 usage() {
   echo "Usage:"
   echo "	$PROGNAME get"
-  echo "	$PROGNAME set <NUMBER>"
+  echo "	$PROGNAME set <NUMBER> <TARGET_COUNTER_FILE>"
 }
 
 main "$@"
