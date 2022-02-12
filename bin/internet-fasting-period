@@ -30,6 +30,8 @@ main() {
 
 get_value() {
   for file in $COUNTER_DIR/**/*; do
+    echo
+
     if [ $(echo "$file" | grep "public/$(basename "$file")") ]; then
       conf_file=$DNSMASQ_TOGGLE_DIR/$(basename "$file").conf
     elif [ $(echo "$file" | grep "private/$(basename "$file")") ]; then
@@ -47,8 +49,6 @@ get_value() {
     else
       echo "\033[38;05;9mdisabled\033[m (\033[38;05;11m$conf_file\033[m does not exist)"
     fi
-
-    echo
   done
 }
 
