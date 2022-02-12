@@ -5,4 +5,7 @@
 
 if [ "$(ip route show)" = "" ]; then
   netplan apply
+
+  [ -e $NON_ROOT_HOME/.log ] || mkdir $NON_ROOT_HOME/.log
+  date >> $NON_ROOT_HOME/.log/ip-observer
 fi
