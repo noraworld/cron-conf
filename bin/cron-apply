@@ -31,13 +31,18 @@ if ! [ -e "$FULLPATH/../$1/$filename" ]; then
   exit 1
 fi
 
-crontab < "$FULLPATH/../$1/$filename"
+if ! [ -e "$FULLPATH/../$1/private/$filename" ]; then
+  echo "$PROGNAME: No such file: $FULLPATH/../$1/private/$filename"
+  exit 1
+fi
 
-if [ "$(diff "$FULLPATH/../$1/$filename" <(crontab -l))" != "" ]; then
+crontab < <(cat "$FULLPATH/../$1/$filename" "$FULLPATH/../$1/private/$filename")
+
+if [ "$(diff <(cat "$FULLPATH/../$1/$filename" "$FULLPATH/../$1/private/$filename") <(crontab -l))" != "" ]; then
   echo "$PROGNAME: It looks like something went wrong" >&2
   echo >&2
   echo "The diff shows here:" >&2
-  diff "$FULLPATH/../$1/$filename" <(crontab -l) >&2
+  diff <(cat "$FULLPATH/../$1/$filename" "$FULLPATH/../$1/private/$filename") <(crontab -l) >&2
   exit 2
 else
   crontab -l
