@@ -2,24 +2,24 @@
 
 set -eu
 
-PROGNAME=$(basename $0)
-FULLPATH=$(dirname $(realpath $0))
+PROG_NAME=$(basename "$0")
+FULL_PATH=$(dirname "$(realpath "$0")")
 CRON_FILENAME="cron.conf"
 ROOT_CRON_FILENAME="root_cron.conf"
 
 main() {
   if [ $# -gt 1 ]; then
-    echo "$PROGNAME: Too many arguments" >&2
+    echo "$PROG_NAME: Too many arguments" >&2
     exit 1
   fi
 
-  if [ -z $1 ]; then
-    echo "$PROGNAME: Missing argument" >&2
+  if [ -z "$1" ]; then
+    echo "$PROG_NAME: Missing argument" >&2
     exit 1
   fi
 
-  if ! [ -d "$FULLPATH/../$1" ]; then
-    echo "$PROGNAME: No such directory: $FULLPATH/../$1" >&2
+  if ! [ -d "$FULL_PATH/../$1" ]; then
+    echo "$PROG_NAME: No such directory: $FULL_PATH/../$1" >&2
     exit 1
   fi
 
@@ -29,20 +29,20 @@ main() {
     filename=$ROOT_CRON_FILENAME
   fi
 
-  if ! [ -e "$FULLPATH/../$1/$filename" ]; then
-    echo "$PROGNAME: No such file: $FULLPATH/../$1/$filename"
+  if ! [ -e "$FULL_PATH/../$1/$filename" ]; then
+    echo "$PROG_NAME: No such file: $FULL_PATH/../$1/$filename"
     exit 1
   fi
 
-  if ! [ -e "$FULLPATH/../$1/private/$filename" ]; then
-    echo "$PROGNAME: No such file: $FULLPATH/../$1/private/$filename"
+  if ! [ -e "$FULL_PATH/../$1/private/$filename" ]; then
+    echo "$PROG_NAME: No such file: $FULL_PATH/../$1/private/$filename"
     exit 1
   fi
 
   crontab < <(print_conf "$@")
 
   if [ "$(diff <(print_conf "$@") <(crontab -l))" != "" ]; then
-    echo "$PROGNAME: It looks like something went wrong" >&2
+    echo "$PROG_NAME: It looks like something went wrong" >&2
     echo >&2
     echo "The diff shows here:" >&2
     diff <(print_conf "$@") <(crontab -l) >&2
@@ -54,13 +54,13 @@ main() {
 
 print_conf() {
   echo "##### BEGIN PUBLIC CRON CONF #####"
-  cat "$FULLPATH/../$1/$filename"
+  cat "$FULL_PATH/../$1/$filename"
   echo "##### END PUBLIC CRON CONF #####"
   echo
   echo
   echo
   echo "##### BEGIN PRIVATE CRON CONF #####"
-  cat "$FULLPATH/../$1/private/$filename"
+  cat "$FULL_PATH/../$1/private/$filename"
   echo "##### END PRIVATE CRON CONF #####"
 }
 
