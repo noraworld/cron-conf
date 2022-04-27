@@ -6,16 +6,26 @@ DNSMASQ_TOGGLE_DIR=/etc/dnsmasq.toggle
 ORIGINAL_PRIV_TOGGLE_DIR=/home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle
 DNSMASQ_PRIV_TOGGLE_DIR=/etc/dnsmasq.priv/toggle
 
+linked=false
+
 for file in $ORIGINAL_TOGGLE_DIR/*; do
   if ! [ -e "$DNSMASQ_TOGGLE_DIR/$(basename "$file")" ]; then
+    linked=true
     ln -s "$file" $DNSMASQ_TOGGLE_DIR
   fi
 done
 
 for file in $ORIGINAL_PRIV_TOGGLE_DIR/*; do
   if ! [ -e "$DNSMASQ_PRIV_TOGGLE_DIR/$(basename "$file")" ]; then
+    linked=true
     ln -s "$file" $DNSMASQ_PRIV_TOGGLE_DIR
   fi
 done
 
-systemctl restart dnsmasq
+# Restart Dnsmasq when at least one symlink is created
+if $linked; then
+  systemctl restart dnsmasq
+fi
+
+# Temporary (it will be removed after test)
+sudo -u $NON_ROOT_USER sh -c "date >> /home/$NON_ROOT_USER/.log/temp.log"
