@@ -26,6 +26,3 @@ done
 if $linked; then
   systemctl restart dnsmasq
 fi
-
-# Temporary (it will be removed after test)
-sudo -u $NON_ROOT_USER sh -c "date >> /home/$NON_ROOT_USER/.log/temp.log"
