@@ -2,12 +2,14 @@
 
 PROGNAME=$(basename $0)
 INTERNET_FASTING_SCRIPT=$(dirname $(realpath $0))/lib/is_internet_fasting
+IS_CRON_SCRIPT=$(dirname $(realpath $0))/../../bin/lib/is-cron
 
 main() {
   visibility=$1
   target=$2
 
   validate
+  authenticate
 
   if [ "$visibility" = "public" ]; then
     TOGGLE_FILEPATH=/etc/dnsmasq.toggle/$target.conf
@@ -46,6 +48,13 @@ validate() {
   if [ "$visibility" != "public" ] && [ "$visibility" != "private" ]; then
     usage
     exit 1
+  fi
+}
+
+authenticate() {
+  if [ "$(sh -c "$IS_CRON_SCRIPT")" = false ]; then
+    echo "Fatal: This operation must be executed by cron, or this script does not take enough effect" >&2
+    exit 2
   fi
 }
 
