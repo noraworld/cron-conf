@@ -1,28 +1,53 @@
 #!/bin/sh
 
-ORIGINAL_TOGGLE_DIR=/home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle
-DNSMASQ_TOGGLE_DIR=/etc/dnsmasq.toggle
+set -eu
 
-ORIGINAL_PRIV_TOGGLE_DIR=/home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle
-DNSMASQ_PRIV_TOGGLE_DIR=/etc/dnsmasq.priv/toggle
+PROG_NAME=$(basename "$0")
 
 linked=false
 
-for file in $ORIGINAL_TOGGLE_DIR/*; do
-  if ! [ -e "$DNSMASQ_TOGGLE_DIR/$(basename "$file")" ]; then
-    linked=true
-    ln -s "$file" $DNSMASQ_TOGGLE_DIR
-  fi
-done
+main() {
+  visibility=$1
+  target=$2
 
-for file in $ORIGINAL_PRIV_TOGGLE_DIR/*; do
-  if ! [ -e "$DNSMASQ_PRIV_TOGGLE_DIR/$(basename "$file")" ]; then
-    linked=true
-    ln -s "$file" $DNSMASQ_PRIV_TOGGLE_DIR
-  fi
-done
+  validate
 
-# Restart Dnsmasq when at least one symlink is created
-if $linked; then
-  systemctl restart dnsmasq
-fi
+  if [ "$visibility" = "public" ]; then
+    TOGGLE_DIR=/etc/dnsmasq.toggle
+    ORIGINAL_TOGGLE_DIR=/home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle
+  elif [ "$visibility" = "private" ]; then
+    TOGGLE_DIR=/etc/dnsmasq.priv/toggle
+    ORIGINAL_TOGGLE_DIR=/home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle
+  fi
+
+  if ! [ -e "$TOGGLE_DIR/$target.conf" ]; then
+    linked=true
+    ln -s "$ORIGINAL_TOGGLE_DIR/$target.conf" "$TOGGLE_DIR"
+  else
+    echo "Warning: \"$TOGGLE_DIR/$target.conf\" already exists" >&2
+  fi
+
+  # Restart Dnsmasq when a symlink is created
+  if $linked; then
+    systemctl restart dnsmasq
+  fi
+}
+
+validate() {
+  if [ -z "$visibility" ] || [ -z "$target" ]; then
+    usage
+    exit 1
+  fi
+
+  if [ "$visibility" != "public" ] && [ "$visibility" != "private" ]; then
+    usage
+    exit 1
+  fi
+}
+
+usage() {
+  echo "Usage:"
+  echo "	$PROG_NAME public|private <TARGET>"
+}
+
+main "$@"
