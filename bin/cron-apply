@@ -6,6 +6,7 @@ PROG_NAME=$(basename "$0")
 FULL_PATH=$(dirname "$(realpath "$0")")
 CRON_FILENAME="cron.conf"
 ROOT_CRON_FILENAME="root_cron.conf"
+JUDGE_FILEPATH="/etc/dnsmasq.toggle/youtube.conf"
 
 main() {
   if [ $# -gt 1 ]; then
@@ -22,6 +23,8 @@ main() {
     echo "$PROG_NAME: No such directory: $FULL_PATH/../$1" >&2
     exit 1
   fi
+
+  judge
 
   if [ "$(whoami)" != "root" ]; then
     filename=$CRON_FILENAME
@@ -49,6 +52,15 @@ main() {
     exit 2
   else
     crontab -l
+  fi
+}
+
+judge() {
+  if [ -e "$JUDGE_FILEPATH" ]; then
+    echo   "$PROG_NAME: Failed to apply cron configurations because \"$JUDGE_FILEPATH\" exists"                                                   >&2
+    printf "%${#PROG_NAME}s  It can be used only when \"$JUDGE_FILEPATH\" does not exist\n"                                                       >&2
+    printf "%${#PROG_NAME}s  But you should not delete it manually because this behavior is to make it difficult to change cron configurations\n" >&2
+    exit 2
   fi
 }
 
