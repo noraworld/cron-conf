@@ -1,7 +1,6 @@
 #!/bin/sh
 
 PROGNAME=$(basename $0)
-INTERNET_FASTING_SCRIPT=$(dirname $(realpath $0))/lib/is_internet_fasting
 IS_CRON_SCRIPT=$(dirname $(realpath $0))/../../bin/lib/is-cron
 
 main() {
@@ -13,21 +12,8 @@ main() {
 
   if [ "$visibility" = "public" ]; then
     TOGGLE_FILEPATH=/etc/dnsmasq.toggle/$target.conf
-    INTERNET_FASTING_PERIOD_FILEPATH=/home/ubuntu/.ifp_counter/public/$target
   elif [ "$visibility" = "private" ]; then
     TOGGLE_FILEPATH=/etc/dnsmasq.priv/toggle/$target.conf
-    INTERNET_FASTING_PERIOD_FILEPATH=/home/ubuntu/.ifp_counter/private/$target
-  fi
-
-  if ! [ -f $INTERNET_FASTING_PERIOD_FILEPATH ]; then
-    echo "Error: \"$INTERNET_FASTING_PERIOD_FILEPATH\" does not exist" >&2
-    exit 1
-  fi
-
-  # do not remove toggle files (continue to restrict distracting
-  # websites and resources) if the period of internet fasting is left
-  if [ "$(sh -c "$INTERNET_FASTING_SCRIPT $INTERNET_FASTING_PERIOD_FILEPATH")" = true ]; then
-    exit 2
   fi
 
   if [ -L "$TOGGLE_FILEPATH" ]; then
