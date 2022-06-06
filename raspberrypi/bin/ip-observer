@@ -6,7 +6,7 @@
 set -eu
 
 main() {
-  debug=true
+  debug=false
 
   if [ "$(ip route show)" = "" ]; then
     netplan apply
