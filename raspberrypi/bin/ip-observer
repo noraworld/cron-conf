@@ -3,9 +3,29 @@
 # My Raspberry Pi suddenly loses its IP address for some reason periodically (maybe once a month?)
 # This script restores its IP address automatically if it loses
 
-if [ "$(ip route show)" = "" ]; then
-  netplan apply
+set -eu
 
+main() {
+  debug=true
+
+  if [ "$(ip route show)" = "" ]; then
+    netplan apply
+    print_log
+  elif $debug; then
+    print_log
+  fi
+}
+
+print_log() {
   [ -e /home/"$NON_ROOT_USER"/.log ] || sudo -u "$NON_ROOT_USER" mkdir /home/"$NON_ROOT_USER"/.log
+
   sudo -u "$NON_ROOT_USER" sh -c "date >> /home/$NON_ROOT_USER/.log/ip-observer"
-fi
+  if ! $debug; then
+    sudo -u "$NON_ROOT_USER" sh -c "echo IP address restored >> /home/$NON_ROOT_USER/.log/ip-observer"
+  else
+    sudo -u "$NON_ROOT_USER" sh -c "echo Just a debug >> /home/$NON_ROOT_USER/.log/ip-observer"
+  fi
+  sudo -u "$NON_ROOT_USER" sh -c "echo >> /home/$NON_ROOT_USER/.log/ip-observer"
+}
+
+main
