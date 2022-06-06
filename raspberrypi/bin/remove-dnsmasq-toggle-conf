@@ -3,6 +3,8 @@
 PROGNAME=$(basename $0)
 IS_CRON_SCRIPT=$(dirname $(realpath $0))/../../bin/lib/is-cron
 
+unlinked=false
+
 main() {
   visibility=$1
   target=$2
@@ -17,12 +19,15 @@ main() {
   fi
 
   if [ -L "$TOGGLE_FILEPATH" ]; then
+    unlinked=true
     unlink $TOGGLE_FILEPATH
   else
     echo "Warning: \"$TOGGLE_FILEPATH\" does not exist" >&2
   fi
 
-  systemctl restart dnsmasq
+  if $unlinked; then
+    systemctl restart dnsmasq
+  fi
 }
 
 validate() {
