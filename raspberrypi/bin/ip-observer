@@ -6,6 +6,6 @@
 if [ "$(ip route show)" = "" ]; then
   netplan apply
 
-  [ -e /home/$NON_ROOT_USER/.log ] || sudo -u $NON_ROOT_USER mkdir /home/$NON_ROOT_USER/.log
-  sudo -u $NON_ROOT_USER sh -c "date >> /home/$NON_ROOT_USER/.log/ip-observer"
+  [ -e /home/"$NON_ROOT_USER"/.log ] || sudo -u "$NON_ROOT_USER" mkdir /home/"$NON_ROOT_USER"/.log
+  sudo -u "$NON_ROOT_USER" sh -c "date >> /home/$NON_ROOT_USER/.log/ip-observer"
 fi
