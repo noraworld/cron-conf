@@ -4,54 +4,58 @@ set -eu
 
 PROG_NAME=$(basename "$0")
 FULL_PATH=$(dirname "$(realpath "$0")")
-CRON_FILENAME="cron.conf"
-ROOT_CRON_FILENAME="root_cron.conf"
 JUDGE_FILEPATH="/etc/dnsmasq.toggle/youtube.conf"
 
+CRON_API_URL="https://api.github.com/repos/noraworld/cron-conf/contents/raspberrypi/cron.conf"
+PRIVATE_CRON_API_URL="https://api.github.com/repos/noraworld/envsman/contents/raspberrypi/cron-conf/private/cron.conf"
+
+CRON_FILE="$FULL_PATH/../raspberrypi/cron.conf"
+PRIVATE_CRON_FILE="$FULL_PATH/../raspberrypi/private/cron.conf"
+
+ROOT_CRON_API_URL="https://api.github.com/repos/noraworld/cron-conf/contents/raspberrypi/root_cron.conf"
+PRIVATE_ROOT_CRON_API_URL="https://api.github.com/repos/noraworld/envsman/contents/raspberrypi/cron-conf/private/root_cron.conf"
+
+ROOT_CRON_FILE="$FULL_PATH/../raspberrypi/root_cron.conf"
+PRIVATE_ROOT_CRON_FILE="$FULL_PATH/../raspberrypi/private/root_cron.conf"
+
 main() {
-  if [ $# -gt 1 ]; then
-    echo "$PROG_NAME: Too many arguments" >&2
-    exit 1
-  fi
-
-  if [ -z "$1" ]; then
-    echo "$PROG_NAME: Missing argument" >&2
-    exit 1
-  fi
-
-  if ! [ -d "$FULL_PATH/../$1" ]; then
-    echo "$PROG_NAME: No such directory: $FULL_PATH/../$1" >&2
-    exit 1
-  fi
-
+  validate
   judge
 
-  if [ "$(whoami)" != "root" ]; then
-    filename=$CRON_FILENAME
+  local_cron_conf="$(print_conf "$CRON_FILE" "$PRIVATE_CRON_FILE" "NON_ROOT")"
+  local_root_cron_conf="$(print_conf "$ROOT_CRON_FILE" "$PRIVATE_ROOT_CRON_FILE" "ROOT")"
+
+  remote_cron_conf="$(print_conf_remote $CRON_API_URL $PRIVATE_CRON_API_URL "NON_ROOT")"
+  remote_root_cron_conf="$(print_conf_remote $ROOT_CRON_API_URL $PRIVATE_ROOT_CRON_API_URL "ROOT")"
+
+  if [ "$(diff <(echo "$remote_cron_conf") <(echo "$local_cron_conf"))" = "" ]; then
+    echo "$local_cron_conf" | crontab
   else
-    filename=$ROOT_CRON_FILENAME
+    echo "$PROG_NAME: Local cron conf and remote cron conf did not match" >&2
+    exit 4
   fi
 
-  if ! [ -e "$FULL_PATH/../$1/$filename" ]; then
-    echo "$PROG_NAME: No such file: $FULL_PATH/../$1/$filename"
-    exit 1
-  fi
-
-  if ! [ -e "$FULL_PATH/../$1/private/$filename" ]; then
-    echo "$PROG_NAME: No such file: $FULL_PATH/../$1/private/$filename"
-    exit 1
-  fi
-
-  crontab < <(print_conf "$@")
-
-  if [ "$(diff <(print_conf "$@") <(crontab -l))" != "" ]; then
-    echo "$PROG_NAME: It looks like something went wrong" >&2
-    echo >&2
-    echo "The diff shows here:" >&2
-    diff <(print_conf "$@") <(crontab -l) >&2
-    exit 2
+  if [ "$(diff <(echo "$remote_root_cron_conf") <(echo "$local_root_cron_conf"))" = "" ]; then
+    echo "$local_root_cron_conf" | sudo crontab
   else
-    crontab -l
+    echo "$PROG_NAME: Local root cron conf and remote root cron conf did not match" >&2
+    exit 4
+  fi
+
+  check_failed=false
+  check "$local_cron_conf" "$(crontab -l)"
+  check "$local_root_cron_conf" "$(sudo crontab -l)"
+  if $check_failed; then
+    exit 3
+  fi
+
+  print_crontab
+}
+
+validate() {
+  if [ "$(whoami)" = "root" ]; then
+    echo "$PROG_NAME: It should be run as a non-root user" >&2
+    exit 1
   fi
 }
 
@@ -62,18 +66,52 @@ judge() {
     printf "%${#PROG_NAME}s  But you should not delete it manually because this behavior is to make it difficult to change cron configurations\n" >&2
     exit 2
   fi
+
+  # TODO: implement additional feature so that it can be only executed via cron
+}
+
+check() {
+  if [ "$(diff <(echo "$1") <(echo "$2"))" != "" ]; then
+    echo "$PROG_NAME: It looks like something went wrong" >&2
+    echo >&2
+    echo "The diff shows here:" >&2
+    diff <(echo "$1") <(echo "$2") >&2
+    check_failed=true
+  fi
+}
+
+# This should be performed only once
+# because the limit of GitHub API requests exceeds
+# if they are called too many
+print_conf_remote() {
+  echo "##### BEGIN $3 PUBLIC CRON CONF #####"
+  curl "$(gh api "$1" --jq .download_url)"
+  echo "##### END $3 PUBLIC CRON CONF #####"
+  echo
+  echo
+  echo
+  echo "##### BEGIN $3 PRIVATE CRON CONF #####"
+  curl "$(gh api "$2" --jq .download_url)"
+  echo "##### END $3 PRIVATE CRON CONF #####"
 }
 
 print_conf() {
-  echo "##### BEGIN PUBLIC CRON CONF #####"
-  cat "$FULL_PATH/../$1/$filename"
-  echo "##### END PUBLIC CRON CONF #####"
+  echo "##### BEGIN $3 PUBLIC CRON CONF #####"
+  cat "$1"
+  echo "##### END $3 PUBLIC CRON CONF #####"
   echo
   echo
   echo
-  echo "##### BEGIN PRIVATE CRON CONF #####"
-  cat "$FULL_PATH/../$1/private/$filename"
-  echo "##### END PRIVATE CRON CONF #####"
+  echo "##### BEGIN $3 PRIVATE CRON CONF #####"
+  cat "$2"
+  echo "##### END $3 PRIVATE CRON CONF #####"
+}
+
+print_crontab() {
+  printf "\n\n\n"
+  crontab -l
+  printf "\n\n\n"
+  sudo crontab -l
 }
 
 main "$@"
