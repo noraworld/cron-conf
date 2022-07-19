@@ -6,17 +6,17 @@ PROG_NAME=$(basename "$0")
 FULL_PATH=$(dirname "$(realpath "$0")")
 JUDGE_FILEPATH="/etc/dnsmasq.toggle/youtube.conf"
 
-CRON_API_URL="https://api.github.com/repos/noraworld/cron-conf/contents/raspberrypi/cron.conf"
-PRIVATE_CRON_API_URL="https://api.github.com/repos/noraworld/envsman/contents/raspberrypi/cron-conf/private/cron.conf"
+CRON_API_URL="https://api.github.com/repos/noraworld/cron-conf/contents/raspberrypi/non_root.cron"
+PRIVATE_CRON_API_URL="https://api.github.com/repos/noraworld/envsman/contents/raspberrypi/cron-conf/private/non_root.cron"
 
-CRON_FILE="$FULL_PATH/../raspberrypi/cron.conf"
-PRIVATE_CRON_FILE="$FULL_PATH/../raspberrypi/private/cron.conf"
+CRON_FILE="$FULL_PATH/../raspberrypi/non_root.cron"
+PRIVATE_CRON_FILE="$FULL_PATH/../raspberrypi/private/non_root.cron"
 
-ROOT_CRON_API_URL="https://api.github.com/repos/noraworld/cron-conf/contents/raspberrypi/root_cron.conf"
-PRIVATE_ROOT_CRON_API_URL="https://api.github.com/repos/noraworld/envsman/contents/raspberrypi/cron-conf/private/root_cron.conf"
+ROOT_CRON_API_URL="https://api.github.com/repos/noraworld/cron-conf/contents/raspberrypi/root.cron"
+PRIVATE_ROOT_CRON_API_URL="https://api.github.com/repos/noraworld/envsman/contents/raspberrypi/cron-conf/private/root.cron"
 
-ROOT_CRON_FILE="$FULL_PATH/../raspberrypi/root_cron.conf"
-PRIVATE_ROOT_CRON_FILE="$FULL_PATH/../raspberrypi/private/root_cron.conf"
+ROOT_CRON_FILE="$FULL_PATH/../raspberrypi/root.cron"
+PRIVATE_ROOT_CRON_FILE="$FULL_PATH/../raspberrypi/private/root.cron"
 
 main() {
   validate
