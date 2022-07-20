@@ -9,8 +9,8 @@ PATH=/home/ubuntu/workspace/cron-conf/raspberrypi/bin:/home/ubuntu/workspace/env
 
 # Deregulated Superman
 #   Available: at 01:00 - 04:00 every day
-*/5 0,4-23 * * * create-dnsmasq-toggle-conf private deregulated_superman && remove-dnsmasq-toggle-conf private normal_upstream   && create-dnsmasq-toggle-conf private superman_upstream
-0   1      * * * remove-dnsmasq-toggle-conf private deregulated_superman && remove-dnsmasq-toggle-conf private superman_upstream && create-dnsmasq-toggle-conf private normal_upstream
+*/5 0,4-23 * * * create-dnsmasq-toggle-conf private deregulated_superman && remove-dnsmasq-toggle-conf private nordvpn_upstream  && create-dnsmasq-toggle-conf private superman_upstream
+0   1      * * * remove-dnsmasq-toggle-conf private deregulated_superman && remove-dnsmasq-toggle-conf private superman_upstream && create-dnsmasq-toggle-conf private nordvpn_upstream
 
 # Superman
 #   Available: at 01:00 - 04:00 every day
