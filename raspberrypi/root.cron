@@ -18,22 +18,22 @@ PATH=/home/ubuntu/workspace/cron-conf/raspberrypi/bin:/home/ubuntu/workspace/env
 0   1      * * * remove-dnsmasq-toggle-conf private superman
 
 # Netflix
-#   Available: at 02:00 - 04:00 on 1,4,7,10,13,16,19,22,25,28
+#   Available: at 02:00 - 05:00 on 1,4,7,10,13,16,19,22,25,28
 */5 *        2-31/3 * * create-dnsmasq-toggle-conf public netflix
 */5 *        3-31/3 * * create-dnsmasq-toggle-conf public netflix
-*/5 0-1,4-23 1-31/3 * * create-dnsmasq-toggle-conf public netflix
+*/5 0-1,5-23 1-31/3 * * create-dnsmasq-toggle-conf public netflix
 0   2        1-31/3 * * remove-dnsmasq-toggle-conf public netflix
 
 # VOD
-#   Available: at 02:00 - 04:00 on 2,5,8,11,14,17,20,23,26,29
+#   Available: at 02:00 - 05:00 on 2,5,8,11,14,17,20,23,26,29
 */5 *        1-31/3 * * create-dnsmasq-toggle-conf public vod
 */5 *        3-31/3 * * create-dnsmasq-toggle-conf public vod
-*/5 0-1,4-23 2-31/3 * * create-dnsmasq-toggle-conf public vod
+*/5 0-1,5-23 2-31/3 * * create-dnsmasq-toggle-conf public vod
 0   2        2-31/3 * * remove-dnsmasq-toggle-conf public vod
 
 # YouTube
-#   Available: at 02:00 - 04:00 on 3,6,9,12,15,18,21,24,27,30
+#   Available: at 02:00 - 05:00 on 3,6,9,12,15,18,21,24,27,30
 */5 *        1-31/3 * * create-dnsmasq-toggle-conf public youtube
 */5 *        2-31/3 * * create-dnsmasq-toggle-conf public youtube
-*/5 0-1,4-23 3-31/3 * * create-dnsmasq-toggle-conf public youtube
+*/5 0-1,5-23 3-31/3 * * create-dnsmasq-toggle-conf public youtube
 0   2        3-31/3 * * remove-dnsmasq-toggle-conf public youtube
