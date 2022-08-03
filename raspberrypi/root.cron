@@ -28,6 +28,8 @@ PATH=/home/ubuntu/workspace/cron-conf/raspberrypi/bin:/home/ubuntu/workspace/env
 */5 *        3-31/3 * * create-dnsmasq-toggle-conf public vod
 */5 0-1,5-23 2-31/3 * * create-dnsmasq-toggle-conf public vod
 0   2        2-31/3 * * remove-dnsmasq-toggle-conf public vod
+*/5 5-7      *      * * create-dnsmasq-toggle-conf public amazon
+0   8        *      * * remove-dnsmasq-toggle-conf public amazon
 
 # YouTube
 #   Available: at 02:00 - 05:00 on 3,6,9,12,15,18,21,24,27,30
