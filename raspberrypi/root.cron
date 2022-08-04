@@ -37,3 +37,15 @@ PATH=/home/ubuntu/workspace/cron-conf/raspberrypi/bin:/home/ubuntu/workspace/env
 */5 *        2-31/3 * * create-dnsmasq-toggle-conf public youtube
 */5 0-1,5-23 3-31/3 * * create-dnsmasq-toggle-conf public youtube
 0   2        3-31/3 * * remove-dnsmasq-toggle-conf public youtube
+
+# YouTube Music
+#   Available: Not decided yet
+#
+#   NOTE:
+#     This rule is the opposite of the other rules
+#     YouTube Music is allowed when the file does exist
+#
+# Deny
+# */5 * * * * remove-dnsmasq-toggle-conf public youtube_music
+# Allow
+# */5 * * * * create-dnsmasq-toggle-conf public youtube_music
