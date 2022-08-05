@@ -7,4 +7,4 @@ PATH=/home/ubuntu/.local/share/zinit/polaris/bin:/home/ubuntu/workspace/cron-con
 #   cron config can be updated only when YouTube is not being
 #   restricted, but this schedule may not match that of YouTube
 #   because it is too tedious to match it every time it is updated
-03 00-09 * * * cron-apply raspberrypi
+*/10 * * * * cron-apply raspberrypi
