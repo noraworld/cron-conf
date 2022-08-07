@@ -54,6 +54,6 @@ NON_ROOT_USER=ubuntu
 #     YouTube Music is allowed when the file does exist
 #
 # Deny
-*/15 0,8-23 * * * sudo remove-dnsmasq-toggle-conf public youtube_music; cron-daemonctl start observe-youtube-music-conf
+*/5 0,8-23 * * * sudo remove-dnsmasq-toggle-conf public youtube_music; cron-daemonctl start observe-youtube-music-conf
 # Allow
-0    1      * * * sudo create-dnsmasq-toggle-conf public youtube_music; cron-daemonctl stop observe-youtube-music-conf
+0   1      * * * sudo create-dnsmasq-toggle-conf public youtube_music; cron-daemonctl stop observe-youtube-music-conf
