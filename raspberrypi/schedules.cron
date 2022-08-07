@@ -1,7 +1,9 @@
-PATH=/home/ubuntu/.local/share/zinit/polaris/bin:/home/ubuntu/workspace/cron-conf/bin:/home/ubuntu/workspace/bluetoothctl-autoconnector/bin:/home/ubuntu/workspace/cron-conf/raspberrypi/bin:/home/ubuntu/workspace/envsman/raspberrypi/cron-conf:/usr/bin:/bin # Default: /usr/bin:/bin
+# Default: /usr/bin:/bin
+PATH=/home/ubuntu/.local/share/zinit/polaris/bin:/home/ubuntu/workspace/cron-conf/bin:/home/ubuntu/workspace/bluetoothctl-autoconnector/bin:/home/ubuntu/workspace/cron-conf/raspberrypi/bin:/home/ubuntu/workspace/envsman/raspberrypi/cron-conf:/usr/bin:/bin
 NON_ROOT_USER=ubuntu
 
 @reboot marlin connect all --retry=2
+@reboot sudo ipv6_forever
 
 # Auto-update cron conf
 # MEMO:
@@ -9,8 +11,6 @@ NON_ROOT_USER=ubuntu
 #   restricted, but this schedule may not match that of YouTube
 #   because it is too tedious to match it every time it is updated
 */10 * * * * cron-apply raspberrypi
-
-@reboot sudo ipv6_forever
 
 # Observe IP address not getting lost
 */10 * * * * sudo ip-observer
