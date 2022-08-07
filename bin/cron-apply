@@ -17,12 +17,15 @@ main() {
   judge
 
   local_cron_conf="$(print_conf "$CRON_FILE" "$PRIVATE_CRON_FILE")"
-  remote_cron_conf="$(print_conf_remote $CRON_API_URL $PRIVATE_CRON_API_URL)"
 
+  # It is advisable to exit if there is no need to update schedules
+  # because the limit of GitHub API requests may be exceeded
   if [ "$(diff <(crontab -l) <(echo "$local_cron_conf"))" = "" ]; then
     echo "INFO: No need to update because current and local cron configs are the same" >&2
     exit 0
   fi
+
+  remote_cron_conf="$(print_conf_remote $CRON_API_URL $PRIVATE_CRON_API_URL)"
 
   if [ "$(diff <(echo "$local_cron_conf") <(echo "$remote_cron_conf"))" != "" ]; then
     echo "ERROR: Cancel updating because local and remote cron configs are different" >&2
