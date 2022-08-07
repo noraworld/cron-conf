@@ -2,7 +2,6 @@
 
 set -eu
 
-PROG_NAME=$(basename "$0")
 FULL_PATH=$(dirname "$(realpath "$0")")
 JUDGE_FILEPATH="/etc/dnsmasq.toggle/youtube.conf"
 
@@ -21,12 +20,12 @@ main() {
   remote_cron_conf="$(print_conf_remote $CRON_API_URL $PRIVATE_CRON_API_URL "NON_ROOT")"
 
   if [ "$(diff <(crontab -l) <(echo "$local_cron_conf"))" = "" ]; then
-    echo "$PROG_NAME: No need to update because current and local cron configs are the same" >&2
+    echo "INFO: No need to update because current and local cron configs are the same" >&2
     exit 0
   fi
 
   if [ "$(diff <(echo "$local_cron_conf") <(echo "$remote_cron_conf"))" != "" ]; then
-    echo "$PROG_NAME: Cancel updating because local and remote cron configs are different" >&2
+    echo "ERROR: Cancel updating because local and remote cron configs are different" >&2
     exit 1
   fi
 
@@ -45,9 +44,9 @@ main() {
 
 judge() {
   if [ -e "$JUDGE_FILEPATH" ]; then
-    echo   "$PROG_NAME: Failed to apply cron configurations because \"$JUDGE_FILEPATH\" exists"                                                   >&2
-    printf "%${#PROG_NAME}s  It can be used only when \"$JUDGE_FILEPATH\" does not exist\n"                                                       >&2
-    printf "%${#PROG_NAME}s  But you should not delete it manually because this behavior is to make it difficult to change cron configurations\n" >&2
+    echo "ERROR: Failed to apply cron configurations because \"$JUDGE_FILEPATH\" exists" >&2
+    echo "       It can be used only when \"$JUDGE_FILEPATH\" does not exist" >&2
+    echo "       But you should not delete it manually because this behavior is to make it difficult to change cron configurations" >&2
     exit 1
   fi
 
@@ -58,7 +57,7 @@ judge() {
 
 check() {
   if [ "$(diff <(echo "$1") <(echo "$2"))" != "" ]; then
-    echo "$PROG_NAME: It looks like something went wrong" >&2
+    echo "ERROR: It looks like something went wrong" >&2
     echo >&2
     echo "The diff shows here:" >&2
     diff <(echo "$1") <(echo "$2") >&2
