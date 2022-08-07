@@ -9,54 +9,34 @@ JUDGE_FILEPATH="/etc/dnsmasq.toggle/youtube.conf"
 CRON_API_URL="https://api.github.com/repos/noraworld/cron-conf/contents/raspberrypi/non_root.cron"
 PRIVATE_CRON_API_URL="https://api.github.com/repos/noraworld/envsman/contents/raspberrypi/cron-conf/private/non_root.cron"
 
-CRON_FILE="$FULL_PATH/../raspberrypi/non_root.cron"
+CRON_FILE="$FULL_PATH/../raspberrypi/schedules.cron"
 PRIVATE_CRON_FILE="$FULL_PATH/../raspberrypi/private/non_root.cron"
 
-ROOT_CRON_API_URL="https://api.github.com/repos/noraworld/cron-conf/contents/raspberrypi/root.cron"
-PRIVATE_ROOT_CRON_API_URL="https://api.github.com/repos/noraworld/envsman/contents/raspberrypi/cron-conf/private/root.cron"
-
-ROOT_CRON_FILE="$FULL_PATH/../raspberrypi/root.cron"
-PRIVATE_ROOT_CRON_FILE="$FULL_PATH/../raspberrypi/private/root.cron"
-
 main() {
-  validate
   judge
 
   local_cron_conf="$(print_conf "$CRON_FILE" "$PRIVATE_CRON_FILE" "NON_ROOT")"
-  local_root_cron_conf="$(print_conf "$ROOT_CRON_FILE" "$PRIVATE_ROOT_CRON_FILE" "ROOT")"
-
   remote_cron_conf="$(print_conf_remote $CRON_API_URL $PRIVATE_CRON_API_URL "NON_ROOT")"
-  remote_root_cron_conf="$(print_conf_remote $ROOT_CRON_API_URL $PRIVATE_ROOT_CRON_API_URL "ROOT")"
 
-  if [ "$(diff <(echo "$remote_cron_conf") <(echo "$local_cron_conf"))" = "" ]; then
-    echo "$local_cron_conf" | crontab
-  else
-    echo "$PROG_NAME: Local cron conf and remote cron conf did not match" >&2
-    exit 4
+  if [ "$(diff <(crontab -l) <(echo "$local_cron_conf"))" = "" ]; then
+    echo "$PROG_NAME: No need to update because current and local cron configs are the same" >&2
+    exit 0
   fi
 
-  if [ "$(diff <(echo "$remote_root_cron_conf") <(echo "$local_root_cron_conf"))" = "" ]; then
-    echo "$local_root_cron_conf" | sudo crontab
-  else
-    echo "$PROG_NAME: Local root cron conf and remote root cron conf did not match" >&2
-    exit 4
+  if [ "$(diff <(echo "$local_cron_conf") <(echo "$remote_cron_conf"))" != "" ]; then
+    echo "$PROG_NAME: Cancel updating because local and remote cron configs are different" >&2
+    exit 1
   fi
+
+  echo "$local_cron_conf" | crontab
 
   check_failed=false
   check "$local_cron_conf" "$(crontab -l)"
-  check "$local_root_cron_conf" "$(sudo crontab -l)"
   if $check_failed; then
-    exit 3
+    exit 1
   fi
 
   print_crontab
-}
-
-validate() {
-  if [ "$(whoami)" = "root" ]; then
-    echo "$PROG_NAME: It should be run as a non-root user" >&2
-    exit 1
-  fi
 }
 
 judge() {
@@ -64,7 +44,7 @@ judge() {
     echo   "$PROG_NAME: Failed to apply cron configurations because \"$JUDGE_FILEPATH\" exists"                                                   >&2
     printf "%${#PROG_NAME}s  It can be used only when \"$JUDGE_FILEPATH\" does not exist\n"                                                       >&2
     printf "%${#PROG_NAME}s  But you should not delete it manually because this behavior is to make it difficult to change cron configurations\n" >&2
-    exit 2
+    exit 1
   fi
 
   # TODO: implement additional feature so that it can be only executed via cron
@@ -85,13 +65,13 @@ check() {
 # if they are called too many
 print_conf_remote() {
   echo "##### BEGIN $3 PUBLIC CRON CONF #####"
-  curl "$(gh api "$1" --jq .download_url)"
+  curl --silent "$(gh api "$1" --jq .download_url)"
   echo "##### END $3 PUBLIC CRON CONF #####"
   echo
   echo
   echo
   echo "##### BEGIN $3 PRIVATE CRON CONF #####"
-  curl "$(gh api "$2" --jq .download_url)"
+  curl --silent "$(gh api "$2" --jq .download_url)"
   echo "##### END $3 PRIVATE CRON CONF #####"
 }
 
@@ -110,8 +90,6 @@ print_conf() {
 print_crontab() {
   printf "\n\n\n"
   crontab -l
-  printf "\n\n\n"
-  sudo crontab -l
 }
 
 main "$@"
