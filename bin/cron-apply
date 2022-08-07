@@ -6,11 +6,13 @@ PROG_NAME=$(basename "$0")
 FULL_PATH=$(dirname "$(realpath "$0")")
 JUDGE_FILEPATH="/etc/dnsmasq.toggle/youtube.conf"
 
-CRON_API_URL="https://api.github.com/repos/noraworld/cron-conf/contents/raspberrypi/non_root.cron"
+CRON_API_URL="https://api.github.com/repos/noraworld/cron-conf/contents/raspberrypi/schedules.cron"
 PRIVATE_CRON_API_URL="https://api.github.com/repos/noraworld/envsman/contents/raspberrypi/cron-conf/private/non_root.cron"
 
 CRON_FILE="$FULL_PATH/../raspberrypi/schedules.cron"
 PRIVATE_CRON_FILE="$FULL_PATH/../raspberrypi/private/non_root.cron"
+
+
 
 main() {
   judge
@@ -36,8 +38,10 @@ main() {
     exit 1
   fi
 
-  print_crontab
+  crontab -l
 }
+
+
 
 judge() {
   if [ -e "$JUDGE_FILEPATH" ]; then
@@ -50,6 +54,8 @@ judge() {
   # TODO: implement additional feature so that it can be only executed via cron
 }
 
+
+
 check() {
   if [ "$(diff <(echo "$1") <(echo "$2"))" != "" ]; then
     echo "$PROG_NAME: It looks like something went wrong" >&2
@@ -59,6 +65,8 @@ check() {
     check_failed=true
   fi
 }
+
+
 
 # This should be performed only once
 # because the limit of GitHub API requests exceeds
@@ -75,6 +83,8 @@ print_conf_remote() {
   echo "##### END $3 PRIVATE CRON CONF #####"
 }
 
+
+
 print_conf() {
   echo "##### BEGIN $3 PUBLIC CRON CONF #####"
   cat "$1"
@@ -87,9 +97,6 @@ print_conf() {
   echo "##### END $3 PRIVATE CRON CONF #####"
 }
 
-print_crontab() {
-  printf "\n\n\n"
-  crontab -l
-}
+
 
 main "$@"
