@@ -1,6 +1,7 @@
 #!/bin/sh
 
 # It is necessary when manipulating systemctl with cron
+#   https://superuser.com/questions/1561076/systemctl-use-failed-to-connect-to-bus-no-such-file-or-directory-debian-9
 export XDG_RUNTIME_DIR=/run/user/$(id -u)
 
 if [ "$(systemctl --user is-active $2)" != "active" ]; then
