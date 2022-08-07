@@ -1,0 +1,90 @@
+#!/bin/sh
+
+# Example usage:
+#   --event create --file youtube_music.conf --target /etc/dnsmasq.toggle
+#   --event delete --file youtube.conf --source /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle --target /etc/dnsmasq.toggle
+#   --event modify --target /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle
+
+set -eu
+
+PROG_NAME=$(basename "$0")
+
+
+
+main() {
+  parse_options "$@"
+  validate "$@"
+
+  # shellcheck disable=SC2086
+  inotifywait -e "$EVENT" --format '%w%f' -m -q -r -t 0 "$TARGET" | while read -r observed_path; do
+    observed_file=$(basename $observed_path)
+
+    if [ "$FILE" = "" ]; then
+      file=$observed_file
+    else
+      file=$FILE
+    fi
+
+    if [ "$file" = "$observed_file" ]; then
+      case "$EVENT" in
+        "create")
+          sudo unlink "$TARGET/$file"
+          sudo systemctl restart dnsmasq
+          echo "INFO: Deleted symlink \"$TARGET/$file\" automatically"
+          ;;
+        "delete")
+          sudo ln -s "$SOURCE/$file" "$TARGET"
+          sudo systemctl restart dnsmasq
+          echo "INFO: Created symlink \"$TARGET/$file\" automatically"
+          ;;
+        "modify")
+          # Only track modified files
+          # "inotifywait -e modify" also tracks created files such as
+          # "youtube.conf.swp", which causes "git" command to fail
+          if [ "$(git -C "$TARGET" status --porcelain | grep -e "^M" -e "^ M" | grep "$file")" != "" ]; then
+            git -C "$TARGET" restore "$observed_path"
+            echo "INFO: Restored changes of \"$file\" automatically"
+          fi
+          ;;
+        "move")
+          # TODO
+          :
+          ;;
+      esac
+    fi
+  done
+}
+
+
+
+parse_options() {
+  # shellcheck disable=SC1090
+  . "$(dirname "$(realpath "$0")")"/lib/"$PROG_NAME"/parser
+  parse "$@"
+  eval "set -- $REST"
+}
+
+
+
+validate() {
+  if [ "$EVENT" = "" ]; then
+    echo "ERROR: --event not set" >&2
+    exit 1
+  fi
+
+  if [ "$SOURCE" = "" ]; then
+    if [ "$EVENT" = "delete" ]; then
+      echo "ERROR: --source not set" >&2
+      exit 1
+    fi
+  fi
+
+  if [ "$TARGET" = "" ]; then
+    echo "ERROR: --target not set" >&2
+    exit 1
+  fi
+}
+
+
+
+main "$@"
