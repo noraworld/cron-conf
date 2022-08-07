@@ -3,21 +3,21 @@
 set -eu
 
 FULL_PATH=$(dirname "$(realpath "$0")")
-JUDGE_FILEPATH="/etc/dnsmasq.toggle/youtube.conf"
+CRON_FILE="$FULL_PATH/../raspberrypi/schedules.cron"
+PRIVATE_CRON_FILE="$FULL_PATH/../raspberrypi/private/schedules.cron"
 
 CRON_API_URL="https://api.github.com/repos/noraworld/cron-conf/contents/raspberrypi/schedules.cron"
-PRIVATE_CRON_API_URL="https://api.github.com/repos/noraworld/envsman/contents/raspberrypi/cron-conf/private/non_root.cron"
+PRIVATE_CRON_API_URL="https://api.github.com/repos/noraworld/envsman/contents/raspberrypi/cron-conf/private/schedules.cron"
 
-CRON_FILE="$FULL_PATH/../raspberrypi/schedules.cron"
-PRIVATE_CRON_FILE="$FULL_PATH/../raspberrypi/private/non_root.cron"
+JUDGE_FILEPATH="/etc/dnsmasq.toggle/youtube.conf"
 
 
 
 main() {
   judge
 
-  local_cron_conf="$(print_conf "$CRON_FILE" "$PRIVATE_CRON_FILE" "NON_ROOT")"
-  remote_cron_conf="$(print_conf_remote $CRON_API_URL $PRIVATE_CRON_API_URL "NON_ROOT")"
+  local_cron_conf="$(print_conf "$CRON_FILE" "$PRIVATE_CRON_FILE")"
+  remote_cron_conf="$(print_conf_remote $CRON_API_URL $PRIVATE_CRON_API_URL)"
 
   if [ "$(diff <(crontab -l) <(echo "$local_cron_conf"))" = "" ]; then
     echo "INFO: No need to update because current and local cron configs are the same" >&2
@@ -71,29 +71,29 @@ check() {
 # because the limit of GitHub API requests exceeds
 # if they are called too many
 print_conf_remote() {
-  echo "##### BEGIN $3 PUBLIC CRON CONF #####"
+  echo "##### BEGIN PUBLIC CRON CONF #####"
   curl --silent "$(gh api "$1" --jq .download_url)"
-  echo "##### END $3 PUBLIC CRON CONF #####"
+  echo "##### END PUBLIC CRON CONF #####"
   echo
   echo
   echo
-  echo "##### BEGIN $3 PRIVATE CRON CONF #####"
+  echo "##### BEGIN PRIVATE CRON CONF #####"
   curl --silent "$(gh api "$2" --jq .download_url)"
-  echo "##### END $3 PRIVATE CRON CONF #####"
+  echo "##### END PRIVATE CRON CONF #####"
 }
 
 
 
 print_conf() {
-  echo "##### BEGIN $3 PUBLIC CRON CONF #####"
+  echo "##### BEGIN PUBLIC CRON CONF #####"
   cat "$1"
-  echo "##### END $3 PUBLIC CRON CONF #####"
+  echo "##### END PUBLIC CRON CONF #####"
   echo
   echo
   echo
-  echo "##### BEGIN $3 PRIVATE CRON CONF #####"
+  echo "##### BEGIN PRIVATE CRON CONF #####"
   cat "$2"
-  echo "##### END $3 PRIVATE CRON CONF #####"
+  echo "##### END PRIVATE CRON CONF #####"
 }
 
 
