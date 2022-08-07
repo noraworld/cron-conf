@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# It is necessary when manipulating systemctl with cron
+export XDG_RUNTIME_DIR=/run/user/$(id -u)
+
+if [ "$(systemctl --user is-active $2)" != "active" ]; then
+  systemctl --user "$1" "$2"
+fi
