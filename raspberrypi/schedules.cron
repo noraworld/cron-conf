@@ -17,34 +17,34 @@ NON_ROOT_USER=ubuntu
 
 # Deregulated Superman
 #   Available: at 01:00 - 08:00 every day
-*/5 0,8-23 * * * sudo create-dnsmasq-toggle-conf private deregulated_superman; sudo remove-dnsmasq-toggle-conf private adguard_upstream; sudo create-dnsmasq-toggle-conf private superman_upstream; cron-daemonctl start observe-deregulated-superman-conf; cron-daemonctl start observe-superman-upstream-conf
-0   1      * * * sudo remove-dnsmasq-toggle-conf private deregulated_superman; sudo remove-dnsmasq-toggle-conf private superman_upstream; sudo create-dnsmasq-toggle-conf private adguard_upstream; cron-daemonctl stop observe-deregulated-superman-conf; cron-daemonctl stop observe-superman-upstream-conf
+*/5 0,8-23 * * * cron-daemonctl start observe-deregulated-superman-conf; cron-daemonctl start observe-superman-upstream-conf; sudo create-dnsmasq-toggle-conf private deregulated_superman; sudo remove-dnsmasq-toggle-conf private adguard_upstream; sudo create-dnsmasq-toggle-conf private superman_upstream
+0   1      * * * cron-daemonctl stop observe-deregulated-superman-conf; cron-daemonctl stop observe-superman-upstream-conf; sudo remove-dnsmasq-toggle-conf private deregulated_superman; sudo remove-dnsmasq-toggle-conf private superman_upstream; sudo create-dnsmasq-toggle-conf private adguard_upstream
 
 # Superman
 #   Available: at 01:00 - 05:00 every day
-*/5 0,5-23 * * * sudo create-dnsmasq-toggle-conf private superman; cron-daemonctl start observe-superman-conf
-0   1      * * * sudo remove-dnsmasq-toggle-conf private superman; cron-daemonctl stop observe-superman-conf
+*/5 0,5-23 * * * cron-daemonctl start observe-superman-conf; sudo create-dnsmasq-toggle-conf private superman
+0   1      * * * cron-daemonctl stop observe-superman-conf; sudo remove-dnsmasq-toggle-conf private superman
 
 # Netflix
 #   Available: at 02:00 - 05:00 every day
-*/5 0-1,5-23 * * * sudo create-dnsmasq-toggle-conf public netflix; cron-daemonctl start observe-netflix-conf
-0   2        * * * sudo remove-dnsmasq-toggle-conf public netflix; cron-daemonctl stop observe-netflix-conf
+*/5 0-1,5-23 * * * cron-daemonctl start observe-netflix-conf; sudo create-dnsmasq-toggle-conf public netflix
+0   2        * * * cron-daemonctl stop observe-netflix-conf; sudo remove-dnsmasq-toggle-conf public netflix
 
 # VOD
 #   Available: at 02:00 - 05:00 on 2,5,8,11,14,17,20,23,26,29
-*/5 *        1-31/3 * * sudo create-dnsmasq-toggle-conf public vod; cron-daemonctl start observe-vod-conf
-*/5 *        3-31/3 * * sudo create-dnsmasq-toggle-conf public vod; cron-daemonctl start observe-vod-conf
-*/5 0-1,5-23 2-31/3 * * sudo create-dnsmasq-toggle-conf public vod; cron-daemonctl start observe-vod-conf
-0   2        2-31/3 * * sudo remove-dnsmasq-toggle-conf public vod; cron-daemonctl stop observe-vod-conf
-*/5 5-7      *      * * sudo create-dnsmasq-toggle-conf public amazon; cron-daemonctl start observe-amazon-conf
-0   8        *      * * sudo remove-dnsmasq-toggle-conf public amazon; cron-daemonctl stop observe-amazon-conf
+*/5 *        1-31/3 * * cron-daemonctl start observe-vod-conf; sudo create-dnsmasq-toggle-conf public vod
+*/5 *        3-31/3 * * cron-daemonctl start observe-vod-conf; sudo create-dnsmasq-toggle-conf public vod
+*/5 0-1,5-23 2-31/3 * * cron-daemonctl start observe-vod-conf; sudo create-dnsmasq-toggle-conf public vod
+0   2        2-31/3 * * cron-daemonctl stop observe-vod-conf; sudo remove-dnsmasq-toggle-conf public vod
+*/5 5-7      *      * * cron-daemonctl start observe-amazon-conf; sudo create-dnsmasq-toggle-conf public amazon
+0   8        *      * * cron-daemonctl stop observe-amazon-conf; sudo remove-dnsmasq-toggle-conf public amazon
 
 # YouTube
 #   Available: at 02:00 - 05:00 on 3,6,9,12,15,18,21,24,27,30
-*/5 *        1-31/3 * * sudo create-dnsmasq-toggle-conf public youtube; cron-daemonctl start observe-youtube-conf
-*/5 *        2-31/3 * * sudo create-dnsmasq-toggle-conf public youtube; cron-daemonctl start observe-youtube-conf
-*/5 0-1,5-23 3-31/3 * * sudo create-dnsmasq-toggle-conf public youtube; cron-daemonctl start observe-youtube-conf
-0   2        3-31/3 * * sudo remove-dnsmasq-toggle-conf public youtube; cron-daemonctl stop observe-youtube-conf
+*/5 *        1-31/3 * * cron-daemonctl start observe-youtube-conf; sudo create-dnsmasq-toggle-conf public youtube
+*/5 *        2-31/3 * * cron-daemonctl start observe-youtube-conf; sudo create-dnsmasq-toggle-conf public youtube
+*/5 0-1,5-23 3-31/3 * * cron-daemonctl start observe-youtube-conf; sudo create-dnsmasq-toggle-conf public youtube
+0   2        3-31/3 * * cron-daemonctl stop observe-youtube-conf; sudo remove-dnsmasq-toggle-conf public youtube
 
 # YouTube Music
 #   Available: 01:00 - 08:00 every day
@@ -54,6 +54,6 @@ NON_ROOT_USER=ubuntu
 #     YouTube Music is allowed when the file does exist
 #
 # Deny
-*/5 0,8-23 * * * sudo remove-dnsmasq-toggle-conf public youtube_music; cron-daemonctl start observe-youtube-music-conf
+*/5 0,8-23 * * * cron-daemonctl start observe-youtube-music-conf; sudo remove-dnsmasq-toggle-conf public youtube_music
 # Allow
-0   1      * * * sudo create-dnsmasq-toggle-conf public youtube_music; cron-daemonctl stop observe-youtube-music-conf
+0   1      * * * cron-daemonctl stop observe-youtube-music-conf; sudo create-dnsmasq-toggle-conf public youtube_music
