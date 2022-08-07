@@ -14,7 +14,9 @@ JUDGE_FILEPATH="/etc/dnsmasq.toggle/youtube.conf"
 
 
 main() {
-  judge
+  # It may be unnecessary because there is an observer to prevent the
+  # cron config file from being modified in the daytime
+  # judge
 
   local_cron_conf="$(print_conf "$CRON_FILE" "$PRIVATE_CRON_FILE")"
 
