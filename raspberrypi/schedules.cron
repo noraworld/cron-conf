@@ -11,6 +11,11 @@ NON_ROOT_USER=ubuntu
 # Observe IP address not getting lost
 */10 * * * * sudo ip-observer
 
+# English
+#   Available: at 21:00 - 00:00 every day
+*/5 21-23 * * * cron-daemonctl start observe-english-conf; sudo create-dnsmasq-toggle-conf private english
+0   0     * * * cron-daemonctl stop observe-english-conf; sudo remove-dnsmasq-toggle-conf private english
+
 # Deregulated Superman
 #   Available: at 01:00 - 08:00 every day
 */5 0,8-23 * * * cron-daemonctl start observe-deregulated-superman-conf; cron-daemonctl start observe-superman-upstream-conf; sudo create-dnsmasq-toggle-conf private deregulated_superman; sudo remove-dnsmasq-toggle-conf private adguard_upstream; sudo create-dnsmasq-toggle-conf private superman_upstream
