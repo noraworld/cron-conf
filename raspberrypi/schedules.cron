@@ -6,10 +6,6 @@ NON_ROOT_USER=ubuntu
 @reboot sudo ipv6_forever
 
 # Auto-update cron conf
-# MEMO:
-#   cron config can be updated only when YouTube is not being
-#   restricted, but this schedule may not match that of YouTube
-#   because it is too tedious to match it every time it is updated
 */10 * * * * cron-apply
 
 # Observe IP address not getting lost
