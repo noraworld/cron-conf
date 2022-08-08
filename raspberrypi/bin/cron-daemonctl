@@ -2,8 +2,21 @@
 
 # It is necessary when manipulating systemctl with cron
 #   https://superuser.com/questions/1561076/systemctl-use-failed-to-connect-to-bus-no-such-file-or-directory-debian-9
-export XDG_RUNTIME_DIR=/run/user/$(id -u)
+XDG_RUNTIME_DIR=/run/user/$(id -u)
+export XDG_RUNTIME_DIR
 
-if [ "$(systemctl --user is-active $2)" != "active" ]; then
-  systemctl --user "$1" "$2"
-fi
+case "$1" in
+  "start")
+    if [ "$(systemctl --user is-active "$2")" != "active" ]; then
+      systemctl --user "$1" "$2"
+    fi
+    ;;
+  "stop")
+    if [ "$(systemctl --user is-active "$2")" = "active" ]; then
+      systemctl --user "$1" "$2"
+    fi
+    ;;
+  *)
+    systemctl --user "$1" "$2"
+    ;;
+esac
