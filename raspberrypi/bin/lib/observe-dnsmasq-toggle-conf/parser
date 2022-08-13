@@ -4,6 +4,7 @@ EVENT=''
 FILE=''
 SOURCE=''
 TARGET=''
+SUDO=''
 REST=''
 parse() {
 	OPTIND=$(($#+1))
@@ -41,6 +42,11 @@ parse() {
 				OPTARG=$2
 				TARGET="$OPTARG"
 				shift ;;
+			'--sudo')
+				[ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+				eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+				SUDO="$OPTARG"
+				;;
 			'-h'|'--help')
 				usage
 				exit 0 ;;
@@ -78,6 +84,7 @@ Options:
   -f, --file FILE             Observe only a specific file (all files in a directory by default)
   -s, --source SOURCE         
   -t, --target TARGET         Target directory to observe (current directory by default)
+      --sudo                  
   -h, --help                  Print help message and exit
 GETOPTIONSHERE
 }

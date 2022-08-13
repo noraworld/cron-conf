@@ -8,6 +8,47 @@
 set -eu
 
 PROG_NAME=$(basename "$0")
+# export PATH=/home/ubuntu/workspace/cron-conf/bin:$PATH
+
+
+
+observe() {
+  observed_file=$(basename "$observed_path")
+
+  if [ "$FILE" = "" ]; then
+    file=$observed_file
+  else
+    file=$FILE
+  fi
+
+  if [ "$file" = "$observed_file" ]; then
+    case "$EVENT" in
+      "create")
+        sudo unlink "$TARGET/$file"
+        sudo systemctl restart dnsmasq
+        echo "INFO: Deleted symlink \"$TARGET/$file\" automatically"
+        ;;
+      "delete")
+        sudo ln -s "$SOURCE/$file" "$TARGET"
+        sudo systemctl restart dnsmasq
+        echo "INFO: Created symlink \"$TARGET/$file\" automatically"
+        ;;
+      "modify")
+        # Only track modified files
+        # "inotifywait -e modify" also tracks created files such as
+        # "youtube.conf.swp", which causes "git" command to fail
+        if [ "$(git -C "$TARGET" status --porcelain | grep -e "^M" -e "^ M" | grep "$file")" != "" ]; then
+          git -C "$TARGET" restore "$observed_path"
+          echo "INFO: Restored changes of \"$file\" automatically"
+        fi
+        ;;
+      "move")
+        # TODO
+        :
+        ;;
+    esac
+  fi
+}
 
 
 
@@ -16,43 +57,15 @@ main() {
   validate "$@"
 
   # shellcheck disable=SC2086
-  inotifywait -e "$EVENT" --format '%w%f' -m -q -r -t 0 "$TARGET" | while read -r observed_path; do
-    observed_file=$(basename $observed_path)
-
-    if [ "$FILE" = "" ]; then
-      file=$observed_file
-    else
-      file=$FILE
-    fi
-
-    if [ "$file" = "$observed_file" ]; then
-      case "$EVENT" in
-        "create")
-          sudo unlink "$TARGET/$file"
-          sudo systemctl restart dnsmasq
-          echo "INFO: Deleted symlink \"$TARGET/$file\" automatically"
-          ;;
-        "delete")
-          sudo ln -s "$SOURCE/$file" "$TARGET"
-          sudo systemctl restart dnsmasq
-          echo "INFO: Created symlink \"$TARGET/$file\" automatically"
-          ;;
-        "modify")
-          # Only track modified files
-          # "inotifywait -e modify" also tracks created files such as
-          # "youtube.conf.swp", which causes "git" command to fail
-          if [ "$(git -C "$TARGET" status --porcelain | grep -e "^M" -e "^ M" | grep "$file")" != "" ]; then
-            git -C "$TARGET" restore "$observed_path"
-            echo "INFO: Restored changes of \"$file\" automatically"
-          fi
-          ;;
-        "move")
-          # TODO
-          :
-          ;;
-      esac
-    fi
-  done
+  if [ "$SUDO" = "1" ]; then
+    sudo inotifywait -e "$EVENT" --format '%w%f' -m -q -r -t 0 "$TARGET" | while read -r observed_path; do
+      observe
+    done
+  else
+    inotifywait -e "$EVENT" --format '%w%f' -m -q -r -t 0 "$TARGET" | while read -r observed_path; do
+      observe
+    done
+  fi
 }
 
 

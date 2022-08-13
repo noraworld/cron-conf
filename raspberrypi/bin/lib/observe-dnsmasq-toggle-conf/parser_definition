@@ -9,5 +9,6 @@ parser_definition() {
   param FILE  -f --file -- "Observe only a specific file (all files in a directory by default)"
   param SOURCE -s --source -- ""
   param TARGET -t --target -- "Target directory to observe (current directory by default)"
+  flag  SUDO --sudo -- ""
   disp :usage -h --help -- "Print help message and exit"
 }
