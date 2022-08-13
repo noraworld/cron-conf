@@ -25,17 +25,44 @@ observe() {
   if [ "$file" = "$observed_file" ]; then
     case "$EVENT" in
       "create")
-        sudo unlink "$TARGET/$file"
-        sudo systemctl restart dnsmasq
-        echo "INFO: Deleted symlink \"$TARGET/$file\" automatically"
+        case "$MODE" in
+          "link")
+            sudo unlink "$TARGET/$file"
+            sudo systemctl restart dnsmasq
+            echo "INFO: Deleted symlink \"$TARGET/$file\" automatically"
+            ;;
+          "file")
+            echo "TODO!"
+            exit 2
+            ;;
+          "cron")
+            echo "ERROR: The combination of mode \"$MODE\" and event \"$EVENT\" is illegal." >&2
+            exit 1
+            ;;
+        esac
         ;;
       "delete")
-        sudo ln -s "$SOURCE/$file" "$TARGET"
-        sudo systemctl restart dnsmasq
-        echo "INFO: Created symlink \"$TARGET/$file\" automatically"
+        case "$MODE" in
+          "link")
+            sudo ln -s "$SOURCE/$file" "$TARGET"
+            sudo systemctl restart dnsmasq
+            echo "INFO: Created symlink \"$TARGET/$file\" automatically"
+            ;;
+          "file")
+            echo "TODO!"
+            exit 2
+            ;;
+          "cron")
+            cron-apply
+            ;;
+        esac
         ;;
       "modify")
         case "$MODE" in
+          "link")
+            echo "ERROR: The combination of mode \"$MODE\" and event \"$EVENT\" is illegal." >&2
+            exit 1
+            ;;
           # Only track modified files
           # "inotifywait -e modify" also tracks created files such as
           # "youtube.conf.swp", which causes "git" command to fail
@@ -51,8 +78,8 @@ observe() {
         esac
         ;;
       "move")
-        # TODO
-        :
+        echo "TODO!"
+        exit 2
         ;;
     esac
   fi
@@ -94,7 +121,7 @@ validate() {
   fi
 
   if [ "$SOURCE" = "" ]; then
-    if [ "$EVENT" = "delete" ]; then
+    if [ "$EVENT" = "delete" ] && [ "$MODE" != "cron" ]; then
       echo "ERROR: --source not set" >&2
       exit 1
     fi
@@ -109,7 +136,7 @@ validate() {
     echo "ERROR: --mode not set" >&2
     exit 1
   elif [ "$MODE" != "link" ] && [ "$MODE" != "file" ] && [ "$MODE" != "cron" ]; then
-    echo "Unrecognized mode: $MODE" >&2
+    echo "ERROR: Unrecognized mode: $MODE" >&2
     exit 1
   fi
 }
