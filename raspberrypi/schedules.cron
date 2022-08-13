@@ -13,6 +13,10 @@ NON_ROOT_USER=ubuntu
 
 # Observe conf changes
 #   Available for change: at 02:00 - 03:00 every day (tentative)
+#
+#   NOTE:
+#     Remember that the shorter the time is, the more it can take effect
+#
 */5 0-1,3-23 * * * cron-daemonctl start observe-crontab
 0   2        * * * cron-daemonctl stop  observe-crontab
 */5 0-1,3-23 * * * cron-daemonctl start observe-cron-conf
