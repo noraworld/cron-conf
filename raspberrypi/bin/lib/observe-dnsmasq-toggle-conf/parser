@@ -5,6 +5,7 @@ FILE=''
 SOURCE=''
 TARGET=''
 SUDO=''
+MODE=''
 REST=''
 parse() {
 	OPTIND=$(($#+1))
@@ -14,7 +15,7 @@ parse() {
 				eval 'set -- "${OPTARG%%\=*}" "${OPTARG#*\=}"' ${1+'"$@"'}
 				;;
 			--no-*|--without-*) unset OPTARG ;;
-			-[efst]?*) OPTARG=$1; shift
+			-[efstm]?*) OPTARG=$1; shift
 				eval 'set -- "${OPTARG%"${OPTARG#??}"}" "${OPTARG#??}"' ${1+'"$@"'}
 				;;
 			-[h]?*) OPTARG=$1; shift
@@ -47,6 +48,11 @@ parse() {
 				eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
 				SUDO="$OPTARG"
 				;;
+			'-m'|'--mode')
+				[ $# -le 1 ] && set "required" "$1" && break
+				OPTARG=$2
+				MODE="$OPTARG"
+				shift ;;
 			'-h'|'--help')
 				usage
 				exit 0 ;;
@@ -85,6 +91,7 @@ Options:
   -s, --source SOURCE         
   -t, --target TARGET         Target directory to observe (current directory by default)
       --sudo                  
+  -m, --mode MODE             link, file, cron
   -h, --help                  Print help message and exit
 GETOPTIONSHERE
 }

@@ -96,6 +96,14 @@ validate() {
     echo "ERROR: --target not set" >&2
     exit 1
   fi
+
+  if [ "$MODE" = "" ]; then
+    echo "ERROR: --mode not set" >&2
+    exit 1
+  elif [ "$MODE" != "link" ] && [ "$MODE" != "file" ] && [ "$MODE" != "cron" ]; then
+    echo "Unrecognized mode: $MODE" >&2
+    exit 1
+  fi
 }
 
 

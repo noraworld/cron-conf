@@ -10,5 +10,6 @@ parser_definition() {
   param SOURCE -s --source -- ""
   param TARGET -t --target -- "Target directory to observe (current directory by default)"
   flag  SUDO --sudo -- ""
+  param MODE -m --mode -- "link, file, cron"
   disp :usage -h --help -- "Print help message and exit"
 }
