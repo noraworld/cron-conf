@@ -11,6 +11,15 @@ NON_ROOT_USER=ubuntu
 # Observe IP address not getting lost
 */10 * * * * sudo ip-observer
 
+# Observe conf changes
+#   Available: at 00:00 - 05:00 every day (tentative)
+*/5 0,5-23 * * * cron-daemonctl start observe-crontab
+0   0      * * * cron-daemonctl stop  observe-crontab
+*/5 0,5-23 * * * cron-daemonctl start observe-cron-conf
+0   0      * * * cron-daemonctl stop  observe-cron-conf
+*/5 0,5-23 * * * cron-daemonctl start observe-dnsmasq-conf
+0   0      * * * cron-daemonctl stop  observe-dnsmasq-conf
+
 # English
 #   Available: at 21:00 - 00:00 every day
 */5 21-23 * * * cron-daemonctl start observe-english-conf; sudo create-dnsmasq-toggle-conf private english
