@@ -30,9 +30,9 @@ NON_ROOT_USER=ubuntu
 0   0     * * * cron-daemonctl stop observe-english-conf; sudo remove-dnsmasq-toggle-conf private english
 
 # Deregulated Superman
-#   Available: at 01:00 - 08:00 every day
-*/5 0,8-23 * * * cron-daemonctl start observe-deregulated-superman-conf; cron-daemonctl start observe-superman-upstream-conf; sudo create-dnsmasq-toggle-conf private deregulated_superman; sudo remove-dnsmasq-toggle-conf private adguard_upstream; sudo create-dnsmasq-toggle-conf private superman_upstream
-0   1      * * * cron-daemonctl stop observe-deregulated-superman-conf; cron-daemonctl stop observe-superman-upstream-conf; sudo remove-dnsmasq-toggle-conf private deregulated_superman; sudo remove-dnsmasq-toggle-conf private superman_upstream; sudo create-dnsmasq-toggle-conf private adguard_upstream
+#   Available: at 01:00 - 12:00 every day
+*/5 0,12-23 * * * cron-daemonctl start observe-deregulated-superman-conf; cron-daemonctl start observe-superman-upstream-conf; sudo create-dnsmasq-toggle-conf private deregulated_superman; sudo remove-dnsmasq-toggle-conf private adguard_upstream; sudo create-dnsmasq-toggle-conf private superman_upstream
+0   1       * * * cron-daemonctl stop observe-deregulated-superman-conf; cron-daemonctl stop observe-superman-upstream-conf; sudo remove-dnsmasq-toggle-conf private deregulated_superman; sudo remove-dnsmasq-toggle-conf private superman_upstream; sudo create-dnsmasq-toggle-conf private adguard_upstream
 
 # Superman
 #   Available: at 01:00 - 06:00 every day
