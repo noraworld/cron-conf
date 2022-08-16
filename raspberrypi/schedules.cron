@@ -1,3 +1,10 @@
+# In performing a command with root privileges (using `sudo`),
+# it is important to change your sudoers to the following with `sudo visudo`
+#
+#   # Defaults      secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
+#   Defaults        env_keep +="PATH"
+#
+
 # Default: /usr/bin:/bin
 PATH=/home/ubuntu/.local/share/zinit/polaris/bin:/home/ubuntu/workspace/cron-conf/bin:/home/ubuntu/workspace/bluetoothctl-autoconnector/bin:/home/ubuntu/workspace/cron-conf/raspberrypi/bin:/home/ubuntu/workspace/envsman/raspberrypi/cron-conf:/usr/bin:/bin
 NON_ROOT_USER=ubuntu
