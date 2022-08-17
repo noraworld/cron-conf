@@ -1,0 +1,27 @@
+#!/bin/sh
+
+SLEEP_INTERVAL=5   # one minute
+RETRY_SHRESHOLD=11 # one minute
+LOG_PATH=$HOME/.log/reboot.log
+
+main() {
+  for i in $(seq 0 "$RETRY_SHRESHOLD"); do
+    if [ "$(timedatectl | grep -c "System clock synchronized: yes")" -eq 1 ]; then
+      echo "System rebooted on $(date)" >> "$LOG_PATH"
+      exit 0
+    else
+      # echo "$i" # debug
+      sleep "$SLEEP_INTERVAL"
+    fi
+  done
+
+  if [ "$(timedatectl | grep -c "System clock synchronized: yes")" -eq 1 ]; then
+    echo "System rebooted on $(date)" >> "$LOG_PATH"
+    exit 0
+  else
+    # It seems to fail to synchronize the system clock
+    echo "System rebooted on $(date) (System clock synchronized: no)" >> "$LOG_PATH"
+  fi
+}
+
+main

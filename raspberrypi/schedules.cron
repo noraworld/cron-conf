@@ -9,7 +9,7 @@
 PATH=/home/ubuntu/.local/share/zinit/polaris/bin:/home/ubuntu/workspace/cron-conf/bin:/home/ubuntu/workspace/bluetoothctl-autoconnector/bin:/home/ubuntu/workspace/cron-conf/raspberrypi/bin:/home/ubuntu/workspace/envsman/raspberrypi/cron-conf:/usr/bin:/bin
 NON_ROOT_USER=ubuntu
 
-@reboot echo "System rebooted on $(date)" >> "$HOME/.log/reboot.log"
+@reboot log-reboot
 @reboot marlin connect all --retry=2
 @reboot sudo ipv6_forever
 
