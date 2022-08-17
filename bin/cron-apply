@@ -31,7 +31,7 @@ main() {
 
   if [ "$(diff <(echo "$local_cron_conf") <(echo "$remote_cron_conf"))" != "" ]; then
     echo "ERROR: Cancel updating because local and remote cron configs are different" >&2
-    exit 1
+    # exit 1
   fi
 
   echo "$local_cron_conf" | crontab
