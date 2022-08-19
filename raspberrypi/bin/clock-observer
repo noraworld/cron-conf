@@ -8,16 +8,25 @@ set -eu
 
 AFTER_NTP_INTERVAL=10
 AFTER_SYNCHRONIZATION_INTERVAL=10
+LOG_PATH=$HOME/.log/clock-observer.log
 
 main() {
+  log_flag=false
+
   check_ntp_status
   check_synchronization
   check_remote_server
+
+  if $log_flag; then
+    echo "The above log was output on $remote_time" >> "$LOG_PATH"
+    echo >> "$LOG_PATH"
+  fi
 }
 
 check_ntp_status() {
   if [ "$(timedatectl | grep -c "NTP service: active")" -eq 0 ]; then
-    echo "INFO: NTP service is inactive. Turning it on automatically..."
+    log_flag=true
+    echo "INFO: NTP service is inactive. Turning it on automatically..." >> "$LOG_PATH"
     sudo timedatectl set-ntp on
     sleep "$AFTER_NTP_INTERVAL"
   fi
@@ -25,7 +34,8 @@ check_ntp_status() {
 
 check_synchronization() {
   if [ "$(timedatectl | grep -c "System clock synchronized: yes")" -eq 0 ]; then
-    echo "INFO: System clock synchronization does not seem to be working. Waiting for a while..."
+    log_flag=true
+    echo "INFO: System clock synchronization does not seem to be working. Waiting for a while..." >> "$LOG_PATH"
     sleep "$AFTER_SYNCHRONIZATION_INTERVAL"
   fi
 }
@@ -35,29 +45,37 @@ check_remote_server() {
   get_remote_time
 
   if [ "$local_time_without_second_and_tz" != "$remote_time_without_second_and_tz" ]; then
-    echo "WARNING: Local time and remote time did not match!"
-    echo "  Local time before fixed: $local_time"
-    echo "  Remote time:             $remote_time"
+    log_flag=true
+
+    {
+      echo "WARNING: Local time and remote time did not match!"
+      echo "   Local time before fixed: $local_time"
+      echo "   Remote time:             $remote_time"
+    } >> "$LOG_PATH"
+
     sudo date --set "$remote_time" > /dev/null
     get_local_time
-    echo "  Local time after fixed:  $local_time"
+
+    echo "   Local time after fixed:  $local_time" >> "$LOG_PATH"
   fi
 }
 
 get_local_time() {
-  # Time format: Fri, 19 Aug 2022 16:12:11 GMT
-
+  # Fri, 19 Aug 2022 16:12:11 GMT
   local_time=$(env LANG=en_US.UTF-8 TZ=GMT date "+%a, %d %b %G %T %Z")
+
+  # Fri, 19 Aug 2022 16:12
   local_time_without_second_and_tz=$(echo "$local_time" | sed -r 's/:[0-9][0-9] GMT$//g')
 }
 
 get_remote_time() {
-  # Time format: Fri, 19 Aug 2022 16:12:11 GMT
-
-  # Do not change to HTTPS!
-  # https://qiita.com/kkdd/items/fdf501e9e6a03ad925d6
-  # https://teratail.com/questions/329775
+  # Fri, 19 Aug 2022 16:12:11 GMT
+  #   Do not change to HTTPS!
+  #   https://qiita.com/kkdd/items/fdf501e9e6a03ad925d6
+  #   https://teratail.com/questions/329775
   remote_time=$(curl -s --head http://www.google.com | grep -i '^date' | tr -d '\r' | cut -b 7-)
+
+  # Fri, 19 Aug 2022 16:12
   remote_time_without_second_and_tz=$(echo "$remote_time" | sed -r 's/:[0-9][0-9] GMT$//g')
 }
 
