@@ -6,7 +6,31 @@ set -eu
 #   sudo timedatectl set-ntp off
 #   sudo date --set "Mon, 15 Aug 2022 18:05:00 GMT"
 
+AFTER_NTP_INTERVAL=10
+AFTER_SYNCHRONIZATION_INTERVAL=10
+
 main() {
+  check_ntp_status
+  check_synchronization
+  check_remote_server
+}
+
+check_ntp_status() {
+  if [ "$(timedatectl | grep -c "NTP service: active")" -eq 0 ]; then
+    echo "INFO: NTP service is inactive. Turning it on automatically..."
+    sudo timedatectl set-ntp on
+    sleep "$AFTER_NTP_INTERVAL"
+  fi
+}
+
+check_synchronization() {
+  if [ "$(timedatectl | grep -c "System clock synchronized: yes")" -eq 0 ]; then
+    echo "INFO: System clock synchronization does not seem to be working. Waiting for a while..."
+    sleep "$AFTER_SYNCHRONIZATION_INTERVAL"
+  fi
+}
+
+check_remote_server() {
   get_local_time
   get_remote_time
 
