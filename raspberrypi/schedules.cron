@@ -10,6 +10,7 @@ PATH=/home/ubuntu/.local/share/zinit/polaris/bin:/home/ubuntu/workspace/cron-con
 NON_ROOT_USER=ubuntu
 
 @reboot log-reboot
+@reboot clock-observer
 @reboot metronome set full
 @reboot marlin connect all --retry=2
 @reboot sudo ipv6_forever
@@ -19,6 +20,9 @@ NON_ROOT_USER=ubuntu
 
 # Observe IP address not getting lost
 */10 * * * * sudo ip-observer
+
+# Observe the system clock not lagging
+*/10 * * * * clock-observer
 
 # This is to reduce the possibility that the system freezes
 0 8 * * * metronome set full
