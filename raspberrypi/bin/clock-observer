@@ -9,6 +9,7 @@ set -eu
 AFTER_NTP_INTERVAL=10
 AFTER_SYNCHRONIZATION_INTERVAL=10
 LOG_PATH=$HOME/.log/clock-observer.log
+TIME_FORMAT_REGEX='^(Sun|Mon|Tue|Wed|Thu|Fri|Sat), [0-9]{2} (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) [0-9]{4} [0-9]{2}:[0-9]{2}:[0-9]{2} GMT$'
 
 main() {
   log_flag=false
@@ -18,8 +19,18 @@ main() {
   check_remote_server
 
   if $log_flag; then
-    echo "The above log was output on $remote_time" >> "$LOG_PATH"
+    echo "============================ Local time:  $local_time ============================" >> "$LOG_PATH"
+
+    if [ "$(echo "$remote_time" | grep -cE "$TIME_FORMAT_REGEX")" -eq 1 ]; then
+      echo "============================ Remote time: $remote_time ============================" >> "$LOG_PATH"
+    else
+      echo "============================ Remote time: (Failed to retrieve properly) ============================" >> "$LOG_PATH"
+    fi
+
     echo >> "$LOG_PATH"
+    echo >> "$LOG_PATH"
+    echo "====================================================================================================" >> "$LOG_PATH"
+    echo "====================================================================================================" >> "$LOG_PATH"
   fi
 }
 
@@ -44,19 +55,24 @@ check_remote_server() {
   get_local_time
   get_remote_time
 
-  if [ "$local_time_without_second_and_tz" != "$remote_time_without_second_and_tz" ]; then
+  # Validate time format
+  if [ "$(echo "$remote_time" | grep -cE "$TIME_FORMAT_REGEX")" -eq 0 ]; then
+    log_flag=true
+    echo "ERROR: Failed to retrieve remote time properly." >> "$LOG_PATH"
+    echo "       Remote time: \"$remote_time\"" >> "$LOG_PATH"
+  elif [ "$local_time_without_second_and_tz" != "$remote_time_without_second_and_tz" ]; then
     log_flag=true
 
     {
       echo "WARNING: Local time and remote time did not match!"
-      echo "   Local time before fixed: $local_time"
-      echo "   Remote time:             $remote_time"
+      echo "         Local time before fixed: $local_time"
+      echo "         Remote time:             $remote_time"
     } >> "$LOG_PATH"
 
     sudo date --set "$remote_time" > /dev/null
     get_local_time
 
-    echo "   Local time after fixed:  $local_time" >> "$LOG_PATH"
+    echo "         Local time after fixed:  $local_time" >> "$LOG_PATH"
   fi
 }
 
