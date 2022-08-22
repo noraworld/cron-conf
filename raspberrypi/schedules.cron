@@ -12,7 +12,7 @@ NON_ROOT_USER=ubuntu
 @reboot log-reboot
 @reboot clock-observer
 @reboot metronome set full
-@reboot marlin connect all --retry=2
+@reboot marlin redisconnect all --retry=2
 @reboot sudo ipv6_forever
 
 # Auto-update cron conf
