@@ -25,9 +25,7 @@ NON_ROOT_USER=ubuntu
 */10 * * * * clock-observer
 
 # This is to reduce the possibility that the system freezes
-30 8  * * * metronome set full
-30 20 * * * metronome set full
-30 18 * * 6 metronome set full
+0 8 * * * metronome set full
 
 # Observe conf changes
 #   Available for change: at 02:00 - 03:00 every day
