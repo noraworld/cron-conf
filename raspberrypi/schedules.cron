@@ -30,7 +30,7 @@ NON_ROOT_USER=ubuntu
 30 18 * * 6 metronome set full
 
 # Observe conf changes
-#   Available for change: at 02:00 - 03:00 every day (tentative)
+#   Available for change: at 02:00 - 03:00 every day
 #
 #   NOTE:
 #     Remember that the shorter the time is, the more it can take effect
