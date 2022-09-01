@@ -76,13 +76,13 @@ NON_ROOT_USER=ubuntu
 */5 2-4      * * 3,6     cron-daemonctl stop observe-youtube-conf; sudo remove-dnsmasq-toggle-conf public youtube
 
 # YouTube Music
-#   Available: 01:00 - 05:00 every day
+#   Available: 01:00 - 05:00, 19:00 - 21:00 every day
 #
 #   NOTE:
 #     This rule is the opposite of the other rules
 #     YouTube Music is allowed when the file does exist
 #
 # Deny
-*/5 0,5-23 * * * cron-daemonctl start observe-youtube-music-conf; sudo remove-dnsmasq-toggle-conf public youtube_music
+*/5 0,5-18,21-23 * * * cron-daemonctl start observe-youtube-music-conf; sudo remove-dnsmasq-toggle-conf public youtube_music
 # Allow
-*/5 1-4    * * * cron-daemonctl stop observe-youtube-music-conf; sudo create-dnsmasq-toggle-conf public youtube_music
+*/5 1-4,19-20    * * * cron-daemonctl stop observe-youtube-music-conf; sudo create-dnsmasq-toggle-conf public youtube_music
