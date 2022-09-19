@@ -46,14 +46,14 @@ NON_ROOT_USER=ubuntu
 */5 0-20  * * * cron-daemonctl stop observe-english-conf; sudo remove-dnsmasq-toggle-conf private english
 
 # Deregulated Superman
-#   Available: at 01:00 - 12:00 every day
-*/5 0,12-23 * * * cron-daemonctl start observe-deregulated-superman-conf; cron-daemonctl start observe-superman-upstream-conf; sudo create-dnsmasq-toggle-conf private deregulated_superman; sudo remove-dnsmasq-toggle-conf private adguard_upstream; sudo create-dnsmasq-toggle-conf private superman_upstream
-*/5 1-11    * * * cron-daemonctl stop observe-deregulated-superman-conf; cron-daemonctl stop observe-superman-upstream-conf; sudo remove-dnsmasq-toggle-conf private deregulated_superman; sudo remove-dnsmasq-toggle-conf private superman_upstream; sudo create-dnsmasq-toggle-conf private adguard_upstream
+#   Available: at 00:00 - 12:00 every day
+*/5 12-23 * * * cron-daemonctl start observe-deregulated-superman-conf; cron-daemonctl start observe-superman-upstream-conf; sudo create-dnsmasq-toggle-conf private deregulated_superman; sudo remove-dnsmasq-toggle-conf private adguard_upstream; sudo create-dnsmasq-toggle-conf private superman_upstream
+*/5 0-11  * * * cron-daemonctl stop observe-deregulated-superman-conf; cron-daemonctl stop observe-superman-upstream-conf; sudo remove-dnsmasq-toggle-conf private deregulated_superman; sudo remove-dnsmasq-toggle-conf private superman_upstream; sudo create-dnsmasq-toggle-conf private adguard_upstream
 
 # Superman
-#   Available: at 01:00 - 05:00 every day
-*/5 0,5-23 * * * cron-daemonctl start observe-superman-conf; sudo create-dnsmasq-toggle-conf private superman
-*/5 1-4    * * * cron-daemonctl stop observe-superman-conf; sudo remove-dnsmasq-toggle-conf private superman
+#   Available: at 00:00 - 05:00 every day
+*/5 5-23 * * * cron-daemonctl start observe-superman-conf; sudo create-dnsmasq-toggle-conf private superman
+*/5 0-4  * * * cron-daemonctl stop observe-superman-conf; sudo remove-dnsmasq-toggle-conf private superman
 
 # Netflix
 #   Available: at 02:00 - 04:00 on Mon, Thu
