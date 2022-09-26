@@ -35,8 +35,8 @@ NON_ROOT_USER=ubuntu
 #
 */5 0-1,3-23 * * * cron-daemonctl start observe-crontab
 */5 2        * * * cron-daemonctl stop  observe-crontab
-*/5 0-1,3-23 * * * cron-daemonctl start observe-cron-conf
-*/5 2        * * * cron-daemonctl stop  observe-cron-conf
+#*/5 0-1,3-23 * * * cron-daemonctl start observe-cron-conf
+#*/5 2        * * * cron-daemonctl stop  observe-cron-conf
 */5 0-1,3-23 * * * cron-daemonctl start observe-dnsmasq-conf
 */5 2        * * * cron-daemonctl stop  observe-dnsmasq-conf
 
