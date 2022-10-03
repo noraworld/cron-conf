@@ -11,10 +11,10 @@ NON_ROOT_USER=ubuntu
 
 @reboot schedule-startup
 
-*/10 * * * * schedule-periodic
-
 # This is to reduce the possibility that the system freezes
 0 8 * * * metronome set full
+
+*/10 * * * * schedule-periodic
 
 # Observe conf changes
 #   Available for change: at 02:00 - 03:00 every day
