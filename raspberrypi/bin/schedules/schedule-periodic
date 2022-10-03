@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Auto-update cron conf
+cron-apply
+
+# Observe IP address not getting lost
+sudo ip-observer
+
+# Observe the system clock not lagging
+clock-observer
