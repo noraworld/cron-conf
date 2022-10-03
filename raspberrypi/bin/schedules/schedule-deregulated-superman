@@ -1,0 +1,17 @@
+#!/bin/sh
+
+if [ "$1" = "deny" ]; then
+  cron-daemonctl start observe-deregulated-superman-conf
+  cron-daemonctl start observe-superman-upstream-conf
+  sudo create-dnsmasq-toggle-conf private deregulated_superman
+  sudo remove-dnsmasq-toggle-conf private adguard_upstream
+  sudo create-dnsmasq-toggle-conf private superman_upstream
+  create-iptables-toggle-conf private 231_deregulated_superman
+elif [ "$1" = "allow" ]; then
+  cron-daemonctl stop observe-deregulated-superman-conf
+  cron-daemonctl stop observe-superman-upstream-conf
+  sudo remove-dnsmasq-toggle-conf private deregulated_superman
+  sudo remove-dnsmasq-toggle-conf private superman_upstream
+  sudo create-dnsmasq-toggle-conf private adguard_upstream
+  remove-iptables-toggle-conf private 231_deregulated_superman
+fi

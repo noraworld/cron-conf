@@ -6,7 +6,7 @@
 #
 
 # Default: /usr/bin:/bin
-PATH=/home/ubuntu/workspace/iptables-conf/bin:/home/ubuntu/.local/share/zinit/polaris/bin:/home/ubuntu/workspace/cron-conf/bin:/home/ubuntu/workspace/bluetoothctl-autoconnector/bin:/home/ubuntu/workspace/cron-conf/raspberrypi/bin:/home/ubuntu/workspace/envsman/raspberrypi/cron-conf:/home/ubuntu/workspace/fan-pippi/bin:/usr/sbin:/usr/bin:/bin
+PATH=/home/ubuntu/workspace/iptables-conf/bin:/home/ubuntu/.local/share/zinit/polaris/bin:/home/ubuntu/workspace/cron-conf/bin:/home/ubuntu/workspace/bluetoothctl-autoconnector/bin:/home/ubuntu/workspace/cron-conf/raspberrypi/bin:/home/ubuntu/workspace/cron-conf/raspberrypi/bin/schedules:/home/ubuntu/workspace/envsman/raspberrypi/cron-conf:/home/ubuntu/workspace/fan-pippi/bin:/usr/sbin:/usr/bin:/bin
 NON_ROOT_USER=ubuntu
 
 @reboot log-reboot
@@ -42,38 +42,40 @@ NON_ROOT_USER=ubuntu
 
 # English
 #   Available: at 21:00 - 00:00 every day
-*/5 21-23 * * * cron-daemonctl start observe-english-conf; sudo create-dnsmasq-toggle-conf private english; create-iptables-toggle-conf private 232_english
-*/5 0-20  * * * cron-daemonctl stop observe-english-conf; sudo remove-dnsmasq-toggle-conf private english; remove-iptables-toggle-conf private 232_english
+*/5 21-23 * * * schedule-english deny
+*/5 0-20  * * * schedule-english allow
 
 # Deregulated Superman
 #   Available: at 00:00 - 12:00 every day
-*/5 12-23 * * * cron-daemonctl start observe-deregulated-superman-conf; cron-daemonctl start observe-superman-upstream-conf; sudo create-dnsmasq-toggle-conf private deregulated_superman; sudo remove-dnsmasq-toggle-conf private adguard_upstream; sudo create-dnsmasq-toggle-conf private superman_upstream; create-iptables-toggle-conf private 231_deregulated_superman
-*/5 0-11  * * * cron-daemonctl stop observe-deregulated-superman-conf; cron-daemonctl stop observe-superman-upstream-conf; sudo remove-dnsmasq-toggle-conf private deregulated_superman; sudo remove-dnsmasq-toggle-conf private superman_upstream; sudo create-dnsmasq-toggle-conf private adguard_upstream; remove-iptables-toggle-conf private 231_deregulated_superman
+*/5 12-23 * * * schedule-deregulated-superman deny
+*/5 0-11  * * * schedule-deregulated-superman allow
 
 # Superman
 #   Available: at 00:00 - 05:00 every day
-*/5 5-23 * * * cron-daemonctl start observe-superman-conf; sudo create-dnsmasq-toggle-conf private superman; create-iptables-toggle-conf private 233_superman
-*/5 0-4  * * * cron-daemonctl stop observe-superman-conf; sudo remove-dnsmasq-toggle-conf private superman; remove-iptables-toggle-conf private 233_superman
+*/5 5-23 * * * schedule-superman deny
+*/5 0-4  * * * schedule-superman allow
 
 # Netflix
 #   Available: at 02:00 - 05:00 on Mon, Thu
-*/5 *        * * 0,2-3,5-6 cron-daemonctl start observe-netflix-conf; sudo create-dnsmasq-toggle-conf public netflix; create-iptables-toggle-conf public 132_netflix
-*/5 0-1,5-23 * * 1,4       cron-daemonctl start observe-netflix-conf; sudo create-dnsmasq-toggle-conf public netflix; create-iptables-toggle-conf public 132_netflix
-*/5 2-4      * * 1,4       cron-daemonctl stop observe-netflix-conf; sudo remove-dnsmasq-toggle-conf public netflix; remove-iptables-toggle-conf public 132_netflix
+*/5 *        * * 0,2-3,5-6 schedule-netflix deny
+*/5 0-1,5-23 * * 1,4       schedule-netflix deny
+*/5 2-4      * * 1,4       schedule-netflix allow
 
 # VOD
 #   Available: at 02:00 - 05:00 on Tue, Fri
-*/5 *        * * 0-1,3-4,6 cron-daemonctl start observe-vod-conf; sudo create-dnsmasq-toggle-conf public vod; create-iptables-toggle-conf public 133_vod
-*/5 0-1,5-23 * * 2,5       cron-daemonctl start observe-vod-conf; sudo create-dnsmasq-toggle-conf public vod; create-iptables-toggle-conf public 133_vod
-*/5 2-4      * * 2,5       cron-daemonctl stop observe-vod-conf; sudo remove-dnsmasq-toggle-conf public vod; remove-iptables-toggle-conf public 133_vod
-*/5 5        * * 2,5       cron-daemonctl start observe-amazon-conf; sudo create-dnsmasq-toggle-conf public amazon; create-iptables-toggle-conf public 131_amazon
-*/5 6        * * 2,5       cron-daemonctl stop observe-amazon-conf; sudo remove-dnsmasq-toggle-conf public amazon; remove-iptables-toggle-conf public 131_amazon
+*/5 *        * * 0-1,3-4,6 schedule-vod deny
+*/5 0-1,5-23 * * 2,5       schedule-vod deny
+*/5 2-4      * * 2,5       schedule-vod allow
+*/5 5        * * 2,5       schedule-amazon deny
+*/5 6        * * 2,5       schedule-amazon allow
+
+04 21 * * * schedule-amazon allow
 
 # YouTube
 #   Available: at 02:00 - 05:00 on Wed, Sat
-*/5 *        * * 0-2,4-5 cron-daemonctl start observe-youtube-conf; sudo create-dnsmasq-toggle-conf public youtube; create-iptables-toggle-conf public 134_youtube
-*/5 0-1,5-23 * * 3,6     cron-daemonctl start observe-youtube-conf; sudo create-dnsmasq-toggle-conf public youtube; create-iptables-toggle-conf public 134_youtube
-*/5 2-4      * * 3,6     cron-daemonctl stop observe-youtube-conf; sudo remove-dnsmasq-toggle-conf public youtube; remove-iptables-toggle-conf public 134_youtube
+*/5 *        * * 0-2,4-5 schedule-youtube deny
+*/5 0-1,5-23 * * 3,6     schedule-youtube deny
+*/5 2-4      * * 3,6     schedule-youtube allow
 
 # YouTube Music
 #   Available: 01:00 - 05:00, 19:00 - 21:00 every day
@@ -83,6 +85,6 @@ NON_ROOT_USER=ubuntu
 #     YouTube Music is allowed when the file does exist
 #
 # Deny
-*/5 0,5-18,21-23 * * * cron-daemonctl start observe-youtube-music-conf; sudo remove-dnsmasq-toggle-conf public youtube_music; remove-iptables-toggle-conf public 135_youtube_music
+*/5 0,5-18,21-23 * * * schedule-youtube-music deny
 # Allow
-*/5 1-4,19-20    * * * cron-daemonctl stop observe-youtube-music-conf; sudo create-dnsmasq-toggle-conf public youtube_music; create-iptables-toggle-conf public 135_youtube_music
+*/5 1-4,19-20    * * * schedule-youtube-music allow

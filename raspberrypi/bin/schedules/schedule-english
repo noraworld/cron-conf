@@ -1,0 +1,11 @@
+#!/bin/sh
+
+if [ "$1" = "deny" ]; then
+  cron-daemonctl start observe-english-conf
+  sudo create-dnsmasq-toggle-conf private english
+  create-iptables-toggle-conf private 232_english
+elif [ "$1" = "allow" ]; then
+  cron-daemonctl stop observe-english-conf
+  sudo remove-dnsmasq-toggle-conf private english
+  remove-iptables-toggle-conf private 232_english
+fi

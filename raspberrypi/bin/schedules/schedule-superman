@@ -1,0 +1,11 @@
+#!/bin/sh
+
+if [ "$1" = "deny" ]; then
+  cron-daemonctl start observe-superman-conf
+  sudo create-dnsmasq-toggle-conf private superman
+  create-iptables-toggle-conf private 233_superman
+elif [ "$1" = "allow" ]; then
+  cron-daemonctl stop observe-superman-conf
+  sudo remove-dnsmasq-toggle-conf private superman
+  remove-iptables-toggle-conf private 233_superman
+fi

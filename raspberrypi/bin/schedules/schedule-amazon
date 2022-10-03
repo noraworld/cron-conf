@@ -1,0 +1,11 @@
+#!/bin/sh
+
+if [ "$1" = "deny" ]; then
+  cron-daemonctl start observe-amazon-conf
+  sudo create-dnsmasq-toggle-conf public amazon
+  create-iptables-toggle-conf public 131_amazon
+elif [ "$1" = "allow" ]; then
+  cron-daemonctl stop observe-amazon-conf
+  sudo remove-dnsmasq-toggle-conf public amazon
+  remove-iptables-toggle-conf public 131_amazon
+fi
