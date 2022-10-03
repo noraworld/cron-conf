@@ -1,0 +1,31 @@
+#!/bin/sh
+
+set -eu
+
+linked=false
+
+main() {
+  visibility=$1
+  target=$2
+
+  if [ "$visibility" = "public" ]; then
+    TOGGLE_DIR=/etc/iptables-conf/toggle
+    ORIGINAL_TOGGLE_DIR=/home/ubuntu/workspace/iptables-conf/iptables/toggle
+  elif [ "$visibility" = "private" ]; then
+    TOGGLE_DIR=/etc/iptables-conf/private/toggle
+    ORIGINAL_TOGGLE_DIR=/home/ubuntu/workspace/iptables-conf/iptables/private/toggle
+  fi
+
+  if ! [ -e "$TOGGLE_DIR/$target.conf" ]; then
+    linked=true
+    sudo ln -s "$ORIGINAL_TOGGLE_DIR/$target.conf" "$TOGGLE_DIR"
+  else
+    echo "Warning: \"$TOGGLE_DIR/$target.conf\" already exists" >&2
+  fi
+
+  if $linked; then
+    kerberos apply /etc/iptables-conf
+  fi
+}
+
+main "$@"

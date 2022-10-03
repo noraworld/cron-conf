@@ -1,0 +1,29 @@
+#!/bin/sh
+
+set -eu
+
+unlinked=false
+
+main() {
+  visibility=$1
+  target=$2
+
+  if [ "$visibility" = "public" ]; then
+    TOGGLE_FILEPATH=/etc/iptables-conf/toggle/$target.conf
+  elif [ "$visibility" = "private" ]; then
+    TOGGLE_FILEPATH=/etc/iptables-conf/private/toggle/$target.conf
+  fi
+
+  if [ -L "$TOGGLE_FILEPATH" ]; then
+    unlinked=true
+    sudo unlink "$TOGGLE_FILEPATH"
+  else
+    echo "Warning: \"$TOGGLE_FILEPATH\" does not exist" >&2
+  fi
+
+  if $unlinked; then
+    kerberos apply /etc/iptables-conf
+  fi
+}
+
+main "$@"
