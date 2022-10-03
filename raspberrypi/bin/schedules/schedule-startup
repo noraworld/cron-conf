@@ -1,0 +1,7 @@
+#!/bin/sh
+
+log-reboot
+clock-observer
+metronome set full
+sudo ipv6_forever
+marlin re-disconnect all --retry=2
