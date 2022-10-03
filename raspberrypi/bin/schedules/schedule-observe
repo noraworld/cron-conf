@@ -1,0 +1,11 @@
+#!/bin/sh
+
+if [ "$1" = "start" ]; then
+  cron-daemonctl start observe-crontab
+  # cron-daemonctl start observe-cron-conf
+  cron-daemonctl start observe-cron-conf
+elif [ "$1" = "stop" ]; then
+  cron-daemonctl stop observe-crontab
+  # cron-daemonctl stop observe-cron-conf
+  cron-daemonctl stop observe-dnsmasq-conf
+fi
