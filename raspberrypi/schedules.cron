@@ -35,6 +35,11 @@ NON_ROOT_USER=ubuntu
 */5 12-23 * * * schedule-deregulated-superman deny
 */5 0-11  * * * schedule-deregulated-superman allow
 
+# Ometeotl
+#   Available: at 00:00 - 05:00 every day
+*/5 5-23 * * * schedule-ometeotl deny
+*/5 0-4  * * * schedule-ometeotl allow
+
 # Superman
 #   Available: at 00:00 - 05:00 every day
 */5 5-23 * * * schedule-superman deny
