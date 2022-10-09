@@ -46,7 +46,7 @@ NON_ROOT_USER=ubuntu
 */5 0-4  * * * schedule-superman allow
 
 # Netflix
-#   Available: at 02:00 - 05:00 every day
+#   Available: at 00:00 - 05:00 every day
 */5 5-23 * * * schedule-netflix deny
 */5 0-4  * * * schedule-netflix allow
 
