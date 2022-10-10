@@ -3,7 +3,7 @@
 if [ "$1" = "deny" ]; then
   cron-daemonctl start observe-youtube-conf
   sudo create-dnsmasq-toggle-conf public youtube
-  create-iptables-toggle-conf public 134_youtube
+  # create-iptables-toggle-conf public 134_youtube
 elif [ "$1" = "allow" ]; then
   cron-daemonctl stop observe-youtube-conf
   sudo remove-dnsmasq-toggle-conf public youtube

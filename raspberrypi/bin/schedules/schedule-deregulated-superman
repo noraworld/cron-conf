@@ -6,7 +6,7 @@ if [ "$1" = "deny" ]; then
   sudo create-dnsmasq-toggle-conf private deregulated_superman
   sudo remove-dnsmasq-toggle-conf private adguard_upstream
   sudo create-dnsmasq-toggle-conf private superman_upstream
-  create-iptables-toggle-conf private 231_deregulated_superman
+  # create-iptables-toggle-conf private 231_deregulated_superman
 elif [ "$1" = "allow" ]; then
   cron-daemonctl stop observe-deregulated-superman-conf
   cron-daemonctl stop observe-superman-upstream-conf

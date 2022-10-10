@@ -3,7 +3,7 @@
 if [ "$1" = "deny" ]; then
   cron-daemonctl start observe-ometeotl-conf
   sudo create-dnsmasq-toggle-conf private ometeotl
-  create-iptables-toggle-conf private 234_ometeotl
+  # create-iptables-toggle-conf private 234_ometeotl
 elif [ "$1" = "allow" ]; then
   cron-daemonctl stop observe-ometeotl-conf
   sudo remove-dnsmasq-toggle-conf private ometeotl
