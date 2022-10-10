@@ -5,6 +5,7 @@ RETRY_SHRESHOLD=11 # one minute
 LOG_PATH=$HOME/.log/reboot.log
 
 main() {
+  # shellcheck disable=SC2034
   for i in $(seq 0 "$RETRY_SHRESHOLD"); do
     if [ "$(timedatectl | grep -c "System clock synchronized: yes")" -eq 1 ]; then
       echo "System rebooted on $(date)" >> "$LOG_PATH"
