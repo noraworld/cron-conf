@@ -1,0 +1,39 @@
+#!/bin/sh
+
+main() {
+  if ! eval "$(dns_blocked)"; then
+    restore_rules
+  fi
+}
+
+restore_rules() {
+  printf "*filter\nCOMMIT\n*nat\nCOMMIT\n" | sudo iptables-restore
+  sudo ufw reload
+}
+
+dns_blocked() {
+  # Avoid invalid context length argument with grep
+  #   https://stackoverflow.com/a/34077672/13999144
+
+  # Check if the drop rule against 53/TCP forwarding exists
+  if [ "$(sudo iptables-save | grep -ce "-A ufw-user-forward -p tcp -m tcp --dport 53 -j DROP")" -eq 0 ]; then
+    echo false
+    return
+  fi
+
+  # Check if the drop rule against 53/UDP forwarding exists
+  if [ "$(sudo iptables-save | grep -ce "-A ufw-user-forward -p udp -m udp --dport 53 -j DROP")" -eq 0 ]; then
+    echo false
+    return
+  fi
+
+  # Check if the accepted rule against port 53 forwarding exists
+  if [ "$(sudo iptables-save | grep -i "forward" | grep "53" | grep -c "ACCEPT")" -ge 1 ]; then
+    echo false
+    return
+  fi
+
+  echo true
+}
+
+main
