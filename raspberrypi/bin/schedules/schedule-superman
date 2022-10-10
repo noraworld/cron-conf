@@ -7,5 +7,5 @@ if [ "$1" = "deny" ]; then
 elif [ "$1" = "allow" ]; then
   cron-daemonctl stop observe-superman-conf
   sudo remove-dnsmasq-toggle-conf private superman
-  remove-iptables-toggle-conf private 233_superman
+  # remove-iptables-toggle-conf private 233_superman
 fi

@@ -7,5 +7,5 @@ if [ "$1" = "deny" ]; then
 elif [ "$1" = "allow" ]; then
   cron-daemonctl stop observe-netflix-conf
   sudo remove-dnsmasq-toggle-conf public netflix
-  remove-iptables-toggle-conf public 132_netflix
+  # remove-iptables-toggle-conf public 132_netflix
 fi

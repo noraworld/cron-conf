@@ -7,5 +7,5 @@ if [ "$1" = "deny" ]; then
 elif [ "$1" = "allow" ]; then
   cron-daemonctl stop observe-amazon-conf
   sudo remove-dnsmasq-toggle-conf public amazon
-  remove-iptables-toggle-conf public 131_amazon
+  # remove-iptables-toggle-conf public 131_amazon
 fi

@@ -13,5 +13,5 @@ elif [ "$1" = "allow" ]; then
   sudo remove-dnsmasq-toggle-conf private deregulated_superman
   sudo remove-dnsmasq-toggle-conf private superman_upstream
   sudo create-dnsmasq-toggle-conf private adguard_upstream
-  remove-iptables-toggle-conf private 231_deregulated_superman
+  # remove-iptables-toggle-conf private 231_deregulated_superman
 fi
