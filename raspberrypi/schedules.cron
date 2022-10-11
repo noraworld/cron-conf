@@ -25,10 +25,10 @@ NON_ROOT_USER=ubuntu
 */5 0-1,3-23 * * * schedule-observe start
 */5 2        * * * schedule-observe stop
 
-# English
+# Focus
 #   Available: at 21:00 - 00:00 every day
-*/5 21-23 * * * schedule-english deny
-*/5 0-20  * * * schedule-english allow
+*/5 21-23 * * * schedule-focus deny
+*/5 0-20  * * * schedule-focus allow
 
 # Deregulated Superman
 #   Available: at 00:00 - 12:00 every day
