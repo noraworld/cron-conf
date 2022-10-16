@@ -7,6 +7,6 @@ if [ "$1" = "deny" ]; then
   # remove-iptables-toggle-conf public 135_youtube_music
 elif [ "$1" = "allow" ]; then
   cron-daemonctl stop observe-youtube-music-conf
-  sudo create-dnsmasq-toggle-conf public youtube_music
+  # sudo create-dnsmasq-toggle-conf public youtube_music
   # create-iptables-toggle-conf public 135_youtube_music
 fi
