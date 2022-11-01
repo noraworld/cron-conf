@@ -41,9 +41,10 @@ NON_ROOT_USER=ubuntu
 */5 0-4  * * * schedule-ometeotl allow
 
 # Superman
-#   Available: at 00:00 - 05:00 every day
-*/5 5-23 * * * schedule-superman deny
-*/5 0-4  * * * schedule-superman allow
+#   Available: at 00:00 - 05:00 on Wed, Sat
+*/5 *    * * 0-2,4-5 schedule-superman deny
+*/5 5-23 * * 3,6     schedule-superman deny
+*/5 0-4  * * 3,6     schedule-superman allow
 
 # Netflix
 #   Available: at 00:00 - 05:00 every day
