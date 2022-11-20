@@ -40,6 +40,12 @@ NON_ROOT_USER=ubuntu
 */5 5-23 * * * schedule-ometeotl deny
 */5 0-4  * * * schedule-ometeotl allow
 
+# Upstream
+#   Available: at 00:00 - 05:00 on Wed, Sat
+*/5 *    * * 0-2,4-5 schedule-upstream deny
+*/5 5-23 * * 3,6     schedule-upstream deny
+*/5 0-4  * * 3,6     schedule-upstream allow
+
 # Superman
 #   Available: at 00:00 - 05:00 on Wed, Sat
 */5 *    * * 0-2,4-5 schedule-superman deny
