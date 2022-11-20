@@ -36,47 +36,47 @@ NON_ROOT_USER=ubuntu
 */5 0-1  * * * schedule-deregulated-superman allow
 
 # Ometeotl
-#   Available: at 00:00 - 05:00 every day
-*/5 5-23 * * * schedule-ometeotl deny
-*/5 0-4  * * * schedule-ometeotl allow
+#   Available: at 00:00 - 02:00 every day
+*/5 2-23 * * * schedule-ometeotl deny
+*/5 0-1  * * * schedule-ometeotl allow
 
 # Upstream
-#   Available: at 00:00 - 05:00 on Wed, Sat
+#   Available: at 00:00 - 02:00 on Wed, Sat
 */5 *    * * 0-2,4-5 schedule-upstream deny
-*/5 5-23 * * 3,6     schedule-upstream deny
-*/5 0-4  * * 3,6     schedule-upstream allow
+*/5 2-23 * * 3,6     schedule-upstream deny
+*/5 0-1  * * 3,6     schedule-upstream allow
 
 # Superman
-#   Available: at 00:00 - 05:00 on Wed, Sat
+#   Available: at 00:00 - 02:00 on Wed, Sat
 */5 *    * * 0-2,4-5 schedule-superman deny
-*/5 5-23 * * 3,6     schedule-superman deny
-*/5 0-4  * * 3,6     schedule-superman allow
+*/5 2-23 * * 3,6     schedule-superman deny
+*/5 0-1  * * 3,6     schedule-superman allow
 
 # Netflix
-#   Available: at 00:00 - 05:00 every day
-*/5 5-23 * * * schedule-netflix deny
-*/5 0-4  * * * schedule-netflix allow
+#   Available: at 00:00 - 02:00 every day
+*/5 2-23 * * * schedule-netflix deny
+*/5 0-1  * * * schedule-netflix allow
 
 # VOD
-#   Available: at 02:00 - 05:00 on Tue, Fri
-*/5 *        * * 0-1,3-4,6 schedule-vod deny
-*/5 0-1,5-23 * * 2,5       schedule-vod deny
-*/5 2-4      * * 2,5       schedule-vod allow
-*/5 5        * * 2,5       schedule-amazon deny
-*/5 6        * * 2,5       schedule-amazon allow
+#   Available: at 00:00 - 02:00 on Tue, Fri
+*/5 *    * * 0-1,3-4,6 schedule-vod deny
+*/5 2-23 * * 2,5       schedule-vod deny
+*/5 0-1  * * 2,5       schedule-vod allow
+*/5 2    * * 2,5       schedule-amazon deny
+*/5 3    * * 2,5       schedule-amazon allow
 
 # YouTube
-#   Available: at 02:00 - 05:00 on Wed, Sat
-*/5 *        * * 0-2,4-5 schedule-youtube deny
-*/5 0-1,5-23 * * 3,6     schedule-youtube deny
-*/5 2-4      * * 3,6     schedule-youtube allow
+#   Available: at 00:00 - 02:00 on Wed, Sat
+*/5 *    * * 0-2,4-5 schedule-youtube deny
+*/5 2-23 * * 3,6     schedule-youtube deny
+*/5 0-1  * * 3,6     schedule-youtube allow
 
 # YouTube Music
-#   Available: 01:00 - 05:00 every day
+#   Available: 00:00 - 02:00 every day
 #
 #   NOTE:
 #     This rule is the opposite of the other rules
 #     YouTube Music is allowed when the file does exist
 #
-*/5 0,5-23 * * * schedule-youtube-music deny
-*/5 1-4    * * * schedule-youtube-music allow
+*/5 2-23 * * * schedule-youtube-music deny
+*/5 0-1  * * * schedule-youtube-music allow
