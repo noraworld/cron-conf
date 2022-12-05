@@ -52,6 +52,11 @@ NON_ROOT_USER=ubuntu
 */5 2-23 * * 3,6     schedule-superman deny
 */5 0-1  * * 3,6     schedule-superman allow
 
+# Chime
+#   Available: at 00:00 - 02:00 every day
+*/15 2-23 * * * schedule-chime deny
+*/15 0-1  * * * schedule-chime allow
+
 # Netflix
 #   Available: at 00:00 - 02:00 every day
 */5 2-23 * * * schedule-netflix deny
