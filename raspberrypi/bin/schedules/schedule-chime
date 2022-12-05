@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ "$1" = "deny" ]; then
+  sudo create-dnsmasq-toggle-conf public chime
+elif [ "$1" = "allow" ]; then
+  sudo remove-dnsmasq-toggle-conf public chime
+fi
