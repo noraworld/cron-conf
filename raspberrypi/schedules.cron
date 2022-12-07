@@ -17,13 +17,13 @@ NON_ROOT_USER=ubuntu
 */10 * * * * schedule-periodic
 
 # Observe conf changes
-#   Available for change: at 02:00 - 03:00 every day
+#   Available for change: at 02:00 - 03:00 on Wed, Sat
 #
 #   NOTE:
 #     Remember that the shorter the time is, the more it can take effect
 #
-*/5 0-1,3-23 * * * schedule-observe start
-*/5 2        * * * schedule-observe stop
+*/5 0-1,3-23 * * 0-2,4-5 schedule-observe start
+*/5 2        * * 3,6     schedule-observe stop
 
 # Focus
 #   Available: at 21:00 - 00:00 every day
