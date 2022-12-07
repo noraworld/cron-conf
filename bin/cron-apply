@@ -42,7 +42,7 @@ main() {
     exit 1
   fi
 
-  crontab -l
+  crontab -l | less
 }
 
 
