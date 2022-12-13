@@ -2,11 +2,11 @@
 
 # It will be denied by removal
 if [ "$1" = "deny" ]; then
-  cron-daemonctl start observe-youtube-music-conf
+  # cron-daemonctl start observe-youtube-music-conf
   sudo remove-dnsmasq-toggle-conf public youtube_music
   # remove-iptables-toggle-conf public 135_youtube_music
 elif [ "$1" = "allow" ]; then
-  cron-daemonctl stop observe-youtube-music-conf
+  # cron-daemonctl stop observe-youtube-music-conf
   # sudo create-dnsmasq-toggle-conf public youtube_music
   # create-iptables-toggle-conf public 135_youtube_music
 fi
