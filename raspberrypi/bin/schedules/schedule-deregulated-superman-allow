@@ -2,7 +2,7 @@
 
 if [ "$1" = "deny" ]; then
   cron-daemonctl start observe-deregulated-superman-allow-conf
-  sudo create-dnsmasq-toggle-conf private deregulated_superman_allow
+  sudo remove-dnsmasq-toggle-conf private deregulated_superman_allow
 elif [ "$1" = "allow" ]; then
   cron-daemonctl stop observe-deregulated-superman-allow-conf
 fi
