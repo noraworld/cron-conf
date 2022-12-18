@@ -77,10 +77,10 @@ NON_ROOT_USER=ubuntu
 */5 4      * * 2,5       schedule-amazon allow
 
 # YouTube
-#   Available: at 01:00 - 05:00 on Wed, Sat
+#   Available: at 01:00 - 04:00 on Wed, Sat
 */5 *      * * 0-2,4-5 schedule-youtube deny
-*/5 0,5-23 * * 3,6     schedule-youtube deny
-*/5 1-4    * * 3,6     schedule-youtube allow
+*/5 0,4-23 * * 3,6     schedule-youtube deny
+*/5 1-3    * * 3,6     schedule-youtube allow
 
 # YouTube Music
 #   Available: 01:00 - 04:00 every day
