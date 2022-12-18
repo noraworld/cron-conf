@@ -14,6 +14,7 @@ NON_ROOT_USER=ubuntu
 # This is to reduce the possibility that the system freezes
 0 8 * * * metronome set full
 
+# Perform periodic tasks
 */10 * * * * schedule-periodic
 
 # Turn VPN on or off
