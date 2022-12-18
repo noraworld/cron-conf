@@ -31,6 +31,11 @@ NON_ROOT_USER=ubuntu
 */5 21-23 * * * schedule-focus deny
 */5 0-20  * * * schedule-focus allow
 
+# Focus (strict mode)
+#   Available: at 21:00 - 00:00, 04:00 - 09:00 every day
+# */5 21-23,4-8 * * * schedule-focus deny
+# */5 0-3,9-20  * * * schedule-focus allow
+
 # Deregulated Superman (deny)
 #   Available: at 01:00 - 04:00 every day
 */5 0,4-23 * * * schedule-deregulated-superman deny
