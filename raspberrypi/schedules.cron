@@ -16,6 +16,8 @@ NON_ROOT_USER=ubuntu
 
 */10 * * * * schedule-periodic
 
+*/5 * * * * vpn-control disconnect
+
 # Observe conf changes
 #   Available for change: at 02:00 - 03:00 on Wed, Sat
 #
