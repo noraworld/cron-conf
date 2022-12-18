@@ -4,9 +4,14 @@
 #   vpn-control connect us
 #   vpn-control disconnect
 
+MY_COUNTRY="JP"
+RETRY_THRESHOLD="5"
+SLEEP_INTERVAL="3"
+
 main() {
   operation="$1"
   country="$2"
+  retry_count=0
 
   case "$operation" in
     "connect")
@@ -15,11 +20,40 @@ main() {
         exit 1
       fi
 
-      sudo systemctl start nordvpn nordvpnd
-      nordvpn connect "$country"
+      while [ "$(connected)" = "false" ] && [ "$retry_count" -lt "$RETRY_THRESHOLD" ]; do
+        echo "Attempting to connect... (retry: $retry_count)"
+
+        sudo systemctl start nordvpn nordvpnd
+        nordvpn connect "$country"
+
+        retry_count=$((retry_count + 1))
+        sleep "$SLEEP_INTERVAL"
+      done
+
+      if [ "$(connected)" = "false" ]; then
+        echo "Error: Failed to connect for some reason." >&2
+      fi
+
       ;;
     "disconnect")
-      sudo systemctl stop nordvpn nordvpnd
+      while [ "$(disconnected)" = "false" ] && [ "$retry_count" -lt "$RETRY_THRESHOLD" ]; do
+        echo "Attempting to disconnect... (retry: $retry_count)"
+
+        sudo systemctl stop nordvpn nordvpnd
+
+        retry_count=$((retry_count + 1))
+        sleep "$SLEEP_INTERVAL"
+      done
+
+      if [ "$(disconnected)" = "false" ]; then
+        echo "Error: Failed to disconnect for some reason." >&2
+      fi
+
+      ;;
+    "status")
+      echo "nordvpn.service: $(systemctl is-active nordvpn)"
+      echo "nordvpnd.service: $(systemctl is-active nordvpnd)"
+      echo "country: $(get_country)"
       ;;
     "")
       echo "Error: An operation is missing." >&2
@@ -30,6 +64,34 @@ main() {
       exit 1
       ;;
   esac
+}
+
+connected() {
+  if [ "$(systemctl is-active nordvpn)" = "active" ] && [ "$(systemctl is-active nordvpnd)" = "active" ] && [ "$(get_country)" != "$MY_COUNTRY" ]; then
+    echo true
+  else
+    echo false
+  fi
+}
+
+disconnected() {
+  if [ "$(systemctl is-active nordvpn | grep -e "inactive" -ce "failed")" -eq 1 ] && [ "$(systemctl is-active nordvpnd | grep -e "inactive" -ce "failed")" -eq 1 ]; then
+    echo true
+  else
+    echo false
+  fi
+}
+
+get_country() {
+  # Return like US
+  current_country=$(curl -s https://ipinfo.io | grep country | awk '{ print $2 }' | tr -d ',' | tr -d '"')
+
+  if [ "$(echo "$current_country" | grep -c '[A-Z][A-Z]')" -ne 0 ]; then
+    echo "$current_country"
+  else
+    echo "Warning: Failed to retrieve a country." >&2
+    echo "$MY_COUNTRY"
+  fi
 }
 
 main "$@"
