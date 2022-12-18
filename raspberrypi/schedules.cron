@@ -83,11 +83,11 @@ NON_ROOT_USER=ubuntu
 */5 1-4    * * 3,6     schedule-youtube allow
 
 # YouTube Music
-#   Available: 01:00 - 03:00 every day
+#   Available: 01:00 - 04:00 every day
 #
 #   NOTE:
 #     This rule is the opposite of the other rules
 #     YouTube Music is allowed when the file does exist
 #
-*/10 0,3-23 * * * schedule-youtube-music deny
-*/10 1-2    * * * schedule-youtube-music allow
+*/10 0,4-23 * * * schedule-youtube-music deny
+*/10 1-3    * * * schedule-youtube-music allow
