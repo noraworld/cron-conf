@@ -9,6 +9,7 @@
 PATH=/home/ubuntu/workspace/iptables-conf/bin:/home/ubuntu/.local/share/zinit/polaris/bin:/home/ubuntu/workspace/cron-conf/bin:/home/ubuntu/workspace/bluetoothctl-autoconnector/bin:/home/ubuntu/workspace/cron-conf/raspberrypi/bin:/home/ubuntu/workspace/cron-conf/raspberrypi/bin/schedules:/home/ubuntu/workspace/envsman/raspberrypi/cron-conf:/home/ubuntu/workspace/fan-pippi/bin:/usr/sbin:/usr/bin:/bin
 NON_ROOT_USER=ubuntu
 
+# Prepare the system for normal operation
 @reboot schedule-startup
 
 # This is to reduce the possibility that the system freezes
