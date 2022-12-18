@@ -1,0 +1,35 @@
+#!/bin/sh
+
+# Usage:
+#   vpn-control connect us
+#   vpn-control disconnect
+
+main() {
+  operation="$1"
+  country="$2"
+
+  case "$operation" in
+    "connect")
+      if [ "$country" = "" ]; then
+        echo "Error: A country is missing." >&2
+        exit 1
+      fi
+
+      sudo systemctl start nordvpn nordvpnd
+      nordvpn connect "$country"
+      ;;
+    "disconnect")
+      sudo systemctl stop nordvpn nordvpnd
+      ;;
+    "")
+      echo "Error: An operation is missing." >&2
+      exit 1
+      ;;
+    *)
+      echo "Error: Unknown operation was detected." >&2
+      exit 1
+      ;;
+  esac
+}
+
+main "$@"
