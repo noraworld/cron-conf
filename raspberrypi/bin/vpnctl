@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # Usage:
-#   vpn-control connect us
-#   vpn-control disconnect
+#   vpnctl connect us
+#   vpnctl disconnect
 
 MY_COUNTRY="JP"
 RETRY_THRESHOLD="5"
