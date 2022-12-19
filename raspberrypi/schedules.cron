@@ -19,8 +19,8 @@ NON_ROOT_USER=ubuntu
 */10 * * * * schedule-periodic
 
 # Turn VPN on or off
-# 57 23 * * * vpn-control connect ca
-# 3  4  * * * vpn-control disconnect
+# 57 23 * * * vpnctl connect ca
+# 3  4  * * * vpnctl disconnect
 
 # Observe conf changes
 #   Available for change: at 02:00 - 03:00 on Wed, Sat
