@@ -52,8 +52,8 @@ NON_ROOT_USER=ubuntu
 
 # Deregulated Superman (deny)
 #   Available: at 01:00 - 04:00 every day
-*/5 0,4-23 * * * schedule-deregulated-superman deny
-*/5 1-3    * * * schedule-deregulated-superman allow
+# */5 0,4-23 * * * schedule-deregulated-superman deny
+# */5 1-3    * * * schedule-deregulated-superman allow
 
 # Deregulated Superman (allow)
 #   Available: at 01:00 - 04:00 every day
