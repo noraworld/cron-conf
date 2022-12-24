@@ -47,8 +47,8 @@ NON_ROOT_USER=ubuntu
 
 # GitHub Editor
 #   Unavailable: at 04:00 - 09:00 every day
-*/5 4-8      * * * schedule-github-editor deny
-*/5 0-3,9-23 * * * schedule-github-editor allow
+# */5 4-8      * * * schedule-github-editor deny
+# */5 0-3,9-23 * * * schedule-github-editor allow
 
 # Deregulated Superman (deny)
 #   Available: at 01:00 - 04:00 every day
