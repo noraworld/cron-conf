@@ -98,7 +98,7 @@ NON_ROOT_USER=ubuntu
 # YouTube
 #   Available: at 01:00 - 10:00 every day
 # */5 *      * * * schedule-youtube deny
-*/5 0,10-23 * * * schedule-youtube deny
+# */5 0,10-23 * * * schedule-youtube deny
 */5 1-9    * * * schedule-youtube allow
 
 # YouTube Music
