@@ -79,8 +79,8 @@ NON_ROOT_USER=ubuntu
 
 # Chime
 #   Available: at 00:00 - 04:00 every day
-*/10 4-23 * * * schedule-chime deny
-*/10 0-3  * * * schedule-chime allow
+# */10 4-23 * * * schedule-chime deny
+# */10 0-3  * * * schedule-chime allow
 
 # Netflix
 #   Available: at 00:00 - 04:00 every day
