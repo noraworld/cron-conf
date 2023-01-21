@@ -25,3 +25,6 @@ clock-observer
 #   If it works properly, the result of the above command should be reset to 0 when the observer is executed
 #
 observe-firewall
+
+# Auto-update specific Git repositories
+auto-git-pull
