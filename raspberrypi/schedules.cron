@@ -1,3 +1,9 @@
+######################################################
+###                                                ###
+###  REMEMBER THE DIARY ENTRY ON FEBRUARY 3, 2023  ###
+###                                                ###
+######################################################
+
 # In performing a command with root privileges (using `sudo`),
 # it is important to change your sudoers to the following with `sudo visudo`
 #
