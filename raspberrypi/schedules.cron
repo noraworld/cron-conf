@@ -94,12 +94,13 @@ NON_ROOT_USER=ubuntu
 */5 0-3  * * * schedule-netflix allow
 
 # VOD
-#   Available: at 01:00 - 04:00 on Tue, Fri
-*/5 *      * * 0-1,3-4,6 schedule-vod deny
-*/5 0,4-23 * * 2,5       schedule-vod deny
-*/5 1-3    * * 2,5       schedule-vod allow
-*/5 4      * * 2,5       schedule-amazon deny
-*/5 5      * * 2,5       schedule-amazon allow
+#   Available: at 00:00 - 01:30, 02:00 - 03:30, 04:00 - 05:30 every day
+*/5     0,2,4 * * * schedule-vod allow
+0-25/5  1,3,5 * * * schedule-vod allow
+30-55/5 1,3,5 * * * schedule-vod deny
+*/5     6-23  * * * schedule-vod deny
+30-55/5 5     * * * schedule-amazon deny
+0       6     * * * schedule-amazon allow
 
 # YouTube
 #   Available: at 00:00 - 01:30, 02:00 - 03:30, 04:00 - 05:30 every day
