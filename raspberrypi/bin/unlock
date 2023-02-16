@@ -1,0 +1,39 @@
+#!/bin/sh
+
+set -eu
+trap clock EXIT
+
+main() {
+  service="$1"
+
+  case "$service" in
+    "chime")
+      sudo unlink /etc/dnsmasq.toggle/chime.conf
+      ;;
+    "youtube")
+      systemctl --user stop observe-youtube-conf && sudo unlink /etc/dnsmasq.toggle/youtube.conf
+      ;;
+    "youtube-music")
+      sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle/youtube_music.conf /etc/dnsmasq.toggle
+      ;;
+    *)
+      echo "error: no such service $service" >&2
+      exit 1
+      ;;
+  esac
+
+  echo "restarting dnsmasq"
+  sudo systemctl restart dnsmasq
+
+  if [ "$(sudo systemctl is-active dnsmasq)" != "active" ]; then
+    echo "error: dnsmasq daemon could not restart unexpectedly" >&2
+    sudo systemctl status dnsmasq >&2
+    exit 1
+  fi
+}
+
+clock() {
+  date +"%T" | sed 's/^[0-9][0-9]:[0-9]/--:-/g'
+}
+
+main "$@"
