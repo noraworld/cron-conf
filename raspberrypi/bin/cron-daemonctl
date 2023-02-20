@@ -1,6 +1,7 @@
 #!/bin/sh
 
 main() {
+  authenticate
   set_env
 
   case "$1" in
@@ -18,6 +19,15 @@ main() {
       systemctl --user "$1" "$2"
       ;;
   esac
+}
+
+authenticate() {
+  IS_CRON_SCRIPT=$(dirname $(realpath $0))/../../bin/lib/is-cron
+
+  if [ "$(sh -c "$IS_CRON_SCRIPT")" = false ]; then
+    echo "Fatal: This operation must be executed by cron, or this script does not take enough effect" >&2
+    exit 2
+  fi
 }
 
 set_env() {
