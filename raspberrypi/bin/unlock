@@ -11,7 +11,7 @@ main() {
       sudo unlink /etc/dnsmasq.toggle/chime.conf
       ;;
     "youtube")
-      systemctl --user stop observe-youtube-conf && sudo unlink /etc/dnsmasq.toggle/youtube.conf
+      sudo unlink /etc/dnsmasq.toggle/youtube.conf
       ;;
     "youtube-music")
       sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle/youtube_music.conf /etc/dnsmasq.toggle
