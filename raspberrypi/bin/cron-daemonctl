@@ -20,7 +20,7 @@ main() {
   esac
 }
 
-set_env {
+set_env() {
   # This is necessary when manipulating systemctl with cron
   #   https://superuser.com/questions/1561076/systemctl-use-failed-to-connect-to-bus-no-such-file-or-directory-debian-9
   XDG_RUNTIME_DIR=/run/user/$(id -u)
