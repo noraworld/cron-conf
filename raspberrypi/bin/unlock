@@ -12,6 +12,7 @@ main() {
       ;;
     "vod")
       sudo unlink /etc/dnsmasq.toggle/vod.conf
+      ;;
     "youtube")
       sudo unlink /etc/dnsmasq.toggle/youtube.conf
       ;;
