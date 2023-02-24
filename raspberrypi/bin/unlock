@@ -10,6 +10,8 @@ main() {
     "chime")
       sudo unlink /etc/dnsmasq.toggle/chime.conf
       ;;
+    "vod")
+      sudo unlink /etc/dnsmasq.toggle/vod.conf
     "youtube")
       sudo unlink /etc/dnsmasq.toggle/youtube.conf
       ;;
