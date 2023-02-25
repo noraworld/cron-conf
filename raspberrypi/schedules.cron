@@ -19,7 +19,7 @@ NON_ROOT_USER=ubuntu
 @reboot schedule-startup
 
 # This is to reduce the possibility that the system freezes
-0 8 * * * metronome set full
+0 8 * * * schedule-daily
 
 # Perform periodic tasks
 */10 * * * * schedule-periodic
