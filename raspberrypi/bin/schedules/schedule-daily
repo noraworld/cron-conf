@@ -1,0 +1,4 @@
+#!/bin/sh
+
+metronome set full
+sudo systemctl restart diary
