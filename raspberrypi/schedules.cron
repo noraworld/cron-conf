@@ -89,9 +89,9 @@ NON_ROOT_USER=ubuntu
 */10 0-5  * * * schedule-chime allow
 
 # Netflix
-#   Available: at 00:00 - 04:00 every day
-*/5 4-23 * * * schedule-netflix deny
-*/5 0-3  * * * schedule-netflix allow
+#   Available: at 00:00 - 06:00 every day
+*/5 6-23 * * * schedule-netflix deny
+*/5 0-5  * * * schedule-netflix allow
 
 # VOD
 #   Available: at 00:00 - 06:00 every day
