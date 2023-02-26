@@ -1,0 +1,362 @@
+#!/bin/sh
+
+main() {
+  operation="$1"
+  service="$2"
+
+  case "$service" in
+    "amazon")
+      amazon
+      ;;
+    "chime")
+      chime
+      ;;
+    "daily")
+      daily
+      ;;
+    "deregulated-superman")
+      deregulated_superman
+      ;;
+    "deregulated-superman-allow")
+      deregulated_superman_allow
+      ;;
+    "focus")
+      focus
+      ;;
+    "github-editor")
+      github_editor
+      ;;
+    "netflix")
+      netflix
+      ;;
+    "observe")
+      observe
+      ;;
+    "ometeotl")
+      ometeotl
+      ;;
+    "periodic")
+      periodic
+      ;;
+    "startup")
+      startup
+      ;;
+    "superman")
+      superman
+      ;;
+    "upstream")
+      upstream
+      ;;
+    "vod")
+      vod
+      ;;
+    "youtube")
+      youtube
+      ;;
+    "youtube-music")
+      youtube_music
+      ;;
+    *)
+      echo "error: no such service: $service" >&2
+      exit 1
+      ;;
+  esac
+}
+
+amazon() {
+  case "$operation" in
+    "deny")
+      cron-daemonctl start observe-amazon-conf
+      sudo create-dnsmasq-toggle-conf public amazon
+      # create-iptables-toggle-conf public 131_amazon
+      ;;
+    "allow")
+      cron-daemonctl stop observe-amazon-conf
+      sudo remove-dnsmasq-toggle-conf public amazon
+      # remove-iptables-toggle-conf public 131_amazon
+      ;;
+    *)
+      echo "error: no such operation: $operation" >&2
+      exit 1
+      ;;
+  esac
+}
+
+chime() {
+  case "$operation" in
+    "deny")
+      sudo create-dnsmasq-toggle-conf public chime
+      ;;
+    "allow")
+      sudo remove-dnsmasq-toggle-conf public chime
+      ;;
+    *)
+      echo "error: no such operation: $operation" >&2
+      exit 1
+      ;;
+  esac
+}
+
+daily() {
+  metronome set full
+  sudo systemctl restart diary
+}
+
+deregulated_superman() {
+  case "$operation" in
+    "deny")
+      cron-daemonctl start observe-deregulated-superman-conf
+      sudo create-dnsmasq-toggle-conf private deregulated_superman
+      # create-iptables-toggle-conf private 231_deregulated_superman
+      ;;
+    "allow")
+      cron-daemonctl stop observe-deregulated-superman-conf
+      # sudo remove-dnsmasq-toggle-conf private deregulated_superman
+      # remove-iptables-toggle-conf private 231_deregulated_superman
+      ;;
+    *)
+      echo "error: no such operation: $operation" >&2
+      exit 1
+      ;;
+  esac
+}
+
+deregulated_superman_allow() {
+  case "$operation" in
+    "deny")
+      cron-daemonctl start observe-deregulated-superman-allow-conf
+      sudo remove-dnsmasq-toggle-conf private deregulated_superman_allow
+      ;;
+    "allow")
+      cron-daemonctl stop observe-deregulated-superman-allow-conf
+      ;;
+    *)
+      echo "error: no such operation: $operation" >&2
+      exit 1
+      ;;
+  esac
+}
+
+focus() {
+  case "$operation" in
+    "deny")
+      cron-daemonctl start observe-focus-conf
+      sudo create-dnsmasq-toggle-conf private focus
+      # create-iptables-toggle-conf private 232_focus
+      ;;
+    "allow")
+      cron-daemonctl stop observe-focus-conf
+      sudo remove-dnsmasq-toggle-conf private focus
+      # remove-iptables-toggle-conf private 232_focus
+      ;;
+    *)
+      echo "error: no such operation: $operation" >&2
+      exit 1
+      ;;
+  esac
+}
+
+github_editor() {
+  case "$operation" in
+    "deny")
+      cron-daemonctl start observe-github-editor-conf
+      sudo create-dnsmasq-toggle-conf public github_editor
+      ;;
+    "allow")
+      cron-daemonctl stop observe-github-editor-conf
+      sudo remove-dnsmasq-toggle-conf public github_editor
+      ;;
+    *)
+      echo "error: no such operation: $operation" >&2
+      exit 1
+      ;;
+  esac
+}
+
+netflix() {
+  case "$operation" in
+    "deny")
+      cron-daemonctl start observe-netflix-conf
+      sudo create-dnsmasq-toggle-conf public netflix
+      # create-iptables-toggle-conf public 132_netflix
+      ;;
+    "allow")
+      cron-daemonctl stop observe-netflix-conf
+      sudo remove-dnsmasq-toggle-conf public netflix
+      # remove-iptables-toggle-conf public 132_netflix
+      ;;
+    *)
+      echo "error: no such operation: $operation" >&2
+      exit 1
+      ;;
+  esac
+}
+
+observe() {
+  case "$operation" in
+    "start")
+      cron-daemonctl start observe-crontab
+      cron-daemonctl start observe-cron-conf
+      cron-daemonctl start observe-dnsmasq-conf
+      cron-daemonctl start observe-dnsmasq-priv-conf
+      ;;
+    "stop")
+      cron-daemonctl stop observe-crontab
+      cron-daemonctl stop observe-cron-conf
+      cron-daemonctl stop observe-dnsmasq-conf
+      cron-daemonctl stop observe-dnsmasq-priv-conf
+      ;;
+    *)
+      echo "error: no such operation: $operation" >&2
+      exit 1
+      ;;
+  esac
+}
+
+ometeotl() {
+  case "$operation" in
+    "deny")
+      cron-daemonctl start observe-ometeotl-conf
+      sudo create-dnsmasq-toggle-conf private ometeotl
+      # create-iptables-toggle-conf private 234_ometeotl
+      ;;
+    "allow")
+      cron-daemonctl stop observe-ometeotl-conf
+      # sudo remove-dnsmasq-toggle-conf private ometeotl
+      # remove-iptables-toggle-conf private 234_ometeotl
+      ;;
+    *)
+      echo "error: no such operation: $operation" >&2
+      exit 1
+      ;;
+  esac
+}
+
+periodic() {
+  # Auto-update cron conf
+  cron-apply
+
+  # Observe IP address not getting lost
+  sudo ip-observer
+
+  # Observe the system clock not lagging
+  clock-observer
+
+  # Observe a firewall blocking the DNS port
+  #
+  # How to check if it works fine:
+  #
+  #   Make sure the following command returns 0
+  #     $ sudo iptables-save | grep -i "forward" | grep "53" | grep -c "ACCEPT"
+  #
+  #   Then execute the following command
+  #     $ sudo iptables -A FORWARD -p udp -m udp --dport 53 -j ACCEPT
+  #
+  #   Perform the following command again and make sure it returns 1
+  #     $ sudo iptables-save | grep -i "forward" | grep "53" | grep -c "ACCEPT"
+  #
+  #   If it works properly, the result of the above command should be reset to 0 when the observer is executed
+  #
+  observe-firewall
+
+  # Auto-update specific Git repositories
+  auto-git-pull
+}
+
+startup() {
+  log-reboot
+  clock-observer
+  metronome set full
+  marlin re-disconnect all --retry=2
+}
+
+superman() {
+  case "$operation" in
+    "deny")
+      cron-daemonctl start observe-superman-conf
+      sudo create-dnsmasq-toggle-conf private superman
+      # create-iptables-toggle-conf private 233_superman
+      ;;
+    "allow")
+      cron-daemonctl stop observe-superman-conf
+      # sudo remove-dnsmasq-toggle-conf private superman
+      # remove-iptables-toggle-conf private 233_superman
+      ;;
+    *)
+      echo "error: no such operation: $operation" >&2
+      exit 1
+      ;;
+  esac
+}
+
+upstream() {
+  case "$operation" in
+    "deny")
+      cron-daemonctl start observe-superman-upstream-conf
+      sudo remove-dnsmasq-toggle-conf private adguard_upstream
+      sudo create-dnsmasq-toggle-conf private superman_upstream
+      ;;
+    "allow")
+      cron-daemonctl stop observe-superman-upstream-conf
+      sudo remove-dnsmasq-toggle-conf private superman_upstream
+      sudo create-dnsmasq-toggle-conf private adguard_upstream
+      ;;
+    *)
+      echo "error: no such operation: $operation" >&2
+      exit 1
+      ;;
+  esac
+}
+
+vod() {
+  case "$operation" in
+    "deny")
+      cron-daemonctl start observe-vod-conf
+      sudo create-dnsmasq-toggle-conf public vod
+      # create-iptables-toggle-conf public 133_vod
+      ;;
+    "allow")
+      cron-daemonctl stop observe-vod-conf
+      sudo remove-dnsmasq-toggle-conf public vod
+      # remove-iptables-toggle-conf public 133_vod
+      ;;
+    *)
+      echo "error: no such operation: $operation" >&2
+      exit 1
+      ;;
+  esac
+}
+
+youtube() {
+  case "$operation" in
+    "deny")
+      ;;
+    "allow")
+      ;;
+    *)
+      echo "error: no such operation: $operation" >&2
+      exit 1
+      ;;
+  esac
+}
+
+youtube_music() {
+  case "$operation" in
+    "deny")
+      cron-daemonctl start observe-youtube-conf
+      sudo create-dnsmasq-toggle-conf public youtube
+      # create-iptables-toggle-conf public 134_youtube
+      ;;
+    "allow")
+      cron-daemonctl stop observe-youtube-conf
+      # sudo remove-dnsmasq-toggle-conf public youtube
+      # remove-iptables-toggle-conf public 134_youtube
+      ;;
+    *)
+      echo "error: no such operation: $operation" >&2
+      exit 1
+      ;;
+  esac
+}
+
+main "$@"
