@@ -57,7 +57,7 @@ main() {
       youtube_music
       ;;
     *)
-      echo "error: no such service: $service" >&2
+      echo "error: no such service: \"$service\"" >&2
       exit 1
       ;;
   esac
@@ -76,7 +76,7 @@ amazon() {
       # remove-iptables-toggle-conf public 131_amazon
       ;;
     *)
-      echo "error: no such operation: $operation" >&2
+      echo "error: no such operation: \"$operation\"" >&2
       exit 1
       ;;
   esac
@@ -91,7 +91,7 @@ chime() {
       sudo remove-dnsmasq-toggle-conf public chime
       ;;
     *)
-      echo "error: no such operation: $operation" >&2
+      echo "error: no such operation: \"$operation\"" >&2
       exit 1
       ;;
   esac
@@ -115,7 +115,7 @@ deregulated_superman() {
       # remove-iptables-toggle-conf private 231_deregulated_superman
       ;;
     *)
-      echo "error: no such operation: $operation" >&2
+      echo "error: no such operation: \"$operation\"" >&2
       exit 1
       ;;
   esac
@@ -131,7 +131,7 @@ deregulated_superman_allow() {
       cron-daemonctl stop observe-deregulated-superman-allow-conf
       ;;
     *)
-      echo "error: no such operation: $operation" >&2
+      echo "error: no such operation: \"$operation\"" >&2
       exit 1
       ;;
   esac
@@ -150,7 +150,7 @@ focus() {
       # remove-iptables-toggle-conf private 232_focus
       ;;
     *)
-      echo "error: no such operation: $operation" >&2
+      echo "error: no such operation: \"$operation\"" >&2
       exit 1
       ;;
   esac
@@ -167,7 +167,7 @@ github_editor() {
       sudo remove-dnsmasq-toggle-conf public github_editor
       ;;
     *)
-      echo "error: no such operation: $operation" >&2
+      echo "error: no such operation: \"$operation\"" >&2
       exit 1
       ;;
   esac
@@ -186,7 +186,7 @@ netflix() {
       # remove-iptables-toggle-conf public 132_netflix
       ;;
     *)
-      echo "error: no such operation: $operation" >&2
+      echo "error: no such operation: \"$operation\"" >&2
       exit 1
       ;;
   esac
@@ -207,7 +207,7 @@ observe() {
       cron-daemonctl stop observe-dnsmasq-priv-conf
       ;;
     *)
-      echo "error: no such operation: $operation" >&2
+      echo "error: no such operation: \"$operation\"" >&2
       exit 1
       ;;
   esac
@@ -226,7 +226,7 @@ ometeotl() {
       # remove-iptables-toggle-conf private 234_ometeotl
       ;;
     *)
-      echo "error: no such operation: $operation" >&2
+      echo "error: no such operation: \"$operation\"" >&2
       exit 1
       ;;
   esac
@@ -283,7 +283,7 @@ superman() {
       # remove-iptables-toggle-conf private 233_superman
       ;;
     *)
-      echo "error: no such operation: $operation" >&2
+      echo "error: no such operation: \"$operation\"" >&2
       exit 1
       ;;
   esac
@@ -302,7 +302,7 @@ upstream() {
       sudo create-dnsmasq-toggle-conf private adguard_upstream
       ;;
     *)
-      echo "error: no such operation: $operation" >&2
+      echo "error: no such operation: \"$operation\"" >&2
       exit 1
       ;;
   esac
@@ -321,7 +321,7 @@ vod() {
       # remove-iptables-toggle-conf public 133_vod
       ;;
     *)
-      echo "error: no such operation: $operation" >&2
+      echo "error: no such operation: \"$operation\"" >&2
       exit 1
       ;;
   esac
@@ -334,7 +334,7 @@ youtube() {
     "allow")
       ;;
     *)
-      echo "error: no such operation: $operation" >&2
+      echo "error: no such operation: \"$operation\"" >&2
       exit 1
       ;;
   esac
@@ -353,7 +353,7 @@ youtube_music() {
       # remove-iptables-toggle-conf public 134_youtube
       ;;
     *)
-      echo "error: no such operation: $operation" >&2
+      echo "error: no such operation: \"$operation\"" >&2
       exit 1
       ;;
   esac
