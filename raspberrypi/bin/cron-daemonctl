@@ -11,7 +11,7 @@ main() {
       if [ "$(systemctl --user is-active "$2")" != "active" ]; then
         systemctl --user "$1" "$2"
 
-        if [ "$SAFE" = 1 ]; then
+        if [ "$SAFE" != 1 ]; then
           punish "$@"
         fi
       fi
