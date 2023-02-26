@@ -12,7 +12,7 @@ main() {
         systemctl --user "$1" "$2"
 
         if [ "$SAFE" = 1 ]; then
-          punish
+          punish "$@"
         fi
       fi
       ;;
@@ -29,7 +29,8 @@ main() {
 
 punish() {
   # sudo shutdown now
-  sudo systemctl stop ssh
+  # sudo systemctl stop ssh
+  echo "manual deletion detected (args: \"$@\")" >> /home/ubuntu/.log/temp
 }
 
 authenticate() {
