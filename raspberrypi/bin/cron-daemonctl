@@ -35,7 +35,7 @@ punish() {
 
   # for debug
   #
-  echo "manual deletion detected (args: \"$@\", date: \"$(date)\")" >> /home/ubuntu/.log/temp
+  echo "manual disablement detected (args: \"$@\", date: \"$(date)\")" >> /home/ubuntu/.log/cron-daemonctl.log
 }
 
 authenticate() {
