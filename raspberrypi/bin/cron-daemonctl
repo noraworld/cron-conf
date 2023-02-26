@@ -3,11 +3,17 @@
 main() {
   authenticate
   set_env
+  parse "$@"
+  eval "set -- $REST"
 
   case "$1" in
     "start")
       if [ "$(systemctl --user is-active "$2")" != "active" ]; then
         systemctl --user "$1" "$2"
+
+        if [ "$SAFE" = 1 ]; then
+          punish
+        fi
       fi
       ;;
     "stop")
@@ -19,6 +25,11 @@ main() {
       systemctl --user "$1" "$2"
       ;;
   esac
+}
+
+punish() {
+  # sudo shutdown now
+  sudo systemctl stop ssh
 }
 
 authenticate() {
