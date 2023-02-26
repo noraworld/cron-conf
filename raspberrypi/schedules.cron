@@ -16,13 +16,13 @@ PATH=/home/ubuntu/workspace/iptables-conf/bin:/home/ubuntu/.local/share/zinit/po
 NON_ROOT_USER=ubuntu
 
 # Prepare the system for normal operation
-@reboot schedule-startup
+@reboot scheduler startup
 
 # This is to reduce the possibility that the system freezes
-0 8 * * * schedule-daily
+0 8 * * * scheduler daily
 
 # Perform periodic tasks
-*/10 * * * * schedule-periodic
+*/10 * * * * scheduler periodic
 
 # Turn VPN on or off
 # 57 23 * * * vpnctl connect ca
@@ -34,9 +34,9 @@ NON_ROOT_USER=ubuntu
 #   NOTE:
 #     Remember that the shorter the time is, the more it can take effect
 #
-*/5 *        * * 0-2,4-5 schedule-observe start
-*/5 0-1,3-23 * * 3,6     schedule-observe start
-*/5 2        * * 3,6     schedule-observe stop
+*/5 *        * * 0-2,4-5 scheduler observe start
+*/5 0-1,3-23 * * 3,6     scheduler observe start
+*/5 2        * * 3,6     scheduler observe stop
 
 # Focus
 #   NOTE:
@@ -44,66 +44,66 @@ NON_ROOT_USER=ubuntu
 #     You can choose either one of them according to your lifestyle
 #
 #   Available: at 21:00 - 00:00, 04:00 - 09:00 every day
-# */5 21-23,4-8 * * * schedule-focus deny
-# */5 0-3,9-20  * * * schedule-focus allow
+# */5 21-23,4-8 * * * scheduler focus deny
+# */5 0-3,9-20  * * * scheduler focus allow
 #
 #   Available: at 21:00 - 00:00 every day
-*/5 21-23 * * * schedule-focus deny
-*/5 0-20  * * * schedule-focus allow
+*/5 21-23 * * * scheduler focus deny
+*/5 0-20  * * * scheduler focus allow
 
 # GitHub Editor
 #   Unavailable: at 05:00 - 09:00 every day
-*/5 5-8      * * * schedule-github-editor deny
-*/5 0-4,9-23 * * * schedule-github-editor allow
+*/5 5-8      * * * scheduler github-editor deny
+*/5 0-4,9-23 * * * scheduler github-editor allow
 
 # Deregulated Superman (deny)
 #   Available: at 01:00 - 04:00 every day
-# */5 0,4-23 * * * schedule-deregulated-superman deny
-# */5 1-3    * * * schedule-deregulated-superman allow
+# */5 0,4-23 * * * scheduler deregulated-superman deny
+# */5 1-3    * * * scheduler deregulated-superman allow
 
 # Deregulated Superman (allow)
 #   Available: at 01:00 - 04:00 every day
-*/5 0,4-23 * * * schedule-deregulated-superman-allow deny
-*/5 1-3    * * * schedule-deregulated-superman-allow allow
+*/5 0,4-23 * * * scheduler deregulated-superman-allow deny
+*/5 1-3    * * * scheduler deregulated-superman-allow allow
 
 # Ometeotl
 #   Available: at 01:00 - 04:00 every day
-# */5 0,4-23 * * * schedule-ometeotl deny
-# */5 1-3    * * * schedule-ometeotl allow
+# */5 0,4-23 * * * scheduler ometeotl deny
+# */5 1-3    * * * scheduler ometeotl allow
 
 # Upstream
 #   Available: at 01:00 - 04:00 on Wed, Sat
-# */5 *      * * 0-2,4-5 schedule-upstream deny
-# */5 0,4-23 * * 3,6     schedule-upstream deny
-# */5 1-3    * * 3,6     schedule-upstream allow
+# */5 *      * * 0-2,4-5 scheduler upstream deny
+# */5 0,4-23 * * 3,6     scheduler upstream deny
+# */5 1-3    * * 3,6     scheduler upstream allow
 
 # Superman
 #   Available: at 01:00 - 04:00 on Wed, Sat
-# */5 *      * * 0-2,4-5 schedule-superman deny
-# */5 0,4-23 * * 3,6     schedule-superman deny
-# */5 1-3    * * 3,6     schedule-superman allow
+# */5 *      * * 0-2,4-5 scheduler superman deny
+# */5 0,4-23 * * 3,6     scheduler superman deny
+# */5 1-3    * * 3,6     scheduler superman allow
 
 # Chime
 #   Available: at 00:00 - 06:00 every day
-*/10 6-23 * * * schedule-chime deny
-*/10 0-5  * * * schedule-chime allow
+*/10 6-23 * * * scheduler chime deny
+*/10 0-5  * * * scheduler chime allow
 
 # Netflix
 #   Available: at 00:00 - 06:00 every day
-*/5 6-23 * * * schedule-netflix deny
-*/5 0-5  * * * schedule-netflix allow
+*/5 6-23 * * * scheduler netflix deny
+*/5 0-5  * * * scheduler netflix allow
 
 # VOD
 #   Available: at 00:00 - 06:00 every day
-*/5 0-5  * * * schedule-vod allow
-*/5 6-23 * * * schedule-vod deny
-*/5 6    * * * schedule-amazon deny
-0   7    * * * schedule-amazon allow
+*/5 0-5  * * * scheduler vod allow
+*/5 6-23 * * * scheduler vod deny
+*/5 6    * * * scheduler amazon deny
+0   7    * * * scheduler amazon allow
 
 # YouTube
 #   Available: at 00:00 - 06:00 every day
-*/30 0-5  * * * schedule-youtube allow
-# */5  6-23 * * * schedule-youtube deny
+*/30 0-5  * * * scheduler youtube allow
+# */5  6-23 * * * scheduler youtube deny
 
 # YouTube Music
 #   Available: 00:00 - 06:00 every day
@@ -112,5 +112,5 @@ NON_ROOT_USER=ubuntu
 #     This rule is the opposite of the other rules
 #     YouTube Music is allowed when the file does exist
 #
-*/10 0-5  * * * schedule-youtube-music allow
-*/10 6-23 * * * schedule-youtube-music deny
+*/10 0-5  * * * scheduler youtube-music allow
+*/10 6-23 * * * scheduler youtube-music deny
