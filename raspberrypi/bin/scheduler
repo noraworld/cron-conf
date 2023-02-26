@@ -2,8 +2,8 @@
 # shellcheck disable=SC2004
 
 main() {
-  operation="$1"
-  service="$2"
+  service="$1"
+  operation="$2"
 
   parse "$@"
   eval "set -- $REST"
