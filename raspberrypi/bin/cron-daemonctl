@@ -30,7 +30,7 @@ main() {
 punish() {
   # sudo shutdown now
   # sudo systemctl stop ssh
-  echo "manual deletion detected (args: \"$@\")" >> /home/ubuntu/.log/temp
+  echo "manual deletion detected (args: \"$@\", date: \"$(date)\")" >> /home/ubuntu/.log/temp
 }
 
 authenticate() {
