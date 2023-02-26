@@ -28,8 +28,13 @@ main() {
 }
 
 punish() {
+  # choose either one of them
+  #
   # sudo shutdown now
   # sudo systemctl stop ssh
+
+  # for debug
+  #
   echo "manual deletion detected (args: \"$@\", date: \"$(date)\")" >> /home/ubuntu/.log/temp
 }
 
