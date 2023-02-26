@@ -341,8 +341,14 @@ vod() {
 youtube() {
   case "$operation" in
     "deny")
+      cron-daemonctl start observe-youtube-conf "$safe"
+      sudo create-dnsmasq-toggle-conf public youtube
+      # create-iptables-toggle-conf public 134_youtube
       ;;
     "allow")
+      cron-daemonctl stop observe-youtube-conf "$safe"
+      # sudo remove-dnsmasq-toggle-conf public youtube
+      # remove-iptables-toggle-conf public 134_youtube
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2
@@ -354,14 +360,15 @@ youtube() {
 youtube_music() {
   case "$operation" in
     "deny")
-      cron-daemonctl start observe-youtube-conf "$safe"
-      sudo create-dnsmasq-toggle-conf public youtube
-      # create-iptables-toggle-conf public 134_youtube
+      # cron-daemonctl start observe-youtube-music-conf "$safe"
+      sudo remove-dnsmasq-toggle-conf public youtube_music
+      # remove-iptables-toggle-conf public 135_youtube_music
       ;;
     "allow")
-      cron-daemonctl stop observe-youtube-conf "$safe"
-      # sudo remove-dnsmasq-toggle-conf public youtube
-      # remove-iptables-toggle-conf public 134_youtube
+      :
+      # cron-daemonctl stop observe-youtube-music-conf "$safe"
+      # sudo create-dnsmasq-toggle-conf public youtube_music
+      # create-iptables-toggle-conf public 135_youtube_music
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2
