@@ -29,14 +29,14 @@ main() {
 }
 
 punish() {
-  # choose either one of them
+  # for debug or logging
+  #
+  echo "manual disablement detected (date: \"$(date)\", args: \"$*\")" >> /home/ubuntu/.log/cron-daemonctl.log
+
+  # choose either of these punishments
   #
   # sudo shutdown now
   # sudo systemctl stop ssh
-
-  # for debug
-  #
-  echo "manual disablement detected (date: \"$(date)\", args: \"$*\")" >> /home/ubuntu/.log/cron-daemonctl.log
 }
 
 authenticate() {
