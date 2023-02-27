@@ -1,4 +1,5 @@
 #!/bin/sh
+# shellcheck disable=SC2004
 
 main() {
   authenticate
@@ -35,11 +36,11 @@ punish() {
 
   # for debug
   #
-  echo "manual disablement detected (args: \"$@\", date: \"$(date)\")" >> /home/ubuntu/.log/cron-daemonctl.log
+  echo "manual disablement detected (args: \"$*\", date: \"$(date)\")" >> /home/ubuntu/.log/cron-daemonctl.log
 }
 
 authenticate() {
-  IS_CRON_SCRIPT=$(dirname $(realpath $0))/../../bin/lib/is-cron
+  IS_CRON_SCRIPT=$(dirname "$(realpath "$0")")/../../bin/lib/is-cron
 
   if [ "$(sh -c "$IS_CRON_SCRIPT")" = false ]; then
     echo "Fatal: This operation must be executed by cron, or this script does not take enough effect" >&2
