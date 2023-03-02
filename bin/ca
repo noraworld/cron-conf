@@ -42,7 +42,10 @@ main() {
     exit 1
   fi
 
-  crontab -l | less
+  # choose either one of them
+  #
+  # crontab -l | less
+  crontab -l | batcat -l ruby
 }
 
 
