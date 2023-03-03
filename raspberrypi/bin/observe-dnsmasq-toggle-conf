@@ -53,7 +53,7 @@ observe() {
             exit 2
             ;;
           "cron")
-            cron-apply
+            ca
             ;;
         esac
         ;;
@@ -73,7 +73,7 @@ observe() {
             fi
             ;;
           "cron")
-            cron-apply
+            ca
             ;;
         esac
         ;;

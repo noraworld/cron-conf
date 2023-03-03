@@ -11,8 +11,8 @@ You can write a job to `non_root.cron` and load it instead.
 To reflect `non_root.cron` to crontab, execute the following command.
 
 ```shell
-cron-apply <DEVICE_NAME>      # for a normal user
-sudo cron-apply <DEVICE_NAME> # for a root user
+ca <DEVICE_NAME>      # for a normal user
+sudo ca <DEVICE_NAME> # for a root user
 ```
 
 `<DEVICE_NAME>` is the same as a directory name that is in this repository’s root, like `raspberrypi`.
