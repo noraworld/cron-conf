@@ -1,6 +1,0 @@
-#!/bin/sh
-
-log-reboot
-clock-observer
-metronome set full
-marlin re-disconnect all --retry=2

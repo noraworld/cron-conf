@@ -1,9 +1,0 @@
-#!/bin/sh
-
-if [ "$1" = "deny" ]; then
-  cron-daemonctl start observe-github-editor-conf
-  sudo create-dnsmasq-toggle-conf public github_editor
-elif [ "$1" = "allow" ]; then
-  cron-daemonctl stop observe-github-editor-conf
-  sudo remove-dnsmasq-toggle-conf public github_editor
-fi
