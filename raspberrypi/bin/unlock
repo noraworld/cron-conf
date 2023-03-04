@@ -1,22 +1,28 @@
 #!/bin/sh
 
 set -eu
-trap clock EXIT
+trap remaining_time EXIT
+
+reference_minute=0
 
 main() {
   service="$1"
 
   case "$service" in
     "chime")
+      reference_minute=10
       sudo unlink /etc/dnsmasq.toggle/chime.conf
       ;;
     "vod")
+      reference_minute=5
       sudo unlink /etc/dnsmasq.toggle/vod.conf
       ;;
     "youtube")
+      reference_minute=5
       sudo unlink /etc/dnsmasq.toggle/youtube.conf
       ;;
     "youtube-music")
+      reference_minute=20
       sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle/youtube_music.conf /etc/dnsmasq.toggle
       ;;
     *)
@@ -35,8 +41,10 @@ main() {
   fi
 }
 
-clock() {
-  date +"%T" | sed 's/^[0-9][0-9]:[0-9]/--:-/g'
+remaining_time() {
+  if [ "$reference_minute" -gt 0 ]; then
+    remaining-time $reference_minute
+  fi
 }
 
 main "$@"
