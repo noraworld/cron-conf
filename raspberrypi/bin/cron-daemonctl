@@ -1,6 +1,8 @@
 #!/bin/sh
 # shellcheck disable=SC2004
 
+LOG_PATH="/home/ubuntu/.log/cron-daemonctl.log"
+
 main() {
   authenticate
   set_env
@@ -31,7 +33,7 @@ main() {
 punish() {
   # for debug or logging
   #
-  echo "manual disablement detected (date: \"$(date)\", args: \"$*\")" >> /home/ubuntu/.log/cron-daemonctl.log
+  echo "manual disablement detected (date: \"$(date)\", args: \"$*\")" >> "$LOG_PATH"
 
   # choose either of these punishments
   #
