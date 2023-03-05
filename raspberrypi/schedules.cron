@@ -125,5 +125,5 @@ NON_ROOT_USER=ubuntu
 #     This rule is the opposite of the other rules
 #     YouTube Music is allowed when the file does exist
 #
-# */20 0-5  * * * scheduler youtube-music allow
-*/20 6-23 * * * scheduler youtube-music deny
+# */15 0-5  * * * scheduler youtube-music allow
+*/15 6-23 * * * scheduler youtube-music deny

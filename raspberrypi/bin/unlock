@@ -22,7 +22,7 @@ main() {
       sudo unlink /etc/dnsmasq.toggle/youtube.conf
       ;;
     "youtube-music")
-      reference_minute=20
+      reference_minute=15
       sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle/youtube_music.conf /etc/dnsmasq.toggle
       ;;
     *)
