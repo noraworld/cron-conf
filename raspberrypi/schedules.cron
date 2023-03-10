@@ -78,21 +78,19 @@ NON_ROOT_USER=ubuntu
 */30 6-23 * * * scheduler deregulated-superman-allow deny
 
 # Ometeotl
-#   Available: at 01:00 - 04:00 every day
-# */5 0,4-23 * * * scheduler ometeotl deny
-# */5 1-3    * * * scheduler ometeotl allow
+#   Available: at 00:00 - 06:00 every day
+# 0 0-5  * * * scheduler ometeotl allow
+0 6-23 * * * scheduler ometeotl deny
 
 # Upstream
-#   Available: at 01:00 - 04:00 on Wed, Sat
-# */5 *      * * 0-2,4-5 scheduler upstream deny
-# */5 0,4-23 * * 3,6     scheduler upstream deny
-# */5 1-3    * * 3,6     scheduler upstream allow
+#   Available: at 00:00 - 06:00 every day
+# 0 0-5  * * * scheduler upstream allow
+0 6-23 * * * scheduler upstream deny
 
 # Superman
-#   Available: at 01:00 - 04:00 on Wed, Sat
-# */5 *      * * 0-2,4-5 scheduler superman deny
-# */5 0,4-23 * * 3,6     scheduler superman deny
-# */5 1-3    * * 3,6     scheduler superman allow
+#   Available: at 00:00 - 06:00 every day
+# 0 0-5    * * * scheduler superman allow
+0 6-23 * * * scheduler superman deny
 
 # Chime
 #   Available: at 00:00 - 06:00 every day

@@ -231,12 +231,13 @@ observe() {
 ometeotl() {
   case "$operation" in
     "deny")
-      cron-daemonctl start observe-ometeotl-conf "$safe"
+      # cron-daemonctl start observe-ometeotl-conf "$safe"
       sudo create-dnsmasq-toggle-conf private ometeotl
       # create-iptables-toggle-conf private 234_ometeotl
       ;;
     "allow")
-      cron-daemonctl stop observe-ometeotl-conf "$safe"
+      :
+      # cron-daemonctl stop observe-ometeotl-conf "$safe"
       # sudo remove-dnsmasq-toggle-conf private ometeotl
       # remove-iptables-toggle-conf private 234_ometeotl
       ;;
@@ -288,12 +289,13 @@ startup() {
 superman() {
   case "$operation" in
     "deny")
-      cron-daemonctl start observe-superman-conf "$safe"
+      # cron-daemonctl start observe-superman-conf "$safe"
       sudo create-dnsmasq-toggle-conf private superman
       # create-iptables-toggle-conf private 233_superman
       ;;
     "allow")
-      cron-daemonctl stop observe-superman-conf "$safe"
+      :
+      # cron-daemonctl stop observe-superman-conf "$safe"
       # sudo remove-dnsmasq-toggle-conf private superman
       # remove-iptables-toggle-conf private 233_superman
       ;;
@@ -307,12 +309,12 @@ superman() {
 upstream() {
   case "$operation" in
     "deny")
-      cron-daemonctl start observe-superman-upstream-conf "$safe"
+      # cron-daemonctl start observe-superman-upstream-conf "$safe"
       sudo remove-dnsmasq-toggle-conf private adguard_upstream
       sudo create-dnsmasq-toggle-conf private superman_upstream
       ;;
     "allow")
-      cron-daemonctl stop observe-superman-upstream-conf "$safe"
+      # cron-daemonctl stop observe-superman-upstream-conf "$safe"
       sudo remove-dnsmasq-toggle-conf private superman_upstream
       sudo create-dnsmasq-toggle-conf private adguard_upstream
       ;;
