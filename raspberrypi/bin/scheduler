@@ -116,12 +116,13 @@ daily() {
 deregulated_superman() {
   case "$operation" in
     "deny")
-      cron-daemonctl start observe-deregulated-superman-conf "$safe"
+      # cron-daemonctl start observe-deregulated-superman-conf "$safe"
       sudo create-dnsmasq-toggle-conf private deregulated_superman
       # create-iptables-toggle-conf private 231_deregulated_superman
       ;;
     "allow")
-      cron-daemonctl stop observe-deregulated-superman-conf "$safe"
+      :
+      # cron-daemonctl stop observe-deregulated-superman-conf "$safe"
       # sudo remove-dnsmasq-toggle-conf private deregulated_superman
       # remove-iptables-toggle-conf private 231_deregulated_superman
       ;;
@@ -135,11 +136,12 @@ deregulated_superman() {
 deregulated_superman_allow() {
   case "$operation" in
     "deny")
-      cron-daemonctl start observe-deregulated-superman-allow-conf "$safe"
+      # cron-daemonctl start observe-deregulated-superman-allow-conf "$safe"
       sudo remove-dnsmasq-toggle-conf private deregulated_superman_allow
       ;;
     "allow")
-      cron-daemonctl stop observe-deregulated-superman-allow-conf "$safe"
+      :
+      # cron-daemonctl stop observe-deregulated-superman-allow-conf "$safe"
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2

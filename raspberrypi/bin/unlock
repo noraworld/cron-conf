@@ -13,6 +13,11 @@ main() {
       reference_minute=10
       sudo unlink /etc/dnsmasq.toggle/chime.conf
       ;;
+    "deregulated-superman")
+      reference_minute=30
+      sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/deregulated_superman_allow.conf /etc/dnsmasq.priv/toggle
+      sudo unlink /etc/dnsmasq.priv/toggle/deregulated_superman.conf
+      ;;
     "vod")
       reference_minute=5
       sudo unlink /etc/dnsmasq.toggle/vod.conf
