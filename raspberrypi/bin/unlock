@@ -15,7 +15,7 @@ main() {
       ;;
     "deregulated-superman")
       reference_minute=30
-      sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/deregulated_superman_allow.conf /etc/dnsmasq.priv/toggle
+      [ -L /etc/dnsmasq.priv/toggle/deregulated_superman_allow.conf ] || sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/deregulated_superman_allow.conf /etc/dnsmasq.priv/toggle
       sudo unlink /etc/dnsmasq.priv/toggle/deregulated_superman.conf
       ;;
     "ometeotl")
@@ -24,10 +24,10 @@ main() {
       ;;
     "superman")
       reference_minute=60
+      [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/ometeotl.conf
+      [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/superman_upstream.conf
+      [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ] || sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/adguard_upstream.conf /etc/dnsmasq.priv/toggle
       sudo unlink /etc/dnsmasq.priv/toggle/superman.conf
-      sudo unlink /etc/dnsmasq.priv/toggle/ometeotl
-      sudo unlink /etc/dnsmasq.priv/toggle/superman_upstream.conf
-      sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/adguard_upstream.conf /etc/dnsmasq.priv/toggle
       ;;
     "vod")
       reference_minute=5
