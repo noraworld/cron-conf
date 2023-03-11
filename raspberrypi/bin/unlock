@@ -18,6 +18,10 @@ main() {
       sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/deregulated_superman_allow.conf /etc/dnsmasq.priv/toggle
       sudo unlink /etc/dnsmasq.priv/toggle/deregulated_superman.conf
       ;;
+    "ometeotl")
+      reference_minute=10
+      sudo unlink /etc/dnsmasq.priv/toggle/ometeotl.conf
+      ;;
     "superman")
       reference_minute=60
       sudo unlink /etc/dnsmasq.priv/toggle/superman.conf
