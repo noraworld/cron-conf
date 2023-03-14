@@ -115,11 +115,11 @@ NON_ROOT_USER=ubuntu
 0      7    * * * scheduler amazon allow
 
 # YouTube
-#   Available: at 00:00 - 06:00 every day
-*/5    0-5  * * * scheduler youtube allow
-0      6    * * * scheduler youtube deny --safe
-5-55/5 6    * * * scheduler youtube deny
-*/5    7-23 * * * scheduler youtube deny
+#   Available: at 00:00 - 04:00 every day
+*/5    0-3  * * * scheduler youtube allow
+0      4    * * * scheduler youtube deny --safe
+5-55/5 4    * * * scheduler youtube deny
+*/5    5-23 * * * scheduler youtube deny
 
 # YouTube Music
 #   Available: 00:00 - 06:00 every day
