@@ -52,6 +52,30 @@ main() {
       [ "$DRY_RUN" = 1 ] && exit 0
       sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle/youtube_music.conf /etc/dnsmasq.toggle
       ;;
+    "adguard-upstream")
+      [ -L /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf
+      [ -L /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf
+      [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/superman_upstream.conf
+      sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/adguard_upstream.conf /etc/dnsmasq.priv/toggle
+      ;;
+    "cloudflare-upstream")
+      [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/adguard_upstream.conf
+      [ -L /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf
+      [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/superman_upstream.conf
+      sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/cloudflare_upstream.conf /etc/dnsmasq.priv/toggle
+      ;;
+    "nordvpn-upstream")
+      [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/adguard_upstream.conf
+      [ -L /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf
+      [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/superman_upstream.conf
+      sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/nordvpn_upstream.conf /etc/dnsmasq.priv/toggle
+      ;;
+    "superman-upstream")
+      [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/adguard_upstream.conf
+      [ -L /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf
+      [ -L /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf
+      sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/superman_upstream.conf /etc/dnsmasq.priv/toggle
+      ;;
     *)
       echo "error: no such service $service" >&2
       exit 1
