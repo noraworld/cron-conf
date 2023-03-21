@@ -40,6 +40,7 @@ main() {
     "vod")
       reference_minute=5
       [ "$DRY_RUN" = 1 ] && exit 0
+      [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/ometeotl.conf
       sudo unlink /etc/dnsmasq.toggle/vod.conf
       ;;
     "youtube")

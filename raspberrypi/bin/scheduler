@@ -328,12 +328,12 @@ upstream() {
 vod() {
   case "$operation" in
     "deny")
-      cron-daemonctl start observe-vod-conf "$safe"
+      # cron-daemonctl start observe-vod-conf "$safe"
       sudo create-dnsmasq-toggle-conf public vod
       # create-iptables-toggle-conf public 133_vod
       ;;
     "allow")
-      cron-daemonctl stop observe-vod-conf "$safe"
+      # cron-daemonctl stop observe-vod-conf "$safe"
       sudo remove-dnsmasq-toggle-conf public vod
       # remove-iptables-toggle-conf public 133_vod
       ;;
