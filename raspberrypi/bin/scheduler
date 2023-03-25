@@ -372,7 +372,7 @@ youtube_alternative() {
       sudo remove-dnsmasq-toggle-conf public youtube_alternative
       ;;
     "allow")
-      :
+      sudo create-dnsmasq-toggle-conf public youtube_alternative
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2
