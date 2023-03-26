@@ -25,7 +25,7 @@ main() {
       sudo unlink /etc/dnsmasq.priv/toggle/deregulated_superman.conf
       ;;
     "ometeotl")
-      reference_minute=10
+      reference_minute=60
       [ "$DRY_RUN" = 1 ] && exit 0
       sudo unlink /etc/dnsmasq.priv/toggle/ometeotl.conf
       ;;
@@ -44,7 +44,6 @@ main() {
       sudo unlink /etc/dnsmasq.toggle/vod.conf
       ;;
     "youtube")
-      reference_minute=5
       [ "$DRY_RUN" = 1 ] && exit 0
       sudo unlink /etc/dnsmasq.toggle/youtube.conf
       ;;
