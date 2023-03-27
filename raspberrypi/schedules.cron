@@ -123,8 +123,8 @@ NON_ROOT_USER=ubuntu
 */1    7-23 * * * scheduler youtube deny
 
 # YouTube Alternative
-*/10 0-5,19-20  * * * scheduler youtube-alternative allow
-*/10 6-18,21-23 * * * scheduler youtube-alternative deny
+# */10 19-20      * * * scheduler youtube-alternative allow
+*/10 0-18,21-23 * * * scheduler youtube-alternative deny
 
 # YouTube Music
 #   Available: 00:00 - 06:00 every day
