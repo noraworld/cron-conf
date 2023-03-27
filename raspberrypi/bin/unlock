@@ -44,6 +44,7 @@ main() {
       sudo unlink /etc/dnsmasq.toggle/vod.conf
       ;;
     "youtube")
+      reference_minute=60
       [ "$DRY_RUN" = 1 ] && exit 0
       sudo unlink /etc/dnsmasq.toggle/youtube.conf
       ;;
