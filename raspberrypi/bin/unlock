@@ -5,7 +5,7 @@ set -eu
 trap remaining_time EXIT
 
 reference_minute=0
-SLEEP_INTERVAL=2
+SLEEP_INTERVAL=5
 
 main() {
   service="$1"
@@ -179,7 +179,7 @@ remaining_time() {
 }
 
 pause() {
-  echo "waiting for $SLEEP_INTERVAL seconds for the observer daemon to be effective"
+  echo "waiting for $SLEEP_INTERVAL seconds for the observer daemon to be effective and to avoid excessive execution"
   sleep "$SLEEP_INTERVAL"
 }
 
