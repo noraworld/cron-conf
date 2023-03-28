@@ -35,7 +35,7 @@ main() {
 
 punish() {
   # for debug or logging
-  echo "manual disablement detected (date: \"$(date)\", args: \"$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')\")" >> "$LOG_PATH"
+  echo "manual disablement detected (date: \"$(date)\", args: \"$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')\", duration: $RECOVERY_TIME)" >> "$LOG_PATH"
 
   # shellcheck disable=SC2046
   echo "sudo systemctl start ssh" | at now + "$RECOVERY_TIME" &&
