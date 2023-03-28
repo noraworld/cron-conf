@@ -2,6 +2,9 @@
 # shellcheck disable=SC2004
 
 LOG_PATH="/home/ubuntu/.log/cron-daemonctl.log"
+# how long before sshd starts
+# e.g. "30 min", "1 hour"
+RECOVERY_TIME="30 min"
 
 main() {
   authenticate
@@ -32,13 +35,14 @@ main() {
 
 punish() {
   # for debug or logging
-  #
   echo "manual disablement detected (date: \"$(date)\", args: \"$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')\")" >> "$LOG_PATH"
 
-  # choose either of these punishments
-  #
-  # sudo shutdown now
-  # sudo systemctl stop ssh
+  # shellcheck disable=SC2046
+  echo "sudo systemctl start ssh" | at now + "$RECOVERY_TIME" &&
+  sudo systemctl stop ssh &&
+  # kill all users logging in with sshd
+  # do not quote pgrep because the error occurs when multiple users are logging in with sshd
+  kill -9 $(pgrep -f "sshd: .*@pts/")
 }
 
 authenticate() {
