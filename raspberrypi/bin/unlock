@@ -5,13 +5,16 @@ set -eu
 trap remaining_time EXIT
 
 reference_minute=0
-SLEEP_INTERVAL=5
+COOLDOWN_INTERVAL=3
+WAITING_INTERVAL=2
 
 main() {
   service="$1"
 
   parse "$@"
   eval "set -- $REST"
+
+  pause "$COOLDOWN_INTERVAL"
 
   case "$service" in
     "chime")
@@ -72,7 +75,7 @@ chime() {
 
   sudo unlink /etc/dnsmasq.toggle/chime.conf
 
-  pause
+  pause "$WAITING_INTERVAL"
 
   if [ -L /etc/dnsmasq.toggle/chime.conf ]; then
     echo "error: /etc/dnsmasq.toggle/chime.conf still exists" >&2
@@ -90,7 +93,7 @@ deregulated_superman() {
 
   sudo unlink /etc/dnsmasq.priv/toggle/deregulated_superman.conf
 
-  pause
+  pause "$WAITING_INTERVAL"
 
   if ! [ -L /etc/dnsmasq.priv/toggle/deregulated_superman_allow.conf ]; then
     echo "error: /etc/dnsmasq.priv/toggle/deregulated_superman_allow.conf still doesn't exist" >&2
@@ -109,7 +112,7 @@ ometeotl() {
 
   sudo unlink /etc/dnsmasq.priv/toggle/ometeotl.conf
 
-  pause
+  pause "$WAITING_INTERVAL"
 
   if [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ]; then
     echo "error: /etc/dnsmasq.priv/toggle/ometeotl.conf still exists" >&2
@@ -135,7 +138,7 @@ superman() {
 
   sudo unlink /etc/dnsmasq.priv/toggle/superman.conf
 
-  pause
+  pause "$WAITING_INTERVAL"
 
   if [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ]; then
     echo "error: /etc/dnsmasq.priv/toggle/ometeotl.conf still exists" >&2
@@ -168,7 +171,7 @@ vod() {
 
   sudo unlink /etc/dnsmasq.toggle/vod.conf
 
-  pause
+  pause "$WAITING_INTERVAL"
 
   if [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ]; then
     echo "error: /etc/dnsmasq.priv/toggle/ometeotl.conf still exists" >&2
@@ -187,7 +190,7 @@ youtube() {
 
   sudo unlink /etc/dnsmasq.toggle/youtube.conf
 
-  pause
+  pause "$WAITING_INTERVAL"
 
   if [ -L /etc/dnsmasq.toggle/youtube.conf ]; then
     echo "error: /etc/dnsmasq.toggle/youtube.conf still exists" >&2
@@ -201,7 +204,7 @@ youtube_alternative() {
 
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle/youtube_alternative.conf /etc/dnsmasq.toggle
 
-  pause
+  pause "$WAITING_INTERVAL"
 
   if ! [ -L /etc/dnsmasq.toggle/youtube_alternative.conf ]; then
     echo "error: /etc/dnsmasq.toggle/youtube_alternative.conf still doesn't exist" >&2
@@ -215,7 +218,7 @@ youtube_music() {
 
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle/youtube_music.conf /etc/dnsmasq.toggle
 
-  pause
+  pause "$WAITING_INTERVAL"
 
   if ! [ -L /etc/dnsmasq.toggle/youtube_music.conf ]; then
     echo "error: /etc/dnsmasq.toggle/youtube_music.conf still doesn't exist" >&2
@@ -238,7 +241,7 @@ adguard_upstream() {
 
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/adguard_upstream.conf /etc/dnsmasq.priv/toggle
 
-  pause
+  pause "$WAITING_INTERVAL"
 
   if [ -L /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf ]; then
     echo "error: /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf still exists" >&2
@@ -276,7 +279,7 @@ cloudflare_upstream() {
 
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/cloudflare_upstream.conf /etc/dnsmasq.priv/toggle
 
-  pause
+  pause "$WAITING_INTERVAL"
 
   if [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ]; then
     echo "error: /etc/dnsmasq.priv/toggle/adguard_upstream.conf still exists" >&2
@@ -314,7 +317,7 @@ nordvpn_upstream() {
 
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/nordvpn_upstream.conf /etc/dnsmasq.priv/toggle
 
-  pause
+  pause "$WAITING_INTERVAL"
 
   if [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ]; then
     echo "error: /etc/dnsmasq.priv/toggle/adguard_upstream.conf still exists" >&2
@@ -352,7 +355,7 @@ superman_upstream() {
 
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/superman_upstream.conf /etc/dnsmasq.priv/toggle
 
-  pause
+  pause "$WAITING_INTERVAL"
 
   if [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ]; then
     echo "error: /etc/dnsmasq.priv/toggle/adguard_upstream.conf still exists" >&2
@@ -382,8 +385,8 @@ remaining_time() {
 }
 
 pause() {
-  echo "waiting for $SLEEP_INTERVAL seconds for the observer daemon to be effective and to avoid excessive execution"
-  sleep "$SLEEP_INTERVAL"
+  echo "waiting for $1 seconds for the observer daemon to be effective or to avoid excessive execution"
+  sleep "$1"
 }
 
 # @getoptions
