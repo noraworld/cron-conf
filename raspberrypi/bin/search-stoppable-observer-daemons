@@ -34,7 +34,7 @@ main() {
     done
 
     echo
-    echo "If nothing shows, all the daemons are now inactive!"
+    echo "If nothing shows above, all the daemons are now inactive!"
   else
     echo "OK, I won't, but let me show you the commands to stop them."
     echo
