@@ -6,15 +6,40 @@ SCHEDULER_FILE="/home/ubuntu/workspace/cron-conf/raspberrypi/bin/scheduler"
 main() {
   echo "Here is a list of observer daemons that can be stopped safely."
   echo "You may need to stop these daemons after the system reboots, as they start automatically even though they are unnecessary."
-  echo
 
   for conf in $OBSERVE_FILES; do
     conf=$(basename "${conf%.*}")
 
     if [ "$(grep -E "cron-daemonctl.*$conf" $SCHEDULER_FILE | grep -cEv "\s*#")" -eq 0 ]; then
-      echo "systemctl --user stop $conf; systemctl --user is-active $conf"
+      daemons="$daemons\n$conf"
     fi
   done
+
+  echo "$daemons"
+  echo
+
+  printf "Would you like to turn them off? [y/N]: "
+  exec < /dev/tty
+  read -r confirm
+
+  if [ "$confirm" = "y" ] || [ "$confirm" = "yes" ]; then
+    echo "$daemons" | while read -r daemon; do
+      [ "$daemon" = "" ] && continue
+
+      systemctl --user stop "$daemon"
+
+      if [ "$(systemctl --user is-active "$daemon")" != "inactive" ]; then
+        echo "warning: $daemon is not inactive!" >&2
+      fi
+    done
+
+    echo
+    echo "If nothing shows, all daemons are now inactive!"
+  else
+    echo "OK, I won't, but let me show you the commands to stop them."
+    echo
+    echo "$daemons" | xargs -I {} echo "systemctl --user stop {}; systemctl --user is-active {}"
+  fi
 }
 
 main "$@"
