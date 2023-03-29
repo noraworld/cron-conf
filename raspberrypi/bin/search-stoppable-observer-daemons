@@ -1,0 +1,20 @@
+#!/bin/sh
+
+OBSERVE_FILES="/home/ubuntu/workspace/systemd-units/lib/systemd/user/observer/*"
+SCHEDULER_FILE="/home/ubuntu/workspace/cron-conf/raspberrypi/bin/scheduler"
+
+main() {
+  echo "Here is a list of observer daemons that can be stopped safely."
+  echo "You may need to stop these daemons after the system reboots, as they start automatically even though they are unnecessary."
+  echo
+
+  for conf in $OBSERVE_FILES; do
+    conf=$(basename "${conf%.*}")
+
+    if [ "$(grep -E "cron-daemonctl.*$conf" $SCHEDULER_FILE | grep -cEv "\s*#")" -eq 0 ]; then
+      echo "systemctl --user stop $conf; systemctl --user is-active $conf"
+    fi
+  done
+}
+
+main "$@"
