@@ -15,146 +15,40 @@ main() {
 
   case "$service" in
     "chime")
-      reference_minute=10
-      [ "$DRY_RUN" = 1 ] && exit 0
-
-      sudo unlink /etc/dnsmasq.toggle/chime.conf
-
-      pause
-
-      [ -L /etc/dnsmasq.toggle/chime.conf ] && echo "error: /etc/dnsmasq.toggle/chime.conf still exists" >&2 && exit
+      chime
       ;;
     "deregulated-superman")
-      reference_minute=30
-      [ "$DRY_RUN" = 1 ] && exit 0
-
-      [ -L /etc/dnsmasq.priv/toggle/deregulated_superman_allow.conf ] || sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/deregulated_superman_allow.conf /etc/dnsmasq.priv/toggle
-      sudo unlink /etc/dnsmasq.priv/toggle/deregulated_superman.conf
-
-      pause
-
-      [ -L /etc/dnsmasq.priv/toggle/deregulated_superman_allow.conf ] || echo "error: /etc/dnsmasq.priv/toggle/deregulated_superman_allow.conf still doesn't exist" >&2 && exit
-      [ -L /etc/dnsmasq.priv/toggle/deregulated_superman.conf ] && echo "error: /etc/dnsmasq.priv/toggle/deregulated_superman.conf still exists" >&2 && exit
+      deregulated_superman
       ;;
     "ometeotl")
-      reference_minute=60
-      [ "$DRY_RUN" = 1 ] && exit 0
-
-      sudo unlink /etc/dnsmasq.priv/toggle/ometeotl.conf
-
-      pause
-
-      [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ] && echo "error: /etc/dnsmasq.priv/toggle/ometeotl.conf still exists" >&2 && exit
+      ometeotl
       ;;
     "superman")
-      reference_minute=60
-      [ "$DRY_RUN" = 1 ] && exit 0
-
-      [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/ometeotl.conf
-      [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/superman_upstream.conf
-      [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ] || sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/adguard_upstream.conf /etc/dnsmasq.priv/toggle
-      sudo unlink /etc/dnsmasq.priv/toggle/superman.conf
-
-      pause
-
-      [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ] && echo "error: /etc/dnsmasq.priv/toggle/ometeotl.conf still exists" >&2 && exit
-      [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ] && echo "error: /etc/dnsmasq.priv/toggle/superman_upstream.conf still exists" >&2 && exit
-      [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ] || echo "error: /etc/dnsmasq.priv/toggle/adguard_upstream.conf still doesn't exist" >&2 && exit
-      [ -L /etc/dnsmasq.priv/toggle/superman.conf ] && echo "error: /etc/dnsmasq.priv/toggle/superman.conf still exists" >&2 && exit
+      superman
       ;;
     "vod")
-      reference_minute=5
-      [ "$DRY_RUN" = 1 ] && exit 0
-
-      [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/ometeotl.conf
-      sudo unlink /etc/dnsmasq.toggle/vod.conf
-
-      pause
-
-      [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ] && echo "error: /etc/dnsmasq.priv/toggle/ometeotl.conf still exists" >&2 && exit
-      [ -L /etc/dnsmasq.toggle/vod.conf ] && echo "error: /etc/dnsmasq.toggle/vod.conf still exists" >&2 && exit
+      vod
       ;;
     "youtube")
-      reference_minute=60
-      [ "$DRY_RUN" = 1 ] && exit 0
-
-      sudo unlink /etc/dnsmasq.toggle/youtube.conf
-
-      pause
-
-      [ -L /etc/dnsmasq.toggle/youtube.conf ] && echo "error: /etc/dnsmasq.toggle/youtube.conf still exists" >&2 && exit
+      youtube
       ;;
     "youtube-alternative")
-      reference_minute=10
-      [ "$DRY_RUN" = 1 ] && exit 0
-
-      sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle/youtube_alternative.conf /etc/dnsmasq.toggle
-
-      pause
-
-      [ -L /etc/dnsmasq.toggle/youtube_alternative.conf ] || echo "error: /etc/dnsmasq.toggle/youtube_alternative.conf still doesn't exist" >&2 && exit
+      youtube_alternative
       ;;
     "youtube-music")
-      reference_minute=10
-      [ "$DRY_RUN" = 1 ] && exit 0
-
-      sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle/youtube_music.conf /etc/dnsmasq.toggle
-
-      pause
-
-      [ -L /etc/dnsmasq.toggle/youtube_music.conf ] || echo "error: /etc/dnsmasq.toggle/youtube_music.conf still doesn't exist" >&2 && exit
+      youtube_music
       ;;
     "adguard-upstream")
-      [ -L /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf
-      [ -L /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf
-      [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/superman_upstream.conf
-      sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/adguard_upstream.conf /etc/dnsmasq.priv/toggle
-
-      pause
-
-      [ -L /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf ] && echo "error: /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf still exists" >&2 && exit
-      [ -L /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf ] && echo "error: /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf still exists" >&2 && exit
-      [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ] && echo "error: /etc/dnsmasq.priv/toggle/superman_upstream.conf still exists" >&2 && exit
-      [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ] || echo "error: /etc/dnsmasq.priv/toggle/adguard_upstream.conf still doesn't exist" >&2 && exit
+      adguard_upstream
       ;;
     "cloudflare-upstream")
-      [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/adguard_upstream.conf
-      [ -L /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf
-      [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/superman_upstream.conf
-      sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/cloudflare_upstream.conf /etc/dnsmasq.priv/toggle
-
-      pause
-
-      [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ] && echo "error: /etc/dnsmasq.priv/toggle/adguard_upstream.conf still exists" >&2 && exit
-      [ -L /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf ] && echo "error: /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf still exists" >&2 && exit
-      [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ] && echo "error: /etc/dnsmasq.priv/toggle/superman_upstream.conf still exists" >&2 && exit
-      [ -L /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf ] || echo "error: /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf still doesn't exist" >&2 && exit
+      cloudflare_upstream
       ;;
     "nordvpn-upstream")
-      [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/adguard_upstream.conf
-      [ -L /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf
-      [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/superman_upstream.conf
-      sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/nordvpn_upstream.conf /etc/dnsmasq.priv/toggle
-
-      pause
-
-      [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ] && echo "error: /etc/dnsmasq.priv/toggle/adguard_upstream.conf still exists" >&2 && exit
-      [ -L /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf ] && echo "error: /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf still exists" >&2 && exit
-      [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ] && echo "error: /etc/dnsmasq.priv/toggle/superman_upstream.conf still exists" >&2 && exit
-      [ -L /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf ] || echo "error: /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf still doesn't exist" >&2 && exit
+      nordvpn_upstream
       ;;
     "superman-upstream")
-      [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/adguard_upstream.conf
-      [ -L /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf
-      [ -L /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf
-      sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/superman_upstream.conf /etc/dnsmasq.priv/toggle
-
-      pause
-
-      [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ] && echo "error: /etc/dnsmasq.priv/toggle/adguard_upstream.conf still exists" >&2 && exit
-      [ -L /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf ] && echo "error: /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf still exists" >&2 && exit
-      [ -L /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf ] && echo "error: /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf still exists" >&2 && exit
-      [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ] || echo "error: /etc/dnsmasq.priv/toggle/superman_upstream.conf still doesn't exist" >&2 && exit
+      superman_upstream
       ;;
     *)
       echo "error: no such service $service" >&2
@@ -170,6 +64,160 @@ main() {
     sudo systemctl status dnsmasq >&2
     exit 1
   fi
+}
+
+chime() {
+  reference_minute=10
+  [ "$DRY_RUN" = 1 ] && exit 0
+
+  sudo unlink /etc/dnsmasq.toggle/chime.conf
+
+  pause
+
+  [ -L /etc/dnsmasq.toggle/chime.conf ] && echo "error: /etc/dnsmasq.toggle/chime.conf still exists" >&2 && exit
+}
+
+deregulated_superman() {
+  reference_minute=30
+  [ "$DRY_RUN" = 1 ] && exit 0
+
+  [ -L /etc/dnsmasq.priv/toggle/deregulated_superman_allow.conf ] || sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/deregulated_superman_allow.conf /etc/dnsmasq.priv/toggle
+  sudo unlink /etc/dnsmasq.priv/toggle/deregulated_superman.conf
+
+  pause
+
+  [ -L /etc/dnsmasq.priv/toggle/deregulated_superman_allow.conf ] || echo "error: /etc/dnsmasq.priv/toggle/deregulated_superman_allow.conf still doesn't exist" >&2 && exit
+  [ -L /etc/dnsmasq.priv/toggle/deregulated_superman.conf ] && echo "error: /etc/dnsmasq.priv/toggle/deregulated_superman.conf still exists" >&2 && exit
+}
+
+ometeotl() {
+  reference_minute=60
+  [ "$DRY_RUN" = 1 ] && exit 0
+
+  sudo unlink /etc/dnsmasq.priv/toggle/ometeotl.conf
+
+  pause
+
+  [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ] && echo "error: /etc/dnsmasq.priv/toggle/ometeotl.conf still exists" >&2 && exit
+}
+
+superman() {
+  reference_minute=60
+  [ "$DRY_RUN" = 1 ] && exit 0
+
+  [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/ometeotl.conf
+  [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/superman_upstream.conf
+  [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ] || sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/adguard_upstream.conf /etc/dnsmasq.priv/toggle
+  sudo unlink /etc/dnsmasq.priv/toggle/superman.conf
+
+  pause
+
+  [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ] && echo "error: /etc/dnsmasq.priv/toggle/ometeotl.conf still exists" >&2 && exit
+  [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ] && echo "error: /etc/dnsmasq.priv/toggle/superman_upstream.conf still exists" >&2 && exit
+  [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ] || echo "error: /etc/dnsmasq.priv/toggle/adguard_upstream.conf still doesn't exist" >&2 && exit
+  [ -L /etc/dnsmasq.priv/toggle/superman.conf ] && echo "error: /etc/dnsmasq.priv/toggle/superman.conf still exists" >&2 && exit
+}
+
+vod() {
+  reference_minute=5
+  [ "$DRY_RUN" = 1 ] && exit 0
+
+  [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/ometeotl.conf
+  sudo unlink /etc/dnsmasq.toggle/vod.conf
+
+  pause
+
+  [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ] && echo "error: /etc/dnsmasq.priv/toggle/ometeotl.conf still exists" >&2 && exit
+  [ -L /etc/dnsmasq.toggle/vod.conf ] && echo "error: /etc/dnsmasq.toggle/vod.conf still exists" >&2 && exit
+}
+
+youtube() {
+  reference_minute=60
+  [ "$DRY_RUN" = 1 ] && exit 0
+
+  sudo unlink /etc/dnsmasq.toggle/youtube.conf
+
+  pause
+
+  [ -L /etc/dnsmasq.toggle/youtube.conf ] && echo "error: /etc/dnsmasq.toggle/youtube.conf still exists" >&2 && exit
+}
+
+youtube_alternative() {
+  reference_minute=10
+  [ "$DRY_RUN" = 1 ] && exit 0
+
+  sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle/youtube_alternative.conf /etc/dnsmasq.toggle
+
+  pause
+
+  [ -L /etc/dnsmasq.toggle/youtube_alternative.conf ] || echo "error: /etc/dnsmasq.toggle/youtube_alternative.conf still doesn't exist" >&2 && exit
+}
+
+youtube_music() {
+  reference_minute=10
+  [ "$DRY_RUN" = 1 ] && exit 0
+
+  sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle/youtube_music.conf /etc/dnsmasq.toggle
+
+  pause
+
+  [ -L /etc/dnsmasq.toggle/youtube_music.conf ] || echo "error: /etc/dnsmasq.toggle/youtube_music.conf still doesn't exist" >&2 && exit
+}
+
+adguard_upstream() {
+  [ -L /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf
+  [ -L /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf
+  [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/superman_upstream.conf
+  sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/adguard_upstream.conf /etc/dnsmasq.priv/toggle
+
+  pause
+
+  [ -L /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf ] && echo "error: /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf still exists" >&2 && exit
+  [ -L /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf ] && echo "error: /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf still exists" >&2 && exit
+  [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ] && echo "error: /etc/dnsmasq.priv/toggle/superman_upstream.conf still exists" >&2 && exit
+  [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ] || echo "error: /etc/dnsmasq.priv/toggle/adguard_upstream.conf still doesn't exist" >&2 && exit
+}
+
+cloudflare_upstream() {
+  [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/adguard_upstream.conf
+  [ -L /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf
+  [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/superman_upstream.conf
+  sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/cloudflare_upstream.conf /etc/dnsmasq.priv/toggle
+
+  pause
+
+  [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ] && echo "error: /etc/dnsmasq.priv/toggle/adguard_upstream.conf still exists" >&2 && exit
+  [ -L /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf ] && echo "error: /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf still exists" >&2 && exit
+  [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ] && echo "error: /etc/dnsmasq.priv/toggle/superman_upstream.conf still exists" >&2 && exit
+  [ -L /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf ] || echo "error: /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf still doesn't exist" >&2 && exit
+}
+
+nordvpn_upstream() {
+  [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/adguard_upstream.conf
+  [ -L /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf
+  [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/superman_upstream.conf
+  sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/nordvpn_upstream.conf /etc/dnsmasq.priv/toggle
+
+  pause
+
+  [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ] && echo "error: /etc/dnsmasq.priv/toggle/adguard_upstream.conf still exists" >&2 && exit
+  [ -L /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf ] && echo "error: /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf still exists" >&2 && exit
+  [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ] && echo "error: /etc/dnsmasq.priv/toggle/superman_upstream.conf still exists" >&2 && exit
+  [ -L /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf ] || echo "error: /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf still doesn't exist" >&2 && exit
+}
+
+superman_upstream() {
+  [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/adguard_upstream.conf
+  [ -L /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf
+  [ -L /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf ] && sudo unlink /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf
+  sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/superman_upstream.conf /etc/dnsmasq.priv/toggle
+
+  pause
+
+  [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ] && echo "error: /etc/dnsmasq.priv/toggle/adguard_upstream.conf still exists" >&2 && exit
+  [ -L /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf ] && echo "error: /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf still exists" >&2 && exit
+  [ -L /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf ] && echo "error: /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf still exists" >&2 && exit
+  [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ] || echo "error: /etc/dnsmasq.priv/toggle/superman_upstream.conf still doesn't exist" >&2 && exit
 }
 
 remaining_time() {
