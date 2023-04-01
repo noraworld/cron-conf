@@ -7,7 +7,7 @@ trap remaining_time EXIT
 reference_minute=0
 COOLDOWN_INTERVAL=3
 COOLDOWN_MESSAGE="to avoid excessive execution"
-WAITING_INTERVAL=2
+WAITING_INTERVAL=1
 WAITING_MESSAGE="for the observer daemon to be effective"
 
 main() {
