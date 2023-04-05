@@ -2,3 +2,4 @@
 
 git -C /home/ubuntu/workspace/diary pull &
 git -C /home/ubuntu/workspace/diary/_private pull &
+git -C /home/ubuntu/workspace/diary/_daily_report pull &
