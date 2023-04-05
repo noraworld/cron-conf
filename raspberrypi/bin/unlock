@@ -194,12 +194,14 @@ youtube() {
 
   error_color
   sudo unlink /etc/dnsmasq.toggle/youtube.conf
+  no_color
 
   pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
 
   if [ -L /etc/dnsmasq.toggle/youtube.conf ]; then
     error_color
     echo "error: /etc/dnsmasq.toggle/youtube.conf still exists" >&2
+    no_color
     exit
   fi
 }
@@ -210,12 +212,14 @@ youtube_alternative() {
 
   error_color
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle/youtube_alternative.conf /etc/dnsmasq.toggle
+  no_color
 
   pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
 
   if ! [ -L /etc/dnsmasq.toggle/youtube_alternative.conf ]; then
     error_color
     echo "error: /etc/dnsmasq.toggle/youtube_alternative.conf still doesn't exist" >&2
+    no_color
     exit
   fi
 }
