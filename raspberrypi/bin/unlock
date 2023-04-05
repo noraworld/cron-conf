@@ -401,11 +401,11 @@ pause() {
 }
 
 error_color() {
-  printf '%s' "$ERROR_COLOR"
+  printf "%s" "$ERROR_COLOR"
 }
 
 no_color() {
-  printf '%s' "$NO_COLOR"
+  printf "%s" "$NO_COLOR"
 }
 
 # @getoptions
