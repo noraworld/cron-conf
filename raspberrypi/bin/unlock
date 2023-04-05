@@ -401,11 +401,13 @@ pause() {
 }
 
 error_color() {
-  echo "$ERROR_COLOR"
+  # shellcheck disable=SC2059
+  printf "$ERROR_COLOR"
 }
 
 no_color() {
-  echo "$NO_COLOR"
+  # shellcheck disable=SC2059
+  printf "$NO_COLOR"
 }
 
 # @getoptions
