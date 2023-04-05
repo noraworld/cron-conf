@@ -10,6 +10,7 @@ COOLDOWN_MESSAGE="to avoid excessive execution"
 WAITING_INTERVAL=1
 WAITING_MESSAGE="for the observer daemon to be effective"
 ERROR_COLOR="\033[0;31m"
+ATTENTION_COLOR="\033[0;33m"
 NO_COLOR="\033[0m"
 
 main() {
@@ -391,11 +392,13 @@ superman_upstream() {
 }
 
 remaining_time() {
-  no_color
+  attention_color
 
   if [ "$reference_minute" -gt 0 ]; then
     remaining-time $reference_minute
   fi
+
+  no_color
 }
 
 pause() {
@@ -414,6 +417,10 @@ error_color() {
 no_color() {
   # shellcheck disable=SC2059
   printf "$NO_COLOR"
+}
+
+attention_color() {
+  printf "$ATTENTION_COLOR"
 }
 
 # @getoptions
