@@ -9,6 +9,8 @@ COOLDOWN_INTERVAL=3
 COOLDOWN_MESSAGE="to avoid excessive execution"
 WAITING_INTERVAL=1
 WAITING_MESSAGE="for the observer daemon to be effective"
+ERROR_COLOR="\033[0;31m"
+NO_COLOR="\033[0m"
 
 main() {
   service="$1"
@@ -190,12 +192,16 @@ youtube() {
   reference_minute=60
   [ "$DRY_RUN" = 1 ] && exit 0
 
+  error_color
   sudo unlink /etc/dnsmasq.toggle/youtube.conf
+  no_color
 
   pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
 
   if [ -L /etc/dnsmasq.toggle/youtube.conf ]; then
+    error_color
     echo "error: /etc/dnsmasq.toggle/youtube.conf still exists" >&2
+    no_color
     exit
   fi
 }
@@ -392,6 +398,14 @@ pause() {
 
   echo "waiting for $duration seconds $message"
   sleep "$1"
+}
+
+error_color() {
+  echo "$ERROR_COLOR"
+}
+
+no_color() {
+  echo "$NO_COLOR"
 }
 
 # @getoptions
