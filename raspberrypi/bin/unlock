@@ -404,6 +404,10 @@ remaining_time() {
 pause() {
   duration="$1"
   message="$2"
+  
+  if [ "$duration" = 0 ]; then
+    return
+  fi
 
   echo "waiting for $duration seconds $message"
   sleep "$1"
