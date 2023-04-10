@@ -5,9 +5,9 @@ set -eu
 trap remaining_time EXIT
 
 reference_minute=0
-COOLDOWN_INTERVAL=3
+COOLDOWN_INTERVAL=0
 COOLDOWN_MESSAGE="to avoid excessive execution"
-WAITING_INTERVAL=1
+WAITING_INTERVAL=0.5
 WAITING_MESSAGE="for the observer daemon to be effective"
 ERROR_COLOR="\033[0;31m"
 ATTENTION_COLOR="\033[0;33m"
