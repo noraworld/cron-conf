@@ -427,6 +427,7 @@ no_color() {
 }
 
 attention_color() {
+  # shellcheck disable=SC2059
   printf "$ATTENTION_COLOR"
 }
 
