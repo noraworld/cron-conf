@@ -2,7 +2,11 @@
 
 set -eu
 
+YELLOW_COLOR="\033[0;33m"
+YELLOW_BOLD_COLOR="\033[1;33m"
+NO_COLOR="\033[0m"
+
 minute=$1
 remaining_time=$(echo $(expr $minute \* 60) - \($(date +%s) % $(expr $minute \* 60)\) | bc)
 
-echo "$(expr $remaining_time / 60) minutes $(expr $remaining_time % 60) seconds remaining (reference time: $minute minutes)"
+echo "${YELLOW_BOLD_COLOR}$(expr $remaining_time / 60)${YELLOW_COLOR} minutes ${YELLOW_BOLD_COLOR}$(expr $remaining_time % 60)${YELLOW_COLOR} seconds${NO_COLOR} remaining (reference time: $minute minutes)"
