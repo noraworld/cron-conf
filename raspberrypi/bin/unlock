@@ -83,7 +83,9 @@ chime() {
 
   sudo unlink /etc/dnsmasq.toggle/chime.conf
 
-  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  if [ "$(is_observer_active "chime")" = "active" ]; then
+    pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  fi
 
   if [ -L /etc/dnsmasq.toggle/chime.conf ]; then
     echo "error: /etc/dnsmasq.toggle/chime.conf still exists" >&2
@@ -394,6 +396,10 @@ superman_upstream() {
   fi
 }
 
+is_observer_active() {
+  systemctl --user is-active "observe-$1-conf"
+}
+
 remaining_time() {
   attention_color
 
@@ -407,7 +413,7 @@ remaining_time() {
 pause() {
   duration="$1"
   message="$2"
-  
+
   if [ "$duration" = 0 ]; then
     return
   fi
