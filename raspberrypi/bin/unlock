@@ -103,7 +103,9 @@ deregulated_superman() {
 
   sudo unlink /etc/dnsmasq.priv/toggle/deregulated_superman.conf
 
-  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  if [ "$(is_observer_active "deregulated-superman")" = "active" ]; then
+    pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  fi
 
   if ! [ -L /etc/dnsmasq.priv/toggle/deregulated_superman_allow.conf ]; then
     echo "error: /etc/dnsmasq.priv/toggle/deregulated_superman_allow.conf still doesn't exist" >&2
@@ -122,7 +124,9 @@ ometeotl() {
 
   sudo unlink /etc/dnsmasq.priv/toggle/ometeotl.conf
 
-  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  if [ "$(is_observer_active "ometeotl")" = "active" ]; then
+    pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  fi
 
   if [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ]; then
     echo "error: /etc/dnsmasq.priv/toggle/ometeotl.conf still exists" >&2
@@ -148,7 +152,9 @@ superman() {
 
   sudo unlink /etc/dnsmasq.priv/toggle/superman.conf
 
-  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  if [ "$(is_observer_active "superman")" = "active" ]; then
+    pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  fi
 
   if [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ]; then
     echo "error: /etc/dnsmasq.priv/toggle/ometeotl.conf still exists" >&2
@@ -181,7 +187,9 @@ vod() {
 
   sudo unlink /etc/dnsmasq.toggle/vod.conf
 
-  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  if [ "$(is_observer_active "vod")" = "active" ]; then
+    pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  fi
 
   if [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ]; then
     echo "error: /etc/dnsmasq.priv/toggle/ometeotl.conf still exists" >&2
@@ -202,7 +210,9 @@ youtube() {
   sudo unlink /etc/dnsmasq.toggle/youtube.conf
   no_color
 
-  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  if [ "$(is_observer_active "youtube")" = "active" ]; then
+    pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  fi
 
   if [ -L /etc/dnsmasq.toggle/youtube.conf ]; then
     error_color
@@ -220,7 +230,9 @@ youtube_alternative() {
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle/youtube_alternative.conf /etc/dnsmasq.toggle
   no_color
 
-  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  if [ "$(is_observer_active "youtube-alternative")" = "active" ]; then
+    pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  fi
 
   if ! [ -L /etc/dnsmasq.toggle/youtube_alternative.conf ]; then
     error_color
@@ -236,7 +248,9 @@ youtube_music() {
 
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle/youtube_music.conf /etc/dnsmasq.toggle
 
-  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  if [ "$(is_observer_active "youtube-music")" = "active" ]; then
+    pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  fi
 
   if ! [ -L /etc/dnsmasq.toggle/youtube_music.conf ]; then
     echo "error: /etc/dnsmasq.toggle/youtube_music.conf still doesn't exist" >&2
@@ -259,7 +273,9 @@ adguard_upstream() {
 
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/adguard_upstream.conf /etc/dnsmasq.priv/toggle
 
-  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  if [ "$(is_observer_active "adguard-upstream")" = "active" ]; then
+    pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  fi
 
   if [ -L /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf ]; then
     echo "error: /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf still exists" >&2
@@ -297,7 +313,9 @@ cloudflare_upstream() {
 
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/cloudflare_upstream.conf /etc/dnsmasq.priv/toggle
 
-  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  if [ "$(is_observer_active "cloudflare-upstream")" = "active" ]; then
+    pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  fi
 
   if [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ]; then
     echo "error: /etc/dnsmasq.priv/toggle/adguard_upstream.conf still exists" >&2
@@ -335,7 +353,9 @@ nordvpn_upstream() {
 
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/nordvpn_upstream.conf /etc/dnsmasq.priv/toggle
 
-  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  if [ "$(is_observer_active "nordvpn-upstream")" = "active" ]; then
+    pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  fi
 
   if [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ]; then
     echo "error: /etc/dnsmasq.priv/toggle/adguard_upstream.conf still exists" >&2
@@ -373,7 +393,9 @@ superman_upstream() {
 
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/superman_upstream.conf /etc/dnsmasq.priv/toggle
 
-  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  if [ "$(is_observer_active "superman-upstream")" = "active" ]; then
+    pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  fi
 
   if [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ]; then
     echo "error: /etc/dnsmasq.priv/toggle/adguard_upstream.conf still exists" >&2
