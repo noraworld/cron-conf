@@ -80,14 +80,18 @@ chime() {
   reference_minute=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
+  error_color
   sudo unlink /etc/dnsmasq.toggle/chime.conf
+  no_color
 
   if [ "$(is_observer_active "chime")" = "active" ]; then
     pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
   fi
 
   if [ -L /etc/dnsmasq.toggle/chime.conf ]; then
+    error_color
     echo "error: /etc/dnsmasq.toggle/chime.conf still exists" >&2
+    no_color
     exit
   fi
 }
@@ -100,19 +104,25 @@ deregulated_superman() {
     sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/deregulated_superman_allow.conf /etc/dnsmasq.priv/toggle
   fi
 
+  error_color
   sudo unlink /etc/dnsmasq.priv/toggle/deregulated_superman.conf
+  no_color
 
   if [ "$(is_observer_active "deregulated-superman")" = "active" ]; then
     pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
   fi
 
   if ! [ -L /etc/dnsmasq.priv/toggle/deregulated_superman_allow.conf ]; then
+    error_color
     echo "error: /etc/dnsmasq.priv/toggle/deregulated_superman_allow.conf still doesn't exist" >&2
+    no_color
     exit
   fi
 
   if [ -L /etc/dnsmasq.priv/toggle/deregulated_superman.conf ]; then
+    error_color
     echo "error: /etc/dnsmasq.priv/toggle/deregulated_superman.conf still exists" >&2
+    no_color
     exit
   fi
 }
@@ -121,14 +131,18 @@ ometeotl() {
   reference_minute=60
   [ "$DRY_RUN" = 1 ] && exit 0
 
+  error_color
   sudo unlink /etc/dnsmasq.priv/toggle/ometeotl.conf
+  no_color
 
   if [ "$(is_observer_active "ometeotl")" = "active" ]; then
     pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
   fi
 
   if [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ]; then
+    error_color
     echo "error: /etc/dnsmasq.priv/toggle/ometeotl.conf still exists" >&2
+    no_color
     exit
   fi
 }
@@ -149,29 +163,39 @@ superman() {
     sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/adguard_upstream.conf /etc/dnsmasq.priv/toggle
   fi
 
+  error_color
   sudo unlink /etc/dnsmasq.priv/toggle/superman.conf
+  no_color
 
   if [ "$(is_observer_active "superman")" = "active" ]; then
     pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
   fi
 
   if [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ]; then
+    error_color
     echo "error: /etc/dnsmasq.priv/toggle/ometeotl.conf still exists" >&2
+    no_color
     exit
   fi
 
   if [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ]; then
+    error_color
     echo "error: /etc/dnsmasq.priv/toggle/superman_upstream.conf still exists" >&2
+    no_color
     exit
   fi
 
   if ! [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ]; then
+    error_color
     echo "error: /etc/dnsmasq.priv/toggle/adguard_upstream.conf still doesn't exist" >&2
+    no_color
     exit
   fi
 
   if [ -L /etc/dnsmasq.priv/toggle/superman.conf ]; then
+    error_color
     echo "error: /etc/dnsmasq.priv/toggle/superman.conf still exists" >&2
+    no_color
     exit
   fi
 }
@@ -184,19 +208,25 @@ vod() {
     sudo unlink /etc/dnsmasq.priv/toggle/ometeotl.conf
   fi
 
+  error_color
   sudo unlink /etc/dnsmasq.toggle/vod.conf
+  no_color
 
   if [ "$(is_observer_active "vod")" = "active" ]; then
     pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
   fi
 
   if [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ]; then
+    error_color
     echo "error: /etc/dnsmasq.priv/toggle/ometeotl.conf still exists" >&2
+    no_color
     exit
   fi
 
   if [ -L /etc/dnsmasq.toggle/vod.conf ]; then
+    error_color
     echo "error: /etc/dnsmasq.toggle/vod.conf still exists" >&2
+    no_color
     exit
   fi
 }
@@ -245,14 +275,18 @@ youtube_music() {
   reference_minute=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
+  error_color
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle/youtube_music.conf /etc/dnsmasq.toggle
+  no_color
 
   if [ "$(is_observer_active "youtube-music")" = "active" ]; then
     pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
   fi
 
   if ! [ -L /etc/dnsmasq.toggle/youtube_music.conf ]; then
+    error_color
     echo "error: /etc/dnsmasq.toggle/youtube_music.conf still doesn't exist" >&2
+    no_color
     exit
   fi
 }
@@ -270,29 +304,39 @@ adguard_upstream() {
     sudo unlink /etc/dnsmasq.priv/toggle/superman_upstream.conf
   fi
 
+  error_color
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/adguard_upstream.conf /etc/dnsmasq.priv/toggle
+  no_color
 
   if [ "$(is_observer_active "adguard-upstream")" = "active" ]; then
     pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
   fi
 
   if [ -L /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf ]; then
+    error_color
     echo "error: /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf still exists" >&2
+    no_color
     exit
   fi
 
   if [ -L /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf ]; then
+    error_color
     echo "error: /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf still exists" >&2
+    no_color
     exit
   fi
 
   if [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ]; then
+    error_color
     echo "error: /etc/dnsmasq.priv/toggle/superman_upstream.conf still exists" >&2
+    no_color
     exit
   fi
 
   if ! [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ]; then
+    error_color
     echo "error: /etc/dnsmasq.priv/toggle/adguard_upstream.conf still doesn't exist" >&2
+    no_color
     exit
   fi
 }
@@ -310,29 +354,39 @@ cloudflare_upstream() {
     sudo unlink /etc/dnsmasq.priv/toggle/superman_upstream.conf
   fi
 
+  error_color
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/cloudflare_upstream.conf /etc/dnsmasq.priv/toggle
+  no_color
 
   if [ "$(is_observer_active "cloudflare-upstream")" = "active" ]; then
     pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
   fi
 
   if [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ]; then
+    error_color
     echo "error: /etc/dnsmasq.priv/toggle/adguard_upstream.conf still exists" >&2
+    no_color
     exit
   fi
 
   if [ -L /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf ]; then
+    error_color
     echo "error: /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf still exists" >&2
+    no_color
     exit
   fi
 
   if [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ]; then
+    error_color
     echo "error: /etc/dnsmasq.priv/toggle/superman_upstream.conf still exists" >&2
+    no_color
     exit
   fi
 
   if ! [ -L /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf ]; then
+    error_color
     echo "error: /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf still doesn't exist" >&2
+    no_color
     exit
   fi
 }
@@ -350,29 +404,39 @@ nordvpn_upstream() {
     sudo unlink /etc/dnsmasq.priv/toggle/superman_upstream.conf
   fi
 
+  error_color
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/nordvpn_upstream.conf /etc/dnsmasq.priv/toggle
+  no_color
 
   if [ "$(is_observer_active "nordvpn-upstream")" = "active" ]; then
     pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
   fi
 
   if [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ]; then
+    error_color
     echo "error: /etc/dnsmasq.priv/toggle/adguard_upstream.conf still exists" >&2
+    no_color
     exit
   fi
 
   if [ -L /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf ]; then
+    error_color
     echo "error: /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf still exists" >&2
+    no_color
     exit
   fi
 
   if [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ]; then
+    error_color
     echo "error: /etc/dnsmasq.priv/toggle/superman_upstream.conf still exists" >&2
+    no_color
     exit
   fi
 
   if ! [ -L /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf ]; then
+    error_color
     echo "error: /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf still doesn't exist" >&2
+    no_color
     exit
   fi
 }
@@ -390,29 +454,39 @@ superman_upstream() {
     sudo unlink /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf
   fi
 
+  error_color
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/superman_upstream.conf /etc/dnsmasq.priv/toggle
+  no_color
 
   if [ "$(is_observer_active "superman-upstream")" = "active" ]; then
     pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
   fi
 
   if [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ]; then
+    error_color
     echo "error: /etc/dnsmasq.priv/toggle/adguard_upstream.conf still exists" >&2
+    no_color
     exit
   fi
 
   if [ -L /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf ]; then
+    error_color
     echo "error: /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf still exists" >&2
+    no_color
     exit
   fi
 
   if [ -L /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf ]; then
+    error_color
     echo "error: /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf still exists" >&2
+    no_color
     exit
   fi
 
   if ! [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ]; then
+    error_color
     echo "error: /etc/dnsmasq.priv/toggle/superman_upstream.conf still doesn't exist" >&2
+    no_color
     exit
   fi
 }
