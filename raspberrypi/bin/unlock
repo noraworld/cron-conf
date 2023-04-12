@@ -74,6 +74,8 @@ main() {
     sudo systemctl status dnsmasq >&2
     exit 1
   fi
+
+  clear
 }
 
 chime() {
