@@ -19,7 +19,7 @@ NON_ROOT_USER=ubuntu
 @reboot scheduler startup
 
 # This is to reduce the possibility that the system freezes
-0 8 * * * scheduler daily
+30 9 * * * scheduler daily
 
 # Perform periodic tasks
 */10 * * * * scheduler periodic
