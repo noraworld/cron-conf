@@ -11,6 +11,7 @@ PROG_NAME="unlock"
 COOLDOWN_INTERVAL=0
 WAITING_INTERVAL=0.5
 TIMES_INTERVAL=3
+TIMES_LIMIT=5
 
 COOLDOWN_MESSAGE="to avoid excessive execution"
 WAITING_MESSAGE="for the observer daemon to be effective"
@@ -505,7 +506,11 @@ remaining_time() {
     remaining-time $reference_minute
   fi
 
-  if [ "$TIMES" != "" ] && [ "$TIMES" -ge 2 ]; then
+  if [ "$TIMES" -gt "$TIMES_LIMIT" ]; then
+    error_color
+    echo "error: execution $TIMES_LIMIT times in a row is not allowed" >&2
+    no_color
+  elif [ "$TIMES" != "" ] && [ "$TIMES" -ge 2 ]; then
     echo
     echo "schedules:"
 
