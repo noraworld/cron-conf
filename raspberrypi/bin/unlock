@@ -505,11 +505,11 @@ remaining_time() {
     remaining-time $reference_minute
   fi
 
-  if [ "$TIMES" != "" ]; then
+  if [ "$TIMES" != "" ] && [ "$TIMES" -ge 2 ]; then
     # remaining time + 1
     next_in=$(echo \(\($(expr $reference_minute \* 60) - \($(date +%s) % $(expr $reference_minute \* 60)\)\) / 60\) + 1 | bc)
 
-    for i in $(seq 0 $(expr "$TIMES" - 1)); do
+    for i in $(seq 0 $(expr "$TIMES" - 2)); do
       echo "$PROG_NAME $service && sleep $TIMES_INTERVAL" | at now + $(expr "$next_in" + "$i" \* "$reference_minute") min
     done
   fi
