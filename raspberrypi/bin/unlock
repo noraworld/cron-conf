@@ -10,6 +10,7 @@ PROG_NAME="unlock"
 
 COOLDOWN_INTERVAL=0
 WAITING_INTERVAL=0.5
+TIMES_INTERVAL=3
 
 COOLDOWN_MESSAGE="to avoid excessive execution"
 WAITING_MESSAGE="for the observer daemon to be effective"
@@ -509,7 +510,7 @@ remaining_time() {
     next_in=$(echo \(\($(expr $reference_minute \* 60) - \($(date +%s) % $(expr $reference_minute \* 60)\)\) / 60\) + 1 | bc)
 
     for i in $(seq 0 $(expr "$TIMES" - 1)); do
-      echo "$PROG_NAME $service" | at now + $(expr "$next_in" + "$i" \* "$reference_minute") min
+      echo "$PROG_NAME $service && sleep $TIMES_INTERVAL" | at now + $(expr "$next_in" + "$i" \* "$reference_minute") min
     done
   fi
 }
