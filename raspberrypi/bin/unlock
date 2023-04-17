@@ -507,13 +507,14 @@ remaining_time() {
 
   if [ "$TIMES" != "" ] && [ "$TIMES" -ge 2 ]; then
     echo
+    echo "schedules:"
 
     # remaining time + 1
     next_in=$(echo \(\($(expr $reference_minute \* 60) - \($(date +%s) % $(expr $reference_minute \* 60)\)\) / 60\) + 1 | bc)
 
     for i in $(seq 0 $(expr "$TIMES" - 2)); do
       at_output=$(echo "sleep $TIMES_INTERVAL && $PROG_NAME $service" | at now + $(expr "$next_in" + "$i" \* "$reference_minute") min 2>&1)
-      echo "$at_output" | grep -Ev "^warning: commands will be executed using"
+      echo "    $at_output" | grep -Ev "^warning: commands will be executed using"
     done
   fi
 }
