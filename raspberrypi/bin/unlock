@@ -514,7 +514,7 @@ remaining_time() {
 
     for i in $(seq 0 $(expr "$TIMES" - 2)); do
       at_output=$(echo "sleep $TIMES_INTERVAL && $PROG_NAME $service" | at now + $(expr "$next_in" + "$i" \* "$reference_minute") min 2>&1)
-      echo "    $at_output" | grep -Ev "^warning: commands will be executed using"
+      echo "$at_output" | grep -Ev "^warning: commands will be executed using"
     done
   fi
 }
