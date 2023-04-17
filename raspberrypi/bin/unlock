@@ -506,6 +506,8 @@ remaining_time() {
   fi
 
   if [ "$TIMES" != "" ] && [ "$TIMES" -ge 2 ]; then
+    echo
+
     # remaining time + 1
     next_in=$(echo \(\($(expr $reference_minute \* 60) - \($(date +%s) % $(expr $reference_minute \* 60)\)\) / 60\) + 1 | bc)
 
