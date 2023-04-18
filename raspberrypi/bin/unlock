@@ -506,7 +506,7 @@ remaining_time() {
     remaining-time $reference_minute
   fi
 
-  if [ "$TIMES" -gt "$TIMES_LIMIT" ]; then
+  if [ "$TIMES" != "" ] && [ "$TIMES" -gt "$TIMES_LIMIT" ]; then
     error_color
     echo "error: execution $TIMES_LIMIT times in a row is not allowed" >&2
     no_color
