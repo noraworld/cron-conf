@@ -8,10 +8,10 @@ reference_minute=0
 
 PROG_NAME="unlock"
 
-COOLDOWN_INTERVAL=0
-WAITING_INTERVAL=0.5
-TIMES_INTERVAL=3
-TIMES_LIMIT=5
+COOLDOWN_INTERVAL=0  # ideal: 3
+WAITING_INTERVAL=0.5 # ideal: 0.5
+TIMES_INTERVAL=3     # ideal: 3
+TIMES_LIMIT=5        # ideal: 6
 
 COOLDOWN_MESSAGE="to avoid excessive execution"
 WAITING_MESSAGE="for the observer daemon to be effective"
