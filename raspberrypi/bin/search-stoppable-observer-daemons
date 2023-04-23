@@ -3,8 +3,10 @@
 
 OBSERVE_FILES="/home/ubuntu/workspace/systemd-units/lib/systemd/user/observer/*"
 SCHEDULER_FILE="/home/ubuntu/workspace/cron-conf/raspberrypi/bin/scheduler"
+XDG_RUNTIME_DIR="/run/user/$(id -u)"
 
 main() {
+  export XDG_RUNTIME_DIR # for cron
   parse "$@"
   eval "set -- $REST"
 
