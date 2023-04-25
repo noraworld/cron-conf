@@ -277,6 +277,9 @@ periodic() {
   #   If it works properly, the result of the above command should be reset to 0 when the observer is executed
   #
   observe-firewall
+  
+  # Auto-connect all devices paired with Bluetooth (if not connected)
+  marlin autoconnect all --retry 2
 
   # Auto-update specific Git repositories
   auto-git-pull
