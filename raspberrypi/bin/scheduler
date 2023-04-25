@@ -279,7 +279,7 @@ periodic() {
   observe-firewall
   
   # Auto-connect all devices paired with Bluetooth (if not connected)
-  marlin autoconnect all --retry 2
+  marlin autoconnect all --retry 2 --log /home/ubuntu/.log/bluetooth_autoconnect.log
 
   # Auto-update specific Git repositories
   auto-git-pull
