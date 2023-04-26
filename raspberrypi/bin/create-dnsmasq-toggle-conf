@@ -27,9 +27,9 @@ main() {
     echo "Warning: \"$TOGGLE_DIR/$target.conf\" already exists" >&2
   fi
 
-  # Restart Dnsmasq when a symlink is created
+  # Restart the Dnsmasq daemon when a symlink is created
   if $linked; then
-    systemctl restart dnsmasq
+    erd
   fi
 }
 
