@@ -70,6 +70,7 @@ main() {
       ;;
   esac
 
+  clear
   echo "restarting dnsmasq"
   erd --log /home/ubuntu/.log/erd.log --from "$PROG_NAME"
 
@@ -78,8 +79,6 @@ main() {
     sudo systemctl status dnsmasq >&2
     exit 1
   fi
-
-  clear
 }
 
 chime() {
