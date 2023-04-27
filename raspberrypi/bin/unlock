@@ -72,7 +72,7 @@ main() {
 
   # clear
   echo "restarting dnsmasq"
-  exrd --log /home/ubuntu/.log/exrd.log --from $(echo "$PROG_NAME $@")
+  exrd --log /home/ubuntu/.log/exrd.log --from "$(echo "$PROG_NAME $@")"
 
   if [ "$(sudo systemctl is-active dnsmasq)" != "active" ]; then
     echo "error: dnsmasq daemon could not restart unexpectedly" >&2

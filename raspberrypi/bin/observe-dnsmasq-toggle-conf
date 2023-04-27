@@ -28,7 +28,7 @@ observe() {
         case "$MODE" in
           "link")
             sudo unlink "$TARGET/$file"
-            exrd --log /home/ubuntu/.log/exrd.log --from $(echo "$PROG_NAME $@")
+            exrd --log /home/ubuntu/.log/exrd.log --from "$(echo "$PROG_NAME $@")"
             echo "INFO: Deleted symlink \"$TARGET/$file\" automatically"
             ;;
           "file")
@@ -45,7 +45,7 @@ observe() {
         case "$MODE" in
           "link")
             sudo ln -s "$SOURCE/$file" "$TARGET"
-            exrd --log /home/ubuntu/.log/exrd.log --from $(echo "$PROG_NAME $@")
+            exrd --log /home/ubuntu/.log/exrd.log --from "$(echo "$PROG_NAME $@")"
             echo "INFO: Created symlink \"$TARGET/$file\" automatically"
             ;;
           "file")
