@@ -70,7 +70,7 @@ main() {
       ;;
   esac
 
-  clear
+  # clear
   echo "restarting dnsmasq"
   erd --log /home/ubuntu/.log/erd.log --from "$PROG_NAME"
 
