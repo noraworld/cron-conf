@@ -26,7 +26,7 @@ main() {
   fi
 
   if $unlinked; then
-    erd --log /home/ubuntu/.log/erd.log --from "$PROG_NAME"
+    exrd --log /home/ubuntu/.log/exrd.log --from "$PROG_NAME"
   fi
 }
 
