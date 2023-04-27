@@ -71,7 +71,7 @@ main() {
   esac
 
   echo "restarting dnsmasq"
-  erd
+  erd --log /home/ubuntu/.log/erd.log --from "$PROG_NAME"
 
   if [ "$(sudo systemctl is-active dnsmasq)" != "active" ]; then
     echo "error: dnsmasq daemon could not restart unexpectedly" >&2

@@ -29,7 +29,7 @@ main() {
 
   # Restart the Dnsmasq daemon when a symlink is created
   if $linked; then
-    erd
+    erd --log /home/ubuntu/.log/erd.log --from "$PROG_NAME"
   fi
 }
 
