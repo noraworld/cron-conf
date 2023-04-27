@@ -10,7 +10,7 @@ PROG_NAME="unlock"
 
 COOLDOWN_INTERVAL=0  # ideal: 3
 WAITING_INTERVAL=0.5 # ideal: 0.5
-TIMES_INTERVAL=3     # ideal: 3
+TIMES_INTERVAL=5     # ideal: 5
 TIMES_LIMIT=100      # ideal: 6
 
 COOLDOWN_MESSAGE="to avoid excessive execution"
