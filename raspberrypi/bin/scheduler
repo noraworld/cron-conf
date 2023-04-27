@@ -81,12 +81,12 @@ amazon() {
   case "$operation" in
     "deny")
       cron-daemonctl start observe-amazon-conf "$safe"
-      sudo create-dnsmasq-toggle-conf public amazon
+      create-dnsmasq-toggle-conf public amazon
       # create-iptables-toggle-conf public 131_amazon
       ;;
     "allow")
       cron-daemonctl stop observe-amazon-conf "$safe"
-      sudo remove-dnsmasq-toggle-conf public amazon
+      remove-dnsmasq-toggle-conf public amazon
       # remove-iptables-toggle-conf public 131_amazon
       ;;
     *)
@@ -99,10 +99,10 @@ amazon() {
 chime() {
   case "$operation" in
     "deny")
-      sudo create-dnsmasq-toggle-conf public chime
+      create-dnsmasq-toggle-conf public chime
       ;;
     "allow")
-      sudo remove-dnsmasq-toggle-conf public chime
+      remove-dnsmasq-toggle-conf public chime
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2
@@ -120,13 +120,13 @@ deregulated_superman() {
   case "$operation" in
     "deny")
       # cron-daemonctl start observe-deregulated-superman-conf "$safe"
-      sudo create-dnsmasq-toggle-conf private deregulated_superman
+      create-dnsmasq-toggle-conf private deregulated_superman
       # create-iptables-toggle-conf private 231_deregulated_superman
       ;;
     "allow")
       :
       # cron-daemonctl stop observe-deregulated-superman-conf "$safe"
-      # sudo remove-dnsmasq-toggle-conf private deregulated_superman
+      # remove-dnsmasq-toggle-conf private deregulated_superman
       # remove-iptables-toggle-conf private 231_deregulated_superman
       ;;
     *)
@@ -140,7 +140,7 @@ deregulated_superman_allow() {
   case "$operation" in
     "deny")
       # cron-daemonctl start observe-deregulated-superman-allow-conf "$safe"
-      sudo remove-dnsmasq-toggle-conf private deregulated_superman_allow
+      remove-dnsmasq-toggle-conf private deregulated_superman_allow
       ;;
     "allow")
       :
@@ -157,12 +157,12 @@ focus() {
   case "$operation" in
     "deny")
       cron-daemonctl start observe-focus-conf "$safe"
-      sudo create-dnsmasq-toggle-conf private focus
+      create-dnsmasq-toggle-conf private focus
       # create-iptables-toggle-conf private 232_focus
       ;;
     "allow")
       cron-daemonctl stop observe-focus-conf "$safe"
-      sudo remove-dnsmasq-toggle-conf private focus
+      remove-dnsmasq-toggle-conf private focus
       # remove-iptables-toggle-conf private 232_focus
       ;;
     *)
@@ -176,11 +176,11 @@ github_editor() {
   case "$operation" in
     "deny")
       cron-daemonctl start observe-github-editor-conf "$safe"
-      sudo create-dnsmasq-toggle-conf public github_editor
+      create-dnsmasq-toggle-conf public github_editor
       ;;
     "allow")
       cron-daemonctl stop observe-github-editor-conf "$safe"
-      sudo remove-dnsmasq-toggle-conf public github_editor
+      remove-dnsmasq-toggle-conf public github_editor
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2
@@ -193,12 +193,12 @@ netflix() {
   case "$operation" in
     "deny")
       cron-daemonctl start observe-netflix-conf "$safe"
-      sudo create-dnsmasq-toggle-conf public netflix
+      create-dnsmasq-toggle-conf public netflix
       # create-iptables-toggle-conf public 132_netflix
       ;;
     "allow")
       cron-daemonctl stop observe-netflix-conf "$safe"
-      sudo remove-dnsmasq-toggle-conf public netflix
+      remove-dnsmasq-toggle-conf public netflix
       # remove-iptables-toggle-conf public 132_netflix
       ;;
     *)
@@ -235,13 +235,13 @@ ometeotl() {
   case "$operation" in
     "deny")
       # cron-daemonctl start observe-ometeotl-conf "$safe"
-      sudo create-dnsmasq-toggle-conf private ometeotl
+      create-dnsmasq-toggle-conf private ometeotl
       # create-iptables-toggle-conf private 234_ometeotl
       ;;
     "allow")
       :
       # cron-daemonctl stop observe-ometeotl-conf "$safe"
-      # sudo remove-dnsmasq-toggle-conf private ometeotl
+      # remove-dnsmasq-toggle-conf private ometeotl
       # remove-iptables-toggle-conf private 234_ometeotl
       ;;
     *)
@@ -277,7 +277,7 @@ periodic() {
   #   If it works properly, the result of the above command should be reset to 0 when the observer is executed
   #
   observe-firewall
-  
+
   # Auto-connect all devices paired with Bluetooth (if not connected)
   marlin autoconnect all --retry 2 # --log /home/ubuntu/.log/bluetooth_autoconnect.log
 
@@ -297,13 +297,13 @@ superman() {
   case "$operation" in
     "deny")
       # cron-daemonctl start observe-superman-conf "$safe"
-      sudo create-dnsmasq-toggle-conf private superman
+      create-dnsmasq-toggle-conf private superman
       # create-iptables-toggle-conf private 233_superman
       ;;
     "allow")
       :
       # cron-daemonctl stop observe-superman-conf "$safe"
-      # sudo remove-dnsmasq-toggle-conf private superman
+      # remove-dnsmasq-toggle-conf private superman
       # remove-iptables-toggle-conf private 233_superman
       ;;
     *)
@@ -317,13 +317,13 @@ upstream() {
   case "$operation" in
     "deny")
       # cron-daemonctl start observe-superman-upstream-conf "$safe"
-      sudo remove-dnsmasq-toggle-conf private adguard_upstream
-      sudo create-dnsmasq-toggle-conf private superman_upstream
+      remove-dnsmasq-toggle-conf private adguard_upstream
+      create-dnsmasq-toggle-conf private superman_upstream
       ;;
     "allow")
       # cron-daemonctl stop observe-superman-upstream-conf "$safe"
-      sudo remove-dnsmasq-toggle-conf private superman_upstream
-      sudo create-dnsmasq-toggle-conf private adguard_upstream
+      remove-dnsmasq-toggle-conf private superman_upstream
+      create-dnsmasq-toggle-conf private adguard_upstream
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2
@@ -336,12 +336,12 @@ vod() {
   case "$operation" in
     "deny")
       # cron-daemonctl start observe-vod-conf "$safe"
-      sudo create-dnsmasq-toggle-conf public vod
+      create-dnsmasq-toggle-conf public vod
       # create-iptables-toggle-conf public 133_vod
       ;;
     "allow")
       # cron-daemonctl stop observe-vod-conf "$safe"
-      sudo remove-dnsmasq-toggle-conf public vod
+      remove-dnsmasq-toggle-conf public vod
       # remove-iptables-toggle-conf public 133_vod
       ;;
     *)
@@ -355,12 +355,12 @@ youtube() {
   case "$operation" in
     "deny")
       [ "$SOFT" = 1 ] || cron-daemonctl start observe-youtube-conf "$safe"
-      sudo create-dnsmasq-toggle-conf public youtube
+      create-dnsmasq-toggle-conf public youtube
       # create-iptables-toggle-conf public 134_youtube
       ;;
     "allow")
       cron-daemonctl stop observe-youtube-conf "$safe"
-      # sudo remove-dnsmasq-toggle-conf public youtube
+      # remove-dnsmasq-toggle-conf public youtube
       # remove-iptables-toggle-conf public 134_youtube
       ;;
     *)
@@ -373,10 +373,10 @@ youtube() {
 youtube_alternative() {
   case "$operation" in
     "deny")
-      sudo remove-dnsmasq-toggle-conf public youtube_alternative
+      remove-dnsmasq-toggle-conf public youtube_alternative
       ;;
     "allow")
-      sudo create-dnsmasq-toggle-conf public youtube_alternative
+      create-dnsmasq-toggle-conf public youtube_alternative
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2
@@ -389,13 +389,13 @@ youtube_music() {
   case "$operation" in
     "deny")
       # cron-daemonctl start observe-youtube-music-conf "$safe"
-      sudo remove-dnsmasq-toggle-conf public youtube_music
+      remove-dnsmasq-toggle-conf public youtube_music
       # remove-iptables-toggle-conf public 135_youtube_music
       ;;
     "allow")
       :
       # cron-daemonctl stop observe-youtube-music-conf "$safe"
-      # sudo create-dnsmasq-toggle-conf public youtube_music
+      # create-dnsmasq-toggle-conf public youtube_music
       # create-iptables-toggle-conf public 135_youtube_music
       ;;
     *)

@@ -20,7 +20,7 @@ main() {
 
   if [ -L "$TOGGLE_FILEPATH" ]; then
     unlinked=true
-    unlink $TOGGLE_FILEPATH
+    sudo unlink $TOGGLE_FILEPATH
   else
     echo "Warning: \"$TOGGLE_FILEPATH\" does not exist" >&2
   fi

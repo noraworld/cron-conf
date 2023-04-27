@@ -22,7 +22,7 @@ main() {
 
   if ! [ -e "$TOGGLE_DIR/$target.conf" ]; then
     linked=true
-    ln -s "$ORIGINAL_TOGGLE_DIR/$target.conf" "$TOGGLE_DIR"
+    sudo ln -s "$ORIGINAL_TOGGLE_DIR/$target.conf" "$TOGGLE_DIR"
   else
     echo "Warning: \"$TOGGLE_DIR/$target.conf\" already exists" >&2
   fi
