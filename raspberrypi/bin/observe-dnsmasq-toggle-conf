@@ -28,7 +28,7 @@ observe() {
         case "$MODE" in
           "link")
             sudo unlink "$TARGET/$file"
-            sudo systemctl restart dnsmasq
+            erd --log /home/ubuntu/.log/erd.log --from "$PROG_NAME"
             echo "INFO: Deleted symlink \"$TARGET/$file\" automatically"
             ;;
           "file")
@@ -45,7 +45,7 @@ observe() {
         case "$MODE" in
           "link")
             sudo ln -s "$SOURCE/$file" "$TARGET"
-            sudo systemctl restart dnsmasq
+            erd --log /home/ubuntu/.log/erd.log --from "$PROG_NAME"
             echo "INFO: Created symlink \"$TARGET/$file\" automatically"
             ;;
           "file")
