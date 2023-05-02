@@ -318,10 +318,14 @@ upstream() {
     "deny")
       # cron-daemonctl start observe-superman-upstream-conf "$safe"
       remove-dnsmasq-toggle-conf private adguard_upstream
+      remove-dnsmasq-toggle-conf private cloudflare_upstream
+      remove-dnsmasq-toggle-conf private nordvpn_upstream
       create-dnsmasq-toggle-conf private superman_upstream
       ;;
     "allow")
       # cron-daemonctl stop observe-superman-upstream-conf "$safe"
+      remove-dnsmasq-toggle-conf private cloudflare_upstream
+      remove-dnsmasq-toggle-conf private nordvpn_upstream
       remove-dnsmasq-toggle-conf private superman_upstream
       create-dnsmasq-toggle-conf private adguard_upstream
       ;;
