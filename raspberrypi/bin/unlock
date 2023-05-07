@@ -34,6 +34,9 @@ main() {
     "deregulated-superman")
       deregulated_superman
       ;;
+    "netflix")
+      netflix
+      ;;
     "ometeotl")
       ometeotl
       ;;
@@ -132,6 +135,26 @@ deregulated_superman() {
   if [ -L /etc/dnsmasq.priv/toggle/deregulated_superman.conf ]; then
     error_color
     echo "error: /etc/dnsmasq.priv/toggle/deregulated_superman.conf still exists" >&2
+    no_color
+    exit
+  fi
+}
+
+netflix() {
+  reference_minute=5
+  [ "$DRY_RUN" = 1 ] && exit 0
+
+  error_color
+  sudo unlink /etc/dnsmasq.toggle/netflix.conf
+  no_color
+
+  if [ "$(is_observer_active "netflix")" = "active" ]; then
+    pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  fi
+
+  if [ -L /etc/dnsmasq.toggle/netflix.conf ]; then
+    error_color
+    echo "error: /etc/dnsmasq.toggle/netflix.conf still exists" >&2
     no_color
     exit
   fi
