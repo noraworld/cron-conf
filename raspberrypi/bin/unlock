@@ -141,7 +141,7 @@ deregulated_superman() {
 }
 
 netflix() {
-  reference_minute=5
+  reference_minute=60
   [ "$DRY_RUN" = 1 ] && exit 0
 
   nordvpn_upstream
