@@ -54,9 +54,32 @@ main() {
 
       ;;
     "status")
-      echo "nordvpn.service: $(systemctl is-active nordvpn)"
-      echo "nordvpnd.service: $(systemctl is-active nordvpnd)"
-      echo "country: $(get_country)"
+      if [ "$(systemctl is-active nordvpn)" = "active" ]; then
+        echo "nordvpn.service: \e[1;32m$(systemctl is-active nordvpn)\e[0m"
+      else
+        echo "nordvpn.service: \e[1;31m$(systemctl is-active nordvpn)\e[0m"
+      fi
+
+      if [ "$(systemctl is-active nordvpnd)" = "active" ]; then
+        echo "nordvpnd.service: \e[1;32m$(systemctl is-active nordvpnd)\e[0m"
+      else
+        echo "nordvpnd.service: \e[1;31m$(systemctl is-active nordvpnd)\e[0m"
+      fi
+
+      current_country=$(get_country)
+      if [ "$current_country" != "$my_country" ]; then
+        echo "country: \e[1;32m$current_country\e[0m"
+      else
+        echo "country: \e[1;31m$current_country\e[0m"
+      fi
+
+      if [ "$VERBOSE" = 1 ]; then
+        echo
+        systemctl status nordvpn || true
+        echo
+        systemctl status nordvpnd || true
+      fi
+
       ;;
     "")
       echo "Error: An operation is missing." >&2
@@ -132,6 +155,7 @@ parser_definition() {
   param   COUNTRY -c --country -- "specify your country code, which is used whether the connection succeeded or failed (default: JP)"
   param   RETRY   -r --retry   -- "specify how many times this command attempts to connect to or disconnect from the VPN server (default: 5)"
   param   SLEEP   -s --sleep   -- "specify how much time this command sleeps between retries (default: 3)"
+  flag    VERBOSE    --verbose -- "output the status verbosely"
   disp    :usage  -h --help    -- "show this help message and exit"
   disp    VERSION    --version -- "show the current version"
 }
@@ -143,6 +167,7 @@ parser_definition() {
 COUNTRY=''
 RETRY=''
 SLEEP=''
+VERBOSE=''
 REST=''
 parse() {
   OPTIND=$(($#+1))
@@ -175,6 +200,11 @@ parse() {
         OPTARG=$2
         SLEEP="$OPTARG"
         shift ;;
+      '--verbose')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        VERBOSE="$OPTARG"
+        ;;
       '-h'|'--help')
         usage
         exit 0 ;;
@@ -218,6 +248,7 @@ Options:
   -c, --country COUNTRY       specify your country code, which is used whether the connection succeeded or failed (default: JP)
   -r, --retry RETRY           specify how many times this command attempts to connect to or disconnect from the VPN server (default: 5)
   -s, --sleep SLEEP           specify how much time this command sleeps between retries (default: 3)
+      --verbose               output the status verbosely
   -h, --help                  show this help message and exit
       --version               show the current version
 GETOPTIONSHERE
