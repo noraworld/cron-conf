@@ -148,9 +148,10 @@ set_var() {
 parser_definition() {
   setup   REST help:usage -- "Usage: vpnctl [options]... [arguments]..." ''
   msg -- 'Arguments:'
-  msg -- '	connect <COUNTRY_CODE>	connect to the VPN server'
-  msg -- '	disconnect			disconnect from the VPN server'
-  msg -- '	status			show status'
+  msg -- '  connect <COUNTRY_CODE>      connect to the VPN server'
+  msg -- '  disconnect                  disconnect from the VPN server'
+  msg -- '  status                      show status'
+  msg -- ''
   msg -- 'Options:'
   param   COUNTRY -c --country -- "specify your country code, which is used whether the connection succeeded or failed (default: JP)"
   param   RETRY   -r --retry   -- "specify how many times this command attempts to connect to or disconnect from the VPN server (default: 5)"
@@ -241,9 +242,10 @@ cat<<'GETOPTIONSHERE'
 Usage: vpnctl [options]... [arguments]...
 
 Arguments:
-  connect <COUNTRY_CODE>	connect to the VPN server
-  disconnect			disconnect from the VPN server
-  status			show status
+  connect <COUNTRY_CODE>      connect to the VPN server
+  disconnect                  disconnect from the VPN server
+  status                      show status
+
 Options:
   -c, --country COUNTRY       specify your country code, which is used whether the connection succeeded or failed (default: JP)
   -r, --retry RETRY           specify how many times this command attempts to connect to or disconnect from the VPN server (default: 5)
