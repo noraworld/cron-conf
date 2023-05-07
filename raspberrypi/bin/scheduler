@@ -200,12 +200,12 @@ github_editor() {
 netflix() {
   case "$operation" in
     "deny")
-      cron-daemonctl start observe-netflix-conf "$safe"
+      # cron-daemonctl start observe-netflix-conf "$safe"
       create-dnsmasq-toggle-conf public netflix
       # create-iptables-toggle-conf public 132_netflix
       ;;
     "allow")
-      cron-daemonctl stop observe-netflix-conf "$safe"
+      # cron-daemonctl stop observe-netflix-conf "$safe"
       remove-dnsmasq-toggle-conf public netflix
       # remove-iptables-toggle-conf public 132_netflix
       ;;
