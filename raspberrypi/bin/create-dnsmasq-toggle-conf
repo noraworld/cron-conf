@@ -29,7 +29,7 @@ main() {
 
   # Restart the Dnsmasq daemon when a symlink is created
   if $linked; then
-    exrd --log /home/ubuntu/.log/exrd.log --from "$(echo "$PROG_NAME $@")"
+    exrd --log /home/ubuntu/.log/exrd.log --from "$(echo "$PROG_NAME $@")" --ignore-log
   fi
 }
 

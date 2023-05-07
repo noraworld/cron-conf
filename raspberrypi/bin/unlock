@@ -77,9 +77,9 @@ main() {
   echo "restarting dnsmasq"
 
   if [ "$SKIP" = 1 ]; then
-    exrd --log /home/ubuntu/.log/exrd.log --from "$(echo "$PROG_NAME $@")" --skip
+    exrd --log /home/ubuntu/.log/exrd.log --from "$(echo "$PROG_NAME $@")" --skip --ignore-log
   else
-    exrd --log /home/ubuntu/.log/exrd.log --from "$(echo "$PROG_NAME $@")"
+    exrd --log /home/ubuntu/.log/exrd.log --from "$(echo "$PROG_NAME $@")" --ignore-log
   fi
 
   if [ "$(sudo systemctl is-active dnsmasq)" != "active" ]; then
