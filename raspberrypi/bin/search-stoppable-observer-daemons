@@ -31,7 +31,7 @@ main() {
   if [ "$WITHOUT_CONFIRMATION" = 1 ]; then
     confirm="yes"
   else
-    printf "Would you like to turn them off? [y/N]: "
+    printf "Would you like to turn them off? [y/N/s/?]: "
     exec < /dev/tty
     read -r confirm
   fi
@@ -49,10 +49,28 @@ main() {
 
     [ "$WITHOUT_CONFIRMATION" = 1 ] || echo
     echo "If nothing shows above, all the daemons are now inactive!"
+  elif [ "$confirm" = "s" ] || [ "$confirm" = "show" ]; then
+    echo
+    echo "$daemons" | while read -r daemon; do
+      [ "$daemon" = "" ] && continue
+
+      printf '%s: ' "$daemon"
+      colorize "$(systemctl --user is-active "$daemon")"
+    done
   else
     echo "OK, I won't, but let me show you the commands to stop them."
     echo
     echo "$daemons" | xargs -I {} echo "systemctl --user stop {}; systemctl --user is-active {}"
+  fi
+}
+
+colorize() {
+  if [ "$1" = "inactive" ]; then
+    echo "\e[1;32m$1\e[0m"
+  elif [ "$1" = "active" ]; then
+    echo "\e[1;31m$1\e[0m"
+  else
+    echo "$1"
   fi
 }
 
