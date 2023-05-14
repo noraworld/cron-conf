@@ -65,7 +65,7 @@ NON_ROOT_USER=ubuntu
 # Deregulated Superman (deny)
 #   Available: at 00:00 - 06:00 every day
 # */30 0-5  * * * scheduler deregulated-superman allow
-*/30 6-23 * * * scheduler deregulated-superman deny
+#TEMP */30 6-23 * * * scheduler deregulated-superman deny
 
 # Deregulated Superman (allow)
 #   Available: at 00:00 - 06:00 every day
@@ -75,7 +75,7 @@ NON_ROOT_USER=ubuntu
 #     Deregulated Superman is allowed when the file does exist
 #
 # */30 0-5  * * * scheduler deregulated-superman-allow allow
-*/30 6-23 * * * scheduler deregulated-superman-allow deny
+#TEMP */30 6-23 * * * scheduler deregulated-superman-allow deny
 
 # Ometeotl
 #   Available: at 00:00 - 06:00 every day
