@@ -80,7 +80,7 @@ NON_ROOT_USER=ubuntu
 # Ometeotl
 #   Available: at 00:00 - 06:00 every day
 # 0 0-5  * * * scheduler ometeotl allow
-0 6-23 * * * scheduler ometeotl deny
+#TEMP 0 6-23 * * * scheduler ometeotl deny
 
 # Upstream
 #   Available: at 00:00 - 06:00 every day
