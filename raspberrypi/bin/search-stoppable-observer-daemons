@@ -68,7 +68,7 @@ colorize() {
   if [ "$1" = "inactive" ]; then
     echo -n "[ \e[1;32m$1\e[0m ] "
   elif [ "$1" = "active" ]; then
-    echo -n "[ \e[1;31m$1\e[0m ] "
+    echo -n "[  \e[1;31m$1\e[0m  ] "
   else
     echo -n "[ $1 ] "
   fi
