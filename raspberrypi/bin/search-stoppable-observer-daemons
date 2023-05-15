@@ -47,7 +47,6 @@ main() {
       fi
     done
 
-    [ "$WITHOUT_CONFIRMATION" = 1 ] || echo
     show_statuses
   elif [ "$confirm" = "s" ] || [ "$confirm" = "show" ]; then
     show_statuses
