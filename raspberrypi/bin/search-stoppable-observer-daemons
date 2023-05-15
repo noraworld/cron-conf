@@ -1,5 +1,5 @@
 #!/bin/sh
-# shellcheck disable=SC2004
+# shellcheck disable=SC2004,SC3037
 
 OBSERVE_FILES="/home/ubuntu/workspace/systemd-units/lib/systemd/user/observer/*"
 SCHEDULER_FILE="/home/ubuntu/workspace/cron-conf/raspberrypi/bin/scheduler"
