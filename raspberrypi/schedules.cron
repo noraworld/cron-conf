@@ -115,11 +115,11 @@ NON_ROOT_USER=ubuntu
 
 # YouTube
 #   Available: at 00:00 - 06:00 every day
-*/10   0-5  * * * scheduler youtube allow
-#TEMP 0      1-5  * * * scheduler youtube deny --soft
-0      6    * * * scheduler youtube deny --safe
-5-55/1 6    * * * scheduler youtube deny
-*/1    7-23 * * * scheduler youtube deny
+5-25,35-55/5 0-5  * * * scheduler youtube allow
+0            1-5  * * * scheduler youtube deny --soft
+0            6    * * * scheduler youtube deny --safe
+5-55/1       6    * * * scheduler youtube deny
+*/1          7-23 * * * scheduler youtube deny
 
 # YouTube Alternative
 # */10 * * * * scheduler youtube-alternative allow
