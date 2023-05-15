@@ -36,6 +36,15 @@ main() {
     read -r confirm
   fi
 
+  while [ "$confirm" = "s" ] || [ "$confirm" = "show" ]; do
+    show_statuses
+
+    echo
+    printf "Would you like to turn them off? [y/N/s/?]: "
+    exec < /dev/tty
+    read -r confirm
+  done
+
   if [ "$confirm" = "y" ] || [ "$confirm" = "yes" ]; then
     echo "$daemons" | while read -r daemon; do
       [ "$daemon" = "" ] && continue
@@ -47,8 +56,6 @@ main() {
       fi
     done
 
-    show_statuses
-  elif [ "$confirm" = "s" ] || [ "$confirm" = "show" ]; then
     show_statuses
   else
     exit 1
