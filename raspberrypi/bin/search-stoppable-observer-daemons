@@ -48,7 +48,7 @@ main() {
     done
 
     [ "$WITHOUT_CONFIRMATION" = 1 ] || echo
-    echo "If nothing shows above, all the daemons are now inactive!"
+    show_statuses
   elif [ "$confirm" = "s" ] || [ "$confirm" = "show" ]; then
     show_statuses
   else
