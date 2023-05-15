@@ -51,9 +51,10 @@ main() {
   elif [ "$confirm" = "s" ] || [ "$confirm" = "show" ]; then
     show_statuses
   else
-    echo "OK, I won't, but let me show you the commands to stop them."
-    echo
-    echo "$daemons" | xargs -I {} echo "systemctl --user stop {}; systemctl --user is-active {}"
+    exit 1
+    # echo "OK, I won't, but let me show you the commands to stop them."
+    # echo
+    # echo "$daemons" | xargs -I {} echo "systemctl --user stop {}; systemctl --user is-active {}"
   fi
 }
 
