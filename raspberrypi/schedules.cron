@@ -99,10 +99,9 @@ NON_ROOT_USER=ubuntu
 
 # Netflix
 #   Available: at 00:00 - 06:00 every day
-# */5    0-5  * * * scheduler netflix allow
-# 0      6    * * * scheduler netflix deny --safe
-# 5-55/5 6    * * * scheduler netflix deny
-# */5    7-23 * * * scheduler netflix deny
+#TEMP 0 0-5  * * * scheduler netflix allow
+#TEMP 0 6    * * * scheduler netflix deny --safe
+#TEMP 0 7-23 * * * scheduler netflix deny
 
 # VOD
 #   Available: at 00:00 - 06:00 every day
