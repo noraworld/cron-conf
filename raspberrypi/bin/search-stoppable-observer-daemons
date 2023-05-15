@@ -26,11 +26,11 @@ main() {
   done
 
   echo "$daemons"
-  echo
 
   if [ "$WITHOUT_CONFIRMATION" = 1 ]; then
     confirm="yes"
   else
+    echo
     printf "Would you like to turn them off? [y/N/s/?]: "
     exec < /dev/tty
     read -r confirm
