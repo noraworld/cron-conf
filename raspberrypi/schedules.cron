@@ -34,10 +34,10 @@ NON_ROOT_USER=ubuntu
 #   NOTE:
 #     Remember that the shorter the time is, the more it can take effect
 #
-*/10   0-4  * * * scheduler observe stop
-0      5    * * * scheduler observe start --safe
-5-55/1 5    * * * scheduler observe start
-*/1    6-23 * * * scheduler observe start
+#TEMP */10   0-4  * * * scheduler observe stop
+#TEMP 0      5    * * * scheduler observe start --safe
+#TEMP 5-55/1 5    * * * scheduler observe start
+#TEMP */1    6-23 * * * scheduler observe start
 
 # Focus
 #   NOTE:
