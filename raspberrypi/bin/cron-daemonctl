@@ -5,6 +5,7 @@ LOG_PATH="/home/ubuntu/.log/cron-daemonctl.log"
 # how long before sshd starts
 # e.g. "30 min", "1 hour"
 RECOVERY_TIME="30 min"
+UPTIME_THRESHOLD="5"
 
 main() {
   authenticate
@@ -17,7 +18,7 @@ main() {
       if [ "$(systemctl --user is-active "$2")" != "active" ]; then
         systemctl --user "$1" "$2"
 
-        if [ "$SAFE" != 1 ]; then
+        if [ "$SAFE" != 1 ] && [ "$(echo "$(awk '{print $1}' /proc/uptime)" / 60 | bc)" -gt "$UPTIME_THRESHOLD" ]; then
           punish "$@"
         fi
       fi
