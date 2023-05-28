@@ -30,7 +30,8 @@ observe() {
         case "$MODE" in
           "link")
             sudo unlink "$TARGET/$file"
-            exrd --log /home/ubuntu/.log/exrd.log --from "$(echo "$PROG_NAME $@")"
+            # exrd is inappropriate here because the file is createable while it waits for the daemon to restart
+            sudo systemctl stop dnsmasq
             echo "INFO: Deleted symlink \"$TARGET/$file\" automatically"
             ;;
           "file")
@@ -47,7 +48,8 @@ observe() {
         case "$MODE" in
           "link")
             sudo ln -s "$SOURCE/$file" "$TARGET"
-            exrd --log /home/ubuntu/.log/exrd.log --from "$(echo "$PROG_NAME $@")"
+            # exrd is inappropriate here because the file is deleteable while it waits for the daemon to restart
+            sudo systemctl stop dnsmasq
             echo "INFO: Created symlink \"$TARGET/$file\" automatically"
             ;;
           "file")
