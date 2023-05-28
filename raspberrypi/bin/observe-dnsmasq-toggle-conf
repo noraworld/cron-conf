@@ -22,6 +22,8 @@ observe() {
     file=$FILE
   fi
 
+  set +e
+
   if [ "$file" = "$observed_file" ]; then
     case "$EVENT" in
       "create")
@@ -83,6 +85,8 @@ observe() {
         ;;
     esac
   fi
+
+  set -e
 }
 
 
