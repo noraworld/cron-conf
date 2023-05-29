@@ -126,7 +126,6 @@ get_country() {
 
 set_var() {
   operation="$1"
-  [ "$operation" = "connect" ] && country="$2"
   retry_count=0
 
   if [ "$COUNTRY" != "" ]; then
