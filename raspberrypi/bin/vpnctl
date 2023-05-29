@@ -51,6 +51,8 @@ connect() {
   if [ "$(connected)" = "false" ]; then
     echo "Error: Failed to connect for some reason." >&2
   fi
+
+  [ "$STATUS" = 1 ] && status
 }
 
 connected() {
@@ -74,6 +76,8 @@ disconnect() {
   if [ "$(disconnected)" = "false" ]; then
     echo "Error: Failed to disconnect for some reason." >&2
   fi
+
+  [ "$STATUS" = 1 ] && status
 }
 
 disconnected() {
@@ -160,6 +164,7 @@ parser_definition() {
   param   COUNTRY -c --country -- "specify a country code, which is also used whether the connection succeeded or failed (default: JP)"
   param   RETRY   -r --retry   -- "specify how many times this command attempts to connect to or disconnect from the VPN server (default: 5)"
   param   SLEEP   -s --sleep   -- "specify how much time this command sleeps between retries (default: 3)"
+  flag    STATUS     --status  -- "show status even when the argument is not 'status'"
   flag    VERBOSE    --verbose -- "output the status verbosely"
   disp    :usage  -h --help    -- "show this help message and exit"
   disp    VERSION    --version -- "show the current version"
@@ -172,6 +177,7 @@ parser_definition() {
 COUNTRY=''
 RETRY=''
 SLEEP=''
+STATUS=''
 VERBOSE=''
 REST=''
 parse() {
@@ -205,6 +211,11 @@ parse() {
         OPTARG=$2
         SLEEP="$OPTARG"
         shift ;;
+      '--status')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        STATUS="$OPTARG"
+        ;;
       '--verbose')
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
@@ -255,6 +266,7 @@ Options:
   -c, --country COUNTRY       specify a country code, which is also used whether the connection succeeded or failed (default: JP)
   -r, --retry RETRY           specify how many times this command attempts to connect to or disconnect from the VPN server (default: 5)
   -s, --sleep SLEEP           specify how much time this command sleeps between retries (default: 3)
+      --status                show status even when the argument is not 'status'
       --verbose               output the status verbosely
   -h, --help                  show this help message and exit
       --version               show the current version
