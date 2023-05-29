@@ -51,9 +51,9 @@ main() {
       ;;
     "status")
       if [ "$(systemctl is-active nordvpn)" = "active" ]; then
-        echo "nordvpn.service: \e[1;32m$(systemctl is-active nordvpn)\e[0m"
+        echo "nordvpn.service:  \e[1;32m$(systemctl is-active nordvpn)\e[0m"
       else
-        echo "nordvpn.service: \e[1;31m$(systemctl is-active nordvpn)\e[0m"
+        echo "nordvpn.service:  \e[1;31m$(systemctl is-active nordvpn)\e[0m"
       fi
 
       if [ "$(systemctl is-active nordvpnd)" = "active" ]; then
@@ -64,9 +64,9 @@ main() {
 
       current_country=$(get_country)
       if [ "$current_country" != "$my_country" ]; then
-        echo "country: \e[1;32m$current_country\e[0m"
+        echo "country:          \e[1;32m$current_country\e[0m"
       else
-        echo "country: \e[1;31m$current_country\e[0m"
+        echo "country:          \e[1;31m$current_country\e[0m"
       fi
 
       if [ "$VERBOSE" = 1 ]; then
