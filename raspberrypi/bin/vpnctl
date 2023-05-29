@@ -22,6 +22,7 @@ main() {
       ;;
     "reconnect")
       disconnect
+      retry_count=0
       connect
       ;;
     "status")
