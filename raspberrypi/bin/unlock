@@ -146,6 +146,7 @@ netflix() {
 
   set +e
   nordvpn_upstream
+  vpnctl reconnect --status
   set -e
 
   error_color
