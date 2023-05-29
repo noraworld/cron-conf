@@ -50,7 +50,13 @@ connect() {
     sleep "$sleep_interval"
   done
 
-  if [ "$(connected)" = "false" ]; then
+  if [ "$(connected)" = "true" ]; then
+    if [ "$SKIP_DNS" != 1 ]; then
+      set +e
+      unlock nordvpn-upstream --skip
+      set -e
+    fi
+  else
     echo "Error: Failed to connect for some reason." >&2
   fi
 
@@ -75,7 +81,13 @@ disconnect() {
     sleep "$sleep_interval"
   done
 
-  if [ "$(disconnected)" = "false" ]; then
+  if [ "$(disconnected)" = "true" ]; then
+    if [ "$SKIP_DNS" != 1 ]; then
+      set +e
+      unlock adguard-upstream --skip
+      set -e
+    fi
+  else
     echo "Error: Failed to disconnect for some reason." >&2
   fi
 
@@ -172,6 +184,7 @@ parser_definition() {
   param   MY_COUNTRY        --my      -- "specify your country code, which is used whether the connection succeeded or failed (default: JP)"
   param   TARGET_COUNTRY    --target  -- "specify a target country code (default: CA)"
   param   RETRY          -r --retry   -- "specify how many times this command attempts to connect to or disconnect from the VPN server (default: 5)"
+  flag    SKIP_DNS          --skipdns -- "do not change the DNS servers"
   param   SLEEP          -s --sleep   -- "specify how much time this command sleeps between retries (default: 3)"
   flag    STATUS            --status  -- "show status even when the argument is not 'status'"
   flag    VERBOSE           --verbose -- "output the status verbosely"
@@ -186,6 +199,7 @@ parser_definition() {
 MY_COUNTRY=''
 TARGET_COUNTRY=''
 RETRY=''
+SKIP_DNS=''
 SLEEP=''
 STATUS=''
 VERBOSE=''
@@ -221,6 +235,11 @@ parse() {
         OPTARG=$2
         RETRY="$OPTARG"
         shift ;;
+      '--skipdns')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        SKIP_DNS="$OPTARG"
+        ;;
       '-s'|'--sleep')
         [ $# -le 1 ] && set "required" "$1" && break
         OPTARG=$2
@@ -281,6 +300,7 @@ Options:
       --my MY_COUNTRY         specify your country code, which is used whether the connection succeeded or failed (default: JP)
       --target TARGET_COUNTRY specify a target country code (default: CA)
   -r, --retry RETRY           specify how many times this command attempts to connect to or disconnect from the VPN server (default: 5)
+      --skipdns               do not change the DNS servers
   -s, --sleep SLEEP           specify how much time this command sleeps between retries (default: 3)
       --status                show status even when the argument is not 'status'
       --verbose               output the status verbosely
