@@ -19,6 +19,10 @@ main() {
     "disconnect")
       disconnect
       ;;
+    "reconnect")
+      connect
+      disconnect
+      ;;
     "status")
       status
       ;;
@@ -150,6 +154,7 @@ parser_definition() {
   msg -- 'Arguments:'
   msg -- '  connect                     connect to the VPN server'
   msg -- '  disconnect                  disconnect from the VPN server'
+  msg -- '  reconnect                   disconnect from the VPN server, and connect to the same one again'
   msg -- '  status                      show status'
   msg -- ''
   msg -- 'Options:'
@@ -244,6 +249,7 @@ Usage: vpnctl [options]... [arguments]...
 Arguments:
   connect                     connect to the VPN server
   disconnect                  disconnect from the VPN server
+  reconnect                   disconnect from the VPN server, and connect to the same one again
   status                      show status
 
 Options:
