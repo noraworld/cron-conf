@@ -14,63 +14,13 @@ main() {
 
   case "$operation" in
     "connect")
-      while [ "$(connected)" = "false" ] && [ "$retry_count" -lt "$retry_threshold" ]; do
-        echo "Attempting to connect... (retry: $retry_count)"
-
-        sudo systemctl start nordvpn nordvpnd
-        nordvpn connect "$my_country"
-
-        retry_count=$((retry_count + 1))
-        sleep "$sleep_interval"
-      done
-
-      if [ "$(connected)" = "false" ]; then
-        echo "Error: Failed to connect for some reason." >&2
-      fi
-
+      connect
       ;;
     "disconnect")
-      while [ "$(disconnected)" = "false" ] && [ "$retry_count" -lt "$retry_threshold" ]; do
-        echo "Attempting to disconnect... (retry: $retry_count)"
-
-        sudo systemctl stop nordvpn nordvpnd
-
-        retry_count=$((retry_count + 1))
-        sleep "$sleep_interval"
-      done
-
-      if [ "$(disconnected)" = "false" ]; then
-        echo "Error: Failed to disconnect for some reason." >&2
-      fi
-
+      disconnect
       ;;
     "status")
-      if [ "$(systemctl is-active nordvpn)" = "active" ]; then
-        echo "nordvpn.service:  \e[1;32m$(systemctl is-active nordvpn)\e[0m"
-      else
-        echo "nordvpn.service:  \e[1;31m$(systemctl is-active nordvpn)\e[0m"
-      fi
-
-      if [ "$(systemctl is-active nordvpnd)" = "active" ]; then
-        echo "nordvpnd.service: \e[1;32m$(systemctl is-active nordvpnd)\e[0m"
-      else
-        echo "nordvpnd.service: \e[1;31m$(systemctl is-active nordvpnd)\e[0m"
-      fi
-
-      current_country=$(get_country)
-      if [ "$current_country" != "$my_country" ]; then
-        echo "country:          \e[1;32m$current_country\e[0m"
-      else
-        echo "country:          \e[1;31m$current_country\e[0m"
-      fi
-
-      if [ "$VERBOSE" = 1 ]; then
-        echo
-        systemctl status nordvpn || true
-        echo
-        systemctl status nordvpnd || true
-      fi
-
+      status
       ;;
     "")
       echo "Error: An operation is missing." >&2
@@ -83,6 +33,22 @@ main() {
   esac
 }
 
+connect() {
+  while [ "$(connected)" = "false" ] && [ "$retry_count" -lt "$retry_threshold" ]; do
+    echo "Attempting to connect... (retry: $retry_count)"
+
+    sudo systemctl start nordvpn nordvpnd
+    nordvpn connect "$my_country"
+
+    retry_count=$((retry_count + 1))
+    sleep "$sleep_interval"
+  done
+
+  if [ "$(connected)" = "false" ]; then
+    echo "Error: Failed to connect for some reason." >&2
+  fi
+}
+
 connected() {
   if [ "$(systemctl is-active nordvpn)" = "active" ] && [ "$(systemctl is-active nordvpnd)" = "active" ] && [ "$(get_country)" != "$my_country" ]; then
     echo true
@@ -91,11 +57,54 @@ connected() {
   fi
 }
 
+disconnect() {
+  while [ "$(disconnected)" = "false" ] && [ "$retry_count" -lt "$retry_threshold" ]; do
+    echo "Attempting to disconnect... (retry: $retry_count)"
+
+    sudo systemctl stop nordvpn nordvpnd
+
+    retry_count=$((retry_count + 1))
+    sleep "$sleep_interval"
+  done
+
+  if [ "$(disconnected)" = "false" ]; then
+    echo "Error: Failed to disconnect for some reason." >&2
+  fi
+}
+
 disconnected() {
   if [ "$(systemctl is-active nordvpn | grep -e "inactive" -ce "failed")" -eq 1 ] && [ "$(systemctl is-active nordvpnd | grep -e "inactive" -ce "failed")" -eq 1 ]; then
     echo true
   else
     echo false
+  fi
+}
+
+status() {
+  if [ "$(systemctl is-active nordvpn)" = "active" ]; then
+    echo "nordvpn.service:  \e[1;32m$(systemctl is-active nordvpn)\e[0m"
+  else
+    echo "nordvpn.service:  \e[1;31m$(systemctl is-active nordvpn)\e[0m"
+  fi
+
+  if [ "$(systemctl is-active nordvpnd)" = "active" ]; then
+    echo "nordvpnd.service: \e[1;32m$(systemctl is-active nordvpnd)\e[0m"
+  else
+    echo "nordvpnd.service: \e[1;31m$(systemctl is-active nordvpnd)\e[0m"
+  fi
+
+  current_country=$(get_country)
+  if [ "$current_country" != "$my_country" ]; then
+    echo "country:          \e[1;32m$current_country\e[0m"
+  else
+    echo "country:          \e[1;31m$current_country\e[0m"
+  fi
+
+  if [ "$VERBOSE" = 1 ]; then
+    echo
+    systemctl status nordvpn || true
+    echo
+    systemctl status nordvpnd || true
   fi
 }
 
