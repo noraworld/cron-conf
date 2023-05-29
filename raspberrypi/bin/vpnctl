@@ -21,8 +21,8 @@ main() {
       disconnect
       ;;
     "reconnect")
-      connect
       disconnect
+      connect
       ;;
     "status")
       status
