@@ -14,16 +14,11 @@ main() {
 
   case "$operation" in
     "connect")
-      if [ "$country" = "" ]; then
-        echo "Error: A country is missing." >&2
-        exit 1
-      fi
-
       while [ "$(connected)" = "false" ] && [ "$retry_count" -lt "$retry_threshold" ]; do
         echo "Attempting to connect... (retry: $retry_count)"
 
         sudo systemctl start nordvpn nordvpnd
-        nordvpn connect "$country"
+        nordvpn connect "$my_country"
 
         retry_count=$((retry_count + 1))
         sleep "$sleep_interval"
@@ -105,7 +100,7 @@ disconnected() {
 }
 
 get_country() {
-  # Return like US
+  # Return like "US"
   current_country=$(curl -s https://ipinfo.io | grep country | awk '{ print $2 }' | tr -d ',' | tr -d '"')
 
   if [ "$(echo "$current_country" | grep -c '[A-Z][A-Z]')" -ne 0 ]; then
@@ -144,12 +139,12 @@ set_var() {
 parser_definition() {
   setup   REST help:usage -- "Usage: vpnctl [options]... [arguments]..." ''
   msg -- 'Arguments:'
-  msg -- '  connect <COUNTRY_CODE>      connect to the VPN server'
+  msg -- '  connect                     connect to the VPN server'
   msg -- '  disconnect                  disconnect from the VPN server'
   msg -- '  status                      show status'
   msg -- ''
   msg -- 'Options:'
-  param   COUNTRY -c --country -- "specify your country code, which is used whether the connection succeeded or failed (default: JP)"
+  param   COUNTRY -c --country -- "specify a country code, which is also used whether the connection succeeded or failed (default: JP)"
   param   RETRY   -r --retry   -- "specify how many times this command attempts to connect to or disconnect from the VPN server (default: 5)"
   param   SLEEP   -s --sleep   -- "specify how much time this command sleeps between retries (default: 3)"
   flag    VERBOSE    --verbose -- "output the status verbosely"
@@ -238,12 +233,12 @@ cat<<'GETOPTIONSHERE'
 Usage: vpnctl [options]... [arguments]...
 
 Arguments:
-  connect <COUNTRY_CODE>      connect to the VPN server
+  connect                     connect to the VPN server
   disconnect                  disconnect from the VPN server
   status                      show status
 
 Options:
-  -c, --country COUNTRY       specify your country code, which is used whether the connection succeeded or failed (default: JP)
+  -c, --country COUNTRY       specify a country code, which is also used whether the connection succeeded or failed (default: JP)
   -r, --retry RETRY           specify how many times this command attempts to connect to or disconnect from the VPN server (default: 5)
   -s, --sleep SLEEP           specify how much time this command sleeps between retries (default: 3)
       --verbose               output the status verbosely
