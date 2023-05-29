@@ -1,10 +1,6 @@
 #!/bin/sh
 # shellcheck disable=SC2004
 
-# Usage:
-#   vpnctl connect us
-#   vpnctl disconnect
-
 set -eu
 
 DEFAULT_COUNTRY="JP"
