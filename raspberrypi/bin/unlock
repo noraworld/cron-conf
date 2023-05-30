@@ -17,6 +17,7 @@ COOLDOWN_MESSAGE="to avoid excessive execution"
 WAITING_MESSAGE="for the observer daemon to be effective"
 
 ERROR_COLOR="\033[0;31m"
+WARNING_COLOR="\033[0;33m"
 NO_COLOR="\033[0m"
 
 main() {
@@ -93,7 +94,7 @@ chime() {
   reference_minute=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
-  error_color
+  warning_color
   sudo unlink /etc/dnsmasq.toggle/chime.conf
   no_color
 
@@ -117,7 +118,7 @@ deregulated_superman() {
     sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/deregulated_superman_allow.conf /etc/dnsmasq.priv/toggle
   fi
 
-  error_color
+  warning_color
   sudo unlink /etc/dnsmasq.priv/toggle/deregulated_superman.conf
   no_color
 
@@ -148,7 +149,7 @@ netflix() {
   vpnctl reconnect --status
   set -e
 
-  error_color
+  warning_color
   sudo unlink /etc/dnsmasq.toggle/netflix.conf
   no_color
 
@@ -168,7 +169,7 @@ ometeotl() {
   reference_minute=60
   [ "$DRY_RUN" = 1 ] && exit 0
 
-  error_color
+  warning_color
   sudo unlink /etc/dnsmasq.priv/toggle/ometeotl.conf
   no_color
 
@@ -200,7 +201,7 @@ superman() {
     sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/adguard_upstream.conf /etc/dnsmasq.priv/toggle
   fi
 
-  error_color
+  warning_color
   sudo unlink /etc/dnsmasq.priv/toggle/superman.conf
   no_color
 
@@ -245,7 +246,7 @@ vod() {
     sudo unlink /etc/dnsmasq.priv/toggle/ometeotl.conf
   fi
 
-  error_color
+  warning_color
   sudo unlink /etc/dnsmasq.toggle/vod.conf
   no_color
 
@@ -272,7 +273,7 @@ youtube() {
   reference_minute=60
   [ "$DRY_RUN" = 1 ] && exit 0
 
-  error_color
+  warning_color
   sudo unlink /etc/dnsmasq.toggle/youtube.conf
   no_color
 
@@ -292,7 +293,7 @@ youtube_alternative() {
   reference_minute=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
-  error_color
+  warning_color
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle/youtube_alternative.conf /etc/dnsmasq.toggle
   no_color
 
@@ -312,7 +313,7 @@ youtube_music() {
   reference_minute=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
-  error_color
+  warning_color
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle/youtube_music.conf /etc/dnsmasq.toggle
   no_color
 
@@ -341,7 +342,7 @@ adguard_upstream() {
     sudo unlink /etc/dnsmasq.priv/toggle/superman_upstream.conf
   fi
 
-  error_color
+  warning_color
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/adguard_upstream.conf /etc/dnsmasq.priv/toggle
   no_color
 
@@ -391,7 +392,7 @@ cloudflare_upstream() {
     sudo unlink /etc/dnsmasq.priv/toggle/superman_upstream.conf
   fi
 
-  error_color
+  warning_color
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/cloudflare_upstream.conf /etc/dnsmasq.priv/toggle
   no_color
 
@@ -441,7 +442,7 @@ nordvpn_upstream() {
     sudo unlink /etc/dnsmasq.priv/toggle/superman_upstream.conf
   fi
 
-  error_color
+  warning_color
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/nordvpn_upstream.conf /etc/dnsmasq.priv/toggle
   no_color
 
@@ -491,7 +492,7 @@ superman_upstream() {
     sudo unlink /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf
   fi
 
-  error_color
+  warning_color
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/superman_upstream.conf /etc/dnsmasq.priv/toggle
   no_color
 
@@ -571,6 +572,11 @@ pause() {
 error_color() {
   # shellcheck disable=SC2059
   printf "$ERROR_COLOR"
+}
+
+warning_color() {
+  # shellcheck disable=SC2059
+  printf "$WARNING_COLOR"
 }
 
 no_color() {
