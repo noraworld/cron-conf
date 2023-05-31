@@ -82,12 +82,6 @@ NON_ROOT_USER=ubuntu
 # 0 0-5  * * * scheduler ometeotl allow
 #TEMP 0 6-23 * * * scheduler ometeotl deny
 
-# Upstream
-#   Available: at 00:00 - 06:00 every day
-# 0 0-5  * * * scheduler upstream allow
-0 6      * * * scheduler upstream deny --safe
-0 0,7-23 * * * scheduler upstream deny
-
 # Superman
 #   Available: at 00:00 - 06:00 every day
 # 0 0-5    * * * scheduler superman allow
@@ -97,6 +91,12 @@ NON_ROOT_USER=ubuntu
 #   Available: at 00:00 - 06:00 every day
 #TEMP */10 6-23 * * * scheduler chime deny
 #TEMP */10 0-5  * * * scheduler chime allow
+
+# Upstream
+#   Available: at 00:00 - 06:00 every day
+# 0 0-5  * * * scheduler upstream allow
+0 6      * * * scheduler upstream deny --safe
+0 0,7-23 * * * scheduler upstream deny
 
 # Netflix
 #   Available: at 00:00 - 06:00 every day
