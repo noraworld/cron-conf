@@ -43,7 +43,7 @@ punish() {
   sudo systemctl stop ssh &&
   # kill all users logging in with sshd
   # do not quote pgrep because the error occurs when multiple users are logging in with sshd
-  kill -9 $(pgrep -f "sshd: .*@pts/")
+  kill -9 $(pgrep -f "sshd: .*@pts/|mosh-server")
 }
 
 authenticate() {
