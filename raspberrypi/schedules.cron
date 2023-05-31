@@ -85,7 +85,8 @@ NON_ROOT_USER=ubuntu
 # Upstream
 #   Available: at 00:00 - 06:00 every day
 # 0 0-5  * * * scheduler upstream allow
-#TEMP 0 6-23 * * * scheduler upstream deny
+0 6      * * * scheduler upstream deny --safe
+0 0,7-23 * * * scheduler upstream deny
 
 # Superman
 #   Available: at 00:00 - 06:00 every day
@@ -100,8 +101,8 @@ NON_ROOT_USER=ubuntu
 # Netflix
 #   Available: at 00:00 - 06:00 every day
 # 0 0-5  * * * scheduler netflix allow
-0 6    * * * scheduler netflix deny --safe
-0 7-23 * * * scheduler netflix deny
+0 6      * * * scheduler netflix deny --safe
+0 0,7-23 * * * scheduler netflix deny
 
 # VOD
 #   Available: at 00:00 - 06:00 every day
