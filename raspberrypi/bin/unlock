@@ -330,6 +330,9 @@ youtube_music() {
 }
 
 adguard_upstream() {
+  reference_minute=60
+  [ "$DRY_RUN" = 1 ] && exit 0
+
   if [ -L /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf ]; then
     sudo unlink /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf
   fi
@@ -380,6 +383,9 @@ adguard_upstream() {
 }
 
 cloudflare_upstream() {
+  reference_minute=60
+  [ "$DRY_RUN" = 1 ] && exit 0
+
   if [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ]; then
     sudo unlink /etc/dnsmasq.priv/toggle/adguard_upstream.conf
   fi
@@ -430,6 +436,9 @@ cloudflare_upstream() {
 }
 
 nordvpn_upstream() {
+  reference_minute=60
+  [ "$DRY_RUN" = 1 ] && exit 0
+
   if [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ]; then
     sudo unlink /etc/dnsmasq.priv/toggle/adguard_upstream.conf
   fi
@@ -480,6 +489,9 @@ nordvpn_upstream() {
 }
 
 superman_upstream() {
+  reference_minute=60
+  [ "$DRY_RUN" = 1 ] && exit 0
+
   if [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ]; then
     sudo unlink /etc/dnsmasq.priv/toggle/adguard_upstream.conf
   fi
