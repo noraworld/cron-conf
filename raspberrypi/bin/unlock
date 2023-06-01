@@ -534,26 +534,30 @@ is_observer_active() {
 }
 
 remaining_time() {
-  if [ "$reference_minute" -gt 0 ]; then
-    remaining-time $reference_minute
-  fi
-
-  if [ "$TIMES" != "" ] && [ "$TIMES" -gt "$TIMES_LIMIT" ]; then
+  if [ "$reference_minute" -le 0 ] && [ "$TIMES" != "" ]; then
     error_color
-    echo "error: execution $TIMES_LIMIT times in a row is not allowed" >&2
+    echo "error: failed to set schedules because the reference minute is not set on this operation" >&2
     no_color
-  elif [ "$TIMES" != "" ] && [ "$TIMES" -ge 2 ]; then
-    echo
-    echo "schedules:"
+  elif [ "$reference_minute" -gt 0 ]; then
+    remaining-time $reference_minute
 
-    # remaining time + 1
-    next_in=$(echo \(\($(expr $reference_minute \* 60) - \($(date +%s) % $(expr $reference_minute \* 60)\)\) / 60\) + 1 | bc)
+    if [ "$TIMES" != "" ] && [ "$TIMES" -gt "$TIMES_LIMIT" ]; then
+      error_color
+      echo "error: execution more than $TIMES_LIMIT times in a row is not allowed" >&2
+      no_color
+    elif [ "$TIMES" != "" ] && [ "$TIMES" -ge 2 ]; then
+      echo
+      echo "schedules:"
 
-    for i in $(seq 0 $(expr "$TIMES" - 2)); do
-      # MEMO: if it's executed at any minute 0 seconds on the dot, the schedule time is shifted by 1 minute
-      at_output=$(echo "sleep $TIMES_INTERVAL && $PROG_NAME $service" | at now + $(expr "$next_in" + "$i" \* "$reference_minute") min 2>&1)
-      echo "$at_output" | grep -Ev "^warning: commands will be executed using"
-    done
+      # remaining time + 1
+      next_in=$(echo \(\($(expr $reference_minute \* 60) - \($(date +%s) % $(expr $reference_minute \* 60)\)\) / 60\) + 1 | bc)
+
+      for i in $(seq 0 $(expr "$TIMES" - 2)); do
+        # MEMO: if it's executed at any minute 0 seconds on the dot, the schedule time is shifted by 1 minute
+        at_output=$(echo "sleep $TIMES_INTERVAL && $PROG_NAME $service" | at now + $(expr "$next_in" + "$i" \* "$reference_minute") min 2>&1)
+        echo "$at_output" | grep -Ev "^warning: commands will be executed using"
+      done
+    fi
   fi
 }
 
