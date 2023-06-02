@@ -103,18 +103,21 @@ disconnected() {
 }
 
 status() {
+  # e.g. nordvpn.service: active
   if [ "$(systemctl is-active nordvpn)" = "active" ]; then
     echo "nordvpn.service:  \e[1;32m$(systemctl is-active nordvpn)\e[0m"
   else
     echo "nordvpn.service:  \e[1;31m$(systemctl is-active nordvpn)\e[0m"
   fi
 
+  # e.g. nordvpnd.service: active
   if [ "$(systemctl is-active nordvpnd)" = "active" ]; then
     echo "nordvpnd.service: \e[1;32m$(systemctl is-active nordvpnd)\e[0m"
   else
     echo "nordvpnd.service: \e[1;31m$(systemctl is-active nordvpnd)\e[0m"
   fi
 
+  # e.g. country: CA
   current_country=$(get_country)
   if [ "$current_country" != "$my_country" ]; then
     echo "country:          \e[1;32m$current_country\e[0m"
@@ -122,11 +125,23 @@ status() {
     echo "country:          \e[1;31m$current_country\e[0m"
   fi
 
+  # e.g. upstream: nordvpn_upstream.conf
+  upstreams=$(ls /etc/dnsmasq.priv/toggle | grep upstream)
+  if [ "$(echo $upstreams | wc -l)" -eq 0 ]; then
+    echo "upstream:         \e[1;31mno DNS set\e[0m"
+  elif [ "$(echo $upstreams | wc -l)" -ge 2 ]; then
+    echo "upstream:         \e[1;31m$upstreams\e[0m"
+  elif [ "$upstreams" != "nordvpn_upstream.conf" ]; then
+    echo "upstream:         \e[1;31m$upstreams\e[0m"
+  else
+    echo "upstream:         \e[1;32m$upstreams\e[0m"
+  fi
+
   if [ "$VERBOSE" = 1 ]; then
     echo
-    systemctl status nordvpn || true
+    systemctl status nordvpn --no-pager || true
     echo
-    systemctl status nordvpnd || true
+    systemctl status nordvpnd --no-pager || true
   fi
 }
 
