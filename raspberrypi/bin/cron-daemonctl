@@ -1,12 +1,6 @@
 #!/bin/sh
 # shellcheck disable=SC2004
 
-LOG_PATH="/home/ubuntu/.log/cron-daemonctl.log"
-# how long before sshd starts
-# e.g. "30 min", "1 hour"
-RECOVERY_TIME="30 min"
-UPTIME_THRESHOLD="5"
-
 main() {
   authenticate
   set_env
@@ -18,7 +12,7 @@ main() {
       if [ "$(systemctl --user is-active "$2")" != "active" ]; then
         systemctl --user "$1" "$2"
 
-        if [ "$SAFE" != 1 ] && [ "$(echo "$(awk '{print $1}' /proc/uptime)" / 60 | bc)" -gt "$UPTIME_THRESHOLD" ]; then
+        if [ "$SAFE" != 1 ]; then
           punish "$@"
         fi
       fi
@@ -35,15 +29,7 @@ main() {
 }
 
 punish() {
-  # for debug or logging
-  echo "manual disablement detected (date: \"$(date)\", args: \"$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')\", duration: $RECOVERY_TIME)" >> "$LOG_PATH"
-
-  # shellcheck disable=SC2046
-  echo "sudo systemctl start ssh" | at now + "$RECOVERY_TIME" &&
-  sudo systemctl stop ssh &&
-  # kill all users logging in with sshd
-  # do not quote pgrep because the error occurs when multiple users are logging in with sshd
-  kill -9 $(pgrep -f "sshd: .*@pts/|mosh-server")
+  sh -c "$(dirname "$(realpath "$0")")/../../bin/lib/punish"
 }
 
 authenticate() {
