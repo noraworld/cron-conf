@@ -26,10 +26,6 @@ NON_ROOT_USER=ubuntu
 # Perform periodic tasks
 */10 * * * * scheduler periodic
 
-# Turn VPN on or off
-# 57 23 * * * vpnctl connect ca
-# 3  4  * * * vpnctl disconnect
-
 # Firewall & Observe conf changes
 #   "git push", "git pull", "git fetch" and changing configurations are available:
 #     at 00:00 - 03:00 every day
@@ -99,6 +95,10 @@ NON_ROOT_USER=ubuntu
 #   Available: at 00:00 - 06:00 every day
 */10 6-23 * * * scheduler chime deny
 */10 0-5  * * * scheduler chime allow
+
+# Turn VPN on or off
+# 57 23 * * * vpnctl connect ca
+# 3  4  * * * vpnctl disconnect
 
 # Upstream & Netflix
 #   Available: at 00:00 - 06:00 every day
