@@ -110,8 +110,8 @@ NON_ROOT_USER=ubuntu
 #   Available: at 00:00 - 06:00 every day
 */5    0-5  * * * scheduler vod allow
 0      6    * * * scheduler vod deny --safe; scheduler amazon deny --safe
-5-55/5 6    * * * scheduler vod deny; scheduler amazon deny
-0      7    * * * scheduler amazon allow
+5-55/5 6    * * * scheduler vod deny;        scheduler amazon deny
+0      7    * * *                            scheduler amazon allow
 */5    7-23 * * * scheduler vod deny
 
 # YouTube
