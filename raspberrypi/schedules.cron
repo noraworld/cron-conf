@@ -97,8 +97,8 @@ NON_ROOT_USER=ubuntu
 
 # Chime
 #   Available: at 00:00 - 06:00 every day
-#TEMP */10 6-23 * * * scheduler chime deny
-#TEMP */10 0-5  * * * scheduler chime allow
+*/10 6-23 * * * scheduler chime deny
+*/10 0-5  * * * scheduler chime allow
 
 # Upstream
 #   Available: at 00:00 - 06:00 every day
