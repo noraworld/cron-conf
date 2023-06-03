@@ -30,23 +30,17 @@ NON_ROOT_USER=ubuntu
 # 57 23 * * * vpnctl connect ca
 # 3  4  * * * vpnctl disconnect
 
-# Observe conf changes
-#   Available for change: at 00:00 - 05:00 every day
+# Firewall & Observe conf changes
+#   "git push", "git pull", "git fetch" and changing configurations are available:
+#     at 00:00 - 03:00 every day
 #
 #   NOTE:
 #     Remember that the shorter the time is, the more it can take effect
 #
-#TEMP */10   0-4  * * * scheduler observe stop
-#TEMP 0      5    * * * scheduler observe start --safe
-#TEMP 5-55/1 5    * * * scheduler observe start
-#TEMP */1    6-23 * * * scheduler observe start
-
-# Firewall
-#   "git push" & "git pull" are available: at 00:00 - 03:00
-*/10    0-2  * * * scheduler firewall allow
-0-10/1  3    * * * scheduler firewall deny --safe
-11-59/1 3    * * * scheduler firewall deny
-*/1     4-23 * * * scheduler firewall deny
+*/10    0-2  * * * scheduler firewall allow;       scheduler observe stop
+0-10/1  3    * * * scheduler firewall deny --safe; scheduler observe start --safe
+11-59/1 3    * * * scheduler firewall deny;        scheduler observe start
+*/1     4-23 * * * scheduler firewall deny;        scheduler observe start
 
 # Focus
 #   NOTE:
