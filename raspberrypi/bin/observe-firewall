@@ -51,6 +51,9 @@ dns_blocked() {
     return
   fi
 
+  # Check if the GitHub IP addresses for "git push" & "git pull" are blocked
+  ssh -T git@github.com > /dev/null 2>&1 && echo false
+
   echo true
 }
 
