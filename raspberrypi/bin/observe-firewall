@@ -7,8 +7,26 @@ main() {
 }
 
 restore_rules() {
+  # Reset all rules
   printf "*filter\nCOMMIT\n*nat\nCOMMIT\n" | sudo iptables-restore
+
+  # Apply UFW rules
+  #   https://github.com/noraworld/ufw-conf
   sudo ufw reload
+
+  # Retrieve all IP addresses for GitHub and extract ones used for "git"
+  github_git_addresses=$(curl -s https://api.github.com/meta | tr -d '\n' | grep -oP "\"git\": \[(.*?)\]" | sed 's/"git": \[//g' | tr -d ']' | tr -d '"' | tr -d ' ')
+
+  # e.g. 192.30.252.0/22,185.199.108.0/22,140.82.112.0/20,143.55.64.0/20,20.201.28.151/32,20.205.243.166/32,20.87.225.212/32,20.248.137.48/32,20.207.73.82/32,20.27.177.113/32,20.200.245.247/32,20.233.54.53/32,20.201.28.152/32,20.205.243.160/32,20.87.225.214/32,20.248.137.50/32,20.207.73.83/32,20.27.177.118/32,20.200.245.248/32,20.233.54.52/32
+  github_git_ip4addresses=$(echo "$github_git_addresses" | perl -pe 's|[0-f]{1,4}:{1,2}[0-f]{1,4}.*?,||g')
+
+  # e.g. 2a0a:a440::/29,2606:50c0::/32
+  github_git_ip6addresses=$(echo "$github_git_addresses" | grep -oP "[0-f]{1,4}:{1,2}.*?," | tr -d '\n' | sed 's/,$/\n/g')
+
+  # Block "git push" & "git pull" (only on this computer)
+  # Try "git pull" at any Git directory to make sure if it works properly
+  sudo iptables  -I OUTPUT -p all -d "$github_git_ip4addresses" -j REJECT
+  sudo ip6tables -I OUTPUT -p all -d "$github_git_ip6addresses" -j REJECT
 }
 
 dns_blocked() {
