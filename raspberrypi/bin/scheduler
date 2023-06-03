@@ -35,6 +35,9 @@ main() {
     "deregulated-superman-allow")
       deregulated_superman_allow
       ;;
+    "firewall")
+      firewall
+      ;;
     "focus")
       focus
       ;;
@@ -179,7 +182,7 @@ firewall() {
   #
   case "$operation" in
     "deny")
-      observe-firewall deny
+      observe-firewall deny "$safe"
       ;;
     "allow")
       observe-firewall allow
