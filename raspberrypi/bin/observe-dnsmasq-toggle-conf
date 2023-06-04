@@ -31,7 +31,7 @@ observe() {
           "link")
             sudo unlink "$TARGET/$file"
             # exrd is inappropriate here because the file is createable while it waits for the daemon to restart
-            sudo systemctl stop dnsmasq
+            sudo systemctl restart dnsmasq
             echo "INFO: Deleted symlink \"$TARGET/$file\" automatically"
             ;;
           "file")
@@ -49,7 +49,7 @@ observe() {
           "link")
             sudo ln -s "$SOURCE/$file" "$TARGET"
             # exrd is inappropriate here because the file is deleteable while it waits for the daemon to restart
-            sudo systemctl stop dnsmasq
+            sudo systemctl restart dnsmasq
             echo "INFO: Created symlink \"$TARGET/$file\" automatically"
             ;;
           "file")
