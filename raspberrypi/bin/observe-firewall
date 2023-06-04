@@ -106,7 +106,7 @@ github_blocked() {
 }
 
 punish() {
-  sh -c "$(dirname "$(realpath "$0")")/../../bin/lib/punish"
+  sh -c "$(dirname "$(realpath "$0")")/../../bin/lib/punish --from \"$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')\""
 }
 
 authenticate() {
