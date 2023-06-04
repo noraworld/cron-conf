@@ -98,7 +98,7 @@ dns_blocked() {
 
 github_blocked() {
   # Check if the GitHub IP addresses for "git push" & "git pull" are blocked
-  # MEMO: "ssh -T git@github.com" can't be used because it always returns non-zero even if the result succeeds
+  # MEMO: "ssh -T git@github.com" can't be used because it always returns a non-zero status, even if the result succeeds
   git -C /home/ubuntu/workspace/cron-conf fetch > /dev/null 2>&1 && echo false && return
 
   echo true
