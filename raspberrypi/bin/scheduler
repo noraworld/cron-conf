@@ -182,7 +182,7 @@ firewall() {
   #
   case "$operation" in
     "deny")
-      observe-firewall deny "$safe"
+      observe-firewall deny "$safe" --debug
       ;;
     "allow")
       observe-firewall allow
