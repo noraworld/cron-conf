@@ -110,7 +110,10 @@ github_blocked() {
   # Check if the GitHub IP addresses for "git push" & "git pull" are blocked
   # MEMO: "ssh -T git@github.com" can't be used because it always returns a non-zero status, even if the result succeeds
   if git -C /home/ubuntu/workspace/cron-conf fetch > /dev/null 2>&1; then
-    [ "$DEBUG" = 1 ] && echo "{ \"code\": 4, \"date\": \"$(date)\", \"reason\": \"git operation with remote repos not blocked\" }," >> "$DEBUG_LOG_PATH"
+    if [ "$DEBUG" = 1 ] && [ "$SAFE" != 1 ]; then
+      echo "{ \"code\": 4, \"date\": \"$(date)\", \"reason\": \"git operation with remote repos not blocked\" }," >> "$DEBUG_LOG_PATH"
+    fi
+
     echo false
     return
   fi
