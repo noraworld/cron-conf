@@ -93,10 +93,10 @@ dns_blocked() {
   fi
 
   # Check if the accepted rule against port 53 forwarding exists
-  if [ "$(sudo iptables-save | grep -i "forward" | grep "53" | grep -c "ACCEPT")" -ge 1 ]; then
+  if [ "$(sudo iptables-save | grep -i "forward" | grep "ACCEPT" | grep "53" | grep -cv ":FORWARD ACCEPT \[[0-9]*:[0-9]*\]")" -ge 1 ]; then
     if [ "$DEBUG" = 1 ]; then
       # https://stackoverflow.com/questions/1251999/how-can-i-replace-each-newline-n-with-a-space-using-sed#answer-1252191
-      echo "{ \"code\": 3, \"date\": \"$(date)\", \"reason\": \"accept rule for forwarding 53 detected ($(sudo iptables-save | grep -i "forward" | grep "53" | grep "ACCEPT" | sed ':a;N;$!ba;s/\n/, /g'))\" }," >> "$DEBUG_LOG_PATH"
+      echo "{ \"code\": 3, \"date\": \"$(date)\", \"reason\": \"accept rule for forwarding 53 detected ($(sudo iptables-save | grep -i "forward" | grep "ACCEPT" | grep "53" | sed ':a;N;$!ba;s/\n/, /g'))\" }," >> "$DEBUG_LOG_PATH"
     fi
 
     echo false
