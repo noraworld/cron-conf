@@ -197,12 +197,12 @@ firewall() {
 focus() {
   case "$operation" in
     "deny")
-      cron-daemonctl start observe-focus-conf "$safe"
+      # cron-daemonctl start observe-focus-conf "$safe"
       create-dnsmasq-toggle-conf private focus
       # create-iptables-toggle-conf private 232_focus
       ;;
     "allow")
-      cron-daemonctl stop observe-focus-conf "$safe"
+      # cron-daemonctl stop observe-focus-conf "$safe"
       remove-dnsmasq-toggle-conf private focus
       # remove-iptables-toggle-conf private 232_focus
       ;;
