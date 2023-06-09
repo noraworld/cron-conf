@@ -402,12 +402,12 @@ youtube() {
 youtube_alternative() {
   case "$operation" in
     "deny")
-      cron-daemonctl start observe-youtube-alternative-conf "$safe"
+      [ "$SOFT" = 1 ] || cron-daemonctl start observe-youtube-alternative-conf "$safe"
       remove-dnsmasq-toggle-conf public youtube_alternative
       ;;
     "allow")
       cron-daemonctl stop observe-youtube-alternative-conf "$safe"
-      create-dnsmasq-toggle-conf public youtube_alternative
+      # create-dnsmasq-toggle-conf public youtube_alternative
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2
