@@ -53,19 +53,6 @@ NON_ROOT_USER=ubuntu
 #TEMP 5-55/5 21    * * * scheduler focus deny
 #TEMP */5    22-23 * * * scheduler focus deny
 
-# GitHub Editor
-#   Unavailable: at 05:00 - 09:00 every day
-#
-#   NOTE:
-#     This rule may be no longer necessary
-#     because the GitHub IP addresses for "git push" & "git pull" are blocked on iptables side
-#
-# */5    0-4  * * * scheduler github-editor allow
-# 0      5    * * * scheduler github-editor deny --safe
-# 5-55/5 5    * * * scheduler github-editor deny
-# */5    6-8  * * * scheduler github-editor deny
-# */5    9-23 * * * scheduler github-editor allow
-
 # Deregulated Superman (deny)
 #   Available: at 00:00 - 06:00 every day
 # */30 0-5  * * * scheduler deregulated-superman allow
@@ -138,3 +125,16 @@ NON_ROOT_USER=ubuntu
 #
 0    0-5  * * * scheduler youtube-music deny
 */10 6-23 * * * scheduler youtube-music deny
+
+# GitHub Editor
+#   Unavailable: at 05:00 - 09:00 every day
+#
+#   NOTE:
+#     This rule may be no longer necessary
+#     because the GitHub IP addresses for "git push" & "git pull" are blocked on iptables side
+#
+# */5    0-4  * * * scheduler github-editor allow
+# 0      5    * * * scheduler github-editor deny --safe
+# 5-55/5 5    * * * scheduler github-editor deny
+# */5    6-8  * * * scheduler github-editor deny
+# */5    9-23 * * * scheduler github-editor allow
