@@ -158,7 +158,11 @@ netflix() {
   [ "$DRY_RUN" = 1 ] && exit 0
 
   set +e
-  vpnctl reconnect --status --norestart
+  if [ "$RECONNECT_VPN" ]; then
+    vpnctl reconnect --status --norestart
+  else
+    vpnctl connect --status --norestart
+  fi
   set -e
 
   warning_color
@@ -643,12 +647,13 @@ no_color() {
 parser_definition() {
   setup   REST help:usage -- "Usage: unlock [options]... [arguments]..." ''
   msg -- 'Options:'
-  flag    DRY_RUN    --dry-run    -- "just show remaining time"
-  flag    NO_RESTART --norestart  -- "skip to restart the daemon"
-  flag    SKIP       --skip       -- "skip the first sleep"
-  param   TIMES      --times      -- "how many times unlock in a row"
-  disp    :usage  -h --help       -- "show help message and exit"
-  disp    VERSION    --version    -- "show current version"
+  flag    DRY_RUN       --dry-run   -- "just show remaining time"
+  flag    NO_RESTART    --norestart -- "skip to restart the daemon"
+  flag    RECONNECT_VPN --vpn       -- "force to reconnect the VPN server"
+  flag    SKIP          --skip      -- "skip the first sleep"
+  param   TIMES         --times     -- "how many times unlock in a row"
+  disp    :usage  -h    --help      -- "show help message and exit"
+  disp    VERSION       --version   -- "show current version"
 }
 # @end
 
@@ -657,6 +662,7 @@ parser_definition() {
 # URL: https://github.com/ko1nksm/getoptions (v3.3.0)
 DRY_RUN=''
 NO_RESTART=''
+RECONNECT_VPN=''
 SKIP=''
 TIMES=''
 REST=''
@@ -682,6 +688,11 @@ parse() {
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
         NO_RESTART="$OPTARG"
+        ;;
+      '--vpn')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        RECONNECT_VPN="$OPTARG"
         ;;
       '--skip')
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
@@ -731,6 +742,7 @@ Usage: unlock [options]... [arguments]...
 Options:
       --dry-run               just show remaining time
       --norestart             skip to restart the daemon
+      --vpn                   force to reconnect the VPN server
       --skip                  skip the first sleep
       --times TIMES           how many times unlock in a row
   -h, --help                  show help message and exit
