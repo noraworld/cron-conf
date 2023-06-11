@@ -53,6 +53,11 @@ NON_ROOT_USER=ubuntu
 5-55/5 21    * * * scheduler focus deny
 */5    22-23 * * * scheduler focus deny
 
+# Chime
+#   Available: at 00:00 - 06:00 every day
+*/10 6-23 * * * scheduler chime deny
+*/10 0-5  * * * scheduler chime allow
+
 # Deregulated Superman (deny & allow)
 #   Available: at 00:00 - 06:00 every day
 #
@@ -67,11 +72,6 @@ NON_ROOT_USER=ubuntu
 #   Available: at 00:00 - 06:00 every day
 # 0 0-5 * * * scheduler superman allow; scheduler ometeotl allow
 0 6-23 * * * scheduler superman deny; scheduler ometeotl deny
-
-# Chime
-#   Available: at 00:00 - 06:00 every day
-*/10 6-23 * * * scheduler chime deny
-*/10 0-5  * * * scheduler chime allow
 
 # Turn VPN on or off
 # 57 23 * * * vpnctl connect ca
