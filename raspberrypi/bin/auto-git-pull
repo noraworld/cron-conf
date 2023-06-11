@@ -1,7 +1,7 @@
 #!/bin/sh
 
-# Reason for invalidation: "git pull" is prohibited from "observe-firewall"
-# git -C /home/ubuntu/workspace/diary pull &
-# git -C /home/ubuntu/workspace/diary/_private pull &
-# git -C /home/ubuntu/workspace/diary/_daily_report pull &
-:
+git -C /home/ubuntu/workspace/cron-conf pull &
+git -C /home/ubuntu/workspace/dnsmasq-conf pull &
+git -C /home/ubuntu/workspace/diary pull &
+git -C /home/ubuntu/workspace/diary/_private pull &
+git -C /home/ubuntu/workspace/diary/_daily_report pull &

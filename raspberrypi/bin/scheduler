@@ -306,8 +306,12 @@ periodic() {
   marlin autoconnect all --retry 2 # --log /home/ubuntu/.log/bluetooth_autoconnect.log
 
   # Auto-update specific Git repositories
-  # Reason for invalidation: "git pull" is prohibited from "observe-firewall"
-  # auto-git-pull
+  #
+  # While this script doesn't take effect while "git pull" is disabled by "observe-firewall",
+  # it's important because settings that aren't changed automatically, especially the strict setting changes,
+  # might not be changed for a while.
+  #
+  auto-git-pull
 }
 
 startup() {
