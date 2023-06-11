@@ -77,11 +77,11 @@ NON_ROOT_USER=ubuntu
 # 57 23 * * * vpnctl connect ca
 # 3  4  * * * vpnctl disconnect
 
-# Upstream & Netflix
+# Netflix & Upstream
 #   Available: at 00:00 - 06:00 every day
-# 0 0-5  * * * scheduler upstream allow;       scheduler netflix allow
-0 6      * * * scheduler upstream deny --safe; scheduler netflix deny --safe
-0 0,7-23 * * * scheduler upstream deny;        scheduler netflix deny
+# 0 0-5  * * * scheduler upstream allow; scheduler netflix allow
+0 6      * * * vpnctl disconnect; scheduler netflix deny --safe; scheduler upstream deny --safe
+0 0,7-23 * * * vpnctl disconnect; scheduler netflix deny;        scheduler upstream deny
 
 # VOD
 #   Available: at 00:00 - 06:00 every day
