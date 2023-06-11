@@ -68,15 +68,10 @@ NON_ROOT_USER=ubuntu
 # */30 0-5  * * * scheduler deregulated-superman-allow allow
 #TEMP */30 6-23 * * * scheduler deregulated-superman-allow deny
 
-# Ometeotl
+# Superman & Ometeotl
 #   Available: at 00:00 - 06:00 every day
-# 0 0-5  * * * scheduler ometeotl allow
-#TEMP 0 6-23 * * * scheduler ometeotl deny
-
-# Superman
-#   Available: at 00:00 - 06:00 every day
-# 0 0-5    * * * scheduler superman allow
-#TEMP 0 6-23 * * * scheduler superman deny
+# 0 0-5 * * * scheduler superman allow; scheduler ometeotl allow
+0 6-23 * * * scheduler superman deny; scheduler ometeotl deny
 
 # Chime
 #   Available: at 00:00 - 06:00 every day
