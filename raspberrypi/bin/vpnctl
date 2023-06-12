@@ -44,6 +44,7 @@ connect() {
     echo "Attempting to connect... (retry: $retry_count)"
 
     sudo systemctl start nordvpn nordvpnd
+    sleep "$sleep_interval" # without this, it can cause the error "You are not logged in"
     nordvpn connect "$target_country"
 
     retry_count=$((retry_count + 1))
