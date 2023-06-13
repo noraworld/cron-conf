@@ -75,6 +75,12 @@ NON_ROOT_USER=ubuntu
 
 # Netflix & Upstream
 #   Available: at 00:00 - 06:00 every day
+#
+#   The order is important in order not to access Netflix without a VPN connection.
+#     1. Deny Netflix
+#     2. Disconnect from a VPN server (NordVPN Upstream -> (whatever))
+#     3. Switch upstream servers ((whatever) -> Superman Upstream)
+#
 # 0 0-5  * * * scheduler upstream allow; scheduler netflix allow
 0 6      * * * scheduler netflix deny --safe; vpnctl disconnect; scheduler upstream deny --safe
 0 0,7-23 * * * scheduler netflix deny;        vpnctl disconnect; scheduler upstream deny
