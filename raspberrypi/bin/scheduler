@@ -374,7 +374,7 @@ vod() {
       ;;
     "allow")
       cron-daemonctl stop observe-vod-conf "$safe"
-      remove-dnsmasq-toggle-conf public vod
+      # remove-dnsmasq-toggle-conf public vod
       # remove-iptables-toggle-conf public 133_vod
       ;;
     *)
