@@ -9,10 +9,11 @@ main() {
 
   case "$1" in
     "start")
+      # TODO: https://stackoverflow.com/questions/63255421/getting-uptime-or-downtime-of-systemd-process-using-systemctl#answer-63260630
+
       if [ "$(systemctl --user is-active "$2")" != "active" ]; then
         systemctl --user "$1" "$2"
 
-        # TODO: https://stackoverflow.com/questions/63255421/getting-uptime-or-downtime-of-systemd-process-using-systemctl#answer-63260630
         if [ "$SAFE" != 1 ]; then
           punish "$@"
         fi
