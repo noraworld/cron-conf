@@ -67,8 +67,8 @@ NON_ROOT_USER=ubuntu
 #     This rule for Deregulated Superman Allow is the opposite of the other rules
 #     Deregulated Superman is allowed when the file does exist
 #
-# */30 0-2 * * * scheduler deregulated-superman allow; scheduler deregulated-superman-allow allow
-*/30 3-23 * * * scheduler deregulated-superman deny; scheduler deregulated-superman-allow deny
+# */10 0-2 * * * scheduler deregulated-superman allow; scheduler deregulated-superman-allow allow
+*/10 3-23 * * * scheduler deregulated-superman deny; scheduler deregulated-superman-allow deny
 
 # Ometeotl
 #   Available: at 00:00 - 03:00 every day
