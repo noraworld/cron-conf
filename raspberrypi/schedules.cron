@@ -54,51 +54,51 @@ NON_ROOT_USER=ubuntu
 */5    22-23 * * * scheduler focus deny
 
 # Chime
-#   Available: at 00:00 - 06:00 every day
-*/10 6-23 * * * scheduler chime deny
-*/10 0-5  * * * scheduler chime allow
+#   Available: at 00:00 - 03:00 every day
+*/10 3-23 * * * scheduler chime deny
+*/10 0-2  * * * scheduler chime allow
 
 # Deregulated Superman (deny & allow)
-#   Available: at 00:00 - 06:00 every day
+#   Available: at 00:00 - 03:00 every day
 #
 #   NOTE:
 #     This rule for Deregulated Superman Allow is the opposite of the other rules
 #     Deregulated Superman is allowed when the file does exist
 #
-# */30 0-5 * * * scheduler deregulated-superman allow; scheduler deregulated-superman-allow allow
-*/30 6-23 * * * scheduler deregulated-superman deny; scheduler deregulated-superman-allow deny
+# */30 0-2 * * * scheduler deregulated-superman allow; scheduler deregulated-superman-allow allow
+*/30 3-23 * * * scheduler deregulated-superman deny; scheduler deregulated-superman-allow deny
 
 # Ometeotl
-#   Available: at 00:00 - 06:00 every day
-0 6-23 * * * scheduler ometeotl deny
+#   Available: at 00:00 - 03:00 every day
+0 3-23 * * * scheduler ometeotl deny
 
 # Superman
-#   Available: at 00:00 - 06:00 every day
+#   Available: at 00:00 - 03:00 every day
 0      19      * * * scheduler superman allow
 0      0,20-23 * * * scheduler superman deny --soft
-0      6       * * * scheduler superman deny --safe
-5-55/5 6       * * * scheduler superman deny
-*/5    7-18    * * * scheduler superman deny
+0      3       * * * scheduler superman deny --safe
+5-55/5 3       * * * scheduler superman deny
+*/5    4-18    * * * scheduler superman deny
 
 # Netflix & Upstream
-#   Available: at 00:00 - 06:00 every day
+#   Available: at 00:00 - 03:00 every day
 #
 #   The order is important in order not to access Netflix without a VPN connection.
 #     1. Deny Netflix
 #     2. Disconnect from a VPN server (NordVPN Upstream -> [whatever])
 #     3. Switch upstream servers ([whatever] -> Superman Upstream)
 #
-# 0 0-5  * * * scheduler upstream allow; scheduler netflix allow
-0 6      * * * scheduler netflix deny --safe; vpnctl disconnect; scheduler upstream deny --safe
-0 0,7-23 * * * scheduler netflix deny;        vpnctl disconnect; scheduler upstream deny
+# 0 0-2  * * * scheduler upstream allow; scheduler netflix allow
+0 3      * * * scheduler netflix deny --safe; vpnctl disconnect; scheduler upstream deny --safe
+0 0,4-23 * * * scheduler netflix deny;        vpnctl disconnect; scheduler upstream deny
 
 # VOD
-#   Available: at 00:00 - 06:00 every day
-*/5    0-5  * * * scheduler vod allow
-0      6    * * * scheduler vod deny --safe; scheduler amazon deny --safe
-5-55/5 6    * * * scheduler vod deny;        scheduler amazon deny
-0      7    * * *                            scheduler amazon allow
-*/5    7-23 * * * scheduler vod deny
+#   Available: at 00:00 - 03:00 every day
+*/5    0-2  * * * scheduler vod allow
+0      3    * * * scheduler vod deny --safe; scheduler amazon deny --safe
+5-55/5 3    * * * scheduler vod deny;        scheduler amazon deny
+0      4    * * *                            scheduler amazon allow
+*/5    4-23 * * * scheduler vod deny
 
 # YouTube
 #   Available: at 00:00 - 03:00 on Monday, Wednesday, and Saturday
@@ -112,22 +112,22 @@ NON_ROOT_USER=ubuntu
 */1     *    * * 0,2,4,5 scheduler youtube deny
 
 # YouTube Alternative
-#   Available: at 00:00 - 05:00 every day (every 10 minutes restriction)
-*/10     0-4  * * * scheduler youtube-alternative allow
-*/10     0-4  * * * scheduler youtube-alternative deny --soft
-0        5    * * * scheduler youtube-alternative deny --safe
-10-50/10 5    * * * scheduler youtube-alternative deny
-*/10     6-23 * * * scheduler youtube-alternative deny
+#   Available: at 00:00 - 03:00 every day (every 10 minutes restriction)
+*/10     0-2  * * * scheduler youtube-alternative allow
+*/10     0-2  * * * scheduler youtube-alternative deny --soft
+0        3    * * * scheduler youtube-alternative deny --safe
+10-50/10 3    * * * scheduler youtube-alternative deny
+*/10     4-23 * * * scheduler youtube-alternative deny
 
 # YouTube Music
-#   Available: 00:00 - 06:00 every day
+#   Available: 00:00 - 03:00 every day
 #
 #   NOTE:
 #     This rule is the opposite of the other rules
 #     YouTube Music is allowed when the file does exist
 #
-0    0-5  * * * scheduler youtube-music deny
-*/10 6-23 * * * scheduler youtube-music deny
+0    0-2  * * * scheduler youtube-music deny
+*/10 3-23 * * * scheduler youtube-music deny
 
 # GitHub Editor
 #   Unavailable: at 05:00 - 09:00 every day
