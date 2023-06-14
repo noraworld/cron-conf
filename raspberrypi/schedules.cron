@@ -135,5 +135,9 @@ NON_ROOT_USER=ubuntu
 # */5    9-23 * * * scheduler github-editor allow
 
 # Turn VPN on or off
+#
+#   NOTE:
+#     There is no concrete assurance that automatically turning on the VPN is safe.
+#
 # 57 23 * * * vpnctl connect ca
 # 3  4  * * * vpnctl disconnect
