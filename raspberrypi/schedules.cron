@@ -128,8 +128,7 @@ NON_ROOT_USER=ubuntu
 #     This rule is the opposite of the other rules
 #     YouTube Music is allowed when the file does exist
 #
-0    0-2  * * * scheduler youtube-music deny
-*/10 3-23 * * * scheduler youtube-music deny
+*/10 * * * * scheduler youtube-music deny
 
 # GitHub Editor
 #   Unavailable: at 05:00 - 09:00 every day
