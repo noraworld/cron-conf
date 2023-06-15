@@ -57,8 +57,8 @@ NON_ROOT_USER=ubuntu
 
 # Chime
 #   Available: at 00:00 - 03:00 every day
-*/10 3-23 * * * scheduler chime deny
 */10 0-2  * * * scheduler chime allow
+*/10 3-23 * * * scheduler chime deny
 
 # Deregulated Superman (deny & allow)
 #   Available: at 00:00 - 03:00 every day
