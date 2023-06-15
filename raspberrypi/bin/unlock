@@ -294,7 +294,7 @@ vod() {
 }
 
 youtube() {
-  reference_minute=60
+  reference_minute=30
   [ "$DRY_RUN" = 1 ] && exit 0
 
   warning_color
