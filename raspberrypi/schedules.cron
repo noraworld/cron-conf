@@ -76,11 +76,11 @@ NON_ROOT_USER=ubuntu
 
 # Superman
 #   Available: at 00:00 - 03:00 every day
-0      19      * * * scheduler superman allow
-0      0,20-23 * * * scheduler superman deny --soft
-0      3       * * * scheduler superman deny --safe
-5-55/5 3       * * * scheduler superman deny
-*/5    4-18    * * * scheduler superman deny
+*/5    0-2,19-23 * * * scheduler superman allow
+0      0,20-23   * * * scheduler superman deny --soft
+0      3         * * * scheduler superman deny --safe
+5-55/5 3         * * * scheduler superman deny
+*/5    4-18      * * * scheduler superman deny
 
 # Netflix & Upstream
 #   Available: at 00:00 - 03:00 every day
