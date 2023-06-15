@@ -76,7 +76,6 @@ NON_ROOT_USER=ubuntu
 #     This rule for Deregulated Superman Allow is the opposite of the other rules
 #     Deregulated Superman is allowed when the file does exist
 #
-# */10 0-2 * * * scheduler deregulated-superman allow; scheduler deregulated-superman-allow allow
 */10 3-23 * * * scheduler deregulated-superman deny; scheduler deregulated-superman-allow deny
 
 # Ometeotl
@@ -105,7 +104,6 @@ NON_ROOT_USER=ubuntu
 #     2. Disconnect from a VPN server (NordVPN Upstream -> [whatever])
 #     3. Switch upstream servers ([whatever] -> Superman Upstream)
 #
-# 0 0-2  * * * scheduler upstream allow; scheduler netflix allow
 0 3      * * * scheduler netflix deny --safe; vpnctl disconnect; scheduler upstream deny --safe
 0 0,4-23 * * * scheduler netflix deny;        vpnctl disconnect; scheduler upstream deny
 
