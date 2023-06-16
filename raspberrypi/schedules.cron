@@ -29,6 +29,11 @@ NON_ROOT_USER=ubuntu
 
 # Firewall & Observe conf changes
 #
+#   Note 1:
+#     "git push", "git pull", "git fetch" and changing configurations are restricted
+#   Note 2:
+#     Remember that the shorter the time is, the more it can take effect
+#
 #   Schedule 1:
 #     Available: 00:00 - 03:00 every day
 #     Intervals: none
@@ -38,21 +43,14 @@ NON_ROOT_USER=ubuntu
 #     Intervals: every 1 minute
 #     Intensity: hard
 #
-#   "git push", "git pull", "git fetch" and changing configurations are available:
-#
-#   NOTE:
-#     Remember that the shorter the time is, the more it can take effect
-#
 */10    0-2  * * * scheduler firewall allow;       scheduler observe stop
 0-10/1  3    * * * scheduler firewall deny --safe; scheduler observe start --safe
 11-59/1 3    * * * scheduler firewall deny;        scheduler observe start
 */1     4-23 * * * scheduler firewall deny;        scheduler observe start
 
 # Focus
-#   Intensity: soft
-#   Intervals: 5 minutes
 #
-#   NOTE:
+#   Note 1:
 #     The above schedule is more strict than the below one
 #     You can choose either one of them according to your lifestyle
 #
@@ -108,6 +106,10 @@ NON_ROOT_USER=ubuntu
 
 # Deregulated Superman (deny & allow)
 #
+#   Note 1:
+#     This rule for Deregulated Superman Allow is the opposite of the other rules
+#     Deregulated Superman is allowed when the file does exist
+#
 #   Schedule 1:
 #     Available: at 00:00 - 03:00 every day
 #     Intervals: none
@@ -116,10 +118,6 @@ NON_ROOT_USER=ubuntu
 #     Available: at 03:00 - 23:59 every day
 #     Intervals: every 10 minutes
 #     Intensity: soft
-#
-#   NOTE:
-#     This rule for Deregulated Superman Allow is the opposite of the other rules
-#     Deregulated Superman is allowed when the file does exist
 #
 */10 3-23 * * * scheduler deregulated-superman deny; scheduler deregulated-superman-allow deny
 
@@ -159,6 +157,12 @@ NON_ROOT_USER=ubuntu
 
 # Netflix & Upstream
 #
+#   Note 1:
+#     The order is important in order not to access Netflix without a VPN connection.
+#       1. Deny Netflix
+#       2. Disconnect from a VPN server (NordVPN Upstream -> [whatever])
+#       3. Switch upstream servers ([whatever] -> Superman Upstream)
+#
 #   Schedule 1:
 #     Available: at 00:00 - 03:00 every day
 #     Intervals: none
@@ -167,11 +171,6 @@ NON_ROOT_USER=ubuntu
 #     Available: at 03:00 - 23:59 every day
 #     Intervals: every 1 hour
 #     Intensity: soft
-#
-#   The order is important in order not to access Netflix without a VPN connection.
-#     1. Deny Netflix
-#     2. Disconnect from a VPN server (NordVPN Upstream -> [whatever])
-#     3. Switch upstream servers ([whatever] -> Superman Upstream)
 #
 0 3      * * * scheduler netflix deny --safe; vpnctl disconnect; scheduler upstream deny --safe
 0 0,4-23 * * * scheduler netflix deny;        vpnctl disconnect; scheduler upstream deny
@@ -252,14 +251,14 @@ NON_ROOT_USER=ubuntu
 
 # YouTube Music
 #
+#   Note 1:
+#     This rule is the opposite of the other rules
+#     YouTube Music is allowed when the file does exist
+#
 #   Schedule 1:
 #     Available: at 00:00 - 23:59 every day
 #     Intervals: every 10 minutes
 #     Intensity: soft
-#
-#   NOTE:
-#     This rule is the opposite of the other rules
-#     YouTube Music is allowed when the file does exist
 #
 */10 * * * * scheduler youtube-music deny
 
