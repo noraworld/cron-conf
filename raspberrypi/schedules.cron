@@ -15,8 +15,12 @@
 PATH=/home/ubuntu/workspace/iptables-conf/bin:/home/ubuntu/.local/share/zinit/polaris/bin:/home/ubuntu/workspace/cron-conf/bin:/home/ubuntu/workspace/bluetoothctl-autoconnector/bin:/home/ubuntu/workspace/cron-conf/raspberrypi/bin:/home/ubuntu/workspace/cron-conf/raspberrypi/bin/schedules:/home/ubuntu/workspace/envsman/raspberrypi/cron-conf:/home/ubuntu/workspace/fan-pippi/bin:/home/ubuntu/workspace/dnsmasq-conf/bin:/usr/sbin:/usr/bin:/bin
 NON_ROOT_USER=ubuntu
 
+
+
 # Prepare the system for normal operation
 @reboot scheduler startup
+
+
 
 # This is to reduce the possibility that the system freezes
 # It is executed with a 3-minute delay to avoid conflicts with "periodic"
@@ -24,8 +28,12 @@ NON_ROOT_USER=ubuntu
 # should not be executed simultaneously
 33 9 * * * scheduler daily
 
+
+
 # Perform periodic tasks
 */10 * * * * scheduler periodic
+
+
 
 # Firewall & Observe conf changes
 #
@@ -47,6 +55,8 @@ NON_ROOT_USER=ubuntu
 0-10/1  3    * * * scheduler firewall deny --safe; scheduler observe start --safe
 11-59/1 3    * * * scheduler firewall deny;        scheduler observe start
 */1     4-23 * * * scheduler firewall deny;        scheduler observe start
+
+
 
 # Focus
 #
@@ -90,6 +100,8 @@ NON_ROOT_USER=ubuntu
 # 5-55/5 21    * * * scheduler focus deny
 # */5    22-23 * * * scheduler focus deny
 
+
+
 # Chime
 #
 #   Schedule 1:
@@ -103,6 +115,8 @@ NON_ROOT_USER=ubuntu
 #
 */10 0-2  * * * scheduler chime allow
 */10 3-23 * * * scheduler chime deny
+
+
 
 # Deregulated Superman (deny & allow)
 #
@@ -121,6 +135,8 @@ NON_ROOT_USER=ubuntu
 #
 */10 3-23 * * * scheduler deregulated-superman deny; scheduler deregulated-superman-allow deny
 
+
+
 # Ometeotl
 #
 #   Schedule 1:
@@ -133,6 +149,8 @@ NON_ROOT_USER=ubuntu
 #     Intensity: soft
 #
 0 3-23 * * * scheduler ometeotl deny
+
+
 
 # Superman
 #
@@ -155,6 +173,8 @@ NON_ROOT_USER=ubuntu
 5-55/5 3         * * * scheduler superman deny
 */5    4-18      * * * scheduler superman deny
 
+
+
 # Netflix & Upstream
 #
 #   Note 1:
@@ -175,6 +195,8 @@ NON_ROOT_USER=ubuntu
 0 3      * * * scheduler netflix deny --safe; vpnctl disconnect; scheduler upstream deny --safe
 0 0,4-23 * * * scheduler netflix deny;        vpnctl disconnect; scheduler upstream deny
 
+
+
 # VOD
 #
 #   Schedule 1:
@@ -191,6 +213,8 @@ NON_ROOT_USER=ubuntu
 5-55/5 3    * * * scheduler vod deny;        scheduler amazon deny
 0      4    * * *                            scheduler amazon allow
 */5    4-23 * * * scheduler vod deny
+
+
 
 # YouTube
 #
@@ -232,6 +256,8 @@ NON_ROOT_USER=ubuntu
 */5     4-23 * * 1,3,6   scheduler youtube deny
 */5     *    * * 0,2,4,5 scheduler youtube deny
 
+
+
 # YouTube Alternative
 #
 #   Schedule 1:
@@ -249,6 +275,8 @@ NON_ROOT_USER=ubuntu
 5-55/5 3    * * * scheduler youtube-alternative deny
 */5    4-23 * * * scheduler youtube-alternative deny
 
+
+
 # YouTube Music
 #
 #   Note 1:
@@ -262,6 +290,8 @@ NON_ROOT_USER=ubuntu
 #
 */10 * * * * scheduler youtube-music deny
 
+
+
 # GitHub Editor
 #   Unavailable: at 05:00 - 09:00 every day
 #
@@ -274,6 +304,8 @@ NON_ROOT_USER=ubuntu
 # 5-55/5 5    * * * scheduler github-editor deny
 # */5    6-8  * * * scheduler github-editor deny
 # */5    9-23 * * * scheduler github-editor allow
+
+
 
 # Turn VPN on or off
 #
