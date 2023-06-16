@@ -189,12 +189,24 @@ netflix() {
   fi
   set -e
 
+  if ! [ -L /etc/dnsmasq.toggle/netflix_allow.conf ]; then
+    sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle/netflix_allow.conf /etc/dnsmasq.toggle
+  fi
+
   warning_color
   sudo unlink /etc/dnsmasq.toggle/netflix.conf
   no_color
 
   if [ "$(is_observer_active "netflix")" = "active" ]; then
     pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  fi
+
+  if ! [ -L /etc/dnsmasq.toggle/netflix_allow.conf ]; then
+    error_color
+    echo "error: /etc/dnsmasq.toggle/netflix_allow.conf still doesn't exist" >&2
+    no_color
+    echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
+    exit
   fi
 
   if [ -L /etc/dnsmasq.toggle/netflix.conf ]; then
