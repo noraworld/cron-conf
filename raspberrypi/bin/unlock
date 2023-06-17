@@ -8,7 +8,7 @@ reference_minute=0
 
 PROG_NAME="unlock"
 
-COOLDOWN_INTERVAL=3  # ideal: 3
+COOLDOWN_INTERVAL=0  # ideal: 3 (this may be unnecessary)
 WAITING_INTERVAL=0.5 # ideal: 0.5
 TIMES_INTERVAL=5     # ideal: 5
 TIMES_LIMIT=6        # ideal: 6
