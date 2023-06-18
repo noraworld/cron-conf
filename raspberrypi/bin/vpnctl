@@ -118,14 +118,6 @@ status() {
     echo "nordvpnd.service: \e[1;31m$(systemctl is-active nordvpnd)\e[0m"
   fi
 
-  # e.g. country: CA
-  current_country=$(get_country)
-  if [ "$current_country" != "$my_country" ]; then
-    echo "country:          \e[1;32m$current_country\e[0m"
-  else
-    echo "country:          \e[1;31m$current_country\e[0m"
-  fi
-
   # e.g. upstream: nordvpn_upstream.conf
   upstreams=$(ls /etc/dnsmasq.priv/toggle | grep upstream)
   if [ "$(echo $upstreams | wc -l)" -eq 0 ]; then
@@ -136,6 +128,14 @@ status() {
     echo "upstream:         \e[1;31m$upstreams\e[0m"
   else
     echo "upstream:         \e[1;32m$upstreams\e[0m"
+  fi
+
+  # e.g. country: CA
+  current_country=$(get_country)
+  if [ "$current_country" != "$my_country" ]; then
+    echo "country:          \e[1;32m$current_country\e[0m"
+  else
+    echo "country:          \e[1;31m$current_country\e[0m"
   fi
 
   if [ "$VERBOSE" = 1 ]; then
