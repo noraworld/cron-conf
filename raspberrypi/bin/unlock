@@ -2,7 +2,7 @@
 # shellcheck disable=SC2004
 
 set -u
-trap remaining_time EXIT
+# trap remaining_time EXIT
 
 reference_minute=0
 
@@ -28,6 +28,7 @@ main() {
   parse "$@"
   eval "set -- $REST"
 
+  validate "$@"
   pause "$COOLDOWN_INTERVAL" "$COOLDOWN_MESSAGE"
 
   case "$service" in
@@ -80,6 +81,7 @@ main() {
   esac
 
   restart_dnsmasq "$@"
+  remaining_time "$@"
 }
 
 restart_dnsmasq() {
@@ -650,6 +652,15 @@ remaining_time() {
         echo "$at_output" | grep -Ev "^warning: commands will be executed using"
       done
     fi
+  fi
+}
+
+validate() {
+  if [ "$TIMES" != "" ] && [ "$TIMES" -gt "$TIMES_LIMIT" ]; then
+    error_color
+    echo "error: execution more than $TIMES_LIMIT times in a row is not allowed" >&2
+    no_color
+    exit 1
   fi
 }
 
