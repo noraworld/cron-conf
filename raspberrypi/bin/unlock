@@ -20,6 +20,8 @@ ERROR_COLOR="\033[0;31m"
 WARNING_COLOR="\033[0;33m"
 NO_COLOR="\033[0m"
 
+SKIP=0
+
 main() {
   service="$1"
 
@@ -684,7 +686,8 @@ parser_definition() {
   flag    DRY_RUN       --dry-run   -- "just show remaining time"
   flag    NO_RESTART    --norestart -- "skip to restart the daemon"
   flag    RECONNECT_VPN --vpn       -- "force to reconnect the VPN server"
-  flag    SKIP          --skip      -- "skip the first sleep"
+  # Disable the option "--skip" as a substitute for a cooldown interval.
+  # flag    SKIP          --skip      -- "skip the first sleep"
   param   TIMES         --times     -- "how many times unlock in a row"
   disp    :usage  -h    --help      -- "show help message and exit"
   disp    VERSION       --version   -- "show current version"
@@ -697,7 +700,6 @@ parser_definition() {
 DRY_RUN=''
 NO_RESTART=''
 RECONNECT_VPN=''
-SKIP=''
 TIMES=''
 REST=''
 parse() {
@@ -727,11 +729,6 @@ parse() {
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
         RECONNECT_VPN="$OPTARG"
-        ;;
-      '--skip')
-        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
-        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
-        SKIP="$OPTARG"
         ;;
       '--times')
         [ $# -le 1 ] && set "required" "$1" && break
@@ -777,7 +774,6 @@ Options:
       --dry-run               just show remaining time
       --norestart             skip to restart the daemon
       --vpn                   force to reconnect the VPN server
-      --skip                  skip the first sleep
       --times TIMES           how many times unlock in a row
   -h, --help                  show help message and exit
       --version               show current version
