@@ -294,6 +294,8 @@ superman() {
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
     exit
   fi
+
+  deregulated_superman
 }
 
 vod() {
