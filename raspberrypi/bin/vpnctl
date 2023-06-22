@@ -54,7 +54,7 @@ connect() {
   if [ "$(connected)" = "true" ]; then
     if [ "$SKIP_DNS" != 1 ]; then
       set +e
-      unlock nordvpn-upstream --skip "$no_restart"
+      unlock nordvpn-upstream "$no_restart"
       set -e
     fi
   else
@@ -85,7 +85,7 @@ disconnect() {
   if [ "$(disconnected)" = "true" ]; then
     if [ "$SKIP_DNS" != 1 ]; then
       set +e
-      unlock adguard-upstream --skip "$no_restart"
+      unlock adguard-upstream "$no_restart"
       set -e
     fi
   else
