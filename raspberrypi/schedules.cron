@@ -38,9 +38,11 @@ NON_ROOT_USER=ubuntu
 # Firewall & Observe conf changes
 #
 #   Note 1:
-#     "git push", "git pull", "git fetch" and changing configurations are restricted
+#     "git push", "git pull", "git fetch" and changing configurations are restricted.
 #   Note 2:
-#     Remember that the shorter the time is, the more it can take effect
+#     Remember that the shorter the time is, the more it can take effect.
+#   Note 3:
+#     The reason I allow it from 5:00 to 6:00 is to pull the latest diary from the repository.
 #
 #   Schedule 1:
 #     Available: 00:00 - 03:00 every day
