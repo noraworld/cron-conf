@@ -47,14 +47,26 @@ NON_ROOT_USER=ubuntu
 #     Intervals: none
 #     Intensity: none
 #   Schedule 2:
-#     Available: 03:00 - 23:59 every day
+#     Available: 03:00 - 05:00 every day
+#     Intervals: immediately
+#     Intensity: hard
+#   Schedule 3:
+#     Available: 05:00 - 06:00 every day
+#     Intervals: none
+#     Intensity: none
+#   Schedule 4:
+#     Available: 06:00 - 23:59 every day
 #     Intervals: immediately
 #     Intensity: hard
 #
 */10    0-2  * * * scheduler firewall allow;       scheduler observe stop
 0-10/1  3    * * * scheduler firewall deny --safe; scheduler observe start --safe
 11-59/1 3    * * * scheduler firewall deny;        scheduler observe start
-*/1     4-23 * * * scheduler firewall deny;        scheduler observe start
+*/1     4    * * * scheduler firewall deny;        scheduler observe start
+*/10    5    * * * scheduler firewall allow;       scheduler observe stop
+0-10/1  6    * * * scheduler firewall deny --safe; scheduler observe start --safe
+11-59/1 6    * * * scheduler firewall deny;        scheduler observe start
+*/1     7-23 * * * scheduler firewall deny;        scheduler observe start
 
 
 
