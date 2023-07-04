@@ -169,35 +169,35 @@ NON_ROOT_USER=ubuntu
 # Superman
 #
 #   Schedule 1:
-#     Available: 00:00 - 23:59 on Sunday, Monday, Tuesday, Wednesday, and Thursday
+#     Available: 00:00 - 23:59 on Sunday, Monday, and Thursday
 #     Intervals: immediately
 #     Intensity: hard
 #   Schedule 2:
-#     Available: at 00:00 - 19:00 on Friday
+#     Available: at 00:00 - 19:00 on Tuesday and Friday
 #     Intervals: immediately
 #     Intensity: hard
 #   Schedule 3:
-#     Available: at 19:00 - 23:59 on Friday
+#     Available: at 19:00 - 23:59 on Tuesday and Friday
 #     Intervals: every 1 hour
 #     Intensity: soft
 #   Schedule 4:
-#     Available: at 00:00 - 03:00 on Saturday
+#     Available: at 00:00 - 03:00 on Wednesday and Saturday
 #     Intervals: none
 #     Intensity: none
 #   Schedule 5:
-#     Available: at 03:00 - 23:59 on Saturday
+#     Available: at 03:00 - 23:59 on Wednesday and Saturday
 #     Intervals: immediately
 #     Intensity: hard
 #
-*/5    0-18  * * 5   scheduler superman deny
-*/5    19-23 * * 5   scheduler superman allow
-0      20-23 * * 5   scheduler superman deny --soft
-0      0     * * 6   scheduler superman deny --soft
-*/5    0-2   * * 6   scheduler superman allow
-0      3     * * 6   scheduler superman deny --safe
-5-55/5 3     * * 6   scheduler superman deny
-*/5    4-23  * * 6   scheduler superman deny
-*/5    *     * * 0-4 scheduler superman deny
+*/5    0-18  * * 2,5   scheduler superman deny
+*/5    19-23 * * 2,5   scheduler superman allow
+0      20-23 * * 2,5   scheduler superman deny --soft
+0      0     * * 3,6   scheduler superman deny --soft
+*/5    0-2   * * 3,6   scheduler superman allow
+0      3     * * 3,6   scheduler superman deny --safe
+5-55/5 3     * * 3,6   scheduler superman deny
+*/5    4-23  * * 3,6   scheduler superman deny
+*/5    *     * * 0-1,4 scheduler superman deny
 
 
 
