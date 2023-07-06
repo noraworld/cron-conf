@@ -234,13 +234,13 @@ netflix() {
   case "$operation" in
     "deny")
       # cron-daemonctl start observe-netflix-conf "$safe"
-      remove-dnsmasq-toggle-conf public netflix_allow
+      remove-dnsmasq-toggle-conf public netflix_allow --skip
       create-dnsmasq-toggle-conf public netflix
       # create-iptables-toggle-conf public 132_netflix
       ;;
     "allow")
       # cron-daemonctl stop observe-netflix-conf "$safe"
-      create-dnsmasq-toggle-conf public netflix_allow
+      create-dnsmasq-toggle-conf public netflix_allow --skip
       remove-dnsmasq-toggle-conf public netflix
       # remove-iptables-toggle-conf public 132_netflix
       ;;
@@ -347,16 +347,16 @@ upstream() {
   case "$operation" in
     "deny")
       # cron-daemonctl start observe-superman-upstream-conf "$safe"
-      remove-dnsmasq-toggle-conf private adguard_upstream
-      remove-dnsmasq-toggle-conf private cloudflare_upstream
-      remove-dnsmasq-toggle-conf private nordvpn_upstream
+      remove-dnsmasq-toggle-conf private adguard_upstream    --skip
+      remove-dnsmasq-toggle-conf private cloudflare_upstream --skip
+      remove-dnsmasq-toggle-conf private nordvpn_upstream    --skip
       create-dnsmasq-toggle-conf private superman_upstream
       ;;
     "allow")
       # cron-daemonctl stop observe-superman-upstream-conf "$safe"
-      remove-dnsmasq-toggle-conf private cloudflare_upstream
-      remove-dnsmasq-toggle-conf private nordvpn_upstream
-      remove-dnsmasq-toggle-conf private superman_upstream
+      remove-dnsmasq-toggle-conf private cloudflare_upstream --skip
+      remove-dnsmasq-toggle-conf private nordvpn_upstream    --skip
+      remove-dnsmasq-toggle-conf private superman_upstream   --skip
       create-dnsmasq-toggle-conf private adguard_upstream
       ;;
     *)
