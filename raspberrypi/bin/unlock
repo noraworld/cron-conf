@@ -30,11 +30,13 @@ main() {
   eval "set -- $REST"
 
   validate "$@"
-  log_before_execution "$@"
+  log_header "$@"
 
   if [ "$DELAY" != "" ]; then
     pause "$DELAY" "$COOLDOWN_MESSAGE"
   fi
+
+  log_before_execution "$@"
 
   case "$service" in
     "chime")
@@ -676,6 +678,17 @@ validate() {
   fi
 }
 
+log_header() {
+  if [ "$DEBUG" != 1 ] || [ "$TIMES" != "" ]; then
+    return
+  fi
+
+  echo "======================================== START ======================================="
+  echo "execute \"$PROG_NAME $@\""
+  echo "======================================== date ========================================"
+  date
+}
+
 log_before_execution() {
   if [ "$DEBUG" != 1 ] || [ "$TIMES" != "" ]; then
     return
@@ -695,11 +708,14 @@ log_after_execution() {
     return
   fi
 
+  echo "======================================== date ========================================"
+  date
   echo "================================= /etc/dnsmasq.toggle ================================"
   ls --color=auto --literal /etc/dnsmasq.toggle
   echo "============================== /etc/dnsmasq.priv/toggle =============================="
   ls --color=auto --literal /etc/dnsmasq.priv/toggle
-  echo "======================================================================================"
+  echo "========================================= END ========================================"
+  echo
   echo
 }
 
