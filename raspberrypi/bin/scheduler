@@ -120,7 +120,7 @@ chime() {
 
 daily() {
   metronome set full
-  if [ "$(marlin info all | grep -c "Connected: no")" -ne 0 ]; then
+  if [ "$(marlin info all --ignore iphone,a4-38 | grep -c "Connected: no")" -ne 0 ]; then
     systemctl --user restart pipewire{,-pulse}.{socket,service}
     sudo systemctl restart bluetooth
   fi
@@ -305,7 +305,7 @@ periodic() {
   clock-observer
 
   # Auto-connect all devices paired with Bluetooth (if not connected)
-  marlin autoconnect all --retry 2 # --log /home/ubuntu/.log/bluetooth_autoconnect.log
+  marlin autoconnect all --retry 2 --ignore iphone,a4-38 # --log /home/ubuntu/.log/bluetooth_autoconnect.log
 
   # Auto-update specific Git repositories
   #
