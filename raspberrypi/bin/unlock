@@ -750,15 +750,15 @@ no_color() {
 parser_definition() {
   setup   REST help:usage -- "Usage: unlock [options]... [arguments]..." ''
   msg -- 'Options:'
-  flag    DEBUG         --debug     -- "write debugging information to a file (disabled if --times is specified)"
-  param   DELAY         --delay     -- "wait the execution for a given time"
-  flag    DRY_RUN       --dry-run   -- "just show remaining time"
-  flag    NO_RESTART    --norestart -- "skip to restart the daemon"
-  flag    RECONNECT_VPN --vpn       -- "force to reconnect the VPN server"
-  flag    SKIP          --skip      -- "skip the first sleep"
-  param   TIMES         --times     -- "how many times unlock in a row"
-  disp    :usage  -h    --help      -- "show help message and exit"
-  disp    VERSION       --version   -- "show current version"
+  flag  DEBUG         --debug     -- "write debugging information to a file (disabled if --times is specified)"
+  param DELAY         --delay     -- "wait the execution for a given time"
+  flag  DRY_RUN       --dry-run   -- "just show remaining time"
+  flag  NO_RESTART    --norestart -- "skip to restart the daemon"
+  flag  RECONNECT_VPN --vpn       -- "force to reconnect the VPN server"
+  flag  SKIP          --skip      -- "skip the first sleep"
+  param TIMES         --times     -- "how many times unlock in a row"
+  disp  :usage  -h    --help      -- "show help message and exit"
+  disp  VERSION       --version   -- "show current version"
 }
 # @end
 
