@@ -5,6 +5,7 @@ set -u
 # trap remaining_time EXIT
 
 reference_minute=0
+max_retry_count=0
 
 PROG_NAME="unlock"
 LOG_PATH="/home/ubuntu/.log/unlock.log"
@@ -12,6 +13,7 @@ LOG_PATH="/home/ubuntu/.log/unlock.log"
 COOLDOWN_INTERVAL=0 # ideal: 10 (this may be unnecessary)
 WAITING_INTERVAL=1  # ideal: 1
 TIMES_INTERVAL=10   # ideal: 10
+RETRY_INTERVAL=10   # ideal: 10
 TIMES_LIMIT=5       # ideal: 5
 
 COOLDOWN_MESSAGE="to avoid excessive execution"
@@ -25,6 +27,7 @@ SKIP=0
 
 main() {
   service="$1"
+  retry_count=1
 
   parse "$@"
   eval "set -- $REST"
@@ -137,15 +140,39 @@ chime() {
 
 deregulated_superman() {
   reference_minute=10
+  max_retry_count=5
   [ "$DRY_RUN" = 1 ] && exit 0
 
-  if ! [ -L /etc/dnsmasq.priv/toggle/deregulated_superman_allow.conf ]; then
-    sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/deregulated_superman_allow.conf /etc/dnsmasq.priv/toggle
+  yet=0
+  if ! [ -L /etc/dnsmasq.priv/toggle/deregulated_superman.conf ] || [ -L /etc/dnsmasq.priv/toggle/deregulated_superman_allow.conf ]; then
+    yet=1
   fi
 
   warning_color
+  sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/deregulated_superman_allow.conf /etc/dnsmasq.priv/toggle
   sudo unlink /etc/dnsmasq.priv/toggle/deregulated_superman.conf
   no_color
+
+  while [ "$retry_count" -le "$max_retry_count" ] && [ "$yet" = 1 ]; do
+    echo "attempting to process... (retry: $retry_count)"
+
+    if [ -L /etc/dnsmasq.priv/toggle/deregulated_superman.conf ] && ! [ -L /etc/dnsmasq.priv/toggle/deregulated_superman_allow.conf ]; then
+      warning_color
+      sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/deregulated_superman_allow.conf /etc/dnsmasq.priv/toggle
+      sudo unlink /etc/dnsmasq.priv/toggle/deregulated_superman.conf
+      no_color
+      break
+    fi
+
+    retry_count=$((retry_count + 1))
+    sleep "$RETRY_INTERVAL"
+  done
+
+  if [ "$retry_count" -ge "$max_retry_count" ]; then
+    warning_color
+    echo "warning: failed to retry" >&2
+    no_color
+  fi
 
   if [ "$(is_observer_active "deregulated-superman")" = "active" ]; then
     pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
