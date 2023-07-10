@@ -344,6 +344,8 @@ superman() {
 }
 
 upstream() {
+  # Every upstream DNS file should be updated in succession without any interval.
+  # When the previous file is deleted and the new file is not yet created, none of the upstream DNS files will be set, and the Internet connection will be blocked.
   case "$operation" in
     "deny")
       # cron-daemonctl start observe-superman-upstream-conf "$safe"
