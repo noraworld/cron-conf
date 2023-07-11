@@ -740,9 +740,9 @@ log_before_execution() {
   echo "======================================== date ========================================"
   date
   echo "================================= /etc/dnsmasq.toggle ================================"
-  ls --color=auto --literal /etc/dnsmasq.toggle
+  ls /etc/dnsmasq.toggle      | grep --color=auto -E "$@|$"
   echo "============================== /etc/dnsmasq.priv/toggle =============================="
-  ls --color=auto --literal /etc/dnsmasq.priv/toggle
+  ls /etc/dnsmasq.priv/toggle | grep --color=auto -E "$@|$"
   echo "============================== main process information =============================="
 }
 
@@ -754,9 +754,9 @@ log_after_execution() {
   echo "======================================== date ========================================"
   date
   echo "================================= /etc/dnsmasq.toggle ================================"
-  ls --color=auto --literal /etc/dnsmasq.toggle
+  ls /etc/dnsmasq.toggle      | grep --color=auto -E "$@|$"
   echo "============================== /etc/dnsmasq.priv/toggle =============================="
-  ls --color=auto --literal /etc/dnsmasq.priv/toggle
+  ls /etc/dnsmasq.priv/toggle | grep --color=auto -E "$@|$"
   echo "========================================= END ========================================"
   echo
   echo
