@@ -35,6 +35,10 @@ main() {
   validate "$@"
   log_header "$@"
 
+  if [ "$SKIP" = 1 ]; then
+    max_retry_count=0
+  fi
+
   if [ "$DELAY" != "" ]; then
     pause "$DELAY" "$COOLDOWN_MESSAGE"
   fi
@@ -798,7 +802,7 @@ parser_definition() {
   flag  DRY_RUN       --dry-run   -- "just show remaining time"
   flag  NO_RESTART    --norestart -- "skip to restart the daemon"
   flag  RECONNECT_VPN --vpn       -- "force to reconnect the VPN server"
-  flag  SKIP          --skip      -- "skip the first sleep"
+  flag  SKIP          --skip      -- "skip the first sleep and retry"
   param TIMES         --times     -- "how many times unlock in a row"
   disp  :usage  -h    --help      -- "show help message and exit"
   disp  VERSION       --version   -- "show current version"
@@ -905,7 +909,7 @@ Options:
       --dry-run               just show remaining time
       --norestart             skip to restart the daemon
       --vpn                   force to reconnect the VPN server
-      --skip                  skip the first sleep
+      --skip                  skip the first sleep and retry
       --times TIMES           how many times unlock in a row
   -h, --help                  show help message and exit
       --version               show current version
