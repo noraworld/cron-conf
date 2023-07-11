@@ -85,6 +85,19 @@ observe() {
         echo "TODO!"
         exit 2
         ;;
+      *)
+        case "$MODE" in
+          "file")
+            git -C "$TARGET" clean -df
+            git -C "$TARGET" restore --staged "$observed_path"
+            git -C "$TARGET" restore "$observed_path"
+          ;;
+          *)
+            echo "Error: the combination of event $EVENT and mode $MODE is not supported" >&2
+            exit 2
+          ;;
+        esac
+        ;;
     esac
   fi
 
