@@ -1,10 +1,5 @@
 #!/bin/sh
 
-# Example usage:
-#   --event create --file youtube_music.conf --target /etc/dnsmasq.toggle
-#   --event delete --file youtube.conf --source /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle --target /etc/dnsmasq.toggle
-#   --event modify --target /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle
-
 set -eu
 
 export PATH=/home/ubuntu/workspace/cron-conf/bin:/home/ubuntu/.local/share/zinit/polaris/bin:"$PATH"
