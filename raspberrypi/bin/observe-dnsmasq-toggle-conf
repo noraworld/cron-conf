@@ -103,11 +103,11 @@ main() {
 
   # shellcheck disable=SC2086
   if [ "$SUDO" = "1" ]; then
-    sudo inotifywait -e "$EVENT" --format '%w%f' -m -q -r -t 0 "$TARGET" | while read -r observed_path; do
+    sudo inotifywait -e "$EVENT" --format '%w%f' -m -q -r -t 0 --exclude "\.git" "$TARGET" | while read -r observed_path; do
       observe
     done
   else
-    inotifywait -e "$EVENT" --format '%w%f' -m -q -r -t 0 "$TARGET" | while read -r observed_path; do
+    inotifywait -e "$EVENT" --format '%w%f' -m -q -r -t 0 --exclude "\.git" "$TARGET" | while read -r observed_path; do
       observe
     done
   fi
