@@ -100,7 +100,7 @@ observe() {
           *)
             echo "Error: the combination of event $EVENT and mode $MODE is not supported" >&2
             exit 2
-          ;;
+            ;;
         esac
         ;;
     esac
