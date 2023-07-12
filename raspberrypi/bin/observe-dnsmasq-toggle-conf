@@ -26,10 +26,6 @@ observe() {
             sudo systemctl restart dnsmasq
             echo "INFO: Deleted symlink \"$TARGET/$file\" automatically"
             ;;
-          "file")
-            echo "TODO!"
-            exit 2
-            ;;
           "cron")
             echo "ERROR: The combination of mode \"$MODE\" and event \"$EVENT\" is illegal." >&2
             exit 1
@@ -44,10 +40,6 @@ observe() {
             sudo systemctl restart dnsmasq
             echo "INFO: Created symlink \"$TARGET/$file\" automatically"
             ;;
-          "file")
-            echo "TODO!"
-            exit 2
-            ;;
           "cron")
             ca
             ;;
@@ -59,23 +51,10 @@ observe() {
             echo "ERROR: The combination of mode \"$MODE\" and event \"$EVENT\" is illegal." >&2
             exit 1
             ;;
-          # Only track modified files
-          # "inotifywait -e modify" also tracks created files such as
-          # "youtube.conf.swp", which causes "git" command to fail
-          "file")
-            if [ "$(git -C "$TARGET" status --porcelain | grep -e "^M" -e "^ M" | grep "$file")" != "" ]; then
-              git -C "$TARGET" restore "$observed_path"
-              echo "INFO: Restored changes of \"$file\" automatically"
-            fi
-            ;;
           "cron")
             ca
             ;;
         esac
-        ;;
-      "move")
-        echo "TODO!"
-        exit 2
         ;;
       *)
         case "$MODE" in
