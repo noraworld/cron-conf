@@ -1,7 +1,6 @@
 #!/bin/sh
 
-set -eu
-
+set -u
 export PATH=/home/ubuntu/workspace/cron-conf/bin:/home/ubuntu/.local/share/zinit/polaris/bin:"$PATH"
 
 PROG_NAME=$(basename "$0")
@@ -16,8 +15,6 @@ observe() {
   else
     file=$FILE
   fi
-
-  set +e
 
   if [ "$file" = "$observed_file" ]; then
     case "$EVENT" in
@@ -95,8 +92,6 @@ observe() {
         ;;
     esac
   fi
-
-  set -e
 }
 
 
