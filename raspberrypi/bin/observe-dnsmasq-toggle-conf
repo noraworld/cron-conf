@@ -2,8 +2,8 @@
 
 set -u
 export PATH=/home/ubuntu/workspace/cron-conf/bin:/home/ubuntu/.local/share/zinit/polaris/bin:"$PATH"
-
 PROG_NAME=$(basename "$0")
+RETRY_INTERVAL=1
 
 
 
@@ -80,10 +80,32 @@ observe() {
       *)
         case "$MODE" in
           "file")
-            git -C "$TARGET" clean -df
-            git -C "$TARGET" restore --staged "$observed_path"
-            git -C "$TARGET" restore "$observed_path"
-          ;;
+            while [ "$(git -C "$TARGET" status --porcelain)" != "" ]; do
+              # untracked new files
+              if [ "$(git -C "$TARGET" status --porcelain | grep "^??")" != "" ]; then
+                git -C "$TARGET" clean -df
+              fi
+
+              # tracked new files
+              if [ "$(git -C "$TARGET" status --porcelain | grep "^A")" != "" ]; then
+                git -C "$TARGET" restore --staged .
+                git -C "$TARGET" clean -df
+              fi
+
+              # tracked modified or deleted files
+              if [ "$(git -C "$TARGET" status --porcelain | grep -e "^M" -e "^D")" != "" ]; then
+                git -C "$TARGET" restore --staged .
+                git -C "$TARGET" restore .
+              fi
+
+              # untracked modified or deleted files
+              if [ "$(git -C "$TARGET" status --porcelain | grep -e "^ M" -e "^ D")" != "" ]; then
+                git -C "$TARGET" restore .
+              fi
+
+              sleep "$RETRY_INTERVAL"
+            done
+            ;;
           *)
             echo "Error: the combination of event $EVENT and mode $MODE is not supported" >&2
             exit 2
