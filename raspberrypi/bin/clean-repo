@@ -1,0 +1,29 @@
+#!/bin/sh
+
+main() {
+  for TARGET; do
+    # untracked new files
+    if [ "$(git -C "$TARGET" status --porcelain | grep "^??")" != "" ]; then
+      git -C "$TARGET" clean -df
+    fi
+
+    # tracked new files
+    if [ "$(git -C "$TARGET" status --porcelain | grep "^A")" != "" ]; then
+      git -C "$TARGET" restore --staged .
+      git -C "$TARGET" clean -df
+    fi
+
+    # tracked modified or deleted files
+    if [ "$(git -C "$TARGET" status --porcelain | grep -e "^M" -e "^D")" != "" ]; then
+      git -C "$TARGET" restore --staged .
+      git -C "$TARGET" restore .
+    fi
+
+    # untracked modified or deleted files
+    if [ "$(git -C "$TARGET" status --porcelain | grep -e "^ M" -e "^ D")" != "" ]; then
+      git -C "$TARGET" restore .
+    fi
+  done
+}
+
+main "$@"
