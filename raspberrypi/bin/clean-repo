@@ -33,7 +33,7 @@ main() {
       # "git rev-list HEAD@{upstream}..HEAD | wc -l | awk '{ print $1 }'" indicates how many commits have not been pushed.
       #   https://stackoverflow.com/questions/19206816/what-to-add-to-git-status-porcelain-to-make-it-behave-like-git-status#answer-19206916
       #
-      git -C "$TARGET" reset --soft HEAD~$(git rev-list HEAD@{upstream}..HEAD | wc -l | awk '{ print $1 }')
+      git -C "$TARGET" reset --soft HEAD~$(git -C "$TARGET" rev-list HEAD@{upstream}..HEAD | wc -l | awk '{ print $1 }')
       git -C "$TARGET" restore --staged .
       git -C "$TARGET" restore .
     fi
