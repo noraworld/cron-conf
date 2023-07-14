@@ -245,42 +245,75 @@ NON_ROOT_USER=ubuntu
 # YouTube
 #
 #   Schedule 1:
-#     Available: at 00:00 - 23:59 on Sunday, Wednesday, and Friday
+#     Available: 00:00 - 23:59 on Sunday, Monday, and Thursday
 #     Intervals: immediately
 #     Intensity: hard
 #   Schedule 2:
-#     Available: at 00:00 - 00:30 on Monday, Tuesday, Thursday, and Saturday
-#     Intervals: none
-#     Intensity: none
-#   Schedule 3:
-#     Available: at 00:30 - 01:00 on Monday, Tuesday, Thursday, and Saturday
+#     Available: at 00:00 - 19:00 on Tuesday and Friday
 #     Intervals: immediately
 #     Intensity: hard
+#   Schedule 3:
+#     Available: at 19:00 - 23:59 on Tuesday and Friday
+#     Intervals: every 1 hour
+#     Intensity: soft
 #   Schedule 4:
-#     Available: at 01:00 - 01:30 on Monday, Tuesday, Thursday, and Saturday
+#     Available: at 00:00 - 03:00 on Wednesday and Saturday
 #     Intervals: none
 #     Intensity: none
 #   Schedule 5:
-#     Available: at 01:30 - 02:00 on Monday, Tuesday, Thursday, and Saturday
-#     Intervals: immediately
-#     Intensity: hard
-#   Schedule 6:
-#     Available: at 02:00 - 02:30 on Monday, Tuesday, Thursday, and Saturday
-#     Intervals: none
-#     Intensity: none
-#   Schedule 7:
-#     Available: at 02:30 - 23:59 on Monday, Tuesday, Thursday, and Saturday
+#     Available: at 03:00 - 23:59 on Wednesday and Saturday
 #     Intervals: immediately
 #     Intensity: hard
 #
-0       0-2  * * 1,2,4,6 scheduler youtube allow
-5-25/5  0-2  * * 1,2,4,6 scheduler youtube allow
-30      0-2  * * 1,2,4,6 scheduler youtube deny --safe
-35-55/5 0-2  * * 1,2,4,6 scheduler youtube deny
-0       3    * * 1,2,4,6 scheduler youtube deny --safe
-5-55/5  3    * * 1,2,4,6 scheduler youtube deny
-*/5     4-23 * * 1,2,4,6 scheduler youtube deny
-*/5     *    * * 0,3,5   scheduler youtube deny
+*/5    0-18  * * 2,5   scheduler youtube deny
+*/5    19-23 * * 2,5   scheduler youtube allow
+0      20-23 * * 2,5   scheduler youtube deny --soft
+0      0     * * 3,6   scheduler youtube deny --soft
+*/5    0-2   * * 3,6   scheduler youtube allow
+0      3     * * 3,6   scheduler youtube deny --safe
+5-55/5 3     * * 3,6   scheduler youtube deny
+*/5    4-23  * * 3,6   scheduler youtube deny
+*/5    *     * * 0-1,4 scheduler youtube deny
+
+## YouTube
+##
+##   Schedule 1:
+##     Available: at 00:00 - 23:59 on Sunday, Wednesday, and Friday
+##     Intervals: immediately
+##     Intensity: hard
+##   Schedule 2:
+##     Available: at 00:00 - 00:30 on Monday, Tuesday, Thursday, and Saturday
+##     Intervals: none
+##     Intensity: none
+##   Schedule 3:
+##     Available: at 00:30 - 01:00 on Monday, Tuesday, Thursday, and Saturday
+##     Intervals: immediately
+##     Intensity: hard
+##   Schedule 4:
+##     Available: at 01:00 - 01:30 on Monday, Tuesday, Thursday, and Saturday
+##     Intervals: none
+##     Intensity: none
+##   Schedule 5:
+##     Available: at 01:30 - 02:00 on Monday, Tuesday, Thursday, and Saturday
+##     Intervals: immediately
+##     Intensity: hard
+##   Schedule 6:
+##     Available: at 02:00 - 02:30 on Monday, Tuesday, Thursday, and Saturday
+##     Intervals: none
+##     Intensity: none
+##   Schedule 7:
+##     Available: at 02:30 - 23:59 on Monday, Tuesday, Thursday, and Saturday
+##     Intervals: immediately
+##     Intensity: hard
+##
+#0       0-2  * * 1,2,4,6 scheduler youtube allow
+#5-25/5  0-2  * * 1,2,4,6 scheduler youtube allow
+#30      0-2  * * 1,2,4,6 scheduler youtube deny --safe
+#35-55/5 0-2  * * 1,2,4,6 scheduler youtube deny
+#0       3    * * 1,2,4,6 scheduler youtube deny --safe
+#5-55/5  3    * * 1,2,4,6 scheduler youtube deny
+#*/5     4-23 * * 1,2,4,6 scheduler youtube deny
+#*/5     *    * * 0,3,5   scheduler youtube deny
 
 
 
