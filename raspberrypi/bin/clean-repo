@@ -25,7 +25,7 @@ main() {
     fi
 
     # already committed files
-    if [ "$(git rev-list HEAD@{upstream}..HEAD)" != "" ]; then
+    if [ "$(git -C "$TARGET" rev-list HEAD@{upstream}..HEAD)" != "" ]; then
       #
       # For instance, "git reset --soft HEAD~2" reverts two commits back.
       #   https://stackoverflow.com/questions/7932222/how-to-revert-two-commits-back-and-commit-only-good-stuff#answer-7932255
