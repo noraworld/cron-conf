@@ -71,7 +71,7 @@ observe() {
       *)
         case "$MODE" in
           "file")
-            while [ "$(git -C "$TARGET" status --porcelain)" != "" ]; do
+            while [ "$(git -C "$TARGET" status --porcelain)" != "" ] || [ "$(git -C "$TARGET" rev-list HEAD@{upstream}..HEAD)" != "" ]; do
               clean-repo "$TARGET"
               sleep "$RETRY_INTERVAL"
             done
