@@ -38,6 +38,7 @@ observe() {
         ;;
       "cron")
         ca
+        [ "$DEBUG" = 1 ] && echo "debug: restored cron configuration"
         ;;
       *)
         echo "error: mode $MODE is not supported" >&2
