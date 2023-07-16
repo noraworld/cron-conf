@@ -2,7 +2,7 @@
 # shellcheck disable=SC2004
 
 PROG_NAME=$(basename "$0")
-IS_CRON_SCRIPT=$(dirname "$(realpath "$0")")/../../bin/lib/is-cron
+# IS_CRON_SCRIPT=$(dirname "$(realpath "$0")")/../../bin/lib/is-cron
 
 unlinked=false
 
@@ -55,12 +55,12 @@ validate() {
   fi
 }
 
-authenticate() {
-  if [ "$(sh -c "$IS_CRON_SCRIPT")" = false ]; then
-    echo "Fatal: This operation must be executed by cron, or this script does not take enough effect" >&2
-    exit 2
-  fi
-}
+# authenticate() {
+#   if [ "$(sh -c "$IS_CRON_SCRIPT")" = false ]; then
+#     echo "Fatal: This operation must be executed by cron, or this script does not take enough effect" >&2
+#     exit 2
+#   fi
+# }
 
 usage() {
   echo "Usage:"
