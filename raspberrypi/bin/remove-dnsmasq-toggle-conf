@@ -2,7 +2,6 @@
 # shellcheck disable=SC2004
 
 PROG_NAME=$(basename "$0")
-
 unlinked=false
 
 main() {
