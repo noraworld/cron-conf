@@ -1,8 +1,8 @@
 #!/bin/sh
 # shellcheck disable=SC2004
 
-PROG_NAME=$(basename $0)
-IS_CRON_SCRIPT=$(dirname $(realpath $0))/../../bin/lib/is-cron
+PROG_NAME=$(basename "$0")
+IS_CRON_SCRIPT=$(dirname "$(realpath "$0")")/../../bin/lib/is-cron
 
 unlinked=false
 
@@ -18,21 +18,21 @@ main() {
 
   if [ "$visibility" = "public" ]; then
     TOGGLE_FILEPATH=/etc/dnsmasq.toggle/$target.conf
-    ORIGINAL_TOGGLE_DIR=/home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle
+    # ORIGINAL_TOGGLE_DIR=/home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle
   elif [ "$visibility" = "private" ]; then
     TOGGLE_FILEPATH=/etc/dnsmasq.priv/toggle/$target.conf
-    ORIGINAL_TOGGLE_DIR=/home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle
+    # ORIGINAL_TOGGLE_DIR=/home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle
   fi
 
   # illegal situation
   if ! [ -L "$TOGGLE_FILEPATH" ]; then
-    linked=true
+    unlinked=true
     sudo rm "$TOGGLE_FILEPATH"
   fi
 
   if [ -L "$TOGGLE_FILEPATH" ]; then
     unlinked=true
-    sudo unlink $TOGGLE_FILEPATH
+    sudo unlink "$TOGGLE_FILEPATH"
   else
     echo "Warning: \"$TOGGLE_FILEPATH\" does not exist" >&2
   fi
