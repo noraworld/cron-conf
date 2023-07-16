@@ -23,22 +23,25 @@ observe() {
         # shellcheck disable=SC1083
         while [ "$(git -C "$TARGET" status --porcelain)" != "" ] || [ "$(git -C "$TARGET" rev-list HEAD@{upstream}..HEAD)" != "" ]; do
           clean-repo "$TARGET"
+          [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): restored $TARGET"
           sleep "$RETRY_INTERVAL"
         done
         ;;
       "ln")
-        sudo ln -s "$SOURCE/$file" "$TARGET"
-        sudo systemctl restart dnsmasq
-        [ "$DEBUG" = 1 ] && echo "debug: created symlink $TARGET/$file"
+        while ! [ -e "$TARGET/$file" ] || { [ -e "$TARGET/$file" ] && ! [ -L "$TARGET/$file" ]; } || { [ -L "$TARGET/$file" ] && [ "$(readlink "$TARGET/$file")" != "$SOURCE/$file" ]; }; do
+          create-dnsmasq-toggle-conf "$TARGET/$file" --immediately
+          [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): created symlink $TARGET/$file"
+          sleep "$RETRY_INTERVAL"
+        done
         ;;
       "unlink")
         sudo rm "$TARGET/$file"
         sudo systemctl restart dnsmasq
-        [ "$DEBUG" = 1 ] && echo "debug: deleted symlink $TARGET/$file"
+        [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): deleted symlink $TARGET/$file"
         ;;
       "cron")
         ca
-        [ "$DEBUG" = 1 ] && echo "debug: restored cron configuration"
+        [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): restored cron configuration"
         ;;
       *)
         echo "error: mode $MODE is not supported" >&2
