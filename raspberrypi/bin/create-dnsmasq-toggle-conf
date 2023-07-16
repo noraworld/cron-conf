@@ -1,7 +1,5 @@
 #!/bin/sh
 
-set -eu
-
 PROG_NAME=$(basename "$0")
 
 linked=false
