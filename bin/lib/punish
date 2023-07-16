@@ -1,10 +1,14 @@
 #!/bin/sh
 
 LOG_PATH="/home/ubuntu/.log/cron-daemonctl.log"
+UPTIME_THRESHOLD="5"
+
 # how long before sshd starts
 # e.g. "30 min", "1 hour", "2 hours"
+#RECOVERY_TIME="1 min"
+#RECOVERY_TIME="30 min"
+#RECOVERY_TIME="1 hour"
 RECOVERY_TIME="2 hours"
-UPTIME_THRESHOLD="5"
 
 main() {
   parse "$@"
