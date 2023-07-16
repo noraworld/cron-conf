@@ -24,7 +24,7 @@ main() {
   fi
 
   # illegal situation
-  if ! [ -L "$TOGGLE_DIR/$target.conf" ]; then
+  if [ -e "$TOGGLE_DIR/$target.conf" ] && ! [ -L "$TOGGLE_DIR/$target.conf" ]; then
     linked=true
     sudo rm "$TOGGLE_DIR/$target.conf"
   fi
