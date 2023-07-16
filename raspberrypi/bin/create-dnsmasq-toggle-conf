@@ -23,6 +23,18 @@ main() {
     ORIGINAL_TOGGLE_DIR=/home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle
   fi
 
+  # illegal situation
+  if ! [ -L "$TOGGLE_DIR/$target.conf" ]; then
+    linked=true
+    sudo rm "$TOGGLE_DIR/$target.conf"
+  fi
+
+  # illegal situation
+  if [ -L "$TOGGLE_DIR/$target.conf" ] && [ "$(readlink "$TOGGLE_DIR/$target.conf")" != "$ORIGINAL_TOGGLE_DIR/$target.conf" ]; then
+    linked=true
+    sudo unlink "$TOGGLE_DIR/$target.conf"
+  fi
+
   if ! [ -e "$TOGGLE_DIR/$target.conf" ]; then
     linked=true
     sudo ln -s "$ORIGINAL_TOGGLE_DIR/$target.conf" "$TOGGLE_DIR"
