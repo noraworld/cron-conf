@@ -23,10 +23,8 @@ main() {
 
   if [ "$visibility" = "public" ]; then
     TOGGLE_FILEPATH=/etc/dnsmasq.toggle/$target.conf
-    # ORIGINAL_TOGGLE_DIR=/home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle
   elif [ "$visibility" = "private" ]; then
     TOGGLE_FILEPATH=/etc/dnsmasq.priv/toggle/$target.conf
-    # ORIGINAL_TOGGLE_DIR=/home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle
   fi
 
   if [ -e "$TOGGLE_FILEPATH" ]; then
