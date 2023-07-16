@@ -1,4 +1,5 @@
 #!/bin/sh
+# DO NOT USE exrd because it is inappropriate here because the file is createable while it waits for the daemon to restart
 
 set -u
 export PATH=/home/ubuntu/workspace/cron-conf/bin:/home/ubuntu/workspace/cron-conf/raspberrypi/bin:/home/ubuntu/.local/share/zinit/polaris/bin:"$PATH"
@@ -17,70 +18,29 @@ observe() {
   fi
 
   if [ "$file" = "$observed_file" ]; then
-    case "$EVENT" in
-      "create")
-        case "$MODE" in
-          "link")
-            sudo unlink "$TARGET/$file"
-            # exrd is inappropriate here because the file is createable while it waits for the daemon to restart
-            sudo systemctl restart dnsmasq
-            echo "INFO: Deleted symlink \"$TARGET/$file\" automatically"
-            ;;
-          "cron")
-            echo "ERROR: The combination of mode \"$MODE\" and event \"$EVENT\" is illegal." >&2
-            exit 1
-            ;;
-          *)
-            echo "Error: the combination of event $EVENT and mode $MODE is not supported" >&2
-            exit 2
-            ;;
-        esac
+    case "$MODE" in
+      "git")
+        while [ "$(git -C "$TARGET" status --porcelain)" != "" ] || [ "$(git -C "$TARGET" rev-list HEAD@{upstream}..HEAD)" != "" ]; do
+          clean-repo "$TARGET"
+          sleep "$RETRY_INTERVAL"
+        done
         ;;
-      "delete")
-        case "$MODE" in
-          "link")
-            sudo ln -s "$SOURCE/$file" "$TARGET"
-            # exrd is inappropriate here because the file is deleteable while it waits for the daemon to restart
-            sudo systemctl restart dnsmasq
-            echo "INFO: Created symlink \"$TARGET/$file\" automatically"
-            ;;
-          "cron")
-            ca
-            ;;
-          *)
-            echo "Error: the combination of event $EVENT and mode $MODE is not supported" >&2
-            exit 2
-            ;;
-        esac
+      "ln")
+        sudo ln -s "$SOURCE/$file" "$TARGET"
+        sudo systemctl restart dnsmasq
+        [ "$DEBUG" = 1 ] && echo "debug: created symlink $TARGET/$file"
         ;;
-      "modify")
-        case "$MODE" in
-          "link")
-            echo "ERROR: The combination of mode \"$MODE\" and event \"$EVENT\" is illegal." >&2
-            exit 1
-            ;;
-          "cron")
-            ca
-            ;;
-          *)
-            echo "Error: the combination of event $EVENT and mode $MODE is not supported" >&2
-            exit 2
-            ;;
-        esac
+      "unlink")
+        sudo rm "$TARGET/$file"
+        sudo systemctl restart dnsmasq
+        [ "$DEBUG" = 1 ] && echo "debug: deleted symlink $TARGET/$file"
+        ;;
+      "cron")
+        ca
         ;;
       *)
-        case "$MODE" in
-          "file")
-            while [ "$(git -C "$TARGET" status --porcelain)" != "" ] || [ "$(git -C "$TARGET" rev-list HEAD@{upstream}..HEAD)" != "" ]; do
-              clean-repo "$TARGET"
-              sleep "$RETRY_INTERVAL"
-            done
-            ;;
-          *)
-            echo "Error: the combination of event $EVENT and mode $MODE is not supported" >&2
-            exit 2
-            ;;
-        esac
+        echo "error: mode $MODE is not supported" >&2
+        exit 1
         ;;
     esac
   fi
@@ -99,7 +59,7 @@ main() {
       observe
     done
   else
-    inotifywait -e "$EVENT" --format '%w%f' -m -q -r -t 0 --exclude "\.git" "$TARGET" | while read -r observed_path; do
+    inotifywait      -e "$EVENT" --format '%w%f' -m -q -r -t 0 --exclude "\.git" "$TARGET" | while read -r observed_path; do
       observe
     done
   fi
@@ -109,27 +69,27 @@ main() {
 
 validate() {
   if [ "$EVENT" = "" ]; then
-    echo "ERROR: --event not set" >&2
+    echo "error: --event not set" >&2
     exit 1
   fi
 
   if [ "$SOURCE" = "" ]; then
     if [ "$EVENT" = "delete" ] && [ "$MODE" != "cron" ]; then
-      echo "ERROR: --source not set" >&2
+      echo "error: --source not set" >&2
       exit 1
     fi
   fi
 
   if [ "$TARGET" = "" ]; then
-    echo "ERROR: --target not set" >&2
+    echo "error: --target not set" >&2
     exit 1
   fi
 
   if [ "$MODE" = "" ]; then
-    echo "ERROR: --mode not set" >&2
+    echo "error: --mode not set" >&2
     exit 1
-  elif [ "$MODE" != "link" ] && [ "$MODE" != "file" ] && [ "$MODE" != "cron" ]; then
-    echo "ERROR: Unrecognized mode: $MODE" >&2
+  elif [ "$MODE" != "git" ] && [ "$MODE" != "ln" ] && [ "$MODE" != "unlink" ] && [ "$MODE" != "cron" ]; then
+    echo "error: unrecognized mode $MODE" >&2
     exit 1
   fi
 }
@@ -140,12 +100,13 @@ validate() {
 parser_definition() {
   setup REST help:usage -- "Usage: observe-dnsmasq-toggle-conf [options]... [arguments]..." ""
   msg -- "Options:"
+  flag   DEBUG   -d --debug   -- "debug mode"
   param  EVENT   -e --event   -- "TBD"
   param  FILE    -f --file    -- "observe only a specific file (all files in a directory by default)"
   param  SOURCE  -s --source  -- "TBD"
   param  TARGET  -t --target  -- "target directory to observe (current directory by default)"
   flag   SUDO       --sudo    -- "TBD"
-  param  MODE    -m --mode    -- "link, file, cron"
+  param  MODE    -m --mode    -- "git, ln, unlink, or cron"
   disp   :usage  -h --help    -- "print help message and exit"
   disp   VERSION    --version -- "show the current version"
 }
@@ -156,6 +117,7 @@ parser_definition() {
 # @gengetoptions parser -i parser_definition parse
 # Generated by getoptions (BEGIN)
 # URL: https://github.com/ko1nksm/getoptions (v3.3.0)
+DEBUG=''
 EVENT=''
 FILE=''
 SOURCE=''
@@ -174,11 +136,16 @@ parse() {
       -[efstm]?*) OPTARG=$1; shift
         eval 'set -- "${OPTARG%"${OPTARG#??}"}" "${OPTARG#??}"' ${1+'"$@"'}
         ;;
-      -[h]?*) OPTARG=$1; shift
+      -[dh]?*) OPTARG=$1; shift
         eval 'set -- "${OPTARG%"${OPTARG#??}"}" -"${OPTARG#??}"' ${1+'"$@"'}
         OPTARG= ;;
     esac
     case $1 in
+      '-d'|'--debug')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        DEBUG="$OPTARG"
+        ;;
       '-e'|'--event')
         [ $# -le 1 ] && set "required" "$1" && break
         OPTARG=$2
@@ -245,12 +212,13 @@ cat<<'GETOPTIONSHERE'
 Usage: observe-dnsmasq-toggle-conf [options]... [arguments]...
 
 Options:
+  -d, --debug                 debug mode
   -e, --event EVENT           TBD
   -f, --file FILE             observe only a specific file (all files in a directory by default)
   -s, --source SOURCE         TBD
   -t, --target TARGET         target directory to observe (current directory by default)
       --sudo                  TBD
-  -m, --mode MODE             link, file, cron
+  -m, --mode MODE             git, ln, unlink, or cron
   -h, --help                  print help message and exit
       --version               show the current version
 GETOPTIONSHERE
