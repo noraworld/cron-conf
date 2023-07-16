@@ -2,7 +2,6 @@
 # shellcheck disable=SC2004
 
 PROG_NAME=$(basename "$0")
-# IS_CRON_SCRIPT=$(dirname "$(realpath "$0")")/../../bin/lib/is-cron
 
 unlinked=false
 
@@ -12,8 +11,6 @@ main() {
 
   visibility=$1
   target=$2
-
-  # authenticate
 
   if [ "$visibility" = "public" ]; then
     TOGGLE_FILEPATH=/etc/dnsmasq.toggle/$target.conf
@@ -41,13 +38,6 @@ main() {
     exrd --log /home/ubuntu/.log/exrd.log --from "$(echo "$PROG_NAME $@")" &
   fi
 }
-
-# authenticate() {
-#   if [ "$(sh -c "$IS_CRON_SCRIPT")" = false ]; then
-#     echo "Fatal: This operation must be executed by cron, or this script does not take enough effect" >&2
-#     exit 2
-#   fi
-# }
 
 usage() {
   echo "Usage:"
