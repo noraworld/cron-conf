@@ -13,7 +13,7 @@ main() {
   target=$2
 
   validate
-  authenticate
+  # authenticate
 
   if [ "$visibility" = "public" ]; then
     TOGGLE_FILEPATH=/etc/dnsmasq.toggle/$target.conf
