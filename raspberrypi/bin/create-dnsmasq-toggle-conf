@@ -8,10 +8,17 @@ main() {
   parse "$@"
   eval "set -- $REST"
 
-  visibility=$1
-  target=$2
-
-  validate
+  if [ "$#" -eq 2 ]; then
+    visibility=$1
+    target=$2
+  elif [ "$#" -eq 1 ]; then
+    if [ "$(echo "$1" | grep -c "/etc/dnsmasq.toggle")" -ne 0 ]; then
+      visibility="public"
+    elif [ "$(echo "$1" | grep -c "/etc/dnsmasq.priv/toggle")" -ne 0 ]; then
+      visibility="private"
+    fi
+    target=$(basename "$1" | sed -r 's/.conf$//g')
+  fi
 
   if [ "$visibility" = "public" ]; then
     TOGGLE_DIR=/etc/dnsmasq.toggle
@@ -47,30 +54,13 @@ main() {
   fi
 }
 
-validate() {
-  if [ -z "$visibility" ] || [ -z "$target" ]; then
-    usage
-    exit 1
-  fi
-
-  if [ "$visibility" != "public" ] && [ "$visibility" != "private" ]; then
-    usage
-    exit 1
-  fi
-}
-
-usage() {
-  echo "Usage:"
-  echo "	$PROG_NAME public|private <TARGET>"
-}
-
 # @getoptions
 parser_definition() {
-  setup   REST help:usage -- "Usage: create-dnsmasq-toggle-conf [options]... [arguments]..." ''
+  setup  REST help:usage -- "Usage: create-dnsmasq-toggle-conf [options]... [arguments]..." ''
   msg -- 'Options:'
-  flag SKIP       --skip    -- "skip dnsmasq restart"
-  disp :usage  -h --help
-  disp VERSION    --version
+  flag   SKIP       --skip    -- "skip dnsmasq restart"
+  disp   :usage  -h --help    -- "show help message and exit"
+  disp   VERSION    --version -- "show version and exit"
 }
 # @end
 
