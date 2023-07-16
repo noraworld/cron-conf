@@ -218,8 +218,8 @@ NON_ROOT_USER=ubuntu
 #     Intervals: every 1 hour
 #     Intensity: soft
 #
-0 3      * * * scheduler netflix deny --safe; vpnctl disconnect; scheduler upstream deny --safe
-0 0,4-23 * * * scheduler netflix deny;        vpnctl disconnect; scheduler upstream deny
+0 3      * * * scheduler netflix deny --safe; vpnctl disconnect --skipdns; scheduler upstream deny --safe
+0 0,4-23 * * * scheduler netflix deny;        vpnctl disconnect --skipdns; scheduler upstream deny
 
 
 
