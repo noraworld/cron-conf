@@ -9,8 +9,17 @@ main() {
   parse "$@"
   eval "set -- $REST"
 
-  visibility=$1
-  target=$2
+  if [ "$#" -eq 2 ]; then
+    visibility=$1
+    target=$2
+  elif [ "$#" -eq 1 ]; then
+    if [ "$(echo "$1" | grep -c "/etc/dnsmasq.toggle")" -ne 0 ]; then
+      visibility="public"
+    elif [ "$(echo "$1" | grep -c "/etc/dnsmasq.priv/toggle")" -ne 0 ]; then
+      visibility="private"
+    fi
+    target=$(basename "$1" | sed -r 's/.conf$//g')
+  fi
 
   if [ "$visibility" = "public" ]; then
     TOGGLE_FILEPATH=/etc/dnsmasq.toggle/$target.conf
@@ -20,15 +29,9 @@ main() {
     # ORIGINAL_TOGGLE_DIR=/home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle
   fi
 
-  # illegal situation
-  if ! [ -L "$TOGGLE_FILEPATH" ]; then
+  if [ -e "$TOGGLE_FILEPATH" ]; then
     unlinked=true
     sudo rm "$TOGGLE_FILEPATH"
-  fi
-
-  if [ -L "$TOGGLE_FILEPATH" ]; then
-    unlinked=true
-    sudo unlink "$TOGGLE_FILEPATH"
   else
     echo "Warning: \"$TOGGLE_FILEPATH\" does not exist" >&2
   fi
