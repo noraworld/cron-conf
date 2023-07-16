@@ -13,7 +13,6 @@ main() {
   visibility=$1
   target=$2
 
-  validate
   # authenticate
 
   if [ "$visibility" = "public" ]; then
@@ -40,18 +39,6 @@ main() {
   if $unlinked && [ "$SKIP" != 1 ]; then
     # It is performed in the background.
     exrd --log /home/ubuntu/.log/exrd.log --from "$(echo "$PROG_NAME $@")" &
-  fi
-}
-
-validate() {
-  if [ -z "$visibility" ] || [ -z "$target" ]; then
-    usage
-    exit 1
-  fi
-
-  if [ "$visibility" != "public" ] && [ "$visibility" != "private" ]; then
-    usage
-    exit 1
   fi
 }
 
