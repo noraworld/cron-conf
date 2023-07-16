@@ -1,9 +1,9 @@
 #!/bin/sh
+# shellcheck disable=SC2004
 # DO NOT USE exrd because it is inappropriate here because the file is createable while it waits for the daemon to restart
 
 set -u
 export PATH=/home/ubuntu/workspace/cron-conf/bin:/home/ubuntu/workspace/cron-conf/raspberrypi/bin:/home/ubuntu/.local/share/zinit/polaris/bin:"$PATH"
-PROG_NAME=$(basename "$0")
 RETRY_INTERVAL=1
 
 
@@ -20,6 +20,7 @@ observe() {
   if [ "$file" = "$observed_file" ]; then
     case "$MODE" in
       "git")
+        # shellcheck disable=SC1083
         while [ "$(git -C "$TARGET" status --porcelain)" != "" ] || [ "$(git -C "$TARGET" rev-list HEAD@{upstream}..HEAD)" != "" ]; do
           clean-repo "$TARGET"
           sleep "$RETRY_INTERVAL"
