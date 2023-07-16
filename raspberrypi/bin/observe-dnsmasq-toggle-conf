@@ -35,9 +35,11 @@ observe() {
         done
         ;;
       "unlink")
-        sudo rm "$TARGET/$file"
-        sudo systemctl restart dnsmasq
-        [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): deleted symlink $TARGET/$file"
+        while [ -e "$TARGET/$file" ]; do
+          remove-dnsmasq-toggle-conf "$TARGET/$file" --immediately
+          [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): deleted symlink $TARGET/$file"
+          sleep "$RETRY_INTERVAL"
+        done
         ;;
       "cron")
         ca
