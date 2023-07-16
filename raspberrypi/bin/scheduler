@@ -26,8 +26,8 @@ main() {
     "chime")
       chime
       ;;
-    "daily")
-      daily
+    "dawn")
+      dawn
       ;;
     "deregulated-superman")
       deregulated_superman
@@ -43,6 +43,12 @@ main() {
       ;;
     "github-editor")
       github_editor
+      ;;
+    "midnight")
+      midnight
+      ;;
+    "morning")
+      morning
       ;;
     "netflix")
       netflix
@@ -118,21 +124,25 @@ chime() {
   esac
 }
 
-daily() {
-  metronome set full
-
+midnight() {
   clean-repo                                                          \
     "/home/ubuntu/workspace/cron-conf"                                \
     "/home/ubuntu/workspace/dnsmasq-conf/dnsmasq"                     \
     "/home/ubuntu/workspace/envsman/raspberrypi/dnsmasq/dnsmasq.priv" \
     "/home/ubuntu/workspace/envsman/raspberrypi/etc/netplan"
+}
+
+dawn() {
+  sudo systemctl restart diary
+}
+
+morning() {
+  metronome set full
 
   if [ "$(marlin info all --ignore a4-38,wh | grep -c "Connected: no")" -ne 0 ]; then
     systemctl --user restart pipewire{,-pulse}.{socket,service}
     sudo systemctl restart bluetooth
   fi
-
-  sudo systemctl restart diary
 }
 
 deregulated_superman() {
