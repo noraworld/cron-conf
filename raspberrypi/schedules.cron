@@ -61,14 +61,14 @@ NON_ROOT_USER=ubuntu
 #     Intervals: immediately
 #     Intensity: hard
 #
-#*/10    0-2  * * * scheduler firewall allow;       scheduler observe stop
-#0-10/1  3    * * * scheduler firewall deny --safe; scheduler observe start --safe
-#11-59/1 3    * * * scheduler firewall deny;        scheduler observe start
-#*/1     4    * * * scheduler firewall deny;        scheduler observe start
-#*/10    5    * * * scheduler firewall allow;       scheduler observe stop
-#0-10/1  6    * * * scheduler firewall deny --safe; scheduler observe start --safe
-#11-59/1 6    * * * scheduler firewall deny;        scheduler observe start
-#*/1     7-23 * * * scheduler firewall deny;        scheduler observe start
+#TEMP */10    0-2  * * * scheduler firewall allow;       scheduler observe stop
+#TEMP 0-10/1  3    * * * scheduler firewall deny --safe; scheduler observe start --safe
+#TEMP 11-59/1 3    * * * scheduler firewall deny;        scheduler observe start
+#TEMP */1     4    * * * scheduler firewall deny;        scheduler observe start
+#TEMP */10    5    * * * scheduler firewall allow;       scheduler observe stop
+#TEMP 0-10/1  6    * * * scheduler firewall deny --safe; scheduler observe start --safe
+#TEMP 11-59/1 6    * * * scheduler firewall deny;        scheduler observe start
+#TEMP */1     7-23 * * * scheduler firewall deny;        scheduler observe start
 
 
 
