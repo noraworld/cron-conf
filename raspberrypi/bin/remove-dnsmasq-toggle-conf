@@ -39,11 +39,6 @@ main() {
   fi
 }
 
-usage() {
-  echo "Usage:"
-  echo "	$PROG_NAME public|private <TARGET>"
-}
-
 # @getoptions
 parser_definition() {
   setup   REST help:usage -- "Usage: remove-dnsmasq-toggle-conf [options]... [arguments]..." ''
