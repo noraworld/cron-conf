@@ -44,6 +44,12 @@ observe() {
         ca
         [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): restored cron configuration"
         ;;
+      "sync")
+        while [ "$(diff -qr "$SOURCE" "$TARGET" | grep "^Only in $TARGET")" != "" ]; do
+          clean-toggle-dir "$SOURCE" "$TARGET" --immediately
+          [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): deleted illegal files in directory"
+        done
+        ;;
       *)
         echo "error: mode $MODE is not supported" >&2
         exit 1
@@ -94,7 +100,7 @@ validate() {
   if [ "$MODE" = "" ]; then
     echo "error: --mode not set" >&2
     exit 1
-  elif [ "$MODE" != "git" ] && [ "$MODE" != "ln" ] && [ "$MODE" != "unlink" ] && [ "$MODE" != "cron" ]; then
+  elif [ "$MODE" != "git" ] && [ "$MODE" != "ln" ] && [ "$MODE" != "unlink" ] && [ "$MODE" != "cron" ] && [ "$MODE" != "sync" ]; then
     echo "error: unrecognized mode $MODE" >&2
     exit 1
   fi
@@ -112,7 +118,7 @@ parser_definition() {
   param  SOURCE  -s --source  -- "TBD"
   param  TARGET  -t --target  -- "target directory to observe (current directory by default)"
   flag   SUDO       --sudo    -- "TBD"
-  param  MODE    -m --mode    -- "git, ln, unlink, or cron"
+  param  MODE    -m --mode    -- "git, ln, unlink, cron, or sync"
   disp   :usage  -h --help    -- "print help message and exit"
   disp   VERSION    --version -- "show the current version"
 }
@@ -224,7 +230,7 @@ Options:
   -s, --source SOURCE         TBD
   -t, --target TARGET         target directory to observe (current directory by default)
       --sudo                  TBD
-  -m, --mode MODE             git, ln, unlink, or cron
+  -m, --mode MODE             git, ln, unlink, cron, or sync
   -h, --help                  print help message and exit
       --version               show the current version
 GETOPTIONSHERE
