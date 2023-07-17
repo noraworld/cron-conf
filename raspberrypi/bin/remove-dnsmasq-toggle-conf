@@ -26,6 +26,8 @@ main() {
     TOGGLE_FILEPATH=/etc/dnsmasq.priv/toggle/$target.conf
   fi
 
+  sudo mkdir -p "$(dirname $TOGGLE_FILEPATH)"
+
   if [ -e "$TOGGLE_FILEPATH" ]; then
     unlinked=true
     sudo rm "$TOGGLE_FILEPATH"
