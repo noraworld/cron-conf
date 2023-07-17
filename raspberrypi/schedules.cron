@@ -22,7 +22,7 @@ NON_ROOT_USER=ubuntu
 
 
 
-#TEMP 48 3 * * * scheduler midnight
+48 3 * * * scheduler midnight
 48 5 * * * scheduler dawn
 # This is to reduce the possibility that the system freezes
 # It is executed with a 8-minute delay to avoid conflicts with "periodic"
