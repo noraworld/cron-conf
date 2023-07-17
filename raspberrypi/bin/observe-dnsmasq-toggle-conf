@@ -9,6 +9,7 @@ RETRY_INTERVAL=1
 
 observe() {
   observed_file=$(basename "$observed_path")
+  [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): observed path is $observed_path"
 
   if [ "$FILE" = "" ]; then
     file=$observed_file
@@ -17,45 +18,81 @@ observe() {
   fi
 
   if [ "$file" = "$observed_file" ]; then
-    case "$MODE" in
-      "git")
-        # shellcheck disable=SC1083
-        while [ "$(git -C "$TARGET" status --porcelain)" != "" ] || [ "$(git -C "$TARGET" rev-list HEAD@{upstream}..HEAD)" != "" ]; do
-          clean-repo "$TARGET"
-          [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): restored $TARGET"
-          sleep "$RETRY_INTERVAL"
-        done
-        ;;
-      "ln")
-        while ! [ -e "$TARGET/$file" ] || { [ -e "$TARGET/$file" ] && ! [ -L "$TARGET/$file" ]; } || { [ -L "$TARGET/$file" ] && [ "$(readlink "$TARGET/$file")" != "$SOURCE/$file" ]; }; do
-          create-dnsmasq-toggle-conf "$TARGET/$file" --immediately
-          [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): created symlink $TARGET/$file"
-          sleep "$RETRY_INTERVAL"
-        done
-        ;;
-      "unlink")
-        while [ -e "$TARGET/$file" ]; do
-          remove-dnsmasq-toggle-conf "$TARGET/$file" --immediately
-          [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): deleted symlink $TARGET/$file"
-          sleep "$RETRY_INTERVAL"
-        done
-        ;;
-      "cron")
-        ca
-        [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): restored cron configuration"
-        ;;
-      "sync")
-        while [ "$(diff -qr "$SOURCE" "$TARGET" | grep "^Only in $TARGET")" != "" ]; do
-          clean-toggle-dir "$SOURCE" "$TARGET" --immediately
-          [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): deleted illegal files in directory"
-        done
-        ;;
-      *)
-        echo "error: mode $MODE is not supported" >&2
-        exit 1
-        ;;
-    esac
+    switch_mode "$@"
   fi
+}
+
+
+
+switch_mode() {
+  case "$MODE" in
+    "git")
+      git_mode "$@"
+      ;;
+    "ln")
+      ln_mode "$@"
+      ;;
+    "unlink")
+      unlink_mode "$@"
+      ;;
+    "cron")
+      cron_mode "$@"
+      ;;
+    "sync")
+      sync_mode "$@"
+      ;;
+    *)
+      echo "error: mode $MODE is not supported" >&2
+      exit 1
+      ;;
+  esac
+}
+
+
+
+git_mode() {
+  # shellcheck disable=SC1083
+  while [ "$(git -C "$TARGET" status --porcelain)" != "" ] || [ "$(git -C "$TARGET" rev-list HEAD@{upstream}..HEAD)" != "" ]; do
+    clean-repo "$TARGET"
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): restored $TARGET"
+    sleep "$RETRY_INTERVAL"
+  done
+}
+
+
+
+ln_mode() {
+  while ! [ -e "$TARGET/$file" ] || { [ -e "$TARGET/$file" ] && ! [ -L "$TARGET/$file" ]; } || { [ -L "$TARGET/$file" ] && [ "$(readlink "$TARGET/$file")" != "$SOURCE/$file" ]; }; do
+    create-dnsmasq-toggle-conf "$TARGET/$file" --immediately
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): created symlink $TARGET/$file"
+    sleep "$RETRY_INTERVAL"
+  done
+}
+
+
+
+unlink_mode() {
+  while [ -e "$TARGET/$file" ]; do
+    remove-dnsmasq-toggle-conf "$TARGET/$file" --immediately
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): deleted symlink $TARGET/$file"
+    sleep "$RETRY_INTERVAL"
+  done
+}
+
+
+
+cron_mode() {
+  ca
+  [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): restored cron configuration"
+}
+
+
+
+sync_mode() {
+  while [ "$(diff -qr "$SOURCE" "$TARGET" | grep "^Only in $TARGET")" != "" ]; do
+    clean-toggle-dir "$SOURCE" "$TARGET" --immediately
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): deleted illegal files in directory"
+  done
 }
 
 
@@ -68,11 +105,17 @@ main() {
   # shellcheck disable=SC2086
   if [ "$SUDO" = "1" ]; then
     sudo inotifywait -e "$EVENT" --format '%w%f' -m -q -r -t 0 --exclude "\.git" "$TARGET" | while read -r observed_path; do
-      observe
+      observe "$@"
     done
   else
-    inotifywait      -e "$EVENT" --format '%w%f' -m -q -r -t 0 --exclude "\.git" "$TARGET" | while read -r observed_path; do
-      observe
+    while true; do
+      sudo mkdir -p "$TARGET"
+      file=$FILE
+      switch_mode "$@"
+
+      inotifywait -e "$EVENT" --format '%w%f' -m -q -r -t 5 --exclude "\.git" "$TARGET" | while read -r observed_path; do
+        observe "$@"
+      done
     done
   fi
 }
