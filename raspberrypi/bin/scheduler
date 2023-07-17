@@ -277,6 +277,8 @@ observe() {
       cron-daemonctl start observe-dnsmasq-conf "$safe"
       cron-daemonctl start observe-dnsmasq-priv-conf "$safe"
       cron-daemonctl start observe-netplan-conf "$safe"
+      cron-daemonctl start observe-dnsmasq-toggle "$safe"
+      cron-daemonctl start observe-dnsmasq-priv-toggle "$safe"
       ;;
     "stop")
       cron-daemonctl stop observe-crontab "$safe"
@@ -284,6 +286,8 @@ observe() {
       cron-daemonctl stop observe-dnsmasq-conf "$safe"
       cron-daemonctl stop observe-dnsmasq-priv-conf "$safe"
       cron-daemonctl stop observe-netplan-conf "$safe"
+      cron-daemonctl stop observe-dnsmasq-toggle "$safe"
+      cron-daemonctl stop observe-dnsmasq-priv-toggle "$safe"
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2
