@@ -28,6 +28,8 @@ main() {
     ORIGINAL_TOGGLE_DIR=/home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle
   fi
 
+  sudo mkdir -p "$TOGGLE_DIR"
+
   # illegal situation
   if [ -e "$TOGGLE_DIR/$target.conf" ] && ! [ -L "$TOGGLE_DIR/$target.conf" ]; then
     linked=true
