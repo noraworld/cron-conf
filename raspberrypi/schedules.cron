@@ -37,10 +37,10 @@ NON_ROOT_USER=ubuntu
 
 
 
-# Firewall & Observe conf changes
+# Firewall
 #
 #   Note 1:
-#     "git push", "git pull", "git fetch" and changing configurations are restricted.
+#     "git push", "git pull" and "git fetch" are restricted.
 #   Note 2:
 #     Remember that the shorter the time is, the more it can take effect.
 #   Note 3:
@@ -63,14 +63,37 @@ NON_ROOT_USER=ubuntu
 #     Intervals: immediately
 #     Intensity: hard
 #
-#TEMP */10    0-2  * * * scheduler firewall allow;       scheduler observe stop
-#TEMP 0-10/1  3    * * * scheduler firewall deny --safe; scheduler observe start --safe
-#TEMP 11-59/1 3    * * * scheduler firewall deny;        scheduler observe start
-#TEMP */1     4    * * * scheduler firewall deny;        scheduler observe start
-#TEMP */10    5    * * * scheduler firewall allow;       scheduler observe stop
-#TEMP 0-10/1  6    * * * scheduler firewall deny --safe; scheduler observe start --safe
-#TEMP 11-59/1 6    * * * scheduler firewall deny;        scheduler observe start
-#TEMP */1     7-23 * * * scheduler firewall deny;        scheduler observe start
+*/10    0-2  * * * scheduler firewall allow;
+0-10/1  3    * * * scheduler firewall deny --safe;
+11-59/1 3    * * * scheduler firewall deny;
+*/1     4    * * * scheduler firewall deny;
+*/10    5    * * * scheduler firewall allow;
+0-10/1  6    * * * scheduler firewall deny --safe;
+11-59/1 6    * * * scheduler firewall deny;
+*/1     7-23 * * * scheduler firewall deny;
+
+
+
+# Observe conf changes
+#
+#   Note 1:
+#     Changing configurations are restricted.
+#   Note 2:
+#     Remember that the shorter the time is, the more it can take effect.
+#
+#   Schedule 1:
+#     Available: 00:00 - 03:00 every day
+#     Intervals: none
+#     Intensity: none
+#   Schedule 2:
+#     Available: 03:00 - 23:59 every day
+#     Intervals: immediately
+#     Intensity: hard
+#
+*/10    0-2  * * * scheduler observe stop
+0-10/1  3    * * * scheduler observe start --safe
+11-59/1 3    * * * scheduler observe start
+*/1     4-23 * * * scheduler observe start
 
 
 
