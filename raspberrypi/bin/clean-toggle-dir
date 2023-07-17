@@ -11,6 +11,8 @@ main () {
   source_directory="$1"
   synced_directory="$2"
 
+  sudo mkdir -p "$synced_directory"
+
   if [ "$(diff -qr "$source_directory" "$synced_directory" | grep "^Only in $synced_directory")" != "" ]; then
     deleted=true
     diff -qr "$source_directory" "$synced_directory" | grep "^Only in $synced_directory" | awk '{ print $4 }' | sudo xargs -I {} rm "$synced_directory/{}"
