@@ -22,13 +22,13 @@ NON_ROOT_USER=ubuntu
 
 
 
-48 3 * * * scheduler midnight
-48 5 * * * scheduler dawn
+49 3 * * * scheduler midnight
+49 5 * * * scheduler dawn
 # This is to reduce the possibility that the system freezes
-# It is executed with a 8-minute delay to avoid conflicts with "periodic"
+# It is executed with a 9-minute delay to avoid conflicts with "periodic"
 # Restarting PipeWire and Bluetooth daemons and attempting to connect to Bluetooth devices
 # should not be executed simultaneously
-48 9 * * * scheduler morning
+49 9 * * * scheduler morning
 
 
 
