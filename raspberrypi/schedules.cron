@@ -33,7 +33,7 @@ NON_ROOT_USER=ubuntu
 
 
 # Perform periodic tasks
-*/10 * * * * scheduler periodic
+*/5 * * * * scheduler periodic
 
 
 
