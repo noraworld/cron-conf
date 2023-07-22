@@ -342,7 +342,7 @@ startup() {
   log-reboot
   clock-observer
   metronome set full
-  # marlin re-disconnect all --retry=2
+  marlin autoconnect all --retry 2 --ignore a4-38,wh # --log /home/ubuntu/.log/bluetooth_autoconnect.log
   search-stoppable-observer-daemons --skip --delay 30
 }
 
