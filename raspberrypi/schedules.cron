@@ -70,11 +70,11 @@ NON_ROOT_USER=ubuntu
 #     Remember that the shorter the time is, the more it can take effect.
 #
 #   Schedule 1:
-#     Available: 00:00 - 03:00 every day
+#     Available: 00:00 - 03:00 on Wednesday and Saturday
 #     Intervals: none
 #     Intensity: none
 #   Schedule 2:
-#     Available: 03:00 - 23:59 every day
+#     Available: 03:00 - 23:59 on Sunday, Monday, Tuesday, Thursday, and Friday
 #     Intervals: immediately
 #     Intensity: hard
 #
