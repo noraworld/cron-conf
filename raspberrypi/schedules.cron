@@ -141,7 +141,6 @@ NON_ROOT_USER=ubuntu
 #     Intervals: every 10 minutes
 #     Intensity: soft
 #
-*/10 0-2  * * * scheduler chime allow
 */10 3-23 * * * scheduler chime deny
 
 
