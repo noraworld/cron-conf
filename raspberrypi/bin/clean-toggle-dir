@@ -32,7 +32,7 @@ main () {
 parser_definition() {
   setup   REST help:usage -- "Usage: clean-toggle-dir [options]... [arguments]..." ''
   msg -- 'Options:'
-  flag    IMMEDIATELY    --immediately -- "takes no arguments"
+  flag    IMMEDIATELY    --immediately -- "restart dnsmasq daemon immediately"
   disp    :usage      -h --help        -- "show help message and exit"
   disp    VERSION        --version     -- "show current version and exit"
 }
@@ -97,7 +97,7 @@ cat<<'GETOPTIONSHERE'
 Usage: clean-toggle-dir [options]... [arguments]...
 
 Options:
-      --immediately           takes no arguments
+      --immediately           restart dnsmasq daemon immediately
   -h, --help                  show help message and exit
       --version               show current version and exit
 GETOPTIONSHERE
