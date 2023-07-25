@@ -53,7 +53,7 @@ switch_mode() {
 git_mode() {
   # shellcheck disable=SC1083
   while [ "$(git -C "$TARGET" status --porcelain)" != "" ] || [ "$(git -C "$TARGET" rev-list HEAD@{upstream}..HEAD)" != "" ]; do
-    clean-repo "$TARGET"
+    clean-repo "$TARGET" --immediately
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): restored $TARGET"
     sleep "$RETRY_INTERVAL"
   done
