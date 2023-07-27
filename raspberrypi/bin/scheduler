@@ -336,6 +336,8 @@ periodic() {
   # might not be changed for a while.
   #
   auto-git-pull
+
+  digital-detox-notifier
 }
 
 startup() {
