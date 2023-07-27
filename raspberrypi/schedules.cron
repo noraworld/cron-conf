@@ -95,6 +95,9 @@ NON_ROOT_USER=ubuntu
 #   Note 1:
 #     The above schedule is more strict than the below one
 #     You can choose either one of them according to your lifestyle
+#   Note 2:
+#     Remember that the Dnsmasq daemon will restart automatically,
+#     and you will lose the streaks of a digital detox when enabling this restriction.
 #
 #   Schedule 1:
 #     Available: 00:00 - 03:00 every day
@@ -135,6 +138,11 @@ NON_ROOT_USER=ubuntu
 
 
 # Chime
+#
+#   Note 1:
+#     Remember that the Dnsmasq daemon will restart,
+#     and you will lose the streaks of a digital detox when enabling this restriction
+#     (because I assume it is impossible not to check emails forever!).
 #
 #   Schedule 1:
 #     Available: 00:00 - 03:00 every day
