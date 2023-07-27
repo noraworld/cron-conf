@@ -1,0 +1,31 @@
+#!/bin/sh
+
+DAY_SECOND="86400"
+COUNT_FILE="/home/ubuntu/.tmp/digital_detox_notifier_count"
+LOG_FILE="/home/ubuntu/.log/digital_detox_notifier.log"
+REPO="noraworld/diary"
+
+main() {
+  since=$(systemctl show dnsmasq --property=ActiveEnterTimestamp | sed -r 's/ActiveEnterTimestamp=//g')
+  uptime=$(( $(date +%s) - $(date -d"$since" +%s) ))
+  uptime_days=$(( uptime / DAY_SECOND ))
+
+  if { [ "$uptime_days" -gt 0 ] && ! [ -e "$COUNT_FILE" ]; } || { [ "$uptime_days" -gt 0 ] && [ "$uptime_days" -gt "$(cat "$COUNT_FILE")" ]; }; then
+    message="You have been on a digital detox for $uptime_days $(pluralize "$@")!"
+    echo "$message ($(date))" >> "$LOG_FILE"
+    # TODO: additional compliment message like "keep it up!", "fantastic!", "holy moly!", or whatever
+    gh issue comment --repo "$REPO" "$(gh issue list --repo "$REPO" --limit 1 | awk '{ print $1 }')" --body "$message"
+  fi
+
+  echo "$uptime_days" > "$COUNT_FILE"
+}
+
+pluralize() {
+  if [ "$uptime_days" -eq 1 ]; then
+    echo "day"
+  else
+    echo "days"
+  fi
+}
+
+main "$@"
