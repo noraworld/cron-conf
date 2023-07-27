@@ -98,11 +98,6 @@ NON_ROOT_USER=ubuntu
 #   Note 2:
 #     Remember that the Dnsmasq daemon will restart automatically,
 #     and you will lose the streaks of a digital detox when enabling this restriction.
-#   Note 3:
-#     It can be very dangerous to enable this restriction
-#     because you are not allowed to visit the website you need to access
-#     when the resource domain of that website has changed.
-#     So pay close attention when you enable it.
 #
 #   Schedule 1:
 #     Available: 00:00 - 03:00 every day
