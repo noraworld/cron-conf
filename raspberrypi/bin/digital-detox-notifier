@@ -18,9 +18,11 @@ main() {
     message="You have been on a digital detox for $uptime_days $(pluralize "$@")!"
     body=$(printf "%s${NEWLINE}${NEWLINE}> From digital-detox-notifier" "$message")
 
-    echo "$message ($(date))" >> "$LOG_FILE"
+    echo >> "$LOG_FILE"
+    printf "%s ($(date))" "$message" >> "$LOG_FILE"
     # TODO: additional compliment message like "keep it up!", "fantastic!", "holy moly!", or whatever
     gh issue comment --repo "$REPO" "$(gh issue list --repo "$REPO" --limit 1 | awk '{ print $1 }')" --body "$body"
+    printf " (succeeded)" >> "$LOG_FILE"
   fi
 
   echo "$uptime_days" > "$COUNT_FILE"
