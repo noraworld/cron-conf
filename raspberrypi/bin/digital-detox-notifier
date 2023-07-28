@@ -15,7 +15,8 @@ main() {
   uptime_days=$(( uptime / DAY_SECOND ))
 
   if { [ "$uptime_days" -gt 0 ] && ! [ -e "$COUNT_FILE" ]; } || { [ "$uptime_days" -gt 0 ] && [ "$uptime_days" -gt "$(cat "$COUNT_FILE")" ]; }; then
-    message="You have been on a digital detox for $uptime_days $(pluralize "$@")!"
+    # message="You have been on a digital detox for $uptime_days $(pluralize "$@")!"
+    message="$uptime_days 日間のデジタルデトックスを達成しました！"
     body=$(printf "%s${NEWLINE}${NEWLINE}> From digital-detox-notifier" "$message")
 
     echo >> "$LOG_FILE"
