@@ -322,9 +322,13 @@ NON_ROOT_USER=ubuntu
 #     YouTube Music is allowed when the file does exist
 #
 #   Schedule 1:
-#     Available: at 00:00 - 23:59 every day
-#     Intervals: every 10 minutes
+#     Available: at 20:00 - 21:00, 22:00 - 23:00, 00:00 - 01:00, 02:00 - 03:00 every day
+#     Intervals: every 5 minutes
 #     Intensity: soft
+#   Schedule 2:
+#     Available: at 03:00 - 20:00, 21:00 - 22:00, 23:00 - 23:59, 01:00 - 02:00 every day
+#     Intervals: immediately
+#     Intensity: hard
 #
 */5    20,22,0,2 * * * scheduler youtube-music allow
 */5    20,22,0,2 * * * scheduler youtube-music deny --soft
