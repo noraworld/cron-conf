@@ -202,25 +202,25 @@ NON_ROOT_USER=ubuntu
 #     Intervals: immediately
 #     Intensity: hard
 #   Schedule 3:
-#     Available: at 19:00 - 23:59 on Tuesday and Friday
-#     Intervals: every 1 hour
-#     Intensity: soft
-#   Schedule 4:
-#     Available: at 00:00 - 03:00 on Wednesday and Saturday
+#     Available: at 20:00 - 21:00, 22:00 - 23:00, 00:00 - 01:00, 02:00 - 03:00 on Tuesday and Friday
 #     Intervals: none
 #     Intensity: none
+#   Schedule 4:
+#     Available: at 21:00 - 22:00, 23:00 - 23:59, 01:00 - 02:00 on Wednesday and Saturday
+#     Intervals: immediately
+#     Intensity: hard
 #   Schedule 5:
 #     Available: at 03:00 - 23:59 on Wednesday and Saturday
 #     Intervals: immediately
 #     Intensity: hard
 #
-*/5    0-18  * * 2,5   scheduler superman deny
-*/5    19-23 * * 2,5   scheduler superman allow
-0      20-23 * * 2,5   scheduler superman deny --soft
-0      0     * * 3,6   scheduler superman deny --soft
-*/5    0-2   * * 3,6   scheduler superman allow
-0      3     * * 3,6   scheduler superman deny --safe
-5-55/5 3     * * 3,6   scheduler superman deny
+*/5    0-19  * * 2,5   scheduler superman deny
+*/5    20,22 * * 2,5   scheduler superman allow
+0      21,23 * * 2,5   scheduler superman deny --safe
+5-55/5 21,23 * * 2,5   scheduler superman deny
+*/5    0,2   * * 3,6   scheduler superman allow
+0      1,3   * * 3,6   scheduler superman deny --safe
+5-55/5 1,3   * * 3,6   scheduler superman deny
 */5    4-23  * * 3,6   scheduler superman deny
 */5    *     * * 0-1,4 scheduler superman deny
 
@@ -277,25 +277,25 @@ NON_ROOT_USER=ubuntu
 #     Intervals: immediately
 #     Intensity: hard
 #   Schedule 3:
-#     Available: at 19:00 - 23:59 on Tuesday and Friday
-#     Intervals: every 1 hour
-#     Intensity: soft
-#   Schedule 4:
-#     Available: at 00:00 - 03:00 on Wednesday and Saturday
+#     Available: at 20:00 - 21:00, 22:00 - 23:00, 00:00 - 01:00, 02:00 - 03:00 on Tuesday and Friday
 #     Intervals: none
 #     Intensity: none
+#   Schedule 4:
+#     Available: at 21:00 - 22:00, 23:00 - 23:59, 01:00 - 02:00 on Wednesday and Saturday
+#     Intervals: immediately
+#     Intensity: hard
 #   Schedule 5:
 #     Available: at 03:00 - 23:59 on Wednesday and Saturday
 #     Intervals: immediately
 #     Intensity: hard
 #
-*/5    0-18  * * 2,5   scheduler youtube deny
-*/5    19-23 * * 2,5   scheduler youtube allow
-0      20-23 * * 2,5   scheduler youtube deny --soft
-0      0     * * 3,6   scheduler youtube deny --soft
-*/5    0-2   * * 3,6   scheduler youtube allow
-0      3     * * 3,6   scheduler youtube deny --safe
-5-55/5 3     * * 3,6   scheduler youtube deny
+*/5    0-19  * * 2,5   scheduler youtube deny
+*/5    20,22 * * 2,5   scheduler youtube allow
+0      21,23 * * 2,5   scheduler youtube deny --safe
+5-55/5 21,23 * * 2,5   scheduler youtube deny
+*/5    0,2   * * 3,6   scheduler youtube allow
+0      1,3   * * 3,6   scheduler youtube deny --safe
+5-55/5 1,3   * * 3,6   scheduler youtube deny
 */5    4-23  * * 3,6   scheduler youtube deny
 */5    *     * * 0-1,4 scheduler youtube deny
 
