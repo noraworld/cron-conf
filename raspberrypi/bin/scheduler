@@ -299,13 +299,13 @@ observe() {
 ometeotl() {
   case "$operation" in
     "deny")
-      # cron-daemonctl start observe-ometeotl-conf "$safe"
+      [ "$SOFT" = 1 ] || cron-daemonctl start observe-ometeotl-conf "$safe"
       create-dnsmasq-toggle-conf private ometeotl
       # create-iptables-toggle-conf private 234_ometeotl
       ;;
     "allow")
       :
-      # cron-daemonctl stop observe-ometeotl-conf "$safe"
+      cron-daemonctl stop observe-ometeotl-conf "$safe"
       # remove-dnsmasq-toggle-conf private ometeotl
       # remove-iptables-toggle-conf private 234_ometeotl
       ;;
