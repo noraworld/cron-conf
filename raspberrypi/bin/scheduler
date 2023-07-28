@@ -450,13 +450,13 @@ youtube_alternative() {
 youtube_music() {
   case "$operation" in
     "deny")
-      # cron-daemonctl start observe-youtube-music-conf "$safe"
+      [ "$SOFT" = 1 ] || cron-daemonctl start observe-youtube-music-conf "$safe"
       remove-dnsmasq-toggle-conf public youtube_music
       # remove-iptables-toggle-conf public 135_youtube_music
       ;;
     "allow")
       :
-      # cron-daemonctl stop observe-youtube-music-conf "$safe"
+      cron-daemonctl stop observe-youtube-music-conf "$safe"
       # create-dnsmasq-toggle-conf public youtube_music
       # create-iptables-toggle-conf public 135_youtube_music
       ;;
