@@ -143,7 +143,7 @@ chime() {
 }
 
 deregulated_superman() {
-  reference_minute=10
+  reference_minute=60
   [ "$DRY_RUN" = 1 ] && exit 0
 
   if ! [ -L /etc/dnsmasq.priv/toggle/deregulated_superman.conf ] || [ -L /etc/dnsmasq.priv/toggle/deregulated_superman_allow.conf ]; then
@@ -338,7 +338,7 @@ superman() {
 }
 
 vod() {
-  reference_minute=5
+  reference_minute=60
   [ "$DRY_RUN" = 1 ] && exit 0
 
   if [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ]; then
@@ -371,7 +371,7 @@ vod() {
 }
 
 youtube() {
-  reference_minute=30
+  reference_minute=60
   [ "$DRY_RUN" = 1 ] && exit 0
 
   warning_color
@@ -413,7 +413,7 @@ youtube_alternative() {
 }
 
 youtube_music() {
-  reference_minute=10
+  reference_minute=5
   [ "$DRY_RUN" = 1 ] && exit 0
 
   warning_color
