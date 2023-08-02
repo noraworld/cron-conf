@@ -372,14 +372,16 @@ upstream() {
   # When the previous file is deleted and the new file is not yet created, none of the upstream DNS files will be set, and the Internet connection will be blocked.
   case "$operation" in
     "deny")
-      # cron-daemonctl start observe-superman-upstream-conf "$safe"
+      [ "$SOFT" = 1 ] || cron-daemonctl start observe-adguard-upstream-conf "$safe"
+      [ "$SOFT" = 1 ] || cron-daemonctl start observe-nordvpn-upstream-conf "$safe"
       remove-dnsmasq-toggle-conf private adguard_upstream    --skip
       remove-dnsmasq-toggle-conf private cloudflare_upstream --skip
       remove-dnsmasq-toggle-conf private nordvpn_upstream    --skip
       create-dnsmasq-toggle-conf private superman_upstream
       ;;
     "allow")
-      # cron-daemonctl stop observe-superman-upstream-conf "$safe"
+      cron-daemonctl stop observe-adguard-upstream-conf "$safe"
+      cron-daemonctl stop observe-nordvpn-upstream-conf "$safe"
       remove-dnsmasq-toggle-conf private cloudflare_upstream --skip
       remove-dnsmasq-toggle-conf private nordvpn_upstream    --skip
       remove-dnsmasq-toggle-conf private superman_upstream   --skip
