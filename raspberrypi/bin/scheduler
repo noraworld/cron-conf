@@ -382,10 +382,10 @@ upstream() {
     "allow")
       cron-daemonctl stop observe-adguard-upstream-conf "$safe"
       cron-daemonctl stop observe-nordvpn-upstream-conf "$safe"
-      remove-dnsmasq-toggle-conf private cloudflare_upstream --skip
-      remove-dnsmasq-toggle-conf private nordvpn_upstream    --skip
-      remove-dnsmasq-toggle-conf private superman_upstream   --skip
-      create-dnsmasq-toggle-conf private adguard_upstream
+      # remove-dnsmasq-toggle-conf private cloudflare_upstream --skip
+      # remove-dnsmasq-toggle-conf private nordvpn_upstream    --skip
+      # remove-dnsmasq-toggle-conf private superman_upstream   --skip
+      # create-dnsmasq-toggle-conf private adguard_upstream
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2
