@@ -246,11 +246,11 @@ NON_ROOT_USER=ubuntu
 # VOD
 #
 #   Schedule 1:
-#     Available: at 20:00 - 21:00, 22:00 - 23:00, 00:00 - 01:00, 02:00 - 03:00 every day
+#     Available: at 12:00 - 21:59 every day
 #     Intervals: none
 #     Intensity: none
 #   Schedule 2:
-#     Available: at 03:00 - 20:00, 21:00 - 22:00, 23:00 - 23:59, 01:00 - 02:00 every day
+#     Available: at 0:00 - 11:59, 22:00 - 23:59 every day
 #     Intervals: immediately
 #     Intensity: hard
 #
