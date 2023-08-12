@@ -239,7 +239,7 @@ NON_ROOT_USER=ubuntu
 #     Intervals: every 1 hour
 #     Intensity: soft
 #
-0 * * * * scheduler netflix deny; vpnctl disconnect --skipdns
+#SEMITEMP 0 * * * * scheduler netflix deny; vpnctl disconnect --skipdns
 
 
 
