@@ -200,35 +200,23 @@ NON_ROOT_USER=ubuntu
 # Superman & Upstream
 #
 #   Schedule 1:
-#     Available: 00:00 - 23:59 on Sunday, Monday, and Thursday
-#     Intervals: immediately
-#     Intensity: hard
+#     Available: at 18:00 - 21:59 on Sunday, Wednesday, and Saturday
+#     Intervals: none
+#     Intensity: none
 #   Schedule 2:
-#     Available: at 00:00 - 19:00 on Tuesday and Friday
+#     Available: at 0:00 - 17:59, 22:00 - 23:59 on Sunday, Wednesday, and Saturday
 #     Intervals: immediately
 #     Intensity: hard
 #   Schedule 3:
-#     Available: at 20:00 - 21:00, 22:00 - 23:00, 00:00 - 01:00, 02:00 - 03:00 on Tuesday and Friday
-#     Intervals: none
-#     Intensity: none
-#   Schedule 4:
-#     Available: at 21:00 - 22:00, 23:00 - 23:59, 01:00 - 02:00 on Wednesday and Saturday
-#     Intervals: immediately
-#     Intensity: hard
-#   Schedule 5:
-#     Available: at 03:00 - 23:59 on Wednesday and Saturday
+#     Available: 00:00 - 23:59 on Monday, Tuesday, Thursday, and Friday
 #     Intervals: immediately
 #     Intensity: hard
 #
-*/5    0-19  * * 2,5   scheduler superman deny;        scheduler upstream deny
-*/5    20,22 * * 2,5   scheduler superman allow;       scheduler upstream allow
-0      21,23 * * 2,5   scheduler superman deny --safe; scheduler upstream deny --safe
-5-55/5 21,23 * * 2,5   scheduler superman deny;        scheduler upstream deny
-*/5    0,2   * * 3,6   scheduler superman allow;       scheduler upstream allow
-0      1,3   * * 3,6   scheduler superman deny --safe; scheduler upstream deny --safe
-5-55/5 1,3   * * 3,6   scheduler superman deny;        scheduler upstream deny
-*/5    4-23  * * 3,6   scheduler superman deny;        scheduler upstream deny
-*/5    *     * * 0-1,4 scheduler superman deny;        scheduler upstream deny
+*/5    18-21   * * 0,3,6   scheduler superman allow;       scheduler upstream allow
+0      22      * * 0,3,6   scheduler superman deny --safe; scheduler upstream deny --safe
+5-55/5 22      * * 0,3,6   scheduler superman deny;        scheduler upstream deny
+*/5    23,0-17 * * 0,3,6   scheduler superman deny;        scheduler upstream deny
+*/5    *       * * 1,2,4,5 scheduler superman deny;        scheduler upstream deny
 
 
 
