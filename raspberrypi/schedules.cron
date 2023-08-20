@@ -190,10 +190,10 @@ NON_ROOT_USER=ubuntu
 #     Intervals: immediately
 #     Intensity: hard
 #
-*/5    15-21   * * * scheduler ometeotl allow
-0      22      * * * scheduler ometeotl deny --safe
-5-55/5 22      * * * scheduler ometeotl deny
-*/5    23,0-14 * * * scheduler ometeotl deny
+*/5    15-20      * * * scheduler ometeotl allow
+0      21         * * * scheduler ometeotl deny --safe
+5-55/5 21         * * * scheduler ometeotl deny
+*/5    22-23,0-14 * * * scheduler ometeotl deny
 
 
 
@@ -212,11 +212,11 @@ NON_ROOT_USER=ubuntu
 #     Intervals: immediately
 #     Intensity: hard
 #
-*/5    18-21   * * 0,3,6   scheduler superman allow;       scheduler upstream allow
-0      22      * * 0,3,6   scheduler superman deny --safe; scheduler upstream deny --safe
-5-55/5 22      * * 0,3,6   scheduler superman deny;        scheduler upstream deny
-*/5    23,0-17 * * 0,3,6   scheduler superman deny;        scheduler upstream deny
-*/5    *       * * 1,2,4,5 scheduler superman deny;        scheduler upstream deny
+*/5    18-20      * * 0,3,6   scheduler superman allow;       scheduler upstream allow
+0      21         * * 0,3,6   scheduler superman deny --safe; scheduler upstream deny --safe
+5-55/5 21         * * 0,3,6   scheduler superman deny;        scheduler upstream deny
+*/5    22-23,0-17 * * 0,3,6   scheduler superman deny;        scheduler upstream deny
+*/5    *          * * 1,2,4,5 scheduler superman deny;        scheduler upstream deny
 
 
 
@@ -264,11 +264,11 @@ NON_ROOT_USER=ubuntu
 #     Intervals: immediately
 #     Intensity: hard
 #
-*/5    12-21   * * 0,3,6   scheduler youtube allow
-0      22      * * 0,3,6   scheduler youtube deny --safe
-5-55/5 22      * * 0,3,6   scheduler youtube deny
-*/5    23,0-11 * * 0,3,6   scheduler youtube deny
-*/5    *       * * 1,2,4,5 scheduler youtube deny
+*/5    12-20      * * 0,3,6   scheduler youtube allow
+0      21         * * 0,3,6   scheduler youtube deny --safe
+5-55/5 21         * * 0,3,6   scheduler youtube deny
+*/5    22-23,0-11 * * 0,3,6   scheduler youtube deny
+*/5    *          * * 1,2,4,5 scheduler youtube deny
 
 
 
