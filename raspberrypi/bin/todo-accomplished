@@ -19,10 +19,28 @@ main() {
     count=$(($count + 1))
   done
 
-  if [ "$(echo "$body" | grep -c "\[x\]")" -ge "$STANDARD" ]; then
-    echo "true"
+  if [ "$YET" = "" ]; then
+    # accomplished
+    if [ "$(echo "$body" | grep -c "\[x\]")" -ge "$STANDARD" ]; then
+      echo "1"
+    # failed to fetch
+    elif [ "$body" = "" ]; then
+      echo "-1"
+    # not accomplished
+    else
+      echo "0"
+    fi
   else
-    echo "false"
+    # accomplished
+    if [ "$(echo "$body" | grep -c "\[ \]")" -le "$STANDARD" ]; then
+      echo "1"
+    # failed to fetch
+    elif [ "$body" = "" ]; then
+      echo "-1"
+    # not accomplished
+    else
+      echo "0"
+    fi
   fi
 }
 
@@ -34,6 +52,7 @@ parser_definition() {
   param   RETRY       --retry    -- "how many times to retry"
   param   SLEEP       --sleep    -- "how many seconds to wait before retrying the next one"
   param   STANDARD    --standard -- "how many to-dos to need"
+  flag    YET         --yet      -- "count how many to-dos have not been accomplished yet rather than accomplished"
   disp    :usage   -h --help     -- "show help message and exit"
   disp    VERSION     --version  -- "show current version"
 }
@@ -46,6 +65,7 @@ REPO=''
 RETRY=''
 SLEEP=''
 STANDARD=''
+YET=''
 REST=''
 parse() {
   OPTIND=$(($#+1))
@@ -80,6 +100,11 @@ parse() {
         OPTARG=$2
         STANDARD="$OPTARG"
         shift ;;
+      '--yet')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        YET="$OPTARG"
+        ;;
       '-h'|'--help')
         usage
         exit 0 ;;
@@ -120,6 +145,7 @@ Options:
       --retry RETRY           how many times to retry
       --sleep SLEEP           how many seconds to wait before retrying the next one
       --standard STANDARD     how many to-dos to need
+      --yet                   count how many to-dos have not been accomplished yet rather than accomplished
   -h, --help                  show help message and exit
       --version               show current version
 GETOPTIONSHERE
