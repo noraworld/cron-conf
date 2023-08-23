@@ -15,8 +15,9 @@ main() {
   while [ "$body" = "" ] && [ "$count" -lt "$RETRY" ]; do
     body=$(gh issue view --repo "$REPO" "$(gh issue list --repo "$REPO" --limit 1 | awk '{ print $1 }')" --json body --jq .body)
     [ "$body" != "" ] && break
-    sleep "$SLEEP"
     count=$(($count + 1))
+    [ "$count" -ge "$RETRY" ] && break
+    sleep "$SLEEP"
   done
 
   if [ "$YET" = "" ]; then
