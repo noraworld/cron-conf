@@ -26,10 +26,10 @@ main() {
       echo "1"
     # failed to fetch
     elif [ "$body" = "" ]; then
-      echo "-1"
+      echo "0"
     # not accomplished
     else
-      echo "0"
+      echo "-1"
     fi
   else
     # accomplished
@@ -37,10 +37,10 @@ main() {
       echo "1"
     # failed to fetch
     elif [ "$body" = "" ]; then
-      echo "-1"
+      echo "0"
     # not accomplished
     else
-      echo "0"
+      echo "-1"
     fi
   fi
 }
