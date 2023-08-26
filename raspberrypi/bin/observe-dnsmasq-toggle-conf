@@ -41,6 +41,9 @@ switch_mode() {
     "sync")
       sync_mode "$@"
       ;;
+    "todo")
+      todo_mode "$@"
+      ;;
     *)
       echo "error: mode $MODE is not supported" >&2
       exit 1
@@ -97,6 +100,20 @@ sync_mode() {
 
 
 
+todo_mode() {
+  # lax mode: sometimes it does nothing, even if your to-do list has not been accomplished
+  #   [ "$(todo-accomplished --repo "noraworld/diary" --except --standard 3)" -lt 0 ]
+  # strict mode: sometimes it restricts allowed domains, even if your to-do list has been accomplished
+  #   [ "$(todo-accomplished --repo "noraworld/diary" --except --standard 3)" -le 0 ]
+  while [ "$(restrict-all check)" -le 0 ] && [ "$(todo-accomplished --repo "noraworld/diary" --except --standard 3)" -lt 0 ]; do
+    restrict-all reset
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset $TARGET"
+    sleep "$RETRY_INTERVAL"
+  done
+}
+
+
+
 main() {
   parse "$@"
   eval "set -- $REST"
@@ -143,7 +160,7 @@ validate() {
   if [ "$MODE" = "" ]; then
     echo "error: --mode not set" >&2
     exit 1
-  elif [ "$MODE" != "git" ] && [ "$MODE" != "ln" ] && [ "$MODE" != "unlink" ] && [ "$MODE" != "cron" ] && [ "$MODE" != "sync" ]; then
+  elif [ "$MODE" != "git" ] && [ "$MODE" != "ln" ] && [ "$MODE" != "unlink" ] && [ "$MODE" != "cron" ] && [ "$MODE" != "sync" ] && [ "$MODE" != "todo" ]; then
     echo "error: unrecognized mode $MODE" >&2
     exit 1
   fi
