@@ -68,6 +68,9 @@ main() {
     "superman")
       superman
       ;;
+    "todo")
+      todo
+      ;;
     "upstream")
       upstream
       ;;
@@ -279,8 +282,6 @@ observe() {
       cron-daemonctl start observe-netplan-conf "$safe"
       cron-daemonctl start observe-dnsmasq-toggle "$safe"
       cron-daemonctl start observe-dnsmasq-priv-toggle "$safe"
-      cron-daemonctl start observe-dnsmasq-todo-list "$safe"
-      cron-daemonctl start observe-dnsmasq-priv-todo-list "$safe"
       ;;
     "stop")
       cron-daemonctl stop observe-crontab "$safe"
@@ -290,8 +291,6 @@ observe() {
       cron-daemonctl stop observe-netplan-conf "$safe"
       cron-daemonctl stop observe-dnsmasq-toggle "$safe"
       cron-daemonctl stop observe-dnsmasq-priv-toggle "$safe"
-      cron-daemonctl stop observe-dnsmasq-todo-list "$safe"
-      cron-daemonctl stop observe-dnsmasq-priv-todo-list "$safe"
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2
@@ -363,6 +362,23 @@ superman() {
       cron-daemonctl stop observe-superman-conf "$safe"
       # remove-dnsmasq-toggle-conf private superman
       # remove-iptables-toggle-conf private 233_superman
+      ;;
+    *)
+      echo "error: no such operation: \"$operation\"" >&2
+      exit 1
+      ;;
+  esac
+}
+
+todo() {
+  case "$operation" in
+    "start")
+      cron-daemonctl start observe-dnsmasq-todo-list "$safe"
+      cron-daemonctl start observe-dnsmasq-priv-todo-list "$safe"
+      ;;
+    "stop")
+      cron-daemonctl stop observe-dnsmasq-todo-list "$safe"
+      cron-daemonctl stop observe-dnsmasq-priv-todo-list "$safe"
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2
