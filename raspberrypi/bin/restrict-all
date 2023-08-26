@@ -1,0 +1,60 @@
+#!/bin/sh
+
+TOGGLE_DIR="/etc/dnsmasq.toggle"
+PRIV_TOGGLE_DIR="/etc/dnsmasq.priv/toggle"
+
+main() {
+  mode="$1"
+  services="observe-deregulated-superman-conf observe-deregulated-superman-allow-conf observe-ometeotl-conf observe-superman-conf observe-adguard-upstream-conf observe-nordvpn-upstream-conf observe-vod-conf observe-youtube-conf observe-youtube-alternative-conf observe-youtube-music-conf"
+
+  case "$mode" in
+    "check")
+      check
+      ;;
+    "reset")
+      reset
+      ;;
+    *)
+      echo "error: no such mode: \"$mode\"" >&2
+      exit 1
+      ;;
+  esac
+}
+
+check() {
+  if [ "$(systemctl --user is-active $services | grep -c "inactive")" -eq 0 ] &&
+     [ -e "$PRIV_TOGGLE_DIR/deregulated_superman.conf"                      ] &&
+   ! [ -e "$PRIV_TOGGLE_DIR/deregulated_superman_allow.conf"                ] &&
+     [ -e "$PRIV_TOGGLE_DIR/ometeotl.conf"                                  ] &&
+     [ -e "$PRIV_TOGGLE_DIR/superman.conf"                                  ] &&
+   ! [ -e "$PRIV_TOGGLE_DIR/adguard_upstream.conf"                          ] &&
+   ! [ -e "$PRIV_TOGGLE_DIR/cloudflare_upstream.conf"                       ] &&
+   ! [ -e "$PRIV_TOGGLE_DIR/nordvpn_upstream.conf"                          ] &&
+     [ -e "$PRIV_TOGGLE_DIR/superman_upstream.conf"                         ] &&
+     [ -e      "$TOGGLE_DIR/vod.conf"                                       ] &&
+     [ -e      "$TOGGLE_DIR/youtube.conf"                                   ] &&
+   ! [ -e      "$TOGGLE_DIR/youtube_alternative.conf"                       ] &&
+   ! [ -e      "$TOGGLE_DIR/youtube_music.conf"                             ]; then
+    echo 1
+  else
+    echo -1
+  fi
+}
+
+reset() {
+  systemctl --user start $services
+  create-dnsmasq-toggle-conf private deregulated_superman --skip
+  remove-dnsmasq-toggle-conf private deregulated_superman_allow --skip
+  create-dnsmasq-toggle-conf private ometeotl --skip
+  create-dnsmasq-toggle-conf private superman --skip
+  remove-dnsmasq-toggle-conf private adguard_upstream --skip
+  remove-dnsmasq-toggle-conf private cloudflare_upstream --skip
+  remove-dnsmasq-toggle-conf private nordvpn_upstream --skip
+  create-dnsmasq-toggle-conf private superman_upstream --skip
+  create-dnsmasq-toggle-conf public vod --skip
+  create-dnsmasq-toggle-conf public youtube --skip
+  remove-dnsmasq-toggle-conf public youtube_alternative --skip
+  remove-dnsmasq-toggle-conf public youtube_music
+}
+
+main "$@"
