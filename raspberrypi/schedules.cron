@@ -101,10 +101,10 @@ NON_ROOT_USER=ubuntu
 #     Intervals: immediately
 #     Intensity: hard
 #
-*/10    8-9       * * * scheduler to-do stop
-0-10/1  10        * * * scheduler to-do start --safe
-11-59/1 10        * * * scheduler to-do start
-*/1     0-7,11-23 * * * scheduler to-do start
+*/10    8-9       * * * scheduler todo stop
+0-10/1  10        * * * scheduler todo start --safe
+11-59/1 10        * * * scheduler todo start
+*/1     0-7,11-23 * * * scheduler todo start
 
 
 
