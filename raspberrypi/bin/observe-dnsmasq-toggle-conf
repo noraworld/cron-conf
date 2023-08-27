@@ -105,8 +105,8 @@ todo_mode() {
   #   [ "$(todo-accomplished --repo "noraworld/diary" --except --standard 3)" -lt 0 ]
   # strict mode: sometimes it restricts allowed domains, even if your to-do list has been accomplished
   #   [ "$(todo-accomplished --repo "noraworld/diary" --except --standard 3)" -le 0 ]
-  while [ "$(restrict-all check)" -le 0 ] && [ "$(todo-accomplished --repo "noraworld/diary" --except --standard 3)" -lt 0 ]; do
-    restrict-all reset
+  while [ "$(restrict-all --strict check)" -le 0 ] && [ "$(todo-accomplished --repo "noraworld/diary" --except --standard 3)" -lt 0 ]; do
+    restrict-all --strict reset
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset $TARGET"
     sleep "$RETRY_INTERVAL"
   done
