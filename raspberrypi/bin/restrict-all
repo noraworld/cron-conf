@@ -54,7 +54,8 @@ reset() {
   create-dnsmasq-toggle-conf public vod --skip
   create-dnsmasq-toggle-conf public youtube --skip
   remove-dnsmasq-toggle-conf public youtube_alternative --skip
-  remove-dnsmasq-toggle-conf public youtube_music
+  remove-dnsmasq-toggle-conf public youtube_music --skip
+  sudo systemctl restart dnsmasq
 }
 
 main "$@"
