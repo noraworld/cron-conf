@@ -57,18 +57,18 @@ reset() {
     systemctl --user start $services
   fi
 
-  create-dnsmasq-toggle-conf private deregulated_superman --skip
-  remove-dnsmasq-toggle-conf private deregulated_superman_allow --skip
-  create-dnsmasq-toggle-conf private ometeotl --skip
-  create-dnsmasq-toggle-conf private superman --skip
-  remove-dnsmasq-toggle-conf private adguard_upstream --skip
-  remove-dnsmasq-toggle-conf private cloudflare_upstream --skip
-  remove-dnsmasq-toggle-conf private nordvpn_upstream --skip
-  create-dnsmasq-toggle-conf private superman_upstream --skip
-  create-dnsmasq-toggle-conf public vod --skip
-  create-dnsmasq-toggle-conf public youtube --skip
-  remove-dnsmasq-toggle-conf public youtube_alternative --skip
-  remove-dnsmasq-toggle-conf public youtube_music
+  create-dnsmasq-toggle-conf private deregulated_superman       --immediately
+  remove-dnsmasq-toggle-conf private deregulated_superman_allow --immediately
+  create-dnsmasq-toggle-conf private ometeotl                   --immediately
+  create-dnsmasq-toggle-conf private superman                   --immediately
+  remove-dnsmasq-toggle-conf private adguard_upstream           --immediately
+  remove-dnsmasq-toggle-conf private cloudflare_upstream        --immediately
+  remove-dnsmasq-toggle-conf private nordvpn_upstream           --immediately
+  create-dnsmasq-toggle-conf private superman_upstream          --immediately
+  create-dnsmasq-toggle-conf public vod                         --immediately
+  create-dnsmasq-toggle-conf public youtube                     --immediately
+  remove-dnsmasq-toggle-conf public youtube_alternative         --immediately
+  remove-dnsmasq-toggle-conf public youtube_music               --immediately
 }
 
 # @getoptions
