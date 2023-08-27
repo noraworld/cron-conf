@@ -21,23 +21,23 @@ main() {
   done
 
   if [ "$EXCEPT" = "" ]; then
-    # accomplished
-    if [ "$(echo "$body" | grep -c "\[x\]")" -ge "$STANDARD" ]; then
-      echo "1"
     # failed to fetch
-    elif [ "$body" = "" ]; then
+    if [ "$body" = "" ]; then
       echo "0"
+    # accomplished
+    elif [ "$(echo "$body" | grep -c "\[x\]")" -ge "$STANDARD" ]; then
+      echo "1"
     # not accomplished
     else
       echo "-1"
     fi
   else
-    # accomplished
-    if [ "$(echo "$body" | grep -c "\[ \]")" -le "$STANDARD" ]; then
-      echo "1"
     # failed to fetch
-    elif [ "$body" = "" ]; then
+    if [ "$body" = "" ]; then
       echo "0"
+    # accomplished
+    elif [ "$(echo "$body" | grep -c "\[ \]")" -le "$STANDARD" ]; then
+      echo "1"
     # not accomplished
     else
       echo "-1"
