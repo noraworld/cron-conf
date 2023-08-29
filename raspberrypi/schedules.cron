@@ -199,11 +199,11 @@ NON_ROOT_USER=ubuntu
 # Ometeotl
 #
 #   Schedule 1:
-#     Available: at 15:00 - 21:59 every day
+#     Available: at 15:00 - 20:59 every day
 #     Intervals: none
 #     Intensity: none
 #   Schedule 2:
-#     Available: at 0:00 - 14:59, 22:00 - 23:59 every day
+#     Available: at 0:00 - 14:59, 21:00 - 23:59 every day
 #     Intervals: immediately
 #     Intensity: hard
 #
