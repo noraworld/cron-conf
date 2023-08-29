@@ -136,6 +136,7 @@ midnight() {
 }
 
 dawn() {
+  vpnctl disconnect --skipdns
   sudo systemctl restart diary
 }
 
