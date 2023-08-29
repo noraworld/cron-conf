@@ -217,11 +217,11 @@ NON_ROOT_USER=ubuntu
 # Superman & Upstream
 #
 #   Schedule 1:
-#     Available: at 18:00 - 21:59 on Sunday, Wednesday, and Saturday
+#     Available: at 18:00 - 20:59 on Sunday, Wednesday, and Saturday
 #     Intervals: none
 #     Intensity: none
 #   Schedule 2:
-#     Available: at 0:00 - 17:59, 22:00 - 23:59 on Sunday, Wednesday, and Saturday
+#     Available: at 0:00 - 17:59, 21:00 - 23:59 on Sunday, Wednesday, and Saturday
 #     Intervals: immediately
 #     Intensity: hard
 #   Schedule 3:
