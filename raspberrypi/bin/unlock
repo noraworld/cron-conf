@@ -46,6 +46,9 @@ main() {
   log_before_execution "$@"
 
   case "$service" in
+    "amazon")
+      amazon
+      ;;
     "chime")
       chime
       ;;
@@ -118,6 +121,25 @@ restart_dnsmasq() {
     echo "error: dnsmasq daemon could not restart unexpectedly" >&2
     sudo systemctl status dnsmasq >&2
     exit 1
+  fi
+}
+
+amazon() {
+  reference_minute=60
+  [ "$DRY_RUN" = 1 ] && exit 0
+
+  warning_color
+  sudo unlink /etc/dnsmasq.toggle/amazon.conf
+  no_color
+
+  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+
+  if [ -L /etc/dnsmasq.toggle/amazon.conf ]; then
+    error_color
+    echo "error: /etc/dnsmasq.toggle/amazon.conf still exists" >&2
+    no_color
+    echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
+    exit
   fi
 }
 
