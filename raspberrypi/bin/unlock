@@ -129,9 +129,7 @@ chime() {
   sudo unlink /etc/dnsmasq.toggle/chime.conf
   no_color
 
-  if [ "$(is_observer_active "chime")" = "active" ]; then
-    pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
-  fi
+  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
 
   if [ -L /etc/dnsmasq.toggle/chime.conf ]; then
     error_color
@@ -176,9 +174,7 @@ deregulated_superman() {
     no_color
   fi
 
-  if [ "$(is_observer_active "deregulated-superman")" = "active" ]; then
-    pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
-  fi
+  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
 
   if ! [ -L /etc/dnsmasq.priv/toggle/deregulated_superman_allow.conf ]; then
     error_color
@@ -205,9 +201,7 @@ focus() {
   sudo unlink /etc/dnsmasq.priv/toggle/focus.conf
   no_color
 
-  if [ "$(is_observer_active "focus")" = "active" ]; then
-    pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
-  fi
+  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
 
   if [ -L /etc/dnsmasq.priv/toggle/focus.conf ]; then
     error_color
@@ -236,9 +230,7 @@ netflix() {
   sudo unlink /etc/dnsmasq.toggle/netflix.conf
   no_color
 
-  if [ "$(is_observer_active "netflix")" = "active" ]; then
-    pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
-  fi
+  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
 
   if ! [ -L /etc/dnsmasq.toggle/netflix_allow.conf ]; then
     error_color
@@ -265,9 +257,7 @@ ometeotl() {
   sudo unlink /etc/dnsmasq.priv/toggle/ometeotl.conf
   no_color
 
-  if [ "$(is_observer_active "ometeotl")" = "active" ]; then
-    pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
-  fi
+  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
 
   if [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ]; then
     error_color
@@ -297,9 +287,7 @@ superman() {
   sudo unlink /etc/dnsmasq.priv/toggle/superman.conf
   no_color
 
-  if [ "$(is_observer_active "superman")" = "active" ]; then
-    pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
-  fi
+  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
 
   if [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ]; then
     error_color
@@ -349,9 +337,7 @@ vod() {
   sudo unlink /etc/dnsmasq.toggle/vod.conf
   no_color
 
-  if [ "$(is_observer_active "vod")" = "active" ]; then
-    pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
-  fi
+  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
 
   if [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ]; then
     error_color
@@ -378,9 +364,7 @@ youtube() {
   sudo unlink /etc/dnsmasq.toggle/youtube.conf
   no_color
 
-  if [ "$(is_observer_active "youtube")" = "active" ]; then
-    pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
-  fi
+  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
 
   if [ -L /etc/dnsmasq.toggle/youtube.conf ]; then
     error_color
@@ -399,9 +383,7 @@ youtube_alternative() {
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle/youtube_alternative.conf /etc/dnsmasq.toggle
   no_color
 
-  if [ "$(is_observer_active "youtube-alternative")" = "active" ]; then
-    pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
-  fi
+  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
 
   if ! [ -L /etc/dnsmasq.toggle/youtube_alternative.conf ]; then
     error_color
@@ -420,9 +402,7 @@ youtube_music() {
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle/youtube_music.conf /etc/dnsmasq.toggle
   no_color
 
-  if [ "$(is_observer_active "youtube-music")" = "active" ]; then
-    pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
-  fi
+  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
 
   if ! [ -L /etc/dnsmasq.toggle/youtube_music.conf ]; then
     error_color
@@ -471,9 +451,7 @@ adguard_upstream() {
     no_color
   fi
 
-  if [ "$(is_observer_active "adguard-upstream")" = "active" ]; then
-    pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
-  fi
+  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
 
   if [ -L /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf ]; then
     error_color
@@ -524,9 +502,7 @@ cloudflare_upstream() {
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/cloudflare_upstream.conf /etc/dnsmasq.priv/toggle
   no_color
 
-  if [ "$(is_observer_active "cloudflare-upstream")" = "active" ]; then
-    pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
-  fi
+  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
 
   if [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ]; then
     error_color
@@ -581,9 +557,7 @@ nordvpn_upstream() {
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/nordvpn_upstream.conf /etc/dnsmasq.priv/toggle
   no_color
 
-  if [ "$(is_observer_active "nordvpn-upstream")" = "active" ]; then
-    pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
-  fi
+  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
 
   if [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ]; then
     error_color
@@ -638,9 +612,7 @@ superman_upstream() {
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/superman_upstream.conf /etc/dnsmasq.priv/toggle
   no_color
 
-  if [ "$(is_observer_active "superman-upstream")" = "active" ]; then
-    pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
-  fi
+  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
 
   if [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ]; then
     error_color
