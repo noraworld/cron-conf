@@ -238,10 +238,12 @@ netflix() {
   reference_minute=60
   [ "$DRY_RUN" = 1 ] && exit 0
 
-  if [ "$RECONNECT_VPN" ]; then
-    vpnctl reconnect --status --norestart
-  else
-    vpnctl connect --status --norestart
+  if [ "$VPN" ]; then
+    if [ "$RECONNECT_VPN" ]; then
+      vpnctl reconnect --status --norestart
+    else
+      vpnctl connect --status --norestart
+    fi
   fi
 
   if ! [ -L /etc/dnsmasq.toggle/netflix_allow.conf ]; then
@@ -791,7 +793,8 @@ parser_definition() {
   param DELAY         --delay     -- "wait the execution for a given time"
   flag  DRY_RUN       --dry-run   -- "just show remaining time"
   flag  NO_RESTART    --norestart -- "skip to restart the daemon"
-  flag  RECONNECT_VPN --vpn       -- "force to reconnect the VPN server"
+  flag  VPN           --vpn       -- "connect to the VPN server (it's currently available only for Netflix)"
+  flag  RECONNECT_VPN --reconnect -- "force to reconnect the VPN server"
   flag  SKIP          --skip      -- "skip the first sleep and retry"
   param TIMES         --times     -- "how many times unlock in a row"
   disp  :usage  -h    --help      -- "show help message and exit"
@@ -806,6 +809,7 @@ DEBUG=''
 DELAY=''
 DRY_RUN=''
 NO_RESTART=''
+VPN=''
 RECONNECT_VPN=''
 SKIP=''
 TIMES=''
@@ -844,6 +848,11 @@ parse() {
         NO_RESTART="$OPTARG"
         ;;
       '--vpn')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        VPN="$OPTARG"
+        ;;
+      '--reconnect')
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
         RECONNECT_VPN="$OPTARG"
@@ -898,7 +907,8 @@ Options:
       --delay DELAY           wait the execution for a given time
       --dry-run               just show remaining time
       --norestart             skip to restart the daemon
-      --vpn                   force to reconnect the VPN server
+      --vpn                   connect to the VPN server (it's currently available only for Netflix)
+      --reconnect             force to reconnect the VPN server
       --skip                  skip the first sleep and retry
       --times TIMES           how many times unlock in a row
   -h, --help                  show help message and exit
