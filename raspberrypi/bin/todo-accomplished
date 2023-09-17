@@ -2,6 +2,8 @@
 
 # shellcheck disable=SC2004
 
+LOG_PATH="/home/ubuntu/.log/todo_accomplished.log"
+
 main() {
   parse "$@"
   eval "set -- $REST"
@@ -20,29 +22,32 @@ main() {
     sleep "$SLEEP"
   done
 
+  result="unknown"
   if [ "$EXCEPT" = "" ]; then
-    # failed to fetch
     if [ "$body" = "" ]; then
+      result="failed to fetch"
       echo "0"
-    # accomplished
     elif [ "$(echo "$body" | grep -c "\[x\]")" -ge "$STANDARD" ]; then
+      result="accomplished"
       echo "1"
-    # not accomplished
     else
+      result="not accomplished"
       echo "-1"
     fi
   else
-    # failed to fetch
     if [ "$body" = "" ]; then
+      result="failed to fetch"
       echo "0"
-    # accomplished
     elif [ "$(echo "$body" | grep -c "\[ \]")" -le "$STANDARD" ]; then
+      result="accomplished"
       echo "1"
-    # not accomplished
     else
+      result="not accomplished"
       echo "-1"
     fi
   fi
+
+  echo "[$(date '+%Y-%m-%dT%H:%M:%S%z')] Invoked GitHub API with result \"$result\"" >> "$LOG_PATH"
 }
 
 # @getoptions
