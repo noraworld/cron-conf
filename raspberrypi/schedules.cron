@@ -244,6 +244,24 @@ NON_ROOT_USER=ubuntu
 
 
 
+# Gaming
+#
+#   Schedule 1:
+#     Available: at 12:00 - 20:59 every day
+#     Intervals: none
+#     Intensity: none
+#   Schedule 2:
+#     Available: at 0:00 - 11:59, 21:00 - 23:59 every day
+#     Intervals: immediately
+#     Intensity: hard
+#
+*/5    12-20      * * * scheduler gaming allow
+0      21         * * * scheduler gaming deny --safe
+5-55/5 21         * * * scheduler gaming deny
+*/5    22-23,0-11 * * * scheduler gaming deny
+
+
+
 # Netflix
 #
 #   Schedule 1:

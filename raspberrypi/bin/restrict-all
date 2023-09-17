@@ -8,7 +8,7 @@ main() {
   eval "set -- $REST"
 
   mode="$1"
-  services="observe-deregulated-superman-conf observe-deregulated-superman-allow-conf observe-ometeotl-conf observe-superman-conf observe-adguard-upstream-conf observe-nordvpn-upstream-conf observe-vod-conf observe-youtube-conf observe-youtube-alternative-conf observe-youtube-music-conf"
+  services="observe-deregulated-superman-conf observe-deregulated-superman-allow-conf observe-ometeotl-conf observe-superman-conf observe-adguard-upstream-conf observe-nordvpn-upstream-conf observe-vod-conf observe-youtube-conf observe-youtube-alternative-conf observe-youtube-music-conf observe-gaming-conf"
 
   case "$mode" in
     "check")
@@ -33,6 +33,7 @@ check() {
    ! [ -e "$PRIV_TOGGLE_DIR/cloudflare_upstream.conf"                       ] &&
    ! [ -e "$PRIV_TOGGLE_DIR/nordvpn_upstream.conf"                          ] &&
      [ -e "$PRIV_TOGGLE_DIR/superman_upstream.conf"                         ] &&
+     [ -e      "$TOGGLE_DIR/gaming.conf"                                    ] &&
      [ -e      "$TOGGLE_DIR/vod.conf"                                       ] &&
      [ -e      "$TOGGLE_DIR/youtube.conf"                                   ] &&
    ! [ -e      "$TOGGLE_DIR/youtube_alternative.conf"                       ] &&
@@ -65,6 +66,7 @@ reset() {
   remove-dnsmasq-toggle-conf private cloudflare_upstream        --immediately
   remove-dnsmasq-toggle-conf private nordvpn_upstream           --immediately
   create-dnsmasq-toggle-conf private superman_upstream          --immediately
+  create-dnsmasq-toggle-conf public gaming                      --immediately
   create-dnsmasq-toggle-conf public vod                         --immediately
   create-dnsmasq-toggle-conf public youtube                     --immediately
   remove-dnsmasq-toggle-conf public youtube_alternative         --immediately

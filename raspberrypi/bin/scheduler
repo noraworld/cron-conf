@@ -41,6 +41,9 @@ main() {
     "focus")
       focus
       ;;
+    "gaming")
+      gaming
+      ;;
     "github-editor")
       github_editor
       ;;
@@ -227,6 +230,22 @@ focus() {
       # cron-daemonctl stop observe-focus-conf "$safe"
       remove-dnsmasq-toggle-conf private focus
       # remove-iptables-toggle-conf private 232_focus
+      ;;
+    *)
+      echo "error: no such operation: \"$operation\"" >&2
+      exit 1
+      ;;
+  esac
+}
+
+gaming() {
+  case "$operation" in
+    "deny")
+      [ "$SOFT" = 1 ] || cron-daemonctl start observe-gaming-conf "$safe"
+      create-dnsmasq-toggle-conf public gaming
+      ;;
+    "allow")
+      cron-daemonctl stop observe-gaming-conf "$safe"
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2
