@@ -106,6 +106,8 @@ todo_mode() {
   # strict mode: sometimes it restricts allowed domains, even if your to-do list has been accomplished
   #   [ "$(todo-accomplished --repo "noraworld/diary" --except --standard 4)" -le 0 ]
 
+  # TODO: Fix the problem that once a checklist is improperly unlocked, it will not be censored thereafter.
+
   set +u
   [ "$todo_skipped" = "" ] && todo_skipped=false
   set -u
