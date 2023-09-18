@@ -363,7 +363,14 @@ periodic() {
   # it's important because settings that aren't changed automatically, especially the strict setting changes,
   # might not be changed for a while.
   #
-  auto-git-pull
+  auto-git-pull                                  \
+    "/home/ubuntu/workspace/cron-conf"           \
+    "/home/ubuntu/workspace/dnsmasq-conf"        \
+    "/home/ubuntu/workspace/envsman"             \
+    "/home/ubuntu/workspace/systemd-units"       \
+    "/home/ubuntu/workspace/diary"               \
+    "/home/ubuntu/workspace/diary/_private"      \
+    "/home/ubuntu/workspace/diary/_daily_report" &
 
   digital-detox-notifier
 }
