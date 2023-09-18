@@ -65,6 +65,9 @@ main() {
     "periodic")
       periodic
       ;;
+    "snorlax")
+      snorlax
+      ;;
     "startup")
       startup
       ;;
@@ -363,6 +366,23 @@ periodic() {
   auto-git-pull
 
   digital-detox-notifier
+}
+
+snorlax() {
+  case "$operation" in
+    "deny")
+      # cron-daemonctl start observe-snorlax-conf "$safe"
+      create-dnsmasq-toggle-conf public snorlax
+      ;;
+    "allow")
+      # cron-daemonctl stop observe-snorlax-conf "$safe"
+      remove-dnsmasq-toggle-conf public snorlax
+      ;;
+    *)
+      echo "error: no such operation: \"$operation\"" >&2
+      exit 1
+      ;;
+  esac
 }
 
 startup() {

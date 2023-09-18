@@ -154,6 +154,28 @@ NON_ROOT_USER=ubuntu
 
 
 
+# Snorlax
+#
+#   Note 1:
+#     Remember that the Dnsmasq daemon will restart automatically,
+#     and you will lose the streaks of a digital detox when enabling this restriction.
+#
+#   Schedule 1:
+#     Available: 00:00 - 07:59 every day
+#     Intervals: every minute
+#     Intensity: soft
+#   Schedule 2:
+#     Available: 08:00 - 23:59 every day
+#     Intervals: none
+#     Intensity: none
+#
+0-5/1  0    * * * scheduler snorlax deny --safe
+6-59/1 0    * * * scheduler snorlax deny
+*/1    1-7  * * * scheduler snorlax deny
+*/5    8-23 * * * scheduler snorlax allow
+
+
+
 # Chime
 #
 #   Note 1:
