@@ -1,13 +1,5 @@
 #!/bin/sh
 
-# git -C /home/ubuntu/workspace/cron-conf           pull &
-# git -C /home/ubuntu/workspace/dnsmasq-conf        pull &
-# git -C /home/ubuntu/workspace/envsman             pull &
-# git -C /home/ubuntu/workspace/systemd-units       pull &
-# git -C /home/ubuntu/workspace/diary               pull &
-# git -C /home/ubuntu/workspace/diary/_private      pull &
-# git -C /home/ubuntu/workspace/diary/_daily_report pull &
-
 PROG_NAME="auto-git-pull"
 
 main() {
