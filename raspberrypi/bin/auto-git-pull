@@ -12,7 +12,11 @@ main() {
     commit_count_after=$(git -C "$TARGET" log --oneline | wc -l | awk '{ print $1 }')
 
     if [ "$commit_count_before" -gt "$commit_count_after" ]; then
-      new_commits="true"
+      if [ "$TARGET" != "/home/ubuntu/workspace/diary" ]          &&
+         [ "$TARGET" != "/home/ubuntu/workspace/diary/_private" ] &&
+         [ "$TARGET" != "/home/ubuntu/workspace/diary/_daily_report" ]; then
+        new_commits="true"
+      fi
 
       if [ "$TARGET" = "/home/ubuntu/workspace/systemd-units" ]; then
         systemd_reload="true"
