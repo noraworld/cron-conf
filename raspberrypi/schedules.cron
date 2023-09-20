@@ -256,13 +256,13 @@ NON_ROOT_USER=ubuntu
 #     Intensity: hard
 #
 */5    8-9             * * *       scheduler superman allow;       scheduler upstream allow
-*/5    18-23           * * 0,2,4,6 scheduler superman allow;       scheduler upstream allow
+*/5    18-20           * * 0,2,4,6 scheduler superman allow;       scheduler upstream allow
 0      10              * * *       scheduler superman deny --safe; scheduler upstream deny --safe
-0      0               * * 0,2,4,6 scheduler superman deny --safe; scheduler upstream deny --safe
+0      21              * * 0,2,4,6 scheduler superman deny --safe; scheduler upstream deny --safe
 5-55/5 10              * * *       scheduler superman deny;        scheduler upstream deny
-5-55/5 0               * * 0,2,4,6 scheduler superman deny;        scheduler upstream deny
-*/5    1-7,11-17       * * 0,2,4,6 scheduler superman deny;        scheduler upstream deny
-*/5    1-7,11-23       * * 1,3,5   scheduler superman deny;        scheduler upstream deny
+5-55/5 21              * * 0,2,4,6 scheduler superman deny;        scheduler upstream deny
+*/5    22-23,0-7,11-17 * * 0,2,4,6 scheduler superman deny;        scheduler upstream deny
+*/5    0-7,11-23       * * 1,3,5   scheduler superman deny;        scheduler upstream deny
 
 
 
@@ -341,13 +341,13 @@ NON_ROOT_USER=ubuntu
 #     Intensity: hard
 #
 */5    8-9             * * *       scheduler youtube allow
-*/5    17-23           * * 0,2,4,6 scheduler youtube allow
+*/5    17-20           * * 0,2,4,6 scheduler youtube allow
 0      10              * * *       scheduler youtube deny --safe
-0      0               * * 0,2,4,6 scheduler youtube deny --safe
+0      21              * * 0,2,4,6 scheduler youtube deny --safe
 5-55/5 10              * * *       scheduler youtube deny
-5-55/5 0               * * 0,2,4,6 scheduler youtube deny
-*/5    1-7,11-16       * * 0,2,4,6 scheduler youtube deny
-*/5    1-7,11-23       * * 1,3,5   scheduler youtube deny
+5-55/5 21              * * 0,2,4,6 scheduler youtube deny
+*/5    22-23,0-7,11-16 * * 0,2,4,6 scheduler youtube deny
+*/5    0-7,11-23       * * 1,3,5   scheduler youtube deny
 
 
 
