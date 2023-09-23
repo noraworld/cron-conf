@@ -279,14 +279,15 @@ netflix() {
     "deny")
       cron-daemonctl start observe-netflix-conf "$safe"
       cron-daemonctl start observe-netflix-allow-conf "$safe"
-      remove-dnsmasq-toggle-conf public netflix_allow --skip
+      # it will take a few mintutes to finish these two process because the Dnsmasq daemon restarts twice
+      remove-dnsmasq-toggle-conf public netflix_allow
       create-dnsmasq-toggle-conf public netflix
       # create-iptables-toggle-conf public 132_netflix
       ;;
     "allow")
       cron-daemonctl stop observe-netflix-conf "$safe"
       cron-daemonctl stop observe-netflix-allow-conf "$safe"
-      # create-dnsmasq-toggle-conf public netflix_allow --skip
+      # create-dnsmasq-toggle-conf public netflix_allow
       # remove-dnsmasq-toggle-conf public netflix
       # remove-iptables-toggle-conf public 132_netflix
       ;;
