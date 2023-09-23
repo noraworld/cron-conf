@@ -133,6 +133,7 @@ chime() {
   esac
 }
 
+# DEPRECATED: moved to "morning"
 midnight() {
   clean-repo                                                          \
     "/home/ubuntu/workspace/cron-conf"                                \
@@ -141,6 +142,7 @@ midnight() {
     "/home/ubuntu/workspace/envsman/raspberrypi/etc/netplan"
 }
 
+# DEPRECATED: moved to "morning"
 dawn() {
   vpnctl disconnect --skipdns
   sudo systemctl restart diary
@@ -153,6 +155,15 @@ morning() {
   systemctl --user restart pipewire{,-pulse}.{socket,service}
   sudo systemctl restart bluetooth
   # fi
+
+  vpnctl disconnect --skipdns
+  sudo systemctl restart diary
+
+  clean-repo                                                          \
+    "/home/ubuntu/workspace/cron-conf"                                \
+    "/home/ubuntu/workspace/dnsmasq-conf/dnsmasq"                     \
+    "/home/ubuntu/workspace/envsman/raspberrypi/dnsmasq/dnsmasq.priv" \
+    "/home/ubuntu/workspace/envsman/raspberrypi/etc/netplan"
 }
 
 deregulated_superman() {
