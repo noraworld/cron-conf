@@ -25,6 +25,9 @@ main() {
       retry_count=0
       connect
       ;;
+    "toggle")
+      toggle
+      ;;
     "status")
       status
       ;;
@@ -101,6 +104,16 @@ disconnected() {
     echo true
   else
     echo false
+  fi
+}
+
+toggle() {
+  if [ "$(connected)" = "true" ]; then
+    disconnect
+  elif [ "$(disconnected)" = "true" ]; then
+    connect
+  else
+    echo "Error: Failed to fetch the status." >&2
   fi
 }
 
