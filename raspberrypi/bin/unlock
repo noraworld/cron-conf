@@ -265,9 +265,9 @@ netflix() {
 
   if [ "$VPN" ]; then
     if [ "$RECONNECT_VPN" ]; then
-      vpnctl reconnect --status --norestart
+      vpnctl reconnect --status --skipdns
     else
-      vpnctl connect --status --norestart
+      vpnctl connect --status --skipdns
     fi
   fi
 
