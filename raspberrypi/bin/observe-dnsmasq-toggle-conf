@@ -119,7 +119,7 @@ todo_mode() {
   set -u
 
   if [ "$todo_skipped" = "false" ]; then
-    if [ "$(restrict-all check)" -le 0 ] && [ "$(todo-accomplished --repo "noraworld/diary" --except --standard 4)" -gt 0 ]; then
+    if [ "$(restrict-all check)" -le 0 ] && [ "$(todo-accomplished --repo "noraworld/diary" --except --standard 4 --past 1)" -gt 0 ]; then
       todo_skipped=true
     else
       todo_skipped=false
