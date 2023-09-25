@@ -23,7 +23,16 @@ main() {
                   xargs --max-args=1 --open-tty gh issue view --repo "$REPO" --json body --jq .body)
     fi
 
-    [ "$body" != "" ] && break
+    if [ "$body" != "" ]; then
+      if [ "$PAST" -ge 1 ]; then
+        if [ "$past_body" != "" ]; then
+          break
+        fi
+      else
+        break
+      fi
+    fi
+
     count=$(($count + 1))
     [ "$count" -ge "$RETRY" ] && break
     sleep "$SLEEP"
