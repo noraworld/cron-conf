@@ -22,7 +22,7 @@ main() {
 
 check() {
   # It returns a false status if it's in a state where you can watch Netflix but the VPN server is not connected.
-  if [ "$(vpnctl disconnected)" = "true" ] &&
+  if [ "$(nordvpn status | grep -i "country" | grep -ci "canada")" -le 0 ] &&
      { ! [ -e "$TOGGLE_DIR/netflix.conf" ] || [ -e "$TOGGLE_DIR/netflix_allow.conf" ]; }; then
     echo -1
   else
