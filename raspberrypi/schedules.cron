@@ -118,7 +118,7 @@ NON_ROOT_USER=ubuntu
 #     and you will lose the streaks of a digital detox when enabling this restriction
 #     (because I assume it is impossible not to check emails forever!).
 #
-#SEMITEMP */10 3-23 * * * scheduler chime deny
+*/10 0-17 * * * scheduler chime deny
 
 
 
