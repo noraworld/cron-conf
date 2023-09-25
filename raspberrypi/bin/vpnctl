@@ -214,6 +214,7 @@ parser_definition() {
   msg -- '  connect                     connect to the VPN server'
   msg -- '  disconnect                  disconnect from the VPN server'
   msg -- '  reconnect                   disconnect from the VPN server, and connect to the same one again'
+  msg -- '  toggle                      connect to the VPN server if it is not connected, otherwise, disconnect from it'
   msg -- '  status                      show status'
   msg -- ''
   msg -- 'Options:'
@@ -337,6 +338,7 @@ Arguments:
   connect                     connect to the VPN server
   disconnect                  disconnect from the VPN server
   reconnect                   disconnect from the VPN server, and connect to the same one again
+  toggle                      connect to the VPN server if it is not connected, otherwise, disconnect from it
   status                      show status
 
 Options:
