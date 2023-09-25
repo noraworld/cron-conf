@@ -10,10 +10,6 @@
 #
 #     # Defaults      secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
 #     Defaults        env_keep +="PATH"
-#
-# Note 2:
-#   Every schedule is designed not to restart the Dnsmasq daemon
-#   unless you manually unlock the restrictions, except for Focus.
 
 # Default: /usr/bin:/bin
 PATH=/home/ubuntu/workspace/iptables-conf/bin:/home/ubuntu/.local/share/zinit/polaris/bin:/home/ubuntu/workspace/cron-conf/bin:/home/ubuntu/workspace/bluetoothctl-autoconnector/bin:/home/ubuntu/workspace/cron-conf/raspberrypi/bin:/home/ubuntu/workspace/cron-conf/raspberrypi/bin/schedules:/home/ubuntu/workspace/envsman/raspberrypi/cron-conf:/home/ubuntu/workspace/fan-pippi/bin:/home/ubuntu/workspace/dnsmasq-conf/bin:/usr/sbin:/usr/bin:/bin
