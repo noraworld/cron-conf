@@ -17,8 +17,14 @@ main() {
     "connect")
       connect
       ;;
+    "connected")
+      connected
+      ;;
     "disconnect")
       disconnect
+      ;;
+    "disconnected")
+      disconnected
       ;;
     "reconnect")
       disconnect
@@ -212,7 +218,9 @@ parser_definition() {
   setup   REST help:usage -- "Usage: vpnctl [options]... [arguments]..." ''
   msg -- 'Arguments:'
   msg -- '  connect                     connect to the VPN server'
+  msg -- '  connected                   check whether the VPN server is connected'
   msg -- '  disconnect                  disconnect from the VPN server'
+  msg -- '  disconnected                check whether the VPN server is disconnected'
   msg -- '  reconnect                   disconnect from the VPN server, and connect to the same one again'
   msg -- '  toggle                      connect to the VPN server if it is not connected, otherwise, disconnect from it'
   msg -- '  status                      show status'
@@ -336,7 +344,9 @@ Usage: vpnctl [options]... [arguments]...
 
 Arguments:
   connect                     connect to the VPN server
+  connected                   check whether the VPN server is connected
   disconnect                  disconnect from the VPN server
+  disconnected                check whether the VPN server is disconnected
   reconnect                   disconnect from the VPN server, and connect to the same one again
   toggle                      connect to the VPN server if it is not connected, otherwise, disconnect from it
   status                      show status
