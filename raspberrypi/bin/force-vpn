@@ -1,7 +1,7 @@
 #!/bin/sh
 
 TOGGLE_DIR="/etc/dnsmasq.toggle"
-PRIV_TOGGLE_DIR="/etc/dnsmasq.priv/toggle"
+# PRIV_TOGGLE_DIR="/etc/dnsmasq.priv/toggle"
 
 main() {
   mode="$1"
