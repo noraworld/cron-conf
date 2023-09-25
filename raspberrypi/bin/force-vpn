@@ -1,0 +1,38 @@
+#!/bin/sh
+
+TOGGLE_DIR="/etc/dnsmasq.toggle"
+PRIV_TOGGLE_DIR="/etc/dnsmasq.priv/toggle"
+
+main() {
+  mode="$1"
+
+  case "$mode" in
+    "check")
+      check
+      ;;
+    "reset")
+      reset
+      ;;
+    *)
+      echo "error: no such mode: \"$mode\"" >&2
+      exit 1
+      ;;
+  esac
+}
+
+check() {
+  # It returns a false status if it's in a state where you can watch Netflix but the VPN server is not connected.
+  if [ "$(vpnctl disconnected)" = "true" ] &&
+     { ! [ -e "$TOGGLE_DIR/netflix.conf" ] || [ -e "$TOGGLE_DIR/netflix_allow.conf" ]; }; then
+    echo -1
+  else
+    echo 1
+  fi
+}
+
+reset() {
+  create-dnsmasq-toggle-conf public netflix --immediately
+  remove-dnsmasq-toggle-conf public netflix_allow --immediately
+}
+
+main "$@"

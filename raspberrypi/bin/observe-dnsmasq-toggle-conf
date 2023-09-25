@@ -131,6 +131,12 @@ todo_mode() {
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset $TARGET"
     sleep "$RETRY_INTERVAL"
   done
+
+  while [ "$(force-vpn check)" -le 0 ] && [ "$todo_skipped" = "false" ]; do
+    force-vpn reset
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset $TARGET"
+    sleep "$RETRY_INTERVAL"
+  done
 }
 
 
