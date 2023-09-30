@@ -19,11 +19,11 @@ main() {
     echo "manual disablement detected (date: \"$(date)\", args: \"$(echo "$FROM" | sed -r 's/\s$//g')\", duration: $RECOVERY_TIME)" >> "$LOG_PATH"
 
     # shellcheck disable=SC2046
-    echo "sudo systemctl start ssh" | at now + "$RECOVERY_TIME" &&
-    sudo systemctl stop ssh &&
+    #TEMP echo "sudo systemctl start ssh" | at now + "$RECOVERY_TIME" &&
+    #TEMP sudo systemctl stop ssh &&
     # kill all users logging in with sshd
     # do not quote pgrep because the error occurs when multiple users are logging in with sshd
-    kill -9 $(pgrep -f "sshd: .*@pts/|mosh-server")
+    #TEMP kill -9 $(pgrep -f "sshd: .*@pts/|mosh-server")
   fi
 }
 
