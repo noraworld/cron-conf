@@ -49,16 +49,16 @@ main() {
       git -C "$TARGET" restore --staged .
       git -C "$TARGET" restore .
     fi
-
-    if $changed; then
-      if [ "$IMMEDIATELY" = 1 ]; then
-        sudo systemctl restart dnsmasq
-      else
-        # It is performed in the background.
-        exrd --log /home/ubuntu/.log/exrd.log --from "$PROG_NAME $*" &
-      fi
-    fi
   done
+
+  if $changed; then
+    if [ "$IMMEDIATELY" = 1 ]; then
+      sudo systemctl restart dnsmasq
+    else
+      # It is performed in the background.
+      exrd --log /home/ubuntu/.log/exrd.log --from "$PROG_NAME $*" &
+    fi
+  fi
 }
 
 # @getoptions
