@@ -34,20 +34,20 @@ check() {
        [ "$(git -C "$TARGET" rev-list HEAD@{upstream}..HEAD)" != "" ]; then
 
       if [ "$DETAIL" != "1" ]; then
-        echo "1"
+        echo "-1"
         return
       fi
 
-      result="${result}1 "
+      result="${result}-1 "
     else
-      result="${result}0 "
+      result="${result}1 "
     fi
   done
 
   if [ "$DETAIL" = "1" ]; then
     echo "$result"
   else
-    echo "0"
+    echo "1"
   fi
 }
 
