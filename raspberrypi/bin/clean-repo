@@ -28,6 +28,7 @@ main() {
 check() {
   result=""
 
+  # shellcheck disable=SC1083
   for TARGET; do
     if [ "$(git -C "$TARGET" status --porcelain)"             != "" ] ||
        [ "$(git -C "$TARGET" rev-list HEAD@{upstream}..HEAD)" != "" ]; then
@@ -78,9 +79,12 @@ perform() {
       git -C "$TARGET" restore .
     fi
 
+    # shellcheck disable=SC1083
     # already committed files
     if [ "$(git -C "$TARGET" rev-list HEAD@{upstream}..HEAD)" != "" ]; then
       changed=true
+      #
+      # shellcheck disable=SC2046
       #
       # For instance, "git reset --soft HEAD~2" reverts two commits back.
       #   https://stackoverflow.com/questions/7932222/how-to-revert-two-commits-back-and-commit-only-good-stuff#answer-7932255
