@@ -101,7 +101,7 @@ sync_mode() {
 
 
 todo_mode() {
-  # TODO: Fix the problem that once a checklist is improperly unlocked, it will not be censored thereafter.
+  # TODO?: Fix the problem that once a checklist is improperly unlocked, it will not be censored thereafter.
 
   set +u
   [ "$todo_skipped" = "" ] && todo_skipped=false
