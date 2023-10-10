@@ -135,7 +135,7 @@ chime() {
 
 # DEPRECATED: moved to "morning"
 midnight() {
-  clean-repo                                                          \
+  clean-repo perform                                                  \
     "/home/ubuntu/workspace/cron-conf"                                \
     "/home/ubuntu/workspace/dnsmasq-conf/dnsmasq"                     \
     "/home/ubuntu/workspace/envsman/raspberrypi/dnsmasq/dnsmasq.priv" \
@@ -159,7 +159,7 @@ morning() {
   vpnctl disconnect --skipdns
   sudo systemctl restart diary
 
-  clean-repo                                                          \
+  clean-repo perform                                                  \
     "/home/ubuntu/workspace/cron-conf"                                \
     "/home/ubuntu/workspace/dnsmasq-conf/dnsmasq"                     \
     "/home/ubuntu/workspace/envsman/raspberrypi/dnsmasq/dnsmasq.priv" \
