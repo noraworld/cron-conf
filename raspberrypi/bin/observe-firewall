@@ -6,7 +6,6 @@ DEBUG_LOG_PATH="/home/ubuntu/.log/observe_firewall_debug.log"
 main() {
   parse "$@"
   eval "set -- $REST"
-  authenticate
 
   operation="$1"
 
@@ -15,6 +14,7 @@ main() {
       deny "$@"
       ;;
     "allow")
+      authenticate
       allow "$@"
       ;;
     *)
