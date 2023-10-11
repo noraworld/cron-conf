@@ -147,7 +147,9 @@ todo_mode() {
     sleep "$RETRY_INTERVAL"
   done
 
-  while [ "$todo_skipped" = "false" ]; do
+  # "observe-firewall check" may not be necessary because the same check is done before "observe-firewall deny."
+  # Besides, it takes a little time to execute them since the same check is done twice.
+  while [ "$todo_skipped" = "false" ] && [ "$(observe-firewall check)" -le 0 ]; do
     observe-firewall deny --debug
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset $TARGET"
     sleep "$RETRY_INTERVAL"
