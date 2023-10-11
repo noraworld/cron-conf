@@ -118,6 +118,7 @@ todo_mode() {
     fi
   fi
 
+  # ln_mode & unlink_mode
   while [ "$(restrict-all check)" -le 0 ] && [ "$todo_skipped" = "false" ]; do
     restrict-all reset
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset $TARGET"
@@ -130,6 +131,7 @@ todo_mode() {
     sleep "$RETRY_INTERVAL"
   done
 
+  # git_mode
   while [ "$todo_skipped" = "false" ] &&
         [ "$(clean-repo check \
                "/home/ubuntu/workspace/cron-conf" \
