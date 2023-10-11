@@ -129,11 +129,11 @@ github_blocked() {
 }
 
 punish() {
-  sh -c "$(dirname "$(realpath "$0")")/../../bin/lib/punish --from \"$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')\""
+  sh -c "/home/ubuntu/workspace/cron-conf/bin/lib/punish --from \"$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')\""
 }
 
 authenticate() {
-  IS_CRON_SCRIPT=$(dirname "$(realpath "$0")")/../../bin/lib/is-cron
+  IS_CRON_SCRIPT=/home/ubuntu/workspace/cron-conf/bin/lib/is-cron
 
   if [ "$(sh -c "$IS_CRON_SCRIPT")" = false ]; then
     echo "Fatal: This operation must be executed by cron, or this script does not take enough effect" >&2
