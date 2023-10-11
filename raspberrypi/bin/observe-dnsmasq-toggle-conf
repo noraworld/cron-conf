@@ -146,6 +146,12 @@ todo_mode() {
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset $TARGET"
     sleep "$RETRY_INTERVAL"
   done
+
+  while [ "$todo_skipped" = "false" ]; do
+    observe-firewall deny --debug
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset $TARGET"
+    sleep "$RETRY_INTERVAL"
+  done
 }
 
 
