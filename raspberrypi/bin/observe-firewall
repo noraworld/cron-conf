@@ -17,6 +17,9 @@ main() {
       authenticate
       allow "$@"
       ;;
+    "check")
+      check "$@"
+      ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2
       exit 1
@@ -39,6 +42,21 @@ allow() {
   if eval "$(github_blocked)"; then
     restore_rules
   fi
+}
+
+check() {
+  if [ "$(dns_blocked)" = "false" ]; then
+    echo "-1"
+    return
+  fi
+
+  if [ "$(github_blocked)" = "false" ]; then
+    echo "-1"
+    return
+  fi
+
+  echo "1"
+  return
 }
 
 restore_rules() {
