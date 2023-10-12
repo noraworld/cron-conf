@@ -162,6 +162,12 @@ todo_mode() {
     cron-apply perform --skip
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): restored cron configuration"
   done
+
+  # sync_mode
+  while [ "$(diff -qr "$SOURCE" "$TARGET" | grep "^Only in $TARGET")" != "" ]; do
+    clean-toggle-dir "$SOURCE" "$TARGET" --immediately
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): deleted illegal files in directory"
+  done
 }
 
 
