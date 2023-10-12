@@ -51,6 +51,12 @@ check() {
   # Invoke the GitHub API
   remote_cron_conf="$(print_conf_remote $CRON_API_URL $PRIVATE_CRON_API_URL)"
 
+  if [ "$(echo "$remote_cron_conf" | wc -l)" -le 7 ]; then
+    # Failed to fetch the GitHub API
+    echo "0"
+    exit
+  fi
+
   if [ "$(diff <(echo "$local_cron_conf") <(echo "$remote_cron_conf"))" != "" ]; then
     # Cancel updating because local and remote cron configs are different
     echo "2"
