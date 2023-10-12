@@ -119,25 +119,23 @@ todo_mode() {
   fi
 
   # ln_mode & unlink_mode
-  while [ "$todo_skipped" = "false" ] && [ "$(restrict-all check)" -le 0 ]; do
+  if [ "$todo_skipped" = "false" ] && [ "$(restrict-all check)" -le 0 ]; then
     restrict-all reset
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset $TARGET"
-    sleep "$RETRY_INTERVAL"
-  done
+  fi
 
-  while [ "$todo_skipped" = "false" ] && [ "$(force-vpn check)" -le 0 ]; do
+  if [ "$todo_skipped" = "false" ] && [ "$(force-vpn check)" -le 0 ]; then
     force-vpn reset
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset $TARGET"
-    sleep "$RETRY_INTERVAL"
-  done
+  fi
 
   # git_mode
-  while [ "$todo_skipped" = "false" ] &&
+  if [ "$todo_skipped" = "false" ] &&
         [ "$(clean-repo check \
                "/home/ubuntu/workspace/cron-conf" \
                "/home/ubuntu/workspace/dnsmasq-conf/dnsmasq" \
                "/home/ubuntu/workspace/envsman/raspberrypi/dnsmasq/dnsmasq.priv" \
-               "/home/ubuntu/workspace/envsman/raspberrypi/etc/netplan")" -le 0 ]; do
+               "/home/ubuntu/workspace/envsman/raspberrypi/etc/netplan")" -le 0 ]; then
 
     clean-repo --immediately perform                                    \
       "/home/ubuntu/workspace/cron-conf"                                \
@@ -146,28 +144,28 @@ todo_mode() {
       "/home/ubuntu/workspace/envsman/raspberrypi/etc/netplan"
 
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset $TARGET"
-    sleep "$RETRY_INTERVAL"
-  done
+  fi
 
   # "observe-firewall check" may not be necessary because the same check is done before "observe-firewall deny."
   # Besides, it takes a little time to execute them since the same check is done twice.
-  while [ "$todo_skipped" = "false" ] && [ "$(observe-firewall check)" -le 0 ]; do
+  if [ "$todo_skipped" = "false" ] && [ "$(observe-firewall check)" -le 0 ]; then
     observe-firewall deny --debug --safe
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset $TARGET"
-    sleep "$RETRY_INTERVAL"
-  done
+  fi
 
   # cron_mode
-  while [ "$todo_skipped" = "false" ] && [ "$(cron-apply check)" -le 0 ]; do
-    cron-apply perform --skip
+  if [ "$todo_skipped" = "false" ] && [ "$(/home/ubuntu/cron-apply check)" -le 0 ]; then
+    /home/ubuntu/cron-apply perform --skip
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): restored cron configuration"
-  done
+  fi
 
   # sync_mode
-  while [ "$todo_skipped" = "false" ] && [ "$(diff -qr "$SOURCE" "$TARGET" | grep "^Only in $TARGET")" != "" ]; do
+  if [ "$todo_skipped" = "false" ] && [ "$(diff -qr "$SOURCE" "$TARGET" | grep "^Only in $TARGET")" != "" ]; then
     clean-toggle-dir "$SOURCE" "$TARGET" --immediately
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): deleted illegal files in directory"
-  done
+  fi
+
+  sleep "$RETRY_INTERVAL"
 }
 
 
