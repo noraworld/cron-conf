@@ -164,7 +164,7 @@ todo_mode() {
   done
 
   # sync_mode
-  while [ "$(diff -qr "$SOURCE" "$TARGET" | grep "^Only in $TARGET")" != "" ]; do
+  while [ "$todo_skipped" = "false" ] && [ "$(diff -qr "$SOURCE" "$TARGET" | grep "^Only in $TARGET")" != "" ]; do
     clean-toggle-dir "$SOURCE" "$TARGET" --immediately
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): deleted illegal files in directory"
   done
