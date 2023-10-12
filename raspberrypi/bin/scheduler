@@ -358,7 +358,7 @@ ometeotl() {
 
 periodic() {
   # Auto-update cron conf
-  cron-apply
+  cron-apply perform
 
   # Observe IP address not getting lost
   sudo ip-observer
