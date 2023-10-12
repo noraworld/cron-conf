@@ -16,6 +16,7 @@ JUDGE_FILEPATH="/etc/dnsmasq.toggle/youtube.conf"
 main() {
   parse "$@"
   eval "set -- $REST"
+  mode="$1"
 
   # It may be unnecessary because there is an observer to prevent the
   # cron config file from being modified in the daytime
