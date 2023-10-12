@@ -44,7 +44,7 @@ check() {
   # because the limit of GitHub API requests may be exceeded
   if [ "$(diff <(crontab -l) <(echo "$local_cron_conf"))" = "" ]; then
     # No need to update because current and local cron configs are the same
-    echo "-1"
+    echo "1"
     exit 1
   fi
 
@@ -53,11 +53,11 @@ check() {
 
   if [ "$(diff <(echo "$local_cron_conf") <(echo "$remote_cron_conf"))" != "" ]; then
     # Cancel updating because local and remote cron configs are different
-    echo "-2"
+    echo "2"
     exit 1
   fi
 
-  echo "1"
+  echo "-1"
 }
 
 perform() {

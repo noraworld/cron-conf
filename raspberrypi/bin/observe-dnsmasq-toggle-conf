@@ -156,6 +156,12 @@ todo_mode() {
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset $TARGET"
     sleep "$RETRY_INTERVAL"
   done
+
+  # cron_mode
+  while [ "$todo_skipped" = "false" ] && [ "$(cron-apply check)" -le 0 ]; do
+    cron-apply perform --skip
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): restored cron configuration"
+  done
 }
 
 
