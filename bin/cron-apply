@@ -115,7 +115,7 @@ print_conf() {
 parser_definition() {
   setup   REST help:usage -- "Usage: cron-apply [options]... [arguments]..." ''
   msg -- 'Options:'
-  flag    DEBUG   -d --debug   -- "takes no arguments"
+  flag    DEBUG   -d --debug   -- "show the schedules after applying the changes"
   disp    :usage  -h --help    -- "show help message and exit"
   disp    VERSION    --version -- "show version and exit"
 }
@@ -180,7 +180,7 @@ cat<<'GETOPTIONSHERE'
 Usage: cron-apply [options]... [arguments]...
 
 Options:
-  -d, --debug                 takes no arguments
+  -d, --debug                 show the schedules after applying the changes
   -h, --help                  show help message and exit
       --version               show version and exit
 GETOPTIONSHERE
