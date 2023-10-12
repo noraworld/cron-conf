@@ -154,8 +154,8 @@ todo_mode() {
   fi
 
   # cron_mode
-  if [ "$todo_skipped" = "false" ] && [ "$(/home/ubuntu/cron-apply check)" -le 0 ]; then
-    /home/ubuntu/cron-apply perform --skip
+  if [ "$todo_skipped" = "false" ] && [ "$(cron-apply check)" -le 0 ]; then
+    cron-apply perform --skip
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): restored cron configuration"
   fi
 
