@@ -6,22 +6,24 @@ When you want to use `sudo`, you should register a job as a root user.
 It’s dangerous and troublesome to execute `sudo` as a normal user.
 
 It’s not recommended to create or edit a job with `crontab -e`.
-You can write a job to `non_root.cron` and load it instead.
+You can write a job to a file and load it instead.
 
-To reflect `non_root.cron` to crontab, execute the following command.
+To reflect a file to crontab, execute the following command.
 
 ```shell
-cron-apply <DEVICE_NAME>      # for a normal user
-sudo cron-apply <DEVICE_NAME> # for a root user
+cron-apply
 ```
-
-`<DEVICE_NAME>` is the same as a directory name that is in this repository’s root, like `raspberrypi`.
 
 To confirm what is executed by crontab, execute the following command.
 
 ```shell
-crontab -l      # for a normal user
-sudo crontab -l # for a root user
+crontab -l | less
+```
+
+Or
+
+```shell
+crontab -l | batcat -l ruby
 ```
 
 ## Useful tool
