@@ -5,9 +5,8 @@ set -eu
 
 VERSION="not set"
 
-FULL_PATH=$(dirname "$(realpath "$0")")
-CRON_FILE="$FULL_PATH/../raspberrypi/schedules.cron"
-PRIVATE_CRON_FILE="$FULL_PATH/../raspberrypi/private/schedules.cron"
+CRON_FILE="/home/ubuntu/workspace/cron-conf/raspberrypi/schedules.cron"
+PRIVATE_CRON_FILE="/home/ubuntu/workspace/cron-conf/raspberrypi/private/schedules.cron"
 
 CRON_API_URL="https://api.github.com/repos/noraworld/cron-conf/contents/raspberrypi/schedules.cron"
 PRIVATE_CRON_API_URL="https://api.github.com/repos/noraworld/envsman/contents/raspberrypi/cron-conf/private/schedules.cron"
