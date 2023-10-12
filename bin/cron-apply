@@ -23,6 +23,24 @@ main() {
   # cron config file from being modified in the daytime
   # judge
 
+  case "$mode" in
+    "check")
+      check "$@"
+      ;;
+    "perform")
+      [ "$SKIP" = 1 ] || check "$@"
+      perform "$@"
+      ;;
+    *)
+      echo "error: no such mode: \"$mode\"" >&2
+      exit 1
+      ;;
+  esac
+}
+
+
+
+check() {
   local_cron_conf="$(print_conf "$CRON_FILE" "$PRIVATE_CRON_FILE")"
 
   # It is advisable to exit if there is no need to update schedules
@@ -38,12 +56,16 @@ main() {
     echo "ERROR: Cancel updating because local and remote cron configs are different" >&2
     exit 1
   fi
+}
 
+
+
+perform() {
   echo "$local_cron_conf" | crontab
 
-  check_failed=false
-  check "$local_cron_conf" "$(crontab -l)"
-  if $check_failed; then
+  validate_failed=false
+  validate "$local_cron_conf" "$(crontab -l)"
+  if $validate_failed; then
     exit 1
   fi
 
@@ -68,13 +90,13 @@ judge() {
 
 
 
-check() {
+validate() {
   if [ "$(diff <(echo "$1") <(echo "$2"))" != "" ]; then
     echo "ERROR: It looks like something went wrong" >&2
     echo >&2
     echo "The diff shows here:" >&2
     diff <(echo "$1") <(echo "$2") >&2
-    check_failed=true
+    validate_failed=true
   fi
 }
 
@@ -116,6 +138,7 @@ parser_definition() {
   setup   REST help:usage -- "Usage: cron-apply [options]... [arguments]..." ''
   msg -- 'Options:'
   flag    DEBUG   -d --debug   -- "show the schedules after applying the changes"
+  flag    SKIP    -s --skip    -- "skip the check"
   disp    :usage  -h --help    -- "show help message and exit"
   disp    VERSION    --version -- "show version and exit"
 }
