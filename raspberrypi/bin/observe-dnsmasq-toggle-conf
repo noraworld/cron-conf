@@ -119,7 +119,7 @@ todo_mode() {
   fi
 
   # ln_mode & unlink_mode
-  while [ "$(restrict-all check)" -le 0 ] && [ "$todo_skipped" = "false" ]; do
+  while [ "$todo_skipped" = "false" ] && [ "$(restrict-all check)" -le 0 ]; do
     restrict-all reset
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset $TARGET"
     sleep "$RETRY_INTERVAL"
