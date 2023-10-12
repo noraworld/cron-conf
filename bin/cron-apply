@@ -113,7 +113,7 @@ print_conf() {
 
 # @getoptions
 parser_definition() {
-  setup   REST help:usage -- "Usage: ca [options]... [arguments]..." ''
+  setup   REST help:usage -- "Usage: cron-apply [options]... [arguments]..." ''
   msg -- 'Options:'
   flag    DEBUG   -d --debug   -- "takes no arguments"
   disp    :usage  -h --help    -- "show help message and exit"
@@ -177,7 +177,7 @@ parse() {
 }
 usage() {
 cat<<'GETOPTIONSHERE'
-Usage: ca [options]... [arguments]...
+Usage: cron-apply [options]... [arguments]...
 
 Options:
   -d, --debug                 takes no arguments

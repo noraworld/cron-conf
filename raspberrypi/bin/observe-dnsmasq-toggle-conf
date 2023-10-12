@@ -85,7 +85,7 @@ unlink_mode() {
 
 
 cron_mode() {
-  ca
+  cron-apply
   [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): restored cron configuration"
 }
 

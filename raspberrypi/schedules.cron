@@ -237,5 +237,5 @@ NON_ROOT_USER=ubuntu
 ##   NOTE:
 ##     There is no concrete assurance that automatically turning on the VPN is safe.
 ##
-## 57 23 * * * vpnctl connect ca
-## 3  4  * * * vpnctl disconnect
+## 57 23 * * * vpnctl connect --skipdns
+## 3  4  * * * vpnctl disconnect --skipdns
