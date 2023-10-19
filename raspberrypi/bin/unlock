@@ -9,7 +9,7 @@ LOG_PATH="/home/ubuntu/.log/unlock.log"
 
 COOLDOWN_INTERVAL=0 # ideal: 10 (this may be unnecessary)
 WAITING_INTERVAL=5  # ideal: ? (it depends on how long it takes to retrieve the to-do list information)
-TIMES_INTERVAL=10   # ideal: 10
+DELAY_INTERVAL=0    # ideal: ?
 RETRY_INTERVAL=10   # ideal: 10
 TIMES_LIMIT=5       # ideal: 5
 
@@ -741,9 +741,9 @@ remaining_time() {
       for i in $(seq 0 $(expr "$TIMES" - 1)); do
         # MEMO: if it's executed at any minute 0 seconds on the dot, the schedule time is shifted by 1 minute
         if [ "$DEBUG" = 1 ]; then
-          at_output=$(echo "$PROG_NAME $service --delay $TIMES_INTERVAL --debug >> $LOG_PATH 2>&1" | at now + $(expr "$next_in" + "$i" \* "$reference_minute") min 2>&1)
+          at_output=$(echo "$PROG_NAME $service --delay $DELAY_INTERVAL --debug >> $LOG_PATH 2>&1" | at now + $(expr "$next_in" + "$i" \* "$reference_minute") min 2>&1)
         else
-          at_output=$(echo "$PROG_NAME $service --delay $TIMES_INTERVAL"                           | at now + $(expr "$next_in" + "$i" \* "$reference_minute") min 2>&1)
+          at_output=$(echo "$PROG_NAME $service --delay $DELAY_INTERVAL"                           | at now + $(expr "$next_in" + "$i" \* "$reference_minute") min 2>&1)
         fi
 
         echo "$at_output" | grep -Ev "^warning: commands will be executed using"
