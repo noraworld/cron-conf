@@ -107,7 +107,7 @@ firewall_mode() {
   # "observe-firewall check" may not be necessary because the same check is done before "observe-firewall deny."
   # Besides, it takes a little time to execute them since the same check is done twice.
   while [ "$(observe-firewall check)" -le 0 ]; do
-    observe-firewall deny --debug
+    observe-firewall deny --debug --safe
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset $TARGET"
   done
 }
