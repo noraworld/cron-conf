@@ -14,7 +14,8 @@ main() {
       deny "$@"
       ;;
     "allow")
-      authenticate
+      # "observe-firewall allow" is used by "observe-dnsmasq-toggle-conf"
+      # authenticate
       allow "$@"
       ;;
     "check")
