@@ -41,6 +41,9 @@ switch_mode() {
     "sync")
       sync_mode "$@"
       ;;
+    "firewall")
+      firewall_mode "$@"
+      ;;
     "todo")
       todo_mode "$@"
       ;;
@@ -95,6 +98,17 @@ sync_mode() {
   while [ "$(diff -qr "$SOURCE" "$TARGET" | grep "^Only in $TARGET")" != "" ]; do
     clean-toggle-dir "$SOURCE" "$TARGET" --immediately
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): deleted illegal files in directory"
+  done
+}
+
+
+
+firewall_mode() {
+  # "observe-firewall check" may not be necessary because the same check is done before "observe-firewall deny."
+  # Besides, it takes a little time to execute them since the same check is done twice.
+  while [ "$(observe-firewall check)" -le 0 ]; do
+    observe-firewall deny --debug
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset $TARGET"
   done
 }
 
@@ -216,7 +230,7 @@ validate() {
   if [ "$MODE" = "" ]; then
     echo "error: --mode not set" >&2
     exit 1
-  elif [ "$MODE" != "git" ] && [ "$MODE" != "ln" ] && [ "$MODE" != "unlink" ] && [ "$MODE" != "cron" ] && [ "$MODE" != "sync" ] && [ "$MODE" != "todo" ]; then
+  elif [ "$MODE" != "git" ] && [ "$MODE" != "ln" ] && [ "$MODE" != "unlink" ] && [ "$MODE" != "cron" ] && [ "$MODE" != "sync" ] && [ "$MODE" != "firewall" ] && [ "$MODE" != "todo" ]; then
     echo "error: unrecognized mode $MODE" >&2
     exit 1
   fi

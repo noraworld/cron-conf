@@ -221,10 +221,10 @@ firewall() {
   #
   case "$operation" in
     "deny")
-      observe-firewall deny "$safe" --debug
+      cron-daemonctl start observe-firewall "$safe"
       ;;
     "allow")
-      observe-firewall allow
+      cron-daemonctl stop observe-firewall "$safe"
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2
