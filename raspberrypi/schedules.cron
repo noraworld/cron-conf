@@ -45,8 +45,6 @@ NON_ROOT_USER=ubuntu
 #     "git push", "git pull" and "git fetch" are restricted.
 #   Note 2:
 #     Remember that the shorter the time is, the more it can take effect.
-#   Note 3:
-#     The reason I allow it from 5:00 to 6:00 is to pull the latest diary from the repository.
 #
 */10    18-20      * * * scheduler firewall allow
 0-10/1  21         * * * scheduler firewall deny --safe
