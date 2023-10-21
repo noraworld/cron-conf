@@ -107,7 +107,7 @@ firewall_mode() {
   # "observe-firewall check" may not be necessary because the same check is done before "observe-firewall deny."
   # Besides, it takes a little time to execute them since the same check is done twice.
   while [ "$(observe-firewall check)" -le 0 ]; do
-    observe-firewall deny --debug --safe
+    observe-firewall deny --debug
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset $TARGET"
   done
 }
@@ -163,7 +163,7 @@ todo_mode() {
 
   # firewall_mode
   if [ "$todo_skipped" = "false" ] && [ "$(observe-firewall check)" -le 0 ]; then
-    observe-firewall deny --debug --safe
+    observe-firewall deny --debug
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset $TARGET"
   fi
 
@@ -184,10 +184,22 @@ todo_mode() {
 
 
 
+initialize() {
+  if [ "$MODE" = "firewall" ] || [ "$MODE" = "todo" ]; then
+    if [ "$(observe-firewall check)" -le 0 ]; then
+      observe-firewall deny --safe
+      [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset $TARGET"
+    fi
+  fi
+}
+
+
+
 main() {
   parse "$@"
   eval "set -- $REST"
   validate "$@"
+  initialize "$@"
 
   # shellcheck disable=SC2086
   if [ "$SUDO" = "1" ]; then
