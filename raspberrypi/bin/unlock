@@ -9,7 +9,7 @@ LOG_PATH="/home/ubuntu/.log/unlock.log"
 
 COOLDOWN_INTERVAL=0 # ideal: 10 (this may be unnecessary)
 WAITING_INTERVAL=5  # ideal: ? (it depends on how long it takes to retrieve the to-do list information)
-DELAY_INTERVAL=0    # ideal: ?
+DELAY_INTERVAL=5    # ideal: ?
 RETRY_INTERVAL=10   # ideal: 10
 TIMES_LIMIT=5       # ideal: 5
 
