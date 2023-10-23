@@ -578,9 +578,6 @@ schedules_update_ready() {
   DAY_SECOND="86400"
   TOOK_THRESHOLD="3"
 
-  # https://stackoverflow.com/questions/22497597/get-the-last-modification-date-of-a-file-in-git-repo#answer-56373126
-  # updated_at=$(GIT_PAGER=cat git log -1 --pretty="format:%ci" "$CRON_FILE")
-
   #
   # This checks a cron file only.
   # This check is incomplete because it doesn't detect the temporary changes to the Dnsmasq configuration files.
