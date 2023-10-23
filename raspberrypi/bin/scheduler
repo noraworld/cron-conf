@@ -571,6 +571,13 @@ youtube_music() {
   esac
 }
 
+#
+# Returns false if the number of days given by TOOK_THRESHOLD has not elapsed since the cron file was updated on GitHub.
+#
+# Note that if the changes to a cron file are made on GitHub during the time when "scheduler firewall allow" and/or
+# "scheduler observe stop" are performed, then the observers start working again without the "--safe" option,
+# which means you get punished.
+#
 schedules_update_ready() {
   OWNER="noraworld"
   REPO="cron-conf"
