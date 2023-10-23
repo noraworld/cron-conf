@@ -586,8 +586,9 @@ schedules_update_ready() {
   TOOK_THRESHOLD="3"
 
   #
-  # This checks a cron file only.
-  # This check is incomplete because it doesn't detect the temporary changes to the Dnsmasq configuration files.
+  # TODO:
+  #   This checks a cron file only.
+  #   This check is incomplete because it doesn't detect the temporary changes to the Dnsmasq configuration files.
   #
   # https://stackoverflow.com/questions/15831313/is-it-possible-to-get-commits-history-for-one-file-in-github-api#answer-15838387
   #
