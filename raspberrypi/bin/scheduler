@@ -224,7 +224,15 @@ firewall() {
       cron-daemonctl start observe-firewall "$safe"
       ;;
     "allow")
-      cron-daemonctl stop observe-firewall "$safe"
+      if [ "$(schedules_update_ready)" -ge 1 ]; then
+        cron-daemonctl stop observe-firewall "$safe"
+      else
+        # MEMO:
+        #   Note that when the firewall observer stops once but the todo observer is still working,
+        #   and if communication with GitHub fails, this is performed and results in getting punished.
+        #   [firewall_memo]
+        cron-daemonctl start observe-firewall "$safe"
+      fi
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2
@@ -321,13 +329,24 @@ observe() {
       cron-daemonctl start observe-dnsmasq-priv-toggle "$safe"
       ;;
     "stop")
-      cron-daemonctl stop observe-crontab "$safe"
-      cron-daemonctl stop observe-cron-conf "$safe"
-      cron-daemonctl stop observe-dnsmasq-conf "$safe"
-      cron-daemonctl stop observe-dnsmasq-priv-conf "$safe"
-      cron-daemonctl stop observe-netplan-conf "$safe"
-      cron-daemonctl stop observe-dnsmasq-toggle "$safe"
-      cron-daemonctl stop observe-dnsmasq-priv-toggle "$safe"
+      if [ "$(schedules_update_ready)" -ge 1 ]; then
+        cron-daemonctl stop observe-crontab "$safe"
+        cron-daemonctl stop observe-cron-conf "$safe"
+        cron-daemonctl stop observe-dnsmasq-conf "$safe"
+        cron-daemonctl stop observe-dnsmasq-priv-conf "$safe"
+        cron-daemonctl stop observe-netplan-conf "$safe"
+        cron-daemonctl stop observe-dnsmasq-toggle "$safe"
+        cron-daemonctl stop observe-dnsmasq-priv-toggle "$safe"
+      else
+        # Note that the same phenomenon could happen as [firewall_memo].
+        cron-daemonctl start observe-crontab "$safe"
+        cron-daemonctl start observe-cron-conf "$safe"
+        cron-daemonctl start observe-dnsmasq-conf "$safe"
+        cron-daemonctl start observe-dnsmasq-priv-conf "$safe"
+        cron-daemonctl start observe-netplan-conf "$safe"
+        cron-daemonctl start observe-dnsmasq-toggle "$safe"
+        cron-daemonctl start observe-dnsmasq-priv-toggle "$safe"
+      fi
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2
@@ -550,6 +569,41 @@ youtube_music() {
       exit 1
       ;;
   esac
+}
+
+schedules_update_ready() {
+  OWNER="noraworld"
+  REPO="cron-conf"
+  CRON_FILE="raspberrypi/schedules.cron"
+  DAY_SECOND="86400"
+  TOOK_THRESHOLD="3"
+
+  # https://stackoverflow.com/questions/22497597/get-the-last-modification-date-of-a-file-in-git-repo#answer-56373126
+  # updated_at=$(GIT_PAGER=cat git log -1 --pretty="format:%ci" "$CRON_FILE")
+
+  #
+  # This checks a cron file only.
+  # This check is incomplete because it doesn't detect the temporary changes to the Dnsmasq configuration files.
+  #
+  # https://stackoverflow.com/questions/15831313/is-it-possible-to-get-commits-history-for-one-file-in-github-api#answer-15838387
+  #
+  updated_at=$(gh api "https://api.github.com/repos/$OWNER/$REPO/commits?path=$CRON_FILE&per_page=1" \
+                  --jq ".[].commit.author.date")
+
+  took_seconds=$(( $(date +%s) - $(date -d"$updated_at" +%s) ))
+  took_days=$(( took_seconds / DAY_SECOND ))
+
+  if [ "$updated_at" = "" ]; then
+    # Failed to retrieve information.
+    echo "0"
+    return
+  elif [ "$took_days" -ge "$TOOK_THRESHOLD" ]; then
+    # Enough time has passed that you can update the cron.
+    echo "1"
+  else
+    # Not enough time has passed to allow cron to be updated.
+    echo "-1"
+  fi
 }
 
 # @getoptions
