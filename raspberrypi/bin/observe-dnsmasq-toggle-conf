@@ -127,9 +127,12 @@ todo_mode() {
        # Besides, it delays knowing whether the restrictions are unlocked if there are some attempts.
        [ "$(todo-accomplished --repo "noraworld/diary" --except --standard 5 --past 2 --retry 1)" -gt 0 ]; then
       todo_skipped=true
-      observe-firewall allow
     else
       todo_skipped=false
+    fi
+  else
+    if [ "$(systemctl --user is-active observe-firewall)" != "active" ] && [ "$(observe-firewall check)" -gt 0 ]; then
+      observe-firewall allow
     fi
   fi
 
