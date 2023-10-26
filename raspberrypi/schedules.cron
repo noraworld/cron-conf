@@ -209,7 +209,7 @@ NON_ROOT_USER=ubuntu
 0      0      * * * scheduler youtube-alternative deny --safe
 5-55/5 10     * * * scheduler youtube-alternative deny
 5-55/5 0      * * * scheduler youtube-alternative deny
-*/5    0-7,11 * * * scheduler youtube-alternative deny
+*/5    1-7,11 * * * scheduler youtube-alternative deny
 
 
 
@@ -220,7 +220,7 @@ NON_ROOT_USER=ubuntu
 0      0      * * * scheduler youtube-music deny --safe
 5-55/5 10     * * * scheduler youtube-music deny
 5-55/5 0      * * * scheduler youtube-music deny
-*/5    0-7,11 * * * scheduler youtube-music deny
+*/5    1-7,11 * * * scheduler youtube-music deny
 
 
 
