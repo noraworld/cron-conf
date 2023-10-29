@@ -65,6 +65,9 @@ main() {
     "periodic")
       periodic
       ;;
+    "schedules-update-ready")
+      schedules_update_ready "$@"
+      ;;
     "snorlax")
       snorlax
       ;;
@@ -597,6 +600,37 @@ schedules_update_ready() {
 
   took_seconds=$(( $(date +%s) - $(date -d"$updated_at" +%s) ))
   took_days=$(( took_seconds / DAY_SECOND ))
+
+  if [ "$1" = "schedules-update-ready" ]; then
+    HOUR_SECOND="3600"
+    DAY_HOUR="24"
+    MINUTE_SECOND="60"
+    HOUR_MINUTE="60"
+
+    echo "[DEBUG] updated at:  $(date -d"$updated_at")"
+    echo "[DEBUG] now:         $(date)"
+
+    echo "[DEBUG] took:        $(printf "%01s" "$took_days"                                                       ) days"    \
+                              "$(printf "%02s" "$(( took_seconds / HOUR_SECOND   % DAY_HOUR                    ))") hours"   \
+                              "$(printf "%02s" "$(( took_seconds / MINUTE_SECOND % HOUR_MINUTE                 ))") minutes" \
+                              "$(printf "%02s" "$(( took_seconds % DAY_SECOND    % HOUR_SECOND % MINUTE_SECOND ))") seconds"
+
+    echo "[DEBUG] passes over: $(printf "%01s" "$TOOK_THRESHOLD") days" \
+                              "$(printf "%02s" "0") hours"              \
+                              "$(printf "%02s" "0") minutes"            \
+                              "$(printf "%02s" "0") seconds"
+
+    if [ "$took_days" -ge "$TOOK_THRESHOLD" ]; then
+      echo "[DEBUG] left:        ready to update!"
+    else
+      echo "[DEBUG] left:        $(printf "%01s" "$(( (TOOK_THRESHOLD * DAY_SECOND - took_seconds) / DAY_SECOND                                  ))") days"    \
+                                "$(printf "%02s" "$(( (TOOK_THRESHOLD * DAY_SECOND - took_seconds) / HOUR_SECOND   % DAY_HOUR                    ))") hours"   \
+                                "$(printf "%02s" "$(( (TOOK_THRESHOLD * DAY_SECOND - took_seconds) / MINUTE_SECOND % HOUR_MINUTE                 ))") minutes" \
+                                "$(printf "%02s" "$(( (TOOK_THRESHOLD * DAY_SECOND - took_seconds) % DAY_SECOND    % HOUR_SECOND % MINUTE_SECOND ))") seconds"
+    fi
+
+    printf "[DEBUG] result:      "
+  fi
 
   if [ "$updated_at" = "" ]; then
     # Failed to retrieve information.
