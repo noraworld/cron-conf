@@ -154,7 +154,7 @@ dawn() {
 morning() {
   metronome set full
 
-  # if [ "$(marlin info all --ignore a4-38,wh | grep -c "Connected: no")" -ne 0 ]; then
+  # if [ "$(marlin info all --only iPhone,Mac | grep -c "Connected: no")" -ne 0 ]; then
   # shellcheck disable=SC3009
   systemctl --user restart pipewire{,-pulse}.{socket,service}
   sudo systemctl restart bluetooth
@@ -390,7 +390,7 @@ periodic() {
   clock-observer
 
   # Auto-connect all devices paired with Bluetooth (if not connected)
-  marlin autoconnect all --retry 2 --ignore a4-38,wh # --log /home/ubuntu/.log/bluetooth_autoconnect.log
+  marlin autoconnect all --retry 2 --only iPhone,Mac # --log /home/ubuntu/.log/bluetooth_autoconnect.log
 
   # Auto-update specific Git repositories
   #
@@ -433,7 +433,7 @@ startup() {
   log-reboot
   clock-observer
   metronome set full
-  marlin autoconnect all --retry 2 --ignore a4-38,wh # --log /home/ubuntu/.log/bluetooth_autoconnect.log
+  marlin autoconnect all --retry 2 --only iPhone,Mac # --log /home/ubuntu/.log/bluetooth_autoconnect.log
   search-stoppable-observer-daemons --skip --delay 30
 }
 
