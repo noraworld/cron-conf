@@ -155,6 +155,7 @@ morning() {
   metronome set full
 
   # if [ "$(marlin info all --ignore a4-38,wh | grep -c "Connected: no")" -ne 0 ]; then
+  # shellcheck disable=SC3009
   systemctl --user restart pipewire{,-pulse}.{socket,service}
   sudo systemctl restart bluetooth
   # fi
