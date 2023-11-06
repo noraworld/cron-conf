@@ -622,7 +622,7 @@ schedules_update_ready() {
                               "$(printf "%02s" "0") seconds"
 
     if [ "$took_days" -ge "$TOOK_THRESHOLD" ]; then
-      echo "[DEBUG] left:        ready to update!"
+      echo "[DEBUG] left:        ready to update or up to date!"
     else
       echo "[DEBUG] left:        $(printf "%01s" "$(( (TOOK_THRESHOLD * DAY_SECOND - took_seconds) / DAY_SECOND                                  ))") days"    \
                                 "$(printf "%02s" "$(( (TOOK_THRESHOLD * DAY_SECOND - took_seconds) / HOUR_SECOND   % DAY_HOUR                    ))") hours"   \
