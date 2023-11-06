@@ -2,6 +2,7 @@
 # shellcheck disable=SC2004
 
 XDG_RUNTIME_DIR="/run/user/$(id -u)"
+PRIV_TOGGLE_DIR="/etc/dnsmasq.priv/toggle"
 
 main() {
   export XDG_RUNTIME_DIR
@@ -480,16 +481,26 @@ todo() {
 }
 
 upstream() {
+  # "cloudflare_upstream" or "superman_upstream"
+  PRIORITY="superman_upstream"
+  NON_PRIORITY="cloudflare_upstream"
+
   # Every upstream DNS file should be updated in succession without any interval.
   # When the previous file is deleted and the new file is not yet created, none of the upstream DNS files will be set, and the Internet connection will be blocked.
   case "$operation" in
     "deny")
       [ "$SOFT" = 1 ] || cron-daemonctl start observe-adguard-upstream-conf "$safe"
       [ "$SOFT" = 1 ] || cron-daemonctl start observe-nordvpn-upstream-conf "$safe"
-      remove-dnsmasq-toggle-conf private adguard_upstream    --skip
-      remove-dnsmasq-toggle-conf private cloudflare_upstream --skip
-      remove-dnsmasq-toggle-conf private nordvpn_upstream    --skip
-      create-dnsmasq-toggle-conf private superman_upstream
+      remove-dnsmasq-toggle-conf private adguard_upstream --skip
+      remove-dnsmasq-toggle-conf private nordvpn_upstream
+
+      # Do nothing if either of them exists, even if the existing one is not prioritized,
+      # because sometimes you may want to use the non-prioritized one.
+      if [ -e "$PRIV_TOGGLE_DIR/$PRIORITY.conf" ] && [ -e "$PRIV_TOGGLE_DIR/$NON_PRIORITY.conf" ]; then
+        remove-dnsmasq-toggle-conf private "$NON_PRIORITY"
+      elif ! [ -e "$PRIV_TOGGLE_DIR/$PRIORITY.conf" ] && ! [ -e "$PRIV_TOGGLE_DIR/$NON_PRIORITY.conf" ]; then
+        create-dnsmasq-toggle-conf private "$PRIORITY"
+      fi
       ;;
     "allow")
       cron-daemonctl stop observe-adguard-upstream-conf "$safe"
