@@ -104,19 +104,19 @@ NON_ROOT_USER=ubuntu
 
 
 
-# Deregulated Superman (deny & allow)
+# Deregulated Superman
 #
 #   Note 1:
 #     This rule for Deregulated Superman Allow is the opposite of the other rules
 #     Deregulated Superman is allowed when the file does exist
 #
-*/5    8-9          * * * scheduler deregulated-superman allow;       scheduler deregulated-superman-allow allow
-*/5    12-20        * * * scheduler deregulated-superman allow;       scheduler deregulated-superman-allow allow
-0      10           * * * scheduler deregulated-superman deny --safe; scheduler deregulated-superman-allow deny --safe
-0      21           * * * scheduler deregulated-superman deny --safe; scheduler deregulated-superman-allow deny --safe
-5-55/5 10           * * * scheduler deregulated-superman deny;        scheduler deregulated-superman-allow deny
-5-55/5 21           * * * scheduler deregulated-superman deny;        scheduler deregulated-superman-allow deny
-*/5    0-7,11,22-23 * * * scheduler deregulated-superman deny;        scheduler deregulated-superman-allow deny
+*/5    8-9          * * * scheduler deregulated-superman allow
+*/5    12-20        * * * scheduler deregulated-superman allow
+0      10           * * * scheduler deregulated-superman deny --safe
+0      21           * * * scheduler deregulated-superman deny --safe
+5-55/5 10           * * * scheduler deregulated-superman deny
+5-55/5 21           * * * scheduler deregulated-superman deny
+*/5    0-7,11,22-23 * * * scheduler deregulated-superman deny
 
 
 
@@ -233,7 +233,7 @@ NON_ROOT_USER=ubuntu
 ##
 ##   NOTE:
 ##     This rule may be no longer necessary
-##     because the GitHub IP addresses for "git push" & "git pull" are blocked on iptables side
+##     because the GitHub IP addresses for "git push" and "git pull" are blocked on iptables side
 ##
 ## */5    0-4  * * * scheduler github-editor allow
 ## 0      5    * * * scheduler github-editor deny --safe

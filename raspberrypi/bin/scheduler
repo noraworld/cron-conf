@@ -30,9 +30,6 @@ main() {
     "deregulated-superman")
       deregulated_superman
       ;;
-    "deregulated-superman-allow")
-      deregulated_superman_allow
-      ;;
     "firewall")
       firewall
       ;;
@@ -153,31 +150,18 @@ deregulated_superman() {
   case "$operation" in
     "deny")
       [ "$SOFT" = 1 ] || cron-daemonctl start observe-deregulated-superman-conf "$safe"
+      [ "$SOFT" = 1 ] || cron-daemonctl start observe-deregulated-superman-allow-conf "$safe"
+      # it will take a few mintutes to finish these two process because the Dnsmasq daemon restarts twice
+      remove-dnsmasq-toggle-conf private deregulated_superman_allow
       create-dnsmasq-toggle-conf private deregulated_superman
       # create-iptables-toggle-conf private 231_deregulated_superman
       ;;
     "allow")
       :
       cron-daemonctl stop observe-deregulated-superman-conf "$safe"
+      cron-daemonctl stop observe-deregulated-superman-allow-conf "$safe"
       # remove-dnsmasq-toggle-conf private deregulated_superman
       # remove-iptables-toggle-conf private 231_deregulated_superman
-      ;;
-    *)
-      echo "error: no such operation: \"$operation\"" >&2
-      exit 1
-      ;;
-  esac
-}
-
-deregulated_superman_allow() {
-  case "$operation" in
-    "deny")
-      [ "$SOFT" = 1 ] || cron-daemonctl start observe-deregulated-superman-allow-conf "$safe"
-      remove-dnsmasq-toggle-conf private deregulated_superman_allow
-      ;;
-    "allow")
-      :
-      cron-daemonctl stop observe-deregulated-superman-allow-conf "$safe"
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2
