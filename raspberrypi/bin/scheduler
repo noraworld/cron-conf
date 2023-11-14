@@ -27,9 +27,6 @@ main() {
     "chime")
       chime
       ;;
-    "dawn")
-      dawn
-      ;;
     "deregulated-superman")
       deregulated_superman
       ;;
@@ -47,9 +44,6 @@ main() {
       ;;
     "github-editor")
       github_editor
-      ;;
-    "midnight")
-      midnight
       ;;
     "morning")
       morning
@@ -135,21 +129,6 @@ chime() {
       exit 1
       ;;
   esac
-}
-
-# DEPRECATED: moved to "morning"
-midnight() {
-  clean-repo perform                                                  \
-    "/home/ubuntu/workspace/cron-conf"                                \
-    "/home/ubuntu/workspace/dnsmasq-conf/dnsmasq"                     \
-    "/home/ubuntu/workspace/envsman/raspberrypi/dnsmasq/dnsmasq.priv" \
-    "/home/ubuntu/workspace/envsman/raspberrypi/etc/netplan"
-}
-
-# DEPRECATED: moved to "morning"
-dawn() {
-  vpnctl disconnect --skipdns
-  sudo systemctl restart diary
 }
 
 morning() {
