@@ -136,7 +136,7 @@ morning() {
 
   # shellcheck disable=SC3009
   touch "/home/ubuntu/.tmp/marlin_update_denier"
-  systemctl --user restart pipewire{,-pulse}.{socket,service}
+  systemctl --user restart pipewire{,-pulse}.{socket,service} # TODO: it doesn't seem to work
   sudo systemctl restart bluetooth
 
   vpnctl disconnect --skipdns
