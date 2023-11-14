@@ -83,19 +83,6 @@ NON_ROOT_USER=ubuntu
 
 
 
-# Focus
-#
-#   Note 1:
-#     Remember that the Dnsmasq daemon will restart automatically,
-#     and you will lose the streaks of a digital detox when enabling this restriction.
-#
-# 0      0    * * * scheduler focus deny --safe
-# 5-55/5 0    * * * scheduler focus deny
-# */5    1-7  * * * scheduler focus deny
-# */5    8-23 * * * scheduler focus allow
-
-
-
 # Snorlax
 #
 #   Note 1:
@@ -230,6 +217,19 @@ NON_ROOT_USER=ubuntu
 5-55/5 10     * * * scheduler youtube-music deny
 5-55/5 23     * * * scheduler youtube-music deny
 */5    0-7,11 * * * scheduler youtube-music deny
+
+
+
+## Focus
+##
+##   Note 1:
+##     Remember that the Dnsmasq daemon will restart automatically,
+##     and you will lose the streaks of a digital detox when enabling this restriction.
+##
+## 0      0    * * * scheduler focus deny --safe
+## 5-55/5 0    * * * scheduler focus deny
+## */5    1-7  * * * scheduler focus deny
+## */5    8-23 * * * scheduler focus allow
 
 
 
