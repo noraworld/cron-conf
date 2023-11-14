@@ -134,11 +134,10 @@ chime() {
 morning() {
   metronome set full
 
-  # if [ "$(marlin info all --only iPhone,Mac | grep -c "Connected: no")" -ne 0 ]; then
   # shellcheck disable=SC3009
+  touch "/home/ubuntu/.tmp/marlin_update_denier"
   systemctl --user restart pipewire{,-pulse}.{socket,service}
   sudo systemctl restart bluetooth
-  # fi
 
   vpnctl disconnect --skipdns
   sudo systemctl restart diary
@@ -376,7 +375,9 @@ periodic() {
   clock-observer
 
   # Auto-connect all devices paired with Bluetooth (if not connected)
-  marlin autoconnect all --retry 2 --only iPhone,Mac # --log /home/ubuntu/.log/bluetooth_autoconnect.log
+  if ! [ -e "/home/ubuntu/.tmp/marlin_update_denier" ]; then
+    marlin autoconnect all --retry 2 --only iPhone,Mac # --log /home/ubuntu/.log/bluetooth_autoconnect.log
+  fi
 
   # Auto-update specific Git repositories
   #
