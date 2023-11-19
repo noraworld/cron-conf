@@ -138,6 +138,14 @@ morning() {
   systemctl --user restart pipewire{,-pulse}.{socket,service} # TODO: it doesn't seem to work
   sudo systemctl restart bluetooth
 
+  # Alarm clock
+  #
+  #   Sound name:   The Other Day I Met a Bear
+  #   Sound source: https://muryochakumero.com/%E7%9D%80%E3%83%A1%E3%83%AD/16646
+  #   Inspired by:  Classroom of the Elite
+  #
+  juke play --volume=0.5 --infinite "/home/ubuntu/.pibox/the_other_day_i_met_a_bear.mp3"
+
   # Network
   vpnctl disconnect --skipdns
   sudo systemctl restart diary
