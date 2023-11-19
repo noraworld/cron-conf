@@ -129,16 +129,20 @@ chime() {
 }
 
 morning() {
+  # Fan control
   metronome set full
 
+  # Sound & Bluetooth
   touch "/home/ubuntu/.tmp/marlin_update_denier"
   # shellcheck disable=SC3009
   systemctl --user restart pipewire{,-pulse}.{socket,service} # TODO: it doesn't seem to work
   sudo systemctl restart bluetooth
 
+  # Network
   vpnctl disconnect --skipdns
   sudo systemctl restart diary
 
+  # File health check
   clean-repo perform                                                  \
     "/home/ubuntu/workspace/cron-conf"                                \
     "/home/ubuntu/workspace/dnsmasq-conf/dnsmasq"                     \
