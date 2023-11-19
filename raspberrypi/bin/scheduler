@@ -134,9 +134,12 @@ morning() {
 
   # Sound & Bluetooth
   touch "/home/ubuntu/.tmp/marlin_update_denier"
-  # shellcheck disable=SC3009
-  systemctl --user restart pipewire{,-pulse}.{socket,service} # TODO: it doesn't seem to work
   sudo systemctl restart bluetooth
+  systemctl --user restart \
+    pipewire.socket        \
+    pipewire.service       \
+    pipewire-pulse.socket  \
+    pipewire-pulse.service
 
   # Alarm clock
   #
