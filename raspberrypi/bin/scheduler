@@ -144,6 +144,10 @@ morning() {
   #   Sound source: https://muryochakumero.com/%E7%9D%80%E3%83%A1%E3%83%AD/16646
   #   Inspired by:  Classroom of the Elite
   #
+  #   Perform the following command to stop the sound.
+  #
+  #     juke stop all
+  #
   juke play --volume=0.5 --infinite "/home/ubuntu/.pibox/the_other_day_i_met_a_bear.mp3"
 
   # Network
