@@ -139,7 +139,8 @@ morning() {
     pipewire.socket        \
     pipewire.service       \
     pipewire-pulse.socket  \
-    pipewire-pulse.service
+    pipewire-pulse.service \
+    wireplumber.service
 
   # Alarm clock
   #
