@@ -381,7 +381,7 @@ periodic() {
   # Auto-connect the devices paired with Bluetooth (only the first successful connection after the Bluetooth daemon starts)
   if [ -e "/home/ubuntu/.tmp/marlin_autoconnect" ]; then
     if [ "$(marlin info all --only iPhone,Mac | grep -c "Connected: no")" -ne 0 ]; then
-      marlin autoconnect all --retry 2 --only iPhone,Mac # --log /home/ubuntu/.log/bluetooth_autoconnect.log
+      marlin autoconnect all --retry 2 --only iPhone,Mac
     else
       [ -e "/home/ubuntu/.tmp/marlin_autoconnect" ] && rm "/home/ubuntu/.tmp/marlin_autoconnect"
     fi
