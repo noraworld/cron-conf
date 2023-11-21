@@ -133,8 +133,8 @@ morning() {
   metronome set full
 
   # Sound & Bluetooth
-  touch "/home/ubuntu/.tmp/marlin_update_denier"
   sudo systemctl restart bluetooth
+  touch "/home/ubuntu/.tmp/marlin_autoconnect"
   systemctl --user restart \
     pipewire.socket        \
     pipewire.service       \
@@ -378,9 +378,13 @@ periodic() {
   # Observe the system clock not lagging
   clock-observer
 
-  # Auto-connect all devices paired with Bluetooth (if not connected)
-  if ! [ -e "/home/ubuntu/.tmp/marlin_update_denier" ]; then
-    marlin autoconnect all --retry 2 --only iPhone,Mac # --log /home/ubuntu/.log/bluetooth_autoconnect.log
+  # Auto-connect the devices paired with Bluetooth (only the first successful connection after the Bluetooth daemon starts)
+  if [ -e "/home/ubuntu/.tmp/marlin_autoconnect" ]; then
+    if [ "$(marlin info all --only iPhone,Mac | grep -c "Connected: no")" -ne 0 ]; then
+      marlin autoconnect all --retry 2 --only iPhone,Mac # --log /home/ubuntu/.log/bluetooth_autoconnect.log
+    else
+      [ -e "/home/ubuntu/.tmp/marlin_autoconnect" ] && rm "/home/ubuntu/.tmp/marlin_autoconnect"
+    fi
   fi
 
   # Auto-update specific Git repositories
