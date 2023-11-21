@@ -378,15 +378,6 @@ periodic() {
   # Observe the system clock not lagging
   clock-observer
 
-  # Auto-connect the devices paired with Bluetooth (only the first successful connection after the Bluetooth daemon starts)
-  if [ -e "/home/ubuntu/.tmp/marlin_autoconnect" ]; then
-    if [ "$(marlin info all --only iPhone,Mac | grep -c "Connected: no")" -ne 0 ]; then
-      marlin autoconnect all --retry 2 --only iPhone,Mac
-    else
-      [ -e "/home/ubuntu/.tmp/marlin_autoconnect" ] && rm "/home/ubuntu/.tmp/marlin_autoconnect"
-    fi
-  fi
-
   # Auto-update specific Git repositories
   #
   # While this script doesn't take effect while "git pull" is disabled by "observe-firewall",
@@ -405,6 +396,15 @@ periodic() {
   digital-detox-notifier
 
   auto-ufw-enabler
+
+  # Auto-connect the devices paired with Bluetooth (only the first successful connection after the Bluetooth daemon starts)
+  if [ -e "/home/ubuntu/.tmp/marlin_autoconnect" ]; then
+    if [ "$(marlin info all --only iPhone,Mac | grep -c "Connected: no")" -ne 0 ]; then
+      marlin autoconnect all --retry 2 --only iPhone,Mac
+    else
+      [ -e "/home/ubuntu/.tmp/marlin_autoconnect" ] && rm "/home/ubuntu/.tmp/marlin_autoconnect"
+    fi
+  fi
 }
 
 snorlax() {
