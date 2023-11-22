@@ -152,12 +152,15 @@ amazon() {
 chime() {
   reference_minute=10
   [ "$DRY_RUN" = 1 ] && exit 0
+  WAITING_INTERVAL=1
 
-  warning_color
-  sudo unlink /etc/dnsmasq.toggle/chime.conf
-  no_color
+  while [ -L "/etc/dnsmasq.toggle/chime.conf" ]; do
+    warning_color
+    sudo unlink /etc/dnsmasq.toggle/chime.conf
+    no_color
 
-  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+    pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  done
 
   if [ -L /etc/dnsmasq.toggle/chime.conf ]; then
     error_color
