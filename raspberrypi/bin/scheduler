@@ -2,10 +2,12 @@
 # shellcheck disable=SC2004
 
 XDG_RUNTIME_DIR="/run/user/$(id -u)"
+PULSE_RUNTIME_PATH="/run/user/$(id -u)/pulse/"
 PRIV_TOGGLE_DIR="/etc/dnsmasq.priv/toggle"
 
 main() {
   export XDG_RUNTIME_DIR
+  export PULSE_RUNTIME_PATH
 
   service="$1"
   operation="$2"
