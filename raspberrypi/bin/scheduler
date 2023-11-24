@@ -610,8 +610,10 @@ schedules_update_ready() {
     MINUTE_SECOND="60"
     HOUR_MINUTE="60"
 
-    echo "[DEBUG] updated at:  $(date -d"$updated_at")"
-    echo "[DEBUG] now:         $(date)"
+    if [ "$VERBOSE" = "1" ]; then
+      echo "[DEBUG] updated at:  $(date -d"$updated_at")"
+      echo "[DEBUG] now:         $(date)"
+    fi
 
     echo "[DEBUG] took:        $(printf "%01s" "$took_days"                                                       ) days"    \
                               "$(printf "%02s" "$(( took_seconds / HOUR_SECOND   % DAY_HOUR                    ))") hours"   \
@@ -654,6 +656,7 @@ parser_definition() {
   msg -- 'Options:'
   flag    SAFE       --safe    -- "not getting punished"
   flag    SOFT       --soft    -- "deny resources without starting a daemon"
+  flag    VERBOSE    --verbose -- "show detailed information"
   disp    :usage  -h --help    -- "show help message and exit"
   disp    VERSION    --version -- "show current version"
 }
@@ -664,6 +667,7 @@ parser_definition() {
 # URL: https://github.com/ko1nksm/getoptions (v3.3.0)
 SAFE=''
 SOFT=''
+VERBOSE=''
 REST=''
 parse() {
   OPTIND=$(($#+1))
@@ -687,6 +691,11 @@ parse() {
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
         SOFT="$OPTARG"
+        ;;
+      '--verbose')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        VERBOSE="$OPTARG"
         ;;
       '-h'|'--help')
         usage
@@ -726,6 +735,7 @@ Usage: scheduler [options]... [arguments]...
 Options:
       --safe                  not getting punished
       --soft                  deny resources without starting a daemon
+      --verbose               show detailed information
   -h, --help                  show help message and exit
       --version               show current version
 GETOPTIONSHERE
