@@ -143,6 +143,7 @@ morning() {
     pipewire-pulse.socket  \
     pipewire-pulse.service \
     wireplumber.service
+  sleep "10" # TODO: The right implementation is to wait until all the daemons restart.
 
   # Alarm clock
   #
