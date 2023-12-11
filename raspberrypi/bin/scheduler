@@ -155,8 +155,8 @@ morning() {
   #     juke stop all
   #
   juke play            \
-    --volume="0.05"     \
-    --gradual="0.05"    \
+    --volume="0.05"    \
+    --gradual="0.05"   \
     --max="3.0"        \
     --times="infinite" \
     "/home/ubuntu/.pibox/the_other_day_i_met_a_bear.mp3"
