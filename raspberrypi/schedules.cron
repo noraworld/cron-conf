@@ -25,16 +25,6 @@ NON_ROOT_USER=ubuntu
 
 
 
-# To-Do List
-#   What we have here is in the so-called draft stage, which may not actually apply.
-#   Delete it without applying if you decide you don't want it.
-#
-# 1. Change the days of the week when the restriction can be lifted
-#    for Gaming, Netflix, VOD, YouTube, and YouTube Alternative, respectively.
-# 2. Superman series cannot be released even during the bonus time from 8 to 10 o'clock.
-
-
-
 # Prepare the system for normal operation
 @reboot scheduler startup
 
