@@ -134,6 +134,10 @@ morning() {
   # Fan control
   metronome set full
 
+  # SSH
+  sudo systemctl restart ssh
+  [ "$(sudo systemctl is-active ssh)" = "active" ] && kill -9 $(pgrep -f "sshd: .*@pts/|mosh-server")
+
   # Sound & Bluetooth
   sudo systemctl restart bluetooth
   touch "/home/ubuntu/.tmp/marlin_autoconnect"
