@@ -818,11 +818,11 @@ parser_definition() {
   param DELAY         --delay     -- "wait the execution for a given time"
   flag  DRY_RUN       --dry-run   -- "just show remaining time"
   flag  NO_RESTART    --norestart -- "skip to restart the daemon"
-  flag  VPN           --vpn       -- "connect to the VPN server (it's currently available only for Netflix)"
   flag  RECONNECT_VPN --reconnect -- "force to reconnect the VPN server"
   flag  SKIP          --skip      -- "skip the first sleep and retry"
   param TIMES         --times     -- "how many times unlock in a row"
   flag  VERBOSE       --verbose   -- "show the redundant information"
+  flag  VPN           --vpn       -- "connect to the VPN server (it's currently available only for Netflix)"
   disp  :usage  -h    --help      -- "show help message and exit"
   disp  VERSION       --version   -- "show current version"
 }
@@ -835,11 +835,11 @@ DEBUG=''
 DELAY=''
 DRY_RUN=''
 NO_RESTART=''
-VPN=''
 RECONNECT_VPN=''
 SKIP=''
 TIMES=''
 VERBOSE=''
+VPN=''
 REST=''
 parse() {
   OPTIND=$(($#+1))
@@ -874,11 +874,6 @@ parse() {
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
         NO_RESTART="$OPTARG"
         ;;
-      '--vpn')
-        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
-        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
-        VPN="$OPTARG"
-        ;;
       '--reconnect')
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
@@ -898,6 +893,11 @@ parse() {
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
         VERBOSE="$OPTARG"
+        ;;
+      '--vpn')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        VPN="$OPTARG"
         ;;
       '-h'|'--help')
         usage
@@ -939,11 +939,11 @@ Options:
       --delay DELAY           wait the execution for a given time
       --dry-run               just show remaining time
       --norestart             skip to restart the daemon
-      --vpn                   connect to the VPN server (it's currently available only for Netflix)
       --reconnect             force to reconnect the VPN server
       --skip                  skip the first sleep and retry
       --times TIMES           how many times unlock in a row
       --verbose               show the redundant information
+      --vpn                   connect to the VPN server (it's currently available only for Netflix)
   -h, --help                  show help message and exit
       --version               show current version
 GETOPTIONSHERE
