@@ -132,6 +132,15 @@ NON_ROOT_USER=ubuntu
 
 
 
+# Maeve
+*/5    21-22      * * 5     scheduler maeve allow
+0      23         * * 5     scheduler maeve deny --safe
+5-55/5 23         * * 5     scheduler maeve deny
+*/5    0-20       * * 5     scheduler maeve deny
+*/5    0-23       * * 0-4,6 scheduler maeve deny
+
+
+
 # Superman
 */5    21-22      * * 5     scheduler superman allow
 0      23         * * 5     scheduler superman deny --safe

@@ -9,7 +9,7 @@ main() {
   eval "set -- $REST"
 
   mode="$1"
-  services="observe-deregulated-superman-conf observe-deregulated-superman-allow-conf observe-ometeotl-conf observe-superman-conf observe-adguard-upstream-conf observe-nordvpn-upstream-conf observe-vod-conf observe-youtube-conf observe-youtube-alternative-conf observe-youtube-music-conf observe-gaming-conf"
+  services="observe-deregulated-superman-conf observe-deregulated-superman-allow-conf observe-maeve-conf observe-ometeotl-conf observe-superman-conf observe-adguard-upstream-conf observe-nordvpn-upstream-conf observe-vod-conf observe-youtube-conf observe-youtube-alternative-conf observe-youtube-music-conf observe-gaming-conf"
 
   case "$mode" in
     "check")
@@ -28,6 +28,7 @@ main() {
 check() {
   if [ -e "$PRIV_TOGGLE_DIR/deregulated_superman.conf"                      ] &&
    ! [ -e "$PRIV_TOGGLE_DIR/deregulated_superman_allow.conf"                ] &&
+     [ -e "$PRIV_TOGGLE_DIR/maeve.conf"                                     ] &&
      [ -e "$PRIV_TOGGLE_DIR/ometeotl.conf"                                  ] &&
      [ -e "$PRIV_TOGGLE_DIR/superman.conf"                                  ] &&
    ! [ -e "$PRIV_TOGGLE_DIR/adguard_upstream.conf"                          ] &&
@@ -61,6 +62,7 @@ reset() {
 
   create-dnsmasq-toggle-conf private deregulated_superman       --immediately
   remove-dnsmasq-toggle-conf private deregulated_superman_allow --immediately
+  create-dnsmasq-toggle-conf private maeve                      --immediately
   create-dnsmasq-toggle-conf private ometeotl                   --immediately
   create-dnsmasq-toggle-conf private superman                   --immediately
   remove-dnsmasq-toggle-conf private adguard_upstream           --immediately

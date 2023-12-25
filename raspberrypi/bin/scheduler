@@ -44,6 +44,9 @@ main() {
     "github-editor")
       github_editor
       ;;
+    "maeve")
+      maeve
+      ;;
     "morning")
       morning
       ;;
@@ -287,6 +290,22 @@ github_editor() {
     "allow")
       cron-daemonctl stop observe-github-editor-conf "$safe"
       remove-dnsmasq-toggle-conf public github_editor
+      ;;
+    *)
+      echo "error: no such operation: \"$operation\"" >&2
+      exit 1
+      ;;
+  esac
+}
+
+maeve() {
+  case "$operation" in
+    "deny")
+      [ "$SOFT" = 1 ] || cron-daemonctl start observe-maeve-conf "$safe"
+      create-dnsmasq-toggle-conf private maeve
+      ;;
+    "allow")
+      cron-daemonctl stop observe-maeve-conf "$safe"
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2
