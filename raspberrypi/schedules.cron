@@ -122,13 +122,13 @@ NON_ROOT_USER=ubuntu
 
 
 # Ometeotl
-*/5    8-9             * * * scheduler ometeotl allow
-*/5    14-22           * * * scheduler ometeotl allow
-0      10              * * * scheduler ometeotl deny --safe
-0      23              * * * scheduler ometeotl deny --safe
-5-55/5 10              * * * scheduler ometeotl deny
-5-55/5 23              * * * scheduler ometeotl deny
-*/5    0-7,11-13       * * * scheduler ometeotl deny
+*/5    8-9       * * * scheduler ometeotl allow
+*/5    0-1,14-23 * * * scheduler ometeotl allow
+0      10        * * * scheduler ometeotl deny --safe
+0      2         * * * scheduler ometeotl deny --safe
+5-55/5 10        * * * scheduler ometeotl deny
+5-55/5 2         * * * scheduler ometeotl deny
+*/5    3-7,11-13 * * * scheduler ometeotl deny
 
 
 
