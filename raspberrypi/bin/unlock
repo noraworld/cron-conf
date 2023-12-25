@@ -713,8 +713,8 @@ remaining_time() {
       echo "error: execution more than $TIMES_LIMIT times in a row is not allowed" >&2
       no_color
     elif [ "$TIMES" != "" ] && [ "$TIMES" -ge 1 ]; then
-      echo
-      echo "schedules:"
+      [ "$VERBOSE" = 1 ] && echo
+      [ "$VERBOSE" = 1 ] && echo "schedules:"
 
       # remaining time + 1
       next_in=$(echo \(\($(expr $reference_minute \* 60) - \($(date +%s) % $(expr $reference_minute \* 60)\)\) / 60\) + 1 | bc)
@@ -727,7 +727,7 @@ remaining_time() {
           at_output=$(echo "$PROG_NAME $service --delay $DELAY_INTERVAL"                           | at now + $(expr "$next_in" + "$i" \* "$reference_minute") min 2>&1)
         fi
 
-        echo "$at_output" | grep -Ev "^warning: commands will be executed using"
+        [ "$VERBOSE" = 1 ] && echo "$at_output" | grep -Ev "^warning: commands will be executed using"
       done
     fi
   fi
@@ -822,6 +822,7 @@ parser_definition() {
   flag  RECONNECT_VPN --reconnect -- "force to reconnect the VPN server"
   flag  SKIP          --skip      -- "skip the first sleep and retry"
   param TIMES         --times     -- "how many times unlock in a row"
+  flag  VERBOSE       --verbose   -- "show the redundant information"
   disp  :usage  -h    --help      -- "show help message and exit"
   disp  VERSION       --version   -- "show current version"
 }
@@ -838,6 +839,7 @@ VPN=''
 RECONNECT_VPN=''
 SKIP=''
 TIMES=''
+VERBOSE=''
 REST=''
 parse() {
   OPTIND=$(($#+1))
@@ -892,6 +894,11 @@ parse() {
         OPTARG=$2
         TIMES="$OPTARG"
         shift ;;
+      '--verbose')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        VERBOSE="$OPTARG"
+        ;;
       '-h'|'--help')
         usage
         exit 0 ;;
@@ -936,6 +943,7 @@ Options:
       --reconnect             force to reconnect the VPN server
       --skip                  skip the first sleep and retry
       --times TIMES           how many times unlock in a row
+      --verbose               show the redundant information
   -h, --help                  show help message and exit
       --version               show current version
 GETOPTIONSHERE
