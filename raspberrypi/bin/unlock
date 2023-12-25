@@ -25,19 +25,12 @@ SKIP=0
 main() {
   service="$1"
   reference_minute=0
-  max_retry_count=18
-  retry_count=1
-  yet=0
 
   parse "$@"
   eval "set -- $REST"
 
   validate "$@"
   log_header "$@"
-
-  if [ "$SKIP" = 1 ]; then
-    max_retry_count=0
-  fi
 
   if [ "$DELAY" != "" ]; then
     pause "$DELAY" "$COOLDOWN_MESSAGE"
@@ -178,35 +171,10 @@ deregulated_superman() {
   reference_minute=60
   [ "$DRY_RUN" = 1 ] && exit 0
 
-  if ! [ -L /etc/dnsmasq.priv/toggle/deregulated_superman.conf ] || [ -L /etc/dnsmasq.priv/toggle/deregulated_superman_allow.conf ]; then
-    yet=1
-  fi
-
   warning_color
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/deregulated_superman_allow.conf /etc/dnsmasq.priv/toggle
   sudo unlink /etc/dnsmasq.priv/toggle/deregulated_superman.conf
   no_color
-
-  while [ "$retry_count" -le "$max_retry_count" ] && [ "$yet" = 1 ]; do
-    echo "attempting to process... (retry: $retry_count)"
-
-    if [ -L /etc/dnsmasq.priv/toggle/deregulated_superman.conf ] && ! [ -L /etc/dnsmasq.priv/toggle/deregulated_superman_allow.conf ]; then
-      warning_color
-      sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/deregulated_superman_allow.conf /etc/dnsmasq.priv/toggle
-      sudo unlink /etc/dnsmasq.priv/toggle/deregulated_superman.conf
-      no_color
-      break
-    fi
-
-    retry_count=$((retry_count + 1))
-    sleep "$RETRY_INTERVAL"
-  done
-
-  if [ "$retry_count" -ge "$max_retry_count" ]; then
-    warning_color
-    echo "warning: failed to retry" >&2
-    no_color
-  fi
 
   pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
 
@@ -525,39 +493,12 @@ adguard_upstream() {
   reference_minute=60
   [ "$DRY_RUN" = 1 ] && exit 0
 
-  if [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ]; then
-    yet=1
-  fi
-
   warning_color
   sudo unlink /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf
   sudo unlink /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf
   sudo unlink /etc/dnsmasq.priv/toggle/superman_upstream.conf
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/adguard_upstream.conf /etc/dnsmasq.priv/toggle
   no_color
-
-  while [ "$retry_count" -le "$max_retry_count" ] && [ "$yet" = 1 ]; do
-    echo "attempting to process... (retry: $retry_count)"
-
-    if ! [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ] && { [ -L /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf ] || [ -L /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf ] || [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ]; }; then
-      warning_color
-      sudo unlink /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf
-      sudo unlink /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf
-      sudo unlink /etc/dnsmasq.priv/toggle/superman_upstream.conf
-      sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/adguard_upstream.conf /etc/dnsmasq.priv/toggle
-      no_color
-      break
-    fi
-
-    retry_count=$((retry_count + 1))
-    sleep "$RETRY_INTERVAL"
-  done
-
-  if [ "$retry_count" -ge "$max_retry_count" ]; then
-    warning_color
-    echo "warning: failed to retry" >&2
-    no_color
-  fi
 
   pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
 
