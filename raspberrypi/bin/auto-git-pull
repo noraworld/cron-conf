@@ -28,11 +28,13 @@ main() {
     exrd --log "/home/ubuntu/.log/exrd.log" --from "$PROG_NAME $*"
   fi
 
+  # NOTE: The process here has not been confirmed to work yet, which means it potentially contains severe bugs.
   if [ "$systemd_reload" = "true" ]; then
     sudo systemctl link /home/ubuntu/workspace/systemd-units/lib/systemd/system/*
     sudo systemctl daemon-reload
 
-    systemctl --user link /home/ubuntu/workspace/systemd-units/lib/systemd/user/* # FIXME: Failed to link unit: Invalid argument
+    # FIXME: Failed to link unit: Invalid argument
+    # systemctl --user link /home/ubuntu/workspace/systemd-units/lib/systemd/user/*
     systemctl --user link /home/ubuntu/workspace/systemd-units/lib/systemd/user/observer/*
     systemctl --user daemon-reload
   fi
