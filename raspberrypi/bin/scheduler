@@ -4,6 +4,7 @@
 XDG_RUNTIME_DIR="/run/user/$(id -u)"
 PULSE_RUNTIME_PATH="/run/user/$(id -u)/pulse/"
 PRIV_TOGGLE_DIR="/etc/dnsmasq.priv/toggle"
+ALARM_TIME="15 min"
 
 main() {
   export XDG_RUNTIME_DIR
@@ -138,8 +139,12 @@ morning() {
   metronome set full
 
   # SSH
-  sudo systemctl restart ssh
-  [ "$(sudo systemctl is-active ssh)" = "active" ] && kill -9 $(pgrep -f "sshd: .*@pts/|mosh-server")
+  # shellcheck disable=SC2046
+  echo "sudo systemctl start ssh" | at now + "$ALARM_TIME" &&
+  sudo systemctl stop ssh &&
+  # kill all users logging in with sshd
+  # do not quote pgrep because the error occurs when multiple users are logging in with sshd
+  kill -9 $(pgrep -f "sshd: .*@pts/|mosh-server")
 
   # Sound & Bluetooth
   sudo systemctl restart bluetooth
