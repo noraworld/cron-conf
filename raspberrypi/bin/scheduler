@@ -626,7 +626,8 @@ schedules_update_ready() {
   BASE_URL="https://api.github.com/repos"
   OWNER="noraworld"
   DAY_SECOND="86400"
-  TOOK_THRESHOLD="0"
+  #TEMP TOOK_THRESHOLD="3"
+  TOOK_THRESHOLD="0" #TEMP
 
   local_cron_conf_updated_at=$(git -C "/home/ubuntu/workspace/cron-conf" --no-pager log -1 --format="%ct")
   local_dnsmasq_conf_updated_at=$(git -C "/home/ubuntu/workspace/dnsmasq-conf" --no-pager log -1 --format="%ct")
