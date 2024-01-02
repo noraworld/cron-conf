@@ -64,11 +64,11 @@ NON_ROOT_USER=ubuntu
 #   Note 2:
 #     Remember that the shorter the time is, the more it can take effect.
 #
-*/10    18-19      * * 5     scheduler observe stop
-0-10/1  20         * * 5     scheduler observe start --safe
-11-59/1 20         * * 5     scheduler observe start
-*/1     0-17,21-23 * * 5     scheduler observe start
-*/1     0-23       * * 0-4,6 scheduler observe start
+#TEMP */10    18-19      * * 5     scheduler observe stop
+#TEMP 0-10/1  20         * * 5     scheduler observe start --safe
+#TEMP 11-59/1 20         * * 5     scheduler observe start
+#TEMP */1     0-17,21-23 * * 5     scheduler observe start
+#TEMP */1     0-23       * * 0-4,6 scheduler observe start
 
 
 
