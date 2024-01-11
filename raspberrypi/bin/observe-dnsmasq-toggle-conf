@@ -125,7 +125,9 @@ todo_mode() {
     if [ "$(restrict-all check)" -le 0 ] &&
        # Do not retry many times, because no matter how many times you do that, the result is likely to be the same.
        # Besides, it delays knowing whether the restrictions are unlocked if there are some attempts.
-       [ "$(todo-accomplished --repo "noraworld/diary" --except --standard 6 --past 2 --retry 1)" -gt 0 ]; then
+       #
+       # [ "$(todo-accomplished --repo "noraworld/diary" --except --standard 6 --past 2 --retry 1)" -gt 0 ]; then
+       [ "$(todo-accomplished --repo "noraworld/diary" --standard 8 --past 2 --retry 1)" -gt 0 ]; then
       todo_skipped=true
     else
       todo_skipped=false
