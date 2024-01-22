@@ -176,13 +176,10 @@ morning() {
   # Network
   vpnctl disconnect --skipdns
   sudo systemctl restart diary
-
-  if [ "$(systemctl is-enabled systemd-networkd)" != "enabled" ]; then
+  if [ "$(systemctl is-enabled systemd-networkd)" != "enabled" ] ||
+     [ "$(systemctl is-active  systemd-networkd)" != "active"  ]; then
     sudo systemctl unmask systemd-networkd
     sudo systemctl enable systemd-networkd
-  fi
-
-  if [ "$(systemctl is-active systemd-networkd)" != "active" ]; then
     sudo systemctl start systemd-networkd
   fi
 
