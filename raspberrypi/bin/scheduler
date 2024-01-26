@@ -140,21 +140,21 @@ morning() {
 
   # SSH
   # shellcheck disable=SC2046
-  echo "sudo systemctl start ssh" | at now + "$ALARM_TIME" &&
-  sudo systemctl stop ssh &&
-  # kill all users logging in with sshd
-  # do not quote pgrep because the error occurs when multiple users are logging in with sshd
-  kill -9 $(pgrep -f "sshd: .*@pts/|mosh-server")
+  #TEMP echo "sudo systemctl start ssh" | at now + "$ALARM_TIME" &&
+  #TEMP sudo systemctl stop ssh &&
+  #TEMP # kill all users logging in with sshd
+  #TEMP # do not quote pgrep because the error occurs when multiple users are logging in with sshd
+  #TEMP kill -9 $(pgrep -f "sshd: .*@pts/|mosh-server")
 
   # Sound & Bluetooth
-  sudo systemctl restart bluetooth
-  touch "/home/ubuntu/.tmp/marlin_autoconnect"
-  systemctl --user restart \
-    pipewire.socket        \
-    pipewire.service       \
-    pipewire-pulse.socket  \
-    pipewire-pulse.service \
-    wireplumber.service
+  #TEMP sudo systemctl restart bluetooth
+  #TEMP touch "/home/ubuntu/.tmp/marlin_autoconnect"
+  #TEMP systemctl --user restart \
+  #TEMP   pipewire.socket        \
+  #TEMP   pipewire.service       \
+  #TEMP   pipewire-pulse.socket  \
+  #TEMP   pipewire-pulse.service \
+  #TEMP   wireplumber.service
 
   # Alarm clock
   #
@@ -166,12 +166,12 @@ morning() {
   #
   #     juke stop all
   #
-  juke play            \
-    --volume="0.025"   \
-    --gradual="0.025"  \
-    --max="3.0"        \
-    --times="infinite" \
-    "/home/ubuntu/.pibox/the_other_day_i_met_a_bear.mp3"
+  #TEMP juke play            \
+  #TEMP   --volume="0.025"   \
+  #TEMP   --gradual="0.025"  \
+  #TEMP   --max="3.0"        \
+  #TEMP   --times="infinite" \
+  #TEMP   "/home/ubuntu/.pibox/the_other_day_i_met_a_bear.mp3"
 
   # Network
   vpnctl disconnect --skipdns
