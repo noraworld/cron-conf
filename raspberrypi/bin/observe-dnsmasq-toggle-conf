@@ -154,14 +154,12 @@ todo_mode() {
         [ "$(clean-repo check \
                "/home/ubuntu/workspace/cron-conf" \
                "/home/ubuntu/workspace/dnsmasq-conf/dnsmasq" \
-               "/home/ubuntu/workspace/envsman/raspberrypi/dnsmasq/dnsmasq.priv" \
-               "/home/ubuntu/workspace/envsman/raspberrypi/etc/netplan")" -le 0 ]; then
+               "/home/ubuntu/workspace/envsman/raspberrypi/dnsmasq/dnsmasq.priv")" -le 0 ]; then
 
     clean-repo --immediately perform                                    \
       "/home/ubuntu/workspace/cron-conf"                                \
       "/home/ubuntu/workspace/dnsmasq-conf/dnsmasq"                     \
-      "/home/ubuntu/workspace/envsman/raspberrypi/dnsmasq/dnsmasq.priv" \
-      "/home/ubuntu/workspace/envsman/raspberrypi/etc/netplan"
+      "/home/ubuntu/workspace/envsman/raspberrypi/dnsmasq/dnsmasq.priv"
 
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset $TARGET"
   fi

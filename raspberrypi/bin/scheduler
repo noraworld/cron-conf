@@ -189,7 +189,6 @@ morning() {
     "/home/ubuntu/workspace/cron-conf"                                \
     "/home/ubuntu/workspace/dnsmasq-conf/dnsmasq"                     \
     "/home/ubuntu/workspace/envsman/raspberrypi/dnsmasq/dnsmasq.priv" \
-    "/home/ubuntu/workspace/envsman/raspberrypi/etc/netplan"          \
     "/home/ubuntu/workspace/ufw-conf"
 }
 
@@ -358,7 +357,6 @@ observe() {
       cron-daemonctl start observe-cron-conf "$safe"
       cron-daemonctl start observe-dnsmasq-conf "$safe"
       cron-daemonctl start observe-dnsmasq-priv-conf "$safe"
-      cron-daemonctl start observe-netplan-conf "$safe"
       cron-daemonctl start observe-dnsmasq-toggle "$safe"
       cron-daemonctl start observe-dnsmasq-priv-toggle "$safe"
       ;;
@@ -371,7 +369,6 @@ observe() {
         cron-daemonctl start observe-cron-conf "$safe"
         cron-daemonctl start observe-dnsmasq-conf "$safe"
         cron-daemonctl start observe-dnsmasq-priv-conf "$safe"
-        cron-daemonctl start observe-netplan-conf "$safe"
         cron-daemonctl start observe-dnsmasq-toggle "$safe"
         cron-daemonctl start observe-dnsmasq-priv-toggle "$safe"
       elif [ "$(schedules_update_ready)" -gt 0 ]; then
@@ -379,7 +376,6 @@ observe() {
         cron-daemonctl stop observe-cron-conf "$safe"
         cron-daemonctl stop observe-dnsmasq-conf "$safe"
         cron-daemonctl stop observe-dnsmasq-priv-conf "$safe"
-        cron-daemonctl stop observe-netplan-conf "$safe"
         cron-daemonctl stop observe-dnsmasq-toggle "$safe"
         cron-daemonctl stop observe-dnsmasq-priv-toggle "$safe"
       fi
