@@ -6,6 +6,13 @@
 #######################################################################################
 # https://github.com/noraworld/cron-conf/blob/6829de9c08b37edcaced5b59d6e50426bc7e8d05/raspberrypi/bin/scheduler#L577-L579
 
+################################################################################################
+###                                                                                          ###
+###  The drastic reform may cause you to lose a lot of time.                                 ###
+###  Remember how long it took to finish off https://github.com/noraworld/to-do/issues/313.  ###
+###                                                                                          ###
+################################################################################################
+
 ######################################################
 ###                                                ###
 ###  REMEMBER THE DIARY ENTRY ON FEBRUARY 3, 2023  ###
