@@ -45,6 +45,9 @@ main() {
     "github-editor")
       github_editor
       ;;
+    "night")
+      night
+      ;;
     "maeve")
       maeve
       ;;
@@ -308,6 +311,10 @@ github_editor() {
       exit 1
       ;;
   esac
+}
+
+night() {
+  cs
 }
 
 maeve() {
