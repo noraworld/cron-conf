@@ -1,6 +1,6 @@
 #!/bin/sh
 
-grep_temp_regex="^\s*#TEMP|^\s*#TMP"
+grep_temp_regex="^\s*#TEMP\|^\s*#TMP"
 sed_temp_regex="^\s*#TEMP\|^\s*#TMP"
 interval="3"
 commit_message="Enable temp"
@@ -30,7 +30,7 @@ main() {
 }
 
 count_temp() {
-  rg --files-with-matches --hidden --glob '!.git' "$grep_temp_regex"  \
+  grep -r -l --exclude-dir='.git' "$grep_temp_regex"                  \
     "/home/ubuntu/workspace/cron-conf"                                \
     "/home/ubuntu/workspace/dnsmasq-conf/dnsmasq"                     \
     "/home/ubuntu/workspace/envsman/raspberrypi/dnsmasq/dnsmasq.priv" \
@@ -39,7 +39,7 @@ count_temp() {
 }
 
 eliminate_temp() {
-  rg --files-with-matches --hidden --glob '!.git' "$grep_temp_regex"  \
+  grep -r -l --exclude-dir='.git' "$grep_temp_regex"                  \
     "/home/ubuntu/workspace/cron-conf"                                \
     "/home/ubuntu/workspace/dnsmasq-conf/dnsmasq"                     \
     "/home/ubuntu/workspace/envsman/raspberrypi/dnsmasq/dnsmasq.priv" \
