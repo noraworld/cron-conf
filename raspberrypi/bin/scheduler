@@ -138,6 +138,15 @@ chime() {
 }
 
 morning() {
+  # File health check
+  # to revert network configuration files to prevent being locked out of the SSH connection.
+  clean-repo perform                                                  \
+    "/home/ubuntu/workspace/cron-conf"                                \
+    "/home/ubuntu/workspace/dnsmasq-conf/dnsmasq"                     \
+    "/home/ubuntu/workspace/envsman/raspberrypi/dnsmasq/dnsmasq.priv" \
+    "/home/ubuntu/workspace/ufw-conf"
+  temp-eliminater
+
   # Fan control
   metronome set full
 
@@ -185,14 +194,6 @@ morning() {
     sudo systemctl enable systemd-networkd
     sudo systemctl start systemd-networkd
   fi
-
-  # File health check
-  # to revert network configuration files to prevent being locked out of the SSH connection.
-  clean-repo perform                                                  \
-    "/home/ubuntu/workspace/cron-conf"                                \
-    "/home/ubuntu/workspace/dnsmasq-conf/dnsmasq"                     \
-    "/home/ubuntu/workspace/envsman/raspberrypi/dnsmasq/dnsmasq.priv" \
-    "/home/ubuntu/workspace/ufw-conf"
 }
 
 deregulated_superman() {
