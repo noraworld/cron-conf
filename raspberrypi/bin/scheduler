@@ -152,21 +152,11 @@ morning() {
 
   # SSH
   # shellcheck disable=SC2046
- echo "sudo systemctl start ssh" | at now + "$ALARM_TIME" &&
- sudo systemctl stop ssh &&
- # kill all users logging in with sshd
- # do not quote pgrep because the error occurs when multiple users are logging in with sshd
- kill -9 $(pgrep -f "sshd: .*@pts/|mosh-server")
-
-  # Sound & Bluetooth
- sudo systemctl restart bluetooth
- touch "/home/ubuntu/.tmp/marlin_autoconnect"
- systemctl --user restart \
-   pipewire.socket        \
-   pipewire.service       \
-   pipewire-pulse.socket  \
-   pipewire-pulse.service \
-   wireplumber.service
+  echo "sudo systemctl start ssh" | at now + "$ALARM_TIME" &&
+  sudo systemctl stop ssh &&
+  # kill all users logging in with sshd
+  # do not quote pgrep because the error occurs when multiple users are logging in with sshd
+  kill -9 $(pgrep -f "sshd: .*@pts/|mosh-server")
 
   # Alarm clock
   #
