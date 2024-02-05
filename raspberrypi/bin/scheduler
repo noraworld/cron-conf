@@ -5,6 +5,7 @@ XDG_RUNTIME_DIR="/run/user/$(id -u)"
 PULSE_RUNTIME_PATH="/run/user/$(id -u)/pulse/"
 PRIV_TOGGLE_DIR="/etc/dnsmasq.priv/toggle"
 ALARM_TIME="15 min"
+SECOND_ALARM_INTERVAL="20 min"
 
 main() {
   export XDG_RUNTIME_DIR
@@ -168,12 +169,16 @@ morning() {
   #
   #     juke stop all
   #
- juke play            \
-   --volume="0.025"   \
-   --gradual="0.025"  \
-   --max="3.0"        \
-   --times="infinite" \
-   "/home/ubuntu/.pibox/the_other_day_i_met_a_bear.mp3"
+  ## First
+  juke play --volume=0.25 /home/ubuntu/.pibox/the_other_day_i_met_a_bear.mp3
+  ## Second
+  echo "juke play                                       \
+    --volume=0.025                                      \
+    --gradual=0.025                                     \
+    --max=3.0                                           \
+    --times=infinite                                    \
+    /home/ubuntu/.pibox/the_other_day_i_met_a_bear.mp3" |
+    at now + "$SECOND_ALARM_INTERVAL"
 
   # Network
   vpnctl disconnect --skipdns
