@@ -9,20 +9,12 @@ main() {
   parse "$@"
   eval "set -- $REST"
 
-  routing_exists
   networkd_aliver
+  routing_exists
   addresses_exist
 
   if [ "$DEBUG" = 1 ]; then
     print_log "0" "nothing wrong was detected"
-  fi
-}
-
-routing_exists() {
-  if [ "$(ip route show)" = "" ]; then
-    sudo netplan apply
-
-    print_log "1" "routing was lost"
   fi
 }
 
@@ -33,7 +25,15 @@ networkd_aliver() {
     sudo systemctl enable systemd-networkd
     sudo systemctl start systemd-networkd
 
-    print_log "2" "systemd-networkd was not active or enabled"
+    print_log "1" "systemd-networkd was not active or enabled"
+  fi
+}
+
+routing_exists() {
+  if [ "$(ip route show)" = "" ]; then
+    sudo netplan apply
+
+    print_log "2" "routing was lost"
   fi
 }
 
