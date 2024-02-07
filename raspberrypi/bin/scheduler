@@ -4,7 +4,7 @@
 XDG_RUNTIME_DIR="/run/user/$(id -u)"
 PULSE_RUNTIME_PATH="/run/user/$(id -u)/pulse/"
 PRIV_TOGGLE_DIR="/etc/dnsmasq.priv/toggle"
-ALARM_TIME="35 min"
+ALARM_TIME="35 min" # "$SECOND_ALARM_INTERVAL" + "15 min"
 SECOND_ALARM_INTERVAL="20 min"
 
 main() {
