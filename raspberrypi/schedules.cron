@@ -47,7 +47,7 @@ NON_ROOT_USER=ubuntu
 
 
 # Perform periodic tasks
-*/5 * * * * scheduler periodic
+*/10 * * * * scheduler periodic
 
 
 
