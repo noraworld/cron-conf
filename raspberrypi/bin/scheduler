@@ -410,6 +410,9 @@ periodic() {
   # Observe IP address not getting lost
   ip-observer
 
+  # Observe firewall not disabled
+  auto-ufw-enabler
+
   # Observe the system clock not lagging
   clock-observer
 
@@ -426,8 +429,6 @@ periodic() {
     "/home/ubuntu/workspace/systemd-units" &
 
   digital-detox-notifier
-
-  auto-ufw-enabler
 
   # Auto-connect the devices paired with Bluetooth (only the first successful connection after the Bluetooth daemon starts)
   if [ -e "/home/ubuntu/.tmp/marlin_autoconnect" ]; then
