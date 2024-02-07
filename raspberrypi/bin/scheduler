@@ -408,7 +408,7 @@ periodic() {
   cron-apply perform
 
   # Observe IP address not getting lost
-  sudo ip-observer
+  ip-observer
 
   # Observe the system clock not lagging
   clock-observer
