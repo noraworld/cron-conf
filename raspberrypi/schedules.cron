@@ -186,13 +186,10 @@ NON_ROOT_USER=ubuntu
 
 
 # VOD
-*/5    8-9       * * * scheduler vod allow
-*/5    0-1,18-23 * * * scheduler vod allow
-0      10        * * * scheduler vod deny --safe
-0      2         * * * scheduler vod deny --safe
-5-55/5 10        * * * scheduler vod deny
-5-55/5 2         * * * scheduler vod deny
-*/5    3-7,11-17 * * * scheduler vod deny
+*/5    9-23 * * * scheduler vod allow
+0      0    * * * scheduler vod deny --safe
+5-55/5 0    * * * scheduler vod deny
+*/5    1-8  * * * scheduler vod deny
 
 
 
