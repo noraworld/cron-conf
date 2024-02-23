@@ -149,11 +149,15 @@ NON_ROOT_USER=ubuntu
 
 
 # Superman
-*/5    21-22      * * 5     scheduler superman allow
-0      23         * * 5     scheduler superman deny --safe
-5-55/5 23         * * 5     scheduler superman deny
-*/5    0-20       * * 5     scheduler superman deny
-*/5    0-23       * * 0-4,6 scheduler superman deny
+*/5    0-8,12-23 * * 0-4   scheduler superman deny
+*/5    9-10      * * 0-4,6 scheduler superman allow
+0      11        * * 0-4,6 scheduler superman deny --safe
+5-55/5 11        * * 0-4,6 scheduler superman deny
+*/5    0-8       * * 5     scheduler superman deny
+*/5    9-23      * * 5     scheduler superman allow
+0      0         * * 6     scheduler superman deny --safe
+5-55/5 0         * * 6     scheduler superman deny
+5-55/5 1-8,12-23 * * 6     scheduler superman deny
 
 
 
