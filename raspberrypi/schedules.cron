@@ -178,10 +178,10 @@ NON_ROOT_USER=ubuntu
 
 
 # Netflix
-*/5    8-22      * * * scheduler netflix allow
-0      23        * * * scheduler netflix deny --safe
-5-55/5 23        * * * scheduler netflix deny
-*/5    0-7       * * * scheduler netflix deny
+*/5    9-23 * * * scheduler netflix allow
+0      0    * * * scheduler netflix deny --safe
+5-55/5 0    * * * scheduler netflix deny
+*/5    1-8  * * * scheduler netflix deny
 
 
 
