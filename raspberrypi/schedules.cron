@@ -60,10 +60,10 @@ NON_ROOT_USER=ubuntu
 #   Note 2:
 #     Remember that the shorter the time is, the more it can take effect.
 #
-*/10    18-21      * * * scheduler firewall allow
-0-10/1  22         * * * scheduler firewall deny --safe
-11-59/1 22         * * * scheduler firewall deny
-*/1     0-17,23    * * * scheduler firewall deny
+*/10    18-21   * * * scheduler firewall allow
+0-10/1  22      * * * scheduler firewall deny --safe
+11-59/1 22      * * * scheduler firewall deny
+*/1     0-17,23 * * * scheduler firewall deny
 
 
 
@@ -207,24 +207,24 @@ NON_ROOT_USER=ubuntu
 
 
 # YouTube Alternative
-*/5    8-9             * * * scheduler youtube-alternative allow
-*/5    18-22           * * * scheduler youtube-alternative allow
-0      10              * * * scheduler youtube-alternative deny --safe
-0      23              * * * scheduler youtube-alternative deny --safe
-5-55/5 10              * * * scheduler youtube-alternative deny
-5-55/5 23              * * * scheduler youtube-alternative deny
-*/5    0-7,11-17       * * * scheduler youtube-alternative deny
+*/5    8-9       * * * scheduler youtube-alternative allow
+*/5    18-22     * * * scheduler youtube-alternative allow
+0      10        * * * scheduler youtube-alternative deny --safe
+0      23        * * * scheduler youtube-alternative deny --safe
+5-55/5 10        * * * scheduler youtube-alternative deny
+5-55/5 23        * * * scheduler youtube-alternative deny
+*/5    0-7,11-17 * * * scheduler youtube-alternative deny
 
 
 
 # YouTube Music
-*/5    8-9          * * * scheduler youtube-music allow
-*/5    12-22        * * * scheduler youtube-music allow
-0      10           * * * scheduler youtube-music deny --safe
-0      23           * * * scheduler youtube-music deny --safe
-5-55/5 10           * * * scheduler youtube-music deny
-5-55/5 23           * * * scheduler youtube-music deny
-*/5    0-7,11       * * * scheduler youtube-music deny
+*/5    8-9    * * * scheduler youtube-music allow
+*/5    12-22  * * * scheduler youtube-music allow
+0      10     * * * scheduler youtube-music deny --safe
+0      23     * * * scheduler youtube-music deny --safe
+5-55/5 10     * * * scheduler youtube-music deny
+5-55/5 23     * * * scheduler youtube-music deny
+*/5    0-7,11 * * * scheduler youtube-music deny
 
 
 
