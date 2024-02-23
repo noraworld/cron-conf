@@ -167,13 +167,10 @@ NON_ROOT_USER=ubuntu
 
 
 # Gaming
-*/5    8-9          * * * scheduler gaming allow
-*/5    12-22        * * * scheduler gaming allow
-0      10           * * * scheduler gaming deny --safe
-0      23           * * * scheduler gaming deny --safe
-5-55/5 10           * * * scheduler gaming deny
-5-55/5 23           * * * scheduler gaming deny
-*/5    0-7,11       * * * scheduler gaming deny
+*/5    9-23 * * * scheduler gaming allow
+0      0    * * * scheduler gaming deny --safe
+5-55/5 0    * * * scheduler gaming deny
+*/5    1-8  * * * scheduler gaming deny
 
 
 
