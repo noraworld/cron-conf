@@ -37,12 +37,14 @@ NON_ROOT_USER=ubuntu
 
 
 
-# This is to reduce the possibility that the system freezes
-# It is executed with a 9-minute delay to avoid conflicts with "periodic"
-# Restarting PipeWire and Bluetooth daemons and attempting to connect to Bluetooth devices
-# should not be executed simultaneously
+# Morning
+#
+#   This is to reduce the possibility that the system freezes
+#   It is executed with a 9-minute delay to avoid conflicts with "periodic"
+#   Restarting PipeWire and Bluetooth daemons and attempting to connect to Bluetooth devices
+#   should not be executed simultaneously
+#
 19 10 * * * scheduler morning
-## 19 2  * * * scheduler night
 
 
 
@@ -223,6 +225,14 @@ NON_ROOT_USER=ubuntu
 5-55/5 10           * * * scheduler youtube-music deny
 5-55/5 23           * * * scheduler youtube-music deny
 */5    0-7,11       * * * scheduler youtube-music deny
+
+
+
+## Night
+##
+##   It's never been used before.
+##
+## 19 2 * * * scheduler night
 
 
 
