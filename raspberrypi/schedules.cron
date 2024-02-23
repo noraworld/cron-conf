@@ -58,10 +58,10 @@ NON_ROOT_USER=ubuntu
 #   Note 2:
 #     Remember that the shorter the time is, the more it can take effect.
 #
- */10    18-21      * * * scheduler firewall allow
- 0-10/1  22         * * * scheduler firewall deny --safe
- 11-59/1 22         * * * scheduler firewall deny
- */1     0-17,23    * * * scheduler firewall deny
+*/10    18-21      * * * scheduler firewall allow
+0-10/1  22         * * * scheduler firewall deny --safe
+11-59/1 22         * * * scheduler firewall deny
+*/1     0-17,23    * * * scheduler firewall deny
 
 
 
@@ -72,19 +72,19 @@ NON_ROOT_USER=ubuntu
 #   Note 2:
 #     Remember that the shorter the time is, the more it can take effect.
 #
- */10    18-19      * * 5     scheduler observe stop
- 0-10/1  20         * * 5     scheduler observe start --safe
- 11-59/1 20         * * 5     scheduler observe start
- */1     0-17,21-23 * * 5     scheduler observe start
- */1     0-23       * * 0-4,6 scheduler observe start
+*/10    18-19      * * 5     scheduler observe stop
+0-10/1  20         * * 5     scheduler observe start --safe
+11-59/1 20         * * 5     scheduler observe start
+*/1     0-17,21-23 * * 5     scheduler observe start
+*/1     0-23       * * 0-4,6 scheduler observe start
 
 
 
 # Todo
- */10    8-9       * * * scheduler todo stop
- 0-10/1  10        * * * scheduler todo start --safe
- 11-59/1 10        * * * scheduler todo start
- */1     0-7,11-23 * * * scheduler todo start
+*/10    8-9       * * * scheduler todo stop
+0-10/1  10        * * * scheduler todo start --safe
+11-59/1 10        * * * scheduler todo start
+*/1     0-7,11-23 * * * scheduler todo start
 
 
 
@@ -94,10 +94,10 @@ NON_ROOT_USER=ubuntu
 #     Remember that the Dnsmasq daemon will restart automatically,
 #     and you will lose the streaks of a digital detox when enabling this restriction.
 #
- 0-10/1  0    * * * scheduler snorlax deny --safe
- 11-59/1 0    * * * scheduler snorlax deny
- */1     1-7  * * * scheduler snorlax deny
- */10    8-23 * * * scheduler snorlax allow
+0-10/1  0    * * * scheduler snorlax deny --safe
+11-59/1 0    * * * scheduler snorlax deny
+*/1     1-7  * * * scheduler snorlax deny
+*/10    8-23 * * * scheduler snorlax allow
 
 
 
