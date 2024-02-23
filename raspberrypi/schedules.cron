@@ -81,7 +81,7 @@ NON_ROOT_USER=ubuntu
 
 
 # Todo
-*/10    9-10       * * * scheduler todo stop
+*/10    9-10      * * * scheduler todo stop
 0-10/1  11        * * * scheduler todo start --safe
 11-59/1 11        * * * scheduler todo start
 */1     0-8,12-23 * * * scheduler todo start
