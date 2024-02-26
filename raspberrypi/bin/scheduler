@@ -233,7 +233,7 @@ firewall() {
         #   Note that when the firewall observer stops once but the todo observer is still working,
         #   and if communication with GitHub fails, this is performed and results in getting punished.
         #   [firewall_memo]
-        cron-daemonctl start observe-firewall "$safe"
+        cron-daemonctl start observe-firewall --safe
       elif [ "$(schedules_update_ready)" -gt 0 ]; then
         cron-daemonctl stop observe-firewall "$safe"
       fi
@@ -356,12 +356,12 @@ observe() {
       if [ "$(schedules_update_ready)" -lt 0 ]; then
         # TODO: Please delete this note below after confirming the phenomenon doesn't happen.
         # Note that the same phenomenon could happen as [firewall_memo].
-        cron-daemonctl start observe-crontab "$safe"
-        cron-daemonctl start observe-cron-conf "$safe"
-        cron-daemonctl start observe-dnsmasq-conf "$safe"
-        cron-daemonctl start observe-dnsmasq-priv-conf "$safe"
-        cron-daemonctl start observe-dnsmasq-toggle "$safe"
-        cron-daemonctl start observe-dnsmasq-priv-toggle "$safe"
+        cron-daemonctl start observe-crontab --safe
+        cron-daemonctl start observe-cron-conf --safe
+        cron-daemonctl start observe-dnsmasq-conf --safe
+        cron-daemonctl start observe-dnsmasq-priv-conf --safe
+        cron-daemonctl start observe-dnsmasq-toggle --safe
+        cron-daemonctl start observe-dnsmasq-priv-toggle --safe
       elif [ "$(schedules_update_ready)" -gt 0 ]; then
         cron-daemonctl stop observe-crontab "$safe"
         cron-daemonctl stop observe-cron-conf "$safe"
