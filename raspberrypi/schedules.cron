@@ -216,13 +216,10 @@ NON_ROOT_USER=ubuntu
 
 
 # YouTube Music
-*/5    8-9    * * * scheduler youtube-music allow
-*/5    12-22  * * * scheduler youtube-music allow
-0      10     * * * scheduler youtube-music deny --safe
-0      23     * * * scheduler youtube-music deny --safe
-5-55/5 10     * * * scheduler youtube-music deny
-5-55/5 23     * * * scheduler youtube-music deny
-*/5    0-7,11 * * * scheduler youtube-music deny
+*/5    9-23 * * * scheduler youtube-music allow
+0      0    * * * scheduler youtube-music deny --safe
+5-55/5 0    * * * scheduler youtube-music deny
+*/5    1-8  * * * scheduler youtube-music deny
 
 
 
