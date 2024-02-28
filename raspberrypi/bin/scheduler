@@ -172,6 +172,11 @@ morning() {
     /home/ubuntu/.pibox/the_other_day_i_met_a_bear.mp3" |
     at now + "$SECOND_ALARM_INTERVAL"
 
+  # Do not append anything between the alarm section and the SSH section.
+  # The SSH section checks whether the alarm is playing,
+  # and if you add something that takes time to proceed between them,
+  # the alarm may stop before the confirmation.
+
   # SSH
   if [ "$(ps aux | grep juke | grep -cv grep)"                -ge 1 ] &&
      [ "$(marlin info WH-1000XM3 | grep -c "Connected: yes")" -ge 1 ]; then
