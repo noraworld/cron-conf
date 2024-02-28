@@ -151,9 +151,6 @@ morning() {
   # Fan control
   metronome set full
 
-  # SSH
-  punish --duration "$ALARM_TIME" --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')"
-
   # Alarm clock
   #
   #   Sound name:   The Other Day I Met a Bear
@@ -174,6 +171,17 @@ morning() {
     --times=30                                          \
     /home/ubuntu/.pibox/the_other_day_i_met_a_bear.mp3" |
     at now + "$SECOND_ALARM_INTERVAL"
+
+  # SSH
+  if [ "$(ps aux | grep juke | grep -cv grep)"                -ge 1 ] &&
+     [ "$(marlin info WH-1000XM3 | grep -c "Connected: yes")" -ge 1 ]; then
+
+    # The SSH connection will be restored immediately after the alarm stops.
+    punish --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" --duration "$ALARM_TIME"
+  else
+    # The SSH connection will not be restored until the same time when you get punished passes.
+    punish --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')"
+  fi
 
   # Network
   vpnctl disconnect --skipdns
