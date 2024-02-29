@@ -67,6 +67,12 @@ main() {
   fi
 
   echo "[$(date '+%Y-%m-%dT%H:%M:%S%z')] Invoked GitHub API with result \"$result\"" >> "$LOG_PATH"
+
+  if [ "$result" = "accomplished" ]; then
+    exit 0
+  else
+    exit 1
+  fi
 }
 
 # @getoptions
