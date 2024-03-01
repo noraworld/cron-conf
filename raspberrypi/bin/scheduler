@@ -4,7 +4,7 @@
 XDG_RUNTIME_DIR="/run/user/$(id -u)"
 PULSE_RUNTIME_PATH="/run/user/$(id -u)/pulse/"
 PRIV_TOGGLE_DIR="/etc/dnsmasq.priv/toggle"
-ALARM_TIME="35 min" # "$SECOND_ALARM_INTERVAL" + "15 min"
+ALARM_TIME="25 min" # "$SECOND_ALARM_INTERVAL" + "5 min"
 SECOND_ALARM_INTERVAL="20 min"
 
 main() {
@@ -168,15 +168,15 @@ morning() {
     --volume=0.025                                      \
     --gradual=0.025                                     \
     --max=3.0                                           \
-    --times=30                                          \
+    --times=120                                         \
     /home/ubuntu/.pibox/the_other_day_i_met_a_bear.mp3" |
     at now + "$SECOND_ALARM_INTERVAL"
-
+  #
   # Do not append anything between the alarm section and the SSH section.
   # The SSH section checks whether the alarm is playing,
   # and if you add something that takes time to proceed between them,
   # the alarm may stop before the confirmation.
-
+  #
   # SSH
   if [ "$(ps aux | grep juke | grep -cv grep)"                -ge 1 ] &&
      [ "$(marlin info WH-1000XM3 | grep -c "Connected: yes")" -ge 1 ]; then
