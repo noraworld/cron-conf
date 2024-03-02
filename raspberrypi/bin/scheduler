@@ -4,7 +4,7 @@
 XDG_RUNTIME_DIR="/run/user/$(id -u)"
 PULSE_RUNTIME_PATH="/run/user/$(id -u)/pulse/"
 PRIV_TOGGLE_DIR="/etc/dnsmasq.priv/toggle"
-ALARM_TIME="25 min" # "$SECOND_ALARM_INTERVAL" + "5 min"
+MINIMUM_ALARM_DURATION="10 min" # The alarm goes off for at least the time given here.
 SECOND_ALARM_INTERVAL="20 min"
 THIRD_ALARM_INTERVAL="40 min"
 
@@ -190,7 +190,10 @@ morning() {
      [ "$(marlin info WH-1000XM3 | grep -c "Connected: yes")" -ge 1 ]; then
 
     # The SSH connection will be restored immediately after the alarm stops.
-    punish --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" --duration "$ALARM_TIME"
+    echo "punish                                                   \
+      --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+      --duration "$MINIMUM_ALARM_DURATION""                        |
+      at now + "$THIRD_ALARM_INTERVAL"
   else
     # The SSH connection will not be restored until the same time when you get punished passes.
     punish --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')"
