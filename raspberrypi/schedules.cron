@@ -40,7 +40,7 @@ NON_ROOT_USER=ubuntu
 #   Restarting PipeWire and Bluetooth daemons and attempting to connect to Bluetooth devices
 #   should not be executed simultaneously
 #
-19 10 * * * scheduler morning
+0 10 * * * scheduler morning
 
 
 
