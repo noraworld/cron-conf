@@ -647,14 +647,28 @@ schedules_update_ready() {
   DAY_SECOND="86400"
   TOOK_THRESHOLD="2"
 
-  local_cron_conf_updated_at=$(git -C "/home/ubuntu/workspace/cron-conf" --no-pager log -1 --format="%ct")
-  local_dnsmasq_conf_updated_at=$(git -C "/home/ubuntu/workspace/dnsmasq-conf" --no-pager log -1 --format="%ct")
-  local_priv_dnsmasq_conf_updated_at=$(git -C "/home/ubuntu/workspace/envsman" --no-pager log -1 --format="%ct")
+  local_cron_conf_updated_at=$(        git -C "/home/ubuntu/workspace/cron-conf"    --no-pager log -1 --format="%ct")
+  local_dnsmasq_conf_updated_at=$(     git -C "/home/ubuntu/workspace/dnsmasq-conf" --no-pager log -1 --format="%ct")
+  local_priv_dnsmasq_conf_updated_at=$(git -C "/home/ubuntu/workspace/envsman"      --no-pager log -1 --format="%ct")
 
   # https://docs.github.com/en/rest/commits/commits?apiVersion=2022-11-28
-  cron_conf_updated_at=$(gh api "$BASE_URL/$OWNER/cron-conf/commits?per_page=1"       --jq ".[].commit.author.date")
-  dnsmasq_conf_updated_at=$(gh api "$BASE_URL/$OWNER/dnsmasq-conf/commits?per_page=1" --jq ".[].commit.author.date")
-  priv_dnsmasq_conf_updated_at=$(gh api "$BASE_URL/$OWNER/envsman/commits?per_page=1" --jq ".[].commit.author.date")
+  cron_conf_updated_at=$(        gh api "$BASE_URL/$OWNER/cron-conf/commits?per_page=1"    --jq ".[].commit.author.date")
+  cron_conf_updated_at_succeeded="$?"
+  dnsmasq_conf_updated_at=$(     gh api "$BASE_URL/$OWNER/dnsmasq-conf/commits?per_page=1" --jq ".[].commit.author.date")
+  dnsmasq_conf_updated_at_succeeded="$?"
+  priv_dnsmasq_conf_updated_at=$(gh api "$BASE_URL/$OWNER/envsman/commits?per_page=1"      --jq ".[].commit.author.date")
+  priv_dnsmasq_conf_updated_at_succeeded="$?"
+
+  if [ "$1" = "schedules-update-ready" ]; then
+    if [ "$cron_conf_updated_at_succeeded"         -ne 0 ] ||
+       [ "$dnsmasq_conf_updated_at_succeeded"      -ne 0 ] ||
+       [ "$priv_dnsmasq_conf_updated_at_succeeded" -ne 0 ]; then
+
+      # Failed to retrieve information.
+      echo "0"
+      exit "1"
+    fi
+  fi
 
   latest_timestamp=$(echo "$(date -d"$cron_conf_updated_at" +%s) $(date -d"$dnsmasq_conf_updated_at" +%s) $(date -d"$priv_dnsmasq_conf_updated_at" +%s)" | tr ' ' '\n' | sort -n | tail -n 1)
   updated_at=$(date --date "@$latest_timestamp")
