@@ -163,23 +163,27 @@ morning() {
   #
   #     juke stop all
   #
-  ## First
-  juke play       \
-    --volume=0.05 \
-    /home/ubuntu/.pibox/the_other_day_i_met_a_bear.mp3
-  ## Second
-  echo "juke play                                       \
-    --volume=0.25                                       \
-    /home/ubuntu/.pibox/the_other_day_i_met_a_bear.mp3" |
-    at now + "$SECOND_ALARM_INTERVAL"
-  ## Third
-  echo "juke play                                       \
-    --volume=0.025                                      \
-    --gradual=0.025                                     \
-    --max=3.0                                           \
-    --times=120                                         \
-    /home/ubuntu/.pibox/the_other_day_i_met_a_bear.mp3" |
-    at now + "$THIRD_ALARM_INTERVAL"
+  if [ "$(marlin info WH-1000XM3 | grep -c "Connected: yes")" -ge 1 ]; then
+    ## First
+    juke play       \
+      --volume=0.05 \
+      /home/ubuntu/.pibox/the_other_day_i_met_a_bear.mp3
+
+    ## Second
+    echo "juke play                                       \
+      --volume=0.25                                       \
+      /home/ubuntu/.pibox/the_other_day_i_met_a_bear.mp3" |
+      at now + "$SECOND_ALARM_INTERVAL"
+
+    ## Third
+    echo "juke play                                       \
+      --volume=0.025                                      \
+      --gradual=0.025                                     \
+      --max=3.0                                           \
+      --times=120                                         \
+      /home/ubuntu/.pibox/the_other_day_i_met_a_bear.mp3" |
+      at now + "$THIRD_ALARM_INTERVAL"
+  fi
   #
   # Do not append anything between the alarm section and the SSH section.
   # The SSH section checks whether the alarm is playing,
@@ -187,17 +191,19 @@ morning() {
   # the alarm may stop before the confirmation.
   #
   # SSH
-  if [ "$(ps aux | grep juke | grep -cv grep)"                -ge 1 ] &&
-     [ "$(marlin info WH-1000XM3 | grep -c "Connected: yes")" -ge 1 ]; then
-
-    # The SSH connection will be restored immediately after the alarm stops.
+  if [ "$(ps aux | grep juke | grep -cv grep)" -ge 1 ]; then
+    # The SSH connection will be restored in $MINIMUM_ALARM_DURATION.
     echo "punish                                                   \
       --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
       --duration "$MINIMUM_ALARM_DURATION""                        |
       at now + "$THIRD_ALARM_INTERVAL"
   else
+    # Is it really necessary?
+    # It doesn't matter if you get up at an appropriate time, even if you don't hear the alarm sound.
+    # Besides, a Bluetooth daemon or a PipeWire daemon is too unstable for the alarm to go off.
+    #
     # The SSH connection will not be restored until the same time when you get punished passes.
-    punish --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')"
+    : # punish --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')"
   fi
 
   # Network
