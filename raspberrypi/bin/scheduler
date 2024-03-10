@@ -5,9 +5,10 @@ XDG_RUNTIME_DIR="/run/user/$(id -u)"
 PULSE_RUNTIME_PATH="/run/user/$(id -u)/pulse/"
 PRIV_TOGGLE_DIR="/etc/dnsmasq.priv/toggle"
 
-SECOND_ALARM_INTERVAL="20 min"  # The second alarm goes off the time given here after the first one does.
-THIRD_ALARM_INTERVAL="40 min"   # The third alarm goes off the time given here after the FIRST one does.
-MINIMUM_ALARM_DURATION="10 min" # The third alarm goes off for at least the time given here.
+SECOND_ALARM_INTERVAL="20 min"   # The second alarm goes off the time given here after the first one does.
+THIRD_ALARM_INTERVAL="40 min"    # The third alarm goes off the time given here after the FIRST one does.
+MINIMUM_ALARM_DURATION="10 min"  # The third alarm goes off for at least the time given here.
+ALARM_DISABLED_DURATION="1 hour" # The SSH connection is lost for the time given here when the alarm is disabled.
 
 main() {
   export XDG_RUNTIME_DIR
@@ -192,18 +193,15 @@ morning() {
   #
   # SSH
   if [ "$(ps aux | grep juke | grep -cv grep)" -ge 1 ]; then
-    # The SSH connection will be restored in $MINIMUM_ALARM_DURATION.
     echo "punish                                                   \
       --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
       --duration "$MINIMUM_ALARM_DURATION""                        |
       at now + "$THIRD_ALARM_INTERVAL"
   else
-    # Is it really necessary?
-    # It doesn't matter if you get up at an appropriate time, even if you don't hear the alarm sound.
-    # Besides, a Bluetooth daemon or a PipeWire daemon is too unstable for the alarm to go off.
-    #
-    # The SSH connection will not be restored until the same time when you get punished passes.
-    : # punish --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')"
+    echo "punish                                                   \
+      --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+      --duration "$ALARM_DISABLED_DURATION""                       |
+      at now + "$THIRD_ALARM_INTERVAL"
   fi
 
   # Network
