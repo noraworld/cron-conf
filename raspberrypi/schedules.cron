@@ -111,6 +111,11 @@ NON_ROOT_USER=ubuntu
 
 
 
+# Crimson
+*/5 * * * * scheduler crimson deny
+
+
+
 # Ometeotl
 */5    10-22 * * * scheduler ometeotl allow
 0      23    * * * scheduler ometeotl deny --safe
