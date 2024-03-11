@@ -10,6 +10,8 @@ THIRD_ALARM_INTERVAL="40 min"    # The third alarm goes off the time given here 
 MINIMUM_ALARM_DURATION="10 min"  # The third alarm goes off for at least the time given here.
 ALARM_DISABLED_DURATION="1 hour" # The SSH connection is lost for the time given here when the alarm is disabled.
 
+UPTIME_THRESHOLD="5"
+
 main() {
   export XDG_RUNTIME_DIR
   export PULSE_RUNTIME_PATH
@@ -464,11 +466,13 @@ periodic() {
   # it's important because settings that aren't changed automatically, especially the strict setting changes,
   # might not be changed for a while.
   #
-  auto-git-pull                            \
-    "/home/ubuntu/workspace/cron-conf"     \
-    "/home/ubuntu/workspace/dnsmasq-conf"  \
-    "/home/ubuntu/workspace/envsman"       \
-    "/home/ubuntu/workspace/systemd-units" &
+  if [ "$(echo "$(awk '{print $1}' /proc/uptime)" / 60 | bc)" -gt "$UPTIME_THRESHOLD" ]; then
+    auto-git-pull                            \
+      "/home/ubuntu/workspace/cron-conf"     \
+      "/home/ubuntu/workspace/dnsmasq-conf"  \
+      "/home/ubuntu/workspace/envsman"       \
+      "/home/ubuntu/workspace/systemd-units" &
+  fi
 
   # Notify each time you achieve your daily digital detox
   digital-detox-notifier
