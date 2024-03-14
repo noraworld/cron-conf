@@ -183,9 +183,9 @@ crimson() {
     pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
   done
 
-  if ! [ -L /etc/dnsmasq.toggle/crimson.conf ]; then
+  if ! [ -L /etc/dnsmasq.priv/toggle/crimson.conf ]; then
     error_color
-    echo "error: /etc/dnsmasq.toggle/crimson.conf still doesn't exist" >&2
+    echo "error: /etc/dnsmasq.priv/toggle/crimson.conf still doesn't exist" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
     exit
