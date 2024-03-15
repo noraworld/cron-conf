@@ -149,10 +149,12 @@ chime() {
 crimson() {
   case "$operation" in
     "deny")
+      [ "$SOFT" = 1 ] || cron-daemonctl start observe-crimson-conf "$safe"
       remove-dnsmasq-toggle-conf private crimson
       ;;
     "allow")
-      create-dnsmasq-toggle-conf private crimson
+      cron-daemonctl stop observe-crimson-conf "$safe"
+      # create-dnsmasq-toggle-conf private crimson
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2
