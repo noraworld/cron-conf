@@ -92,10 +92,10 @@ NON_ROOT_USER=ubuntu
 #     Remember that the Dnsmasq daemon will restart automatically,
 #     and you will lose the streaks of a digital detox when enabling this restriction.
 #
-0-10/1  0     * * * scheduler snorlax deny --safe
-11-59/1 0     * * * scheduler snorlax deny
-*/1     1-9   * * * scheduler snorlax deny
-*/10    10-23 * * * scheduler snorlax allow
+#0-10/1  0     * * * scheduler snorlax deny --safe
+#11-59/1 0     * * * scheduler snorlax deny
+#*/1     1-9   * * * scheduler snorlax deny
+#*/10    10-23 * * * scheduler snorlax allow
 
 
 
@@ -218,10 +218,14 @@ NON_ROOT_USER=ubuntu
 
 
 # YouTube
-*/5    10-22 * * * scheduler youtube allow
-0      23    * * * scheduler youtube deny --safe
-5-55/5 23    * * * scheduler youtube deny
-*/5    0-9   * * * scheduler youtube deny
+#*/5    10-22 * * * scheduler youtube allow
+#0      23    * * * scheduler youtube deny --safe
+#5-55/5 23    * * * scheduler youtube deny
+#*/5    0-9   * * * scheduler youtube deny
+*/5    10-23,0-1 * * * scheduler youtube allow
+0      2         * * * scheduler youtube deny --safe
+5-55/5 2         * * * scheduler youtube deny
+*/5    3-9       * * * scheduler youtube deny
 
 
 
