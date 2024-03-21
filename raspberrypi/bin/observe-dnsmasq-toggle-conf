@@ -122,12 +122,20 @@ todo_mode() {
   set -u
 
   if [ "$todo_skipped" = "false" ]; then
-    if [ "$(restrict-all check)" -le 0 ] &&
-       # Do not retry many times, because no matter how many times you do that, the result is likely to be the same.
-       # Besides, it delays knowing whether the restrictions are unlocked if there are some attempts.
-       #
-       # [ "$(todo-accomplished --repo "noraworld/diary" --except --standard 6 --past 2 --retry 1)" -gt 0 ]; then
-       [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 0 --standard "$STANDARD")" -gt 0 ]; then
+    # Do not retry many times, because no matter how many times you do that, the result is likely to be the same.
+    # Besides, it delays knowing whether the restrictions are unlocked if there are some attempts.
+    accomplished="0"
+    if [ "$NIGHT" != 1 ]; then
+      if [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 0 --standard 10)" -gt 0 ]; then
+        accomplished="1"
+      fi
+    else
+      if [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 0 --except --standard 1)" -gt 0 ]; then
+        accomplished="1"
+      fi
+    fi
+
+    if [ "$(restrict-all check)" -le 0 ] && [ "$accomplished" -gt 0 ]; then
       todo_skipped=true
     else
       todo_skipped=false
@@ -262,7 +270,7 @@ parser_definition() {
   param  FILE    -f --file     -- "observe only a specific file (all files in a directory by default)"
   param  SOURCE  -s --source   -- "TBD"
   param  TARGET  -t --target   -- "target directory to observe (current directory by default)"
-  param  STANDARD   --standard -- "the same as the option for todo-accomplished"
+  param  NIGHT      --night    -- "if you specify this, the option for todo-accomplished is changed"
   flag   SUDO       --sudo     -- "TBD"
   param  MODE    -m --mode     -- "git, ln, unlink, cron, or sync"
   disp   :usage  -h --help     -- "print help message and exit"
@@ -280,7 +288,7 @@ EVENT=''
 FILE=''
 SOURCE=''
 TARGET=''
-STANDARD=''
+NIGHT=''
 SUDO=''
 MODE=''
 REST=''
@@ -325,10 +333,10 @@ parse() {
         OPTARG=$2
         TARGET="$OPTARG"
         shift ;;
-      '--standard')
+      '--night')
         [ $# -le 1 ] && set "required" "$1" && break
         OPTARG=$2
-        STANDARD="$OPTARG"
+        NIGHT="$OPTARG"
         shift ;;
       '--sudo')
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
@@ -381,7 +389,7 @@ Options:
   -f, --file FILE             observe only a specific file (all files in a directory by default)
   -s, --source SOURCE         TBD
   -t, --target TARGET         target directory to observe (current directory by default)
-      --standard STANDARD     the same as the option for todo-accomplished
+      --night NIGHT           if you specify this, the option for todo-accomplished is changed
       --sudo                  TBD
   -m, --mode MODE             git, ln, unlink, cron, or sync
   -h, --help                  print help message and exit
