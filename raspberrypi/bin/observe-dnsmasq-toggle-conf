@@ -127,7 +127,7 @@ todo_mode() {
        # Besides, it delays knowing whether the restrictions are unlocked if there are some attempts.
        #
        # [ "$(todo-accomplished --repo "noraworld/diary" --except --standard 6 --past 2 --retry 1)" -gt 0 ]; then
-       [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 0 --standard 10)" -gt 0 ]; then
+       [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 0 --standard "$STANDARD")" -gt 0 ]; then
       todo_skipped=true
     else
       todo_skipped=false
@@ -257,15 +257,16 @@ validate() {
 parser_definition() {
   setup REST help:usage -- "Usage: observe-dnsmasq-toggle-conf [options]... [arguments]..." ""
   msg -- "Options:"
-  flag   DEBUG   -d --debug   -- "debug mode"
-  param  EVENT   -e --event   -- "TBD"
-  param  FILE    -f --file    -- "observe only a specific file (all files in a directory by default)"
-  param  SOURCE  -s --source  -- "TBD"
-  param  TARGET  -t --target  -- "target directory to observe (current directory by default)"
-  flag   SUDO       --sudo    -- "TBD"
-  param  MODE    -m --mode    -- "git, ln, unlink, cron, or sync"
-  disp   :usage  -h --help    -- "print help message and exit"
-  disp   VERSION    --version -- "show the current version"
+  flag   DEBUG   -d --debug    -- "debug mode"
+  param  EVENT   -e --event    -- "TBD"
+  param  FILE    -f --file     -- "observe only a specific file (all files in a directory by default)"
+  param  SOURCE  -s --source   -- "TBD"
+  param  TARGET  -t --target   -- "target directory to observe (current directory by default)"
+  param  STANDARD   --standard -- "the same as the option for todo-accomplished"
+  flag   SUDO       --sudo     -- "TBD"
+  param  MODE    -m --mode     -- "git, ln, unlink, cron, or sync"
+  disp   :usage  -h --help     -- "print help message and exit"
+  disp   VERSION    --version  -- "show the current version"
 }
 # @end
 
@@ -279,6 +280,7 @@ EVENT=''
 FILE=''
 SOURCE=''
 TARGET=''
+STANDARD=''
 SUDO=''
 MODE=''
 REST=''
@@ -322,6 +324,11 @@ parse() {
         [ $# -le 1 ] && set "required" "$1" && break
         OPTARG=$2
         TARGET="$OPTARG"
+        shift ;;
+      '--standard')
+        [ $# -le 1 ] && set "required" "$1" && break
+        OPTARG=$2
+        STANDARD="$OPTARG"
         shift ;;
       '--sudo')
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
@@ -374,6 +381,7 @@ Options:
   -f, --file FILE             observe only a specific file (all files in a directory by default)
   -s, --source SOURCE         TBD
   -t, --target TARGET         target directory to observe (current directory by default)
+      --standard STANDARD     the same as the option for todo-accomplished
       --sudo                  TBD
   -m, --mode MODE             git, ln, unlink, cron, or sync
   -h, --help                  print help message and exit
