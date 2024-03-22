@@ -270,7 +270,7 @@ parser_definition() {
   param  FILE    -f --file     -- "observe only a specific file (all files in a directory by default)"
   param  SOURCE  -s --source   -- "TBD"
   param  TARGET  -t --target   -- "target directory to observe (current directory by default)"
-  param  NIGHT      --night    -- "if you specify this, the option for todo-accomplished is changed"
+  flag   NIGHT      --night    -- "if you specify this, the option for todo-accomplished is changed"
   flag   SUDO       --sudo     -- "TBD"
   param  MODE    -m --mode     -- "git, ln, unlink, cron, or sync"
   disp   :usage  -h --help     -- "print help message and exit"
@@ -334,10 +334,10 @@ parse() {
         TARGET="$OPTARG"
         shift ;;
       '--night')
-        [ $# -le 1 ] && set "required" "$1" && break
-        OPTARG=$2
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
         NIGHT="$OPTARG"
-        shift ;;
+        ;;
       '--sudo')
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
@@ -389,7 +389,7 @@ Options:
   -f, --file FILE             observe only a specific file (all files in a directory by default)
   -s, --source SOURCE         TBD
   -t, --target TARGET         target directory to observe (current directory by default)
-      --night NIGHT           if you specify this, the option for todo-accomplished is changed
+      --night                 if you specify this, the option for todo-accomplished is changed
       --sudo                  TBD
   -m, --mode MODE             git, ln, unlink, cron, or sync
   -h, --help                  print help message and exit
