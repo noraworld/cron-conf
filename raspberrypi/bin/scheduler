@@ -218,12 +218,12 @@ morning() {
   #
   # SSH
   if [ "$(ps aux | grep juke | grep -cv grep)" -ge 1 ]; then
-    echo "punish                                                   \
+    echo "/home/ubuntu/workspace/cron-conf/bin/lib/punish          \
       --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
       --duration "$MINIMUM_ALARM_DURATION""                        |
       at now + "$THIRD_ALARM_INTERVAL"
   else
-    echo "punish                                                   \
+    echo "/home/ubuntu/workspace/cron-conf/bin/lib/punish          \
       --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
       --duration "$ALARM_DISABLED_DURATION""                       |
       at now + "$THIRD_ALARM_INTERVAL"
