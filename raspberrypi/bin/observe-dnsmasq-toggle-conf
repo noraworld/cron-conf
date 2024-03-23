@@ -4,6 +4,7 @@
 set -u
 export PATH=/home/ubuntu/workspace/cron-conf/bin:/home/ubuntu/workspace/cron-conf/raspberrypi/bin:/home/ubuntu/.local/share/zinit/polaris/bin:"$PATH"
 RETRY_INTERVAL=1
+ACCOMPLISHED_CHECK_INTERVAL=1800
 
 
 
@@ -115,8 +116,6 @@ firewall_mode() {
 
 
 todo_mode() {
-  # TODO?: Fix the problem that once a checklist is improperly unlocked, it will not be censored thereafter.
-
   set +u
   [ "$todo_skipped" = "" ] && todo_skipped=false
   set -u
@@ -143,6 +142,26 @@ todo_mode() {
   else
     if [ "$(systemctl --user is-active observe-firewall)" != "active" ] && [ "$(observe-firewall check)" -gt 0 ]; then
       observe-firewall allow
+    fi
+
+    set +u
+    [ "$accomplished_last_checked_at" = "" ] && accomplished_last_checked_at=$(date +%s)
+    set -u
+
+    if [ "$(echo $(( $(date +%s) - $accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
+      accomplished_last_checked_at=$(date +%s)
+
+      if [ "$NIGHT" != 1 ]; then
+        if [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 0 --standard 10)" -lt 0 ]; then
+          todo_skipped=false
+          /home/ubuntu/workspace/cron-conf/bin/lib/punish --from \"$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')\"
+        fi
+      else
+        if [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 0 --except --standard 2)" -lt 0 ]; then
+          todo_skipped=false
+          /home/ubuntu/workspace/cron-conf/bin/lib/punish --from \"$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')\"
+        fi
+      fi
     fi
   fi
 
