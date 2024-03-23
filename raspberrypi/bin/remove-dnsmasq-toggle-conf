@@ -40,7 +40,7 @@ main() {
       sudo systemctl restart dnsmasq
     else
       # It is performed in the background.
-      exrd --log /home/ubuntu/.log/exrd.log --from "$(echo "$PROG_NAME $@")" &
+      exrd --skip --log /home/ubuntu/.log/exrd.log --from "$(echo "$PROG_NAME $@")" &
     fi
   fi
 }

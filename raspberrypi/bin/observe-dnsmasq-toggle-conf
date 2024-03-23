@@ -183,7 +183,12 @@ todo_mode() {
                "/home/ubuntu/workspace/dnsmasq-conf/dnsmasq" \
                "/home/ubuntu/workspace/envsman/raspberrypi/dnsmasq/dnsmasq.priv")" -le 0 ]; then
 
-    clean-repo --immediately perform                                    \
+    # MEMO: "--immediately" might not be necessary
+    # clean-repo --immediately perform                                    \
+    #   "/home/ubuntu/workspace/cron-conf"                                \
+    #   "/home/ubuntu/workspace/dnsmasq-conf/dnsmasq"                     \
+    #   "/home/ubuntu/workspace/envsman/raspberrypi/dnsmasq/dnsmasq.priv"
+    clean-repo perform                                                  \
       "/home/ubuntu/workspace/cron-conf"                                \
       "/home/ubuntu/workspace/dnsmasq-conf/dnsmasq"                     \
       "/home/ubuntu/workspace/envsman/raspberrypi/dnsmasq/dnsmasq.priv"
@@ -205,7 +210,9 @@ todo_mode() {
 
   # sync_mode
   if [ "$todo_skipped" = "false" ] && [ "$(diff -qr "$SOURCE" "$TARGET" | grep "^Only in $TARGET")" != "" ]; then
-    clean-toggle-dir "$SOURCE" "$TARGET" --immediately
+    # MEMO: "--immediately" might not be necessary
+    # clean-toggle-dir "$SOURCE" "$TARGET" --immediately
+    clean-toggle-dir "$SOURCE" "$TARGET"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): deleted illegal files in directory"
   fi
 
