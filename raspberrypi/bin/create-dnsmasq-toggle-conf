@@ -8,16 +8,20 @@ main() {
   parse "$@"
   eval "set -- $REST"
 
-  if [ "$#" -eq 2 ]; then
-    visibility=$1
-    target=$2
-  elif [ "$#" -eq 1 ]; then
+  if [ "$#" -eq 1 ]; then
     if [ "$(echo "$1" | grep -c "/etc/dnsmasq.toggle")" -ne 0 ]; then
       visibility="public"
     elif [ "$(echo "$1" | grep -c "/etc/dnsmasq.priv/toggle")" -ne 0 ]; then
       visibility="private"
     fi
-    target=$(basename "$1" | sed -r 's/.conf$//g')
+    targets=$(basename "$1" | sed -r 's/.conf$//g')
+  elif [ "$#" -eq 2 ]; then
+    visibility=$1
+    targets=$2
+  elif [ "$#" -ge 3 ]; then
+    visibility=$1
+    shift
+    targets=$@
   fi
 
   if [ "$visibility" = "public" ]; then
@@ -29,26 +33,36 @@ main() {
   fi
 
   sudo mkdir -p "$TOGGLE_DIR"
+  operate "$@"
+  restart_dnsmasq "$@"
+}
 
-  # illegal situation
-  if [ -e "$TOGGLE_DIR/$target.conf" ] && ! [ -L "$TOGGLE_DIR/$target.conf" ]; then
-    linked=true
-    sudo rm "$TOGGLE_DIR/$target.conf"
-  fi
+operate() {
+  # Do not encompass $targets with double quotes.
+  for target in $targets; do
+    # illegal situation
+    if [ -e "$TOGGLE_DIR/$target.conf" ] && ! [ -L "$TOGGLE_DIR/$target.conf" ]; then
+      linked=true
+      sudo rm "$TOGGLE_DIR/$target.conf"
+    fi
 
-  # illegal situation
-  if [ -L "$TOGGLE_DIR/$target.conf" ] && [ "$(readlink "$TOGGLE_DIR/$target.conf")" != "$ORIGINAL_TOGGLE_DIR/$target.conf" ]; then
-    linked=true
-    sudo unlink "$TOGGLE_DIR/$target.conf"
-  fi
+    # illegal situation
+    if [ -L "$TOGGLE_DIR/$target.conf" ] &&
+       [ "$(readlink "$TOGGLE_DIR/$target.conf")" != "$ORIGINAL_TOGGLE_DIR/$target.conf" ]; then
+      linked=true
+      sudo unlink "$TOGGLE_DIR/$target.conf"
+    fi
 
-  if ! [ -e "$TOGGLE_DIR/$target.conf" ]; then
-    linked=true
-    sudo ln -s "$ORIGINAL_TOGGLE_DIR/$target.conf" "$TOGGLE_DIR"
-  else
-    echo "Warning: \"$TOGGLE_DIR/$target.conf\" already exists" >&2
-  fi
+    if ! [ -e "$TOGGLE_DIR/$target.conf" ]; then
+      linked=true
+      sudo ln -s "$ORIGINAL_TOGGLE_DIR/$target.conf" "$TOGGLE_DIR"
+    else
+      echo "Warning: \"$TOGGLE_DIR/$target.conf\" already exists" >&2
+    fi
+  done
+}
 
+restart_dnsmasq() {
   # Restart the Dnsmasq daemon when a symlink is created
   if $linked && [ "$SKIP" != 1 ]; then
     if [ "$IMMEDIATELY" = 1 ]; then
