@@ -26,20 +26,20 @@ main() {
 }
 
 check() {
-  if [ -e "$PRIV_TOGGLE_DIR/deregulated_superman.conf"                      ] &&
-   ! [ -e "$PRIV_TOGGLE_DIR/deregulated_superman_allow.conf"                ] &&
-     [ -e "$PRIV_TOGGLE_DIR/maeve.conf"                                     ] &&
-     [ -e "$PRIV_TOGGLE_DIR/ometeotl.conf"                                  ] &&
-     [ -e "$PRIV_TOGGLE_DIR/superman.conf"                                  ] &&
-   ! [ -e "$PRIV_TOGGLE_DIR/adguard_upstream.conf"                          ] &&
-   ! [ -e "$PRIV_TOGGLE_DIR/cloudflare_upstream.conf"                       ] &&
-   ! [ -e "$PRIV_TOGGLE_DIR/nordvpn_upstream.conf"                          ] &&
-     [ -e "$PRIV_TOGGLE_DIR/superman_upstream.conf"                         ] &&
-     [ -e      "$TOGGLE_DIR/gaming.conf"                                    ] &&
-     [ -e      "$TOGGLE_DIR/vod.conf"                                       ] &&
-     [ -e      "$TOGGLE_DIR/youtube.conf"                                   ] &&
-   ! [ -e      "$TOGGLE_DIR/youtube_alternative.conf"                       ] &&
-   ! [ -e      "$TOGGLE_DIR/youtube_music.conf"                             ]; then
+  if [ -e "$PRIV_TOGGLE_DIR/deregulated_superman.conf"       ] &&
+   ! [ -e "$PRIV_TOGGLE_DIR/deregulated_superman_allow.conf" ] &&
+     [ -e "$PRIV_TOGGLE_DIR/maeve.conf"                      ] &&
+     [ -e "$PRIV_TOGGLE_DIR/ometeotl.conf"                   ] &&
+     [ -e "$PRIV_TOGGLE_DIR/superman.conf"                   ] &&
+   ! [ -e "$PRIV_TOGGLE_DIR/adguard_upstream.conf"           ] &&
+   ! [ -e "$PRIV_TOGGLE_DIR/cloudflare_upstream.conf"        ] &&
+   ! [ -e "$PRIV_TOGGLE_DIR/nordvpn_upstream.conf"           ] &&
+     [ -e "$PRIV_TOGGLE_DIR/superman_upstream.conf"          ] &&
+     [ -e      "$TOGGLE_DIR/gaming.conf"                     ] &&
+     [ -e      "$TOGGLE_DIR/vod.conf"                        ] &&
+     [ -e      "$TOGGLE_DIR/youtube.conf"                    ] &&
+   ! [ -e      "$TOGGLE_DIR/youtube_alternative.conf"        ] &&
+   ! [ -e      "$TOGGLE_DIR/youtube_music.conf"              ]; then
 
     if [ "$STRICT" = 1 ]; then
       if [ "$(systemctl --user is-active $services | grep -c "inactive")" -eq 0 ]; then
