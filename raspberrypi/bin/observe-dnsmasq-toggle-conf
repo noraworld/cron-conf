@@ -147,12 +147,12 @@ todo_mode() {
       if [ "$NIGHT" != 1 ]; then
         if [ "$(restrict-all check)" -le 0 ] && [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 0 --standard 10)" -lt 0 ]; then
           todo_skipped=false
-          /home/ubuntu/workspace/cron-conf/bin/lib/punish --from \"$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')\"
+          /home/ubuntu/workspace/cron-conf/bin/lib/punish --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')"
         fi
       else
         if [ "$(restrict-all check)" -le 0 ] && [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 0 --except --standard 2)" -lt 0 ]; then
           todo_skipped=false
-          /home/ubuntu/workspace/cron-conf/bin/lib/punish --from \"$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')\"
+          /home/ubuntu/workspace/cron-conf/bin/lib/punish --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')"
         fi
       fi
     fi
