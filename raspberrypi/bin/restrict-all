@@ -60,23 +60,32 @@ reset() {
     systemctl --user start $services
   fi
 
+  # NOTE:
+  #   Restarting the Dnsmasq daemon is not executed
+  #   without the "--immediately" option for some reason,
+  #   even though it is performed in a current shell.
+
   create-dnsmasq-toggle-conf public gaming  \
                                     vod     \
-                                    youtube
+                                    youtube \
+                                    --immediately
 
   remove-dnsmasq-toggle-conf public youtube_alternative \
-                                    youtube_music
+                                    youtube_music       \
+                                    --immediately
 
   create-dnsmasq-toggle-conf private deregulated_superman \
                                      maeve                \
                                     ometeotl              \
                                     superman              \
-                                    superman_upstream
+                                    superman_upstream     \
+                                    --immediately
 
   remove-dnsmasq-toggle-conf private deregulated_superman_allow \
                                      adguard_upstream           \
                                      cloudflare_upstream        \
-                                     nordvpn_upstream
+                                     nordvpn_upstream           \
+                                     --immediately
 }
 
 # @getoptions
