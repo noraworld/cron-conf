@@ -145,12 +145,23 @@ todo_mode() {
       accomplished_last_checked_at=$(date +%s)
 
       if [ "$NIGHT" != 1 ]; then
-        if [ "$(restrict-all check)" -le 0 ] && [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 0 --standard 10)" -lt 0 ]; then
+        #
+        # NOTE:
+        #   Do not add `[ "$(restrict-all check)" -le 0 ]` as an "ADD" condition here.
+        #
+        #   This is called by two daemons. The variable `todo_skipped` should be turned `false` on both of them
+        #   when `todo-accomplished` returns `false`. However, when either of them enters this condition,
+        #   `restrict-all check` will return `-1`. And if `[ "$(restrict-all check)" -le 0 ]` is added to this condition,
+        #   the other one never enters this condition, which means `observe-firewall deny` and `observe-firewall allow`
+        #   will have conflict. [firewall-conflict]
+        #
+        if [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 0 --standard 10)" -lt 0 ]; then
           todo_skipped=false
           /home/ubuntu/workspace/cron-conf/bin/lib/punish --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')"
         fi
       else
-        if [ "$(restrict-all check)" -le 0 ] && [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 0 --except --standard 2)" -lt 0 ]; then
+        # NOTE: Same as [firewall-conflict]
+        if [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 0 --except --standard 2)" -lt 0 ]; then
           todo_skipped=false
           /home/ubuntu/workspace/cron-conf/bin/lib/punish --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')"
         fi
