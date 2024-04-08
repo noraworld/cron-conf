@@ -8,7 +8,6 @@ PROG_NAME="unlock"
 LOG_PATH="/home/ubuntu/.log/unlock.log"
 
 COOLDOWN_INTERVAL=0 # ideal: 10 (this may be unnecessary)
-WAITING_INTERVAL=10 # ideal: ? (it depends on how long it takes to retrieve the to-do list information)
 DELAY_INTERVAL=3    # ideal: 3
 RETRY_INTERVAL=10   # ideal: 10
 TIMES_LIMIT=5       # ideal: 5
@@ -23,11 +22,10 @@ NO_COLOR="\033[0m"
 SKIP=0
 
 main() {
-  services=$@
-  reference_minute=0
-
   parse "$@"
   eval "set -- $REST"
+
+  services=$@
 
   validate "$@"
   log_header "$@"
@@ -39,6 +37,9 @@ main() {
   log_before_execution "$@"
 
   for service in $services; do
+    reference_minute=0
+    waiting_interval=10
+
     case "$service" in
       "amazon")
         amazon
@@ -133,13 +134,14 @@ restart_dnsmasq() {
 
 amazon() {
   reference_minute=60
+  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   warning_color
   sudo unlink /etc/dnsmasq.toggle/amazon.conf
   no_color
 
-  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  pause "$waiting_interval" "$WAITING_MESSAGE"
 
   if [ -L /etc/dnsmasq.toggle/amazon.conf ]; then
     error_color
@@ -152,15 +154,15 @@ amazon() {
 
 chime() {
   reference_minute=10
+  waiting_interval=1
   [ "$DRY_RUN" = 1 ] && exit 0
-  WAITING_INTERVAL=1
 
   while [ -L "/etc/dnsmasq.toggle/chime.conf" ]; do
     warning_color
     sudo unlink /etc/dnsmasq.toggle/chime.conf
     no_color
 
-    pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+    pause "$waiting_interval" "$WAITING_MESSAGE"
   done
 
   if [ -L /etc/dnsmasq.toggle/chime.conf ]; then
@@ -174,15 +176,15 @@ chime() {
 
 crimson() {
   reference_minute=5
+  waiting_interval=1
   [ "$DRY_RUN" = 1 ] && exit 0
-  WAITING_INTERVAL=1
 
   while ! [ -L "/etc/dnsmasq.priv/toggle/crimson.conf" ]; do
     warning_color
     sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/crimson.conf /etc/dnsmasq.priv/toggle
     no_color
 
-    pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+    pause "$waiting_interval" "$WAITING_MESSAGE"
   done
 
   if ! [ -L /etc/dnsmasq.priv/toggle/crimson.conf ]; then
@@ -196,6 +198,7 @@ crimson() {
 
 deregulated_superman() {
   reference_minute=60
+  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   warning_color
@@ -203,7 +206,7 @@ deregulated_superman() {
   sudo unlink /etc/dnsmasq.priv/toggle/deregulated_superman.conf
   no_color
 
-  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  pause "$waiting_interval" "$WAITING_MESSAGE"
 
   if ! [ -L /etc/dnsmasq.priv/toggle/deregulated_superman_allow.conf ]; then
     error_color
@@ -224,13 +227,14 @@ deregulated_superman() {
 
 focus() {
   reference_minute=5
+  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   warning_color
   sudo unlink /etc/dnsmasq.priv/toggle/focus.conf
   no_color
 
-  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  pause "$waiting_interval" "$WAITING_MESSAGE"
 
   if [ -L /etc/dnsmasq.priv/toggle/focus.conf ]; then
     error_color
@@ -243,15 +247,15 @@ focus() {
 
 snorlax() {
   reference_minute=5
+  waiting_interval=1
   [ "$DRY_RUN" = 1 ] && exit 0
-  WAITING_INTERVAL=1
 
   while [ -L "/etc/dnsmasq.toggle/snorlax.conf" ]; do
     warning_color
     sudo unlink /etc/dnsmasq.toggle/snorlax.conf
     no_color
 
-    pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+    pause "$waiting_interval" "$WAITING_MESSAGE"
   done
 
   if [ -L /etc/dnsmasq.toggle/snorlax.conf ]; then
@@ -265,13 +269,14 @@ snorlax() {
 
 maeve() {
   reference_minute=60
+  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   warning_color
   sudo unlink /etc/dnsmasq.priv/toggle/maeve.conf
   no_color
 
-  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  pause "$waiting_interval" "$WAITING_MESSAGE"
 
   if [ -L /etc/dnsmasq.priv/toggle/maeve.conf ]; then
     error_color
@@ -284,6 +289,7 @@ maeve() {
 
 netflix() {
   reference_minute=60
+  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   if [ "$VPN" ]; then
@@ -302,7 +308,7 @@ netflix() {
   sudo unlink /etc/dnsmasq.toggle/netflix.conf
   no_color
 
-  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  pause "$waiting_interval" "$WAITING_MESSAGE"
 
   if ! [ -L /etc/dnsmasq.toggle/netflix_allow.conf ]; then
     error_color
@@ -323,13 +329,14 @@ netflix() {
 
 ometeotl() {
   reference_minute=60
+  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   warning_color
   sudo unlink /etc/dnsmasq.priv/toggle/ometeotl.conf
   no_color
 
-  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  pause "$waiting_interval" "$WAITING_MESSAGE"
 
   if [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ]; then
     error_color
@@ -342,6 +349,7 @@ ometeotl() {
 
 superman() {
   reference_minute=60
+  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   if [ -L /etc/dnsmasq.priv/toggle/maeve.conf ]; then
@@ -372,7 +380,7 @@ superman() {
   sudo unlink /etc/dnsmasq.priv/toggle/superman.conf
   no_color
 
-  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  pause "$waiting_interval" "$WAITING_MESSAGE"
 
   if [ -L /etc/dnsmasq.priv/toggle/maeve.conf ]; then
     error_color
@@ -433,13 +441,14 @@ superman() {
 
 gaming() {
   reference_minute=60
+  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   warning_color
   sudo unlink /etc/dnsmasq.toggle/gaming.conf
   no_color
 
-  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  pause "$waiting_interval" "$WAITING_MESSAGE"
 
   if [ -L /etc/dnsmasq.toggle/gaming.conf ]; then
     error_color
@@ -452,6 +461,7 @@ gaming() {
 
 vod() {
   reference_minute=60
+  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   if [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ]; then
@@ -462,7 +472,7 @@ vod() {
   sudo unlink /etc/dnsmasq.toggle/vod.conf
   no_color
 
-  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  pause "$waiting_interval" "$WAITING_MESSAGE"
 
   if [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ]; then
     error_color
@@ -483,13 +493,14 @@ vod() {
 
 youtube() {
   reference_minute=60
+  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   warning_color
   sudo unlink /etc/dnsmasq.toggle/youtube.conf
   no_color
 
-  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  pause "$waiting_interval" "$WAITING_MESSAGE"
 
   if [ -L /etc/dnsmasq.toggle/youtube.conf ]; then
     error_color
@@ -502,13 +513,14 @@ youtube() {
 
 youtube_alternative() {
   reference_minute=5
+  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   warning_color
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle/youtube_alternative.conf /etc/dnsmasq.toggle
   no_color
 
-  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  pause "$waiting_interval" "$WAITING_MESSAGE"
 
   if ! [ -L /etc/dnsmasq.toggle/youtube_alternative.conf ]; then
     error_color
@@ -521,13 +533,14 @@ youtube_alternative() {
 
 youtube_music() {
   reference_minute=5
+  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   warning_color
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle/youtube_music.conf /etc/dnsmasq.toggle
   no_color
 
-  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  pause "$waiting_interval" "$WAITING_MESSAGE"
 
   if ! [ -L /etc/dnsmasq.toggle/youtube_music.conf ]; then
     error_color
@@ -540,6 +553,7 @@ youtube_music() {
 
 adguard_upstream() {
   reference_minute=60
+  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   warning_color
@@ -549,7 +563,7 @@ adguard_upstream() {
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/adguard_upstream.conf /etc/dnsmasq.priv/toggle
   no_color
 
-  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  pause "$waiting_interval" "$WAITING_MESSAGE"
 
   if [ -L /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf ]; then
     error_color
@@ -582,6 +596,7 @@ adguard_upstream() {
 
 cloudflare_upstream() {
   reference_minute=60
+  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   if [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ]; then
@@ -600,7 +615,7 @@ cloudflare_upstream() {
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/cloudflare_upstream.conf /etc/dnsmasq.priv/toggle
   no_color
 
-  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  pause "$waiting_interval" "$WAITING_MESSAGE"
 
   if [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ]; then
     error_color
@@ -637,6 +652,7 @@ cloudflare_upstream() {
 
 nordvpn_upstream() {
   reference_minute=60
+  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   if [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ]; then
@@ -655,7 +671,7 @@ nordvpn_upstream() {
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/nordvpn_upstream.conf /etc/dnsmasq.priv/toggle
   no_color
 
-  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  pause "$waiting_interval" "$WAITING_MESSAGE"
 
   if [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ]; then
     error_color
@@ -692,6 +708,7 @@ nordvpn_upstream() {
 
 superman_upstream() {
   reference_minute=60
+  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   if [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ]; then
@@ -710,7 +727,7 @@ superman_upstream() {
   sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/superman_upstream.conf /etc/dnsmasq.priv/toggle
   no_color
 
-  pause "$WAITING_INTERVAL" "$WAITING_MESSAGE"
+  pause "$waiting_interval" "$WAITING_MESSAGE"
 
   if [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ]; then
     error_color
