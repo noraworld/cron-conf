@@ -8,7 +8,7 @@ main() {
     sleep "$SLEEP_INTERVAL"
   done
 
-  unlock youtube --skip && unlock superman --skip
+  unlock youtube superman --skip
   ls --color=auto --literal -al /etc/dnsmasq.toggle && ls --color=auto --literal -al /etc/dnsmasq.priv/toggle
 }
 
