@@ -1,0 +1,15 @@
+#!/bin/sh
+
+SLEEP_INTERVAL="10"
+
+main() {
+  while [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 0 --standard 10)" -le 0 ]; do
+    echo "Failed to retrieve todo list. Retry in $SLEEP_INTERVAL seconds."
+    sleep "$SLEEP_INTERVAL"
+  done
+
+  unlock youtube --skip && unlock superman --skip
+  ls --color=auto --literal -al /etc/dnsmasq.toggle && ls --color=auto --literal -al /etc/dnsmasq.priv/toggle
+}
+
+main "$@"
