@@ -134,7 +134,6 @@ restart_dnsmasq() {
 
 amazon() {
   reference_minute=60
-  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   warning_color
@@ -198,7 +197,6 @@ crimson() {
 
 deregulated_superman() {
   reference_minute=60
-  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   warning_color
@@ -227,7 +225,6 @@ deregulated_superman() {
 
 focus() {
   reference_minute=5
-  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   warning_color
@@ -269,7 +266,6 @@ snorlax() {
 
 maeve() {
   reference_minute=60
-  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   warning_color
@@ -289,7 +285,6 @@ maeve() {
 
 netflix() {
   reference_minute=60
-  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   if [ "$VPN" ]; then
@@ -329,7 +324,6 @@ netflix() {
 
 ometeotl() {
   reference_minute=60
-  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   warning_color
@@ -349,7 +343,6 @@ ometeotl() {
 
 superman() {
   reference_minute=60
-  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   if [ -L /etc/dnsmasq.priv/toggle/maeve.conf ]; then
@@ -441,7 +434,6 @@ superman() {
 
 gaming() {
   reference_minute=60
-  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   warning_color
@@ -461,7 +453,6 @@ gaming() {
 
 vod() {
   reference_minute=60
-  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   if [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ]; then
@@ -493,7 +484,6 @@ vod() {
 
 youtube() {
   reference_minute=60
-  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   warning_color
@@ -513,7 +503,6 @@ youtube() {
 
 youtube_alternative() {
   reference_minute=5
-  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   warning_color
@@ -533,7 +522,6 @@ youtube_alternative() {
 
 youtube_music() {
   reference_minute=5
-  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   warning_color
@@ -553,7 +541,6 @@ youtube_music() {
 
 adguard_upstream() {
   reference_minute=60
-  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   warning_color
@@ -596,7 +583,6 @@ adguard_upstream() {
 
 cloudflare_upstream() {
   reference_minute=60
-  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   if [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ]; then
@@ -652,7 +638,6 @@ cloudflare_upstream() {
 
 nordvpn_upstream() {
   reference_minute=60
-  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   if [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ]; then
@@ -708,7 +693,6 @@ nordvpn_upstream() {
 
 superman_upstream() {
   reference_minute=60
-  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   if [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ]; then
