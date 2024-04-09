@@ -239,7 +239,7 @@ all() {
     echo "error: /etc/dnsmasq.toggle/amazon.conf still exists" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
-    exit
+    # exit
   fi
 
   if [ -L /etc/dnsmasq.toggle/chime.conf ]; then
@@ -247,7 +247,7 @@ all() {
     echo "error: /etc/dnsmasq.toggle/chime.conf still exists" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
-    exit
+    # exit
   fi
 
   if ! [ -L /etc/dnsmasq.priv/toggle/crimson.conf ]; then
@@ -255,7 +255,7 @@ all() {
     echo "error: /etc/dnsmasq.priv/toggle/crimson.conf still doesn't exist" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
-    exit
+    # exit
   fi
 
   if [ -L /etc/dnsmasq.priv/toggle/deregulated_superman.conf ]; then
@@ -263,7 +263,7 @@ all() {
     echo "error: /etc/dnsmasq.priv/toggle/deregulated_superman.conf still exists" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
-    exit
+    # exit
   fi
 
   if ! [ -L /etc/dnsmasq.priv/toggle/deregulated_superman_allow.conf ]; then
@@ -271,7 +271,7 @@ all() {
     echo "error: /etc/dnsmasq.priv/toggle/deregulated_superman_allow.conf still doesn't exist" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
-    exit
+    # exit
   fi
 
   if [ -L /etc/dnsmasq.priv/toggle/focus.conf ]; then
@@ -279,7 +279,7 @@ all() {
     echo "error: /etc/dnsmasq.priv/toggle/focus.conf still exists" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
-    exit
+    # exit
   fi
 
   if [ -L /etc/dnsmasq.toggle/snorlax.conf ]; then
@@ -287,7 +287,7 @@ all() {
     echo "error: /etc/dnsmasq.toggle/snorlax.conf still exists" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
-    exit
+    # exit
   fi
 
   if [ -L /etc/dnsmasq.priv/toggle/maeve.conf ]; then
@@ -295,7 +295,7 @@ all() {
     echo "error: /etc/dnsmasq.priv/toggle/maeve.conf still exists" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
-    exit
+    # exit
   fi
 
   if [ -L /etc/dnsmasq.toggle/netflix.conf ]; then
@@ -303,7 +303,7 @@ all() {
     echo "error: /etc/dnsmasq.toggle/netflix.conf still exists" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
-    exit
+    # exit
   fi
 
   if ! [ -L /etc/dnsmasq.toggle/netflix_allow.conf ]; then
@@ -311,7 +311,7 @@ all() {
     echo "error: /etc/dnsmasq.toggle/netflix_allow.conf still doesn't exist" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
-    exit
+    # exit
   fi
 
   if [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ]; then
@@ -319,7 +319,7 @@ all() {
     echo "error: /etc/dnsmasq.priv/toggle/ometeotl.conf still exists" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
-    exit
+    # exit
   fi
 
   if [ -L /etc/dnsmasq.priv/toggle/superman.conf ]; then
@@ -327,7 +327,7 @@ all() {
     echo "error: /etc/dnsmasq.priv/toggle/superman.conf still exists" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
-    exit
+    # exit
   fi
 
   if [ -L /etc/dnsmasq.toggle/gaming.conf ]; then
@@ -335,7 +335,7 @@ all() {
     echo "error: /etc/dnsmasq.toggle/gaming.conf still exists" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
-    exit
+    # exit
   fi
 
   if [ -L /etc/dnsmasq.toggle/vod.conf ]; then
@@ -343,7 +343,7 @@ all() {
     echo "error: /etc/dnsmasq.toggle/vod.conf still exists" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
-    exit
+    # exit
   fi
 
   if [ -L /etc/dnsmasq.toggle/youtube.conf ]; then
@@ -351,7 +351,7 @@ all() {
     echo "error: /etc/dnsmasq.toggle/youtube.conf still exists" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
-    exit
+    # exit
   fi
 
   if ! [ -L /etc/dnsmasq.toggle/youtube_alternative.conf ]; then
@@ -359,7 +359,7 @@ all() {
     echo "error: /etc/dnsmasq.toggle/youtube_alternative.conf still doesn't exist" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
-    exit
+    # exit
   fi
 
   if ! [ -L /etc/dnsmasq.toggle/youtube_music.conf ]; then
@@ -367,7 +367,7 @@ all() {
     echo "error: /etc/dnsmasq.toggle/youtube_music.conf still doesn't exist" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
-    exit
+    # exit
   fi
 
   if ! [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ]; then
@@ -375,7 +375,7 @@ all() {
     echo "error: /etc/dnsmasq.priv/toggle/adguard_upstream.conf still doesn't exist" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
-    exit
+    # exit
   fi
 
   if [ -L /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf ]; then
@@ -383,7 +383,7 @@ all() {
     echo "error: /etc/dnsmasq.priv/toggle/cloudflare_upstream.conf still exists" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
-    exit
+    # exit
   fi
 
   if [ -L /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf ]; then
@@ -391,7 +391,7 @@ all() {
     echo "error: /etc/dnsmasq.priv/toggle/nordvpn_upstream.conf still exists" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
-    exit
+    # exit
   fi
 
   if [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ]; then
@@ -399,7 +399,7 @@ all() {
     echo "error: /etc/dnsmasq.priv/toggle/superman_upstream.conf still exists" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
-    exit
+    # exit
   fi
 }
 
