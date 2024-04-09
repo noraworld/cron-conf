@@ -38,7 +38,7 @@ main() {
 
   for service in $services; do
     reference_minute=0
-    waiting_interval=10
+    waiting_interval=5
 
     case "$service" in
       "all")
