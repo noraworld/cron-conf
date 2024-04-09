@@ -523,6 +523,11 @@ startup() {
 superman() {
   case "$operation" in
     "deny")
+      if [ "$VAMPIRE" = "1" ] && ! [ -L /etc/dnsmasq.priv/toggle/superman.conf ]; then
+        cron-daemonctl stop observe-superman-conf "$safe"
+        return
+      fi
+
       [ "$SOFT" = 1 ] || cron-daemonctl start observe-superman-conf "$safe"
       create-dnsmasq-toggle-conf private superman
       # create-iptables-toggle-conf private 233_superman
