@@ -17,7 +17,10 @@ main() {
   fi
 
   unlock all --skip
-  ls --color=auto --literal -al /etc/dnsmasq.toggle && ls --color=auto --literal -al /etc/dnsmasq.priv/toggle
+
+  # https://ubuntuforums.org/showthread.php?t=1203166
+  echo && ls --color=auto --literal --time-style=+ -l /etc/dnsmasq.toggle &&
+  echo && ls --color=auto --literal --time-style=+ -l /etc/dnsmasq.priv/toggle
 }
 
 # @getoptions
