@@ -118,7 +118,7 @@ main() {
 amazon() {
   case "$operation" in
     "deny")
-      if [ "$VAMPIRE" = "1" ] && ! [ -L /etc/dnsmasq.toggle/amazon.conf ]; then
+      if [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ]; then
         cron-daemonctl stop observe-amazon-conf "$safe"
         remove-dnsmasq-toggle-conf public amazon
         return
@@ -242,7 +242,7 @@ morning() {
 deregulated_superman() {
   case "$operation" in
     "deny")
-      if [ "$VAMPIRE" = "1" ] && ! [ -L /etc/dnsmasq.priv/toggle/deregulated_superman.conf ]; then
+      if [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ]; then
         cron-daemonctl stop observe-deregulated-superman-conf "$safe"
         cron-daemonctl stop observe-deregulated-superman-allow-conf "$safe"
         return
@@ -333,7 +333,7 @@ focus() {
 gaming() {
   case "$operation" in
     "deny")
-      if [ "$VAMPIRE" = "1" ] && ! [ -L /etc/dnsmasq.toggle/gaming.conf ]; then
+      if [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ]; then
         cron-daemonctl stop observe-gaming-conf "$safe"
         return
       fi
@@ -375,7 +375,7 @@ night() {
 maeve() {
   case "$operation" in
     "deny")
-      if [ "$VAMPIRE" = "1" ] && ! [ -L /etc/dnsmasq.priv/toggle/maeve.conf ]; then
+      if [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ]; then
         cron-daemonctl stop observe-maeve-conf "$safe"
         return
       fi
@@ -396,7 +396,7 @@ maeve() {
 netflix() {
   case "$operation" in
     "deny")
-      if [ "$VAMPIRE" = "1" ] && ! [ -L /etc/dnsmasq.toggle/netflix.conf ]; then
+      if [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ]; then
         cron-daemonctl stop observe-netflix-conf "$safe"
         cron-daemonctl stop observe-netflix-allow-conf "$safe"
         return
@@ -463,7 +463,7 @@ observe() {
 ometeotl() {
   case "$operation" in
     "deny")
-      if [ "$VAMPIRE" = "1" ] && ! [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ]; then
+      if [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ]; then
         cron-daemonctl stop observe-ometeotl-conf "$safe"
         return
       fi
@@ -556,7 +556,7 @@ startup() {
 superman() {
   case "$operation" in
     "deny")
-      if [ "$VAMPIRE" = "1" ] && ! [ -L /etc/dnsmasq.priv/toggle/superman.conf ]; then
+      if [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ]; then
         cron-daemonctl stop observe-superman-conf "$safe"
         return
       fi
@@ -620,7 +620,7 @@ upstream() {
   # When the previous file is deleted and the new file is not yet created, none of the upstream DNS files will be set, and the Internet connection will be blocked.
   case "$operation" in
     "deny")
-      if [ "$VAMPIRE" = "1" ] && ! [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ]; then
+      if [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ]; then
         cron-daemonctl stop observe-adguard-upstream-conf "$safe"
         cron-daemonctl stop observe-nordvpn-upstream-conf "$safe"
         return
@@ -657,7 +657,7 @@ upstream() {
 vod() {
   case "$operation" in
     "deny")
-      if [ "$VAMPIRE" = "1" ] && ! [ -L /etc/dnsmasq.toggle/vod.conf ]; then
+      if [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ]; then
         cron-daemonctl stop observe-vod-conf "$safe"
         return
       fi
@@ -681,7 +681,7 @@ vod() {
 youtube() {
   case "$operation" in
     "deny")
-      if [ "$VAMPIRE" = "1" ] && ! [ -L /etc/dnsmasq.toggle/youtube.conf ]; then
+      if [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ]; then
         cron-daemonctl stop observe-youtube-conf "$safe"
         return
       fi
@@ -705,7 +705,7 @@ youtube() {
 youtube_alternative() {
   case "$operation" in
     "deny")
-      if [ "$VAMPIRE" = "1" ] && [ -L /etc/dnsmasq.toggle/youtube_alternative.conf ]; then
+      if [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ]; then
         cron-daemonctl stop observe-youtube-alternative-conf "$safe"
         return
       fi
@@ -727,7 +727,7 @@ youtube_alternative() {
 youtube_music() {
   case "$operation" in
     "deny")
-      if [ "$VAMPIRE" = "1" ] && [ -L /etc/dnsmasq.toggle/youtube_music.conf ]; then
+      if [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ]; then
         cron-daemonctl stop observe-youtube-music-conf "$safe"
         return
       fi

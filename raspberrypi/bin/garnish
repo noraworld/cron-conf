@@ -1,0 +1,61 @@
+#!/bin/sh
+
+# https://chat.openai.com/share/a37c2f7c-6ed6-4373-8cfb-5bc2d436e20e
+# https://chat.openai.com/share/77d93a57-a6b4-4c52-a6ad-03726f116ddc
+# https://chat.openai.com/share/8392f873-40ad-4a47-922c-26892a098571
+# https://chat.openai.com/share/daa739ff-7e80-4f55-83b3-e3bea92daeb1
+# https://chat.openai.com/share/902f66af-1bd1-4be8-9c0e-2cb363ccb60d
+
+GARLIC_STORAGE="/home/ubuntu/.tmp/garlic.dat"
+GET_UP_AFTER="10"
+GET_UP_BEFORE="12"
+
+main() {
+  operation="$1"
+
+  case "$operation" in
+    "prep")
+      prep "$@"
+      ;;
+    "savor")
+      savor "$@"
+      ;;
+    *)
+      echo "error: no such operation: \"$operation\"" >&2
+      exit 1
+      ;;
+  esac
+}
+
+prep() {
+  [ -f "$GARLIC_STORAGE" ] && rm -f "$GARLIC_STORAGE"
+  touch "$GARLIC_STORAGE"
+
+  if [ -f "$GARLIC_STORAGE" ]; then
+    echo "$GARLIC_STORAGE created"
+  else
+    echo "error: failed to create file $GARLIC_STORAGE for some reason" >&2
+  fi
+}
+
+savor() {
+  if ! [ -f "$GARLIC_STORAGE" ]; then
+    echo "-1"
+  else
+    get_up_at=$(
+      stat "$GARLIC_STORAGE"  |
+      grep "Birth"            |
+      sed -r "s/\sBirth:\s//" |
+      awk '{ print $2 }'      |
+      awk -F: '{ print $1 }'
+    )
+
+    if [ "$get_up_at" -ge "$GET_UP_AFTER" ] && [ "$get_up_at" -le "$GET_UP_BEFORE" ]; then
+      echo "1"
+    else
+      echo "-1"
+    fi
+  fi
+}
+
+main "$@"
