@@ -31,6 +31,7 @@ main() {
   else
     echo "OK, it won't be created." >&2
   fi
+  echo
 
   unlock $services --skip
 
