@@ -786,6 +786,7 @@ parser_definition() {
   msg -- 'Options:'
   flag    SAFE       --safe    -- "not getting punished"
   flag    SOFT       --soft    -- "deny resources without starting a daemon"
+  flag    VAMPIRE    --vampire -- "exempt the restriction if you beat your drowsiness in the morning"
   flag    VERBOSE    --verbose -- "show detailed information"
   disp    :usage  -h --help    -- "show help message and exit"
   disp    VERSION    --version -- "show current version"
@@ -797,6 +798,7 @@ parser_definition() {
 # URL: https://github.com/ko1nksm/getoptions (v3.3.0)
 SAFE=''
 SOFT=''
+VAMPIRE=''
 VERBOSE=''
 REST=''
 parse() {
@@ -821,6 +823,11 @@ parse() {
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
         SOFT="$OPTARG"
+        ;;
+      '--vampire')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        VAMPIRE="$OPTARG"
         ;;
       '--verbose')
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
@@ -865,6 +872,7 @@ Usage: scheduler [options]... [arguments]...
 Options:
       --safe                  not getting punished
       --soft                  deny resources without starting a daemon
+      --vampire               exempt the restriction if you beat your drowsiness in the morning
       --verbose               show detailed information
   -h, --help                  show help message and exit
       --version               show current version
