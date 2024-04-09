@@ -4,6 +4,13 @@ main() {
   parse "$@"
   eval "set -- $REST"
 
+  services=$@
+
+  if [ "$services" = "" ]; then
+    echo "error: service names are missing" >&2
+    exit
+  fi
+
   sleep_interval=10
   if [ "$SLEEP" != "" ]; then
     sleep_interval="$SLEEP"
@@ -16,7 +23,7 @@ main() {
     done
   fi
 
-  unlock all --skip
+  unlock $services --skip
 
   # https://ubuntuforums.org/showthread.php?t=1203166
   echo && ls --color=auto --literal --time-style=+ -l /etc/dnsmasq.toggle &&
