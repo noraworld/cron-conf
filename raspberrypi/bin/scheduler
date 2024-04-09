@@ -8,7 +8,7 @@ PRIV_TOGGLE_DIR="/etc/dnsmasq.priv/toggle"
 SECOND_ALARM_INTERVAL="20 min"   # The second alarm goes off the time given here after the first one does.
 THIRD_ALARM_INTERVAL="40 min"    # The third alarm goes off the time given here after the FIRST one does.
 MINIMUM_ALARM_DURATION="10 min"  # The third alarm goes off for at least the time given here.
-ALARM_DISABLED_DURATION="2 hour" # The SSH connection is lost for the time given here when the alarm is disabled.
+ALARM_DISABLED_DURATION="81 min" # The SSH connection is lost for the time given here when the alarm is disabled.
 
 UPTIME_THRESHOLD="5"
 
