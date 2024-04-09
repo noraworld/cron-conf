@@ -20,6 +20,9 @@ main() {
     "savor")
       savor "$@"
       ;;
+    "wipe")
+      wipe "$@"
+      ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2
       exit 1
@@ -56,6 +59,10 @@ savor() {
       echo "-1"
     fi
   fi
+}
+
+wipe() {
+  [ -f "$GARLIC_STORAGE" ] && rm -f "$GARLIC_STORAGE"
 }
 
 main "$@"

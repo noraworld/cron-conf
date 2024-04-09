@@ -181,6 +181,7 @@ morning() {
     "/home/ubuntu/workspace/envsman/raspberrypi/dnsmasq/dnsmasq.priv" \
     "/home/ubuntu/workspace/ufw-conf"
   temp-eliminater
+  garnish wipe
 
   # Fan control
   metronome set full
