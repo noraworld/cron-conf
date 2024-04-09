@@ -118,6 +118,12 @@ main() {
 amazon() {
   case "$operation" in
     "deny")
+      if [ "$VAMPIRE" = "1" ] && ! [ -L /etc/dnsmasq.toggle/amazon.conf ]; then
+        cron-daemonctl stop observe-amazon-conf "$safe"
+        remove-dnsmasq-toggle-conf public amazon
+        return
+      fi
+
       cron-daemonctl start observe-amazon-conf "$safe"
       create-dnsmasq-toggle-conf public amazon
       # create-iptables-toggle-conf public 131_amazon
@@ -236,6 +242,12 @@ morning() {
 deregulated_superman() {
   case "$operation" in
     "deny")
+      if [ "$VAMPIRE" = "1" ] && ! [ -L /etc/dnsmasq.priv/toggle/deregulated_superman.conf ]; then
+        cron-daemonctl stop observe-deregulated-superman-conf "$safe"
+        cron-daemonctl stop observe-deregulated-superman-allow-conf "$safe"
+        return
+      fi
+
       [ "$SOFT" = 1 ] || cron-daemonctl start observe-deregulated-superman-conf "$safe"
       [ "$SOFT" = 1 ] || cron-daemonctl start observe-deregulated-superman-allow-conf "$safe"
       # it will take a few mintutes to finish these two process because the Dnsmasq daemon restarts twice
@@ -321,6 +333,11 @@ focus() {
 gaming() {
   case "$operation" in
     "deny")
+      if [ "$VAMPIRE" = "1" ] && ! [ -L /etc/dnsmasq.toggle/gaming.conf ]; then
+        cron-daemonctl stop observe-gaming-conf "$safe"
+        return
+      fi
+
       [ "$SOFT" = 1 ] || cron-daemonctl start observe-gaming-conf "$safe"
       create-dnsmasq-toggle-conf public gaming
       ;;
@@ -358,6 +375,11 @@ night() {
 maeve() {
   case "$operation" in
     "deny")
+      if [ "$VAMPIRE" = "1" ] && ! [ -L /etc/dnsmasq.priv/toggle/maeve.conf ]; then
+        cron-daemonctl stop observe-maeve-conf "$safe"
+        return
+      fi
+
       [ "$SOFT" = 1 ] || cron-daemonctl start observe-maeve-conf "$safe"
       create-dnsmasq-toggle-conf private maeve
       ;;
@@ -374,6 +396,12 @@ maeve() {
 netflix() {
   case "$operation" in
     "deny")
+      if [ "$VAMPIRE" = "1" ] && ! [ -L /etc/dnsmasq.toggle/netflix.conf ]; then
+        cron-daemonctl stop observe-netflix-conf "$safe"
+        cron-daemonctl stop observe-netflix-allow-conf "$safe"
+        return
+      fi
+
       cron-daemonctl start observe-netflix-conf "$safe"
       cron-daemonctl start observe-netflix-allow-conf "$safe"
       # it will take a few mintutes to finish these two process because the Dnsmasq daemon restarts twice
@@ -435,6 +463,11 @@ observe() {
 ometeotl() {
   case "$operation" in
     "deny")
+      if [ "$VAMPIRE" = "1" ] && ! [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ]; then
+        cron-daemonctl stop observe-ometeotl-conf "$safe"
+        return
+      fi
+
       [ "$SOFT" = 1 ] || cron-daemonctl start observe-ometeotl-conf "$safe"
       create-dnsmasq-toggle-conf private ometeotl
       # create-iptables-toggle-conf private 234_ometeotl
@@ -587,6 +620,12 @@ upstream() {
   # When the previous file is deleted and the new file is not yet created, none of the upstream DNS files will be set, and the Internet connection will be blocked.
   case "$operation" in
     "deny")
+      if [ "$VAMPIRE" = "1" ] && ! [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ]; then
+        cron-daemonctl stop observe-adguard-upstream-conf "$safe"
+        cron-daemonctl stop observe-nordvpn-upstream-conf "$safe"
+        return
+      fi
+
       [ "$SOFT" = 1 ] || cron-daemonctl start observe-adguard-upstream-conf "$safe"
       [ "$SOFT" = 1 ] || cron-daemonctl start observe-nordvpn-upstream-conf "$safe"
       remove-dnsmasq-toggle-conf private adguard_upstream --skip
@@ -618,6 +657,11 @@ upstream() {
 vod() {
   case "$operation" in
     "deny")
+      if [ "$VAMPIRE" = "1" ] && ! [ -L /etc/dnsmasq.toggle/vod.conf ]; then
+        cron-daemonctl stop observe-vod-conf "$safe"
+        return
+      fi
+
       cron-daemonctl start observe-vod-conf "$safe"
       create-dnsmasq-toggle-conf public vod
       # create-iptables-toggle-conf public 133_vod
@@ -637,6 +681,11 @@ vod() {
 youtube() {
   case "$operation" in
     "deny")
+      if [ "$VAMPIRE" = "1" ] && ! [ -L /etc/dnsmasq.toggle/youtube.conf ]; then
+        cron-daemonctl stop observe-youtube-conf "$safe"
+        return
+      fi
+
       [ "$SOFT" = 1 ] || cron-daemonctl start observe-youtube-conf "$safe"
       create-dnsmasq-toggle-conf public youtube
       # create-iptables-toggle-conf public 134_youtube
@@ -656,6 +705,11 @@ youtube() {
 youtube_alternative() {
   case "$operation" in
     "deny")
+      if [ "$VAMPIRE" = "1" ] && [ -L /etc/dnsmasq.toggle/youtube_alternative.conf ]; then
+        cron-daemonctl stop observe-youtube-alternative-conf "$safe"
+        return
+      fi
+
       [ "$SOFT" = 1 ] || cron-daemonctl start observe-youtube-alternative-conf "$safe"
       remove-dnsmasq-toggle-conf public youtube_alternative
       ;;
@@ -673,6 +727,11 @@ youtube_alternative() {
 youtube_music() {
   case "$operation" in
     "deny")
+      if [ "$VAMPIRE" = "1" ] && [ -L /etc/dnsmasq.toggle/youtube_music.conf ]; then
+        cron-daemonctl stop observe-youtube-music-conf "$safe"
+        return
+      fi
+
       [ "$SOFT" = 1 ] || cron-daemonctl start observe-youtube-music-conf "$safe"
       remove-dnsmasq-toggle-conf public youtube_music
       # remove-iptables-toggle-conf public 135_youtube_music
