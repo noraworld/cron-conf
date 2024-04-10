@@ -60,32 +60,37 @@ reset() {
     systemctl --user start $services
   fi
 
-  # NOTE:
-  #   Restarting the Dnsmasq daemon is not executed
-  #   without the "--immediately" option for some reason,
-  #   even though it is performed in a current shell.
-
   create-dnsmasq-toggle-conf public gaming  \
                                     vod     \
                                     youtube \
-                                    --immediately
+                                    --skip
 
   remove-dnsmasq-toggle-conf public youtube_alternative \
                                     youtube_music       \
-                                    --immediately
+                                    --skip
 
   create-dnsmasq-toggle-conf private deregulated_superman \
                                      maeve                \
                                     ometeotl              \
                                     superman              \
                                     superman_upstream     \
-                                    --immediately
+                                    --skip
 
   remove-dnsmasq-toggle-conf private deregulated_superman_allow \
                                      adguard_upstream           \
                                      cloudflare_upstream        \
                                      nordvpn_upstream           \
-                                     --immediately
+                                     --skip
+
+  # NOTE:
+  #   Actually, it should be avoided to restart the daemon directly here.
+  #   But we have no choice but to do so because the daemon sometimes fails
+  #   when the "--immediately" option is specified to each command above.
+  #   On top of that, restarting the Dnsmasq daemon is not executed
+  #   without the "--immediately" option for some reason,
+  #   even though it is performed in a current shell.
+
+  sudo systemctl restart dnsmasq
 }
 
 # @getoptions
