@@ -16,13 +16,6 @@ main() {
     sleep_interval="$SLEEP"
   fi
 
-  if [ "$MORNING" != 1 ]; then
-    while [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 0 --standard 10)" -le 0 ]; do
-      echo "Failed to retrieve todo list. Retry in $sleep_interval seconds."
-      sleep "$sleep_interval"
-    done
-  fi
-
   if [ "$MORNING" = 1 ]; then
     echo -n "Would you like to prepare a piece of garlic? [y/N]: "
     exec < /dev/tty
@@ -33,6 +26,11 @@ main() {
       echo "OK, it won't be created." >&2
     fi
     echo
+  else
+    while [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 0 --standard 10)" -le 0 ]; do
+      echo "Failed to retrieve todo list. Retry in $sleep_interval seconds."
+      sleep "$sleep_interval"
+    done
   fi
 
   unlock $services --skip
