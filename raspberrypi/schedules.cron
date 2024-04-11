@@ -191,10 +191,10 @@ NON_ROOT_USER=ubuntu
 
 
 # YouTube Alternative
-*/5    0-9   * * * scheduler youtube-alternative deny
+*/5    0-9   * * * scheduler youtube-alternative deny --soft
 */5    10-22 * * * scheduler youtube-alternative allow
-0      23    * * * scheduler youtube-alternative deny --safe
-5-55/5 23    * * * scheduler youtube-alternative deny
+0      23    * * * scheduler youtube-alternative deny --soft
+5-55/5 23    * * * scheduler youtube-alternative deny --soft
 
 
 
