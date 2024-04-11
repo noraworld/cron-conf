@@ -763,6 +763,11 @@ schedules_update_ready() {
   DAY_SECOND="86400"
   TOOK_THRESHOLD="0"
 
+  if [ "$TOOK_THRESHOLD" -eq 0 ] && [ "$1" != "schedules-update-ready" ]; then
+    echo "1"
+    return
+  fi
+
   local_cron_conf_updated_at=$(        git -C "/home/ubuntu/workspace/cron-conf"    --no-pager log -1 --format="%ct")
   local_dnsmasq_conf_updated_at=$(     git -C "/home/ubuntu/workspace/dnsmasq-conf" --no-pager log -1 --format="%ct")
   local_priv_dnsmasq_conf_updated_at=$(git -C "/home/ubuntu/workspace/envsman"      --no-pager log -1 --format="%ct")
