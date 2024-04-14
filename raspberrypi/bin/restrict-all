@@ -9,7 +9,10 @@ main() {
   eval "set -- $REST"
 
   mode="$1"
-  services="observe-deregulated-superman-conf observe-deregulated-superman-allow-conf observe-maeve-conf observe-ometeotl-conf observe-superman-conf observe-adguard-upstream-conf observe-nordvpn-upstream-conf observe-vod-conf observe-youtube-conf observe-youtube-alternative-conf observe-youtube-music-conf observe-gaming-conf"
+
+  # What's missing:
+  #   observe-youtube-alternative-conf observe-youtube-music-conf
+  services="observe-deregulated-superman-conf observe-deregulated-superman-allow-conf observe-maeve-conf observe-ometeotl-conf observe-superman-conf observe-adguard-upstream-conf observe-nordvpn-upstream-conf observe-vod-conf observe-youtube-conf observe-gaming-conf"
 
   case "$mode" in
     "check")
@@ -37,9 +40,9 @@ check() {
      [ -e "$PRIV_TOGGLE_DIR/superman_upstream.conf"          ] &&
      [ -e      "$TOGGLE_DIR/gaming.conf"                     ] &&
      [ -e      "$TOGGLE_DIR/vod.conf"                        ] &&
-     [ -e      "$TOGGLE_DIR/youtube.conf"                    ] &&
-   ! [ -e      "$TOGGLE_DIR/youtube_alternative.conf"        ] &&
-   ! [ -e      "$TOGGLE_DIR/youtube_music.conf"              ]; then
+     [ -e      "$TOGGLE_DIR/youtube.conf"                    ]; then
+   # ! [ -e      "$TOGGLE_DIR/youtube_alternative.conf"        ] &&
+   # ! [ -e      "$TOGGLE_DIR/youtube_music.conf"              ]; then
 
     if [ "$STRICT" = 1 ]; then
       if [ "$(systemctl --user is-active $services | grep -c "inactive")" -eq 0 ]; then
@@ -65,9 +68,9 @@ reset() {
                                     youtube \
                                     --skip
 
-  remove-dnsmasq-toggle-conf public youtube_alternative \
-                                    youtube_music       \
-                                    --skip
+  # remove-dnsmasq-toggle-conf public youtube_alternative \
+  #                                   youtube_music       \
+  #                                   --skip
 
   create-dnsmasq-toggle-conf private deregulated_superman \
                                      maeve                \
