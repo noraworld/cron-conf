@@ -179,7 +179,8 @@ morning() {
     "/home/ubuntu/workspace/cron-conf"                                \
     "/home/ubuntu/workspace/dnsmasq-conf/dnsmasq"                     \
     "/home/ubuntu/workspace/envsman/raspberrypi/dnsmasq/dnsmasq.priv" \
-    "/home/ubuntu/workspace/ufw-conf"
+    "/home/ubuntu/workspace/ufw-conf"                                 \
+    "/home/ubuntu/workspace/netplan-conf"
   temp-eliminater
   garnish wipe
 
