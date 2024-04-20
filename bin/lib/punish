@@ -8,7 +8,7 @@ UPTIME_THRESHOLD="5"
 #RECOVERY_TIME="1 min"
 #RECOVERY_TIME="30 min"
 #RECOVERY_TIME="1 hour"
-RECOVERY_TIME="2 hours"
+RECOVERY_TIME="10 min"
 
 main() {
   parse "$@"
