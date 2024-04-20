@@ -8,7 +8,7 @@ PROG_NAME="unlock"
 LOG_PATH="/home/ubuntu/.log/unlock.log"
 
 COOLDOWN_INTERVAL=0 # ideal: 10 (this may be unnecessary)
-DELAY_INTERVAL=3    # ideal: 3
+DELAY_INTERVAL=5    # ideal: 5
 RETRY_INTERVAL=10   # ideal: 10
 TIMES_LIMIT=5       # ideal: 5
 
