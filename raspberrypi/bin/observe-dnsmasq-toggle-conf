@@ -161,7 +161,7 @@ todo_mode() {
         fi
       else
         # NOTE: Same as [firewall-conflict]
-        if [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 0 --except --standard 2)" -lt 0 ]; then
+        if [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 0 --except --standard 0)" -lt 0 ]; then
           todo_skipped=false
           /home/ubuntu/workspace/cron-conf/bin/lib/punish --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')"
         fi
