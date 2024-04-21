@@ -104,25 +104,29 @@ dns_blocked() {
   # Avoid invalid context length argument with grep
   #   https://stackoverflow.com/a/34077672/13999144
 
-  # Check if the drop rule against 53/TCP forwarding exists
-  if [ "$(sudo iptables-save | grep -ce "-A ufw-user-forward -p tcp -m tcp --dport 53 -j DROP")" -eq 0 ]; then
-    [ "$DEBUG" = 1 ] && echo "{ \"code\": 1, \"date\": \"$(date)\", \"reason\": \"drop rule for forwarding 53/TCP not found\" }," >> "$DEBUG_LOG_PATH"
+  # Check if the default forward policy exists
+  if [ "$(sudo iptables-save | grep -ce "-A ufw-skip-to-policy-forward -j DROP")" -eq 0 ]; then
+    [ "$DEBUG" = 1 ] && echo "{ \"code\": 6, \"date\": \"$(date)\", \"reason\": \"drop rule for forwarding not found\" }," >> "$DEBUG_LOG_PATH"
     echo false
     return
   fi
 
-  # Check if the drop rule against 53/UDP forwarding exists
-  if [ "$(sudo iptables-save | grep -ce "-A ufw-user-forward -p udp -m udp --dport 53 -j DROP")" -eq 0 ]; then
-    [ "$DEBUG" = 1 ] && echo "{ \"code\": 2, \"date\": \"$(date)\", \"reason\": \"drop rule for forwarding 53/UDP not found\" }," >> "$DEBUG_LOG_PATH"
+  # Check if the accept rule against the port 53 forwarding doesn't exist
+  if [ "$(sudo iptables-save | grep -e "-A ufw-user-forward" | grep -c "53")" -ne 0 ]; then
+    [ "$DEBUG" = 1 ] && echo "{ \"code\": 7, \"date\": \"$(date)\", \"reason\": \"accept rule for forwarding 53/TCP found\" }," >> "$DEBUG_LOG_PATH"
     echo false
     return
   fi
 
-  # Check if the accepted rule against port 53 forwarding exists
-  if [ "$(sudo iptables-save | grep -i "forward" | grep "ACCEPT" | grep "53" | grep -cv ":FORWARD ACCEPT \[[0-9]*:[0-9]*\]")" -ge 1 ]; then
+  # Check if the accepted rule against port 1024 - 65535 forwarding doesn't exist
+  if [ "$(sudo iptables-save                                                                                                                      |
+          grep -e "-A ufw-user-forward"                                                                                                           |
+          grep -E "\b(102[4-9]|10[3-9][0-9]|1[1-9][0-9]{2}|[2-9][0-9]{3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])\b" |
+          grep -cv "60313")" -ne 0 ]; then
+
     if [ "$DEBUG" = 1 ]; then
-      # https://stackoverflow.com/questions/1251999/how-can-i-replace-each-newline-n-with-a-space-using-sed#answer-1252191
-      echo "{ \"code\": 3, \"date\": \"$(date)\", \"reason\": \"accept rule for forwarding 53 detected ($(sudo iptables-save | grep -i "forward" | grep "ACCEPT" | grep "53" | sed ':a;N;$!ba;s/\n/, /g'))\" }," >> "$DEBUG_LOG_PATH"
+      ## https://stackoverflow.com/questions/1251999/how-can-i-replace-each-newline-n-with-a-space-using-sed#answer-1252191
+      echo "{ \"code\": 3, \"date\": \"$(date)\", \"reason\": \"accept rule for forwarding 1024:65535 detected\" }," >> "$DEBUG_LOG_PATH"
     fi
 
     echo false
