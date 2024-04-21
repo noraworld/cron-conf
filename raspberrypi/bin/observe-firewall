@@ -29,7 +29,7 @@ main() {
 }
 
 deny() {
-  if ! eval "$(dns_blocked)" || ! eval "$(github_blocked)"; then
+  if ! eval "$(port_blocked)" || ! eval "$(github_blocked)"; then
     restore_rules
     restrict_github
 
@@ -46,7 +46,7 @@ allow() {
 }
 
 check() {
-  if [ "$(dns_blocked)" = "false" ]; then
+  if [ "$(port_blocked)" = "false" ]; then
     echo "-1"
     return
   fi
@@ -100,7 +100,7 @@ restrict_github() {
   sudo ip6tables -I OUTPUT -p all -d "$github_git_ip6addresses" -j REJECT
 }
 
-dns_blocked() {
+port_blocked() {
   # Avoid invalid context length argument with grep
   #   https://stackoverflow.com/a/34077672/13999144
 
