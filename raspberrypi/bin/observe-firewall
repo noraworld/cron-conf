@@ -126,7 +126,7 @@ port_blocked() {
 
     if [ "$DEBUG" = 1 ]; then
       ## https://stackoverflow.com/questions/1251999/how-can-i-replace-each-newline-n-with-a-space-using-sed#answer-1252191
-      echo "{ \"code\": 3, \"date\": \"$(date)\", \"reason\": \"accept rule for forwarding 1024:65535 detected\" }," >> "$DEBUG_LOG_PATH"
+      echo "{ \"code\": 8, \"date\": \"$(date)\", \"reason\": \"accept rule for forwarding 1024:65535 detected\" }," >> "$DEBUG_LOG_PATH"
     fi
 
     echo false
