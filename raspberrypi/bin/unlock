@@ -130,7 +130,7 @@ restart_dnsmasq() {
 
   if [ "$(sudo systemctl is-active dnsmasq)" != "active" ]; then
     echo "error: dnsmasq daemon could not restart unexpectedly" >&2
-    sudo systemctl status dnsmasq >&2
+    sudo systemctl status dnsmasq --no-pager >&2
     exit 1
   fi
 }
