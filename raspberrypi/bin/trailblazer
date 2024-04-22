@@ -11,7 +11,7 @@ main() {
     exit
   fi
 
-  sleep_interval=10
+  sleep_interval=30
   if [ "$SLEEP" != "" ]; then
     sleep_interval="$SLEEP"
   fi
