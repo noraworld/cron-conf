@@ -128,7 +128,7 @@ todo_mode() {
         todo_skipped=true
       fi
     else
-      if [ "$(restrict-all check)" -le 0 ] && [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 0 --except --standard 2)" -gt 0 ]; then
+      if [ "$(restrict-all check)" -le 0 ] && [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 0 --except --standard 0)" -gt 0 ]; then
         todo_skipped=true
       fi
     fi
