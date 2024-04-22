@@ -182,7 +182,7 @@ NON_ROOT_USER=ubuntu
 
 
 # YouTube Music
-*/5 * * * * scheduler youtube-music deny --soft
+*/10 * * * * scheduler youtube-music deny --soft
 
 
 
