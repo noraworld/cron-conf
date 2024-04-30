@@ -192,17 +192,17 @@ NON_ROOT_USER=ubuntu
 
 
 # YouTube
-#*/5    0-9   * * * scheduler youtube deny --vampire
-#*/5    10-22 * * * scheduler youtube allow
-#0      23    * * * scheduler youtube deny --vampire --safe
-#5-55/5 23    * * * scheduler youtube deny --vampire
+*/5    0-9   * * * scheduler youtube deny --vampire
+*/5    10-22 * * * scheduler youtube allow
+0      23    * * * scheduler youtube deny --vampire --safe
+5-55/5 23    * * * scheduler youtube deny --vampire
 
-*/5    0-1   * * * scheduler superman deny --vampire
-*/5    2-9   * * * scheduler superman deny --safe
-*/5    10-11 * * * scheduler superman allow
-0      12    * * * scheduler superman deny --vampire --safe
-5-55/5 12    * * * scheduler superman deny --vampire
-*/5    13-23 * * * scheduler superman deny --vampire
+#*/5    0-1   * * * scheduler superman deny --vampire
+#*/5    2-9   * * * scheduler superman deny --safe
+#*/5    10-11 * * * scheduler superman allow
+#0      12    * * * scheduler superman deny --vampire --safe
+#5-55/5 12    * * * scheduler superman deny --vampire
+#*/5    13-23 * * * scheduler superman deny --vampire
 
 
 
