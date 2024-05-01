@@ -206,6 +206,11 @@ NON_ROOT_USER=ubuntu
 
 
 # YouTube
+#
+#   Note 1:
+#     Be careful when you update the schedule for YouTube.
+#     It has a massive impact on the sleep schedule.
+#
 #*/5    0-9   * * * scheduler youtube deny --vampire
 #*/5    10-22 * * * scheduler youtube allow
 #0      23    * * * scheduler youtube deny --vampire --safe
