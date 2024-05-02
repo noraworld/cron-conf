@@ -27,7 +27,27 @@ main() {
     fi
     echo
   else
-    while [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 0 --standard 10)" -le 0 ]; do
+    accomplished="unknown"
+
+    if [ "$(systemctl --user is-active observe-dnsmasq-todo-list observe-dnsmasq-priv-todo-list |
+            grep -c inactive)" -eq 0 ]; then
+      accomplished=$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 1 --standard 10)
+    elif [ "$(systemctl --user is-active observe-dnsmasq-todo-list-night observe-dnsmasq-priv-todo-list-night |
+              grep -c inactive)" -eq 0 ];
+      accomplished=$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 1 --except --standard 0)
+    fi
+
+    if [ "$accomplished" = "unknown" ]; then
+      echo "Something went wrong." >&2
+      exit
+    fi
+
+    if [ "$accomplished" -lt 0 ]; then
+      echo "Not accomplished yet." >&2
+      exit
+    fi
+
+    while [ "$accomplished" -eq 0 ]; do
       echo "Failed to retrieve todo list. Retry in $sleep_interval seconds."
       sleep "$sleep_interval"
     done
