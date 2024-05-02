@@ -124,11 +124,11 @@ todo_mode() {
     # Do not retry many times, because no matter how many times you do that, the result is likely to be the same.
     # Besides, it delays knowing whether the restrictions are unlocked if there are some attempts.
     if [ "$NIGHT" != 1 ]; then
-      if [ "$(restrict-all check)" -le 0 ] && [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 0 --standard 10)" -gt 0 ]; then
+      if [ "$(restrict-all check)" -le 0 ] && [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 1 --standard 10)" -gt 0 ]; then
         todo_skipped=true
       fi
     else
-      if [ "$(restrict-all check)" -le 0 ] && [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 0 --except --standard 0)" -gt 0 ]; then
+      if [ "$(restrict-all check)" -le 0 ] && [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 1 --except --standard 0)" -gt 0 ]; then
         todo_skipped=true
       fi
     fi
@@ -155,13 +155,13 @@ todo_mode() {
         #   the other one never enters this condition, which means `observe-firewall deny` and `observe-firewall allow`
         #   will have conflict. [firewall-conflict]
         #
-        if [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 0 --standard 10)" -lt 0 ]; then
+        if [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 1 --standard 10)" -lt 0 ]; then
           todo_skipped=false
           /home/ubuntu/workspace/cron-conf/bin/lib/punish --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')"
         fi
       else
         # NOTE: Same as [firewall-conflict]
-        if [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 0 --except --standard 0)" -lt 0 ]; then
+        if [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 1 --except --standard 0)" -lt 0 ]; then
           todo_skipped=false
           /home/ubuntu/workspace/cron-conf/bin/lib/punish --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')"
         fi
