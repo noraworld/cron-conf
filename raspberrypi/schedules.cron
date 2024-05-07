@@ -70,11 +70,7 @@ NON_ROOT_USER=ubuntu
 #   Note 2:
 #     Remember that the shorter the time is, the more it can take effect.
 #
-*/1     0-9   * * 0-5 scheduler observe start
-*/10    10-11 * * 0-5 scheduler observe stop
-0-10/1  12    * * 0-5 scheduler observe start --safe
-11-59/1 12    * * 0-5 scheduler observe start
-*/1     13-23 * * 0-5 scheduler observe start
+*/1     0-23  * * 0-5 scheduler observe start
 */1     0-9   * * 6   scheduler observe start
 */10    10-22 * * 6   scheduler observe stop
 0-10/1  23    * * 6   scheduler observe start --safe
