@@ -29,11 +29,9 @@ main() {
   else
     accomplished="unknown"
 
-    if [ "$(systemctl --user is-active observe-dnsmasq-todo-list |
-            grep -c inactive)" -eq 0 ]; then
+    if [ "$(systemctl --user is-active observe-dnsmasq-todo-list | grep -c inactive)" -eq 0 ]; then
       accomplished=$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 1 --standard 10)
-    elif [ "$(systemctl --user is-active observe-dnsmasq-todo-list-night |
-              grep -c inactive)" -eq 0 ]; then
+    elif [ "$(systemctl --user is-active observe-dnsmasq-todo-list-night | grep -c inactive)" -eq 0 ]; then
       accomplished=$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 1 --except --standard 0)
     fi
 
