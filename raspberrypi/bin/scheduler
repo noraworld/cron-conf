@@ -583,11 +583,9 @@ todo() {
   case "$operation" in
     "start")
       cron-daemonctl start observe-dnsmasq-todo-list "$safe"
-      cron-daemonctl start observe-dnsmasq-priv-todo-list "$safe"
       ;;
     "stop")
       cron-daemonctl stop observe-dnsmasq-todo-list "$safe"
-      cron-daemonctl stop observe-dnsmasq-priv-todo-list "$safe"
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2
@@ -600,11 +598,9 @@ todo_night() {
   case "$operation" in
     "start")
       cron-daemonctl start observe-dnsmasq-todo-list-night "$safe"
-      cron-daemonctl start observe-dnsmasq-priv-todo-list-night "$safe"
       ;;
     "stop")
       cron-daemonctl stop observe-dnsmasq-todo-list-night "$safe"
-      cron-daemonctl stop observe-dnsmasq-priv-todo-list-night "$safe"
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2

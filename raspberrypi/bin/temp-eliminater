@@ -74,7 +74,6 @@ stop_daemons() {
   systemctl --user stop observe-dnsmasq-toggle
   systemctl --user stop observe-dnsmasq-priv-toggle
   systemctl --user stop observe-dnsmasq-todo-list
-  systemctl --user stop observe-dnsmasq-priv-todo-list
 }
 
 # @getoptions
