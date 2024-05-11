@@ -35,10 +35,15 @@ NON_ROOT_USER=ubuntu
 
 # Morning
 #
-#   This is to reduce the possibility that the system freezes
-#   It is executed with a 9-minute delay to avoid conflicts with "periodic"
-#   Restarting PipeWire and Bluetooth daemons and attempting to connect to Bluetooth devices
-#   should not be executed simultaneously
+#   Note 1:
+#     This is to reduce the possibility that the system freezes
+#     It is executed with a 9-minute delay to avoid conflicts with "periodic"
+#     Restarting PipeWire and Bluetooth daemons and attempting to connect to Bluetooth devices
+#     should not be executed simultaneously
+#   Note 2:
+#     When you update the time, you also have to update:
+#       * other schedules (during the morning)
+#       * constants in garnish
 #
 19 10 * * * scheduler morning
 
