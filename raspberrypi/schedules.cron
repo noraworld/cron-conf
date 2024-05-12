@@ -243,11 +243,22 @@ NON_ROOT_USER=ubuntu
 # */5    20-23 * * * scheduler youtube deny
 #
 # Mode: 4
-*/5    0-9   * * * scheduler youtube deny
-*/5    10-11 * * * scheduler youtube allow
-0      12    * * * scheduler youtube deny --safe
-5-55/5 12    * * * scheduler youtube deny
-*/5    13-23 * * * scheduler youtube deny
+# */5    0-9   * * * scheduler youtube deny
+# */5    10-11 * * * scheduler youtube allow
+# 0      12    * * * scheduler youtube deny --safe
+# 5-55/5 12    * * * scheduler youtube deny
+# */5    13-23 * * * scheduler youtube deny
+#
+# Mode: 5
+*/5    0-9   * * 0-5 scheduler youtube deny
+*/5    10-11 * * 0-5 scheduler youtube allow
+0      12    * * 0-5 scheduler youtube deny --safe
+5-55/5 12    * * 0-5 scheduler youtube deny
+*/5    13-23 * * 0-5 scheduler youtube deny
+*/5    0-9   * * 6   scheduler youtube deny
+*/5    10-22 * * 6   scheduler youtube allow
+0      23    * * 6   scheduler youtube deny --safe
+5-55/5 23    * * 6   scheduler youtube deny
 
 
 
