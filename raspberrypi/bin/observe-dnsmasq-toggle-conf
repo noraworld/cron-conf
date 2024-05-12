@@ -9,6 +9,11 @@ ACCOMPLISHED_CHECK_INTERVAL=1800
 
 
 observe() {
+  if [ "$VPN" = 1 ] && [ "$(force-vpn check)" -gt 0 ]; then
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): operation skipped because of VPN safe"
+    return
+  fi
+
   observed_file=$(basename "$observed_path")
   [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): observed path is $observed_path"
 
@@ -303,6 +308,7 @@ parser_definition() {
   flag   NIGHT      --night    -- "if you specify this, the option for todo-accomplished is changed"
   flag   SUDO       --sudo     -- "TBD"
   param  MODE    -m --mode     -- "git, ln, unlink, cron, or sync"
+  flag   VPN        --vpn      -- "only if you are connected to a VPN and have a foreign IP address, you will be exempt from the restrictions"
   disp   :usage  -h --help     -- "print help message and exit"
   disp   VERSION    --version  -- "show the current version"
 }
@@ -321,6 +327,7 @@ TARGET=''
 NIGHT=''
 SUDO=''
 MODE=''
+VPN=''
 REST=''
 parse() {
   OPTIND=$(($#+1))
@@ -378,6 +385,11 @@ parse() {
         OPTARG=$2
         MODE="$OPTARG"
         shift ;;
+      '--vpn')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        VPN="$OPTARG"
+        ;;
       '-h'|'--help')
         usage
         exit 0 ;;
@@ -422,6 +434,7 @@ Options:
       --night                 if you specify this, the option for todo-accomplished is changed
       --sudo                  TBD
   -m, --mode MODE             git, ln, unlink, cron, or sync
+      --vpn                   only if you are connected to a VPN and have a foreign IP address, you will be exempt from the restrictions
   -h, --help                  print help message and exit
       --version               show the current version
 GETOPTIONSHERE
