@@ -9,11 +9,6 @@ ACCOMPLISHED_CHECK_INTERVAL=1800
 
 
 observe() {
-  if [ "$VPN" = 1 ] && [ "$(force-vpn check)" -gt 0 ]; then
-    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): operation skipped because of VPN safe"
-    return
-  fi
-
   observed_file=$(basename "$observed_path")
   [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): observed path is $observed_path"
 
@@ -31,6 +26,11 @@ observe() {
 
 
 switch_mode() {
+  if [ "$VPN" = 1 ] && [ "$(force-vpn check)" -gt 0 ]; then
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): operation skipped because of VPN safe"
+    return
+  fi
+
   case "$MODE" in
     "git")
       git_mode "$@"
