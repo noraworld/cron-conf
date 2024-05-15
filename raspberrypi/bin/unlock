@@ -373,7 +373,9 @@ all() {
   if ! [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ]; then
     error_color
     echo "error: /etc/dnsmasq.priv/toggle/adguard_upstream.conf still doesn't exist" >&2
+    echo "       create superman_upstream.conf instead so that an upstream DNS will not be lost" >&2
     no_color
+    sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/superman_upstream.conf /etc/dnsmasq.priv/toggle
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
     # exit
   fi
