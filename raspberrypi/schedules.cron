@@ -61,10 +61,10 @@ NON_ROOT_USER=ubuntu
 #   Note 2:
 #     Remember that the shorter the time is, the more it can take effect.
 #
-*/1     0-9   * * * scheduler firewall deny
-*/10    10-22 * * * scheduler firewall allow
-0-10/1  23    * * * scheduler firewall deny --safe
-11-59/1 23    * * * scheduler firewall deny
+# */1     0-9   * * * scheduler firewall deny
+# */10    10-22 * * * scheduler firewall allow
+# 0-10/1  23    * * * scheduler firewall deny --safe
+# 11-59/1 23    * * * scheduler firewall deny
 
 
 
