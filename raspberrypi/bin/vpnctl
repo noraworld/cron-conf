@@ -86,7 +86,13 @@ disconnect() {
   while [ "$(disconnected)" = "false" ] && [ "$retry_count" -lt "$retry_threshold" ]; do
     echo "Attempting to disconnect... (retry: $retry_count)"
 
-    [ "$HARD" = 1 ] && sudo systemctl stop nordvpn nordvpnd
+    if [ "$HARD" = 1 ]; then
+      sudo systemctl stop nordvpn nordvpnd
+    else
+      set +e
+      nordvpn disconnect
+      set -e
+    fi
 
     retry_count=$((retry_count + 1))
     sleep "$sleep_interval"
