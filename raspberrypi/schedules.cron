@@ -187,6 +187,10 @@ NON_ROOT_USER=ubuntu
 0      23    * * * scheduler gaming deny --vampire --safe
 5-55/5 23    * * * scheduler gaming deny --vampire
 
+*/5    0-9   * * * scheduler gaming allow
+*/5    10-11 * * * scheduler gaming deny --morning
+*/5    13-23 * * * scheduler gaming allow
+
 
 
 # Netflix

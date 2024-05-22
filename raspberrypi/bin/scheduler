@@ -30,7 +30,7 @@ main() {
   fi
 
   # Comment out if you want to enable morning bonus time.
-  MORNING="-1"
+  [ "$MORNING" = "1" ] && MORNING="-1"
 
   case "$service" in
     "amazon")
@@ -591,6 +591,11 @@ todo() {
       cron-daemonctl start observe-dnsmasq-todo-list "$safe"
       ;;
     "stop")
+      if [ "$MORNING" = "-1" ]; then
+        cron-daemonctl start observe-dnsmasq-todo-list "$safe"
+        return
+      fi
+
       cron-daemonctl stop observe-dnsmasq-todo-list "$safe"
       ;;
     *)
@@ -606,6 +611,11 @@ todo_night() {
       cron-daemonctl start observe-dnsmasq-todo-list-night "$safe"
       ;;
     "stop")
+      if [ "$MORNING" = "-1" ]; then
+        cron-daemonctl start observe-dnsmasq-todo-list-night "$safe"
+        return
+      fi
+
       cron-daemonctl stop observe-dnsmasq-todo-list-night "$safe"
       ;;
     *)
