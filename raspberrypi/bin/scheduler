@@ -30,7 +30,7 @@ main() {
   fi
 
   # Comment out if you want to enable morning bonus time.
-  MORNING="0"
+  MORNING="-1"
 
   case "$service" in
     "amazon")
@@ -121,7 +121,7 @@ main() {
 amazon() {
   case "$operation" in
     "deny")
-      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ]; } || [ "$MORNING" = "1" ]; then
+      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } || [ "$MORNING" = "1" ]; then
         cron-daemonctl stop observe-amazon-conf "$safe"
         remove-dnsmasq-toggle-conf public amazon
         return
@@ -228,7 +228,7 @@ morning() {
   # the alarm may stop before the confirmation.
   #
   # SSH
-  if [ "$MORNING" = 1 ]; then
+  if [ "$MORNING" = "1" ]; then
     if [ "$(ps aux | grep juke | grep -cv grep)" -ge 1 ]; then
       echo "/home/ubuntu/workspace/cron-conf/bin/lib/punish          \
         --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
@@ -249,7 +249,7 @@ morning() {
 deregulated_superman() {
   case "$operation" in
     "deny")
-      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ]; } || [ "$MORNING" = "1" ]; then
+      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } || [ "$MORNING" = "1" ]; then
         cron-daemonctl stop observe-deregulated-superman-conf "$safe"
         cron-daemonctl stop observe-deregulated-superman-allow-conf "$safe"
         return
@@ -340,7 +340,7 @@ focus() {
 gaming() {
   case "$operation" in
     "deny")
-      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ]; } || [ "$MORNING" = "1" ]; then
+      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } || [ "$MORNING" = "1" ]; then
         cron-daemonctl stop observe-gaming-conf "$safe"
         return
       fi
@@ -382,7 +382,7 @@ night() {
 maeve() {
   case "$operation" in
     "deny")
-      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ]; } || [ "$MORNING" = "1" ]; then
+      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } || [ "$MORNING" = "1" ]; then
         cron-daemonctl stop observe-maeve-conf "$safe"
         return
       fi
@@ -403,7 +403,7 @@ maeve() {
 netflix() {
   case "$operation" in
     "deny")
-      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ]; } || [ "$MORNING" = "1" ]; then
+      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } || [ "$MORNING" = "1" ]; then
         cron-daemonctl stop observe-netflix-conf "$safe"
         cron-daemonctl stop observe-netflix-allow-conf "$safe"
         return
@@ -471,7 +471,7 @@ observe() {
 ometeotl() {
   case "$operation" in
     "deny")
-      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ]; } || [ "$MORNING" = "1" ]; then
+      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } || [ "$MORNING" = "1" ]; then
         cron-daemonctl stop observe-ometeotl-conf "$safe"
         return
       fi
@@ -564,7 +564,7 @@ startup() {
 superman() {
   case "$operation" in
     "deny")
-      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ]; } || [ "$MORNING" = "1" ]; then
+      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } || [ "$MORNING" = "1" ]; then
         cron-daemonctl stop observe-superman-conf "$safe"
         return
       fi
@@ -624,7 +624,7 @@ upstream() {
   # When the previous file is deleted and the new file is not yet created, none of the upstream DNS files will be set, and the Internet connection will be blocked.
   case "$operation" in
     "deny")
-      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ]; } || [ "$MORNING" = "1" ]; then
+      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } || [ "$MORNING" = "1" ]; then
         cron-daemonctl stop observe-adguard-upstream-conf "$safe"
         cron-daemonctl stop observe-nordvpn-upstream-conf "$safe"
         return
@@ -661,7 +661,7 @@ upstream() {
 vod() {
   case "$operation" in
     "deny")
-      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ]; } || [ "$MORNING" = "1" ]; then
+      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } || [ "$MORNING" = "1" ]; then
         cron-daemonctl stop observe-vod-conf "$safe"
         return
       fi
@@ -685,7 +685,7 @@ vod() {
 youtube() {
   case "$operation" in
     "deny")
-      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ]; } || [ "$MORNING" = "1" ]; then
+      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } || [ "$MORNING" = "1" ]; then
         cron-daemonctl stop observe-youtube-conf "$safe"
         return
       fi
@@ -709,7 +709,7 @@ youtube() {
 youtube_alternative() {
   case "$operation" in
     "deny")
-      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ]; } || [ "$MORNING" = "1" ]; then
+      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } || [ "$MORNING" = "1" ]; then
         cron-daemonctl stop observe-youtube-alternative-conf "$safe"
         return
       fi
@@ -731,7 +731,7 @@ youtube_alternative() {
 youtube_music() {
   case "$operation" in
     "deny")
-      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ]; } || [ "$MORNING" = "1" ]; then
+      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } || [ "$MORNING" = "1" ]; then
         cron-daemonctl stop observe-youtube-music-conf "$safe"
         return
       fi
