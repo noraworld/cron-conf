@@ -30,7 +30,8 @@ main() {
   fi
 
   # Comment out if you want to enable morning bonus time.
-  [ "$MORNING" = "1" ] && MORNING="-1"
+  MORNING="-1"
+  VAMPIRE="-1"
 
   case "$service" in
     "amazon")
@@ -588,14 +589,14 @@ superman() {
 todo() {
   case "$operation" in
     "start")
-      cron-daemonctl start observe-dnsmasq-todo-list "$safe"
-      ;;
-    "stop")
-      if [ "$MORNING" = "-1" ]; then
-        cron-daemonctl start observe-dnsmasq-todo-list "$safe"
+      if [ "$MORNING" = "1" ]; then
+        cron-daemonctl stop observe-dnsmasq-todo-list "$safe"
         return
       fi
 
+      cron-daemonctl start observe-dnsmasq-todo-list "$safe"
+      ;;
+    "stop")
       cron-daemonctl stop observe-dnsmasq-todo-list "$safe"
       ;;
     *)
@@ -608,14 +609,14 @@ todo() {
 todo_night() {
   case "$operation" in
     "start")
-      cron-daemonctl start observe-dnsmasq-todo-list-night "$safe"
-      ;;
-    "stop")
-      if [ "$MORNING" = "-1" ]; then
-        cron-daemonctl start observe-dnsmasq-todo-list-night "$safe"
+      if [ "$MORNING" = "1" ]; then
+        cron-daemonctl stop observe-dnsmasq-todo-list-night "$safe"
         return
       fi
 
+      cron-daemonctl start observe-dnsmasq-todo-list-night "$safe"
+      ;;
+    "stop")
       cron-daemonctl stop observe-dnsmasq-todo-list-night "$safe"
       ;;
     *)
