@@ -33,12 +33,12 @@ main() {
       # There is an unknown phenomenon the restrictions are not regulated even though the tasks have been accomplished.
       # That's resolved by restarting the daemon for some reason.
       systemctl --user restart observe-dnsmasq-todo-list
-      accomplished=$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 0 --standard 10)
+      accomplished=$(todo-accomplished --repo "noraworld/diary" --retry 1 --standard 10 --past 0)
     elif [ "$(systemctl --user is-active observe-dnsmasq-todo-list-night | grep -c inactive)" -eq 0 ]; then
       # There is an unknown phenomenon the restrictions are not regulated even though the tasks have been accomplished.
       # That's resolved by restarting the daemon for some reason.
       systemctl --user restart observe-dnsmasq-todo-list-night
-      accomplished=$(todo-accomplished --repo "noraworld/diary" --retry 1 --past 0 --except --standard 0)
+      accomplished=$(todo-accomplished --repo "noraworld/diary" --retry 1 --except --standard 0 --past 0)
     fi
 
     if [ "$accomplished" = "unknown" ]; then
