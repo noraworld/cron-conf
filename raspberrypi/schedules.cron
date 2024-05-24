@@ -45,7 +45,7 @@ NON_ROOT_USER=ubuntu
 #       * other schedules (during the morning)
 #       * constants in garnish
 #
-19 10 * * * scheduler morning
+19 10 * * * scheduler morning --morning
 
 
 
