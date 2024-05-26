@@ -129,11 +129,11 @@ todo_mode() {
     # Do not retry many times, because no matter how many times you do that, the result is likely to be the same.
     # Besides, it delays knowing whether the restrictions are unlocked if there are some attempts.
     if [ "$NIGHT" != 1 ]; then
-      if [ "$(restrict-all check)" -le 0 ] && [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --standard 10 --past 0)" -gt 0 ]; then
+      if [ "$(restrict-all check)" -le 0 ] && [ "$(quota day)" -gt 0 ]; then
         todo_skipped=true
       fi
     else
-      if [ "$(restrict-all check)" -le 0 ] && [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --except --standard 0 --past 0)" -gt 0 ]; then
+      if [ "$(restrict-all check)" -le 0 ] && [ "$(quota night)" -gt 0 ]; then
         todo_skipped=true
       fi
     fi
@@ -155,18 +155,18 @@ todo_mode() {
         #   Do not add `[ "$(restrict-all check)" -le 0 ]` as an "ADD" condition here.
         #
         #   This is called by two daemons. The variable `todo_skipped` should be turned `false` on both of them
-        #   when `todo-accomplished` returns `false`. However, when either of them enters this condition,
+        #   when `quota` returns `false`. However, when either of them enters this condition,
         #   `restrict-all check` will return `-1`. And if `[ "$(restrict-all check)" -le 0 ]` is added to this condition,
         #   the other one never enters this condition, which means `observe-firewall deny` and `observe-firewall allow`
         #   will have conflict. [firewall-conflict]
         #
-        if [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --standard 10 --past 0)" -lt 0 ]; then
+        if [ "$(quota day)" -lt 0 ]; then
           todo_skipped=false
           /home/ubuntu/workspace/cron-conf/bin/lib/punish --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')"
         fi
       else
         # NOTE: Same as [firewall-conflict]
-        if [ "$(todo-accomplished --repo "noraworld/diary" --retry 1 --except --standard 0 --past 0)" -lt 0 ]; then
+        if [ "$(quota night)" -lt 0 ]; then
           todo_skipped=false
           /home/ubuntu/workspace/cron-conf/bin/lib/punish --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')"
         fi
@@ -305,7 +305,7 @@ parser_definition() {
   param  FILE    -f --file     -- "observe only a specific file (all files in a directory by default)"
   param  SOURCE  -s --source   -- "TBD"
   param  TARGET  -t --target   -- "target directory to observe (current directory by default)"
-  flag   NIGHT      --night    -- "if you specify this, the option for todo-accomplished is changed"
+  flag   NIGHT      --night    -- "if you specify this, the option for quota is changed"
   flag   SUDO       --sudo     -- "TBD"
   param  MODE    -m --mode     -- "git, ln, unlink, cron, or sync"
   flag   VPN        --vpn      -- "only if you are connected to a VPN and have a foreign IP address, you will be exempt from the restrictions"
@@ -431,7 +431,7 @@ Options:
   -f, --file FILE             observe only a specific file (all files in a directory by default)
   -s, --source SOURCE         TBD
   -t, --target TARGET         target directory to observe (current directory by default)
-      --night                 if you specify this, the option for todo-accomplished is changed
+      --night                 if you specify this, the option for quota is changed
       --sudo                  TBD
   -m, --mode MODE             git, ln, unlink, cron, or sync
       --vpn                   only if you are connected to a VPN and have a foreign IP address, you will be exempt from the restrictions

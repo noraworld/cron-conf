@@ -33,12 +33,12 @@ main() {
       # There is an unknown phenomenon the restrictions are not regulated even though the tasks have been accomplished.
       # That's resolved by restarting the daemon for some reason.
       systemctl --user restart observe-dnsmasq-todo-list
-      accomplished=$(todo-accomplished --repo "noraworld/diary" --retry 1 --standard 10 --past 0)
+      accomplished=$(quota day)
     elif [ "$(systemctl --user is-active observe-dnsmasq-todo-list-night | grep -c inactive)" -eq 0 ]; then
       # There is an unknown phenomenon the restrictions are not regulated even though the tasks have been accomplished.
       # That's resolved by restarting the daemon for some reason.
       systemctl --user restart observe-dnsmasq-todo-list-night
-      accomplished=$(todo-accomplished --repo "noraworld/diary" --retry 1 --except --standard 0 --past 0)
+      accomplished=$(quota night)
     fi
 
     if [ "$accomplished" = "unknown" ]; then
@@ -68,7 +68,7 @@ main() {
 parser_definition() {
   setup   REST help:usage -- "Usage: trailblazer [options]... [arguments]..." ''
   msg -- 'Options:'
-  flag    MORNING    --morning -- "skip todo-accomplished, and ask to prepare a piece of garlic"
+  flag    MORNING    --morning -- "skip quota, and ask to prepare a piece of garlic"
   param   SLEEP      --sleep   -- "how many seconds to wait for the next attempt"
   disp    :usage  -h --help
   disp    VERSION    --version
@@ -140,7 +140,7 @@ cat<<'GETOPTIONSHERE'
 Usage: trailblazer [options]... [arguments]...
 
 Options:
-      --morning               skip todo-accomplished, and ask to prepare a piece of garlic
+      --morning               skip quota, and ask to prepare a piece of garlic
       --sleep SLEEP           how many seconds to wait for the next attempt
   -h, --help
       --version

@@ -1,0 +1,14 @@
+#!/bin/sh
+
+main() {
+  case "$1" in
+    "day")
+      todo-accomplished --repo "noraworld/diary" --retry 1 --standard 10 --past 0
+      ;;
+    "night")
+      todo-accomplished --repo "noraworld/diary" --retry 1 --except --standard 0 --past 0
+      ;;
+  esac
+}
+
+main "$@"
