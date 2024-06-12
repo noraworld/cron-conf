@@ -1047,44 +1047,34 @@ remaining_time() {
       for i in $(seq 0 $(expr "$TIMES" - 1)); do
         # MEMO: if it's executed at any minute 0 seconds on the dot, the schedule time is shifted by 1 minute
         if [ "$DEBUG" = 1 ]; then
-          at_output=$(echo "$PROG_NAME $services --skip --delay $DELAY_INTERVAL --debug >> $LOG_PATH 2>&1" |
-                      at now + $(expr "$next_in" + "$i" \* "$reference_minute") min 2>&1)
-
-          echo "$PROG_NAME $services --skip --delay 1 --debug >> $LOG_PATH 2>&1" |
-          at now + $(expr "$next_in" + "$i" \* "$reference_minute") min 2>&1
-
-          echo "$PROG_NAME $services --skip --delay 2 --debug >> $LOG_PATH 2>&1" |
-          at now + $(expr "$next_in" + "$i" \* "$reference_minute") min 2>&1
-
-          echo "$PROG_NAME $services --skip --delay 3 --debug >> $LOG_PATH 2>&1" |
-          at now + $(expr "$next_in" + "$i" \* "$reference_minute") min 2>&1
-
-          echo "$PROG_NAME $services --skip --delay 4 --debug >> $LOG_PATH 2>&1" |
-          at now + $(expr "$next_in" + "$i" \* "$reference_minute") min 2>&1
-
-          echo "$PROG_NAME $services --skip --delay 5 --debug >> $LOG_PATH 2>&1" |
-          at now + $(expr "$next_in" + "$i" \* "$reference_minute") min 2>&1
+          at_output1=$(echo "$PROG_NAME $services --skip --delay 1 --debug >> $LOG_PATH 2>&1" |
+                       at now + $(expr "$next_in" + "$i" \* "$reference_minute") min 2>&1)
+          at_output2=$(echo "$PROG_NAME $services --skip --delay 2 --debug >> $LOG_PATH 2>&1" |
+                       at now + $(expr "$next_in" + "$i" \* "$reference_minute") min 2>&1)
+          at_output3=$(echo "$PROG_NAME $services --skip --delay 3 --debug >> $LOG_PATH 2>&1" |
+                       at now + $(expr "$next_in" + "$i" \* "$reference_minute") min 2>&1)
+          at_output4=$(echo "$PROG_NAME $services --skip --delay 4 --debug >> $LOG_PATH 2>&1" |
+                       at now + $(expr "$next_in" + "$i" \* "$reference_minute") min 2>&1)
+          at_output5=$(echo "$PROG_NAME $services --skip --delay 5 --debug >> $LOG_PATH 2>&1" |
+                       at now + $(expr "$next_in" + "$i" \* "$reference_minute") min 2>&1)
         else
-          at_output=$(echo "$PROG_NAME $services --skip --delay $DELAY_INTERVAL" |
-                      at now + $(expr "$next_in" + "$i" \* "$reference_minute") min 2>&1)
-
-          echo "$PROG_NAME $services --skip --delay 1" |
-          at now + $(expr "$next_in" + "$i" \* "$reference_minute") min 2>&1
-
-          echo "$PROG_NAME $services --skip --delay 2" |
-          at now + $(expr "$next_in" + "$i" \* "$reference_minute") min 2>&1
-
-          echo "$PROG_NAME $services --skip --delay 3" |
-          at now + $(expr "$next_in" + "$i" \* "$reference_minute") min 2>&1
-
-          echo "$PROG_NAME $services --skip --delay 4" |
-          at now + $(expr "$next_in" + "$i" \* "$reference_minute") min 2>&1
-
-          echo "$PROG_NAME $services --skip --delay 5" |
-          at now + $(expr "$next_in" + "$i" \* "$reference_minute") min 2>&1
+          at_output1=$(echo "$PROG_NAME $services --skip --delay 1" |
+                       at now + $(expr "$next_in" + "$i" \* "$reference_minute") min 2>&1)
+          at_output2=$(echo "$PROG_NAME $services --skip --delay 2" |
+                       at now + $(expr "$next_in" + "$i" \* "$reference_minute") min 2>&1)
+          at_output3=$(echo "$PROG_NAME $services --skip --delay 3" |
+                       at now + $(expr "$next_in" + "$i" \* "$reference_minute") min 2>&1)
+          at_output4=$(echo "$PROG_NAME $services --skip --delay 4" |
+                       at now + $(expr "$next_in" + "$i" \* "$reference_minute") min 2>&1)
+          at_output5=$(echo "$PROG_NAME $services --skip --delay 5" |
+                       at now + $(expr "$next_in" + "$i" \* "$reference_minute") min 2>&1)
         fi
 
-        [ "$VERBOSE" = 1 ] && echo "$at_output" | grep -Ev "^warning: commands will be executed using"
+        [ "$VERBOSE" = 1 ] && echo "$at_output1" | grep -Ev "^warning: commands will be executed using"
+        [ "$VERBOSE" = 1 ] && echo "$at_output2" | grep -Ev "^warning: commands will be executed using"
+        [ "$VERBOSE" = 1 ] && echo "$at_output3" | grep -Ev "^warning: commands will be executed using"
+        [ "$VERBOSE" = 1 ] && echo "$at_output4" | grep -Ev "^warning: commands will be executed using"
+        [ "$VERBOSE" = 1 ] && echo "$at_output5" | grep -Ev "^warning: commands will be executed using"
       done
     fi
   fi
