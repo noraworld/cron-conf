@@ -5,6 +5,7 @@ set -u
 export PATH=/home/ubuntu/workspace/cron-conf/bin:/home/ubuntu/workspace/cron-conf/raspberrypi/bin:/home/ubuntu/.local/share/zinit/polaris/bin:"$PATH"
 RETRY_INTERVAL=1
 ACCOMPLISHED_CHECK_INTERVAL=1800
+PUNISHMENT_DURATION="3 hours"
 
 
 
@@ -162,13 +163,17 @@ todo_mode() {
         #
         if [ "$(quota day)" -lt 0 ]; then
           todo_skipped=false
-          /home/ubuntu/workspace/cron-conf/bin/lib/punish --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')"
+          /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+            --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+            --duration "$PUNISHMENT_DURATION"
         fi
       else
         # NOTE: Same as [firewall-conflict]
         if [ "$(quota night)" -lt 0 ]; then
           todo_skipped=false
-          /home/ubuntu/workspace/cron-conf/bin/lib/punish --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')"
+          /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+            --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+            --duration "$PUNISHMENT_DURATION"
         fi
       fi
     fi
