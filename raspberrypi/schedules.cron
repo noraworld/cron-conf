@@ -157,23 +157,23 @@ NON_ROOT_USER=ubuntu
 
 
 # Superman
-*/5    0-6   * * 0   scheduler superman deny
-*/5    7-23  * * 0   scheduler superman allow
-*/5    0-6   * * 1   scheduler superman allow
-0      7     * * 1   scheduler superman deny --safe
-5-55/5 7     * * 1   scheduler superman deny
-*/5    8-9   * * 1   scheduler superman deny
-*/5    10-11 * * 1   scheduler superman deny --morning
-0      12    * * 1   scheduler superman deny --safe
-5-55/5 12    * * 1   scheduler superman deny
-*/5    13-23 * * 1   scheduler superman deny
-*/5    0-9   * * 2-6 scheduler superman deny
-*/5    10-11 * * 2-6 scheduler superman deny --morning
-0      12    * * 2-6 scheduler superman deny --safe
-5-55/5 12    * * 2-6 scheduler superman deny
-*/5    13-23 * * 2-6 scheduler superman deny
+# */5    0-6   * * 0   scheduler superman deny
+# */5    7-23  * * 0   scheduler superman allow
+# */5    0-6   * * 1   scheduler superman allow
+# 0      7     * * 1   scheduler superman deny --safe
+# 5-55/5 7     * * 1   scheduler superman deny
+# */5    8-9   * * 1   scheduler superman deny
+# */5    10-11 * * 1   scheduler superman deny --morning
+# 0      12    * * 1   scheduler superman deny --safe
+# 5-55/5 12    * * 1   scheduler superman deny
+# */5    13-23 * * 1   scheduler superman deny
+# */5    0-9   * * 2-6 scheduler superman deny
+# */5    10-11 * * 2-6 scheduler superman deny --morning
+# 0      12    * * 2-6 scheduler superman deny --safe
+# 5-55/5 12    * * 2-6 scheduler superman deny
+# */5    13-23 * * 2-6 scheduler superman deny
 #
-# */5 * * * * scheduler superman allow
+*/5 * * * * scheduler superman allow
 
 
 
