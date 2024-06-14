@@ -6,7 +6,7 @@ main() {
       todo-accomplished --repo "noraworld/diary" --retry 1 --standard 10 --past 0
       ;;
     "night")
-      todo-accomplished --repo "noraworld/diary" --retry 1 --except --standard 3 --past 0
+      todo-accomplished --repo "noraworld/diary" --retry 1 --except --standard 4 --past 0
       ;;
   esac
 }
