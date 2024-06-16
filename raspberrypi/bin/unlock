@@ -110,6 +110,7 @@ main() {
 
   restart_dnsmasq "$@"
   remaining_time "$@"
+  show_directories "$@"
 
   log_after_execution "$@"
 }
@@ -1078,6 +1079,11 @@ remaining_time() {
       done
     fi
   fi
+}
+
+show_directories() {
+  echo && ls --color=auto --literal --time-style=+ -l /etc/dnsmasq.toggle &&
+  echo && ls --color=auto --literal --time-style=+ -l /etc/dnsmasq.priv/toggle
 }
 
 validate() {
