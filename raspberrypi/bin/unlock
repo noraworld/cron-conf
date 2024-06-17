@@ -1082,6 +1082,7 @@ remaining_time() {
 }
 
 show_directories() {
+  # https://ubuntuforums.org/showthread.php?t=1203166
   echo && ls --color=auto --literal --time-style=+ -l /etc/dnsmasq.toggle &&
   echo && ls --color=auto --literal --time-style=+ -l /etc/dnsmasq.priv/toggle
 }
