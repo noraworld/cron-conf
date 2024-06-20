@@ -247,7 +247,7 @@ morning() {
   fi
 
   # Network
-  vpnctl disconnect --skipdns
+  # vpnctl disconnect --skipdns
 }
 
 deregulated_superman() {
