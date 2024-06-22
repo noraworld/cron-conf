@@ -122,6 +122,9 @@ firewall_mode() {
 
 
 todo_mode() {
+  todo_skipped=""
+  quota_refresh="false"
+
   set +u
   [ "$todo_skipped" = "" ] && todo_skipped=false
   set -u
@@ -163,18 +166,27 @@ todo_mode() {
         #
         if [ "$(quota day)" -lt 0 ]; then
           todo_skipped=false
-          # It is a hassle to reconnect to the SSH every time day mode and night mode are switched and kicked out of the SSH.
-          ### /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-          ###   --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-          ###   --duration "$PUNISHMENT_DURATION"
+
+          if [ "$quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            quota_refresh=true
+          fi
         fi
       else
         # NOTE: Same as [firewall-conflict]
         if [ "$(quota night)" -lt 0 ]; then
           todo_skipped=false
-          ### /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-          ###   --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-          ###   --duration "$PUNISHMENT_DURATION"
+
+          if [ "$quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            quota_refresh=true
+          fi
         fi
       fi
     fi
