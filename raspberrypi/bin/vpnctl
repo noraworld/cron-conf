@@ -111,7 +111,7 @@ disconnect() {
 
   # It is necessary because it fails to retrieve the IP address soon after the VPN is disconnected.
   echo
-  echo "wait for 5 seconds"
+  echo "wait for $SLEEP_INTERVAL_AFTER_DISCONNECTED seconds to avoid failing to retrieve your current country"
   sleep "$SLEEP_INTERVAL_AFTER_DISCONNECTED"
 
   [ "$STATUS" = 1 ] && status
