@@ -7,6 +7,7 @@ DEFAULT_MY_COUNTRY="JP"
 DEFAULT_TARGET_COUNTRY="ca"
 DEFAULT_RETRY_THRESHOLD="5"
 DEFAULT_SLEEP_INTERVAL="3"
+SLEEP_INTERVAL_AFTER_DISCONNECTED="5"
 
 main() {
   parse "$@"
@@ -107,6 +108,11 @@ disconnect() {
   else
     echo "Error: Failed to disconnect for some reason." >&2
   fi
+
+  # It is necessary because it fails to retrieve the IP address soon after the VPN is disconnected.
+  echo
+  echo "wait for 5 seconds"
+  sleep "$SLEEP_INTERVAL_AFTER_DISCONNECTED"
 
   [ "$STATUS" = 1 ] && status
 }
