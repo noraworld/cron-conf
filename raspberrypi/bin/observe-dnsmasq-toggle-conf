@@ -225,7 +225,9 @@ todo_mode() {
 
   # firewall_mode
   if [ "$todo_skipped" = "false" ] && [ "$(observe-firewall check)" -le 0 ]; then
-    observe-firewall deny --debug
+    # MEMO: I wonder if there is a better way not to get punished the first time the diary is updated but to do it a second time.
+    # observe-firewall deny --debug
+    observe-firewall deny --safe
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset $TARGET"
   fi
 
