@@ -109,12 +109,14 @@ disconnect() {
     echo "Error: Failed to disconnect for some reason." >&2
   fi
 
-  # It is necessary because it fails to retrieve the IP address soon after the VPN is disconnected.
-  echo
-  echo "wait for $SLEEP_INTERVAL_AFTER_DISCONNECTED seconds to avoid failing to retrieve your current country"
-  sleep "$SLEEP_INTERVAL_AFTER_DISCONNECTED"
+  if [ "$STATUS" = 1 ]; then
+    # It is necessary because it fails to retrieve the IP address soon after the VPN is disconnected.
+    echo
+    echo "wait for $SLEEP_INTERVAL_AFTER_DISCONNECTED seconds to avoid failing to retrieve your current country"
+    sleep "$SLEEP_INTERVAL_AFTER_DISCONNECTED"
 
-  [ "$STATUS" = 1 ] && status
+    status
+  fi
 }
 
 disconnected() {
