@@ -122,11 +122,9 @@ firewall_mode() {
 
 
 todo_mode() {
-  todo_skipped=""
-  quota_refresh="false"
-
   set +u
-  [ "$todo_skipped" = "" ] && todo_skipped=false
+  [ "$todo_skipped"  = "" ] && todo_skipped=false
+  [ "$quota_refresh" = "" ] && quota_refresh=false
   set -u
 
   if [ "$todo_skipped" = "false" ]; then
