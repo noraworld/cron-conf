@@ -45,7 +45,9 @@ main() {
 }
 
 updatable() {
-  if [ "$(echo $(( $(date +%s) - $(cat "$CHECK_FILE") )) )" -gt "$CHECK_INTERVAL" ]; then
+  if [ "$(cat "$RESULT_FILE")" -eq 0 ] ||
+     [ "$(echo $(( $(date +%s) - $(cat "$CHECK_FILE") )) )" -gt "$CHECK_INTERVAL" ]; then
+
     date +%s > "$CHECK_FILE"
     echo "1"
   else
