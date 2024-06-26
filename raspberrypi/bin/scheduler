@@ -736,6 +736,12 @@ youtube() {
 }
 
 youtube_alternative() {
+  if [ "$PROGRESS" = "1" ] && [ "$(task-stacked)" -lt 0 ]; then
+    [ "$SOFT" = 1 ] || cron-daemonctl start observe-youtube-alternative-conf "$safe"
+    remove-dnsmasq-toggle-conf public youtube_alternative
+    return
+  fi
+
   case "$operation" in
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
@@ -759,6 +765,12 @@ youtube_alternative() {
 }
 
 youtube_music() {
+  if [ "$PROGRESS" = "1" ] && [ "$(task-stacked)" -lt 0 ]; then
+    [ "$SOFT" = 1 ] || cron-daemonctl start observe-youtube-music-conf "$safe"
+    remove-dnsmasq-toggle-conf public youtube_music
+    return
+  fi
+
   case "$operation" in
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
