@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# TODO:
+#   * illegal file change
+#   * what if the result is 0 (API error, etc.)
+
 CHECK_FILE="/home/ubuntu/.tmp/task_stacked_last_update"
 CHECK_INTERVAL="1800"
 RESULT_FILE="/home/ubuntu/.tmp/task_stacked_last_result"
