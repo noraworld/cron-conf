@@ -707,6 +707,7 @@ vod() {
 youtube() {
   if [ "$PROGRESS" = "1" ] && [ "$(task-stacked)" -lt 0 ]; then
     [ "$SOFT" = 1 ] || cron-daemonctl start observe-youtube-conf "$safe"
+    create-dnsmasq-toggle-conf public youtube
     return
   fi
 
