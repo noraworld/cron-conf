@@ -31,6 +31,9 @@ main() {
   if [ "$stacked" -gt 0 ] && [ "$nothing" -eq 0 ]; then
     echo "1" > "$RESULT_FILE"
     echo "1"
+  elif [ "$stacked" -eq 0 ] && [ "$nothing" -eq 0 ]; then
+    echo "0" > "$RESULT_FILE"
+    echo "0"
   else
     echo "-1" > "$RESULT_FILE"
     echo "-1"
