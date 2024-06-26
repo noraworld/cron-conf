@@ -705,6 +705,11 @@ vod() {
 }
 
 youtube() {
+  if [ "$PROGRESS" = "1" ] && [ "$(task-stacked)" -lt 0 ]; then
+    [ "$SOFT" = 1 ] || cron-daemonctl start observe-youtube-conf "$safe"
+    return
+  fi
+
   case "$operation" in
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||

@@ -310,10 +310,10 @@ NON_ROOT_USER=ubuntu
 # 5-55/5 12    * * 5     scheduler youtube deny
 # */5    13-23 * * 5     scheduler youtube deny
 #
-*/5    0-9   * * * scheduler youtube deny --vampire
-*/5    10-22 * * * scheduler youtube allow
-0      23    * * * scheduler youtube deny --vampire --safe
-5-55/5 23    * * * scheduler youtube deny --vampire
+*/5    0-9   * * * scheduler youtube deny  --progress --vampire
+*/5    10-22 * * * scheduler youtube allow --progress
+0      23    * * * scheduler youtube deny  --progress --vampire --safe
+5-55/5 23    * * * scheduler youtube deny  --progress --vampire
 
 
 
