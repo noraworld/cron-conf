@@ -1,14 +1,12 @@
 #!/bin/sh
 
-# TODO:
-#   * illegal file change
-
 CHECK_FILE="/home/ubuntu/.tmp/task_stacked_last_update"
 CHECK_INTERVAL="1800"
 RESULT_FILE="/home/ubuntu/.tmp/task_stacked_last_result"
 
 main() {
   prepare "$@"
+  police "$@"
 
   if [ "$(updatable)" -lt 0 ]; then
     echo "It has not taken $CHECK_INTERVAL seconds since the last update." >&2
@@ -70,6 +68,14 @@ prepare() {
   [ "$FORCE" = 1 ] && CHECK_INTERVAL="0"
   [ -e "$CHECK_FILE"  ] || date +%s  > "$CHECK_FILE"
   [ -e "$RESULT_FILE" ] || echo "-1" > "$RESULT_FILE"
+}
+
+police() {
+  if [ "$(echo $(( $(date +%s) - $(cat "$CHECK_FILE") )) )" -lt 0 ]; then
+    echo "An illegal timestamp was detected from the last update." >&2
+    echo "-2" > "$RESULT_FILE"
+    exit "2"
+  fi
 }
 
 # @getoptions
