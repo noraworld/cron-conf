@@ -28,10 +28,14 @@ main() {
     awk '/## 🐯 今日やること/{ getline; print }'
   )
 
-  stacked=$(echo "$result" | grep -cE "\* \[x\] \[.*\]\(https\:\/\/github\.com\/noraworld\/to\-do\/issues\/[0-9]*\)")
+  completed=$(echo "$result" | grep -cE "\* \[x\] \[.*\]\(https\:\/\/github\.com\/noraworld\/to\-do\/issues\/[0-9]*\)")
+  stacked=$(echo "$result" | grep -cE "\* \[.\] \[.*\]\(https\:\/\/github\.com\/noraworld\/to\-do\/issues\/[0-9]*\)")
   nothing=$(echo "$result" | grep -cE "\* 特になし")
 
-  if [ "$stacked" -gt 0 ] && [ "$nothing" -eq 0 ]; then
+  if [ "$completed" -gt 0 ] && [ "$stacked" -gt 0 ] && [ "$nothing" -eq 0 ]; then
+    echo "2" > "$RESULT_FILE"
+    echo "2"
+  elif [ "$stacked" -gt 0 ] && [ "$nothing" -eq 0 ]; then
     echo "1" > "$RESULT_FILE"
     echo "1"
   elif [ "$stacked" -eq 0 ] && [ "$nothing" -eq 0 ]; then
