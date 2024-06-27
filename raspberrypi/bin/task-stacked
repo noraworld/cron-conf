@@ -25,14 +25,14 @@ main() {
     )                                            \
     --json body                                  \
     --jq .body                                   |
-    awk '/## 🐯 今日やること/{ getline; print }'
+    awk '/## 🐯 今日やること/{ flag=1; next } flag'
   )
 
   completed=$(echo "$result" | grep -cE "\* \[x\] \[.*\]\(https\:\/\/github\.com\/noraworld\/to\-do\/issues\/[0-9]*\)")
   stacked=$(echo "$result" | grep -cE "\* \[.\] \[.*\]\(https\:\/\/github\.com\/noraworld\/to\-do\/issues\/[0-9]*\)")
   nothing=$(echo "$result" | grep -cE "\* 特になし")
 
-  if [ "$completed" -gt 0 ] && [ "$stacked" -gt 0 ] && [ "$nothing" -eq 0 ]; then
+  if [ "$completed" -gt 0 ] && [ "$stacked" -gt 0 ] && [ "$completed" = "$stacked" ] && [ "$nothing" -eq 0 ]; then
     echo "2" > "$RESULT_FILE"
     echo "2"
   elif [ "$stacked" -gt 0 ] && [ "$nothing" -eq 0 ]; then
