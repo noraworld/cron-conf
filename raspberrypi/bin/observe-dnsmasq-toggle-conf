@@ -131,11 +131,11 @@ todo_mode() {
     # Do not retry many times, because no matter how many times you do that, the result is likely to be the same.
     # Besides, it delays knowing whether the restrictions are unlocked if there are some attempts.
     if [ "$NIGHT" != 1 ]; then
-      if [ "$(restrict-all check)" -le 0 ] && [ "$(quota day)" -gt 0 ]; then
+      if [ "$(restrict-all check)" -le 0 ] && [ "$(quota day)" -gt 0 ] && [ "$(task-stacked)" -ge 2 ]; then
         todo_skipped=true
       fi
     else
-      if [ "$(restrict-all check)" -le 0 ] && [ "$(quota night)" -gt 0 ]; then
+      if [ "$(restrict-all check)" -le 0 ] && [ "$(quota night)" -gt 0 ] && [ "$(task-stacked)" -ge 2 ]; then
         todo_skipped=true
       fi
     fi
@@ -162,7 +162,7 @@ todo_mode() {
         #   the other one never enters this condition, which means `observe-firewall deny` and `observe-firewall allow`
         #   will have conflict. [firewall-conflict]
         #
-        if [ "$(quota day)" -lt 0 ]; then
+        if [ "$(quota day)" -lt 0 ] && [ "$(task-stacked)" -ge 2 ]; then
           todo_skipped=false
 
           if [ "$quota_refresh" = "true" ]; then
@@ -175,7 +175,7 @@ todo_mode() {
         fi
       else
         # NOTE: Same as [firewall-conflict]
-        if [ "$(quota night)" -lt 0 ]; then
+        if [ "$(quota night)" -lt 0 ] && [ "$(task-stacked)" -ge 2 ]; then
           todo_skipped=false
 
           if [ "$quota_refresh" = "true" ]; then
