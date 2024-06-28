@@ -38,7 +38,8 @@ main() {
 
   for service in $services; do
     reference_minute=0
-    waiting_interval=5
+    # 5 is not enough for observe-dnsmasq-toggle-conf
+    waiting_interval=10
 
     case "$service" in
       "all")
