@@ -9,6 +9,8 @@ LOG_FILE="/home/ubuntu/.log/digital_detox_notifier.log"
 REPO="noraworld/diary"
 NEWLINE="\r\n"
 
+export GHC_FROM="$(basename "$0") $*"
+
 main() {
   since=$(systemctl show dnsmasq --property=ActiveEnterTimestamp | sed -r 's/ActiveEnterTimestamp=//g')
   uptime=$(( $(date +%s) - $(date -d"$since" +%s) ))

@@ -13,6 +13,8 @@ PRIVATE_CRON_API_URL="https://api.github.com/repos/noraworld/envsman/contents/ra
 
 JUDGE_FILEPATH="/etc/dnsmasq.toggle/youtube.conf"
 
+export GHC_FROM="$(basename "$0") $*"
+
 main() {
   parse "$@"
   eval "set -- $REST"

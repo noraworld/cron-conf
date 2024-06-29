@@ -4,6 +4,8 @@ CHECK_FILE="/home/ubuntu/.tmp/task_stacked_last_update"
 CHECK_INTERVAL="1800"
 RESULT_FILE="/home/ubuntu/.tmp/task_stacked_last_result"
 
+export GHC_FROM="$(basename "$0") $*"
+
 main() {
   prepare "$@"
   police "$@"

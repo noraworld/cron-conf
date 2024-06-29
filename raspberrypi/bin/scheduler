@@ -12,6 +12,8 @@ ALARM_DISABLED_DURATION="60 min" # The SSH connection is lost for the time given
 
 UPTIME_THRESHOLD="5"
 
+export GHC_FROM="$(basename "$0") $*"
+
 main() {
   export XDG_RUNTIME_DIR
   export PULSE_RUNTIME_PATH

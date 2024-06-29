@@ -4,6 +4,8 @@
 
 LOG_PATH="/home/ubuntu/.log/todo_accomplished.log"
 
+export GHC_FROM="$(basename "$0") $*"
+
 main() {
   parse "$@"
   eval "set -- $REST"
