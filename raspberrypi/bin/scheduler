@@ -343,6 +343,12 @@ focus() {
 }
 
 gaming() {
+  if [ "$PROGRESS" = "1" ] && [ "$(task-stacked)" -lt 0 ]; then
+    [ "$SOFT" = 1 ] || cron-daemonctl start observe-gaming-conf "$safe"
+    create-dnsmasq-toggle-conf public gaming
+    return
+  fi
+
   case "$operation" in
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
@@ -386,6 +392,12 @@ night() {
 }
 
 maeve() {
+  if [ "$PROGRESS" = "1" ] && [ "$(task-stacked)" -lt 0 ]; then
+    [ "$SOFT" = 1 ] || cron-daemonctl start observe-maeve-conf "$safe"
+    create-dnsmasq-toggle-conf private maeve
+    return
+  fi
+
   case "$operation" in
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
@@ -477,6 +489,12 @@ observe() {
 }
 
 ometeotl() {
+  if [ "$PROGRESS" = "1" ] && [ "$(task-stacked)" -lt 0 ]; then
+    [ "$SOFT" = 1 ] || cron-daemonctl start observe-ometeotl-conf "$safe"
+    create-dnsmasq-toggle-conf private ometeotl
+    return
+  fi
+
   case "$operation" in
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
@@ -571,6 +589,12 @@ startup() {
 }
 
 superman() {
+  if [ "$PROGRESS" = "1" ] && [ "$(task-stacked)" -lt 0 ]; then
+    [ "$SOFT" = 1 ] || cron-daemonctl start observe-superman-conf "$safe"
+    create-dnsmasq-toggle-conf private superman
+    return
+  fi
+
   case "$operation" in
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
@@ -680,6 +704,12 @@ upstream() {
 }
 
 vod() {
+  if [ "$PROGRESS" = "1" ] && [ "$(task-stacked)" -lt 0 ]; then
+    [ "$SOFT" = 1 ] || cron-daemonctl start observe-vod-conf "$safe"
+    create-dnsmasq-toggle-conf public vod
+    return
+  fi
+
   case "$operation" in
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
