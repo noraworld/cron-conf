@@ -108,13 +108,13 @@ validate() {
 # if they are called too many
 print_conf_remote() {
   echo "##### BEGIN PUBLIC CRON CONF #####"
-  curl --silent "$(gh api "$1" --jq .download_url)"
+  curl --silent "$(ghc api "$1" --jq .download_url)"
   echo "##### END PUBLIC CRON CONF #####"
   echo
   echo
   echo
   echo "##### BEGIN PRIVATE CRON CONF #####"
-  curl --silent "$(gh api "$2" --jq .download_url)"
+  curl --silent "$(ghc api "$2" --jq .download_url)"
   echo "##### END PRIVATE CRON CONF #####"
 }
 

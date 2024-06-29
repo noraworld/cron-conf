@@ -16,11 +16,11 @@ main() {
 
   count=0
   while [ "$body" = "" ] && [ "$count" -lt "$RETRY" ]; do
-    body=$(gh issue view --repo "$REPO" "$(gh issue list --repo "$REPO" --limit 1 | awk '{ print $1 }')" --json body --jq .body)
+    body=$(ghc issue view --repo "$REPO" "$(ghc issue list --repo "$REPO" --limit 1 | awk '{ print $1 }')" --json body --jq .body)
 
     if [ "$PAST" -ge 1 ]; then
-      past_body=$(gh issue list --repo "$REPO" --state "closed" --limit "$PAST" | awk '{ print $1 }' |
-                  xargs --max-args=1 --open-tty gh issue view --repo "$REPO" --json body --jq .body)
+      past_body=$(ghc issue list --repo "$REPO" --state "closed" --limit "$PAST" | awk '{ print $1 }' |
+                  xargs --max-args=1 --open-tty ghc issue view --repo "$REPO" --json body --jq .body)
     fi
 
     if [ "$body" != "" ]; then

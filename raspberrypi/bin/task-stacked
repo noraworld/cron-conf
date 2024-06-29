@@ -14,9 +14,9 @@ main() {
     exit "1"
   fi
 
-  result=$(gh issue view                         \
+  result=$(ghc issue view                         \
     --repo "noraworld/diary"                     \
-    $(gh issue list                              \
+    $(ghc issue list                              \
       --repo "noraworld/diary"                   \
       --limit 1                                  |
       awk '{ print $1 }'                         \
