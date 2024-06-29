@@ -162,7 +162,7 @@ todo_mode() {
         #   the other one never enters this condition, which means `observe-firewall deny` and `observe-firewall allow`
         #   will have conflict. [firewall-conflict]
         #
-        if [ "$(quota day)" -lt 0 ] && [ "$(task-stacked)" -ge 2 ]; then
+        if [ "$(quota day)" -lt 0 ] && [ "$(task-stacked)" -lt 2 ]; then
           todo_skipped=false
 
           if [ "$quota_refresh" = "true" ]; then
@@ -175,7 +175,7 @@ todo_mode() {
         fi
       else
         # NOTE: Same as [firewall-conflict]
-        if [ "$(quota night)" -lt 0 ] && [ "$(task-stacked)" -ge 2 ]; then
+        if [ "$(quota night)" -lt 0 ] && [ "$(task-stacked)" -lt 2 ]; then
           todo_skipped=false
 
           if [ "$quota_refresh" = "true" ]; then
