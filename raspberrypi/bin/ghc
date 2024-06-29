@@ -4,9 +4,7 @@ LOG_PATH="/home/ubuntu/.log/gh_api_invoked.log"
 
 main() {
   echo "[$(date '+%Y-%m-%dT%H:%M:%S%z')] Invoked GitHub API" >> "$LOG_PATH"
-
-  # Do not encompass $@ with "double quote."
-  gh $@
+  gh "$@"
 }
 
 main "$@"
