@@ -29,34 +29,48 @@ main() {
   else
     accomplished="unknown"
 
+    # $(( $(quota day) * $(task-stacked) ))
+    #
+    # | value | number of combination | status           |
+    # | ----: | --------------------: | :--------------- |
+    # |     2 |                     1 | ok               |
+    # |     1 |                     2 | not enough       |
+    # |     0 |                     6 | api error        |
+    # |    -1 |                     2 | not accomplished |
+    # |    -2 |                     1 | not accomplished |
+
     if [ "$(systemctl --user is-active observe-dnsmasq-todo-list | grep -c inactive)" -eq 0 ]; then
       # There is an unknown phenomenon the restrictions are not regulated even though the tasks have been accomplished.
       # That's resolved by restarting the daemon for some reason.
       systemctl --user restart observe-dnsmasq-todo-list
-      accomplished=$(quota day)
+      accomplished=$(( $(quota day) * $(task-stacked) ))
     elif [ "$(systemctl --user is-active observe-dnsmasq-todo-list-night | grep -c inactive)" -eq 0 ]; then
       # There is an unknown phenomenon the restrictions are not regulated even though the tasks have been accomplished.
       # That's resolved by restarting the daemon for some reason.
       systemctl --user restart observe-dnsmasq-todo-list-night
-      accomplished=$(quota night)
+      accomplished=$(( $(quota night) * $(task-stacked) ))
     fi
 
+    # value: unknown
     if [ "$accomplished" = "unknown" ]; then
       echo "Something went wrong." >&2
       exit
     fi
 
-    if [ "$accomplished" -lt 0 ]; then
+    # value: 1, -1, -2
+    if [ "$accomplished" -lt 0 ] || [ "$accomplished" -eq 1 ]; then
       echo "Not accomplished yet." >&2
       exit
     fi
 
+    # value: 0
     while [ "$accomplished" -eq 0 ]; do
       echo "Failed to retrieve todo list. Retry in $sleep_interval seconds."
       sleep "$sleep_interval"
     done
   fi
 
+  # value: 2
   unlock $services --skip
 }
 
