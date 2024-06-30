@@ -8,7 +8,9 @@ main() {
     echo "" >> "$LOG_PATH"
   fi
 
-  echo "[$(date '+%Y-%m-%dT%H:%M:%S%z')] Invoked GitHub API from \"$(echo "$GHC_FROM" | sed 's/[[:space:]]*$//')\"" >> "$LOG_PATH"
+  echo "[$(date '+%Y-%m-%dT%H:%M:%S%z')] Invoked GitHub API from" \
+       "\"$(echo "$GHC_FROM" | sed 's/[[:space:]]*$//')\"" >> "$LOG_PATH"
+
   gh "$@"
 }
 
