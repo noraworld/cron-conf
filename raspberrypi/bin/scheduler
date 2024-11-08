@@ -31,7 +31,7 @@ main() {
     safe=""
   fi
 
-  # Comment out these lines if you want to enable morning bonus time.
+  # COMMENT OUT these lines (put "#" at the beginning of these lines) if you want to ENABLE morning bonus time.
   # When enabling them, "scheduler [service_name] deny --vampire" is virtually the same as
   # "scheduler [service_name] allow"
   [ "$MORNING" = "1" ] && MORNING="-1"
