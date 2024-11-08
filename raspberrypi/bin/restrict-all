@@ -10,10 +10,13 @@ main() {
 
   mode="$1"
 
-  # What's missing:
-  #   None!
+  # Enable either one of them
   #
-  services="observe-deregulated-superman-conf observe-deregulated-superman-allow-conf observe-maeve-conf observe-ometeotl-conf observe-superman-conf observe-adguard-upstream-conf observe-nordvpn-upstream-conf observe-vod-conf observe-youtube-conf observe-gaming-conf observe-youtube-alternative-conf observe-youtube-music-conf"
+  # All
+  # services="observe-deregulated-superman-conf observe-deregulated-superman-allow-conf observe-maeve-conf observe-ometeotl-conf observe-superman-conf observe-adguard-upstream-conf observe-nordvpn-upstream-conf observe-vod-conf observe-youtube-conf observe-gaming-conf observe-youtube-alternative-conf observe-youtube-music-conf"
+  #
+  # All except for YouTube Music
+  services="observe-deregulated-superman-conf observe-deregulated-superman-allow-conf observe-maeve-conf observe-ometeotl-conf observe-superman-conf observe-adguard-upstream-conf observe-nordvpn-upstream-conf observe-vod-conf observe-youtube-conf observe-gaming-conf observe-youtube-alternative-conf"
 
   case "$mode" in
     "check")
@@ -42,8 +45,8 @@ check() {
      [ -e      "$TOGGLE_DIR/gaming.conf"                     ] &&
      [ -e      "$TOGGLE_DIR/vod.conf"                        ] &&
      [ -e      "$TOGGLE_DIR/youtube.conf"                    ] &&
-   ! [ -e      "$TOGGLE_DIR/youtube_alternative.conf"        ] &&
-   ! [ -e      "$TOGGLE_DIR/youtube_music.conf"              ]; then
+   ! [ -e      "$TOGGLE_DIR/youtube_alternative.conf"        ]; then
+   # ! [ -e      "$TOGGLE_DIR/youtube_music.conf"              ]; then
 
     if [ "$STRICT" = 1 ]; then
       if [ "$(systemctl --user is-active $services | grep -c "inactive")" -eq 0 ]; then
@@ -69,8 +72,15 @@ reset() {
                                     youtube \
                                     --skip
 
+  # Enable either one of them
+  #
+  # All
+  # remove-dnsmasq-toggle-conf public youtube_alternative \
+  #                                   youtube_music       \
+  #                                   --skip
+  #
+  # All except for YouTube Music
   remove-dnsmasq-toggle-conf public youtube_alternative \
-                                    youtube_music       \
                                     --skip
 
   create-dnsmasq-toggle-conf private deregulated_superman \
