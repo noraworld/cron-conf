@@ -6,7 +6,7 @@ set -eu
 DAY_SECOND="86400"
 COUNT_FILE="/home/ubuntu/.tmp/digital_detox_notifier_count"
 LOG_FILE="/home/ubuntu/.log/digital_detox_notifier.log"
-REPO="noraworld/diary"
+REPO="noraworld/reserved-diary"
 NEWLINE="\r\n"
 
 export GHC_FROM="$(basename "$0") $*"

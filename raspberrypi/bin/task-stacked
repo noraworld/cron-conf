@@ -16,15 +16,15 @@ main() {
     exit "1"
   fi
 
-  result=$(ghc issue view                         \
-    --repo "noraworld/diary"                     \
-    $(ghc issue list                              \
-      --repo "noraworld/diary"                   \
-      --limit 1                                  |
-      awk '{ print $1 }'                         \
-    )                                            \
-    --json body                                  \
-    --jq .body                                   |
+  result=$(ghc issue view               \
+    --repo "noraworld/reserved-diary"   \
+    $(ghc issue list                    \
+      --repo "noraworld/reserved-diary" \
+      --limit 1                         |
+      awk '{ print $1 }'                \
+    )                                   \
+    --json body                         \
+    --jq .body                          |
     awk '/## 🐯 今日やること/{ flag=1; next } flag'
   )
 
