@@ -112,17 +112,25 @@ port_blocked() {
   fi
 
   # Check if the accept rule against the port 53 forwarding doesn't exist
-  if [ "$(sudo iptables-save | grep -e "-A ufw-user-forward" | grep -c "53")" -ne 0 ]; then
+  #
+  # TODO: You also have to check the range that inludes 53
+  #       For instance, "-A ufw-user-forward -p tcp -m multiport --dports 1:1023 -j ACCEPT" should be blocked because it includes 53
+  if [ "$(sudo iptables-save | grep -e "-A ufw-user-forward" | grep -c " 53 ")" -ne 0 ]; then
     [ "$DEBUG" = 1 ] && echo "{ \"code\": 7, \"date\": \"$(date)\", \"reason\": \"accept rule for forwarding 53/TCP found\" }," >> "$DEBUG_LOG_PATH"
     echo false
     return
   fi
 
   # Check if the accepted rule against port 1024 - 65535 forwarding doesn't exist
+  #   Except for:
+  #     60313: SSH
+  #     50000 - 51819 & 51821 - 65535: Discord (51820 is used for NordVPN WireGuard)
   if [ "$(sudo iptables-save                                                                                                                      |
           grep -e "-A ufw-user-forward"                                                                                                           |
           grep -E "\b(102[4-9]|10[3-9][0-9]|1[1-9][0-9]{2}|[2-9][0-9]{3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])\b" |
-          grep -cv "60313")" -ne 0 ]; then
+          grep -v "60313"                                                                                                                         |
+          grep -v "50000:51819"                                                                                                                   |
+          grep -cv "51821:65535")" -ne 0 ]; then
 
     if [ "$DEBUG" = 1 ]; then
       ## https://stackoverflow.com/questions/1251999/how-can-i-replace-each-newline-n-with-a-space-using-sed#answer-1252191
