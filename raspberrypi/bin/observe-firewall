@@ -125,6 +125,7 @@ port_blocked() {
   #   Except for:
   #     60313: SSH
   #     50000 - 51819 & 51821 - 65535: Discord (51820 is used for NordVPN WireGuard)
+  #       https://chatgpt.com/share/6734528b-0d14-8004-9253-770de34c4db2
   if [ "$(sudo iptables-save                                                                                                                      |
           grep -e "-A ufw-user-forward"                                                                                                           |
           grep -E "\b(102[4-9]|10[3-9][0-9]|1[1-9][0-9]{2}|[2-9][0-9]{3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])\b" |
