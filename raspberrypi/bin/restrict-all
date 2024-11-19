@@ -10,15 +10,6 @@ main() {
 
   mode="$1"
   shift 1
-
-  # Enable either one of them
-  #
-  # All
-  # services="observe-deregulated-superman-conf observe-deregulated-superman-allow-conf observe-maeve-conf observe-ometeotl-conf observe-superman-conf observe-adguard-upstream-conf observe-nordvpn-upstream-conf observe-vod-conf observe-youtube-conf observe-gaming-conf observe-youtube-alternative-conf observe-youtube-music-conf"
-  #
-  # All except for YouTube Music
-  # services="observe-deregulated-superman-conf observe-deregulated-superman-allow-conf observe-maeve-conf observe-ometeotl-conf observe-superman-conf observe-adguard-upstream-conf observe-nordvpn-upstream-conf observe-vod-conf observe-youtube-conf observe-gaming-conf observe-youtube-alternative-conf"
-
   services="$@"
 
   case "$mode" in
