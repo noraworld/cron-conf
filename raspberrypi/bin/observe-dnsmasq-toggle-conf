@@ -6,7 +6,7 @@ export PATH=/home/ubuntu/workspace/cron-conf/bin:/home/ubuntu/workspace/cron-con
 RETRY_INTERVAL=1
 ACCOMPLISHED_CHECK_INTERVAL="1800" # 30 minutes
 PUNISHMENT_DURATION="3 hours"
-RESTRICTED_SERVICES="observe-deregulated-superman-conf observe-deregulated-superman-allow-conf observe-maeve-conf observe-ometeotl-conf observe-superman-conf observe-adguard-upstream-conf observe-nordvpn-upstream-conf observe-vod-conf observe-youtube-conf observe-gaming-conf observe-youtube-alternative-conf observe-youtube-music-conf observe-cloudflare-upstream-conf observe-superman-upstream-conf"
+RESTRICTED_SERVICES="observe-deregulated-superman-conf observe-deregulated-superman-allow-conf observe-maeve-conf observe-ometeotl-conf observe-superman-conf observe-adguard-upstream-conf observe-nordvpn-upstream-conf observe-vod-conf observe-youtube-conf observe-gaming-conf observe-youtube-alternative-conf observe-youtube-music-conf observe-cloudflare-upstream-conf observe-superman-upstream-conf" # All
 # RESTRICTED_SERVICES="observe-youtube-conf"
 
 
