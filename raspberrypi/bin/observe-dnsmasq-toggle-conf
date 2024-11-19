@@ -6,6 +6,7 @@ export PATH=/home/ubuntu/workspace/cron-conf/bin:/home/ubuntu/workspace/cron-con
 RETRY_INTERVAL=1
 ACCOMPLISHED_CHECK_INTERVAL="1800" # 30 minutes
 PUNISHMENT_DURATION="3 hours"
+RESTRICTED_SERVICES="observe-deregulated-superman-conf observe-deregulated-superman-allow-conf observe-maeve-conf observe-ometeotl-conf observe-superman-conf observe-adguard-upstream-conf observe-nordvpn-upstream-conf observe-vod-conf observe-youtube-conf observe-gaming-conf observe-youtube-alternative-conf observe-youtube-music-conf observe-cloudflare-upstream-conf observe-superman-upstream-conf"
 
 
 
@@ -131,11 +132,11 @@ todo_mode() {
     # Do not retry many times, because no matter how many times you do that, the result is likely to be the same.
     # Besides, it delays knowing whether the restrictions are unlocked if there are some attempts.
     if [ "$NIGHT" != 1 ]; then
-      if [ "$(restrict-all check)" -le 0 ] && [ "$(quota day)" -gt 0 ] && [ "$(task-stacked)" -ge 2 ]; then
+      if [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ] && [ "$(quota day)" -gt 0 ] && [ "$(task-stacked)" -ge 2 ]; then
         todo_skipped=true
       fi
     else
-      if [ "$(restrict-all check)" -le 0 ] && [ "$(quota night)" -gt 0 ] && [ "$(task-stacked)" -ge 2 ]; then
+      if [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ] && [ "$(quota night)" -gt 0 ] && [ "$(task-stacked)" -ge 2 ]; then
         todo_skipped=true
       fi
     fi
@@ -154,11 +155,12 @@ todo_mode() {
       if [ "$NIGHT" != 1 ]; then
         #
         # NOTE:
-        #   Do not add `[ "$(restrict-all check)" -le 0 ]` as an "ADD" condition here.
+        #   Do not add `[ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ]` as an "ADD" condition here.
         #
         #   This is called by two daemons. The variable `todo_skipped` should be turned `false` on both of them
         #   when `quota` returns `false`. However, when either of them enters this condition,
-        #   `restrict-all check` will return `-1`. And if `[ "$(restrict-all check)" -le 0 ]` is added to this condition,
+        #   `restrict-all check $RESTRICTED_SERVICES` will return `-1`.
+        #   And if `[ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ]` is added to this condition,
         #   the other one never enters this condition, which means `observe-firewall deny` and `observe-firewall allow`
         #   will have conflict. [firewall-conflict]
         #
@@ -191,8 +193,8 @@ todo_mode() {
   fi
 
   # ln_mode & unlink_mode
-  if [ "$todo_skipped" = "false" ] && [ "$(restrict-all check)" -le 0 ]; then
-    restrict-all reset
+  if [ "$todo_skipped" = "false" ] && [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ]; then
+    restrict-all reset $RESTRICTED_SERVICES
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset $TARGET"
   fi
 
