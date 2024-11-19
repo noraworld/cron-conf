@@ -79,10 +79,10 @@ reset() {
     fi
   done
 
-  create-dnsmasq-toggle-conf public $create_public --skip
-  remove-dnsmasq-toggle-conf public $remove_public --skip
-  create-dnsmasq-toggle-conf private $create_private --skip
-  remove-dnsmasq-toggle-conf private $remove_private --skip
+  [ "$create_public"  != "" ] && create-dnsmasq-toggle-conf public  $create_public  --skip
+  [ "$remove_public"  != "" ] && remove-dnsmasq-toggle-conf public  $remove_public  --skip
+  [ "$create_private" != "" ] && create-dnsmasq-toggle-conf private $create_private --skip
+  [ "$remove_private" != "" ] && remove-dnsmasq-toggle-conf private $remove_private --skip
 
   # NOTE:
   #   Actually, it should be avoided to restart the daemon directly here.
