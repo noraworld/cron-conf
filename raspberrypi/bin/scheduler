@@ -13,6 +13,7 @@ ALARM_DISABLED_DURATION="60 min" # The SSH connection is lost for the time given
 UPTIME_THRESHOLD="5"
 
 RESTRICTED_SERVICES="observe-deregulated-superman-conf observe-deregulated-superman-allow-conf observe-maeve-conf observe-ometeotl-conf observe-superman-conf observe-adguard-upstream-conf observe-nordvpn-upstream-conf observe-vod-conf observe-youtube-conf observe-gaming-conf observe-youtube-alternative-conf observe-youtube-music-conf observe-cloudflare-upstream-conf observe-superman-upstream-conf"
+# RESTRICTED_SERVICES="observe-youtube-conf"
 
 export GHC_FROM="$(basename "$0") $*"
 
