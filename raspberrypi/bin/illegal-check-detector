@@ -20,7 +20,7 @@ set -e
 export GHC_FROM="$(basename "$0") $*"
 
 CHECK_FILE="/home/ubuntu/.tmp/illegal_check_detector_last_update"
-CHECK_INTERVAL="1800"
+CHECK_INTERVAL="900"
 RESULT_FILE="/home/ubuntu/.tmp/illegal_check_detector_last_result"
 
 main() {
