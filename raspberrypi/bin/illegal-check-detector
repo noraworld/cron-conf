@@ -30,7 +30,7 @@ main() {
   if [ "$(updatable)" -lt 0 ]; then
     echo "It has not taken $CHECK_INTERVAL seconds since the last update." >&2
     cat "$RESULT_FILE"
-    exit "1"
+    exit "200"
   else
     echo "0" > "$RESULT_FILE"
   fi

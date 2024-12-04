@@ -3,18 +3,27 @@
 RESULT_FILE="/home/ubuntu/.tmp/illegal_check_detector_last_result"
 
 main() {
+  personal=""
+  work=""
+
   personal=$(
     illegal-check-detector                      \
       --main-repo     noraworld/reserved-diary  \
       --template-repo noraworld/diary-templates \
       --todo-repo     noraworld/to-do
   )
-  work=$(
-    illegal-check-detector                             \
-      --main-repo     noraworld/daily-report           \
-      --template-repo noraworld/daily-report-templates \
-      --todo-repo     noraworld/work-scraps --force
-  )
+  status=$(echo $?)
+
+  if [ "$status" = "200" ]; then
+    work="$personal"
+  else
+    work=$(
+      illegal-check-detector                             \
+        --main-repo     noraworld/daily-report           \
+        --template-repo noraworld/daily-report-templates \
+        --todo-repo     noraworld/work-scraps --force
+    )
+  fi
 
   if [ "$personal" = "1" ] && [ "$work" = "1" ]; then
     echo "1" > "$RESULT_FILE"
