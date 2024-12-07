@@ -105,7 +105,9 @@ updatable() {
 }
 
 validate() {
-  echo "Consider adding the --strict option because you might misspell the repo name!" >&2
+  if [ "$STRICT" != "1" ]; then
+    echo "Consider adding the --strict option because you might misspell the repo name!" >&2
+  fi
 
   if [ "$(echo "$MAIN_REPO" | grep -cE ".*/.*")" -ne 1 ]; then
     echo "This is not a repository (MAIN_REPO)" >&2
