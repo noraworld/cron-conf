@@ -29,7 +29,7 @@ main() {
   else
     accomplished="unknown"
 
-    # $(( $(quota day) * $(task-stacked) ))
+    # $(( $(quota day) * $(boom) ))
     #
     # | value | number of combination | status           |
     # | ----: | --------------------: | :--------------- |
@@ -43,12 +43,12 @@ main() {
       # There is an unknown phenomenon the restrictions are not regulated even though the tasks have been accomplished.
       # That's resolved by restarting the daemon for some reason.
       systemctl --user restart observe-dnsmasq-todo-list
-      accomplished=$(( $(quota day) * $(task-stacked) ))
+      accomplished=$(( $(quota day) * $(boom) ))
     elif [ "$(systemctl --user is-active observe-dnsmasq-todo-list-night | grep -c inactive)" -eq 0 ]; then
       # There is an unknown phenomenon the restrictions are not regulated even though the tasks have been accomplished.
       # That's resolved by restarting the daemon for some reason.
       systemctl --user restart observe-dnsmasq-todo-list-night
-      accomplished=$(( $(quota night) * $(task-stacked) ))
+      accomplished=$(( $(quota night) * $(boom) ))
     fi
 
     # value: unknown

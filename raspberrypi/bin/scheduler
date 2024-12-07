@@ -349,7 +349,7 @@ focus() {
 }
 
 gaming() {
-  if [ "$PROGRESS" = "1" ] && [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ] && [ "$(task-stacked)" -lt 0 ]; then
+  if [ "$PROGRESS" = "1" ] && [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ] && [ "$(boom)" -lt 0 ]; then
     [ "$SOFT" = 1 ] || cron-daemonctl start observe-gaming-conf "$safe"
     create-dnsmasq-toggle-conf public gaming
     return
@@ -398,7 +398,7 @@ night() {
 }
 
 maeve() {
-  if [ "$PROGRESS" = "1" ] && [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ] && [ "$(task-stacked)" -lt 0 ]; then
+  if [ "$PROGRESS" = "1" ] && [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ] && [ "$(boom)" -lt 0 ]; then
     [ "$SOFT" = 1 ] || cron-daemonctl start observe-maeve-conf "$safe"
     create-dnsmasq-toggle-conf private maeve
     return
@@ -495,7 +495,7 @@ observe() {
 }
 
 ometeotl() {
-  if [ "$PROGRESS" = "1" ] && [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ] && [ "$(task-stacked)" -lt 0 ]; then
+  if [ "$PROGRESS" = "1" ] && [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ] && [ "$(boom)" -lt 0 ]; then
     [ "$SOFT" = 1 ] || cron-daemonctl start observe-ometeotl-conf "$safe"
     create-dnsmasq-toggle-conf private ometeotl
     return
@@ -595,7 +595,7 @@ startup() {
 }
 
 superman() {
-  if [ "$PROGRESS" = "1" ] && [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ] && [ "$(task-stacked)" -lt 0 ]; then
+  if [ "$PROGRESS" = "1" ] && [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ] && [ "$(boom)" -lt 0 ]; then
     [ "$SOFT" = 1 ] || cron-daemonctl start observe-superman-conf "$safe"
     create-dnsmasq-toggle-conf private superman
     return
@@ -710,7 +710,7 @@ upstream() {
 }
 
 vod() {
-  if [ "$PROGRESS" = "1" ] && [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ] && [ "$(task-stacked)" -lt 0 ]; then
+  if [ "$PROGRESS" = "1" ] && [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ] && [ "$(boom)" -lt 0 ]; then
     [ "$SOFT" = 1 ] || cron-daemonctl start observe-vod-conf "$safe"
     create-dnsmasq-toggle-conf public vod
     return
@@ -741,7 +741,7 @@ vod() {
 }
 
 youtube() {
-  if [ "$PROGRESS" = "1" ] && [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ] && [ "$(task-stacked)" -lt 0 ]; then
+  if [ "$PROGRESS" = "1" ] && [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ] && [ "$(boom)" -lt 0 ]; then
     [ "$SOFT" = 1 ] || cron-daemonctl start observe-youtube-conf "$safe"
     create-dnsmasq-toggle-conf public youtube
     return
@@ -772,7 +772,7 @@ youtube() {
 }
 
 youtube_alternative() {
-  if [ "$PROGRESS" = "1" ] && [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ] && [ "$(task-stacked)" -lt 0 ]; then
+  if [ "$PROGRESS" = "1" ] && [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ] && [ "$(boom)" -lt 0 ]; then
     [ "$SOFT" = 1 ] || cron-daemonctl start observe-youtube-alternative-conf "$safe"
     remove-dnsmasq-toggle-conf public youtube_alternative
     return
@@ -801,7 +801,7 @@ youtube_alternative() {
 }
 
 youtube_music() {
-  if [ "$PROGRESS" = "1" ] && [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ] && [ "$(task-stacked)" -lt 0 ]; then
+  if [ "$PROGRESS" = "1" ] && [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ] && [ "$(boom)" -lt 0 ]; then
     [ "$SOFT" = 1 ] || cron-daemonctl start observe-youtube-music-conf "$safe"
     remove-dnsmasq-toggle-conf public youtube_music
     return

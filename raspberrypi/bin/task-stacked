@@ -13,24 +13,35 @@ main() {
   if [ "$(updatable)" -lt 0 ]; then
     echo "It has not taken $CHECK_INTERVAL seconds since the last update." >&2
     cat "$RESULT_FILE"
-    exit "1"
+    exit "200"
   fi
 
-  result=$(ghc issue view               \
-    --repo "noraworld/reserved-diary"   \
-    $(ghc issue list                    \
-      --repo "noraworld/reserved-diary" \
-      --limit 1                         |
-      awk '{ print $1 }'                \
-    )                                   \
-    --json body                         \
-    --jq .body                          |
+  validate "$@"
+
+  result=$(ghc issue view \
+    --repo "$MAIN_REPO"   \
+    $(ghc issue list      \
+      --repo "$MAIN_REPO" \
+      --limit 1           |
+      awk '{ print $1 }'  \
+    )                     \
+    --json body           \
+    --jq .body            |
     awk '/## 🐯 今日やること/{ flag=1; next } flag'
   )
 
-  completed=$(echo "$result" | grep -cE "\* \[x\] \[.*\]\(https\:\/\/github\.com\/noraworld\/to\-do\/issues\/[0-9]*\)")
-  stacked=$(echo "$result" | grep -cE "\* \[.\] \[.*\]\(https\:\/\/github\.com\/noraworld\/to\-do\/issues\/[0-9]*\)")
-  nothing=$(echo "$result" | grep -cE "\* 特になし")
+  completed=$(
+    echo "$result" |
+    grep -cE "\* \[x\] \[.*\]\(https\:\/\/github\.com\/$(echo $TODO_REPO | sed -r "s|/|\\\/|g")\/issues\/[0-9]*\)"
+  )
+  stacked=$(
+    echo "$result" |
+    grep -cE "\* \[.\] \[.*\]\(https\:\/\/github\.com\/$(echo $TODO_REPO | sed -r "s|/|\\\/|g")\/issues\/[0-9]*\)"
+  )
+  nothing=$(
+    echo "$result" |
+    grep -cE "\* 特になし"
+  )
 
   if [ "$DEBUG" = 1 ]; then
     echo "DEBUG: completed = $completed"
@@ -64,6 +75,32 @@ updatable() {
   fi
 }
 
+validate() {
+  if [ "$STRICT" != "1" ]; then
+    echo "Consider adding the --strict option because you might misspell the repo name!" >&2
+  fi
+
+  if [ "$(echo "$MAIN_REPO" | grep -cE ".*/.*")" -ne 1 ]; then
+    echo "This is not a repository (MAIN_REPO)" >&2
+    exit
+  fi
+
+  if [ "$STRICT" = "1" ] && ! gh repo view "$MAIN_REPO" > /dev/null 2>&1; then
+    echo "No repository found (MAIN_REPO)" >&2
+    exit
+  fi
+
+  if [ "$(echo "$TODO_REPO" | grep -cE ".*/.*")" -ne 1 ]; then
+    echo "This is not a repository (TODO_REPO)" >&2
+    exit
+  fi
+
+  if [ "$STRICT" = "1" ] && ! gh repo view "$TODO_REPO" > /dev/null 2>&1; then
+    echo "No repository found (TODO_REPO)" >&2
+    exit
+  fi
+}
+
 prepare() {
   parse "$@"
   eval "set -- $REST"
@@ -84,10 +121,13 @@ police() {
 parser_definition() {
   setup   REST help:usage -- "Usage: task-stacked [options]... [arguments]..." ''
   msg -- 'Options:'
-  flag DEBUG      --debug   -- "perform as debug mode"
-  flag FORCE      --force   -- "ignore CHECK_INTERVAL"
-  disp :usage  -h --help
-  disp VERSION    --version
+  flag  DEBUG        --debug     -- "perform as debug mode"
+  flag  FORCE        --force     -- "ignore CHECK_INTERVAL"
+  param MAIN_REPO    --main-repo -- "main repo"
+  flag  STRICT       --strict    -- "check repo existence strictly"
+  param TODO_REPO    --todo-repo -- "todo repo"
+  disp  :usage    -h --help
+  disp  VERSION      --version
 }
 # @end
 
@@ -96,6 +136,9 @@ parser_definition() {
 # URL: https://github.com/ko1nksm/getoptions (v3.3.0)
 DEBUG=''
 FORCE=''
+MAIN_REPO=''
+STRICT=''
+TODO_REPO=''
 REST=''
 parse() {
   OPTIND=$(($#+1))
@@ -120,6 +163,21 @@ parse() {
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
         FORCE="$OPTARG"
         ;;
+      '--main-repo')
+        [ $# -le 1 ] && set "required" "$1" && break
+        OPTARG=$2
+        MAIN_REPO="$OPTARG"
+        shift ;;
+      '--strict')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        STRICT="$OPTARG"
+        ;;
+      '--todo-repo')
+        [ $# -le 1 ] && set "required" "$1" && break
+        OPTARG=$2
+        TODO_REPO="$OPTARG"
+        shift ;;
       '-h'|'--help')
         usage
         exit 0 ;;
@@ -158,6 +216,9 @@ Usage: task-stacked [options]... [arguments]...
 Options:
       --debug                 perform as debug mode
       --force                 ignore CHECK_INTERVAL
+      --main-repo MAIN_REPO   main repo
+      --strict                check repo existence strictly
+      --todo-repo TODO_REPO   todo repo
   -h, --help
       --version
 GETOPTIONSHERE
