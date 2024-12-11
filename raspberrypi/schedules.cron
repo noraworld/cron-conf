@@ -49,6 +49,10 @@ NON_ROOT_USER=ubuntu
 
 
 
+30 8 * * * sincere
+
+
+
 # Perform periodic tasks
 */10 * * * * scheduler periodic
 
