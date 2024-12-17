@@ -141,7 +141,7 @@ todo_mode() {
       if \
         [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ] &&
         [ "$(quota day)" -gt 0 ]                               &&
-        [ "$(boom)" -ge 2 ]                                    ||
+        [ "$(boom)" -ge 2 ]                                    &&
         [ "$(sincere)" -gt 0 ];
       then
         todo_skipped=true
@@ -155,7 +155,7 @@ todo_mode() {
       if \
         [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ] &&
         [ "$(quota night)" -gt 0 ]                             &&
-        [ "$(boom)" -ge 2 ]                                    ||
+        [ "$(boom)" -ge 2 ]                                    &&
         [ "$(sincere)" -gt 0 ];
       then
         todo_skipped=true
