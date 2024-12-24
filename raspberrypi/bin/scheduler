@@ -12,9 +12,6 @@ ALARM_DISABLED_DURATION="60 min" # The SSH connection is lost for the time given
 
 UPTIME_THRESHOLD="5"
 
-# RESTRICTED_SERVICES="observe-deregulated-superman-conf observe-deregulated-superman-allow-conf observe-maeve-conf observe-ometeotl-conf observe-superman-conf observe-adguard-upstream-conf observe-nordvpn-upstream-conf observe-vod-conf observe-youtube-conf observe-gaming-conf observe-youtube-alternative-conf observe-youtube-music-conf observe-cloudflare-upstream-conf observe-superman-upstream-conf" # All
-RESTRICTED_SERVICES="observe-youtube-conf"
-
 export GHC_FROM="$(basename "$0") $*"
 
 main() {
@@ -349,7 +346,7 @@ focus() {
 }
 
 gaming() {
-  if [ "$PROGRESS" = "1" ] && [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ] && [ "$(boom)" -lt 0 ]; then
+  if [ "$PROGRESS" = "1" ] && [ "$(restrict-all check "observe-gaming-conf")" -le 0 ] && [ "$(boom)" -lt 0 ]; then
     [ "$SOFT" = 1 ] || cron-daemonctl start observe-gaming-conf "$safe"
     create-dnsmasq-toggle-conf public gaming
     return
@@ -398,7 +395,7 @@ night() {
 }
 
 maeve() {
-  if [ "$PROGRESS" = "1" ] && [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ] && [ "$(boom)" -lt 0 ]; then
+  if [ "$PROGRESS" = "1" ] && [ "$(restrict-all check "observe-maeve-conf")" -le 0 ] && [ "$(boom)" -lt 0 ]; then
     [ "$SOFT" = 1 ] || cron-daemonctl start observe-maeve-conf "$safe"
     create-dnsmasq-toggle-conf private maeve
     return
@@ -495,7 +492,7 @@ observe() {
 }
 
 ometeotl() {
-  if [ "$PROGRESS" = "1" ] && [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ] && [ "$(boom)" -lt 0 ]; then
+  if [ "$PROGRESS" = "1" ] && [ "$(restrict-all check "observe-ometeotl-conf")" -le 0 ] && [ "$(boom)" -lt 0 ]; then
     [ "$SOFT" = 1 ] || cron-daemonctl start observe-ometeotl-conf "$safe"
     create-dnsmasq-toggle-conf private ometeotl
     return
@@ -595,7 +592,7 @@ startup() {
 }
 
 superman() {
-  if [ "$PROGRESS" = "1" ] && [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ] && [ "$(boom)" -lt 0 ]; then
+  if [ "$PROGRESS" = "1" ] && [ "$(restrict-all check "observe-superman-conf")" -le 0 ] && [ "$(boom)" -lt 0 ]; then
     [ "$SOFT" = 1 ] || cron-daemonctl start observe-superman-conf "$safe"
     create-dnsmasq-toggle-conf private superman
     return
@@ -710,7 +707,7 @@ upstream() {
 }
 
 vod() {
-  if [ "$PROGRESS" = "1" ] && [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ] && [ "$(boom)" -lt 0 ]; then
+  if [ "$PROGRESS" = "1" ] && [ "$(restrict-all check "observe-vod-conf")" -le 0 ] && [ "$(boom)" -lt 0 ]; then
     [ "$SOFT" = 1 ] || cron-daemonctl start observe-vod-conf "$safe"
     create-dnsmasq-toggle-conf public vod
     return
@@ -741,7 +738,7 @@ vod() {
 }
 
 youtube() {
-  if [ "$PROGRESS" = "1" ] && [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ] && [ "$(boom)" -lt 0 ]; then
+  if [ "$PROGRESS" = "1" ] && [ "$(restrict-all check "observe-youtube-conf")" -le 0 ] && [ "$(boom)" -lt 0 ]; then
     [ "$SOFT" = 1 ] || cron-daemonctl start observe-youtube-conf "$safe"
     create-dnsmasq-toggle-conf public youtube
     return
@@ -772,7 +769,7 @@ youtube() {
 }
 
 youtube_alternative() {
-  if [ "$PROGRESS" = "1" ] && [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ] && [ "$(boom)" -lt 0 ]; then
+  if [ "$PROGRESS" = "1" ] && [ "$(restrict-all check "observe-youtube-alternative-conf")" -le 0 ] && [ "$(boom)" -lt 0 ]; then
     [ "$SOFT" = 1 ] || cron-daemonctl start observe-youtube-alternative-conf "$safe"
     remove-dnsmasq-toggle-conf public youtube_alternative
     return
@@ -801,7 +798,7 @@ youtube_alternative() {
 }
 
 youtube_music() {
-  if [ "$PROGRESS" = "1" ] && [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ] && [ "$(boom)" -lt 0 ]; then
+  if [ "$PROGRESS" = "1" ] && [ "$(restrict-all check "observe-youtube-music-conf")" -le 0 ] && [ "$(boom)" -lt 0 ]; then
     [ "$SOFT" = 1 ] || cron-daemonctl start observe-youtube-music-conf "$safe"
     remove-dnsmasq-toggle-conf public youtube_music
     return
