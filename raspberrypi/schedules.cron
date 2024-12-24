@@ -201,26 +201,26 @@ NON_ROOT_USER=ubuntu
 
 
 # Gaming
-*/5    0-9   * * * scheduler gaming deny --vampire
+*/5    0-9   * * * scheduler gaming deny
 */5    10-22 * * * scheduler gaming allow
-0      23    * * * scheduler gaming deny --vampire --safe
-5-55/5 23    * * * scheduler gaming deny --vampire
+0      23    * * * scheduler gaming deny --safe
+5-55/5 23    * * * scheduler gaming deny
 
 
 
 # Netflix
-*/5    0-9   * * * scheduler netflix deny --vampire
+*/5    0-9   * * * scheduler netflix deny
 */5    10-22 * * * scheduler netflix allow
-0      23    * * * scheduler netflix deny --vampire --safe
-5-55/5 23    * * * scheduler netflix deny --vampire
+0      23    * * * scheduler netflix deny --safe
+5-55/5 23    * * * scheduler netflix deny
 
 
 
 # VOD
-*/5    0-9   * * * scheduler vod deny --vampire
+*/5    0-9   * * * scheduler vod deny
 */5    10-22 * * * scheduler vod allow
-0      23    * * * scheduler vod deny --vampire --safe
-5-55/5 23    * * * scheduler vod deny --vampire
+0      23    * * * scheduler vod deny --safe
+5-55/5 23    * * * scheduler vod deny
 
 
 
@@ -314,10 +314,10 @@ NON_ROOT_USER=ubuntu
 # 5-55/5 12    * * 5     scheduler youtube deny
 # */5    13-23 * * 5     scheduler youtube deny
 #
-*/5    0-9   * * * scheduler youtube deny  --progress --vampire
+*/5    0-9   * * * scheduler youtube deny  --progress
 */5    10-22 * * * scheduler youtube allow --progress
-0      23    * * * scheduler youtube deny  --progress --vampire --safe
-5-55/5 23    * * * scheduler youtube deny  --progress --vampire
+0      23    * * * scheduler youtube deny  --progress --safe
+5-55/5 23    * * * scheduler youtube deny  --progress
 
 
 
