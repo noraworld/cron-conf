@@ -201,10 +201,10 @@ NON_ROOT_USER=ubuntu
 # 5-55/5 12    * * 6     scheduler superman deny
 # */5    13-23 * * 6     scheduler superman deny
 #
-*/5    0-9   * * * scheduler superman deny  --progress
-*/5    10-22 * * * scheduler superman allow --progress
-0      23    * * * scheduler superman deny  --progress --safe
-5-55/5 23    * * * scheduler superman deny  --progress
+*/5    0-9   * * * scheduler superman deny
+*/5    10-22 * * * scheduler superman allow
+0      23    * * * scheduler superman deny --safe
+5-55/5 23    * * * scheduler superman deny
 
 
 
@@ -322,10 +322,10 @@ NON_ROOT_USER=ubuntu
 # 5-55/5 12    * * 5     scheduler youtube deny
 # */5    13-23 * * 5     scheduler youtube deny
 #
-*/5    0-9   * * * scheduler youtube deny  --progress
-*/5    10-22 * * * scheduler youtube allow --progress
-0      23    * * * scheduler youtube deny  --progress --safe
-5-55/5 23    * * * scheduler youtube deny  --progress
+*/5    0-9   * * * scheduler youtube deny
+*/5    10-22 * * * scheduler youtube allow
+0      23    * * * scheduler youtube deny --safe
+5-55/5 23    * * * scheduler youtube deny
 
 
 
