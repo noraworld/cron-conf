@@ -8,14 +8,14 @@ main() {
     "gaming")
       case "$TIMEFRAME" in
         "day")
-          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --retry 1          --standard 10 --past 0)
-          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --retry 1 --except --standard 0  --past 0)
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --retry 1          --standard 8 --past 0)
+          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --retry 1 --except --standard 0 --past 0)
           task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --todo-repo "noraworld/to-do")
           task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --todo-repo "noraworld/work-scraps")
           ;;
         "night")
-          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --retry 1 --except --standard 4 --past 0)
-          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --retry 1 --except --standard 0 --past 0)
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --retry 1          --standard 12 --past 0)
+          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --retry 1 --except --standard 0  --past 0)
           task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --todo-repo "noraworld/to-do")
           task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --todo-repo "noraworld/work-scraps")
           ;;
@@ -30,8 +30,8 @@ main() {
           task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --todo-repo "noraworld/work-scraps")
           ;;
         "night")
-          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --retry 1 --except --standard 4 --past 0)
-          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --retry 1 --except --standard 0 --past 0)
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --retry 1          --standard 14 --past 0)
+          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --retry 1 --except --standard 0  --past 0)
           task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --todo-repo "noraworld/to-do")
           task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --todo-repo "noraworld/work-scraps")
           ;;
@@ -46,8 +46,8 @@ main() {
           task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --todo-repo "noraworld/work-scraps")
           ;;
         "night")
-          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --retry 1 --except --standard 4 --past 0)
-          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --retry 1 --except --standard 0 --past 0)
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --retry 1 --except --standard 14 --past 0)
+          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --retry 1 --except --standard 0  --past 0)
           task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --todo-repo "noraworld/to-do")
           task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --todo-repo "noraworld/work-scraps")
           ;;
@@ -56,13 +56,13 @@ main() {
     "youtube")
       case "$TIMEFRAME" in
         "day")
-          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --retry 1          --standard 10 --past 0)
-          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --retry 1 --except --standard 0  --past 0)
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --retry 1 --except --standard 4 --past 0)
+          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --retry 1 --except --standard 0 --past 0)
           task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --todo-repo "noraworld/to-do")
           task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --todo-repo "noraworld/work-scraps")
           ;;
         "night")
-          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --retry 1 --except --standard 4 --past 0)
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --retry 1 --except --standard 0 --past 0)
           todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --retry 1 --except --standard 0 --past 0)
           task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --todo-repo "noraworld/to-do")
           task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --todo-repo "noraworld/work-scraps")
@@ -72,13 +72,13 @@ main() {
     "youtube-alternative")
       case "$TIMEFRAME" in
         "day")
-          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --retry 1          --standard 10 --past 0)
-          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --retry 1 --except --standard 0  --past 0)
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --retry 1 --except --standard 8 --past 0)
+          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --retry 1 --except --standard 0 --past 0)
           task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --todo-repo "noraworld/to-do")
           task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --todo-repo "noraworld/work-scraps")
           ;;
         "night")
-          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --retry 1 --except --standard 4 --past 0)
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --retry 1 --except --standard 6 --past 0)
           todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --retry 1 --except --standard 0 --past 0)
           task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --todo-repo "noraworld/to-do")
           task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --todo-repo "noraworld/work-scraps")
