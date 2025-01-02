@@ -137,25 +137,25 @@ todo_mode() {
   fi
 
   # ln_mode & unlink_mode (netflix)
-  if [ "$gaming_skipped" = "false" ] && [ "$(restrict-all check "observe-netflix-conf")" -le 0 ]; then
+  if [ "$netflix_skipped" = "false" ] && [ "$(restrict-all check "observe-netflix-conf")" -le 0 ]; then
     restrict-all reset "observe-netflix-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-netflix-conf"
   fi
 
   # ln_mode & unlink_mode (vod)
-  if [ "$gaming_skipped" = "false" ] && [ "$(restrict-all check "observe-vod-conf")" -le 0 ]; then
+  if [ "$vod_skipped" = "false" ] && [ "$(restrict-all check "observe-vod-conf")" -le 0 ]; then
     restrict-all reset "observe-vod-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-vod-conf"
   fi
 
   # ln_mode & unlink_mode (youtube)
-  if [ "$gaming_skipped" = "false" ] && [ "$(restrict-all check "observe-youtube-conf")" -le 0 ]; then
+  if [ "$youtube_skipped" = "false" ] && [ "$(restrict-all check "observe-youtube-conf")" -le 0 ]; then
     restrict-all reset "observe-youtube-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-youtube-conf"
   fi
 
   # ln_mode & unlink_mode (youtube-alternative)
-  if [ "$gaming_skipped" = "false" ] && [ "$(restrict-all check "observe-youtube-alternative-conf")" -le 0 ]; then
+  if [ "$youtube_alternative_skipped" = "false" ] && [ "$(restrict-all check "observe-youtube-alternative-conf")" -le 0 ]; then
     restrict-all reset "observe-youtube-alternative-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-youtube-alternative-conf"
   fi
