@@ -781,7 +781,7 @@ youtube() {
 
 youtube_alternative() {
   reference_minute=5
-  waiting_interval=5
+  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   warning_color
