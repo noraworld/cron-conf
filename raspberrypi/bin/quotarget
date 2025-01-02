@@ -1,5 +1,18 @@
 #!/bin/sh
 
+# | Service             | Timeframe | Daily | Today | Work  |
+# | ------------------- | :-------: | :---: | :---: | :---: |
+# | Gaming              | day       |    +8 |   ALL |   ALL |
+# | Gaming              | night     |   +12 |   ALL |   ALL |
+# | Netflix             | day       |   +10 |   ALL |   ALL |
+# | Netflix             | night     |   +14 |   ALL |   ALL |
+# | VOD                 | day       |   +10 |   ALL |   ALL |
+# | VOD                 | night     |   +14 |   ALL |   ALL |
+# | YouTube             | day       |    -4 |   ALL |   ALL |
+# | YouTube             | night     |    -0 |   ALL |   ALL |
+# | YouTube Alternative | day       |    -8 |   ALL |   ALL |
+# | YouTube Alternative | night     |    -6 |   ALL |   ALL |
+
 main() {
   prepare "$@"
   validate "$@"
