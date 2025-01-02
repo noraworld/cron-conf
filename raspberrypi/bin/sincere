@@ -1,7 +1,5 @@
 #!/bin/sh
 
-RESULT_FILE="/home/ubuntu/.tmp/illegal_check_detector_last_result"
-
 main() {
   personal=""
   work=""
@@ -12,30 +10,20 @@ main() {
       --template-repo noraworld/diary-templates \
       --todo-repo     noraworld/to-do
   )
-  status=$(echo $?)
-
-  if [ "$status" = "200" ]; then
-    work="$personal"
-  else
-    work=$(
-      illegal-check-detector                             \
-        --main-repo     noraworld/daily-report           \
-        --template-repo noraworld/daily-report-templates \
-        --todo-repo     noraworld/work-scraps --force
-    )
-  fi
+  work=$(
+    illegal-check-detector                             \
+      --main-repo     noraworld/daily-report           \
+      --template-repo noraworld/daily-report-templates \
+      --todo-repo     noraworld/work-scraps
+  )
 
   if [ "$personal" = "1" ] && [ "$work" = "1" ]; then
-    echo "1" > "$RESULT_FILE"
     echo "1"
   elif [ "$personal" = "-2" ] || [ "$work" = "-2" ]; then
-    echo "-2" > "$RESULT_FILE"
     echo "-2"
   elif [ "$personal" = "-1" ] || [ "$work" = "-1" ]; then
-    echo "-1" > "$RESULT_FILE"
     echo "-1"
   else
-    echo "0" > "$RESULT_FILE"
     echo "0"
   fi
 }

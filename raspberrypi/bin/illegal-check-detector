@@ -19,9 +19,7 @@ set -e
 
 export GHC_FROM="$(basename "$0") $*"
 
-CHECK_FILE="/home/ubuntu/.tmp/illegal_check_detector_last_update"
 CHECK_INTERVAL="900"
-RESULT_FILE="/home/ubuntu/.tmp/illegal_check_detector_last_result"
 
 main() {
   prepare "$@"
@@ -81,6 +79,8 @@ prepare() {
   eval "set -- $REST"
 
   [ "$FORCE" = 1 ] && CHECK_INTERVAL="0"
+  CHECK_FILE="/home/ubuntu/.tmp/illegal_check_detector_$(echo "$MAIN_REPO" | cut -d '/' -f2 | tr '-' '_')_last_update"
+  RESULT_FILE="/home/ubuntu/.tmp/illegal_check_detector_$(echo "$MAIN_REPO" | cut -d '/' -f2 | tr '-' '_')_last_result"
   [ -e "$CHECK_FILE"  ] || date +%s  > "$CHECK_FILE"
   [ -e "$RESULT_FILE" ] || echo "-1" > "$RESULT_FILE"
 }
