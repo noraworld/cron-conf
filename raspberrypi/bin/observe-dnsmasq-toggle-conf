@@ -129,7 +129,6 @@ todo_mode() {
   vod_todo
   youtube_todo
   youtube_alternative_todo
-  general_todo
 
   # ln_mode & unlink_mode (gaming)
   if [ "$gaming_skipped" = "false" ] && [ "$(restrict-all check "observe-gaming-conf")" -le 0 ]; then
@@ -162,13 +161,13 @@ todo_mode() {
   fi
 
   # vpn check
-  if [ "$todo_skipped" = "false" ] && [ "$(force-vpn check)" -le 0 ]; then
+  if [ "$youtube_skipped" = "false" ] && [ "$(force-vpn check)" -le 0 ]; then
     force-vpn reset
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset $TARGET"
   fi
 
   # git_mode
-  if [ "$todo_skipped" = "false" ] &&
+  if [ "$youtube_skipped" = "false" ] &&
         [ "$(clean-repo check \
                "/home/ubuntu/workspace/cron-conf" \
                "/home/ubuntu/workspace/dnsmasq-conf/dnsmasq" \
@@ -188,7 +187,7 @@ todo_mode() {
   fi
 
   # firewall_mode
-  if [ "$todo_skipped" = "false" ] && [ "$(observe-firewall check)" -le 0 ]; then
+  if [ "$youtube_skipped" = "false" ] && [ "$(observe-firewall check)" -le 0 ]; then
     # MEMO: I wonder if there is a better way not to get punished the first time the diary is updated but to do it a second time.
     # observe-firewall deny --debug
     observe-firewall deny --safe
@@ -196,13 +195,13 @@ todo_mode() {
   fi
 
   # cron_mode
-  if [ "$todo_skipped" = "false" ] && [ "$(cron-apply check)" -le 0 ]; then
+  if [ "$youtube_skipped" = "false" ] && [ "$(cron-apply check)" -le 0 ]; then
     cron-apply perform --skip
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): restored cron configuration"
   fi
 
   # sync_mode
-  if [ "$todo_skipped" = "false" ] && [ "$(diff -qr "$SOURCE" "$TARGET" | grep "^Only in $TARGET")" != "" ]; then
+  if [ "$youtube_skipped" = "false" ] && [ "$(diff -qr "$SOURCE" "$TARGET" | grep "^Only in $TARGET")" != "" ]; then
     # MEMO: "--immediately" might not be necessary
     # clean-toggle-dir "$SOURCE" "$TARGET" --immediately
     clean-toggle-dir "$SOURCE" "$TARGET"
@@ -428,6 +427,11 @@ youtube_todo() {
       fi
     fi
   else
+    # only youtube_todo() applies this
+    if [ "$(systemctl --user is-active observe-firewall)" != "active" ] && [ "$(observe-firewall check)" -gt 0 ]; then
+      observe-firewall allow
+    fi
+
     set +u
     [ "$youtube_accomplished_last_checked_at" = "" ] && youtube_accomplished_last_checked_at=$(date +%s)
     set -u
@@ -520,101 +524,6 @@ youtube_alternative_todo() {
               --duration "$PUNISHMENT_DURATION"
           else
             youtube_alternative_quota_refresh=true
-          fi
-        fi
-      fi
-    fi
-  fi
-}
-
-
-
-general_todo() {
-  set +u
-  [ "$todo_skipped"  = "" ] && todo_skipped=false
-  [ "$quota_refresh" = "" ] && quota_refresh=false
-  set -u
-
-  if [ "$todo_skipped" = "false" ]; then
-    # Do not retry many times, because no matter how many times you do that, the result is likely to be the same.
-    # Besides, it delays knowing whether the restrictions are unlocked if there are some attempts.
-    if [ "$NIGHT" != 1 ]; then
-      # if \
-      #   [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ] &&
-      #   [ "$(quota day)" -gt 0 ]                               &&
-      #   [ "$(boom)" -ge 2 ];
-      # then
-      if \
-        [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ] &&
-        [ "$(quota day)" -gt 0 ]                               &&
-        [ "$(boom)" -ge 2 ]                                    &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        todo_skipped=true
-      fi
-    else
-      # if \
-      #   [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ] &&
-      #   [ "$(quota night)" -gt 0 ]                             &&
-      #   [ "$(boom)" -ge 2 ];
-      # then
-      if \
-        [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ] &&
-        [ "$(quota night)" -gt 0 ]                             &&
-        [ "$(boom)" -ge 2 ]                                    &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        todo_skipped=true
-      fi
-    fi
-  else
-    if [ "$(systemctl --user is-active observe-firewall)" != "active" ] && [ "$(observe-firewall check)" -gt 0 ]; then
-      observe-firewall allow
-    fi
-
-    set +u
-    [ "$accomplished_last_checked_at" = "" ] && accomplished_last_checked_at=$(date +%s)
-    set -u
-
-    if [ "$(echo $(( $(date +%s) - $accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
-      accomplished_last_checked_at=$(date +%s)
-
-      if [ "$NIGHT" != 1 ]; then
-        #
-        # NOTE:
-        #   Do not add `[ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ]` as an "ADD" condition here.
-        #
-        #   This is called by two daemons. The variable `todo_skipped` should be turned `false` on both of them
-        #   when `quota` returns `false`. However, when either of them enters this condition,
-        #   `restrict-all check $RESTRICTED_SERVICES` will return `-1`.
-        #   And if `[ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ]` is added to this condition,
-        #   the other one never enters this condition, which means `observe-firewall deny` and `observe-firewall allow`
-        #   will have conflict. [firewall-conflict]
-        #
-        # if [ "$(quota day)" -lt 0 ] || [ "$(boom)" -lt 2 ]; then
-        if [ "$(quota day)" -lt 0 ] || [ "$(boom)" -lt 2 ] || [ "$(sincere)" -lt 0 ]; then
-          todo_skipped=false
-
-          if [ "$quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            quota_refresh=true
-          fi
-        fi
-      else
-        # NOTE: Same as [firewall-conflict]
-        # if [ "$(quota night)" -lt 0 ] || [ "$(boom)" -lt 2 ]; then
-        if [ "$(quota night)" -lt 0 ] || [ "$(boom)" -lt 2 ] || [ "$(sincere)" -lt 0 ]; then
-          todo_skipped=false
-
-          if [ "$quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            quota_refresh=true
           fi
         fi
       fi
