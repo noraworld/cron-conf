@@ -129,6 +129,12 @@ todo_mode() {
   [ "$quota_refresh" = "" ] && quota_refresh=false
   set -u
 
+  gaming_todo
+  netflix_todo
+  vod_todo
+  youtube_todo
+  youtube_alternative_todo
+
   if [ "$todo_skipped" = "false" ]; then
     # Do not retry many times, because no matter how many times you do that, the result is likely to be the same.
     # Besides, it delays knowing whether the restrictions are unlocked if there are some attempts.
@@ -215,10 +221,34 @@ todo_mode() {
     fi
   fi
 
-  # ln_mode & unlink_mode
-  if [ "$todo_skipped" = "false" ] && [ "$(restrict-all check $RESTRICTED_SERVICES)" -le 0 ]; then
-    restrict-all reset $RESTRICTED_SERVICES
-    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset $TARGET"
+  # ln_mode & unlink_mode (gaming)
+  if [ "$gaming_skipped" = "false" ] && [ "$(restrict-all check "observe-gaming-conf")" -le 0 ]; then
+    restrict-all reset "observe-gaming-conf"
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-gaming-conf"
+  fi
+
+  # ln_mode & unlink_mode (netflix)
+  if [ "$gaming_skipped" = "false" ] && [ "$(restrict-all check "observe-netflix-conf")" -le 0 ]; then
+    restrict-all reset "observe-netflix-conf"
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-netflix-conf"
+  fi
+
+  # ln_mode & unlink_mode (vod)
+  if [ "$gaming_skipped" = "false" ] && [ "$(restrict-all check "observe-vod-conf")" -le 0 ]; then
+    restrict-all reset "observe-vod-conf"
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-vod-conf"
+  fi
+
+  # ln_mode & unlink_mode (youtube)
+  if [ "$gaming_skipped" = "false" ] && [ "$(restrict-all check "observe-youtube-conf")" -le 0 ]; then
+    restrict-all reset "observe-youtube-conf"
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-youtube-conf"
+  fi
+
+  # ln_mode & unlink_mode (youtube-alternative)
+  if [ "$gaming_skipped" = "false" ] && [ "$(restrict-all check "observe-youtube-alternative-conf")" -le 0 ]; then
+    restrict-all reset "observe-youtube-alternative-conf"
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-youtube-alternative-conf"
   fi
 
   # vpn check
@@ -270,6 +300,321 @@ todo_mode() {
   fi
 
   sleep "$RETRY_INTERVAL"
+}
+
+
+
+gaming_todo() {
+  set +u
+  [ "$gaming_skipped" = "" ] && gaming_skipped=false
+  [ "$gaming_quota_refresh" = "" ] && gaming_quota_refresh=false
+  set -u
+
+  if [ "$gaming_skipped" = "false" ]; then
+    if [ "$NIGHT" != "1" ]; then
+      if \
+        [ "$(restrict-all check "observe-gaming-conf")" -le 0 ] &&
+        [ "$(~/test --debug --timeframe day --service gaming)" -gt 0 ] &&
+        [ "$(sincere)" -gt 0 ];
+      then
+        gaming_skipped=true
+      fi
+    else
+      if \
+        [ "$(restrict-all check "observe-gaming-conf")" -le 0 ] &&
+        [ "$(~/test --debug --timeframe night --service gaming)" -gt 0 ] &&
+        [ "$(sincere)" -gt 0 ];
+      then
+        gaming_skipped=true
+      fi
+    fi
+  else
+    set +u
+    [ "$gaming_accomplished_last_checked_at" = "" ] && gaming_accomplished_last_checked_at=$(date +%s)
+    set -u
+
+    if [ "$(echo $(( $(date +%s) - $gaming_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
+      gaming_accomplished_last_checked_at=$(date +%s)
+
+      if [ "$NIGHT" != 1 ]; then
+        if [ "$(~/test --debug --timeframe day --service gaming)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+          gaming_skipped=false
+
+          if [ "$gaming_quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            gaming_quota_refresh=true
+          fi
+        fi
+      else
+        if [ "$(~/test --debug --timeframe night --service gaming)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+          gaming_skipped=false
+
+          if [ "$gaming_quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            gaming_quota_refresh=true
+          fi
+        fi
+      fi
+    fi
+  fi
+}
+
+
+
+netflix_todo() {
+  set +u
+  [ "$netflix_skipped" = "" ] && netflix_skipped=false
+  [ "$netflix_quota_refresh" = "" ] && netflix_quota_refresh=false
+  set -u
+
+  if [ "$netflix_skipped" = "false" ]; then
+    if [ "$NIGHT" != "1" ]; then
+      if \
+        [ "$(restrict-all check "observe-netflix-conf")" -le 0 ] &&
+        [ "$(~/test --debug --timeframe day --service netflix)" -gt 0 ] &&
+        [ "$(sincere)" -gt 0 ];
+      then
+        netflix_skipped=true
+      fi
+    else
+      if \
+        [ "$(restrict-all check "observe-netflix-conf")" -le 0 ] &&
+        [ "$(~/test --debug --timeframe night --service netflix)" -gt 0 ] &&
+        [ "$(sincere)" -gt 0 ];
+      then
+        netflix_skipped=true
+      fi
+    fi
+  else
+    set +u
+    [ "$netflix_accomplished_last_checked_at" = "" ] && netflix_accomplished_last_checked_at=$(date +%s)
+    set -u
+
+    if [ "$(echo $(( $(date +%s) - $netflix_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
+      netflix_accomplished_last_checked_at=$(date +%s)
+
+      if [ "$NIGHT" != 1 ]; then
+        if [ "$(~/test --debug --timeframe day --service netflix)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+          netflix_skipped=false
+
+          if [ "$netflix_quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            netflix_quota_refresh=true
+          fi
+        fi
+      else
+        if [ "$(~/test --debug --timeframe night --service netflix)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+          netflix_skipped=false
+
+          if [ "$netflix_quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            netflix_quota_refresh=true
+          fi
+        fi
+      fi
+    fi
+  fi
+}
+
+
+
+vod_todo() {
+  set +u
+  [ "$vod_skipped" = "" ] && vod_skipped=false
+  [ "$vod_quota_refresh" = "" ] && vod_quota_refresh=false
+  set -u
+
+  if [ "$vod_skipped" = "false" ]; then
+    if [ "$NIGHT" != "1" ]; then
+      if \
+        [ "$(restrict-all check "observe-vod-conf")" -le 0 ] &&
+        [ "$(~/test --debug --timeframe day --service vod)" -gt 0 ] &&
+        [ "$(sincere)" -gt 0 ];
+      then
+        vod_skipped=true
+      fi
+    else
+      if \
+        [ "$(restrict-all check "observe-vod-conf")" -le 0 ] &&
+        [ "$(~/test --debug --timeframe night --service vod)" -gt 0 ] &&
+        [ "$(sincere)" -gt 0 ];
+      then
+        vod_skipped=true
+      fi
+    fi
+  else
+    set +u
+    [ "$vod_accomplished_last_checked_at" = "" ] && vod_accomplished_last_checked_at=$(date +%s)
+    set -u
+
+    if [ "$(echo $(( $(date +%s) - $vod_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
+      vod_accomplished_last_checked_at=$(date +%s)
+
+      if [ "$NIGHT" != 1 ]; then
+        if [ "$(~/test --debug --timeframe day --service vod)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+          vod_skipped=false
+
+          if [ "$vod_quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            vod_quota_refresh=true
+          fi
+        fi
+      else
+        if [ "$(~/test --debug --timeframe night --service vod)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+          vod_skipped=false
+
+          if [ "$vod_quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            vod_quota_refresh=true
+          fi
+        fi
+      fi
+    fi
+  fi
+}
+
+
+
+youtube_todo() {
+  set +u
+  [ "$youtube_skipped" = "" ] && youtube_skipped=false
+  [ "$youtube_quota_refresh" = "" ] && youtube_quota_refresh=false
+  set -u
+
+  if [ "$youtube_skipped" = "false" ]; then
+    if [ "$NIGHT" != "1" ]; then
+      if \
+        [ "$(restrict-all check "observe-youtube-conf")" -le 0 ] &&
+        [ "$(~/test --debug --timeframe day --service youtube)" -gt 0 ] &&
+        [ "$(sincere)" -gt 0 ];
+      then
+        youtube_skipped=true
+      fi
+    else
+      if \
+        [ "$(restrict-all check "observe-youtube-conf")" -le 0 ] &&
+        [ "$(~/test --debug --timeframe night --service youtube)" -gt 0 ] &&
+        [ "$(sincere)" -gt 0 ];
+      then
+        youtube_skipped=true
+      fi
+    fi
+  else
+    set +u
+    [ "$youtube_accomplished_last_checked_at" = "" ] && youtube_accomplished_last_checked_at=$(date +%s)
+    set -u
+
+    if [ "$(echo $(( $(date +%s) - $youtube_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
+      youtube_accomplished_last_checked_at=$(date +%s)
+
+      if [ "$NIGHT" != 1 ]; then
+        if [ "$(~/test --debug --timeframe day --service youtube)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+          youtube_skipped=false
+
+          if [ "$youtube_quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            youtube_quota_refresh=true
+          fi
+        fi
+      else
+        if [ "$(~/test --debug --timeframe night --service youtube)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+          youtube_skipped=false
+
+          if [ "$youtube_quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            youtube_quota_refresh=true
+          fi
+        fi
+      fi
+    fi
+  fi
+}
+
+
+
+youtube_alternative_todo() {
+  set +u
+  [ "$youtube_alternative_skipped" = "" ] && youtube_alternative_skipped=false
+  [ "$youtube_alternative_quota_refresh" = "" ] && youtube_alternative_quota_refresh=false
+  set -u
+
+  if [ "$youtube_alternative_skipped" = "false" ]; then
+    if [ "$NIGHT" != "1" ]; then
+      if \
+        [ "$(restrict-all check "observe-youtube-alternative-conf")" -le 0 ] &&
+        [ "$(~/test --debug --timeframe day --service youtube-alternative)" -gt 0 ] &&
+        [ "$(sincere)" -gt 0 ];
+      then
+        youtube_alternative_skipped=true
+      fi
+    else
+      if \
+        [ "$(restrict-all check "observe-youtube-alternative-conf")" -le 0 ] &&
+        [ "$(~/test --debug --timeframe night --service youtube-alternative)" -gt 0 ] &&
+        [ "$(sincere)" -gt 0 ];
+      then
+        youtube_alternative_skipped=true
+      fi
+    fi
+  else
+    set +u
+    [ "$youtube_alternative_accomplished_last_checked_at" = "" ] && youtube_alternative_accomplished_last_checked_at=$(date +%s)
+    set -u
+
+    if [ "$(echo $(( $(date +%s) - $youtube_alternative_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
+      youtube_alternative_accomplished_last_checked_at=$(date +%s)
+
+      if [ "$NIGHT" != 1 ]; then
+        if [ "$(~/test --debug --timeframe day --service youtube-alternative)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+          youtube_alternative_skipped=false
+
+          if [ "$youtube_alternative_quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            youtube_alternative_quota_refresh=true
+          fi
+        fi
+      else
+        if [ "$(~/test --debug --timeframe night --service youtube-alternative)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+          youtube_alternative_skipped=false
+
+          if [ "$youtube_alternative_quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            youtube_alternative_quota_refresh=true
+          fi
+        fi
+      fi
+    fi
+  fi
 }
 
 
