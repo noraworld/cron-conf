@@ -223,7 +223,7 @@ gaming_todo() {
     if [ "$NIGHT" != "1" ]; then
       if \
         [ "$(restrict-all check "observe-gaming-conf")" -le 0 ] &&
-        [ "$(~/test --debug --timeframe day --service gaming)" -gt 0 ] &&
+        [ "$(quotarget --timeframe day --service gaming)" -gt 0 ] &&
         [ "$(sincere)" -gt 0 ];
       then
         gaming_skipped=true
@@ -231,7 +231,7 @@ gaming_todo() {
     else
       if \
         [ "$(restrict-all check "observe-gaming-conf")" -le 0 ] &&
-        [ "$(~/test --debug --timeframe night --service gaming)" -gt 0 ] &&
+        [ "$(quotarget --timeframe night --service gaming)" -gt 0 ] &&
         [ "$(sincere)" -gt 0 ];
       then
         gaming_skipped=true
@@ -246,7 +246,7 @@ gaming_todo() {
       gaming_accomplished_last_checked_at=$(date +%s)
 
       if [ "$NIGHT" != 1 ]; then
-        if [ "$(~/test --debug --timeframe day --service gaming)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+        if [ "$(quotarget --timeframe day --service gaming)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
           gaming_skipped=false
 
           if [ "$gaming_quota_refresh" = "true" ]; then
@@ -258,7 +258,7 @@ gaming_todo() {
           fi
         fi
       else
-        if [ "$(~/test --debug --timeframe night --service gaming)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+        if [ "$(quotarget --timeframe night --service gaming)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
           gaming_skipped=false
 
           if [ "$gaming_quota_refresh" = "true" ]; then
@@ -286,7 +286,7 @@ netflix_todo() {
     if [ "$NIGHT" != "1" ]; then
       if \
         [ "$(restrict-all check "observe-netflix-conf")" -le 0 ] &&
-        [ "$(~/test --debug --timeframe day --service netflix)" -gt 0 ] &&
+        [ "$(quotarget --timeframe day --service netflix)" -gt 0 ] &&
         [ "$(sincere)" -gt 0 ];
       then
         netflix_skipped=true
@@ -294,7 +294,7 @@ netflix_todo() {
     else
       if \
         [ "$(restrict-all check "observe-netflix-conf")" -le 0 ] &&
-        [ "$(~/test --debug --timeframe night --service netflix)" -gt 0 ] &&
+        [ "$(quotarget --timeframe night --service netflix)" -gt 0 ] &&
         [ "$(sincere)" -gt 0 ];
       then
         netflix_skipped=true
@@ -309,7 +309,7 @@ netflix_todo() {
       netflix_accomplished_last_checked_at=$(date +%s)
 
       if [ "$NIGHT" != 1 ]; then
-        if [ "$(~/test --debug --timeframe day --service netflix)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+        if [ "$(quotarget --timeframe day --service netflix)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
           netflix_skipped=false
 
           if [ "$netflix_quota_refresh" = "true" ]; then
@@ -321,7 +321,7 @@ netflix_todo() {
           fi
         fi
       else
-        if [ "$(~/test --debug --timeframe night --service netflix)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+        if [ "$(quotarget --timeframe night --service netflix)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
           netflix_skipped=false
 
           if [ "$netflix_quota_refresh" = "true" ]; then
@@ -349,7 +349,7 @@ vod_todo() {
     if [ "$NIGHT" != "1" ]; then
       if \
         [ "$(restrict-all check "observe-vod-conf")" -le 0 ] &&
-        [ "$(~/test --debug --timeframe day --service vod)" -gt 0 ] &&
+        [ "$(quotarget --timeframe day --service vod)" -gt 0 ] &&
         [ "$(sincere)" -gt 0 ];
       then
         vod_skipped=true
@@ -357,7 +357,7 @@ vod_todo() {
     else
       if \
         [ "$(restrict-all check "observe-vod-conf")" -le 0 ] &&
-        [ "$(~/test --debug --timeframe night --service vod)" -gt 0 ] &&
+        [ "$(quotarget --timeframe night --service vod)" -gt 0 ] &&
         [ "$(sincere)" -gt 0 ];
       then
         vod_skipped=true
@@ -372,7 +372,7 @@ vod_todo() {
       vod_accomplished_last_checked_at=$(date +%s)
 
       if [ "$NIGHT" != 1 ]; then
-        if [ "$(~/test --debug --timeframe day --service vod)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+        if [ "$(quotarget --timeframe day --service vod)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
           vod_skipped=false
 
           if [ "$vod_quota_refresh" = "true" ]; then
@@ -384,7 +384,7 @@ vod_todo() {
           fi
         fi
       else
-        if [ "$(~/test --debug --timeframe night --service vod)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+        if [ "$(quotarget --timeframe night --service vod)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
           vod_skipped=false
 
           if [ "$vod_quota_refresh" = "true" ]; then
@@ -412,7 +412,7 @@ youtube_todo() {
     if [ "$NIGHT" != "1" ]; then
       if \
         [ "$(restrict-all check "observe-youtube-conf")" -le 0 ] &&
-        [ "$(~/test --debug --timeframe day --service youtube)" -gt 0 ] &&
+        [ "$(quotarget --timeframe day --service youtube)" -gt 0 ] &&
         [ "$(sincere)" -gt 0 ];
       then
         youtube_skipped=true
@@ -420,7 +420,7 @@ youtube_todo() {
     else
       if \
         [ "$(restrict-all check "observe-youtube-conf")" -le 0 ] &&
-        [ "$(~/test --debug --timeframe night --service youtube)" -gt 0 ] &&
+        [ "$(quotarget --timeframe night --service youtube)" -gt 0 ] &&
         [ "$(sincere)" -gt 0 ];
       then
         youtube_skipped=true
@@ -440,7 +440,7 @@ youtube_todo() {
       youtube_accomplished_last_checked_at=$(date +%s)
 
       if [ "$NIGHT" != 1 ]; then
-        if [ "$(~/test --debug --timeframe day --service youtube)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+        if [ "$(quotarget --timeframe day --service youtube)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
           youtube_skipped=false
 
           if [ "$youtube_quota_refresh" = "true" ]; then
@@ -452,7 +452,7 @@ youtube_todo() {
           fi
         fi
       else
-        if [ "$(~/test --debug --timeframe night --service youtube)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+        if [ "$(quotarget --timeframe night --service youtube)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
           youtube_skipped=false
 
           if [ "$youtube_quota_refresh" = "true" ]; then
@@ -480,7 +480,7 @@ youtube_alternative_todo() {
     if [ "$NIGHT" != "1" ]; then
       if \
         [ "$(restrict-all check "observe-youtube-alternative-conf")" -le 0 ] &&
-        [ "$(~/test --debug --timeframe day --service youtube-alternative)" -gt 0 ] &&
+        [ "$(quotarget --timeframe day --service youtube-alternative)" -gt 0 ] &&
         [ "$(sincere)" -gt 0 ];
       then
         youtube_alternative_skipped=true
@@ -488,7 +488,7 @@ youtube_alternative_todo() {
     else
       if \
         [ "$(restrict-all check "observe-youtube-alternative-conf")" -le 0 ] &&
-        [ "$(~/test --debug --timeframe night --service youtube-alternative)" -gt 0 ] &&
+        [ "$(quotarget --timeframe night --service youtube-alternative)" -gt 0 ] &&
         [ "$(sincere)" -gt 0 ];
       then
         youtube_alternative_skipped=true
@@ -503,7 +503,7 @@ youtube_alternative_todo() {
       youtube_alternative_accomplished_last_checked_at=$(date +%s)
 
       if [ "$NIGHT" != 1 ]; then
-        if [ "$(~/test --debug --timeframe day --service youtube-alternative)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+        if [ "$(quotarget --timeframe day --service youtube-alternative)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
           youtube_alternative_skipped=false
 
           if [ "$youtube_alternative_quota_refresh" = "true" ]; then
@@ -515,7 +515,7 @@ youtube_alternative_todo() {
           fi
         fi
       else
-        if [ "$(~/test --debug --timeframe night --service youtube-alternative)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+        if [ "$(quotarget --timeframe night --service youtube-alternative)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
           youtube_alternative_skipped=false
 
           if [ "$youtube_alternative_quota_refresh" = "true" ]; then
