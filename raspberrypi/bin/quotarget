@@ -1,0 +1,220 @@
+#!/bin/sh
+
+main() {
+  prepare "$@"
+  validate "$@"
+
+  case "$SERVICE" in
+    "gaming")
+      case "$TIMEFRAME" in
+        "day")
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --retry 1          --standard 10 --past 0)
+          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --retry 1 --except --standard 0  --past 0)
+          task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --todo-repo "noraworld/to-do")
+          task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --todo-repo "noraworld/work-scraps")
+          ;;
+        "night")
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --retry 1 --except --standard 4 --past 0)
+          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --retry 1 --except --standard 0 --past 0)
+          task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --todo-repo "noraworld/to-do")
+          task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --todo-repo "noraworld/work-scraps")
+          ;;
+      esac
+      ;;
+    "netflix")
+      case "$TIMEFRAME" in
+        "day")
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --retry 1          --standard 10 --past 0)
+          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --retry 1 --except --standard 0  --past 0)
+          task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --todo-repo "noraworld/to-do")
+          task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --todo-repo "noraworld/work-scraps")
+          ;;
+        "night")
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --retry 1 --except --standard 4 --past 0)
+          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --retry 1 --except --standard 0 --past 0)
+          task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --todo-repo "noraworld/to-do")
+          task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --todo-repo "noraworld/work-scraps")
+          ;;
+      esac
+      ;;
+    "vod")
+      case "$TIMEFRAME" in
+        "day")
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --retry 1          --standard 10 --past 0)
+          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --retry 1 --except --standard 0  --past 0)
+          task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --todo-repo "noraworld/to-do")
+          task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --todo-repo "noraworld/work-scraps")
+          ;;
+        "night")
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --retry 1 --except --standard 4 --past 0)
+          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --retry 1 --except --standard 0 --past 0)
+          task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --todo-repo "noraworld/to-do")
+          task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --todo-repo "noraworld/work-scraps")
+          ;;
+      esac
+      ;;
+    "youtube")
+      case "$TIMEFRAME" in
+        "day")
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --retry 1          --standard 10 --past 0)
+          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --retry 1 --except --standard 0  --past 0)
+          task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --todo-repo "noraworld/to-do")
+          task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --todo-repo "noraworld/work-scraps")
+          ;;
+        "night")
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --retry 1 --except --standard 4 --past 0)
+          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --retry 1 --except --standard 0 --past 0)
+          task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --todo-repo "noraworld/to-do")
+          task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --todo-repo "noraworld/work-scraps")
+          ;;
+      esac
+      ;;
+    "youtube-alternative")
+      case "$TIMEFRAME" in
+        "day")
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --retry 1          --standard 10 --past 0)
+          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --retry 1 --except --standard 0  --past 0)
+          task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --todo-repo "noraworld/to-do")
+          task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --todo-repo "noraworld/work-scraps")
+          ;;
+        "night")
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --retry 1 --except --standard 4 --past 0)
+          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --retry 1 --except --standard 0 --past 0)
+          task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --todo-repo "noraworld/to-do")
+          task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --todo-repo "noraworld/work-scraps")
+          ;;
+      esac
+      ;;
+    *)
+      echo "invalid service name: $SERVICE" >&2
+      exit 1
+      ;;
+  esac
+
+  sum=$(( $todo_personal + $todo_work + $task_personal + $task_work ))
+  product=$(( $todo_personal * $todo_work * $task_personal * $task_work ))
+
+  if [ "$DEBUG" = "1" ]; then
+    echo "DEBUG: todo_personal = $todo_personal" >&2
+    echo "DEBUG: todo_work     = $todo_work"     >&2
+    echo "DEBUG: task_personal = $task_personal" >&2
+    echo "DEBUG: task_work     = $task_work"     >&2
+    echo "DEBUG: sum           = $sum"           >&2
+    echo "DEBUG: product       = $product"       >&2
+  fi
+
+  if [ "$sum" = "6" ] && [ "$product" = "4" ]; then
+    echo "1"
+  elif [ "$product" = "0" ]; then
+    echo "0"
+  else
+    echo "-1"
+  fi
+}
+
+prepare() {
+  parse "$@"
+  eval "set -- $REST"
+}
+
+validate() {
+  if [ "$TIMEFRAME" != "day" ] && [ "$TIMEFRAME" != "night" ]; then
+    echo "invalid timeframe: $TIMEFRAME" >&2
+    exit 1
+  fi
+}
+
+# @getoptions
+parser_definition() {
+  setup REST help:usage -- "Usage: quotarget [options]... [arguments]..." ''
+  msg -- 'Options:'
+  flag  DEBUG        --debug     -- "show debug messages"
+  param SERVICE      --service   -- "youtube, vod, ..."
+  param TIMEFRAME    --timeframe -- "day or night"
+  disp  :usage    -h --help
+  disp  VERSION      --version
+}
+# @end
+
+# @gengetoptions parser -i parser_definition parse
+# Generated by getoptions (BEGIN)
+# URL: https://github.com/ko1nksm/getoptions (v3.3.0)
+DEBUG=''
+SERVICE=''
+TIMEFRAME=''
+REST=''
+parse() {
+  OPTIND=$(($#+1))
+  while OPTARG= && [ $# -gt 0 ]; do
+    case $1 in
+      --?*=*) OPTARG=$1; shift
+        eval 'set -- "${OPTARG%%\=*}" "${OPTARG#*\=}"' ${1+'"$@"'}
+        ;;
+      --no-*|--without-*) unset OPTARG ;;
+      -[h]?*) OPTARG=$1; shift
+        eval 'set -- "${OPTARG%"${OPTARG#??}"}" -"${OPTARG#??}"' ${1+'"$@"'}
+        OPTARG= ;;
+    esac
+    case $1 in
+      '--debug')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        DEBUG="$OPTARG"
+        ;;
+      '--service')
+        [ $# -le 1 ] && set "required" "$1" && break
+        OPTARG=$2
+        SERVICE="$OPTARG"
+        shift ;;
+      '--timeframe')
+        [ $# -le 1 ] && set "required" "$1" && break
+        OPTARG=$2
+        TIMEFRAME="$OPTARG"
+        shift ;;
+      '-h'|'--help')
+        usage
+        exit 0 ;;
+      '--version')
+        echo "${VERSION}"
+        exit 0 ;;
+      --)
+        shift
+        while [ $# -gt 0 ]; do
+          REST="${REST} \"\${$(($OPTIND-$#))}\""
+          shift
+        done
+        break ;;
+      [-]?*) set "unknown" "$1"; break ;;
+      *)
+        REST="${REST} \"\${$(($OPTIND-$#))}\""
+    esac
+    shift
+  done
+  [ $# -eq 0 ] && { OPTIND=1; unset OPTARG; return 0; }
+  case $1 in
+    unknown) set "Unrecognized option: $2" "$@" ;;
+    noarg) set "Does not allow an argument: $2" "$@" ;;
+    required) set "Requires an argument: $2" "$@" ;;
+    pattern:*) set "Does not match the pattern (${1#*:}): $2" "$@" ;;
+    notcmd) set "Not a command: $2" "$@" ;;
+    *) set "Validation error ($1): $2" "$@"
+  esac
+  echo "$1" >&2
+  exit 1
+}
+usage() {
+cat<<'GETOPTIONSHERE'
+Usage: quotarget [options]... [arguments]...
+
+Options:
+      --debug                 show debug messages
+      --service SERVICE       youtube, vod, ...
+      --timeframe TIMEFRAME   day or night
+  -h, --help
+      --version
+GETOPTIONSHERE
+}
+# Generated by getoptions (END)
+# @end
+
+main "$@"
