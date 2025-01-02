@@ -5,10 +5,18 @@ main() {
   eval "set -- $REST"
 
   services=$@
+  quotarget_service=""
 
   if [ "$services" = "" ]; then
     echo "error: service names are missing" >&2
     exit
+  fi
+
+  # multiple services or "all" cannot be specified for quotarget for now
+  if [ "$services" = "all" ] || [ "$(echo "$services" | grep -c ' ')" -gt 0 ]; then
+    quotarget_service="youtube"
+  else
+    quotarget_service="$services"
   fi
 
   sleep_interval=30
@@ -27,50 +35,36 @@ main() {
     fi
     echo
   else
-    accomplished="unknown"
+    accomplished="0"
 
-    # $(( $(quota day) * $(boom) ))
-    #
-    # | value | number of combination | status           |
-    # | ----: | --------------------: | :--------------- |
-    # |     2 |                     1 | ok               |
-    # |     1 |                     2 | not enough       |
-    # |     0 |                     6 | api error        |
-    # |    -1 |                     2 | not accomplished |
-    # |    -2 |                     1 | not accomplished |
-
-    if [ "$(systemctl --user is-active observe-dnsmasq-todo-list | grep -c inactive)" -eq 0 ]; then
-      # There is an unknown phenomenon the restrictions are not regulated even though the tasks have been accomplished.
-      # That's resolved by restarting the daemon for some reason.
-      systemctl --user restart observe-dnsmasq-todo-list
-      accomplished=$(( $(quota day) * $(boom) ))
-    elif [ "$(systemctl --user is-active observe-dnsmasq-todo-list-night | grep -c inactive)" -eq 0 ]; then
-      # There is an unknown phenomenon the restrictions are not regulated even though the tasks have been accomplished.
-      # That's resolved by restarting the daemon for some reason.
-      systemctl --user restart observe-dnsmasq-todo-list-night
-      accomplished=$(( $(quota night) * $(boom) ))
-    fi
-
-    # value: unknown
-    if [ "$accomplished" = "unknown" ]; then
-      echo "Something went wrong." >&2
-      exit
-    fi
-
-    # value: 1, -1, -2
-    if [ "$accomplished" -lt 0 ] || [ "$accomplished" -eq 1 ]; then
-      echo "Not accomplished yet." >&2
-      exit
-    fi
-
-    # value: 0
     while [ "$accomplished" -eq 0 ]; do
-      echo "Failed to retrieve todo list. Retry in $sleep_interval seconds."
-      sleep "$sleep_interval"
+      if [ "$(systemctl --user is-active observe-dnsmasq-todo-list | grep -c inactive)" -eq 0 ]; then
+        # There is an unknown phenomenon the restrictions are not regulated even though the tasks have been accomplished.
+        # That's resolved by restarting the daemon for some reason.
+        systemctl --user restart observe-dnsmasq-todo-list
+        accomplished=$(quotarget --timeframe day --service $quotarget_service)
+      elif [ "$(systemctl --user is-active observe-dnsmasq-todo-list-night | grep -c inactive)" -eq 0 ]; then
+        # There is an unknown phenomenon the restrictions are not regulated even though the tasks have been accomplished.
+        # That's resolved by restarting the daemon for some reason.
+        systemctl --user restart observe-dnsmasq-todo-list-night
+        accomplished=$(quotarget --timeframe night --service $quotarget_service)
+      fi
+
+      # value: negative
+      if [ "$accomplished" -lt 0 ]; then
+        echo "Not accomplished yet." >&2
+        exit
+      fi
+
+      # value: zero
+      if [ "$accomplished" -eq 0 ]; then
+        echo "Failed to retrieve todo list. Retry in $sleep_interval seconds."
+        sleep "$sleep_interval"
+      fi
     done
   fi
 
-  # value: 2
+  # value: positive
   unlock $services --skip
 }
 
@@ -78,7 +72,7 @@ main() {
 parser_definition() {
   setup   REST help:usage -- "Usage: trailblazer [options]... [arguments]..." ''
   msg -- 'Options:'
-  flag    MORNING    --morning -- "skip quota, and ask to prepare a piece of garlic"
+  flag    MORNING    --morning -- "skip quotarget, and ask to prepare a piece of garlic"
   param   SLEEP      --sleep   -- "how many seconds to wait for the next attempt"
   disp    :usage  -h --help
   disp    VERSION    --version
@@ -150,7 +144,7 @@ cat<<'GETOPTIONSHERE'
 Usage: trailblazer [options]... [arguments]...
 
 Options:
-      --morning               skip quota, and ask to prepare a piece of garlic
+      --morning               skip quotarget, and ask to prepare a piece of garlic
       --sleep SLEEP           how many seconds to wait for the next attempt
   -h, --help
       --version

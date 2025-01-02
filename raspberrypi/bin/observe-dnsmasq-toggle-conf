@@ -606,7 +606,7 @@ parser_definition() {
   param  FILE    -f --file     -- "observe only a specific file (all files in a directory by default)"
   param  SOURCE  -s --source   -- "TBD"
   param  TARGET  -t --target   -- "target directory to observe (current directory by default)"
-  flag   NIGHT      --night    -- "if you specify this, the option for quota is changed"
+  flag   NIGHT      --night    -- "if you specify this, the option for quotarget is changed"
   flag   SUDO       --sudo     -- "TBD"
   param  MODE    -m --mode     -- "git, ln, unlink, cron, or sync"
   flag   VPN        --vpn      -- "only if you are connected to a VPN and have a foreign IP address, you will be exempt from the restrictions"
@@ -732,7 +732,7 @@ Options:
   -f, --file FILE             observe only a specific file (all files in a directory by default)
   -s, --source SOURCE         TBD
   -t, --target TARGET         target directory to observe (current directory by default)
-      --night                 if you specify this, the option for quota is changed
+      --night                 if you specify this, the option for quotarget is changed
       --sudo                  TBD
   -m, --mode MODE             git, ln, unlink, cron, or sync
       --vpn                   only if you are connected to a VPN and have a foreign IP address, you will be exempt from the restrictions
