@@ -539,7 +539,8 @@ discipline_todo() {
         # TODO:
         #   "restrict-all" is actually unnecessary, but executing "quotarget" every time takes time,
         #   so it's kind of like cushioning material. Even though "observe-gaming-conf" is inappropriate,
-        #   I don't have no idea what kind of "cushioning material" is better. [^cushioning_material]
+        #   I don't have no idea what kind of "cushioning material" is better.
+        #   Don't forget to update "discipline" part in quotarget as well when updating here. [^cushioning_material]
         [ "$(restrict-all check "observe-gaming-conf")" -le 0 ] &&
         [ "$(quotarget --timeframe day --service discipline)" -gt 0 ] &&
         [ "$(sincere)" -gt 0 ];
