@@ -69,6 +69,9 @@ main() {
     "maeve")
       maeve
       ;;
+    "good")
+      good
+      ;;
     "morning")
       morning
       ;;
@@ -182,6 +185,10 @@ crimson() {
   esac
 }
 
+good() {
+  garnish wipe
+}
+
 morning() {
   # File health check
   # to revert network configuration files to prevent being locked out of the SSH connection.
@@ -192,7 +199,6 @@ morning() {
     "/home/ubuntu/workspace/ufw-conf"                                 \
     "/home/ubuntu/workspace/netplan-conf"
   temp-eliminater
-  garnish wipe
 
   # Fan control
   metronome set full
