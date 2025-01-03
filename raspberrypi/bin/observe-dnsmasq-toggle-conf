@@ -127,6 +127,7 @@ todo_mode() {
   vod_todo
   youtube_todo
   youtube_alternative_todo
+  discipline_todo
 
   # ln_mode & unlink_mode (gaming)
   if [ "$gaming_skipped" = "false" ] && [ "$(restrict-all check "observe-gaming-conf")" -le 0 ]; then
@@ -159,13 +160,13 @@ todo_mode() {
   fi
 
   # vpn check
-  if [ "$youtube_skipped" = "false" ] && [ "$(force-vpn check)" -le 0 ]; then
+  if [ "$discipline_skipped" = "false" ] && [ "$(force-vpn check)" -le 0 ]; then
     force-vpn reset
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset $TARGET"
   fi
 
   # git_mode
-  if [ "$youtube_skipped" = "false" ] &&
+  if [ "$discipline_skipped" = "false" ] &&
         [ "$(clean-repo check \
                "/home/ubuntu/workspace/cron-conf" \
                "/home/ubuntu/workspace/dnsmasq-conf/dnsmasq" \
@@ -185,7 +186,7 @@ todo_mode() {
   fi
 
   # firewall_mode
-  if [ "$youtube_skipped" = "false" ] && [ "$(observe-firewall check)" -le 0 ]; then
+  if [ "$discipline_skipped" = "false" ] && [ "$(observe-firewall check)" -le 0 ]; then
     # MEMO: I wonder if there is a better way not to get punished the first time the diary is updated but to do it a second time.
     # observe-firewall deny --debug
     observe-firewall deny --safe
@@ -193,13 +194,13 @@ todo_mode() {
   fi
 
   # cron_mode
-  if [ "$youtube_skipped" = "false" ] && [ "$(cron-apply check)" -le 0 ]; then
+  if [ "$discipline_skipped" = "false" ] && [ "$(cron-apply check)" -le 0 ]; then
     cron-apply perform --skip
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): restored cron configuration"
   fi
 
   # sync_mode
-  if [ "$youtube_skipped" = "false" ] && [ "$(diff -qr "$SOURCE" "$TARGET" | grep "^Only in $TARGET")" != "" ]; then
+  if [ "$discipline_skipped" = "false" ] && [ "$(diff -qr "$SOURCE" "$TARGET" | grep "^Only in $TARGET")" != "" ]; then
     # MEMO: "--immediately" might not be necessary
     # clean-toggle-dir "$SOURCE" "$TARGET" --immediately
     clean-toggle-dir "$SOURCE" "$TARGET"
@@ -425,11 +426,6 @@ youtube_todo() {
       fi
     fi
   else
-    # only youtube_todo() applies this
-    if [ "$(systemctl --user is-active observe-firewall)" != "active" ] && [ "$(observe-firewall check)" -gt 0 ]; then
-      observe-firewall allow
-    fi
-
     set +u
     [ "$youtube_accomplished_last_checked_at" = "" ] && youtube_accomplished_last_checked_at=$(date +%s)
     set -u
@@ -522,6 +518,78 @@ youtube_alternative_todo() {
               --duration "$PUNISHMENT_DURATION"
           else
             youtube_alternative_quota_refresh=true
+          fi
+        fi
+      fi
+    fi
+  fi
+}
+
+
+
+discipline_todo() {
+  set +u
+  [ "$discipline_skipped" = "" ] && discipline_skipped=false
+  [ "$discipline_quota_refresh" = "" ] && discipline_quota_refresh=false
+  set -u
+
+  if [ "$discipline_skipped" = "false" ]; then
+    if [ "$NIGHT" != "1" ]; then
+      if \
+        # TODO:
+        #   "restrict-all" is actually unnecessary, but executing "quotarget" every time takes time,
+        #   so it's kind of like cushioning material. Even though "observe-gaming-conf" is inappropriate,
+        #   I don't have no idea what kind of "cushioning material" is better. [^cushioning_material]
+        [ "$(restrict-all check "observe-gaming-conf")" -le 0 ] &&
+        [ "$(quotarget --timeframe day --service discipline)" -gt 0 ] &&
+        [ "$(sincere)" -gt 0 ];
+      then
+        discipline_skipped=true
+      fi
+    else
+      if \
+        # TODO: [^cushioning_material]
+        [ "$(restrict-all check "observe-gaming-conf")" -le 0 ] &&
+        [ "$(quotarget --timeframe night --service discipline)" -gt 0 ] &&
+        [ "$(sincere)" -gt 0 ];
+      then
+        discipline_skipped=true
+      fi
+    fi
+  else
+    if [ "$(systemctl --user is-active observe-firewall)" != "active" ] && [ "$(observe-firewall check)" -gt 0 ]; then
+      observe-firewall allow
+    fi
+
+    set +u
+    [ "$discipline_accomplished_last_checked_at" = "" ] && discipline_accomplished_last_checked_at=$(date +%s)
+    set -u
+
+    if [ "$(echo $(( $(date +%s) - $discipline_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
+      discipline_accomplished_last_checked_at=$(date +%s)
+
+      if [ "$NIGHT" != 1 ]; then
+        if [ "$(quotarget --timeframe day --service discipline)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+          discipline_skipped=false
+
+          if [ "$discipline_quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            discipline_quota_refresh=true
+          fi
+        fi
+      else
+        if [ "$(quotarget --timeframe night --service discipline)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+          discipline_skipped=false
+
+          if [ "$discipline_quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            discipline_quota_refresh=true
           fi
         fi
       fi
