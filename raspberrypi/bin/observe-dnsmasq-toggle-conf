@@ -546,6 +546,10 @@ discipline_todo() {
         [ "$(sincere)" -gt 0 ];
       then
         discipline_skipped=true
+
+        if [ "$(systemctl --user is-active observe-firewall)" != "active" ] && [ "$(observe-firewall check)" -gt 0 ]; then
+          observe-firewall allow
+        fi
       fi
     else
       if \
@@ -555,6 +559,10 @@ discipline_todo() {
         [ "$(sincere)" -gt 0 ];
       then
         discipline_skipped=true
+
+        if [ "$(systemctl --user is-active observe-firewall)" != "active" ] && [ "$(observe-firewall check)" -gt 0 ]; then
+          observe-firewall allow
+        fi
       fi
     fi
   else
