@@ -69,7 +69,7 @@ main() {
           task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --todo-repo "noraworld/work-scraps")
           ;;
         "night")
-          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 0 --retry 1 --standard 14 --except)
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 0 --retry 1 --standard 14)
           task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --todo-repo "noraworld/to-do")
 
           todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --past 0 --retry 1 --standard 0 --except)
