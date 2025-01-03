@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# The negative value indicates that --except is specified.
+# For instance, the script returns true (1)
+# if -4 ("--standard 4 --except") is specified
+# and the number of unchecked marks is less than or equal to 4.
+#
 # | Service             | Timeframe | Daily | Today | Work  |
 # | ------------------- | :-------: | :---: | :---: | :---: |
 # | Gaming              | day       |    +8 |   ALL |   ALL |
