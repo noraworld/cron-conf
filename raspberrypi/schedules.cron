@@ -170,38 +170,6 @@ NON_ROOT_USER=ubuntu
 
 
 # Superman
-# */5    0-6   * * 0   scheduler superman deny
-# */5    7-23  * * 0   scheduler superman allow
-# */5    0-6   * * 1   scheduler superman allow
-# 0      7     * * 1   scheduler superman deny --safe
-# 5-55/5 7     * * 1   scheduler superman deny
-# */5    8-9   * * 1   scheduler superman deny
-# */5    10-11 * * 1   scheduler superman deny --morning
-# 0      12    * * 1   scheduler superman deny --safe
-# 5-55/5 12    * * 1   scheduler superman deny
-# */5    13-23 * * 1   scheduler superman deny
-# */5    0-9   * * 2-6 scheduler superman deny
-# */5    10-11 * * 2-6 scheduler superman deny --morning
-# 0      12    * * 2-6 scheduler superman deny --safe
-# 5-55/5 12    * * 2-6 scheduler superman deny
-# */5    13-23 * * 2-6 scheduler superman deny
-#
-# */5    0-6   * * 0,2,4 scheduler superman deny
-# */5    7-23  * * 0,2,4 scheduler superman allow
-# */5    0-6   * * 1,3,5 scheduler superman allow
-# 0      7     * * 1,3,5 scheduler superman deny --safe
-# 5-55/5 7     * * 1,3,5 scheduler superman deny
-# */5    8-9   * * 1,3,5 scheduler superman deny
-# */5    10-11 * * 1,3,5 scheduler superman deny --morning
-# 0      12    * * 1,3,5 scheduler superman deny --safe
-# 5-55/5 12    * * 1,3,5 scheduler superman deny
-# */5    13-23 * * 1,3,5 scheduler superman deny
-# */5    0-9   * * 6     scheduler superman deny
-# */5    10-11 * * 6     scheduler superman deny --morning
-# 0      12    * * 6     scheduler superman deny --safe
-# 5-55/5 12    * * 6     scheduler superman deny
-# */5    13-23 * * 6     scheduler superman deny
-#
 */5    0-9   * * * scheduler superman deny
 */5    10-22 * * * scheduler superman allow
 0      23    * * * scheduler superman deny --safe
@@ -235,7 +203,70 @@ NON_ROOT_USER=ubuntu
 
 # YouTube Music
 */5 * * * * scheduler youtube-music deny --soft
+
+
+
+# YouTube Alternative
+*/5    0-9   * * * scheduler youtube-alternative deny
+*/5    10-22 * * * scheduler youtube-alternative allow
+0      23    * * * scheduler youtube-alternative deny --safe
+5-55/5 23    * * * scheduler youtube-alternative deny
+
+
+
+# YouTube
 #
+#   Note 1:
+#     Be careful when you update the schedule for YouTube.
+#     It has a massive impact on the sleep schedule.
+#
+*/5    0-9   * * * scheduler youtube deny
+*/5    10-22 * * * scheduler youtube allow
+0      23    * * * scheduler youtube deny --safe
+5-55/5 23    * * * scheduler youtube deny
+
+
+
+############################################################
+########################## Legacy ##########################
+############################################################
+
+# These schedules should be deleted in the future.
+
+# Superman
+# */5    0-6   * * 0   scheduler superman deny
+# */5    7-23  * * 0   scheduler superman allow
+# */5    0-6   * * 1   scheduler superman allow
+# 0      7     * * 1   scheduler superman deny --safe
+# 5-55/5 7     * * 1   scheduler superman deny
+# */5    8-9   * * 1   scheduler superman deny
+# */5    10-11 * * 1   scheduler superman deny --morning
+# 0      12    * * 1   scheduler superman deny --safe
+# 5-55/5 12    * * 1   scheduler superman deny
+# */5    13-23 * * 1   scheduler superman deny
+# */5    0-9   * * 2-6 scheduler superman deny
+# */5    10-11 * * 2-6 scheduler superman deny --morning
+# 0      12    * * 2-6 scheduler superman deny --safe
+# 5-55/5 12    * * 2-6 scheduler superman deny
+# */5    13-23 * * 2-6 scheduler superman deny
+#
+# */5    0-6   * * 0,2,4 scheduler superman deny
+# */5    7-23  * * 0,2,4 scheduler superman allow
+# */5    0-6   * * 1,3,5 scheduler superman allow
+# 0      7     * * 1,3,5 scheduler superman deny --safe
+# 5-55/5 7     * * 1,3,5 scheduler superman deny
+# */5    8-9   * * 1,3,5 scheduler superman deny
+# */5    10-11 * * 1,3,5 scheduler superman deny --morning
+# 0      12    * * 1,3,5 scheduler superman deny --safe
+# 5-55/5 12    * * 1,3,5 scheduler superman deny
+# */5    13-23 * * 1,3,5 scheduler superman deny
+# */5    0-9   * * 6     scheduler superman deny
+# */5    10-11 * * 6     scheduler superman deny --morning
+# 0      12    * * 6     scheduler superman deny --safe
+# 5-55/5 12    * * 6     scheduler superman deny
+# */5    13-23 * * 6     scheduler superman deny
+
+# YouTube Music
 # */5    0-6   * * 0,2,4 scheduler youtube-music allow
 # 0      7     * * 0,2,4 scheduler youtube-music deny --safe
 # 5-55/5 7     * * 0,2,4 scheduler youtube-music deny
@@ -257,8 +288,6 @@ NON_ROOT_USER=ubuntu
 # 0      23    * * * scheduler youtube-music deny --vampire --safe
 # 5-55/5 23    * * * scheduler youtube-music deny --vampire
 
-
-
 # YouTube Alternative
 # */5 * * * * scheduler youtube-alternative deny --soft
 #
@@ -277,20 +306,8 @@ NON_ROOT_USER=ubuntu
 # 0      12    * * 5     scheduler youtube-alternative deny --safe
 # 5-55/5 12    * * 5     scheduler youtube-alternative deny
 # */5    13-23 * * 5     scheduler youtube-alternative deny
-#
-*/5    0-9   * * * scheduler youtube-alternative deny
-*/5    10-22 * * * scheduler youtube-alternative allow
-0      23    * * * scheduler youtube-alternative deny --safe
-5-55/5 23    * * * scheduler youtube-alternative deny
-
-
 
 # YouTube
-#
-#   Note 1:
-#     Be careful when you update the schedule for YouTube.
-#     It has a massive impact on the sleep schedule.
-#
 # */5    0-6   * * 0   scheduler youtube allow
 # 0      7     * * 0   scheduler youtube deny --safe
 # 5-55/5 7     * * 0   scheduler youtube deny
@@ -322,11 +339,10 @@ NON_ROOT_USER=ubuntu
 # 0      12    * * 5     scheduler youtube deny --safe
 # 5-55/5 12    * * 5     scheduler youtube deny
 # */5    13-23 * * 5     scheduler youtube deny
-#
-*/5    0-9   * * * scheduler youtube deny
-*/5    10-22 * * * scheduler youtube allow
-0      23    * * * scheduler youtube deny --safe
-5-55/5 23    * * * scheduler youtube deny
+
+############################################################
+########################## Legacy ##########################
+############################################################
 
 
 
