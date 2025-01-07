@@ -201,6 +201,14 @@ NON_ROOT_USER=ubuntu
 
 
 
+# Amazon
+*/5    0-9   * * * scheduler amazon deny
+*/5    10-22 * * * scheduler amazon allow
+0      23    * * * scheduler amazon deny --safe
+5-55/5 23    * * * scheduler amazon deny
+
+
+
 # YouTube Music
 */5 * * * * scheduler youtube-music deny --soft
 
