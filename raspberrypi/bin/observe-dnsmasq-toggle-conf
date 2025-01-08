@@ -127,6 +127,9 @@ todo_mode() {
   vod_todo
   youtube_todo
   youtube_alternative_todo
+
+  upstream_todo
+
   discipline_todo
 
   # ln_mode & unlink_mode (gaming)
@@ -157,6 +160,16 @@ todo_mode() {
   if [ "$youtube_alternative_skipped" = "false" ] && [ "$(restrict-all check "observe-youtube-alternative-conf")" -le 0 ]; then
     restrict-all reset "observe-youtube-alternative-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-youtube-alternative-conf"
+  fi
+
+  # ln_mode & unlink_mode (upstream)
+  if [ "$upstream_skipped" = "false" ] && [ "$(restrict-all check "observe-adguard-upstream-conf")" -le 0 ]; then
+    restrict-all reset                 \
+      observe-adguard-upstream-conf    \
+      observe-cloudflare-upstream-conf \
+      observe-nordvpn-upstream-conf    \
+      observe-superman-upstream-conf
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-***-upstream-conf"
   fi
 
   # vpn check
@@ -518,6 +531,69 @@ youtube_alternative_todo() {
               --duration "$PUNISHMENT_DURATION"
           else
             youtube_alternative_quota_refresh=true
+          fi
+        fi
+      fi
+    fi
+  fi
+}
+
+
+
+upstream_todo() {
+  set +u
+  [ "$upstream_skipped" = "" ] && upstream_skipped=false
+  [ "$upstream_quota_refresh" = "" ] && upstream_quota_refresh=false
+  set -u
+
+  if [ "$upstream_skipped" = "false" ]; then
+    if [ "$NIGHT" != "1" ]; then
+      if \
+        [ "$(restrict-all check "observe-adguard-upstream-conf")" -le 0 ] &&
+        [ "$(quotarget --timeframe day --service upstream)" -gt 0 ] &&
+        [ "$(sincere)" -gt 0 ];
+      then
+        upstream_skipped=true
+      fi
+    else
+      if \
+        [ "$(restrict-all check "observe-adguard-upstream-conf")" -le 0 ] &&
+        [ "$(quotarget --timeframe night --service upstream)" -gt 0 ] &&
+        [ "$(sincere)" -gt 0 ];
+      then
+        upstream_skipped=true
+      fi
+    fi
+  else
+    set +u
+    [ "$upstream_accomplished_last_checked_at" = "" ] && upstream_accomplished_last_checked_at=$(date +%s)
+    set -u
+
+    if [ "$(echo $(( $(date +%s) - $upstream_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
+      upstream_accomplished_last_checked_at=$(date +%s)
+
+      if [ "$NIGHT" != 1 ]; then
+        if [ "$(quotarget --timeframe day --service upstream)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+          upstream_skipped=false
+
+          if [ "$upstream_quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            upstream_quota_refresh=true
+          fi
+        fi
+      else
+        if [ "$(quotarget --timeframe night --service upstream)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+          upstream_skipped=false
+
+          if [ "$upstream_quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            upstream_quota_refresh=true
           fi
         fi
       fi
