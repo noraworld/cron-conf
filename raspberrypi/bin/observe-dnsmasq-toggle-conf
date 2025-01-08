@@ -128,6 +128,7 @@ todo_mode() {
   youtube_todo
   youtube_alternative_todo
 
+  deregulated_superman_todo
   upstream_todo
 
   discipline_todo
@@ -160,6 +161,12 @@ todo_mode() {
   if [ "$youtube_alternative_skipped" = "false" ] && [ "$(restrict-all check "observe-youtube-alternative-conf")" -le 0 ]; then
     restrict-all reset "observe-youtube-alternative-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-youtube-alternative-conf"
+  fi
+
+  # ln_mode & unlink_mode (deregulated-superman)
+  if [ "$deregulated_superman_skipped" = "false" ] && [ "$(restrict-all check "observe-deregulated-superman-conf")" -le 0 ]; then
+    restrict-all reset "observe-deregulated-superman-conf"
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-deregulated-superman-conf"
   fi
 
   # ln_mode & unlink_mode (upstream)
@@ -531,6 +538,69 @@ youtube_alternative_todo() {
               --duration "$PUNISHMENT_DURATION"
           else
             youtube_alternative_quota_refresh=true
+          fi
+        fi
+      fi
+    fi
+  fi
+}
+
+
+
+deregulated_superman_todo() {
+  set +u
+  [ "$deregulated_superman_skipped" = "" ] && deregulated_superman_skipped=false
+  [ "$deregulated_superman_quota_refresh" = "" ] && deregulated_superman_quota_refresh=false
+  set -u
+
+  if [ "$deregulated_superman_skipped" = "false" ]; then
+    if [ "$NIGHT" != "1" ]; then
+      if \
+        [ "$(restrict-all check "observe-deregulated-superman-conf")" -le 0 ] &&
+        [ "$(quotarget --timeframe day --service deregulated-superman)" -gt 0 ] &&
+        [ "$(sincere)" -gt 0 ];
+      then
+        deregulated_superman_skipped=true
+      fi
+    else
+      if \
+        [ "$(restrict-all check "observe-deregulated-superman-conf")" -le 0 ] &&
+        [ "$(quotarget --timeframe night --service deregulated-superman)" -gt 0 ] &&
+        [ "$(sincere)" -gt 0 ];
+      then
+        deregulated_superman_skipped=true
+      fi
+    fi
+  else
+    set +u
+    [ "$deregulated_superman_accomplished_last_checked_at" = "" ] && deregulated_superman_accomplished_last_checked_at=$(date +%s)
+    set -u
+
+    if [ "$(echo $(( $(date +%s) - $deregulated_superman_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
+      deregulated_superman_accomplished_last_checked_at=$(date +%s)
+
+      if [ "$NIGHT" != 1 ]; then
+        if [ "$(quotarget --timeframe day --service deregulated-superman)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+          deregulated_superman_skipped=false
+
+          if [ "$deregulated_superman_quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            deregulated_superman_quota_refresh=true
+          fi
+        fi
+      else
+        if [ "$(quotarget --timeframe night --service deregulated-superman)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+          deregulated_superman_skipped=false
+
+          if [ "$deregulated_superman_quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            deregulated_superman_quota_refresh=true
           fi
         fi
       fi
