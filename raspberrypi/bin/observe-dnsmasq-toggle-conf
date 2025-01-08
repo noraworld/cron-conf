@@ -129,6 +129,7 @@ todo_mode() {
   youtube_alternative_todo
 
   deregulated_superman_todo
+  maeve_todo
   upstream_todo
 
   discipline_todo
@@ -167,6 +168,12 @@ todo_mode() {
   if [ "$deregulated_superman_skipped" = "false" ] && [ "$(restrict-all check "observe-deregulated-superman-conf")" -le 0 ]; then
     restrict-all reset "observe-deregulated-superman-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-deregulated-superman-conf"
+  fi
+
+  # ln_mode & unlink_mode (maeve)
+  if [ "$maeve_skipped" = "false" ] && [ "$(restrict-all check "observe-maeve-conf")" -le 0 ]; then
+    restrict-all reset "observe-maeve-conf"
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-maeve-conf"
   fi
 
   # ln_mode & unlink_mode (upstream)
@@ -601,6 +608,69 @@ deregulated_superman_todo() {
               --duration "$PUNISHMENT_DURATION"
           else
             deregulated_superman_quota_refresh=true
+          fi
+        fi
+      fi
+    fi
+  fi
+}
+
+
+
+maeve_todo() {
+  set +u
+  [ "$maeve_skipped" = "" ] && maeve_skipped=false
+  [ "$maeve_quota_refresh" = "" ] && maeve_quota_refresh=false
+  set -u
+
+  if [ "$maeve_skipped" = "false" ]; then
+    if [ "$NIGHT" != "1" ]; then
+      if \
+        [ "$(restrict-all check "observe-maeve-conf")" -le 0 ] &&
+        [ "$(quotarget --timeframe day --service maeve)" -gt 0 ] &&
+        [ "$(sincere)" -gt 0 ];
+      then
+        maeve_skipped=true
+      fi
+    else
+      if \
+        [ "$(restrict-all check "observe-maeve-conf")" -le 0 ] &&
+        [ "$(quotarget --timeframe night --service maeve)" -gt 0 ] &&
+        [ "$(sincere)" -gt 0 ];
+      then
+        maeve_skipped=true
+      fi
+    fi
+  else
+    set +u
+    [ "$maeve_accomplished_last_checked_at" = "" ] && maeve_accomplished_last_checked_at=$(date +%s)
+    set -u
+
+    if [ "$(echo $(( $(date +%s) - $maeve_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
+      maeve_accomplished_last_checked_at=$(date +%s)
+
+      if [ "$NIGHT" != 1 ]; then
+        if [ "$(quotarget --timeframe day --service maeve)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+          maeve_skipped=false
+
+          if [ "$maeve_quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            maeve_quota_refresh=true
+          fi
+        fi
+      else
+        if [ "$(quotarget --timeframe night --service maeve)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+          maeve_skipped=false
+
+          if [ "$maeve_quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            maeve_quota_refresh=true
           fi
         fi
       fi
