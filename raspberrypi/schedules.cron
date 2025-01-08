@@ -50,6 +50,7 @@ NON_ROOT_USER=ubuntu
 
 
 
+# Detech illegal checks on diary
 30 8 * * * sincere
 
 
@@ -211,6 +212,7 @@ NON_ROOT_USER=ubuntu
 
 # YouTube Music
 #   It can be unlocked at 5-minute intervals, except late at night.
+#   Blocking it late at night is neccessary to prevent YouTube from playing videos.
 */5    0-9   * * * scheduler youtube-music deny
 */5    10-22 * * * scheduler youtube-music deny --soft
 0      23    * * * scheduler youtube-music deny --safe
@@ -227,11 +229,6 @@ NON_ROOT_USER=ubuntu
 
 
 # YouTube
-#
-#   Note 1:
-#     Be careful when you update the schedule for YouTube.
-#     It has a massive impact on the sleep schedule.
-#
 */5    0-9   * * * scheduler youtube deny
 */5    10-22 * * * scheduler youtube allow
 0      23    * * * scheduler youtube deny --safe
@@ -320,6 +317,11 @@ NON_ROOT_USER=ubuntu
 # */5    13-23 * * 5     scheduler youtube-alternative deny
 
 # YouTube
+#
+#   Note 1:
+#     Be careful when you update the schedule for YouTube.
+#     It has a massive impact on the sleep schedule.
+#
 # */5    0-6   * * 0   scheduler youtube allow
 # 0      7     * * 0   scheduler youtube deny --safe
 # 5-55/5 7     * * 0   scheduler youtube deny
