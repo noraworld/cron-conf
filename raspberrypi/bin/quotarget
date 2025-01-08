@@ -7,8 +7,8 @@
 #
 # | Service              | Timeframe | Daily | Today | Work  |
 # | -------------------- | :-------: | :---: | :---: | :---: |
-# | Discipline           | day       |    +8 |  ALL  |  ALL  |
-# | Discipline           | night     |   +12 |  ALL  |  ALL  |
+# | Discipline           | day       |    +8 |  ALL  |  ALL  | # must be the same as Gaming (day) for now
+# | Discipline           | night     |   +12 |  ALL  |  ALL  | # must be the same as Gaming (night) for now
 # | Gaming               | day       |    +8 |  ALL  |  ALL  |
 # | Gaming               | night     |   +12 |  ALL  |  ALL  |
 # | Netflix              | day       |   +10 |  ALL  |  ALL  |
