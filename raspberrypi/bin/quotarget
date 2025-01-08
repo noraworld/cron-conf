@@ -5,20 +5,30 @@
 # if -4 ("--standard 4 --except") is specified
 # and the number of unchecked marks is less than or equal to 4.
 #
-# | Service             | Timeframe | Daily | Today | Work  |
-# | ------------------- | :-------: | :---: | :---: | :---: |
-# | Discipline          | day       |    +8 |   ALL |   ALL |
-# | Discipline          | night     |   +12 |   ALL |   ALL |
-# | Gaming              | day       |    +8 |   ALL |   ALL |
-# | Gaming              | night     |   +12 |   ALL |   ALL |
-# | Netflix             | day       |   +10 |   ALL |   ALL |
-# | Netflix             | night     |   +14 |   ALL |   ALL |
-# | VOD                 | day       |   +10 |   ALL |   ALL |
-# | VOD                 | night     |   +14 |   ALL |   ALL |
-# | YouTube             | day       |    -4 |   ALL |   ALL |
-# | YouTube             | night     |    -0 |   ALL |   ALL |
-# | YouTube Alternative | day       |    -8 |   ALL |   ALL |
-# | YouTube Alternative | night     |    -6 |   ALL |   ALL |
+# | Service              | Timeframe | Daily | Today | Work  |
+# | -------------------- | :-------: | :---: | :---: | :---: |
+# | Discipline           | day       |    +8 |  ALL  |  ALL  |
+# | Discipline           | night     |   +12 |  ALL  |  ALL  |
+# | Gaming               | day       |    +8 |  ALL  |  ALL  |
+# | Gaming               | night     |   +12 |  ALL  |  ALL  |
+# | Netflix              | day       |   +10 |  ALL  |  ALL  |
+# | Netflix              | night     |   +14 |  ALL  |  ALL  |
+# | VOD                  | day       |   +10 |  ALL  |  ALL  |
+# | VOD                  | night     |   +14 |  ALL  |  ALL  |
+# | YouTube              | day       |    -4 |  ALL  |  ALL  |
+# | YouTube              | night     |    -0 |  ALL  |  ALL  |
+# | YouTube Alternative  | day       |    -8 |  ALL  |  ALL  |
+# | YouTube Alternative  | night     |    -6 |  ALL  |  ALL  |
+# | Deregulated Superman | day       |    +4 |  n/a  |  n/a  |
+# | Deregulated Superman | night     |    +4 |  n/a  |  n/a  |
+# | Maeve                | day       |    +8 |  n/a  |  n/a  |
+# | Maeve                | night     |    +8 |  n/a  |  n/a  |
+# | Ometeotl             | day       |    +6 |  n/a  |  n/a  |
+# | Ometeotl             | night     |    +6 |  n/a  |  n/a  |
+# | Superman             | day       |   +10 |  n/a  |  n/a  |
+# | Superman             | night     |   +10 |  n/a  |  n/a  |
+# | Upstream             | day       |    +4 |  n/a  |  n/a  |
+# | Upstream             | night     |    +4 |  n/a  |  n/a  |
 
 main() {
   prepare "$@"
@@ -130,6 +140,56 @@ main() {
 
           todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --past 0 --retry 1 --standard 0 --except)
           task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --todo-repo "noraworld/work-scraps")
+          ;;
+      esac
+      ;;
+    "deregulated-superman")
+      case "$TIMEFRAME" in
+        "day")
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 0 --retry 1 --standard 4)
+          ;;
+        "night")
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 0 --retry 1 --standard 4)
+          ;;
+      esac
+      ;;
+    "maeve")
+      case "$TIMEFRAME" in
+        "day")
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 0 --retry 1 --standard 8)
+          ;;
+        "night")
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 0 --retry 1 --standard 8)
+          ;;
+      esac
+      ;;
+    "ometeotl")
+      case "$TIMEFRAME" in
+        "day")
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 0 --retry 1 --standard 6)
+          ;;
+        "night")
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 0 --retry 1 --standard 6)
+          ;;
+      esac
+      ;;
+    "superman")
+      case "$TIMEFRAME" in
+        "day")
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 0 --retry 1 --standard 10)
+          ;;
+        "night")
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 0 --retry 1 --standard 10)
+          ;;
+      esac
+      ;;
+    "upstream")
+      case "$TIMEFRAME" in
+        "day")
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 0 --retry 1 --standard 4)
+          ;;
+        "night")
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 0 --retry 1 --standard 4)
           ;;
       esac
       ;;
