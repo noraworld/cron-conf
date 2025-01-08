@@ -131,6 +131,7 @@ todo_mode() {
   deregulated_superman_todo
   maeve_todo
   ometeotl_todo
+  superman_todo
   upstream_todo
 
   discipline_todo
@@ -181,6 +182,12 @@ todo_mode() {
   if [ "$ometeotl_skipped" = "false" ] && [ "$(restrict-all check "observe-ometeotl-conf")" -le 0 ]; then
     restrict-all reset "observe-ometeotl-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-ometeotl-conf"
+  fi
+
+  # ln_mode & unlink_mode (superman)
+  if [ "$superman_skipped" = "false" ] && [ "$(restrict-all check "observe-superman-conf")" -le 0 ]; then
+    restrict-all reset "observe-superman-conf"
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-superman-conf"
   fi
 
   # ln_mode & unlink_mode (upstream)
@@ -741,6 +748,69 @@ ometeotl_todo() {
               --duration "$PUNISHMENT_DURATION"
           else
             ometeotl_quota_refresh=true
+          fi
+        fi
+      fi
+    fi
+  fi
+}
+
+
+
+superman_todo() {
+  set +u
+  [ "$superman_skipped" = "" ] && superman_skipped=false
+  [ "$superman_quota_refresh" = "" ] && superman_quota_refresh=false
+  set -u
+
+  if [ "$superman_skipped" = "false" ]; then
+    if [ "$NIGHT" != "1" ]; then
+      if \
+        [ "$(restrict-all check "observe-superman-conf")" -le 0 ] &&
+        [ "$(quotarget --timeframe day --service superman)" -gt 0 ] &&
+        [ "$(sincere)" -gt 0 ];
+      then
+        superman_skipped=true
+      fi
+    else
+      if \
+        [ "$(restrict-all check "observe-superman-conf")" -le 0 ] &&
+        [ "$(quotarget --timeframe night --service superman)" -gt 0 ] &&
+        [ "$(sincere)" -gt 0 ];
+      then
+        superman_skipped=true
+      fi
+    fi
+  else
+    set +u
+    [ "$superman_accomplished_last_checked_at" = "" ] && superman_accomplished_last_checked_at=$(date +%s)
+    set -u
+
+    if [ "$(echo $(( $(date +%s) - $superman_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
+      superman_accomplished_last_checked_at=$(date +%s)
+
+      if [ "$NIGHT" != 1 ]; then
+        if [ "$(quotarget --timeframe day --service superman)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+          superman_skipped=false
+
+          if [ "$superman_quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            superman_quota_refresh=true
+          fi
+        fi
+      else
+        if [ "$(quotarget --timeframe night --service superman)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+          superman_skipped=false
+
+          if [ "$superman_quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            superman_quota_refresh=true
           fi
         fi
       fi
