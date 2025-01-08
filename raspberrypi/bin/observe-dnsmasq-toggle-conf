@@ -130,6 +130,7 @@ todo_mode() {
 
   deregulated_superman_todo
   maeve_todo
+  ometeotl_todo
   upstream_todo
 
   discipline_todo
@@ -174,6 +175,12 @@ todo_mode() {
   if [ "$maeve_skipped" = "false" ] && [ "$(restrict-all check "observe-maeve-conf")" -le 0 ]; then
     restrict-all reset "observe-maeve-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-maeve-conf"
+  fi
+
+  # ln_mode & unlink_mode (ometeotl)
+  if [ "$ometeotl_skipped" = "false" ] && [ "$(restrict-all check "observe-ometeotl-conf")" -le 0 ]; then
+    restrict-all reset "observe-ometeotl-conf"
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-ometeotl-conf"
   fi
 
   # ln_mode & unlink_mode (upstream)
@@ -671,6 +678,69 @@ maeve_todo() {
               --duration "$PUNISHMENT_DURATION"
           else
             maeve_quota_refresh=true
+          fi
+        fi
+      fi
+    fi
+  fi
+}
+
+
+
+ometeotl_todo() {
+  set +u
+  [ "$ometeotl_skipped" = "" ] && ometeotl_skipped=false
+  [ "$ometeotl_quota_refresh" = "" ] && ometeotl_quota_refresh=false
+  set -u
+
+  if [ "$ometeotl_skipped" = "false" ]; then
+    if [ "$NIGHT" != "1" ]; then
+      if \
+        [ "$(restrict-all check "observe-ometeotl-conf")" -le 0 ] &&
+        [ "$(quotarget --timeframe day --service ometeotl)" -gt 0 ] &&
+        [ "$(sincere)" -gt 0 ];
+      then
+        ometeotl_skipped=true
+      fi
+    else
+      if \
+        [ "$(restrict-all check "observe-ometeotl-conf")" -le 0 ] &&
+        [ "$(quotarget --timeframe night --service ometeotl)" -gt 0 ] &&
+        [ "$(sincere)" -gt 0 ];
+      then
+        ometeotl_skipped=true
+      fi
+    fi
+  else
+    set +u
+    [ "$ometeotl_accomplished_last_checked_at" = "" ] && ometeotl_accomplished_last_checked_at=$(date +%s)
+    set -u
+
+    if [ "$(echo $(( $(date +%s) - $ometeotl_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
+      ometeotl_accomplished_last_checked_at=$(date +%s)
+
+      if [ "$NIGHT" != 1 ]; then
+        if [ "$(quotarget --timeframe day --service ometeotl)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+          ometeotl_skipped=false
+
+          if [ "$ometeotl_quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            ometeotl_quota_refresh=true
+          fi
+        fi
+      else
+        if [ "$(quotarget --timeframe night --service ometeotl)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+          ometeotl_skipped=false
+
+          if [ "$ometeotl_quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            ometeotl_quota_refresh=true
           fi
         fi
       fi
