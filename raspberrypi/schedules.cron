@@ -160,12 +160,8 @@ NON_ROOT_USER=ubuntu
 
 
 # YouTube Music
-#   It can be unlocked at 5-minute intervals, except late at night.
-#   Blocking it late at night is neccessary to prevent YouTube from playing videos.
-*/5    0-9   * * * scheduler youtube-music deny
-*/5    10-22 * * * scheduler youtube-music deny --soft
-0      23    * * * scheduler youtube-music deny --safe
-5-55/5 23    * * * scheduler youtube-music deny
+#   It can be unlocked at 5-minute intervals
+*/5 * * * * scheduler youtube-music deny --soft
 
 
 
