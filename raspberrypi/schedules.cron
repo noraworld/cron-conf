@@ -160,7 +160,6 @@ NON_ROOT_USER=ubuntu
 
 
 # YouTube Music
-#   It can be unlocked at 5-minute intervals
 */5 * * * * scheduler youtube-music deny --soft
 
 
