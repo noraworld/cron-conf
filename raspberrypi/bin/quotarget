@@ -147,9 +147,17 @@ main() {
       case "$TIMEFRAME" in
         "day")
           todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 0 --retry 1 --standard 4)
+          task_personal=2
+
+          todo_work=1
+          task_work=2
           ;;
         "night")
           todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 0 --retry 1 --standard 4)
+          task_personal=2
+
+          todo_work=1
+          task_work=2
           ;;
       esac
       ;;
@@ -157,9 +165,17 @@ main() {
       case "$TIMEFRAME" in
         "day")
           todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 0 --retry 1 --standard 8)
+          task_personal=2
+
+          todo_work=1
+          task_work=2
           ;;
         "night")
           todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 0 --retry 1 --standard 8)
+          task_personal=2
+
+          todo_work=1
+          task_work=2
           ;;
       esac
       ;;
@@ -167,9 +183,17 @@ main() {
       case "$TIMEFRAME" in
         "day")
           todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 0 --retry 1 --standard 6)
+          task_personal=2
+
+          todo_work=1
+          task_work=2
           ;;
         "night")
           todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 0 --retry 1 --standard 6)
+          task_personal=2
+
+          todo_work=1
+          task_work=2
           ;;
       esac
       ;;
@@ -177,9 +201,17 @@ main() {
       case "$TIMEFRAME" in
         "day")
           todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 0 --retry 1 --standard 10)
+          task_personal=2
+
+          todo_work=1
+          task_work=2
           ;;
         "night")
           todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 0 --retry 1 --standard 10)
+          task_personal=2
+
+          todo_work=1
+          task_work=2
           ;;
       esac
       ;;
@@ -187,9 +219,17 @@ main() {
       case "$TIMEFRAME" in
         "day")
           todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 0 --retry 1 --standard 4)
+          task_personal=2
+
+          todo_work=1
+          task_work=2
           ;;
         "night")
           todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 0 --retry 1 --standard 4)
+          task_personal=2
+
+          todo_work=1
+          task_work=2
           ;;
       esac
       ;;
