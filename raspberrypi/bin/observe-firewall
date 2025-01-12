@@ -104,40 +104,11 @@ port_blocked() {
   # Avoid invalid context length argument with grep
   #   https://stackoverflow.com/a/34077672/13999144
 
-  # Check if the default forward policy exists
-  if [ "$(sudo iptables-save | grep -ce "-A ufw-skip-to-policy-forward -j DROP")" -eq 0 ]; then
-    [ "$DEBUG" = 1 ] && echo "{ \"code\": 6, \"date\": \"$(date)\", \"reason\": \"drop rule for forwarding not found\" }," >> "$DEBUG_LOG_PATH"
-    echo false
-    return
-  fi
-
-  # Check if the accept rule against the port 53 forwarding doesn't exist
-  #
-  # TODO: You also have to check the range that inludes 53
-  #       For instance, "-A ufw-user-forward -p tcp -m multiport --dports 1:1023 -j ACCEPT" should be blocked because it includes 53
-  if [ "$(sudo iptables-save | grep -e "-A ufw-user-forward" | grep -c " 53 ")" -ne 0 ]; then
-    [ "$DEBUG" = 1 ] && echo "{ \"code\": 7, \"date\": \"$(date)\", \"reason\": \"accept rule for forwarding 53/TCP found\" }," >> "$DEBUG_LOG_PATH"
-    echo false
-    return
-  fi
-
-  # Check if the accepted rule against port 1024 - 65535 forwarding doesn't exist
-  #   Except for:
-  #     60313: SSH
-  #     50000 - 51819 & 51821 - 65535: Discord (51820 is used for NordVPN WireGuard)
-  #       https://chatgpt.com/share/6734528b-0d14-8004-9253-770de34c4db2
-  if [ "$(sudo iptables-save                                                                                                                      |
-          grep -e "-A ufw-user-forward"                                                                                                           |
-          grep -E "\b(102[4-9]|10[3-9][0-9]|1[1-9][0-9]{2}|[2-9][0-9]{3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])\b" |
-          grep -v "60313"                                                                                                                         |
-          grep -v "50000:51819"                                                                                                                   |
-          grep -cv "51821:65535")" -ne 0 ]; then
-
-    if [ "$DEBUG" = 1 ]; then
-      ## https://stackoverflow.com/questions/1251999/how-can-i-replace-each-newline-n-with-a-space-using-sed#answer-1252191
-      echo "{ \"code\": 8, \"date\": \"$(date)\", \"reason\": \"accept rule for forwarding 1024:65535 detected\" }," >> "$DEBUG_LOG_PATH"
-    fi
-
+  # Check if the drop rules against the port 53 & 51,820 forwarding exist
+  if [ "$(sudo iptables-save |
+          grep -E "\-A ufw-user-forward -p (tcp|udp) -m (tcp|udp) --dport (53|51820) -j DROP")" -ne 4 ];
+  then
+    [ "$DEBUG" = 1 ] && echo "{ \"code\": 9, \"date\": \"$(date)\", \"reason\": \"drop rules not found\" }," >> "$DEBUG_LOG_PATH"
     echo false
     return
   fi
