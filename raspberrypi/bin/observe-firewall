@@ -106,7 +106,7 @@ port_blocked() {
 
   # Check if the drop rules against the port 53 & 51,820 forwarding exist
   if [ "$(sudo iptables-save |
-          grep -E "\-A ufw-user-forward -p (tcp|udp) -m (tcp|udp) --dport (53|51820) -j DROP")" -ne 4 ];
+          grep -cE "\-A ufw-user-forward -p (tcp|udp) -m (tcp|udp) --dport (53|51820) -j DROP")" -ne 4 ];
   then
     [ "$DEBUG" = 1 ] && echo "{ \"code\": 9, \"date\": \"$(date)\", \"reason\": \"drop rules not found\" }," >> "$DEBUG_LOG_PATH"
     echo false
