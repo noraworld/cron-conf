@@ -104,9 +104,36 @@ port_blocked() {
   # Avoid invalid context length argument with grep
   #   https://stackoverflow.com/a/34077672/13999144
 
-  # Check if the drop rules against the port 53 & 51,820 forwarding exist
-  if [ "$(sudo iptables-save |
-          grep -cE "\-A ufw-user-forward -p (tcp|udp) -m (tcp|udp) --dport (53|51820) -j DROP" || true)" -ne 4 ];
+  # Check if the drop rules exist
+  # Ports:
+  #            53: DNS
+  #           500: L2TP & IPSec (NordVPN)
+  #          1194: OpenVPN (NordVPN)
+  #     1231-1234: OpenVPN (NordVPN)
+  #          1701: L2TP (NordVPN)
+  #          1723: PPTP (NordVPN)
+  #          4500: L2TP & IPSec (NordVPN)
+  #         51820: NordLynx (NordVPN)
+  #   Links:
+  #     https://chatgpt.com/share/6734528b-0d14-8004-9253-770de34c4db2
+  #     https://community.watchguard.com/watchguard-community/discussion/2457/nordvpn-on-watchguard
+  #     https://nordvpn.com/blog/what-are-vpn-ports/
+  if \
+    # TCP & UDP
+    [ "$(sudo iptables-save |
+         grep -cE "\-A ufw-user-forward -p (tcp|udp) -m (tcp|udp) --dport (53|51820) -j DROP" || true)" -ne 4 ] ||
+    # TCP
+    [ "$(sudo iptables-save |
+         grep -cE "\-A ufw-user-forward -p tcp -m tcp --dport (1701|1723) -j DROP" || true)" -ne 2 ] ||
+    # UDP
+    [ "$(sudo iptables-save |
+         grep -cE "\-A ufw-user-forward -p udp -m udp --dport (500|1194|4500) -j DROP" || true)" -ne 3 ] ||
+    # TCP (Multiport)
+    [ "$(sudo iptables-save |
+         grep -cE "\-A ufw-user-forward -p tcp -m multiport --dports 1231:1234 -j DROP" || true)" -ne 1 ] ||
+    # UDP (Multiport)
+    [ "$(sudo iptables-save |
+         grep -cE "\-A ufw-user-forward -p udp -m multiport --dports 1231:1234 -j DROP" || true)" -ne 1 ];
   then
     [ "$DEBUG" = 1 ] && echo "{ \"code\": 9, \"date\": \"$(date)\", \"reason\": \"drop rules not found\" }," >> "$DEBUG_LOG_PATH"
     echo false
