@@ -120,42 +120,42 @@ NON_ROOT_USER=ubuntu
 
 
 # Superman
-*/5    0-9   * * * scheduler superman deny
+# */5    0-9   * * * scheduler superman deny
 */5    10-22 * * * scheduler superman allow
-0      23    * * * scheduler superman deny --safe
-5-55/5 23    * * * scheduler superman deny
+# 0      23    * * * scheduler superman deny --safe
+# 5-55/5 23    * * * scheduler superman deny
 
 
 
 # Gaming
-*/5    0-9   * * * scheduler gaming deny
+# */5    0-9   * * * scheduler gaming deny
 */5    10-22 * * * scheduler gaming allow
-0      23    * * * scheduler gaming deny --safe
-5-55/5 23    * * * scheduler gaming deny
+# 0      23    * * * scheduler gaming deny --safe
+# 5-55/5 23    * * * scheduler gaming deny
 
 
 
 # Netflix
-*/5    0-9   * * * scheduler netflix deny
+# */5    0-9   * * * scheduler netflix deny
 */5    10-22 * * * scheduler netflix allow
-0      23    * * * scheduler netflix deny --safe
-5-55/5 23    * * * scheduler netflix deny
+# 0      23    * * * scheduler netflix deny --safe
+# 5-55/5 23    * * * scheduler netflix deny
 
 
 
 # VOD
-*/5    0-9   * * * scheduler vod deny
+# */5    0-9   * * * scheduler vod deny
 */5    10-22 * * * scheduler vod allow
-0      23    * * * scheduler vod deny --safe
-5-55/5 23    * * * scheduler vod deny
+# 0      23    * * * scheduler vod deny --safe
+# 5-55/5 23    * * * scheduler vod deny
 
 
 
 # Amazon
-*/5    0-9   * * * scheduler amazon deny
+# */5    0-9   * * * scheduler amazon deny
 */5    10-22 * * * scheduler amazon allow
-0      23    * * * scheduler amazon deny --safe
-5-55/5 23    * * * scheduler amazon deny
+# 0      23    * * * scheduler amazon deny --safe
+# 5-55/5 23    * * * scheduler amazon deny
 
 
 
@@ -165,18 +165,18 @@ NON_ROOT_USER=ubuntu
 
 
 # YouTube Alternative
-*/5    0-9   * * * scheduler youtube-alternative deny
+# */5    0-9   * * * scheduler youtube-alternative deny
 */5    10-22 * * * scheduler youtube-alternative allow
-0      23    * * * scheduler youtube-alternative deny --safe
-5-55/5 23    * * * scheduler youtube-alternative deny
+# 0      23    * * * scheduler youtube-alternative deny --safe
+# 5-55/5 23    * * * scheduler youtube-alternative deny
 
 
 
 # YouTube
-*/5    0-9   * * * scheduler youtube deny
+# */5    0-9   * * * scheduler youtube deny
 */5    10-22 * * * scheduler youtube allow
-0      23    * * * scheduler youtube deny --safe
-5-55/5 23    * * * scheduler youtube deny
+# 0      23    * * * scheduler youtube deny --safe
+# 5-55/5 23    * * * scheduler youtube deny
 
 
 
