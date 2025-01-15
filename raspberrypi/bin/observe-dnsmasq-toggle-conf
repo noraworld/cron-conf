@@ -169,6 +169,7 @@ todo_mode() {
   # ln_mode & unlink_mode (deregulated-superman)
   if [ "$deregulated_superman_skipped" = "false" ] && [ "$(restrict-all check "observe-deregulated-superman-conf")" -le 0 ]; then
     restrict-all reset "observe-deregulated-superman-conf"
+    restrict-all reset "observe-deregulated-superman-allow-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-deregulated-superman-conf"
   fi
 
