@@ -180,6 +180,78 @@ NON_ROOT_USER=ubuntu
 
 
 
+## Firewall
+##
+##   Note 1:
+##     "git push", "git pull" and "git fetch" are restricted.
+##   Note 2:
+##     Remember that the shorter the time is, the more it can take effect.
+##
+## */1     0-9   * * * scheduler firewall deny
+## */10    10-22 * * * scheduler firewall allow
+## 0-10/1  23    * * * scheduler firewall deny --safe
+## 11-59/1 23    * * * scheduler firewall deny
+
+
+
+## Snorlax
+##
+##   Note 1:
+##     Remember that the Dnsmasq daemon will restart automatically,
+##     and you will lose the streaks of a digital detox when enabling this restriction.
+##
+## 0      0     * * * scheduler snorlax deny --soft
+## 5-55/5 0     * * * scheduler snorlax deny --soft
+## */5    1-9   * * * scheduler snorlax deny --soft
+## */10   10-23 * * * scheduler snorlax allow
+
+
+
+## Night
+##
+##   It's never been used before.
+##
+## 19 2 * * * scheduler night
+
+
+
+## Focus
+##
+##   Note 1:
+##     Remember that the Dnsmasq daemon will restart automatically,
+##     and you will lose the streaks of a digital detox when enabling this restriction.
+##
+## 0      0    * * * scheduler focus deny --safe
+## 5-55/5 0    * * * scheduler focus deny
+## */5    1-7  * * * scheduler focus deny
+## */5    8-23 * * * scheduler focus allow
+
+
+
+## GitHub Editor
+##
+##   NOTE:
+##     This rule may be no longer necessary
+##     because the GitHub IP addresses for "git push" and "git pull" are blocked on iptables side
+##
+## */5    0-4  * * * scheduler github-editor allow
+## 0      5    * * * scheduler github-editor deny --safe
+## 5-55/5 5    * * * scheduler github-editor deny
+## */5    6-8  * * * scheduler github-editor deny
+## */5    9-23 * * * scheduler github-editor allow
+
+
+
+## Turn VPN on or off
+##
+##   NOTE:
+##     There is no concrete assurance that automatically turning on the VPN is safe.
+##
+## 57 23 * * * vpnctl connect --skipdns
+## 3  4  * * * vpnctl disconnect --skipdns
+
+
+
 ############################################################
 ########################## Legacy ##########################
 ############################################################
@@ -359,75 +431,3 @@ NON_ROOT_USER=ubuntu
 ############################################################
 ########################## Legacy ##########################
 ############################################################
-
-
-
-## Firewall
-##
-##   Note 1:
-##     "git push", "git pull" and "git fetch" are restricted.
-##   Note 2:
-##     Remember that the shorter the time is, the more it can take effect.
-##
-## */1     0-9   * * * scheduler firewall deny
-## */10    10-22 * * * scheduler firewall allow
-## 0-10/1  23    * * * scheduler firewall deny --safe
-## 11-59/1 23    * * * scheduler firewall deny
-
-
-
-## Snorlax
-##
-##   Note 1:
-##     Remember that the Dnsmasq daemon will restart automatically,
-##     and you will lose the streaks of a digital detox when enabling this restriction.
-##
-## 0      0     * * * scheduler snorlax deny --soft
-## 5-55/5 0     * * * scheduler snorlax deny --soft
-## */5    1-9   * * * scheduler snorlax deny --soft
-## */10   10-23 * * * scheduler snorlax allow
-
-
-
-## Night
-##
-##   It's never been used before.
-##
-## 19 2 * * * scheduler night
-
-
-
-## Focus
-##
-##   Note 1:
-##     Remember that the Dnsmasq daemon will restart automatically,
-##     and you will lose the streaks of a digital detox when enabling this restriction.
-##
-## 0      0    * * * scheduler focus deny --safe
-## 5-55/5 0    * * * scheduler focus deny
-## */5    1-7  * * * scheduler focus deny
-## */5    8-23 * * * scheduler focus allow
-
-
-
-## GitHub Editor
-##
-##   NOTE:
-##     This rule may be no longer necessary
-##     because the GitHub IP addresses for "git push" and "git pull" are blocked on iptables side
-##
-## */5    0-4  * * * scheduler github-editor allow
-## 0      5    * * * scheduler github-editor deny --safe
-## 5-55/5 5    * * * scheduler github-editor deny
-## */5    6-8  * * * scheduler github-editor deny
-## */5    9-23 * * * scheduler github-editor allow
-
-
-
-## Turn VPN on or off
-##
-##   NOTE:
-##     There is no concrete assurance that automatically turning on the VPN is safe.
-##
-## 57 23 * * * vpnctl connect --skipdns
-## 3  4  * * * vpnctl disconnect --skipdns
