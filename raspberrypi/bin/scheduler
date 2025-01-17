@@ -41,7 +41,7 @@ main() {
   # COMMENT OUT this line (put "#" at the beginning of this line if it doesn't exist) if you want to ENABLE the
   # kryptonite mode. When enabling it, the restriction is exempted even after midnight. In other words, ACTIVATE this
   # line (remove "#" at the beginning of this line if it exists) if you want to DISABLE the kryptonite mode.
-  # [ "$KRYPTONITE" = "1" ] && KRYPTONITE="-1"
+  [ "$KRYPTONITE" = "1" ] && KRYPTONITE="-1"
 
   case "$service" in
     "amazon")
