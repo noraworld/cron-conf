@@ -15,20 +15,21 @@
 # | Netflix              | night     |    +8 |    -5 |  ALL  |  ALL  | VOD                  |
 # | VOD                  | day       |    +6 |  n/a  |  ALL  |  ALL  | Netflix              |
 # | VOD                  | night     |    +8 |    -5 |  ALL  |  ALL  | Netflix              |
-# | YouTube              | day       |   +10 |    -5 |  ALL  |  ALL  |                      |
-# | YouTube              | night     |   +12 |    -2 |  ALL  |  ALL  |                      |
 # | YouTube Alternative  | day       |    +8 |    -5 |  ALL  |  ALL  |                      |
 # | YouTube Alternative  | night     |   +10 |    -2 |  ALL  |  ALL  |                      |
-# | Deregulated Superman | day       |    +4 |  n/a  |  n/a  |  n/a  | Upstream             |
-# | Deregulated Superman | night     |    +4 |  n/a  |  n/a  |  n/a  | Upstream             |
-# | Maeve                | day       |    +8 |  n/a  |  n/a  |  n/a  |                      |
-# | Maeve                | night     |    +8 |  n/a  |  n/a  |  n/a  |                      |
-# | Ometeotl             | day       |    +6 |  n/a  |  n/a  |  n/a  |                      |
-# | Ometeotl             | night     |    +6 |  n/a  |  n/a  |  n/a  |                      |
-# | Superman             | day       |   +10 |  n/a  |  n/a  |  n/a  |                      |
-# | Superman             | night     |   +10 |  n/a  |  n/a  |  n/a  |                      |
+# | YouTube              | day       |   +10 |    -5 |  ALL  |  ALL  |                      |
+# | YouTube              | night     |   +12 |    -2 |  ALL  |  ALL  |                      |
+# | -------------------- | --------- | ----- | ----- | ----- | ----- | -------------------- |
 # | Upstream             | day       |    +4 |  n/a  |  n/a  |  n/a  | Deregulated Superman |
 # | Upstream             | night     |    +4 |  n/a  |  n/a  |  n/a  | Deregulated Superman |
+# | Deregulated Superman | day       |    +4 |  n/a  |  n/a  |  n/a  | Upstream             |
+# | Deregulated Superman | night     |    +4 |  n/a  |  n/a  |  n/a  | Upstream             |
+# | Ometeotl             | day       |    +6 |  n/a  |  n/a  |  n/a  |                      |
+# | Ometeotl             | night     |    +6 |  n/a  |  n/a  |  n/a  |                      |
+# | Maeve                | day       |    +8 |  n/a  |  n/a  |  n/a  |                      |
+# | Maeve                | night     |    +8 |  n/a  |  n/a  |  n/a  |                      |
+# | Superman             | day       |   +10 |  n/a  |  n/a  |  n/a  |                      |
+# | Superman             | night     |   +10 |  n/a  |  n/a  |  n/a  |                      |
 
 main() {
   prepare "$@"
