@@ -935,7 +935,7 @@ discipline_todo() {
       discipline_accomplished_last_checked_at=$(date +%s)
 
       if [ "$NIGHT" != 1 ]; then
-        if [ "$(quotarget --timeframe day --service discipline)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+        if [ "$(restrict-all check "observe-gaming-conf")" -gt 0 ] || [ "$(quotarget --timeframe day --service discipline)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
           discipline_skipped=false
 
           if [ "$discipline_quota_refresh" = "true" ]; then
@@ -947,7 +947,7 @@ discipline_todo() {
           fi
         fi
       else
-        if [ "$(quotarget --timeframe night --service discipline)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+        if [ "$(restrict-all check "observe-gaming-conf")" -gt 0 ] || [ "$(quotarget --timeframe night --service discipline)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
           discipline_skipped=false
 
           if [ "$discipline_quota_refresh" = "true" ]; then
