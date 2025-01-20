@@ -120,10 +120,11 @@ NON_ROOT_USER=ubuntu
 
 
 # Superman
-#*/5    0-9   * * * scheduler superman deny --kryptonite
-*/5    10-22 * * * scheduler superman allow
-#0      23    * * * scheduler superman deny --kryptonite --safe
-#5-55/5 23    * * * scheduler superman deny --kryptonite
+# */5    0-9   * * * scheduler superman deny --kryptonite
+# */5    10-22 * * * scheduler superman allow
+# 0      23    * * * scheduler superman deny --kryptonite --safe
+# 5-55/5 23    * * * scheduler superman deny --kryptonite
+*/5 * * * * scheduler superman allow
 
 
 
