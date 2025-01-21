@@ -895,10 +895,10 @@ discipline_todo() {
       if \
         # TODO:
         #   "restrict-all" is actually unnecessary, but executing "quotarget" every time takes time,
-        #   so it's kind of like cushioning material. Even though "observe-gaming-conf" is inappropriate,
+        #   so it's kind of like cushioning material. Even though "observe-youtube-conf" is inappropriate,
         #   I don't have no idea what kind of "cushioning material" is better.
         #   Don't forget to update "discipline" part in quotarget as well when updating here. [^cushioning_material]
-        [ "$(restrict-all check "observe-gaming-conf")" -le 0 ] &&
+        [ "$(restrict-all check "observe-youtube-conf")" -le 0 ] &&
         [ "$(quotarget --timeframe day --service discipline)" -gt 0 ] &&
         [ "$(sincere)" -gt 0 ];
       then
@@ -911,7 +911,7 @@ discipline_todo() {
     else
       if \
         # TODO: [^cushioning_material]
-        [ "$(restrict-all check "observe-gaming-conf")" -le 0 ] &&
+        [ "$(restrict-all check "observe-youtube-conf")" -le 0 ] &&
         [ "$(quotarget --timeframe night --service discipline)" -gt 0 ] &&
         [ "$(sincere)" -gt 0 ];
       then
@@ -935,7 +935,7 @@ discipline_todo() {
       discipline_accomplished_last_checked_at=$(date +%s)
 
       if [ "$NIGHT" != 1 ]; then
-        if [ "$(restrict-all check "observe-gaming-conf")" -gt 0 ] || [ "$(quotarget --timeframe day --service discipline)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+        if [ "$(restrict-all check "observe-youtube-conf")" -gt 0 ] || [ "$(quotarget --timeframe day --service discipline)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
           discipline_skipped=false
 
           if [ "$discipline_quota_refresh" = "true" ]; then
@@ -947,7 +947,7 @@ discipline_todo() {
           fi
         fi
       else
-        if [ "$(restrict-all check "observe-gaming-conf")" -gt 0 ] || [ "$(quotarget --timeframe night --service discipline)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+        if [ "$(restrict-all check "observe-youtube-conf")" -gt 0 ] || [ "$(quotarget --timeframe night --service discipline)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
           discipline_skipped=false
 
           if [ "$discipline_quota_refresh" = "true" ]; then
