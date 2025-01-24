@@ -7,16 +7,16 @@
 #
 # | Service              | Timeframe | Daily | Daily | Today | Work  | Same as              |
 # | -------------------- | :-------: | :---: | :---: | :---: | :---: | -------------------- |
-# | Gaming               | day       |    +4 |  n/a  |  ALL  |  ALL  | Discipline           |
-# | Gaming               | night     |    +6 |    -5 |  ALL  |  ALL  | Discipline           |
+# | Gaming               | day       |    +4 |  n/a  |  ALL  |  ALL  |                      |
+# | Gaming               | night     |    +6 |    -5 |  ALL  |  ALL  |                      |
 # | Netflix              | day       |    +6 |  n/a  |  ALL  |  ALL  | VOD                  |
 # | Netflix              | night     |    +8 |    -5 |  ALL  |  ALL  | VOD                  |
 # | VOD                  | day       |    +6 |  n/a  |  ALL  |  ALL  | Netflix              |
 # | VOD                  | night     |    +8 |    -5 |  ALL  |  ALL  | Netflix              |
 # | YouTube Alternative  | day       |    +8 |    -5 |  ALL  |  ALL  |                      |
 # | YouTube Alternative  | night     |   +10 |    -5 |  ALL  |  ALL  |                      |
-# | YouTube              | day       |   +10 |    -5 |  ALL  |  ALL  |                      |
-# | YouTube              | night     |   +12 |    -5 |  ALL  |  ALL  |                      |
+# | YouTube              | day       |   +10 |    -5 |  ALL  |  ALL  | Discipline           |
+# | YouTube              | night     |   +12 |    -5 |  ALL  |  ALL  | Discipline           |
 # | Discipline           | day       |   +10 |    -5 |  ALL  |  ALL  | YouTube              |
 # | Discipline           | night     |   +12 |    -5 |  ALL  |  ALL  | YouTube              |
 # | -------------------- | --------- | ----- | ----- | ----- | ----- | -------------------- |
