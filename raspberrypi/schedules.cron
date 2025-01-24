@@ -72,19 +72,16 @@ NON_ROOT_USER=ubuntu
 
 
 # Todo
-*/1     0-6   * * * scheduler todo-night start
-*/10    7     * * * scheduler todo-night stop
-0-10/1  7     * * * scheduler todo       start --safe
-11-59/1 7     * * * scheduler todo       start
-*/1     8-9   * * * scheduler todo       start
-*/10    10-11 * * * scheduler todo       start --morning
-0-10/1  12    * * * scheduler todo       start --safe
-11-59/1 12    * * * scheduler todo       start
-*/1     13-18 * * * scheduler todo       start
-*/10    19    * * * scheduler todo       stop
-0-10/1  19    * * * scheduler todo-night start --safe
-11-59/1 19    * * * scheduler todo-night start
-*/1     20-23 * * * scheduler todo-night start
+*/1     0-7   * * * scheduler todo-night start
+*/10    8     * * * scheduler todo-night stop
+*/10    8-11  * * * scheduler todo       start --morning
+0-10/1  11    * * * scheduler todo       start --safe
+11-59/1 11    * * * scheduler todo       start
+*/1     12-19 * * * scheduler todo       start
+*/10    20    * * * scheduler todo       stop
+0-10/1  20    * * * scheduler todo-night start --safe
+11-59/1 20    * * * scheduler todo-night start
+*/1     21-23 * * * scheduler todo-night start
 
 
 
@@ -120,43 +117,43 @@ NON_ROOT_USER=ubuntu
 
 
 # Superman
-# */5    0-9   * * * scheduler superman deny --kryptonite
-# */5    10-22 * * * scheduler superman allow
-# 0      23    * * * scheduler superman deny --kryptonite --safe
-# 5-55/5 23    * * * scheduler superman deny --kryptonite
+# */5    0-7  * * * scheduler superman deny --kryptonite
+# */5    8-22 * * * scheduler superman allow
+# 0      23   * * * scheduler superman deny --kryptonite --safe
+# 5-55/5 23   * * * scheduler superman deny --kryptonite
 */5 * * * * scheduler superman allow
 
 
 
 # Gaming
-*/5    0-9   * * * scheduler gaming deny --kryptonite
-*/5    10-22 * * * scheduler gaming allow
-0      23    * * * scheduler gaming deny --kryptonite --safe
-5-55/5 23    * * * scheduler gaming deny --kryptonite
+*/5    0-7  * * * scheduler gaming deny --kryptonite
+*/5    8-22 * * * scheduler gaming allow
+0      23   * * * scheduler gaming deny --kryptonite --safe
+5-55/5 23   * * * scheduler gaming deny --kryptonite
 
 
 
 # Netflix
-*/5    0-9   * * * scheduler netflix deny --kryptonite
-*/5    10-22 * * * scheduler netflix allow
-0      23    * * * scheduler netflix deny --kryptonite --safe
-5-55/5 23    * * * scheduler netflix deny --kryptonite
+*/5    0-7  * * * scheduler netflix deny --kryptonite
+*/5    8-22 * * * scheduler netflix allow
+0      23   * * * scheduler netflix deny --kryptonite --safe
+5-55/5 23   * * * scheduler netflix deny --kryptonite
 
 
 
 # VOD
-*/5    0-9   * * * scheduler vod deny --kryptonite
-*/5    10-22 * * * scheduler vod allow
-0      23    * * * scheduler vod deny --kryptonite --safe
-5-55/5 23    * * * scheduler vod deny --kryptonite
+*/5    0-7  * * * scheduler vod deny --kryptonite
+*/5    8-22 * * * scheduler vod allow
+0      23   * * * scheduler vod deny --kryptonite --safe
+5-55/5 23   * * * scheduler vod deny --kryptonite
 
 
 
 # Amazon
-*/5    0-9   * * * scheduler amazon deny --kryptonite
-*/5    10-22 * * * scheduler amazon allow
-0      23    * * * scheduler amazon deny --kryptonite --safe
-5-55/5 23    * * * scheduler amazon deny --kryptonite
+*/5    0-7  * * * scheduler amazon deny --kryptonite
+*/5    8-22 * * * scheduler amazon allow
+0      23   * * * scheduler amazon deny --kryptonite --safe
+5-55/5 23   * * * scheduler amazon deny --kryptonite
 
 
 
@@ -166,18 +163,18 @@ NON_ROOT_USER=ubuntu
 
 
 # YouTube Alternative
-*/5    0-9   * * * scheduler youtube-alternative deny --kryptonite
-*/5    10-22 * * * scheduler youtube-alternative allow
-0      23    * * * scheduler youtube-alternative deny --kryptonite --safe
-5-55/5 23    * * * scheduler youtube-alternative deny --kryptonite
+*/5    0-7  * * * scheduler youtube-alternative deny --kryptonite
+*/5    8-22 * * * scheduler youtube-alternative allow
+0      23   * * * scheduler youtube-alternative deny --kryptonite --safe
+5-55/5 23   * * * scheduler youtube-alternative deny --kryptonite
 
 
 
 # YouTube
-# */5    0-9   * * * scheduler youtube deny
-# */5    10-22 * * * scheduler youtube allow
-# 0      23    * * * scheduler youtube deny --safe
-# 5-55/5 23    * * * scheduler youtube deny
+# */5    0-7  * * * scheduler youtube deny
+# */5    8-22 * * * scheduler youtube allow
+# 0      23   * * * scheduler youtube deny --safe
+# 5-55/5 23   * * * scheduler youtube deny
 */5 * * * * scheduler youtube allow
 
 
@@ -189,10 +186,10 @@ NON_ROOT_USER=ubuntu
 ##   Note 2:
 ##     Remember that the shorter the time is, the more it can take effect.
 ##
-## */1     0-9   * * * scheduler firewall deny
-## */10    10-22 * * * scheduler firewall allow
-## 0-10/1  23    * * * scheduler firewall deny --safe
-## 11-59/1 23    * * * scheduler firewall deny
+## */1     0-7  * * * scheduler firewall deny
+## */10    8-22 * * * scheduler firewall allow
+## 0-10/1  23   * * * scheduler firewall deny --safe
+## 11-59/1 23   * * * scheduler firewall deny
 
 
 

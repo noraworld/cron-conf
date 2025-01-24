@@ -8,8 +8,8 @@
 # https://chat.openai.com/share/edeeb1b2-6df9-4c33-ac6e-84dfc27e7f8f
 
 GARLIC_STORAGE="/home/ubuntu/.tmp/garlic.dat"
-GET_UP_AFTER="10"
-GET_UP_BEFORE="12"
+GET_UP_AFTER="8"
+GET_UP_BEFORE="11"
 
 main() {
   operation="$1"
