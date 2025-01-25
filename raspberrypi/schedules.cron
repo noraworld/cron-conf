@@ -61,13 +61,7 @@ NON_ROOT_USER=ubuntu
 
 
 # Observe conf changes
-*/10    0-6   * * 0   scheduler observe stop
-0-10/1  7     * * 0   scheduler observe start --safe
-11-59/1 7     * * 0   scheduler observe start
-*/1     8-23  * * 0   scheduler observe start
-*/1     0-23  * * 1-5 scheduler observe start
-*/1     0-6   * * 6   scheduler observe start
-*/10    7-23  * * 6   scheduler observe stop
+*/1 * * * * scheduler observe start
 
 
 
