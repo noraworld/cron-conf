@@ -74,7 +74,7 @@ NON_ROOT_USER=ubuntu
 # Todo
 */1     0-7   * * * scheduler todo-night start
 */10    8     * * * scheduler todo-night stop
-*/10    8-11  * * * scheduler todo       start --morning
+*/10    8-10  * * * scheduler todo       start --morning
 0-10/1  11    * * * scheduler todo       start --safe
 11-59/1 11    * * * scheduler todo       start
 */1     12-19 * * * scheduler todo       start
