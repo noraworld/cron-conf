@@ -117,11 +117,10 @@ NON_ROOT_USER=ubuntu
 
 
 # Superman
-# */5    0-7  * * * scheduler superman deny --purple-kryptonite
-# */5    8-22 * * * scheduler superman allow
-# 0      23   * * * scheduler superman deny --purple-kryptonite --safe
-# 5-55/5 23   * * * scheduler superman deny --purple-kryptonite
-*/5 * * * * scheduler superman allow
+*/5    0-7  * * * scheduler superman deny --purple-kryptonite
+*/5    8-22 * * * scheduler superman allow
+0      23   * * * scheduler superman deny --purple-kryptonite --safe
+5-55/5 23   * * * scheduler superman deny --purple-kryptonite
 
 
 
@@ -171,11 +170,10 @@ NON_ROOT_USER=ubuntu
 
 
 # YouTube
-# */5    0-7  * * * scheduler youtube deny --red-kryptonite
-# */5    8-22 * * * scheduler youtube allow
-# 0      23   * * * scheduler youtube deny --red-kryptonite --safe
-# 5-55/5 23   * * * scheduler youtube deny --red-kryptonite
-*/5 * * * * scheduler youtube allow
+*/5    0-7  * * * scheduler youtube deny --red-kryptonite
+*/5    8-22 * * * scheduler youtube allow
+0      23   * * * scheduler youtube deny --red-kryptonite --safe
+5-55/5 23   * * * scheduler youtube deny --red-kryptonite
 
 
 

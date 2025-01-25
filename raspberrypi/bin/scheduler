@@ -35,15 +35,17 @@ main() {
   # bonus time. When enabling them, "scheduler [service_name] deny --vampire" is virtually the same as
   # "scheduler [service_name] allow". In other words, ACTIVATE these lines (remove "#" at the beginning of these lines
   # if they exist) if you want to DISABLE morning bonus time.
+  #
   # [ "$MORNING" = "1" ] && MORNING="-1"
   # [ "$VAMPIRE" = "1" ] && VAMPIRE="-1"
 
   # COMMENT OUT this line (put "#" at the beginning of this line if it doesn't exist) if you want to ENABLE the
   # kryptonite mode. When enabling it, the restriction is exempted even after midnight. In other words, ACTIVATE this
   # line (remove "#" at the beginning of this line if it exists) if you want to DISABLE the kryptonite mode.
-  [ "$PURPLE_KRYPTONITE" = "1" ] && PURPLE_KRYPTONITE="-1"
-  [ "$RED_KRYPTONITE"    = "1" ] && RED_KRYPTONITE="-1"
-  [ "$YELLOW_KRYPTONITE" = "1" ] && YELLOW_KRYPTONITE="-1"
+  #
+  # [ "$PURPLE_KRYPTONITE" = "1" ] && PURPLE_KRYPTONITE="-1"
+  # [ "$RED_KRYPTONITE"    = "1" ] && RED_KRYPTONITE="-1"
+  # [ "$YELLOW_KRYPTONITE" = "1" ] && YELLOW_KRYPTONITE="-1"
 
   case "$service" in
     "amazon")
