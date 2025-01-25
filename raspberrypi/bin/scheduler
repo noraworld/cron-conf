@@ -41,7 +41,9 @@ main() {
   # COMMENT OUT this line (put "#" at the beginning of this line if it doesn't exist) if you want to ENABLE the
   # kryptonite mode. When enabling it, the restriction is exempted even after midnight. In other words, ACTIVATE this
   # line (remove "#" at the beginning of this line if it exists) if you want to DISABLE the kryptonite mode.
-  [ "$KRYPTONITE" = "1" ] && KRYPTONITE="-1"
+  [ "$PURPLE_KRYPTONITE" = "1" ] && PURPLE_KRYPTONITE="-1"
+  [ "$RED_KRYPTONITE"    = "1" ] && RED_KRYPTONITE="-1"
+  [ "$YELLOW_KRYPTONITE" = "1" ] && YELLOW_KRYPTONITE="-1"
 
   case "$service" in
     "amazon")
@@ -136,7 +138,8 @@ amazon() {
   case "$operation" in
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
-      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] || [ "$KRYPTONITE" = "1" ]; then
+      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
+      [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-amazon-conf "$safe"
         remove-dnsmasq-toggle-conf public amazon
         return
@@ -268,7 +271,8 @@ deregulated_superman() {
   case "$operation" in
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
-      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] || [ "$KRYPTONITE" = "1" ]; then
+      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
+      [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-deregulated-superman-conf "$safe"
         cron-daemonctl stop observe-deregulated-superman-allow-conf "$safe"
         return
@@ -360,7 +364,8 @@ gaming() {
   case "$operation" in
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
-      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] || [ "$KRYPTONITE" = "1" ]; then
+      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
+      [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-gaming-conf "$safe"
         return
       fi
@@ -403,7 +408,8 @@ maeve() {
   case "$operation" in
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
-      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] || [ "$KRYPTONITE" = "1" ]; then
+      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
+      [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-maeve-conf "$safe"
         return
       fi
@@ -425,7 +431,8 @@ netflix() {
   case "$operation" in
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
-      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] || [ "$KRYPTONITE" = "1" ]; then
+      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
+      [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-netflix-conf "$safe"
         cron-daemonctl stop observe-netflix-allow-conf "$safe"
         return
@@ -494,7 +501,8 @@ ometeotl() {
   case "$operation" in
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
-      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] || [ "$KRYPTONITE" = "1" ]; then
+      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
+      [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-ometeotl-conf "$safe"
         return
       fi
@@ -588,7 +596,8 @@ superman() {
   case "$operation" in
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
-      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] || [ "$KRYPTONITE" = "1" ]; then
+      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
+      [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-superman-conf "$safe"
         return
       fi
@@ -659,7 +668,8 @@ upstream() {
   case "$operation" in
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
-      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] || [ "$KRYPTONITE" = "1" ]; then
+      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
+      [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-adguard-upstream-conf "$safe"
         cron-daemonctl stop observe-nordvpn-upstream-conf "$safe"
         return
@@ -697,7 +707,8 @@ vod() {
   case "$operation" in
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
-      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] || [ "$KRYPTONITE" = "1" ]; then
+      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
+      [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-vod-conf "$safe"
         return
       fi
@@ -722,7 +733,8 @@ youtube() {
   case "$operation" in
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
-      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] || [ "$KRYPTONITE" = "1" ]; then
+      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
+      [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-youtube-conf "$safe"
         return
       fi
@@ -747,7 +759,8 @@ youtube_alternative() {
   case "$operation" in
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
-      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] || [ "$KRYPTONITE" = "1" ]; then
+      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
+      [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-youtube-alternative-conf "$safe"
         return
       fi
@@ -770,7 +783,8 @@ youtube_music() {
   case "$operation" in
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
-      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] || [ "$KRYPTONITE" = "1" ]; then
+      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
+      [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-youtube-music-conf "$safe"
         return
       fi
@@ -896,21 +910,25 @@ schedules_update_ready() {
 parser_definition() {
   setup   REST help:usage -- "Usage: scheduler [options]... [arguments]..." ''
   msg -- 'Options:'
-  flag    KRYPTONITE    --kryptonite -- "exempt the restriction even after midnight"
-  flag    MORNING       --morning    -- "whether to exempt the restriction in the morning"
-  flag    SAFE          --safe       -- "not getting punished"
-  flag    SOFT          --soft       -- "deny resources without starting a daemon"
-  flag    VAMPIRE       --vampire    -- "exempt the restriction if you beat your drowsiness in the morning"
-  flag    VERBOSE       --verbose    -- "show detailed information"
-  disp    :usage     -h --help       -- "show help message and exit"
-  disp    VERSION       --version    -- "show current version"
+  flag    PURPLE_KRYPTONITE    --purple-kryptonite -- "exempt the restriction even after midnight"
+  flag    RED_KRYPTONITE       --red-kryptonite    -- "exempt the restriction even after midnight"
+  flag    YELLOW_KRYPTONITE    --yellow-kryptonite -- "exempt the restriction even after midnight"
+  flag    MORNING              --morning           -- "whether to exempt the restriction in the morning"
+  flag    SAFE                 --safe              -- "not getting punished"
+  flag    SOFT                 --soft              -- "deny resources without starting a daemon"
+  flag    VAMPIRE              --vampire           -- "exempt the restriction if you beat your drowsiness in the morning"
+  flag    VERBOSE              --verbose           -- "show detailed information"
+  disp    :usage            -h --help              -- "show help message and exit"
+  disp    VERSION              --version           -- "show current version"
 }
 # @end
 
 # @gengetoptions parser -i parser_definition parse
 # Generated by getoptions (BEGIN)
 # URL: https://github.com/ko1nksm/getoptions (v3.3.0)
-KRYPTONITE=''
+PURPLE_KRYPTONITE=''
+RED_KRYPTONITE=''
+YELLOW_KRYPTONITE=''
 MORNING=''
 SAFE=''
 SOFT=''
@@ -930,10 +948,20 @@ parse() {
         OPTARG= ;;
     esac
     case $1 in
-      '--kryptonite')
+      '--purple-kryptonite')
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
-        KRYPTONITE="$OPTARG"
+        PURPLE_KRYPTONITE="$OPTARG"
+        ;;
+      '--red-kryptonite')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        RED_KRYPTONITE="$OPTARG"
+        ;;
+      '--yellow-kryptonite')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        YELLOW_KRYPTONITE="$OPTARG"
         ;;
       '--morning')
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
@@ -996,7 +1024,9 @@ cat<<'GETOPTIONSHERE'
 Usage: scheduler [options]... [arguments]...
 
 Options:
-      --kryptonite            exempt the restriction even after midnight
+      --purple-kryptonite     exempt the restriction even after midnight
+      --red-kryptonite        exempt the restriction even after midnight
+      --yellow-kryptonite     exempt the restriction even after midnight
       --morning               whether to exempt the restriction in the morning
       --safe                  not getting punished
       --soft                  deny resources without starting a daemon
