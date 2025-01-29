@@ -114,6 +114,9 @@ main() {
     "todo-night")
       todo_night
       ;;
+    "todo-midnight")
+      todo_midnight
+      ;;
     "upstream")
       upstream
       ;;
@@ -652,6 +655,26 @@ todo_night() {
       ;;
     "stop")
       cron-daemonctl stop observe-dnsmasq-todo-list-night "$safe"
+      ;;
+    *)
+      echo "error: no such operation: \"$operation\"" >&2
+      exit 1
+      ;;
+  esac
+}
+
+todo_midnight() {
+  case "$operation" in
+    "start")
+      if [ "$MORNING" = "1" ]; then
+        cron-daemonctl stop observe-dnsmasq-todo-list-midnight "$safe"
+        return
+      fi
+
+      cron-daemonctl start observe-dnsmasq-todo-list-midnight "$safe"
+      ;;
+    "stop")
+      cron-daemonctl stop observe-dnsmasq-todo-list-midnight "$safe"
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2

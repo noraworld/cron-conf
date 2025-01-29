@@ -52,6 +52,13 @@ main() {
         # sleep "$sleep_interval" # need?
         accomplished=$(quotarget --timeframe night --service $quotarget_service)
         [ "$?" != "0" ] && exit 1
+      elif [ "$(systemctl --user is-active observe-dnsmasq-todo-list-midnight | grep -c inactive)" -eq 0 ]; then
+        # There is an unknown phenomenon the restrictions are not regulated even though the tasks have been accomplished.
+        # That's resolved by restarting the daemon for some reason.
+        systemctl --user restart observe-dnsmasq-todo-list-midnight
+        # sleep "$sleep_interval" # need?
+        accomplished=$(quotarget --timeframe midnight --service $quotarget_service)
+        [ "$?" != "0" ] && exit 1
       fi
 
       # value: negative
