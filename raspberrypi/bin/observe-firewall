@@ -108,6 +108,7 @@ port_blocked() {
   # Ports:
   #            53: DNS
   #           500: L2TP & IPSec (NordVPN)
+  #           853: DoT
   #          1194: OpenVPN (NordVPN)
   #     1231-1234: OpenVPN (NordVPN)
   #          1701: L2TP (NordVPN)
@@ -121,7 +122,7 @@ port_blocked() {
   if \
     # TCP & UDP
     [ "$(sudo iptables-save |
-         grep -cE "\-A ufw-user-forward -p (tcp|udp) -m (tcp|udp) --dport (53|51820) -j DROP" || true)" -ne 4 ] ||
+         grep -cE "\-A ufw-user-forward -p (tcp|udp) -m (tcp|udp) --dport (53|853|51820) -j DROP" || true)" -ne 6 ] ||
     # TCP
     [ "$(sudo iptables-save |
          grep -cE "\-A ufw-user-forward -p tcp -m tcp --dport (1701|1723) -j DROP" || true)" -ne 2 ] ||
