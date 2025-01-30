@@ -249,6 +249,23 @@ todo_mode() {
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): deleted illegal files in directory"
   fi
 
+  # observer check
+  if [ "$discipline_skipped" = "false" ] && {
+     [ "$(systemctl --user is-active observe-crontab)"             != "active" ] ||
+     [ "$(systemctl --user is-active observe-cron-conf)"           != "active" ] ||
+     [ "$(systemctl --user is-active observe-dnsmasq-conf)"        != "active" ] ||
+     [ "$(systemctl --user is-active observe-dnsmasq-priv-conf)"   != "active" ] ||
+     [ "$(systemctl --user is-active observe-dnsmasq-toggle)"      != "active" ] ||
+     [ "$(systemctl --user is-active observe-dnsmasq-priv-toggle)" != "active" ]; }
+  then
+    systemctl --user start observe-crontab
+    systemctl --user start observe-cron-conf
+    systemctl --user start observe-dnsmasq-conf
+    systemctl --user start observe-dnsmasq-priv-conf
+    systemctl --user start observe-dnsmasq-toggle
+    systemctl --user start observe-dnsmasq-priv-toggle
+  fi
+
   sleep "$RETRY_INTERVAL"
 }
 
@@ -1107,6 +1124,21 @@ discipline_todo() {
         if [ "$(systemctl --user is-active observe-firewall)" != "active" ] && [ "$(observe-firewall check)" -gt 0 ]; then
           observe-firewall allow
         fi
+
+        if [ "$(systemctl --user is-active observe-crontab)"             = "active" ] ||
+           [ "$(systemctl --user is-active observe-cron-conf)"           = "active" ] ||
+           [ "$(systemctl --user is-active observe-dnsmasq-conf)"        = "active" ] ||
+           [ "$(systemctl --user is-active observe-dnsmasq-priv-conf)"   = "active" ] ||
+           [ "$(systemctl --user is-active observe-dnsmasq-toggle)"      = "active" ] ||
+           [ "$(systemctl --user is-active observe-dnsmasq-priv-toggle)" = "active" ]
+        then
+          systemctl --user stop observe-crontab
+          systemctl --user stop observe-cron-conf
+          systemctl --user stop observe-dnsmasq-conf
+          systemctl --user stop observe-dnsmasq-priv-conf
+          systemctl --user stop observe-dnsmasq-toggle
+          systemctl --user stop observe-dnsmasq-priv-toggle
+        fi
       fi
     elif [ "$NIGHT" = "1" ]; then
       if \
@@ -1119,6 +1151,21 @@ discipline_todo() {
 
         if [ "$(systemctl --user is-active observe-firewall)" != "active" ] && [ "$(observe-firewall check)" -gt 0 ]; then
           observe-firewall allow
+        fi
+
+        if [ "$(systemctl --user is-active observe-crontab)"             = "active" ] ||
+           [ "$(systemctl --user is-active observe-cron-conf)"           = "active" ] ||
+           [ "$(systemctl --user is-active observe-dnsmasq-conf)"        = "active" ] ||
+           [ "$(systemctl --user is-active observe-dnsmasq-priv-conf)"   = "active" ] ||
+           [ "$(systemctl --user is-active observe-dnsmasq-toggle)"      = "active" ] ||
+           [ "$(systemctl --user is-active observe-dnsmasq-priv-toggle)" = "active" ]
+        then
+          systemctl --user stop observe-crontab
+          systemctl --user stop observe-cron-conf
+          systemctl --user stop observe-dnsmasq-conf
+          systemctl --user stop observe-dnsmasq-priv-conf
+          systemctl --user stop observe-dnsmasq-toggle
+          systemctl --user stop observe-dnsmasq-priv-toggle
         fi
       fi
     elif [ "$MIDNIGHT" = "1" ]; then
@@ -1133,11 +1180,41 @@ discipline_todo() {
         if [ "$(systemctl --user is-active observe-firewall)" != "active" ] && [ "$(observe-firewall check)" -gt 0 ]; then
           observe-firewall allow
         fi
+
+        if [ "$(systemctl --user is-active observe-crontab)"             = "active" ] ||
+           [ "$(systemctl --user is-active observe-cron-conf)"           = "active" ] ||
+           [ "$(systemctl --user is-active observe-dnsmasq-conf)"        = "active" ] ||
+           [ "$(systemctl --user is-active observe-dnsmasq-priv-conf)"   = "active" ] ||
+           [ "$(systemctl --user is-active observe-dnsmasq-toggle)"      = "active" ] ||
+           [ "$(systemctl --user is-active observe-dnsmasq-priv-toggle)" = "active" ]
+        then
+          systemctl --user stop observe-crontab
+          systemctl --user stop observe-cron-conf
+          systemctl --user stop observe-dnsmasq-conf
+          systemctl --user stop observe-dnsmasq-priv-conf
+          systemctl --user stop observe-dnsmasq-toggle
+          systemctl --user stop observe-dnsmasq-priv-toggle
+        fi
       fi
     fi
   else
     if [ "$(systemctl --user is-active observe-firewall)" != "active" ] && [ "$(observe-firewall check)" -gt 0 ]; then
       observe-firewall allow
+    fi
+
+    if [ "$(systemctl --user is-active observe-crontab)"             = "active" ] ||
+       [ "$(systemctl --user is-active observe-cron-conf)"           = "active" ] ||
+       [ "$(systemctl --user is-active observe-dnsmasq-conf)"        = "active" ] ||
+       [ "$(systemctl --user is-active observe-dnsmasq-priv-conf)"   = "active" ] ||
+       [ "$(systemctl --user is-active observe-dnsmasq-toggle)"      = "active" ] ||
+       [ "$(systemctl --user is-active observe-dnsmasq-priv-toggle)" = "active" ]
+    then
+      systemctl --user stop observe-crontab
+      systemctl --user stop observe-cron-conf
+      systemctl --user stop observe-dnsmasq-conf
+      systemctl --user stop observe-dnsmasq-priv-conf
+      systemctl --user stop observe-dnsmasq-toggle
+      systemctl --user stop observe-dnsmasq-priv-toggle
     fi
 
     set +u

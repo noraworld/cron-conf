@@ -61,7 +61,7 @@ NON_ROOT_USER=ubuntu
 
 
 # Observe conf changes
-*/1 * * * * scheduler observe start
+# */1 * * * * scheduler observe start
 
 
 
