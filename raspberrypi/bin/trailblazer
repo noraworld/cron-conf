@@ -41,22 +41,30 @@ main() {
       if [ "$(systemctl --user is-active observe-dnsmasq-todo-list | grep -c inactive)" -eq 0 ]; then
         # There is an unknown phenomenon the restrictions are not regulated even though the tasks have been accomplished.
         # That's resolved by restarting the daemon for some reason.
-        systemctl --user restart observe-dnsmasq-todo-list
-        echo "waiting for 10 seconds" && sleep "10" # need?
+        if [ "$REFRESH" = "1" ]; then
+          systemctl --user restart observe-dnsmasq-todo-list
+          echo "waiting for 10 seconds"
+          sleep "10"
+        fi
+
         accomplished=$(quotarget --timeframe day --service $quotarget_service)
         [ "$?" != "0" ] && exit 1
       elif [ "$(systemctl --user is-active observe-dnsmasq-todo-list-night | grep -c inactive)" -eq 0 ]; then
-        # There is an unknown phenomenon the restrictions are not regulated even though the tasks have been accomplished.
-        # That's resolved by restarting the daemon for some reason.
-        systemctl --user restart observe-dnsmasq-todo-list-night
-        echo "waiting for 10 seconds" && sleep "10" # need?
+        if [ "$REFRESH" = "1" ]; then
+          systemctl --user restart observe-dnsmasq-todo-list-night
+          echo "waiting for 10 seconds"
+          sleep "10"
+        fi
+
         accomplished=$(quotarget --timeframe night --service $quotarget_service)
         [ "$?" != "0" ] && exit 1
       elif [ "$(systemctl --user is-active observe-dnsmasq-todo-list-midnight | grep -c inactive)" -eq 0 ]; then
-        # There is an unknown phenomenon the restrictions are not regulated even though the tasks have been accomplished.
-        # That's resolved by restarting the daemon for some reason.
-        systemctl --user restart observe-dnsmasq-todo-list-midnight
-        echo "waiting for 10 seconds" && sleep "10" # need?
+        if [ "$REFRESH" = "1" ]; then
+          systemctl --user restart observe-dnsmasq-todo-list-midnight
+          echo "waiting for 10 seconds"
+          sleep "10"
+        fi
+
         accomplished=$(quotarget --timeframe midnight --service $quotarget_service)
         [ "$?" != "0" ] && exit 1
       fi
@@ -89,6 +97,7 @@ parser_definition() {
   msg -- 'Options:'
   flag    DRY_RUN    --dry-run -- "just show the success message instead of unlocking the services"
   flag    MORNING    --morning -- "skip quotarget, and ask to prepare a piece of garlic"
+  flag    REFRESH    --refresh -- "restart todo-list daemon before check"
   param   SLEEP      --sleep   -- "how many seconds to wait for the next attempt"
   disp    :usage  -h --help
   disp    VERSION    --version
@@ -100,6 +109,7 @@ parser_definition() {
 # URL: https://github.com/ko1nksm/getoptions (v3.3.0)
 DRY_RUN=''
 MORNING=''
+REFRESH=''
 SLEEP=''
 REST=''
 parse() {
@@ -124,6 +134,11 @@ parse() {
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
         MORNING="$OPTARG"
+        ;;
+      '--refresh')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        REFRESH="$OPTARG"
         ;;
       '--sleep')
         [ $# -le 1 ] && set "required" "$1" && break
@@ -168,6 +183,7 @@ Usage: trailblazer [options]... [arguments]...
 Options:
       --dry-run               just show the success message instead of unlocking the services
       --morning               skip quotarget, and ask to prepare a piece of garlic
+      --refresh               restart todo-list daemon before check
       --sleep SLEEP           how many seconds to wait for the next attempt
   -h, --help
       --version
