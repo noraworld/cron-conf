@@ -36,7 +36,7 @@ main() {
   # "scheduler [service_name] allow". In other words, ACTIVATE these lines (remove "#" at the beginning of these lines
   # if they exist) if you want to DISABLE morning bonus time.
   #
-  # [ "$MORNING" = "1" ] && MORNING="-1"
+  [ "$MORNING" = "1" ] && MORNING="-1"
   # [ "$VAMPIRE" = "1" ] && VAMPIRE="-1"
 
   # COMMENT OUT this line (put "#" at the beginning of this line if it doesn't exist) if you want to ENABLE the
