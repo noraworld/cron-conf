@@ -25,14 +25,7 @@ main() {
   fi
 
   if [ "$MORNING" = 1 ]; then
-    echo -n "Would you like to prepare a piece of garlic? [y/N]: "
-    exec < /dev/tty
-    read confirm
-    if [ "$confirm" = "y" ] || [ "$confirm" = "yes" ]; then
-      garnish prep
-    else
-      echo "OK, it won't be created." >&2
-    fi
+    garnish prep
     echo
   else
     accomplished="0"
