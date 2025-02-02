@@ -60,8 +60,25 @@ NON_ROOT_USER=ubuntu
 
 
 
+# Firewall
+#
+#   Note 1:
+#     "git push", "git pull" and "git fetch" are restricted.
+#   Note 2:
+#     Remember that the shorter the time is, the more it can take effect.
+#
+*/1     0-7  * * * scheduler firewall deny
+*/10    8-22 * * * scheduler firewall allow
+0-10/1  23   * * * scheduler firewall deny --safe
+11-59/1 23   * * * scheduler firewall deny
+
+
+
 # Observe conf changes
-# */1 * * * * scheduler observe start
+*/1     0-7  * * * scheduler observe start
+*/10    8-22 * * * scheduler observe stop
+0-10/1  23   * * * scheduler observe start --safe
+11-59/1 23   * * * scheduler observe start
 
 
 
@@ -171,20 +188,6 @@ NON_ROOT_USER=ubuntu
 */5    8-22 * * * scheduler youtube deny --vampire
 0      23   * * * scheduler youtube deny --red-kryptonite --safe
 5-55/5 23   * * * scheduler youtube deny --red-kryptonite
-
-
-
-## Firewall
-##
-##   Note 1:
-##     "git push", "git pull" and "git fetch" are restricted.
-##   Note 2:
-##     Remember that the shorter the time is, the more it can take effect.
-##
-## */1     0-7  * * * scheduler firewall deny
-## */10    8-22 * * * scheduler firewall allow
-## 0-10/1  23   * * * scheduler firewall deny --safe
-## 11-59/1 23   * * * scheduler firewall deny
 
 
 
