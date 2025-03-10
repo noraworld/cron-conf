@@ -16,17 +16,35 @@ main() {
 
   validate "$@"
 
-  result=$(ghc issue view \
-    --repo "$MAIN_REPO"   \
-    $(ghc issue list      \
-      --repo "$MAIN_REPO" \
-      --limit 1           |
-      awk '{ print $1 }'  \
-    )                     \
-    --json body           \
-    --jq .body            |
-    awk '/## 🐯 今日やること/{ flag=1; next } flag'
-  )
+  [ "$PAST" = "" ] && PAST=0
+
+  if [ "$PAST" -eq 0 ]; then
+    result=$(ghc issue view \
+      --repo "$MAIN_REPO"   \
+      $(ghc issue list      \
+        --repo "$MAIN_REPO" \
+        --limit 1           |
+        awk '{ print $1 }'  \
+      )                     \
+      --json body           \
+      --jq .body            |
+      awk '/## 🐯 今日やること/{ flag=1; next } flag'
+    )
+  elif [ "$PAST" -ge 1 ]; then
+    result=$(ghc issue view \
+      --repo "$MAIN_REPO"   \
+      $(ghc issue list      \
+        --repo "$MAIN_REPO" \
+        --state "closed"    \
+        --limit "$PAST"     |
+        awk '{ print $1 }'  |
+        tail -n 1           \
+      )                     \
+      --json body           \
+      --jq .body            |
+      awk '/## 🐯 今日やること/{ flag=1; next } flag'
+    )
+  fi
 
   completed=$(
     echo "$result" |
