@@ -5,45 +5,45 @@
 # if +6 & -4 ("--checked 6 --unchecked 4") is specified
 # and the number of checked marks is more than or equal to 6 and the number of unchecked marks is less than or equal to 4.
 #
-# | Service                  | Timeframe | Daily | Daily | Today | Work  | Same as              |
-# | ------------------------ | :-------: | :---: | :---: | :---: | :---: | -------------------- |
-# | YouTube Music Persistent | day       |    +4 |  n/a  |  n/a  |  n/a  |                      |
-# | YouTube Music Persistent | night     |    +6 |  n/a  |  n/a  |  n/a  |                      |
-# | YouTube Music Persistent | midnight  |   +10 |  n/a  |  n/a  |  n/a  |                      |
-# | Gaming                   | day       |    +2 |  n/a  |  n/a  |  n/a  |                      |
-# | Gaming                   | night     |    +4 |    -6 |  n/a  |  n/a  |                      |
-# | Gaming                   | midnight  |    +6 |    -6 |  n/a  |  n/a  |                      |
-# | Netflix                  | day       |    +4 |  n/a  |  n/a  |  n/a  | VOD                  |
-# | Netflix                  | night     |    +6 |    -6 |  n/a  |  n/a  | VOD                  |
-# | Netflix                  | midnight  |    +8 |    -0 |  n/a  |  n/a  | VOD                  |
-# | VOD                      | day       |    +4 |  n/a  |  n/a  |  n/a  | Netflix              |
-# | VOD                      | night     |    +6 |    -6 |  n/a  |  n/a  | Netflix              |
-# | VOD                      | midnight  |    +8 |    -0 |  n/a  |  n/a  | Netflix              |
-# | YouTube Alternative      | day       |    +6 |    -6 |  ALL  |  n/a  |                      |
-# | YouTube Alternative      | night     |    +8 |    -6 |  ALL  |  n/a  |                      |
-# | YouTube Alternative      | midnight  |   +10 |    -0 |  ALL  |  n/a  |                      |
-# | YouTube                  | day       |    +8 |    -6 |  ALL  |  ALL  | Discipline           |
-# | YouTube                  | night     |   +10 |    -4 |  ALL  |  ALL  | Discipline           |
-# | YouTube                  | midnight  |   +12 |    -0 |  ALL  |  ALL  | Discipline           |
-# | Discipline               | day       |    +8 |    -6 |  ALL  |  ALL  | YouTube              |
-# | Discipline               | night     |   +10 |    -4 |  ALL  |  ALL  | YouTube              |
-# | Discipline               | midnight  |   +12 |    -0 |  ALL  |  ALL  | YouTube              |
-# | ------------------------ | --------- | ----- | ----- | ----- | ----- | -------------------- |
-# | Deregulated Superman     | day       |    +1 |  n/a  |  n/a  |  n/a  |                      |
-# | Deregulated Superman     | night     |    +1 |  n/a  |  n/a  |  n/a  |                      |
-# | Deregulated Superman     | midnight  |    +1 |  n/a  |  n/a  |  n/a  |                      |
-# | Ometeotl                 | day       |    +2 |  n/a  |  n/a  |  n/a  |                      |
-# | Ometeotl                 | night     |    +2 |  n/a  |  n/a  |  n/a  |                      |
-# | Ometeotl                 | midnight  |    +2 |  n/a  |  n/a  |  n/a  |                      |
-# | Maeve                    | day       |    +6 |  n/a  |  ALL  |  n/a  | Upstream             |
-# | Maeve                    | night     |    +6 |  n/a  |  ALL  |  n/a  | Upstream             |
-# | Maeve                    | midnight  |    +6 |  n/a  |  ALL  |  n/a  | Upstream             |
-# | Upstream                 | day       |    +6 |  n/a  |  ALL  |  n/a  | Maeve                |
-# | Upstream                 | night     |    +6 |  n/a  |  ALL  |  n/a  | Maeve                |
-# | Upstream                 | midnight  |    +6 |  n/a  |  ALL  |  n/a  | Maeve                |
-# | Superman                 | day       |   +10 |  n/a  |  ALL  |  ALL  |                      |
-# | Superman                 | night     |   +10 |  n/a  |  ALL  |  ALL  |                      |
-# | Superman                 | midnight  |   +10 |  n/a  |  ALL  |  ALL  |                      |
+# | Service                  | Timeframe | Daily+  | Daily-  | Perso | Work  | Past  | Same as              |
+# | ------------------------ | :-------: | :-----: | :-----: | :---: | :---: | :---: | -------------------- |
+# | YouTube Music Persistent | day       |      +4 |   n/a   |  n/a  |  n/a  |     0 |                      |
+# | YouTube Music Persistent | night     |      +6 |   n/a   |  n/a  |  n/a  |     0 |                      |
+# | YouTube Music Persistent | midnight  |     +10 |   n/a   |  n/a  |  n/a  |     0 |                      |
+# | Gaming                   | day       |      +2 |   n/a   |  n/a  |  n/a  |     1 |                      |
+# | Gaming                   | night     |      +4 |      -6 |  n/a  |  n/a  |     1 |                      |
+# | Gaming                   | midnight  |      +6 |      -6 |  n/a  |  n/a  |     1 |                      |
+# | Netflix                  | day       |      +4 |   n/a   |  n/a  |  n/a  |     1 | VOD                  |
+# | Netflix                  | night     |      +6 |      -6 |  n/a  |  n/a  |     1 | VOD                  |
+# | Netflix                  | midnight  |      +8 |      -0 |  n/a  |  n/a  |     1 | VOD                  |
+# | VOD                      | day       |      +4 |   n/a   |  n/a  |  n/a  |     1 | Netflix              |
+# | VOD                      | night     |      +6 |      -6 |  n/a  |  n/a  |     1 | Netflix              |
+# | VOD                      | midnight  |      +8 |      -0 |  n/a  |  n/a  |     1 | Netflix              |
+# | YouTube Alternative      | day       |      +6 |      -6 |  ALL  |  n/a  |     1 |                      |
+# | YouTube Alternative      | night     |      +8 |      -6 |  ALL  |  n/a  |     1 |                      |
+# | YouTube Alternative      | midnight  |     +10 |      -0 |  ALL  |  n/a  |     1 |                      |
+# | YouTube                  | day       |      +8 |      -6 |  ALL  |  ALL  |     1 | Discipline           |
+# | YouTube                  | night     |     +10 |      -4 |  ALL  |  ALL  |     1 | Discipline           |
+# | YouTube                  | midnight  |     +12 |      -0 |  ALL  |  ALL  |     1 | Discipline           |
+# | Discipline               | day       |      +8 |      -6 |  ALL  |  ALL  |     1 | YouTube              |
+# | Discipline               | night     |     +10 |      -4 |  ALL  |  ALL  |     1 | YouTube              |
+# | Discipline               | midnight  |     +12 |      -0 |  ALL  |  ALL  |     1 | YouTube              |
+# | ------------------------ | --------- | ------- | ------- | ----- | ----- | ----- | -------------------- |
+# | Deregulated Superman     | day       |      +1 |   n/a   |  n/a  |  n/a  |     1 |                      |
+# | Deregulated Superman     | night     |      +1 |   n/a   |  n/a  |  n/a  |     1 |                      |
+# | Deregulated Superman     | midnight  |      +1 |   n/a   |  n/a  |  n/a  |     1 |                      |
+# | Ometeotl                 | day       |      +2 |   n/a   |  n/a  |  n/a  |     1 |                      |
+# | Ometeotl                 | night     |      +2 |   n/a   |  n/a  |  n/a  |     1 |                      |
+# | Ometeotl                 | midnight  |      +2 |   n/a   |  n/a  |  n/a  |     1 |                      |
+# | Maeve                    | day       |      +6 |   n/a   |  ALL  |  n/a  |     1 | Upstream             |
+# | Maeve                    | night     |      +6 |   n/a   |  ALL  |  n/a  |     1 | Upstream             |
+# | Maeve                    | midnight  |      +6 |   n/a   |  ALL  |  n/a  |     1 | Upstream             |
+# | Upstream                 | day       |      +6 |   n/a   |  ALL  |  n/a  |     1 | Maeve                |
+# | Upstream                 | night     |      +6 |   n/a   |  ALL  |  n/a  |     1 | Maeve                |
+# | Upstream                 | midnight  |      +6 |   n/a   |  ALL  |  n/a  |     1 | Maeve                |
+# | Superman                 | day       |     +10 |   n/a   |  ALL  |  ALL  |     1 |                      |
+# | Superman                 | night     |     +10 |   n/a   |  ALL  |  ALL  |     1 |                      |
+# | Superman                 | midnight  |     +10 |   n/a   |  ALL  |  ALL  |     1 |                      |
 
 main() {
   prepare "$@"
