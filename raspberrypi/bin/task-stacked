@@ -138,6 +138,7 @@ parser_definition() {
   flag  DEBUG        --debug     -- "perform as debug mode"
   flag  FORCE        --force     -- "ignore CHECK_INTERVAL"
   param MAIN_REPO    --main-repo -- "main repo"
+  param PAST         --past      -- "get the past tasks instead of today"
   flag  LAZY         --lazy      -- "ignore checking repo existence"
   param TODO_REPO    --todo-repo -- "todo repo"
   disp  :usage    -h --help
@@ -151,6 +152,7 @@ parser_definition() {
 DEBUG=''
 FORCE=''
 MAIN_REPO=''
+PAST=''
 LAZY=''
 TODO_REPO=''
 REST=''
@@ -181,6 +183,11 @@ parse() {
         [ $# -le 1 ] && set "required" "$1" && break
         OPTARG=$2
         MAIN_REPO="$OPTARG"
+        shift ;;
+      '--past')
+        [ $# -le 1 ] && set "required" "$1" && break
+        OPTARG=$2
+        PAST="$OPTARG"
         shift ;;
       '--lazy')
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
@@ -231,6 +238,7 @@ Options:
       --debug                 perform as debug mode
       --force                 ignore CHECK_INTERVAL
       --main-repo MAIN_REPO   main repo
+      --past PAST             get the past tasks instead of today
       --lazy                  ignore checking repo existence
       --todo-repo TODO_REPO   todo repo
   -h, --help
