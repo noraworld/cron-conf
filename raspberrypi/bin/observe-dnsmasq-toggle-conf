@@ -127,6 +127,7 @@ todo_mode() {
   vod_todo
   youtube_todo
   youtube_alternative_todo
+  youtube_music_persistent_todo
 
   deregulated_superman_todo
   maeve_todo
@@ -164,6 +165,12 @@ todo_mode() {
   if [ "$youtube_alternative_skipped" = "false" ] && [ "$(restrict-all check "observe-youtube-alternative-conf")" -le 0 ]; then
     restrict-all reset "observe-youtube-alternative-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-youtube-alternative-conf"
+  fi
+
+  # ln_mode & unlink_mode (youtube-music-persistent)
+  if [ "$youtube_music_persistent_skipped" = "false" ] && [ "$(restrict-all check "observe-youtube-music-persistent-conf")" -le 0 ]; then
+    restrict-all reset "observe-youtube-music-persistent-conf"
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-youtube-music-persistent-conf"
   fi
 
   # ln_mode & unlink_mode (deregulated-superman)
@@ -677,6 +684,89 @@ youtube_alternative_todo() {
               --duration "$PUNISHMENT_DURATION"
           else
             youtube_alternative_quota_refresh=true
+          fi
+        fi
+      fi
+    fi
+  fi
+}
+
+
+
+youtube_music_persistent_todo() {
+  set +u
+  [ "$youtube_music_persistent_skipped" = "" ] && youtube_music_persistent_skipped=false
+  [ "$youtube_music_persistent_quota_refresh" = "" ] && youtube_music_persistent_quota_refresh=false
+  set -u
+
+  if [ "$youtube_music_persistent_skipped" = "false" ]; then
+    if [ "$NIGHT" != "1" ] && [ "$MIDNIGHT" != "1" ]; then
+      if \
+        [ "$(restrict-all check "observe-youtube-music-persistent-conf")" -le 0 ] &&
+        [ "$(quotarget --timeframe day --service youtube-music-persistent)" -gt 0 ] &&
+        [ "$(sincere)" -gt 0 ];
+      then
+        youtube_music_persistent_skipped=true
+      fi
+    elif [ "$NIGHT" = "1" ]; then
+      if \
+        [ "$(restrict-all check "observe-youtube-music-persistent-conf")" -le 0 ] &&
+        [ "$(quotarget --timeframe night --service youtube-music-persistent)" -gt 0 ] &&
+        [ "$(sincere)" -gt 0 ];
+      then
+        youtube_music_persistent_skipped=true
+      fi
+    elif [ "$MIDNIGHT" = "1" ]; then
+      if \
+        [ "$(restrict-all check "observe-youtube-music-persistent-conf")" -le 0 ] &&
+        [ "$(quotarget --timeframe midnight --service youtube-music-persistent)" -gt 0 ] &&
+        [ "$(sincere)" -gt 0 ];
+      then
+        youtube_music_persistent_skipped=true
+      fi
+    fi
+  else
+    set +u
+    [ "$youtube_music_persistent_accomplished_last_checked_at" = "" ] && youtube_music_persistent_accomplished_last_checked_at=$(date +%s)
+    set -u
+
+    if [ "$(echo $(( $(date +%s) - $youtube_music_persistent_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
+      youtube_music_persistent_accomplished_last_checked_at=$(date +%s)
+
+      if [ "$NIGHT" != 1 ] && [ "$MIDNIGHT" != 1 ]; then
+        if [ "$(quotarget --timeframe day --service youtube-music-persistent)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+          youtube_music_persistent_skipped=false
+
+          if [ "$youtube_music_persistent_quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            youtube_music_persistent_quota_refresh=true
+          fi
+        fi
+      elif [ "$NIGHT" = 1 ]; then
+        if [ "$(quotarget --timeframe night --service youtube-music-persistent)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+          youtube_music_persistent_skipped=false
+
+          if [ "$youtube_music_persistent_quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            youtube_music_persistent_quota_refresh=true
+          fi
+        fi
+      elif [ "$MIDNIGHT" = 1 ]; then
+        if [ "$(quotarget --timeframe midnight --service youtube-music-persistent)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+          youtube_music_persistent_skipped=false
+
+          if [ "$youtube_music_persistent_quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            youtube_music_persistent_quota_refresh=true
           fi
         fi
       fi

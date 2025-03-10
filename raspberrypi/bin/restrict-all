@@ -181,6 +181,12 @@ build() {
       [ "$1" = "command"   ] && echo "remove-dnsmasq-toggle-conf public"
       [ "$1" = "name"      ] && echo "youtube_music"
       ;;
+    "observe-youtube-music-persistent-conf")
+      [ "$1" = "existence" ] && echo "false"
+      [ "$1" = "path"      ] && echo "$TOGGLE_DIR/youtube_music_persistent.conf"
+      [ "$1" = "command"   ] && echo "remove-dnsmasq-toggle-conf public"
+      [ "$1" = "name"      ] && echo "youtube_music_persistent"
+      ;;
   esac
 }
 

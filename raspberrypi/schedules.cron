@@ -177,6 +177,11 @@ NON_ROOT_USER=ubuntu
 
 
 
+# YouTube Music Persistent
+*/5 * * * * scheduler youtube-music-persistent allow
+
+
+
 # YouTube Alternative
 */5    0-7  * * * scheduler youtube-alternative deny --yellow-kryptonite
 */5    8-22 * * * scheduler youtube-alternative allow
