@@ -32,9 +32,9 @@
 # | Deregulated Superman     | day       |      +1 |   n/a   |  n/a  |  n/a  |     1 |                       |
 # | Deregulated Superman     | night     |      +1 |   n/a   |  n/a  |  n/a  |     1 |                       |
 # | Deregulated Superman     | midnight  |      +1 |   n/a   |  n/a  |  n/a  |     1 |                       |
-# | Ometeotl                 | day       |      +2 |   n/a   |  n/a  |  n/a  |     1 |                       |
-# | Ometeotl                 | night     |      +2 |   n/a   |  n/a  |  n/a  |     1 |                       |
-# | Ometeotl                 | midnight  |      +2 |   n/a   |  n/a  |  n/a  |     1 |                       |
+# | Ometeotl                 | day       |     +12 |      -0 |  ALL  |  n/a  |     1 | Netflix, VOD          |
+# | Ometeotl                 | night     |     +12 |      -0 |  ALL  |  n/a  |     1 | Netflix, VOD          |
+# | Ometeotl                 | midnight  |     +12 |      -0 |  ALL  |  n/a  |     1 | Netflix, VOD          |
 # | Maeve                    | day       |     +12 |      -0 |  ALL  |  ALL  |     1 | Alternative, Upstream |
 # | Maeve                    | night     |     +12 |      -0 |  ALL  |  ALL  |     1 | Alternative, Upstream |
 # | Maeve                    | midnight  |     +12 |      -0 |  ALL  |  ALL  |     1 | Alternative, Upstream |
@@ -278,22 +278,22 @@ main() {
     "ometeotl")
       case "$TIMEFRAME" in
         "day")
-          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 1 --retry 1 --checked 2)
-          task_personal=2
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 1 --retry 1 --checked 12 --unchecked 0)
+          task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --past 1 --todo-repo "noraworld/to-do")
 
           todo_work=1
           task_work=2
           ;;
         "night")
-          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 1 --retry 1 --checked 2)
-          task_personal=2
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 1 --retry 1 --checked 12 --unchecked 0)
+          task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --past 1 --todo-repo "noraworld/to-do")
 
           todo_work=1
           task_work=2
           ;;
         "midnight")
-          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 1 --retry 1 --checked 2)
-          task_personal=2
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 1 --retry 1 --checked 12 --unchecked 0)
+          task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --past 1 --todo-repo "noraworld/to-do")
 
           todo_work=1
           task_work=2
