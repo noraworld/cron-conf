@@ -10,9 +10,9 @@
 # | YouTube Music Persistent | day       |      +4 |   n/a   |  n/a  |  n/a  |     0 |                       |
 # | YouTube Music Persistent | night     |      +6 |   n/a   |  n/a  |  n/a  |     0 |                       |
 # | YouTube Music Persistent | midnight  |     +10 |   n/a   |  n/a  |  n/a  |     0 |                       |
-# | Gaming                   | day       |      +2 |   n/a   |  n/a  |  n/a  |     1 |                       |
-# | Gaming                   | night     |      +4 |      -6 |  n/a  |  n/a  |     1 |                       |
-# | Gaming                   | midnight  |      +6 |      -6 |  n/a  |  n/a  |     1 |                       |
+# | Gaming                   | day       |     +12 |      -0 |  n/a  |  n/a  |     1 | Deregulated Superman  |
+# | Gaming                   | night     |     +12 |      -0 |  n/a  |  n/a  |     1 | Deregulated Superman  |
+# | Gaming                   | midnight  |     +12 |      -0 |  n/a  |  n/a  |     1 | Deregulated Superman  |
 # | Netflix                  | day       |     +12 |      -0 |  ALL  |  n/a  |     1 | VOD, Ometeotl         |
 # | Netflix                  | night     |     +12 |      -0 |  ALL  |  n/a  |     1 | VOD, Ometeotl         |
 # | Netflix                  | midnight  |     +12 |      -0 |  ALL  |  n/a  |     1 | VOD, Ometeotl         |
@@ -78,21 +78,21 @@ main() {
     "gaming")
       case "$TIMEFRAME" in
         "day")
-          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 1 --retry 1 --checked 2)
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 1 --retry 1 --checked 12 --unchecked 0)
           task_personal=2
 
           todo_work=1
           task_work=2
           ;;
         "night")
-          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 1 --retry 1 --checked 4 --unchecked 6)
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 1 --retry 1 --checked 12 --unchecked 0)
           task_personal=2
 
           todo_work=1
           task_work=2
           ;;
         "midnight")
-          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 1 --retry 1 --checked 6 --unchecked 6)
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 1 --retry 1 --checked 12 --unchecked 0)
           task_personal=2
 
           todo_work=1
