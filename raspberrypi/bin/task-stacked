@@ -18,8 +18,9 @@ main() {
 
   [ "$PAST" = "" ] && PAST=0
 
+  result="100"
   if [ "$PAST" -eq 0 ]; then
-    result=$(ghc issue view \
+    check_list=$(ghc issue view \
       --repo "$MAIN_REPO"   \
       $(ghc issue list      \
         --repo "$MAIN_REPO" \
@@ -30,52 +31,63 @@ main() {
       --jq .body            |
       awk '/## 🐯 今日やること/{ flag=1; next } flag'
     )
+
+    result=$(judge "$check_list")
   elif [ "$PAST" -ge 1 ]; then
-    result=$(ghc issue view \
-      --repo "$MAIN_REPO"   \
-      $(ghc issue list      \
-        --repo "$MAIN_REPO" \
-        --state "closed"    \
-        --limit "$PAST"     |
-        awk '{ print $1 }'  |
-        tail -n 1           \
-      )                     \
-      --json body           \
-      --jq .body            |
-      awk '/## 🐯 今日やること/{ flag=1; next } flag'
-    )
+    for issue_number in $(ghc issue list --repo "$MAIN_REPO" --state "closed" --limit "$PAST" | awk '{ print $1 }'); do
+      check_list=$(ghc issue view \
+        --repo "$MAIN_REPO"   \
+        "$issue_number"       \
+        --json body           \
+        --jq .body            |
+        awk '/## 🐯 今日やること/{ flag=1; next } flag'
+      )
+
+      tmp_result=$(judge "$check_list")
+      if [ "$tmp_result" -lt "$result" ]; then
+        result="$tmp_result"
+      fi
+    done
   fi
 
+  if [ "$result" != "100" ]; then
+    echo "$result" > "$RESULT_FILE"
+    echo "$result"
+  else
+    echo "something went wrong" >&2
+    echo "-2" > "$RESULT_FILE"
+    echo "-2"
+  fi
+}
+
+judge() {
   completed=$(
-    echo "$result" |
+    echo "$1" |
     grep -cE "\* \[x\] \[.*\]\(https\:\/\/github\.com\/$(echo $TODO_REPO | sed -r "s|/|\\\/|g")\/issues\/[0-9]*\)"
   )
   stacked=$(
-    echo "$result" |
+    echo "$1" |
     grep -cE "\* \[.\] \[.*\]\(https\:\/\/github\.com\/$(echo $TODO_REPO | sed -r "s|/|\\\/|g")\/issues\/[0-9]*\)"
   )
   nothing=$(
-    echo "$result" |
+    echo "$1" |
     grep -cE "\* 特になし"
   )
 
   if [ "$DEBUG" = 1 ]; then
-    echo "DEBUG: completed = $completed"
-    echo "DEBUG: stacked   = $stacked"
-    echo "DEBUG: nothing   = $nothing"
+    echo "DEBUG: completed = $completed" >&2
+    echo "DEBUG: stacked   = $stacked"   >&2
+    echo "DEBUG: nothing   = $nothing"   >&2
+    echo ""                              >&2
   fi
 
   if [ "$completed" -gt 0 ] && [ "$stacked" -gt 0 ] && [ "$completed" = "$stacked" ] && [ "$nothing" -eq 0 ]; then
-    echo "2" > "$RESULT_FILE"
     echo "2"
   elif [ "$stacked" -gt 0 ] && [ "$nothing" -eq 0 ]; then
-    echo "1" > "$RESULT_FILE"
     echo "1"
   elif [ "$stacked" -eq 0 ] && [ "$nothing" -eq 0 ]; then
-    echo "0" > "$RESULT_FILE"
     echo "0"
   else
-    echo "-1" > "$RESULT_FILE"
     echo "-1"
   fi
 }
