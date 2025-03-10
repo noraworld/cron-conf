@@ -7,6 +7,9 @@
 #
 # | Service                  | Timeframe | Daily | Daily | Today | Work  | Same as              |
 # | ------------------------ | :-------: | :---: | :---: | :---: | :---: | -------------------- |
+# | YouTube Music Persistent | day       |    +4 |  n/a  |  n/a  |  n/a  |                      |
+# | YouTube Music Persistent | night     |    +6 |  n/a  |  n/a  |  n/a  |                      |
+# | YouTube Music Persistent | midnight  |   +10 |  n/a  |  n/a  |  n/a  |                      |
 # | Gaming                   | day       |    +2 |  n/a  |  ALL  |  ALL  |                      |
 # | Gaming                   | night     |    +4 |    -6 |  ALL  |  ALL  |                      |
 # | Gaming                   | midnight  |    +6 |    -6 |  ALL  |  ALL  |                      |
@@ -19,9 +22,6 @@
 # | YouTube Alternative      | day       |    +6 |    -6 |  ALL  |  ALL  |                      |
 # | YouTube Alternative      | night     |    +8 |    -6 |  ALL  |  ALL  |                      |
 # | YouTube Alternative      | midnight  |   +10 |    -0 |  ALL  |  ALL  |                      |
-# | YouTube Music Persistent | day       |    +4 |  n/a  |  n/a  |  n/a  |                      |
-# | YouTube Music Persistent | night     |    +6 |  n/a  |  n/a  |  n/a  |                      |
-# | YouTube Music Persistent | midnight  |   +10 |  n/a  |  n/a  |  n/a  |                      |
 # | YouTube                  | day       |    +8 |    -6 |  ALL  |  ALL  | Discipline           |
 # | YouTube                  | night     |   +10 |    -4 |  ALL  |  ALL  | Discipline           |
 # | YouTube                  | midnight  |   +12 |    -0 |  ALL  |  ALL  | Discipline           |
