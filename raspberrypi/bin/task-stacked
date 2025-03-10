@@ -74,16 +74,12 @@ updatable() {
 }
 
 validate() {
-  if [ "$STRICT" != "1" ]; then
-    echo "Consider adding the --strict option because you might misspell the repo name!" >&2
-  fi
-
   if [ "$(echo "$MAIN_REPO" | grep -cE ".*/.*")" -ne 1 ]; then
     echo "This is not a repository (MAIN_REPO)" >&2
     exit
   fi
 
-  if [ "$STRICT" = "1" ] && ! gh repo view "$MAIN_REPO" > /dev/null 2>&1; then
+  if [ "$LAZY" = "1" ] || ! gh repo view "$MAIN_REPO" > /dev/null 2>&1; then
     echo "No repository found (MAIN_REPO)" >&2
     exit
   fi
@@ -93,7 +89,7 @@ validate() {
     exit
   fi
 
-  if [ "$STRICT" = "1" ] && ! gh repo view "$TODO_REPO" > /dev/null 2>&1; then
+  if [ "$LAZY" = "1" ] || ! gh repo view "$TODO_REPO" > /dev/null 2>&1; then
     echo "No repository found (TODO_REPO)" >&2
     exit
   fi
@@ -124,7 +120,7 @@ parser_definition() {
   flag  DEBUG        --debug     -- "perform as debug mode"
   flag  FORCE        --force     -- "ignore CHECK_INTERVAL"
   param MAIN_REPO    --main-repo -- "main repo"
-  flag  STRICT       --strict    -- "check repo existence strictly"
+  flag  LAZY         --lazy      -- "ignore checking repo existence"
   param TODO_REPO    --todo-repo -- "todo repo"
   disp  :usage    -h --help
   disp  VERSION      --version
@@ -137,7 +133,7 @@ parser_definition() {
 DEBUG=''
 FORCE=''
 MAIN_REPO=''
-STRICT=''
+LAZY=''
 TODO_REPO=''
 REST=''
 parse() {
@@ -168,10 +164,10 @@ parse() {
         OPTARG=$2
         MAIN_REPO="$OPTARG"
         shift ;;
-      '--strict')
+      '--lazy')
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
-        STRICT="$OPTARG"
+        LAZY="$OPTARG"
         ;;
       '--todo-repo')
         [ $# -le 1 ] && set "required" "$1" && break
@@ -217,7 +213,7 @@ Options:
       --debug                 perform as debug mode
       --force                 ignore CHECK_INTERVAL
       --main-repo MAIN_REPO   main repo
-      --strict                check repo existence strictly
+      --lazy                  ignore checking repo existence
       --todo-repo TODO_REPO   todo repo
   -h, --help
       --version
