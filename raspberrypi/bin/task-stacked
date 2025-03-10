@@ -19,7 +19,8 @@ main() {
   [ "$PAST" = "" ] && PAST=0
 
   result="100"
-  if [ "$PAST" -eq 0 ]; then
+
+  if [ "$PAST" -eq 0 ] || [ "$INCLUDE_TODAY" = "1" ]; then
     check_list=$(ghc issue view \
       --repo "$MAIN_REPO"   \
       $(ghc issue list      \
@@ -33,7 +34,15 @@ main() {
     )
 
     result=$(judge "$check_list")
-  elif [ "$PAST" -ge 1 ]; then
+    if [ "$DEBUG" = 1 ]; then
+      echo "DEBUG: result (today)      = $result" >&2
+      echo ""                           >&2
+    fi
+  fi
+
+  if [ "$PAST" -ge 1 ]; then
+    [ "$DEBUG" = 1 ] && ago="0"
+
     for issue_number in $(ghc issue list --repo "$MAIN_REPO" --state "closed" --limit "$PAST" | awk '{ print $1 }'); do
       check_list=$(ghc issue view \
         --repo "$MAIN_REPO"   \
@@ -46,6 +55,18 @@ main() {
       tmp_result=$(judge "$check_list")
       if [ "$tmp_result" -lt "$result" ]; then
         result="$tmp_result"
+      fi
+
+      if [ "$DEBUG" = 1 ]; then
+        ago=$(( $ago + 1 ))
+
+        if [ "$ago" -eq 1 ]; then
+          echo "DEBUG: result ($ago day ago)  = $result" >&2
+        else
+          echo "DEBUG: result ($ago days ago) = $result" >&2
+        fi
+
+        echo "" >&2
       fi
     done
   fi
@@ -75,10 +96,9 @@ judge() {
   )
 
   if [ "$DEBUG" = 1 ]; then
-    echo "DEBUG: completed = $completed" >&2
-    echo "DEBUG: stacked   = $stacked"   >&2
-    echo "DEBUG: nothing   = $nothing"   >&2
-    echo ""                              >&2
+    echo "DEBUG: completed           = $completed" >&2
+    echo "DEBUG: stacked             = $stacked"   >&2
+    echo "DEBUG: nothing             = $nothing"   >&2
   fi
 
   if [ "$completed" -gt 0 ] && [ "$stacked" -gt 0 ] && [ "$completed" = "$stacked" ] && [ "$nothing" -eq 0 ]; then
@@ -147,14 +167,15 @@ police() {
 parser_definition() {
   setup   REST help:usage -- "Usage: task-stacked [options]... [arguments]..." ''
   msg -- 'Options:'
-  flag  DEBUG        --debug     -- "perform as debug mode"
-  flag  FORCE        --force     -- "ignore CHECK_INTERVAL"
-  param MAIN_REPO    --main-repo -- "main repo"
-  param PAST         --past      -- "get the past tasks instead of today"
-  flag  LAZY         --lazy      -- "ignore checking repo existence"
-  param TODO_REPO    --todo-repo -- "todo repo"
-  disp  :usage    -h --help
-  disp  VERSION      --version
+  flag  DEBUG            --debug         -- "perform as debug mode"
+  flag  FORCE            --force         -- "ignore CHECK_INTERVAL"
+  flag  INCLUDE_TODAY    --include-today -- "whether to include today's task (only enabled when --past)"
+  param MAIN_REPO        --main-repo     -- "main repo"
+  param PAST             --past          -- "get the past tasks instead of today"
+  flag  LAZY             --lazy          -- "ignore checking repo existence"
+  param TODO_REPO        --todo-repo     -- "todo repo"
+  disp  :usage        -h --help
+  disp  VERSION          --version
 }
 # @end
 
@@ -163,6 +184,7 @@ parser_definition() {
 # URL: https://github.com/ko1nksm/getoptions (v3.3.0)
 DEBUG=''
 FORCE=''
+INCLUDE_TODAY=''
 MAIN_REPO=''
 PAST=''
 LAZY=''
@@ -190,6 +212,11 @@ parse() {
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
         FORCE="$OPTARG"
+        ;;
+      '--include-today')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        INCLUDE_TODAY="$OPTARG"
         ;;
       '--main-repo')
         [ $# -le 1 ] && set "required" "$1" && break
@@ -249,6 +276,7 @@ Usage: task-stacked [options]... [arguments]...
 Options:
       --debug                 perform as debug mode
       --force                 ignore CHECK_INTERVAL
+      --include-today         whether to include today's task (only enabled when --past)
       --main-repo MAIN_REPO   main repo
       --past PAST             get the past tasks instead of today
       --lazy                  ignore checking repo existence
