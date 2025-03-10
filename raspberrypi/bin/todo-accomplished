@@ -17,21 +17,14 @@ main() {
 
   count=0
   while [ "$body" = "" ] && [ "$count" -lt "$RETRY" ]; do
-    body=$(ghc issue view --repo "$REPO" "$(ghc issue list --repo "$REPO" --limit 1 | awk '{ print $1 }')" --json body --jq .body)
-
-    if [ "$PAST" -ge 1 ]; then
-      past_body=$(ghc issue list --repo "$REPO" --state "closed" --limit "$PAST" | awk '{ print $1 }' |
-                  xargs --max-args=1 --open-tty ghc issue view --repo "$REPO" --json body --jq .body)
+    if [ "$PAST" -eq 0 ]; then
+      body=$(ghc issue view --repo "$REPO" "$(ghc issue list --repo "$REPO" --limit 1 | awk '{ print $1 }')" --json body --jq .body)
+    elif [ "$PAST" -ge 1 ]; then
+      body=$(ghc issue view --repo "$REPO" "$(ghc issue list --repo "$REPO" --state "closed" --limit "$PAST" | awk '{ print $1 }' | tail -n 1)" --json body --jq .body)
     fi
 
     if [ "$body" != "" ]; then
-      if [ "$PAST" -ge 1 ]; then
-        if [ "$past_body" != "" ]; then
-          break
-        fi
-      else
-        break
-      fi
+      break
     fi
 
     count=$(($count + 1))
@@ -43,12 +36,9 @@ main() {
   unchecked_count=$(echo "$body" | grep -c "\[ \]")
   result="unknown"
 
-  if [ "$body" = "" ] || { [ "$PAST" -ge 1 ] && [ "$past_body" = "" ]; }; then
+  if [ "$body" = "" ]; then
     result="failed to fetch"
     echo "0"
-  elif [ "$PAST" -ge 1 ] && [ "$past_body" != "" ] && [ "$(echo "$past_body" | grep -c "\[ \]")" -ne 0 ]; then
-    result="not accomplished in the past"
-    echo "-1"
   elif {
     [ "$CHECKED"   != "" ]                &&
     [ "$UNCHECKED" != "" ]                &&
