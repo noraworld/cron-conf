@@ -108,6 +108,9 @@ main() {
       "superman-upstream")
         superman_upstream
         ;;
+      "discipline")
+        discipline
+        ;;
       *)
         echo "error: no such service $service" >&2
         exit 1
@@ -242,6 +245,10 @@ all() {
 
   if [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ]; then
     sudo unlink /etc/dnsmasq.priv/toggle/superman_upstream.conf
+  fi
+
+  if [ -L /etc/dnsmasq.toggle/discipline.conf ]; then
+    sudo unlink /etc/dnsmasq.toggle/discipline.conf
   fi
 
   pause "$waiting_interval" "$WAITING_MESSAGE"
@@ -419,6 +426,14 @@ all() {
   if [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ]; then
     error_color
     echo "error: /etc/dnsmasq.priv/toggle/superman_upstream.conf still exists" >&2
+    no_color
+    echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
+    # exit
+  fi
+
+  if [ -L /etc/dnsmasq.toggle/discipline.conf ]; then
+    error_color
+    echo "error: /etc/dnsmasq.toggle/discipline.conf still exists" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
     # exit
@@ -1115,6 +1130,25 @@ superman_upstream() {
   if ! [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ]; then
     error_color
     echo "error: /etc/dnsmasq.priv/toggle/superman_upstream.conf still doesn't exist" >&2
+    no_color
+    echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
+    exit
+  fi
+}
+
+discipline() {
+  reference_minute=60
+  [ "$DRY_RUN" = 1 ] && exit 0
+
+  warning_color
+  sudo unlink /etc/dnsmasq.toggle/discipline.conf
+  no_color
+
+  pause "$waiting_interval" "$WAITING_MESSAGE"
+
+  if [ -L /etc/dnsmasq.toggle/discipline.conf ]; then
+    error_color
+    echo "error: /etc/dnsmasq.toggle/discipline.conf still exists" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
     exit

@@ -135,6 +135,9 @@ main() {
     "youtube-music-persistent")
       youtube_music_persistent
       ;;
+    "discipline")
+      discipline
+      ;;
     *)
       echo "error: no such service: \"$service\"" >&2
       exit 1
@@ -850,6 +853,29 @@ youtube_music_persistent() {
     "allow")
       :
       cron-daemonctl stop observe-youtube-music-persistent-conf "$safe"
+      ;;
+    *)
+      echo "error: no such operation: \"$operation\"" >&2
+      exit 1
+      ;;
+  esac
+}
+
+discipline() {
+  case "$operation" in
+    "deny")
+      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
+      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
+      [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
+        cron-daemonctl stop observe-discipline-conf "$safe"
+        return
+      fi
+
+      [ "$SOFT" = 1 ] || cron-daemonctl start observe-discipline-conf "$safe"
+      create-dnsmasq-toggle-conf public discipline
+      ;;
+    "allow")
+      cron-daemonctl stop observe-discipline-conf "$safe"
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2
