@@ -16,14 +16,35 @@ main() {
   [ "$SLEEP" = "" ] && SLEEP=3
 
   count=0
-  while [ "$body" = "" ] && [ "$count" -lt "$RETRY" ]; do
-    if [ "$PAST" -eq 0 ]; then
-      body=$(ghc issue view --repo "$REPO" "$(ghc issue list --repo "$REPO" --limit 1 | awk '{ print $1 }')" --json body --jq .body)
-    elif [ "$PAST" -ge 1 ]; then
-      body=$(ghc issue view --repo "$REPO" "$(ghc issue list --repo "$REPO" --state "closed" --limit "$PAST" | awk '{ print $1 }' | tail -n 1)" --json body --jq .body)
+  result="100"
+  while [ "$body_with_tasks" = "" ] && [ "$count" -lt "$RETRY" ]; do
+    if [ "$PAST" -eq 0 ] || [ "$INCLUDE_TODAY" = "1" ]; then
+      issue_number=$(ghc issue list --repo "$REPO" --limit 1 | awk '{ print $1 }')
+      body_with_tasks=$(ghc issue view --repo "$REPO" "$issue_number" --json body --jq .body)
+      body_without_tasks=$(echo "$body_with_tasks" | awk '!found {print} /## 🐯 今日やること/ {found=1}')
+
+      checked_count=$(  echo "$body_with_tasks"    | grep -c "\[x\]")
+      unchecked_count=$(echo "$body_without_tasks" | grep -c "\[ \]")
+
+      result=$(judge "$checked_count" "$unchecked_count" "$body_with_tasks")
     fi
 
-    if [ "$body" != "" ]; then
+    if [ "$PAST" -ge 1 ]; then
+      for issue_number in $(ghc issue list --repo "$REPO" --state "closed" --limit "$PAST" | awk '{ print $1 }'); do
+        body_with_tasks=$(ghc issue view --repo "$REPO" "$issue_number" --json body --jq .body)
+        body_without_tasks=$(echo "$body_with_tasks" | awk '!found {print} /## 🐯 今日やること/ {found=1}')
+
+        checked_count=$(  echo "$body_with_tasks"    | grep -c "\[x\]")
+        unchecked_count=$(echo "$body_without_tasks" | grep -c "\[ \]")
+
+        tmp_result=$(judge "$checked_count" "$unchecked_count" "$body_with_tasks")
+        if [ "$tmp_result" -lt "$result" ]; then
+          result="$tmp_result"
+        fi
+      done
+    fi
+
+    if [ "$body_with_tasks" != "" ]; then
       break
     fi
 
@@ -32,40 +53,43 @@ main() {
     sleep "$SLEEP"
   done
 
-  checked_count=$(  echo "$body" | grep -c "\[x\]")
-  unchecked_count=$(echo "$body" | grep -c "\[ \]")
-  result="unknown"
-
-  if [ "$body" = "" ]; then
-    result="failed to fetch"
-    echo "0"
-  elif {
-    [ "$CHECKED"   != "" ]                &&
-    [ "$UNCHECKED" != "" ]                &&
-    [ "$checked_count"   -ge "$CHECKED" ] &&
-    [ "$unchecked_count" -le "$UNCHECKED" ];
-  } || {
-    [ "$CHECKED"   != "" ] &&
-    [ "$UNCHECKED"  = "" ] &&
-    [ "$checked_count" -ge "$CHECKED" ];
-  } || {
-    [ "$UNCHECKED" != "" ] &&
-    [ "$CHECKED"    = "" ] &&
-    [ "$unchecked_count" -le "$UNCHECKED" ];
-  }; then
-    result="accomplished"
-    echo "1"
+  if [ "$result" != "100" ]; then
+    echo "$result"
   else
-    result="not accomplished"
-    echo "-1"
+    echo "something went wrong" >&2
+    result="-2"
+    echo "-2"
   fi
 
   echo "[$(date '+%Y-%m-%dT%H:%M:%S%z')] Invoked GitHub API with result \"$result\"" >> "$LOG_PATH"
 
-  if [ "$result" = "accomplished" ]; then
+  if [ "$result" -ge 1 ]; then
     exit 0
   else
     exit 1
+  fi
+}
+
+judge() {
+  if [ "$3" = "" ]; then
+    echo "0"
+  elif {
+    [ "$CHECKED"   != "" ] &&
+    [ "$UNCHECKED" != "" ] &&
+    [ "$1" -ge "$CHECKED" ] &&
+    [ "$2" -le "$UNCHECKED" ];
+  } || {
+    [ "$CHECKED"   != "" ] &&
+    [ "$UNCHECKED"  = "" ] &&
+    [ "$1" -ge "$CHECKED" ];
+  } || {
+    [ "$UNCHECKED" != "" ] &&
+    [ "$CHECKED"    = "" ] &&
+    [ "$2" -le "$UNCHECKED" ];
+  }; then
+    echo "1"
+  else
+    echo "-1"
   fi
 }
 
