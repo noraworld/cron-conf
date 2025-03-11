@@ -5,7 +5,7 @@
 # if +6 & -4 ("--checked 6 --unchecked 4") is specified
 # and the number of checked marks is more than or equal to 6 and the number of unchecked marks is less than or equal to 4.
 #
-# | Service                  | Timeframe | Daily+  | Daily-  | Perso | Work  | Past  | Same as               |
+# | Service                  | Timeframe | Daily+  | Daily-  | Perso | Work  | Past  | Same as (on purpose)  |
 # | ------------------------ | :-------: | :-----: | :-----: | :---: | :---: | :---: | --------------------- |
 # | YouTube Music Persistent | day       |      +4 |   n/a   |  n/a  |  n/a  |     0 |                       |
 # | YouTube Music Persistent | night     |      +6 |   n/a   |  n/a  |  n/a  |     0 |                       |
