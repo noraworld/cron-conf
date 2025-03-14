@@ -44,9 +44,9 @@
 # | Upstream                 | day       |     +12 |      -0 |  ALL  |  ALL  |     1 | Alternative, Maeve    |
 # | Upstream                 | night     |     +12 |      -0 |  ALL  |  ALL  |     1 | Alternative, Maeve    |
 # | Upstream                 | midnight  |     +12 |      -0 |  ALL  |  ALL  |     1 | Alternative, Maeve    |
-# | Superman                 | day       |     +12 |      -0 |  ALL  |  ALL  |     2 | YouTube, Discipline   |
-# | Superman                 | night     |     +12 |      -0 |  ALL  |  ALL  |     2 | YouTube, Discipline   |
-# | Superman                 | midnight  |     +12 |      -0 |  ALL  |  ALL  |     2 | YouTube, Discipline   |
+# | Superman                 | day       |     +12 |      -0 |  ALL  |  ALL  |     3 | YouTube, Discipline   |
+# | Superman                 | night     |     +12 |      -0 |  ALL  |  ALL  |     3 | YouTube, Discipline   |
+# | Superman                 | midnight  |     +12 |      -0 |  ALL  |  ALL  |     3 | YouTube, Discipline   |
 
 main() {
   prepare "$@"
@@ -331,25 +331,25 @@ main() {
     "superman")
       case "$TIMEFRAME" in
         "day")
-          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 2 --retry 1 --checked 12 --unchecked 0)
-          task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --past 2 --todo-repo "noraworld/to-do")
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 3 --retry 1 --checked 12 --unchecked 0)
+          task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --past 3 --todo-repo "noraworld/to-do")
 
-          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --past 2 --retry 1 --unchecked 0)
-          task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --past 2 --todo-repo "noraworld/work-scraps")
+          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --past 3 --retry 1 --unchecked 0)
+          task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --past 3 --todo-repo "noraworld/work-scraps")
           ;;
         "night")
-          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 2 --retry 1 --checked 12 --unchecked 0)
-          task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --past 2 --todo-repo "noraworld/to-do")
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 3 --retry 1 --checked 12 --unchecked 0)
+          task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --past 3 --todo-repo "noraworld/to-do")
 
-          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --past 2 --retry 1 --unchecked 0)
-          task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --past 2 --todo-repo "noraworld/work-scraps")
+          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --past 3 --retry 1 --unchecked 0)
+          task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --past 3 --todo-repo "noraworld/work-scraps")
           ;;
         "midnight")
-          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 2 --retry 1 --checked 12 --unchecked 0)
-          task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --past 2 --todo-repo "noraworld/to-do")
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 3 --retry 1 --checked 12 --unchecked 0)
+          task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --past 3 --todo-repo "noraworld/to-do")
 
-          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --past 2 --retry 1 --unchecked 0)
-          task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --past 2 --todo-repo "noraworld/work-scraps")
+          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --past 3 --retry 1 --unchecked 0)
+          task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --past 3 --todo-repo "noraworld/work-scraps")
           ;;
       esac
       ;;
