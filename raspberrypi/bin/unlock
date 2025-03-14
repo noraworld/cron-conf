@@ -81,6 +81,9 @@ main() {
       "gaming")
         gaming
         ;;
+      "social-media")
+        social_media
+        ;;
       "vod")
         vod
         ;;
@@ -209,6 +212,10 @@ all() {
 
   if [ -L /etc/dnsmasq.toggle/gaming.conf ]; then
     sudo unlink /etc/dnsmasq.toggle/gaming.conf
+  fi
+
+  if [ -L /etc/dnsmasq.toggle/social_media.conf ]; then
+    sudo unlink /etc/dnsmasq.toggle/social_media.conf
   fi
 
   if [ -L /etc/dnsmasq.toggle/vod.conf ]; then
@@ -352,6 +359,14 @@ all() {
   if [ -L /etc/dnsmasq.toggle/gaming.conf ]; then
     error_color
     echo "error: /etc/dnsmasq.toggle/gaming.conf still exists" >&2
+    no_color
+    echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
+    # exit
+  fi
+
+  if [ -L /etc/dnsmasq.toggle/social_media.conf ]; then
+    error_color
+    echo "error: /etc/dnsmasq.toggle/social_media.conf still exists" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
     # exit
@@ -813,6 +828,37 @@ gaming() {
   if [ -L /etc/dnsmasq.toggle/gaming.conf ]; then
     error_color
     echo "error: /etc/dnsmasq.toggle/gaming.conf still exists" >&2
+    no_color
+    echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
+    exit
+  fi
+}
+
+social_media() {
+  reference_minute=60
+  [ "$DRY_RUN" = 1 ] && exit 0
+
+  if [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ]; then
+    sudo unlink /etc/dnsmasq.priv/toggle/ometeotl.conf
+  fi
+
+  warning_color
+  sudo unlink /etc/dnsmasq.toggle/social_media.conf
+  no_color
+
+  pause "$waiting_interval" "$WAITING_MESSAGE"
+
+  if [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ]; then
+    error_color
+    echo "error: /etc/dnsmasq.priv/toggle/ometeotl.conf still exists" >&2
+    no_color
+    echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
+    exit
+  fi
+
+  if [ -L /etc/dnsmasq.toggle/social_media.conf ]; then
+    error_color
+    echo "error: /etc/dnsmasq.toggle/social_media.conf still exists" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
     exit

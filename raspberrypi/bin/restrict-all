@@ -151,6 +151,12 @@ build() {
       [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf private"
       [ "$1" = "name"      ] && echo "superman_upstream"
       ;;
+    "observe-social-media-conf")
+      [ "$1" = "existence" ] && echo "true"
+      [ "$1" = "path"      ] && echo "$TOGGLE_DIR/social_media.conf"
+      [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf public"
+      [ "$1" = "name"      ] && echo "social_media"
+      ;;
     "observe-vod-conf")
       [ "$1" = "existence" ] && echo "true"
       [ "$1" = "path"      ] && echo "$TOGGLE_DIR/vod.conf"

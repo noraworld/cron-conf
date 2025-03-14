@@ -124,6 +124,7 @@ firewall_mode() {
 todo_mode() {
   gaming_todo
   netflix_todo
+  social_media_todo
   vod_todo
   youtube_todo
   youtube_alternative_todo
@@ -147,6 +148,12 @@ todo_mode() {
   if [ "$netflix_skipped" = "false" ] && [ "$(restrict-all check "observe-netflix-conf")" -le 0 ]; then
     restrict-all reset "observe-netflix-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-netflix-conf"
+  fi
+
+  # ln_mode & unlink_mode (social-media)
+  if [ "$social_media_skipped" = "false" ] && [ "$(restrict-all check "observe-social-media-conf")" -le 0 ]; then
+    restrict-all reset "observe-social-media-conf"
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-social-media-conf"
   fi
 
   # ln_mode & unlink_mode (vod)
@@ -435,6 +442,89 @@ netflix_todo() {
               --duration "$PUNISHMENT_DURATION"
           else
             netflix_quota_refresh=true
+          fi
+        fi
+      fi
+    fi
+  fi
+}
+
+
+
+social_media_todo() {
+  set +u
+  [ "$social_media_skipped" = "" ] && social_media_skipped=false
+  [ "$social_media_quota_refresh" = "" ] && social_media_quota_refresh=false
+  set -u
+
+  if [ "$social_media_skipped" = "false" ]; then
+    if [ "$NIGHT" != "1" ] && [ "$MIDNIGHT" != "1" ]; then
+      if \
+        [ "$(restrict-all check "observe-social-media-conf")" -le 0 ] &&
+        [ "$(quotarget --timeframe day --service social-media)" -gt 0 ] &&
+        [ "$(sincere)" -gt 0 ];
+      then
+        social_media_skipped=true
+      fi
+    elif [ "$NIGHT" = "1" ]; then
+      if \
+        [ "$(restrict-all check "observe-social-media-conf")" -le 0 ] &&
+        [ "$(quotarget --timeframe night --service social-media)" -gt 0 ] &&
+        [ "$(sincere)" -gt 0 ];
+      then
+        social_media_skipped=true
+      fi
+    elif [ "$MIDNIGHT" = "1" ]; then
+      if \
+        [ "$(restrict-all check "observe-social-media-conf")" -le 0 ] &&
+        [ "$(quotarget --timeframe midnight --service social-media)" -gt 0 ] &&
+        [ "$(sincere)" -gt 0 ];
+      then
+        social_media_skipped=true
+      fi
+    fi
+  else
+    set +u
+    [ "$social_media_accomplished_last_checked_at" = "" ] && social_media_accomplished_last_checked_at=$(date +%s)
+    set -u
+
+    if [ "$(echo $(( $(date +%s) - $social_media_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
+      social_media_accomplished_last_checked_at=$(date +%s)
+
+      if [ "$NIGHT" != 1 ] && [ "$MIDNIGHT" != 1 ]; then
+        if [ "$(quotarget --timeframe day --service social-media)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+          social_media_skipped=false
+
+          if [ "$social_media_quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            social_media_quota_refresh=true
+          fi
+        fi
+      elif [ "$NIGHT" = 1 ]; then
+        if [ "$(quotarget --timeframe night --service social-media)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+          social_media_skipped=false
+
+          if [ "$social_media_quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            social_media_quota_refresh=true
+          fi
+        fi
+      elif [ "$MIDNIGHT" = 1 ]; then
+        if [ "$(quotarget --timeframe midnight --service social-media)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+          social_media_skipped=false
+
+          if [ "$social_media_quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            social_media_quota_refresh=true
           fi
         fi
       fi
