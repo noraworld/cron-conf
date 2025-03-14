@@ -36,9 +36,9 @@
 # | Deregulated Superman     | day       |     +12 |      -0 |  ALL  |  ALL  |     2 | Gaming                |
 # | Deregulated Superman     | night     |     +12 |      -0 |  ALL  |  ALL  |     2 | Gaming                |
 # | Deregulated Superman     | midnight  |     +12 |      -0 |  ALL  |  ALL  |     2 | Gaming                |
-# | Maeve                    | day       |     +12 |      -0 |  ALL  |  ALL  |     2 | Alternative, Upstream |
-# | Maeve                    | night     |     +12 |      -0 |  ALL  |  ALL  |     2 | Alternative, Upstream |
-# | Maeve                    | midnight  |     +12 |      -0 |  ALL  |  ALL  |     2 | Alternative, Upstream |
+# | Maeve                    | day       |     +12 |      -0 |  ALL  |  ALL  |     3 | Alternative, Upstream |
+# | Maeve                    | night     |     +12 |      -0 |  ALL  |  ALL  |     3 | Alternative, Upstream |
+# | Maeve                    | midnight  |     +12 |      -0 |  ALL  |  ALL  |     3 | Alternative, Upstream |
 # | Ometeotl                 | day       |     +12 |      -0 |  ALL  |  ALL  |     1 | Netflix, VOD          |
 # | Ometeotl                 | night     |     +12 |      -0 |  ALL  |  ALL  |     1 | Netflix, VOD          |
 # | Ometeotl                 | midnight  |     +12 |      -0 |  ALL  |  ALL  |     1 | Netflix, VOD          |
@@ -282,25 +282,25 @@ main() {
     "maeve")
       case "$TIMEFRAME" in
         "day")
-          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 2 --retry 1 --checked 12 --unchecked 0)
-          task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --past 2 --todo-repo "noraworld/to-do")
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 3 --retry 1 --checked 12 --unchecked 0)
+          task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --past 3 --todo-repo "noraworld/to-do")
 
-          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --past 2 --retry 1 --unchecked 0)
-          task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --past 2 --todo-repo "noraworld/work-scraps")
+          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --past 3 --retry 1 --unchecked 0)
+          task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --past 3 --todo-repo "noraworld/work-scraps")
           ;;
         "night")
-          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 2 --retry 1 --checked 12 --unchecked 0)
-          task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --past 2 --todo-repo "noraworld/to-do")
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 3 --retry 1 --checked 12 --unchecked 0)
+          task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --past 3 --todo-repo "noraworld/to-do")
 
-          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --past 2 --retry 1 --unchecked 0)
-          task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --past 2 --todo-repo "noraworld/work-scraps")
+          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --past 3 --retry 1 --unchecked 0)
+          task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --past 3 --todo-repo "noraworld/work-scraps")
           ;;
         "midnight")
-          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 2 --retry 1 --checked 12 --unchecked 0)
-          task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --past 2 --todo-repo "noraworld/to-do")
+          todo_personal=$(todo-accomplished --repo "noraworld/reserved-diary" --past 3 --retry 1 --checked 12 --unchecked 0)
+          task_personal=$(task-stacked --main-repo "noraworld/reserved-diary" --past 3 --todo-repo "noraworld/to-do")
 
-          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --past 2 --retry 1 --unchecked 0)
-          task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --past 2 --todo-repo "noraworld/work-scraps")
+          todo_work=$(todo-accomplished     --repo "noraworld/daily-report"   --past 3 --retry 1 --unchecked 0)
+          task_work=$(task-stacked     --main-repo "noraworld/daily-report"   --past 3 --todo-repo "noraworld/work-scraps")
           ;;
       esac
       ;;
