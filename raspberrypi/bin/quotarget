@@ -5,49 +5,49 @@
 # if +6 & -4 ("--checked 6 --unchecked 4") is specified
 # and the number of checked marks is more than or equal to 6 and the number of unchecked marks is less than or equal to 4.
 #
-# | Service                  | Timeframe | Daily+  | Daily-  | Perso | Work  | Past  | Same as (on purpose)  |
-# | ------------------------ | :-------: | :-----: | :-----: | :---: | :---: | :---: | --------------------- |
-# | Discipline               | day       |      +4 |   n/a   |  n/a  |  n/a  |     0 |                       |
-# | Discipline               | night     |      +6 |   n/a   |  n/a  |  n/a  |     0 |                       |
-# | Discipline               | midnight  |     +10 |   n/a   |  n/a  |  n/a  |     0 |                       |
-# | ------------------------ | --------- | ------- | ------- | ----- | ----- | ----- | --------------------- |
-# | Gaming                   | day       |     +12 |      -0 |  ALL  |  ALL  |     1 | Deregulated Superman  |
-# | Gaming                   | night     |     +12 |      -0 |  ALL  |  ALL  |     1 | Deregulated Superman  |
-# | Gaming                   | midnight  |     +12 |      -0 |  ALL  |  ALL  |     1 | Deregulated Superman  |
-# | Netflix                  | day       |     +12 |      -0 |  ALL  |  ALL  |     2 | VOD, Ometeotl         |
-# | Netflix                  | night     |     +12 |      -0 |  ALL  |  ALL  |     2 | VOD, Ometeotl         |
-# | Netflix                  | midnight  |     +12 |      -0 |  ALL  |  ALL  |     2 | VOD, Ometeotl         |
-# | Social Media             | day       |     +12 |      -0 |  ALL  |  ALL  |     3 | TBA                   |
-# | Social Media             | night     |     +12 |      -0 |  ALL  |  ALL  |     3 | TBA                   |
-# | Social Media             | midnight  |     +12 |      -0 |  ALL  |  ALL  |     3 | TBA                   |
-# | VOD                      | day       |     +12 |      -0 |  ALL  |  ALL  |     2 | Netflix, Ometeotl     |
-# | VOD                      | night     |     +12 |      -0 |  ALL  |  ALL  |     2 | Netflix, Ometeotl     |
-# | VOD                      | midnight  |     +12 |      -0 |  ALL  |  ALL  |     2 | Netflix, Ometeotl     |
-# | YouTube                  | day       |     +12 |      -0 |  ALL  |  ALL  |     4 | Discipline, Superman  |
-# | YouTube                  | night     |     +12 |      -0 |  ALL  |  ALL  |     4 | Discipline, Superman  |
-# | YouTube                  | midnight  |     +12 |      -0 |  ALL  |  ALL  |     4 | Discipline, Superman  |
-# | YouTube Alternative      | day       |     +12 |      -0 |  ALL  |  ALL  |     3 | Maeve, Upstream       |
-# | YouTube Alternative      | night     |     +12 |      -0 |  ALL  |  ALL  |     3 | Maeve, Upstream       |
-# | YouTube Alternative      | midnight  |     +12 |      -0 |  ALL  |  ALL  |     3 | Maeve, Upstream       |
-# | YouTube Music Persistent | day       |      +4 |   n/a   |  n/a  |  n/a  |     0 |                       |
-# | YouTube Music Persistent | night     |      +6 |   n/a   |  n/a  |  n/a  |     0 |                       |
-# | YouTube Music Persistent | midnight  |     +10 |   n/a   |  n/a  |  n/a  |     0 |                       |
-# | ------------------------ | --------- | ------- | ------- | ----- | ----- | ----- | --------------------- |
-# | Deregulated Superman     | day       |     +12 |      -0 |  ALL  |  ALL  |     2 | Gaming                |
-# | Deregulated Superman     | night     |     +12 |      -0 |  ALL  |  ALL  |     2 | Gaming                |
-# | Deregulated Superman     | midnight  |     +12 |      -0 |  ALL  |  ALL  |     2 | Gaming                |
-# | Maeve                    | day       |     +12 |      -0 |  ALL  |  ALL  |     3 | Alternative, Upstream |
-# | Maeve                    | night     |     +12 |      -0 |  ALL  |  ALL  |     3 | Alternative, Upstream |
-# | Maeve                    | midnight  |     +12 |      -0 |  ALL  |  ALL  |     3 | Alternative, Upstream |
-# | Ometeotl                 | day       |     +12 |      -0 |  ALL  |  ALL  |     1 | Netflix, VOD          |
-# | Ometeotl                 | night     |     +12 |      -0 |  ALL  |  ALL  |     1 | Netflix, VOD          |
-# | Ometeotl                 | midnight  |     +12 |      -0 |  ALL  |  ALL  |     1 | Netflix, VOD          |
-# | Superman                 | day       |     +12 |      -0 |  ALL  |  ALL  |     4 | YouTube, Discipline   |
-# | Superman                 | night     |     +12 |      -0 |  ALL  |  ALL  |     4 | YouTube, Discipline   |
-# | Superman                 | midnight  |     +12 |      -0 |  ALL  |  ALL  |     4 | YouTube, Discipline   |
-# | Upstream                 | day       |     +12 |      -0 |  ALL  |  ALL  |     3 | Alternative, Maeve    |
-# | Upstream                 | night     |     +12 |      -0 |  ALL  |  ALL  |     3 | Alternative, Maeve    |
-# | Upstream                 | midnight  |     +12 |      -0 |  ALL  |  ALL  |     3 | Alternative, Maeve    |
+# | Service                  | Timeframe | Daily+  | Daily-  | Perso | Work  | Past  |
+# | ------------------------ | :-------: | :-----: | :-----: | :---: | :---: | :---: |
+# | Discipline               | day       |      +4 |   n/a   |  n/a  |  n/a  |     0 |
+# | Discipline               | night     |      +6 |   n/a   |  n/a  |  n/a  |     0 |
+# | Discipline               | midnight  |     +10 |   n/a   |  n/a  |  n/a  |     0 |
+# | ------------------------ | --------- | ------- | ------- | ----- | ----- | ----- |
+# | Gaming                   | day       |     +12 |      -0 |  ALL  |  ALL  |     1 |
+# | Gaming                   | night     |     +12 |      -0 |  ALL  |  ALL  |     1 |
+# | Gaming                   | midnight  |     +12 |      -0 |  ALL  |  ALL  |     1 |
+# | Netflix                  | day       |     +12 |      -0 |  ALL  |  ALL  |     2 |
+# | Netflix                  | night     |     +12 |      -0 |  ALL  |  ALL  |     2 |
+# | Netflix                  | midnight  |     +12 |      -0 |  ALL  |  ALL  |     2 |
+# | Social Media             | day       |     +12 |      -0 |  ALL  |  ALL  |     3 |
+# | Social Media             | night     |     +12 |      -0 |  ALL  |  ALL  |     3 |
+# | Social Media             | midnight  |     +12 |      -0 |  ALL  |  ALL  |     3 |
+# | VOD                      | day       |     +12 |      -0 |  ALL  |  ALL  |     2 |
+# | VOD                      | night     |     +12 |      -0 |  ALL  |  ALL  |     2 |
+# | VOD                      | midnight  |     +12 |      -0 |  ALL  |  ALL  |     2 |
+# | YouTube                  | day       |     +12 |      -0 |  ALL  |  ALL  |     4 |
+# | YouTube                  | night     |     +12 |      -0 |  ALL  |  ALL  |     4 |
+# | YouTube                  | midnight  |     +12 |      -0 |  ALL  |  ALL  |     4 |
+# | YouTube Alternative      | day       |     +12 |      -0 |  ALL  |  ALL  |     3 |
+# | YouTube Alternative      | night     |     +12 |      -0 |  ALL  |  ALL  |     3 |
+# | YouTube Alternative      | midnight  |     +12 |      -0 |  ALL  |  ALL  |     3 |
+# | YouTube Music Persistent | day       |      +4 |   n/a   |  n/a  |  n/a  |     0 |
+# | YouTube Music Persistent | night     |      +6 |   n/a   |  n/a  |  n/a  |     0 |
+# | YouTube Music Persistent | midnight  |     +10 |   n/a   |  n/a  |  n/a  |     0 |
+# | ------------------------ | --------- | ------- | ------- | ----- | ----- | ----- |
+# | Deregulated Superman     | day       |     +12 |      -0 |  ALL  |  ALL  |     2 |
+# | Deregulated Superman     | night     |     +12 |      -0 |  ALL  |  ALL  |     2 |
+# | Deregulated Superman     | midnight  |     +12 |      -0 |  ALL  |  ALL  |     2 |
+# | Maeve                    | day       |     +12 |      -0 |  ALL  |  ALL  |     3 |
+# | Maeve                    | night     |     +12 |      -0 |  ALL  |  ALL  |     3 |
+# | Maeve                    | midnight  |     +12 |      -0 |  ALL  |  ALL  |     3 |
+# | Ometeotl                 | day       |     +12 |      -0 |  ALL  |  ALL  |     1 |
+# | Ometeotl                 | night     |     +12 |      -0 |  ALL  |  ALL  |     1 |
+# | Ometeotl                 | midnight  |     +12 |      -0 |  ALL  |  ALL  |     1 |
+# | Superman                 | day       |     +12 |      -0 |  ALL  |  ALL  |     4 |
+# | Superman                 | night     |     +12 |      -0 |  ALL  |  ALL  |     4 |
+# | Superman                 | midnight  |     +12 |      -0 |  ALL  |  ALL  |     4 |
+# | Upstream                 | day       |     +12 |      -0 |  ALL  |  ALL  |     3 |
+# | Upstream                 | night     |     +12 |      -0 |  ALL  |  ALL  |     3 |
+# | Upstream                 | midnight  |     +12 |      -0 |  ALL  |  ALL  |     3 |
 
 main() {
   prepare "$@"
