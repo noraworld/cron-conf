@@ -51,7 +51,7 @@ NON_ROOT_USER=ubuntu
 
 
 # Detect illegal checks on diary
-30 8 * * * sincere
+40 2 * * * sincere
 
 
 
