@@ -93,6 +93,9 @@ main() {
     "ometeotl")
       ometeotl
       ;;
+    "recurrent")
+      recurrent
+      ;;
     "periodic")
       periodic
       ;;
