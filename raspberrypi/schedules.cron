@@ -103,12 +103,12 @@ NON_ROOT_USER=ubuntu
 
 
 # Chime
-*/5 * * * * scheduler chime deny
+*/30 * * * * scheduler chime deny
 
 
 
 # Crimson
-*/10 * * * * scheduler crimson deny --soft
+0 * * * * scheduler crimson deny --soft
 
 
 
@@ -192,7 +192,7 @@ NON_ROOT_USER=ubuntu
 
 
 # YouTube Music
-*/5 * * * * scheduler youtube-music deny --soft
+*/30 * * * * scheduler youtube-music deny --soft
 
 
 
