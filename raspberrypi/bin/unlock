@@ -952,7 +952,6 @@ youtube() {
 
 youtube_alternative() {
   reference_minute=5
-  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   warning_color
@@ -992,7 +991,6 @@ youtube_music() {
 
 youtube_music_persistent() {
   reference_minute=5
-  waiting_interval=10
   [ "$DRY_RUN" = 1 ] && exit 0
 
   warning_color
