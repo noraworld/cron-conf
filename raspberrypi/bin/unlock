@@ -10,7 +10,7 @@ LOG_PATH="/home/ubuntu/.log/unlock.log"
 COOLDOWN_INTERVAL=0 # ideal: 10 (this may be unnecessary)
 DELAY_INTERVAL=5    # ideal: 5
 RETRY_INTERVAL=10   # ideal: 10
-TIMES_LIMIT=5       # ideal: 5
+TIMES_LIMIT=-1      # disabled by https://github.com/noraworld/cron-conf/commit/57be24fbe3ffb9b95ad55f7b8ef3dfaae6846551
 
 COOLDOWN_MESSAGE="to avoid excessive execution"
 WAITING_MESSAGE="for the observer daemon to be effective"
