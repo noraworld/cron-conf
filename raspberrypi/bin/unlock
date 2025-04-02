@@ -84,6 +84,9 @@ main() {
       "social-media")
         social_media
         ;;
+      "social-media-allow")
+        social_media_allow
+        ;;
       "vod")
         vod
         ;;
@@ -216,6 +219,10 @@ all() {
 
   if [ -L /etc/dnsmasq.toggle/social_media.conf ]; then
     sudo unlink /etc/dnsmasq.toggle/social_media.conf
+  fi
+
+  if ! [ -L /etc/dnsmasq.toggle/social_media_allow.conf ]; then
+    sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle/social_media_allow.conf /etc/dnsmasq.toggle
   fi
 
   if [ -L /etc/dnsmasq.toggle/vod.conf ]; then
@@ -367,6 +374,14 @@ all() {
   if [ -L /etc/dnsmasq.toggle/social_media.conf ]; then
     error_color
     echo "error: /etc/dnsmasq.toggle/social_media.conf still exists" >&2
+    no_color
+    echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
+    # exit
+  fi
+
+  if ! [ -L /etc/dnsmasq.toggle/social_media_allow.conf ]; then
+    error_color
+    echo "error: /etc/dnsmasq.toggle/social_media_allow.conf still doesn't exist" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
     # exit
@@ -859,6 +874,26 @@ social_media() {
   if [ -L /etc/dnsmasq.toggle/social_media.conf ]; then
     error_color
     echo "error: /etc/dnsmasq.toggle/social_media.conf still exists" >&2
+    no_color
+    echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
+    exit
+  fi
+}
+
+social_media_allow() {
+  reference_minute=5
+  waiting_interval=1
+  [ "$DRY_RUN" = 1 ] && exit 0
+
+  warning_color
+  sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle/social_media_allow.conf /etc/dnsmasq.toggle
+  no_color
+
+  pause "$waiting_interval" "$WAITING_MESSAGE"
+
+  if ! [ -L /etc/dnsmasq.toggle/social_media_allow.conf ]; then
+    error_color
+    echo "error: /etc/dnsmasq.toggle/social_media_allow.conf still doesn't exist" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
     exit

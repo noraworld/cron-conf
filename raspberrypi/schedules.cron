@@ -167,6 +167,11 @@ NON_ROOT_USER=ubuntu
 
 
 
+# Social Media Allow
+*/5 * * * * scheduler social-media-allow deny --soft
+
+
+
 # VOD
 */5    0-7  * * * scheduler vod deny --yellow-kryptonite
 */5    8-22 * * * scheduler vod allow
