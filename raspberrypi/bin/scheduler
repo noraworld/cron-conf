@@ -541,6 +541,12 @@ ometeotl() {
   esac
 }
 
+recurrent() {
+  if [ "$(atq | wc -l)" -ne 0 ]; then
+    atrm $(atq | cut -f1)
+  fi
+}
+
 periodic() {
   # Auto-update cron conf
   cron-apply perform
