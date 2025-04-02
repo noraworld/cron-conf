@@ -215,6 +215,12 @@ todo_mode() {
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-***-upstream-conf"
   fi
 
+  # ln_mode & unlink_mode (discipline)
+  if [ "$discipline_skipped" = "false" ] && [ "$(restrict-all check "observe-discipline-conf")" -le 0 ]; then
+    restrict-all reset "observe-discipline-conf"
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-discipline-conf"
+  fi
+
   # vpn check
   if [ "$discipline_skipped" = "false" ] && [ "$(force-vpn check)" -le 0 ]; then
     force-vpn reset
