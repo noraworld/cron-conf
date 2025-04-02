@@ -83,6 +83,15 @@ NON_ROOT_USER=ubuntu
 
 
 
+# Discipline
+# */5    0-7  * * * scheduler discipline deny --red-kryptonite
+# */5    8-22 * * * scheduler discipline allow
+# 0      23   * * * scheduler discipline deny --red-kryptonite --safe
+# 5-55/5 23   * * * scheduler discipline deny --red-kryptonite
+*/5 * * * * scheduler discipline allow
+
+
+
 # Todo
 */1     0-7   * * * scheduler todo-midnight start
 */10    8     * * * scheduler todo-midnight stop
@@ -214,15 +223,6 @@ NON_ROOT_USER=ubuntu
 */5    8-22 * * * scheduler youtube deny --vampire
 0      23   * * * scheduler youtube deny --red-kryptonite --safe
 5-55/5 23   * * * scheduler youtube deny --red-kryptonite
-
-
-
-# Discipline
-# */5    0-7  * * * scheduler discipline deny --red-kryptonite
-# */5    8-22 * * * scheduler discipline allow
-# 0      23   * * * scheduler discipline deny --red-kryptonite --safe
-# 5-55/5 23   * * * scheduler discipline deny --red-kryptonite
-*/5 * * * * scheduler discipline allow
 
 
 
