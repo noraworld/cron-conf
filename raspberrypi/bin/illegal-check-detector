@@ -114,7 +114,7 @@ validate() {
     exit
   fi
 
-  if [ "$STRICT" = "1" ] && ! gh repo view "$MAIN_REPO" > /dev/null 2>&1; then
+  if [ "$STRICT" = "1" ] && ! ghc repo view "$MAIN_REPO" > /dev/null 2>&1; then
     echo "No repository found (MAIN_REPO)" >&2
     exit
   fi
@@ -124,7 +124,7 @@ validate() {
     exit
   fi
 
-  if [ "$STRICT" = "1" ] && ! gh repo view "$TEMPLATE_REPO" > /dev/null 2>&1; then
+  if [ "$STRICT" = "1" ] && ! ghc repo view "$TEMPLATE_REPO" > /dev/null 2>&1; then
     echo "No repository found (TEMPLATE_REPO)" >&2
     exit
   fi
@@ -134,7 +134,7 @@ validate() {
     exit
   fi
 
-  if [ "$STRICT" = "1" ] && ! gh repo view "$TODO_REPO" > /dev/null 2>&1; then
+  if [ "$STRICT" = "1" ] && ! ghc repo view "$TODO_REPO" > /dev/null 2>&1; then
     echo "No repository found (TODO_REPO)" >&2
     exit
   fi
