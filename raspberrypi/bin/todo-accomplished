@@ -3,6 +3,7 @@
 # shellcheck disable=SC2004
 
 LOG_PATH="/home/ubuntu/.log/todo_accomplished.log"
+NEW_DAY_OFFSET="2 hours ago"
 
 export GHC_FROM="$(basename "$0") $*"
 
@@ -19,8 +20,7 @@ main() {
   result="100"
   while [ "$body_with_tasks" = "" ] && [ "$count" -lt "$RETRY" ]; do
     if [ "$PAST" -eq 0 ] || [ "$INCLUDE_TODAY" = "1" ]; then
-      issue_number=$(ghc issue list --repo "$REPO" --limit 1 | awk '{ print $1 }')
-      body_with_tasks=$(ghc issue view --repo "$REPO" "$issue_number" --json body --jq .body)
+      body_with_tasks=$(todo-cache --repo "$REPO" --date "$(date -d "$NEW_DAY_OFFSET" +%F)")
       body_without_tasks=$(echo "$body_with_tasks" | awk '!found {print} /## 🐯 今日やること/ {found=1}')
 
       checked_count=$(  echo "$body_with_tasks"    | grep -c "\[x\]")
@@ -30,8 +30,8 @@ main() {
     fi
 
     if [ "$PAST" -ge 1 ]; then
-      for issue_number in $(ghc issue list --repo "$REPO" --state "closed" --limit "$PAST" | awk '{ print $1 }'); do
-        body_with_tasks=$(ghc issue view --repo "$REPO" "$issue_number" --json body --jq .body)
+      for i in $(seq 1 "$PAST"); do
+        body_with_tasks=$(todo-cache --repo "$REPO" --date "$(date -d "$i days ago $NEW_DAY_OFFSET" +%F)")
         body_without_tasks=$(echo "$body_with_tasks" | awk '!found {print} /## 🐯 今日やること/ {found=1}')
 
         checked_count=$(  echo "$body_with_tasks"    | grep -c "\[x\]")
