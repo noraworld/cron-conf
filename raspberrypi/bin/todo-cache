@@ -17,7 +17,7 @@ main() {
     [ "$DEBUG" = "1" ] && echo "info: cache found!" >&2
     cat "$filepath"
   else
-    [ "$DEBUG" = "1" ] && echo "info: cache not found" >&2
+    [ "$DEBUG" = "1" ] && echo "info: cache is either not found, stale, or disabled" >&2
     content=$(ghc issue view --repo "$REPO" "$issue_number" --json body --jq .body)
     printf "%s\n" "---" "$(date '+%s')" "---" "$content" > "$filepath"
     cat "$filepath"
