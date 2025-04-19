@@ -15,12 +15,12 @@ main() {
 
   if [ -e "$filepath" ] && [ "$(echo $(( $(date '+%s') - $(cat "$filepath" | awk 'NR == 2') )) )" -lt "$CHECK_INTERVAL" ] && [ "$FORCE" != "1" ]; then
     [ "$DEBUG" = "1" ] && echo "info: cache found!" >&2
-    cat "$filepath"
+    tail -n +4 "$filepath"
   else
     [ "$DEBUG" = "1" ] && echo "info: cache is either not found, stale, or disabled" >&2
     content=$(ghc issue view --repo "$REPO" "$issue_number" --json body --jq .body)
     printf "%s\n" "---" "$(date '+%s')" "---" "$content" > "$filepath"
-    cat "$filepath"
+    tail -n +4 "$filepath"
   fi
 }
 
