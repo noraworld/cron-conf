@@ -67,7 +67,6 @@ build_true_tasklist() {
   ] && [ \
   "$(ghc issue view --json state --jq .state "$(echo "$1" | grep -oP '\(https?://[^\)]*\)' | sed 's/[()]//g')")" = "OPEN" \
   ]; }; then
-    ## TODO: https://github.com/noraworld/to-do/labels/preliminary
     echo "$1" | sed -r "s/^\*\s*\[x\]/\* \[ \]/g"
   else
     echo "$1"
