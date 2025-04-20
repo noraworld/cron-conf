@@ -20,6 +20,7 @@ set -e
 export GHC_FROM="$(basename "$0") $*"
 
 CHECK_INTERVAL="900"
+NEW_DAY_OFFSET="2 hours ago"
 
 main() {
   prepare "$@"
@@ -35,8 +36,7 @@ main() {
 
   validate "$@"
 
-  number=$(ghc issue list --repo "$MAIN_REPO" --limit 1 | awk '{ print $1 }')
-  body=$(ghc issue view --repo "$MAIN_REPO" --json body --jq .body "$number")
+  body=$(todo-cache --repo "$MAIN_REPO" --date "$(date -d "$NEW_DAY_OFFSET" +%F)")
 
 # DO NOT INDENT THESE LINES!
 while IFS= read -r line; do
@@ -47,6 +47,7 @@ EOF
 
   if [ "$body" != "$(echo "$result" | sed '${/^$/d}')" ]; then
     # Update the body because it was illegal!
+    number=$(ghc issue list --repo "$MAIN_REPO" --limit 1 | awk '{ print $1 }')
     ghc issue edit --repo "$MAIN_REPO" "$number" --body "$(echo "$result" | sed '${/^$/d}')" > /dev/null 2>&1
     echo "-1" > "$RESULT_FILE"
     echo "-1"
@@ -57,6 +58,7 @@ EOF
   fi
 }
 
+# I wonder if there is a better way to suppress the number of calls of the APIs 🤔
 build_true_tasklist() {
   if { [ \
   "$(echo "$1" | grep -cE "\*\s*\[x\]\s*\[.*\]\(https\:\/\/github\.com\/$(echo $TEMPLATE_REPO | sed -r "s|/|\\\/|g")\/issues\/[0-9]*\)")" -ne 0 \
