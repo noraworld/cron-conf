@@ -5,7 +5,7 @@ export GHC_FROM="$(basename "$0") $*"
 
 CACHE_BASE_PATH="/home/ubuntu/.tmp/todo_caches"
 CHECK_INTERVAL="3600"
-GUESSED_ISSUE_NUMBER_LIST_FILE="/home/ubuntu/.tmp/todo_caches/guessed_issue_number_list"
+GUESSED_ISSUES_LIST_FILE="/home/ubuntu/.tmp/todo_caches/guessed_issues_list"
 
 main() {
   setup "$@"
@@ -25,14 +25,14 @@ main() {
 }
 
 get_issue_number() {
-  if ! [ -e "$GUESSED_ISSUE_NUMBER_LIST_FILE" ]; then
-    [ "$DEBUG" = "1" ] && echo "info: $GUESSED_ISSUE_NUMBER_LIST_FILE not found" >&2
+  if ! [ -e "$GUESSED_ISSUES_LIST_FILE" ]; then
+    [ "$DEBUG" = "1" ] && echo "info: $GUESSED_ISSUES_LIST_FILE not found" >&2
     ghc issue list --repo "$REPO" --state "all" | grep -E "$DATE" | awk '{ print $1 }'
     return
   fi
 
-  base_date=$(cat "$GUESSED_ISSUE_NUMBER_LIST_FILE" | grep -E "^$REPO" | awk '{ print $2 }')
-  base_number=$(cat "$GUESSED_ISSUE_NUMBER_LIST_FILE" | grep -E "^$REPO" | awk '{ print $3 }')
+  base_date=$(cat "$GUESSED_ISSUES_LIST_FILE" | grep -E "^$REPO" | awk '{ print $2 }')
+  base_number=$(cat "$GUESSED_ISSUES_LIST_FILE" | grep -E "^$REPO" | awk '{ print $3 }')
 
   if [ "$base_date" = "" ] || [ "$base_number" = "" ]; then
     [ "$DEBUG" = "1" ] && echo "info: failed to retrieve base date or base number" >&2
