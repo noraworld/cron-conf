@@ -120,7 +120,7 @@ validate() {
     exit
   fi
 
-  if [ "$LAZY" = "1" ] || ! ghc repo view "$MAIN_REPO" > /dev/null 2>&1; then
+  if [ "$STRICT" = "1" ] && ! ghc repo view "$MAIN_REPO" > /dev/null 2>&1; then
     echo "No repository found (MAIN_REPO)" >&2
     exit
   fi
@@ -130,7 +130,7 @@ validate() {
     exit
   fi
 
-  if [ "$LAZY" = "1" ] || ! ghc repo view "$TODO_REPO" > /dev/null 2>&1; then
+  if [ "$STRICT" = "1" ] && ! ghc repo view "$TODO_REPO" > /dev/null 2>&1; then
     echo "No repository found (TODO_REPO)" >&2
     exit
   fi
@@ -163,7 +163,7 @@ parser_definition() {
   flag  INCLUDE_TODAY    --include-today -- "whether to include today's task (only enabled when --past)"
   param MAIN_REPO        --main-repo     -- "main repo"
   param PAST             --past          -- "get the past tasks instead of today"
-  flag  LAZY             --lazy          -- "ignore checking repo existence"
+  flag  STRICT           --strict        -- "check repo existence strictly"
   param TODO_REPO        --todo-repo     -- "todo repo"
   disp  :usage        -h --help
   disp  VERSION          --version
@@ -178,7 +178,7 @@ FORCE=''
 INCLUDE_TODAY=''
 MAIN_REPO=''
 PAST=''
-LAZY=''
+STRICT=''
 TODO_REPO=''
 REST=''
 parse() {
@@ -219,10 +219,10 @@ parse() {
         OPTARG=$2
         PAST="$OPTARG"
         shift ;;
-      '--lazy')
+      '--strict')
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
-        LAZY="$OPTARG"
+        STRICT="$OPTARG"
         ;;
       '--todo-repo')
         [ $# -le 1 ] && set "required" "$1" && break
@@ -270,7 +270,7 @@ Options:
       --include-today         whether to include today's task (only enabled when --past)
       --main-repo MAIN_REPO   main repo
       --past PAST             get the past tasks instead of today
-      --lazy                  ignore checking repo existence
+      --strict                check repo existence strictly
       --todo-repo TODO_REPO   todo repo
   -h, --help
       --version
