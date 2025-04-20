@@ -6,8 +6,15 @@ export GHC_FROM="$(basename "$0") $*"
 CACHE_BASE_PATH="/home/ubuntu/.tmp/todo_caches"
 CHECK_INTERVAL="3600"
 GUESSED_ISSUES_LIST_FILE="/home/ubuntu/.tmp/todo_caches/guessed_issues_list"
+ISSUES_LIST_INTERVAL="21600"
+LEGITIMATE_ISSUES_LIST_FILE="/home/ubuntu/.tmp/todo_caches/legitimate_issues_list"
+NEW_DAY_OFFSET="2 hours ago"
 
 main() {
+  parse "$@"
+  eval "set -- $REST"
+
+  validate "$@"
   setup "$@"
 
   filepath="$CACHE_BASE_PATH/$(echo "$REPO" | sed 's#.*/##' | tr '-' '_')/$DATE"
@@ -27,7 +34,17 @@ main() {
 get_issue_number() {
   if ! [ -e "$GUESSED_ISSUES_LIST_FILE" ]; then
     [ "$DEBUG" = "1" ] && echo "info: $GUESSED_ISSUES_LIST_FILE not found" >&2
-    ghc issue list --repo "$REPO" --state "all" | grep -E "$DATE" | awk '{ print $1 }'
+
+    if [ -e "$LEGITIMATE_ISSUES_LIST_FILE" ] && [ "$(echo $(( $(date '+%s') - $(cat "$LEGITIMATE_ISSUES_LIST_FILE" | awk 'NR == 2') )) )" -lt "$ISSUES_LIST_INTERVAL" ] && [ "$FORCE" != "1" ]; then
+      [ "$DEBUG" = "1" ] && echo "info: issues list cache found!" >&2
+      tail -n +4 "$LEGITIMATE_ISSUES_LIST_FILE" | awk "NR == $PAST" | awk '{ print $1 }'
+    else
+      [ "$DEBUG" = "1" ] && echo "info: issues list cache is either not found, stale, or disabled" >&2
+      issues=$(ghc issue list --repo "$REPO" --state "all")
+      printf "%s\n" "---" "$(date '+%s')" "---" "$issues" > "$LEGITIMATE_ISSUES_LIST_FILE"
+      tail -n +4 "$LEGITIMATE_ISSUES_LIST_FILE" | awk "NR == $PAST" | awk '{ print $1 }'
+    fi
+
     return
   fi
 
@@ -36,7 +53,17 @@ get_issue_number() {
 
   if [ "$base_date" = "" ] || [ "$base_number" = "" ]; then
     [ "$DEBUG" = "1" ] && echo "info: failed to retrieve base date or base number" >&2
-    ghc issue list --repo "$REPO" --state "all" | grep -E "$DATE" | awk '{ print $1 }'
+
+    if [ -e "$LEGITIMATE_ISSUES_LIST_FILE" ] && [ "$(echo $(( $(date '+%s') - $(cat "$LEGITIMATE_ISSUES_LIST_FILE" | awk 'NR == 2') )) )" -lt "$ISSUES_LIST_INTERVAL" ] && [ "$FORCE" != "1" ]; then
+      [ "$DEBUG" = "1" ] && echo "info: issues list cache found!" >&2
+      tail -n +4 "$LEGITIMATE_ISSUES_LIST_FILE" | awk "NR == $PAST" | awk '{ print $1 }'
+    else
+      [ "$DEBUG" = "1" ] && echo "info: issues list cache is either not found, stale, or disabled" >&2
+      issues=$(ghc issue list --repo "$REPO" --state "all")
+      printf "%s\n" "---" "$(date '+%s')" "---" "$issues" > "$LEGITIMATE_ISSUES_LIST_FILE"
+      tail -n +4 "$LEGITIMATE_ISSUES_LIST_FILE" | awk "NR == $PAST" | awk '{ print $1 }'
+    fi
+
     return
   fi
 
@@ -48,17 +75,34 @@ get_issue_number() {
   echo $(( base_number + diff_days ))
 }
 
-setup() {
-  parse "$@"
-  eval "set -- $REST"
-
-  if [ "$DATE" = "" ] || [ "$REPO" = "" ]; then
-    echo "error: one of the required params are missing" >&2
+validate() {
+  if [ "$REPO" = "" ]; then
+    echo "error: --repo is missing" >&2
     exit 1
   fi
 
+  if [ "$DATE" = "" ] && [ "$PAST" = "" ]; then
+    echo "either --date or --past is necessary" >&2
+    exit 1
+  fi
+
+  if [ "$DATE" != "" ] && [ "$PAST" != "" ]; then
+    echo "both --date and --past are not acceptable" >&2
+    exit 1
+  fi
+}
+
+setup() {
   if ! [ -e "$CACHE_BASE_PATH/$(echo "$REPO" | sed 's#.*/##' | tr '-' '_')" ]; then
     mkdir -p "$CACHE_BASE_PATH/$(echo "$REPO" | sed 's#.*/##' | tr '-' '_')"
+  fi
+
+  if [ "$DATE" = "" ]; then
+    DATE=$(date -d "$PAST days ago $NEW_DAY_OFFSET" +%F)
+  elif [ "$PAST" = "" ]; then
+    today_epoch=$(date -d "$(date -d "$NEW_DAY_OFFSET" +%F)" +%s)
+    input_epoch=$(date -d "$DATE" +%s)
+    PAST="$(( (today_epoch - input_epoch) / 86400 ))"
   fi
 }
 
@@ -66,9 +110,10 @@ setup() {
 parser_definition() {
   setup   REST help:usage -- "Usage: todo-cache [options]... [arguments]..." ''
   msg -- 'Options:'
-  param   DATE       --date  -- "target date"
+  param   DATE       --date  -- "target date (mutually exclusive with --past)"
   flag    DEBUG      --debug -- "debug mode"
   flag    FORCE      --force -- "get todo from API even if cache exists"
+  param   PAST       --past  -- "how many days ago (mutually exclusive with --date)"
   param   REPO       --repo  -- "target repo"
   disp    :usage  -h --help
   disp    VERSION    --version
@@ -81,6 +126,7 @@ parser_definition() {
 DATE=''
 DEBUG=''
 FORCE=''
+PAST=''
 REPO=''
 REST=''
 parse() {
@@ -111,6 +157,11 @@ parse() {
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
         FORCE="$OPTARG"
         ;;
+      '--past')
+        [ $# -le 1 ] && set "required" "$1" && break
+        OPTARG=$2
+        PAST="$OPTARG"
+        shift ;;
       '--repo')
         [ $# -le 1 ] && set "required" "$1" && break
         OPTARG=$2
@@ -152,9 +203,10 @@ cat<<'GETOPTIONSHERE'
 Usage: todo-cache [options]... [arguments]...
 
 Options:
-      --date DATE             target date
+      --date DATE             target date (mutually exclusive with --past)
       --debug                 debug mode
       --force                 get todo from API even if cache exists
+      --past PAST             how many days ago (mutually exclusive with --date)
       --repo REPO             target repo
   -h, --help
       --version
