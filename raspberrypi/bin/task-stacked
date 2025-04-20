@@ -1,6 +1,5 @@
 #!/bin/sh
 
-CHECK_INTERVAL="900"
 NEW_DAY_OFFSET="2 hours ago"
 
 export GHC_FROM="$(basename "$0") $*"
@@ -8,12 +7,6 @@ export GHC_FROM="$(basename "$0") $*"
 main() {
   prepare "$@"
   police "$@"
-
-  if [ "$(updatable)" -lt 0 ]; then
-    echo "It has not taken $CHECK_INTERVAL seconds since the last update." >&2
-    cat "$RESULT_FILE"
-    exit "200"
-  fi
 
   validate "$@"
 
@@ -103,17 +96,6 @@ judge() {
   fi
 }
 
-updatable() {
-  if [ "$(cat "$RESULT_FILE")" -eq 0 ] ||
-     [ "$(echo $(( $(date +%s) - $(cat "$CHECK_FILE") )) )" -gt "$CHECK_INTERVAL" ]; then
-
-    date +%s > "$CHECK_FILE"
-    echo "1"
-  else
-    echo "-1"
-  fi
-}
-
 validate() {
   if [ "$(echo "$MAIN_REPO" | grep -cE ".*/.*")" -ne 1 ]; then
     echo "This is not a repository (MAIN_REPO)" >&2
@@ -139,7 +121,6 @@ validate() {
 prepare() {
   parse "$@"
   eval "set -- $REST"
-  [ "$FORCE" = 1 ] && CHECK_INTERVAL="0"
   CHECK_FILE="/home/ubuntu/.tmp/task_stacked_$(echo "$MAIN_REPO" | cut -d '/' -f2 | tr '-' '_')_last_update"
   RESULT_FILE="/home/ubuntu/.tmp/task_stacked_$(echo "$MAIN_REPO" | cut -d '/' -f2 | tr '-' '_')_last_result"
   [ -e "$CHECK_FILE"  ] || date +%s  > "$CHECK_FILE"
@@ -159,7 +140,7 @@ parser_definition() {
   setup   REST help:usage -- "Usage: task-stacked [options]... [arguments]..." ''
   msg -- 'Options:'
   flag  DEBUG            --debug         -- "perform as debug mode"
-  flag  FORCE            --force         -- "ignore CHECK_INTERVAL"
+  flag  FORCE            --force         -- "get content from APIs even if cache exists"
   flag  INCLUDE_TODAY    --include-today -- "whether to include today's task (only enabled when --past)"
   param MAIN_REPO        --main-repo     -- "main repo"
   param PAST             --past          -- "get the past tasks instead of today"
@@ -266,7 +247,7 @@ Usage: task-stacked [options]... [arguments]...
 
 Options:
       --debug                 perform as debug mode
-      --force                 ignore CHECK_INTERVAL
+      --force                 get content from APIs even if cache exists
       --include-today         whether to include today's task (only enabled when --past)
       --main-repo MAIN_REPO   main repo
       --past PAST             get the past tasks instead of today

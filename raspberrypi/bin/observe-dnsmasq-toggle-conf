@@ -4,7 +4,7 @@
 set -u
 export PATH=/home/ubuntu/workspace/cron-conf/bin:/home/ubuntu/workspace/cron-conf/raspberrypi/bin:/home/ubuntu/.local/share/zinit/polaris/bin:"$PATH"
 RETRY_INTERVAL=1
-ACCOMPLISHED_CHECK_INTERVAL="1200" # 20 minutes
+ACCOMPLISHED_CHECK_INTERVAL="3600"
 PUNISHMENT_DURATION="1 hour"
 
 
