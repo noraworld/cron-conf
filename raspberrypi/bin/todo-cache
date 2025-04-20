@@ -10,7 +10,6 @@ ISSUE_NUMBER_LIST_FILE="/home/ubuntu/.tmp/todo_caches/issue_number_list"
 main() {
   setup "$@"
 
-  issue_number=$(get_issue_number "$@")
   filepath="$CACHE_BASE_PATH/$(echo "$REPO" | sed 's#.*/##' | tr '-' '_')/$DATE"
 
   if [ -e "$filepath" ] && [ "$(echo $(( $(date '+%s') - $(cat "$filepath" | awk 'NR == 2') )) )" -lt "$CHECK_INTERVAL" ] && [ "$FORCE" != "1" ]; then
@@ -18,6 +17,7 @@ main() {
     tail -n +4 "$filepath"
   else
     [ "$DEBUG" = "1" ] && echo "info: cache is either not found, stale, or disabled" >&2
+    issue_number=$(get_issue_number "$@")
     content=$(ghc issue view --repo "$REPO" "$issue_number" --json body --jq .body)
     printf "%s\n" "---" "$(date '+%s')" "---" "$content" > "$filepath"
     tail -n +4 "$filepath"
