@@ -5,9 +5,9 @@ export GHC_FROM="$(basename "$0") $*"
 
 CACHE_BASE_PATH="/home/ubuntu/.tmp/todo_caches"
 CHECK_INTERVAL="3600"
-GUESSED_ISSUES_LIST_FILE="/home/ubuntu/.tmp/todo_caches/guessed_issues_list"
+GUESSED_ISSUES_LIST_FILE="guessed_issues_list"
 ISSUES_LIST_INTERVAL="21600"
-LEGITIMATE_ISSUES_LIST_FILE="/home/ubuntu/.tmp/todo_caches/legitimate_issues_list"
+LEGITIMATE_ISSUES_LIST_FILE="legitimate_issues_list"
 NEW_DAY_OFFSET="2 hours ago"
 
 main() {
@@ -32,36 +32,36 @@ main() {
 }
 
 get_issue_number() {
-  if ! [ -e "$GUESSED_ISSUES_LIST_FILE" ]; then
-    [ "$DEBUG" = "1" ] && echo "info: $GUESSED_ISSUES_LIST_FILE not found" >&2
+  if ! [ -e "$CACHE_BASE_PATH/$GUESSED_ISSUES_LIST_FILE" ]; then
+    [ "$DEBUG" = "1" ] && echo "info: $CACHE_BASE_PATH/$GUESSED_ISSUES_LIST_FILE not found" >&2
 
-    if [ -e "$LEGITIMATE_ISSUES_LIST_FILE" ] && [ "$(echo $(( $(date '+%s') - $(cat "$LEGITIMATE_ISSUES_LIST_FILE" | awk 'NR == 2') )) )" -lt "$ISSUES_LIST_INTERVAL" ] && [ "$FORCE" != "1" ]; then
+    if [ -e "$CACHE_BASE_PATH/$(echo "$REPO" | sed 's#.*/##' | tr '-' '_')/$LEGITIMATE_ISSUES_LIST_FILE" ] && [ "$(echo $(( $(date '+%s') - $(cat "$CACHE_BASE_PATH/$(echo "$REPO" | sed 's#.*/##' | tr '-' '_')/$LEGITIMATE_ISSUES_LIST_FILE" | awk 'NR == 2') )) )" -lt "$ISSUES_LIST_INTERVAL" ] && [ "$FORCE" != "1" ]; then
       [ "$DEBUG" = "1" ] && echo "info: issues list cache found!" >&2
-      tail -n +4 "$LEGITIMATE_ISSUES_LIST_FILE" | awk "NR == $(( PAST + 1 ))" | awk '{ print $1 }'
+      tail -n +4 "$CACHE_BASE_PATH/$(echo "$REPO" | sed 's#.*/##' | tr '-' '_')/$LEGITIMATE_ISSUES_LIST_FILE" | awk "NR == $(( PAST + 1 ))" | awk '{ print $1 }'
     else
       [ "$DEBUG" = "1" ] && echo "info: issues list cache is either not found, stale, or disabled" >&2
       issues=$(ghc issue list --repo "$REPO" --state "all")
-      printf "%s\n" "---" "$(date '+%s')" "---" "$issues" > "$LEGITIMATE_ISSUES_LIST_FILE"
-      tail -n +4 "$LEGITIMATE_ISSUES_LIST_FILE" | awk "NR == $(( PAST + 1 ))" | awk '{ print $1 }'
+      printf "%s\n" "---" "$(date '+%s')" "---" "$issues" > "$CACHE_BASE_PATH/$(echo "$REPO" | sed 's#.*/##' | tr '-' '_')/$LEGITIMATE_ISSUES_LIST_FILE"
+      tail -n +4 "$CACHE_BASE_PATH/$(echo "$REPO" | sed 's#.*/##' | tr '-' '_')/$LEGITIMATE_ISSUES_LIST_FILE" | awk "NR == $(( PAST + 1 ))" | awk '{ print $1 }'
     fi
 
     return
   fi
 
-  base_date=$(cat "$GUESSED_ISSUES_LIST_FILE" | grep -E "^$REPO" | awk '{ print $2 }')
-  base_number=$(cat "$GUESSED_ISSUES_LIST_FILE" | grep -E "^$REPO" | awk '{ print $3 }')
+  base_date=$(cat "$CACHE_BASE_PATH/$GUESSED_ISSUES_LIST_FILE" | grep -E "^$REPO" | awk '{ print $2 }')
+  base_number=$(cat "$CACHE_BASE_PATH/$GUESSED_ISSUES_LIST_FILE" | grep -E "^$REPO" | awk '{ print $3 }')
 
   if [ "$base_date" = "" ] || [ "$base_number" = "" ]; then
     [ "$DEBUG" = "1" ] && echo "info: failed to retrieve base date or base number" >&2
 
-    if [ -e "$LEGITIMATE_ISSUES_LIST_FILE" ] && [ "$(echo $(( $(date '+%s') - $(cat "$LEGITIMATE_ISSUES_LIST_FILE" | awk 'NR == 2') )) )" -lt "$ISSUES_LIST_INTERVAL" ] && [ "$FORCE" != "1" ]; then
+    if [ -e "$CACHE_BASE_PATH/$(echo "$REPO" | sed 's#.*/##' | tr '-' '_')/$LEGITIMATE_ISSUES_LIST_FILE" ] && [ "$(echo $(( $(date '+%s') - $(cat "$CACHE_BASE_PATH/$(echo "$REPO" | sed 's#.*/##' | tr '-' '_')/$LEGITIMATE_ISSUES_LIST_FILE" | awk 'NR == 2') )) )" -lt "$ISSUES_LIST_INTERVAL" ] && [ "$FORCE" != "1" ]; then
       [ "$DEBUG" = "1" ] && echo "info: issues list cache found!" >&2
-      tail -n +4 "$LEGITIMATE_ISSUES_LIST_FILE" | awk "NR == $(( PAST + 1 ))" | awk '{ print $1 }'
+      tail -n +4 "$CACHE_BASE_PATH/$(echo "$REPO" | sed 's#.*/##' | tr '-' '_')/$LEGITIMATE_ISSUES_LIST_FILE" | awk "NR == $(( PAST + 1 ))" | awk '{ print $1 }'
     else
       [ "$DEBUG" = "1" ] && echo "info: issues list cache is either not found, stale, or disabled" >&2
       issues=$(ghc issue list --repo "$REPO" --state "all")
-      printf "%s\n" "---" "$(date '+%s')" "---" "$issues" > "$LEGITIMATE_ISSUES_LIST_FILE"
-      tail -n +4 "$LEGITIMATE_ISSUES_LIST_FILE" | awk "NR == $(( PAST + 1 ))" | awk '{ print $1 }'
+      printf "%s\n" "---" "$(date '+%s')" "---" "$issues" > "$CACHE_BASE_PATH/$(echo "$REPO" | sed 's#.*/##' | tr '-' '_')/$LEGITIMATE_ISSUES_LIST_FILE"
+      tail -n +4 "$CACHE_BASE_PATH/$(echo "$REPO" | sed 's#.*/##' | tr '-' '_')/$LEGITIMATE_ISSUES_LIST_FILE" | awk "NR == $(( PAST + 1 ))" | awk '{ print $1 }'
     fi
 
     return
