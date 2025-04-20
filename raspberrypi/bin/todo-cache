@@ -37,12 +37,12 @@ get_issue_number() {
 
     if [ -e "$LEGITIMATE_ISSUES_LIST_FILE" ] && [ "$(echo $(( $(date '+%s') - $(cat "$LEGITIMATE_ISSUES_LIST_FILE" | awk 'NR == 2') )) )" -lt "$ISSUES_LIST_INTERVAL" ] && [ "$FORCE" != "1" ]; then
       [ "$DEBUG" = "1" ] && echo "info: issues list cache found!" >&2
-      tail -n +4 "$LEGITIMATE_ISSUES_LIST_FILE" | awk "NR == $PAST" | awk '{ print $1 }'
+      tail -n +4 "$LEGITIMATE_ISSUES_LIST_FILE" | awk "NR == $(( PAST + 1 ))" | awk '{ print $1 }'
     else
       [ "$DEBUG" = "1" ] && echo "info: issues list cache is either not found, stale, or disabled" >&2
       issues=$(ghc issue list --repo "$REPO" --state "all")
       printf "%s\n" "---" "$(date '+%s')" "---" "$issues" > "$LEGITIMATE_ISSUES_LIST_FILE"
-      tail -n +4 "$LEGITIMATE_ISSUES_LIST_FILE" | awk "NR == $PAST" | awk '{ print $1 }'
+      tail -n +4 "$LEGITIMATE_ISSUES_LIST_FILE" | awk "NR == $(( PAST + 1 ))" | awk '{ print $1 }'
     fi
 
     return
@@ -56,12 +56,12 @@ get_issue_number() {
 
     if [ -e "$LEGITIMATE_ISSUES_LIST_FILE" ] && [ "$(echo $(( $(date '+%s') - $(cat "$LEGITIMATE_ISSUES_LIST_FILE" | awk 'NR == 2') )) )" -lt "$ISSUES_LIST_INTERVAL" ] && [ "$FORCE" != "1" ]; then
       [ "$DEBUG" = "1" ] && echo "info: issues list cache found!" >&2
-      tail -n +4 "$LEGITIMATE_ISSUES_LIST_FILE" | awk "NR == $PAST" | awk '{ print $1 }'
+      tail -n +4 "$LEGITIMATE_ISSUES_LIST_FILE" | awk "NR == $(( PAST + 1 ))" | awk '{ print $1 }'
     else
       [ "$DEBUG" = "1" ] && echo "info: issues list cache is either not found, stale, or disabled" >&2
       issues=$(ghc issue list --repo "$REPO" --state "all")
       printf "%s\n" "---" "$(date '+%s')" "---" "$issues" > "$LEGITIMATE_ISSUES_LIST_FILE"
-      tail -n +4 "$LEGITIMATE_ISSUES_LIST_FILE" | awk "NR == $PAST" | awk '{ print $1 }'
+      tail -n +4 "$LEGITIMATE_ISSUES_LIST_FILE" | awk "NR == $(( PAST + 1 ))" | awk '{ print $1 }'
     fi
 
     return
