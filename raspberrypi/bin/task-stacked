@@ -16,7 +16,7 @@ main() {
 
   if [ "$PAST" -eq 0 ] || [ "$INCLUDE_TODAY" = "1" ]; then
     check_list=$(
-      todo-cache --repo "$MAIN_REPO" --date "$(date -d "$NEW_DAY_OFFSET" +%F)" |
+      todo-cache --repo "$MAIN_REPO" --date "$(date -d "$NEW_DAY_OFFSET" +%F)" "$force" |
       awk '/## 🐯 今日やること/{ flag=1; next } flag'
     )
 
@@ -32,7 +32,7 @@ main() {
 
     for i in $(seq 1 "$PAST"); do
       check_list=$(
-        todo-cache --repo "$MAIN_REPO" --date "$(date -d "$i days ago $NEW_DAY_OFFSET" +%F)" |
+        todo-cache --repo "$MAIN_REPO" --date "$(date -d "$i days ago $NEW_DAY_OFFSET" +%F)" "$force" |
         awk '/## 🐯 今日やること/{ flag=1; next } flag'
       )
 
@@ -125,6 +125,12 @@ prepare() {
   RESULT_FILE="/home/ubuntu/.tmp/task_stacked_$(echo "$MAIN_REPO" | cut -d '/' -f2 | tr '-' '_')_last_result"
   [ -e "$CHECK_FILE"  ] || date +%s  > "$CHECK_FILE"
   [ -e "$RESULT_FILE" ] || echo "-1" > "$RESULT_FILE"
+
+  if [ "$FORCE" = "1" ]; then
+    force="--force"
+  else
+    force=""
+  fi
 }
 
 police() {
