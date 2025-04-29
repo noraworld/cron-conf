@@ -483,6 +483,18 @@ netflix() {
 observe() {
   case "$operation" in
     "start")
+      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
+      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
+      [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
+        cron-daemonctl stop observe-crontab "$safe"
+        cron-daemonctl stop observe-cron-conf "$safe"
+        cron-daemonctl stop observe-dnsmasq-conf "$safe"
+        cron-daemonctl stop observe-dnsmasq-priv-conf "$safe"
+        cron-daemonctl stop observe-dnsmasq-toggle "$safe"
+        cron-daemonctl stop observe-dnsmasq-priv-toggle "$safe"
+        return
+      fi
+
       cron-daemonctl start observe-crontab "$safe"
       cron-daemonctl start observe-cron-conf "$safe"
       cron-daemonctl start observe-dnsmasq-conf "$safe"
