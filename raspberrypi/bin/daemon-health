@@ -4,12 +4,12 @@ LOG_PATH="/home/ubuntu/.log/daemon_health.log"
 SLEEP_INTERVAL="5"
 
 main() {
-  check_dameon "ssh"
+  check_daemon "ssh"
   check_daemon "dnsmasq"
   check_daemon "hostapd"
 }
 
-check_dameon() {
+check_daemon() {
   if [ "$(systemctl is-active "$1")" != "active" ]; then
     echo "[$(date '+%Y-%m-%dT%H:%M:%S%z')] INFO:  Restarting $1 daemon" >> "$LOG_PATH"
     sudo systemctl start "$1"
