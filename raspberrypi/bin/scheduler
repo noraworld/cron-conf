@@ -337,6 +337,13 @@ firewall() {
   #
   case "$operation" in
     "deny")
+      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
+      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
+      [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
+        cron-daemonctl stop observe-firewall "$safe"
+        return
+      fi
+
       cron-daemonctl start observe-firewall "$safe"
       ;;
     "allow")

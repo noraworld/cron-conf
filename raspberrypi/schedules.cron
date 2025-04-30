@@ -68,18 +68,18 @@ NON_ROOT_USER=ubuntu
 #   Note 2:
 #     Remember that the shorter the time is, the more it can take effect.
 #
-*/1     0-7  * * * scheduler firewall deny
+*/1     0-7  * * * scheduler firewall deny --red-kryptonite
 */10    8-22 * * * scheduler firewall allow
-0-10/1  23   * * * scheduler firewall deny --safe
-11-59/1 23   * * * scheduler firewall deny
+0-10/1  23   * * * scheduler firewall deny --red-kryptonite --safe
+11-59/1 23   * * * scheduler firewall deny --red-kryptonite
 
 
 
 # Observe conf changes
-*/1     0-7  * * * scheduler observe start
+*/1     0-7  * * * scheduler observe start --red-kryptonite
 */10    8-22 * * * scheduler observe stop
-0-10/1  23   * * * scheduler observe start --safe
-11-59/1 23   * * * scheduler observe start
+0-10/1  23   * * * scheduler observe start --red-kryptonite --safe
+11-59/1 23   * * * scheduler observe start --red-kryptonite
 
 
 
