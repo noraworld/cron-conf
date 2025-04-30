@@ -564,6 +564,16 @@ ometeotl() {
 }
 
 recurrent() {
+  # Observe IP address not getting lost
+  ip-observer
+
+  # Observe firewall not disabled
+  auto-ufw-enabler
+
+  # Observe the system clock not lagging
+  clock-observer
+
+  # Observe the daemons running
   daemon-health
 
   if [ "$(atq | wc -l)" -ne 0 ]; then
@@ -574,15 +584,6 @@ recurrent() {
 periodic() {
   # Auto-update cron conf
   cron-apply perform
-
-  # Observe IP address not getting lost
-  ip-observer
-
-  # Observe firewall not disabled
-  auto-ufw-enabler
-
-  # Observe the system clock not lagging
-  clock-observer
 
   # Auto-update specific Git repositories
   #
