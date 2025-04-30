@@ -1,0 +1,25 @@
+#!/bin/sh
+
+LOG_PATH="/home/ubuntu/.log/daemon_health.log"
+SLEEP_INTERVAL="5"
+
+main() {
+  check_dameon "ssh"
+  check_daemon "dnsmasq"
+  check_daemon "hostapd"
+}
+
+check_dameon() {
+  if [ "$(systemctl is-active "$1")" != "active" ]; then
+    echo "[$(date '+%Y-%m-%dT%H:%M:%S%z')] INFO:  Restarting $1 daemon" >> "$LOG_PATH"
+    sudo systemctl start "$1"
+
+    sleep "$SLEEP_INTERVAL"
+
+    if [ "$(systemctl is-active "$1")" != "active" ]; then
+      echo "[$(date '+%Y-%m-%dT%H:%M:%S%z')] FATAL: Restarting $1 daemon failed" >> "$LOG_PATH"
+    fi
+  fi
+}
+
+main "$@"
