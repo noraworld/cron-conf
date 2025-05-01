@@ -5,6 +5,7 @@
 # set -eu
 
 LOG_PATH="/home/ubuntu/.log/ip-observer"
+SLEEP_INTERVAL="3"
 PING_COUNT="1"
 PING_WAIT="5"
 GLOBAL_IP="8.8.8.8"
@@ -36,7 +37,7 @@ networkd_aliver() {
 
 routing_exists() {
   if [ "$(ip route show)" = "" ]; then
-    sudo netplan apply
+    refresh_netplan
 
     print_log "2" "routing was lost"
   fi
@@ -47,7 +48,7 @@ addresses_exist() {
   actual_wifi_ip=$(ip -f inet address show wlan0 | grep -oE "[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[^255]")
 
   if [ "$expected_wifi_ip" != "$actual_wifi_ip" ]; then
-    sudo netplan apply
+    refresh_netplan
 
     print_log "3" "expected Wi-Fi IP address did not match actual one"
   fi
@@ -55,10 +56,15 @@ addresses_exist() {
 
 check_connectivity() {
   if ! ping -c "$PING_COUNT" -W "$PING_WAIT" "$GLOBAL_IP" > /dev/null; then
-    sudo netplan apply
+    refresh_netplan
 
     print_log "4" "sending an ICMP Echo packet to the Internet has failed"
   fi
+}
+
+refresh_netplan() {
+  sudo netplan apply
+  sleep "$SLEEP_INTERVAL" # ping fails immediately after "sudo netplan apply"
 }
 
 print_log() {
