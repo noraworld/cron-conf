@@ -4,6 +4,9 @@
 set -eu
 
 LOG_PATH="/home/ubuntu/.log/ip-observer"
+PING_COUNT="1"
+PING_WAIT="5"
+GLOBAL_IP="8.8.8.8"
 
 main() {
   parse "$@"
@@ -12,6 +15,7 @@ main() {
   networkd_aliver
   routing_exists
   addresses_exist
+  check_connectivity
 
   if [ "$DEBUG" = 1 ]; then
     print_log "0" "nothing wrong was detected"
@@ -45,6 +49,14 @@ addresses_exist() {
     sudo netplan apply
 
     print_log "3" "expected Wi-Fi IP address did not match actual one"
+  fi
+}
+
+check_connectivity() {
+  if ! ping -c "$PING_COUNT" -W "$PING_WAIT" "$GLOBAL_IP" > /dev/null; then
+    sudo netplan apply
+
+    print_log "4" "sending an ICMP Echo packet to the Internet has failed"
   fi
 }
 
