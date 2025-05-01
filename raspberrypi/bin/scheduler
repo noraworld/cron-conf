@@ -563,6 +563,7 @@ ometeotl() {
   esac
 }
 
+# Do not put heavy tasks here because they are performed every minute
 recurrent() {
   # Observe IP address not getting lost
   ip-observer
