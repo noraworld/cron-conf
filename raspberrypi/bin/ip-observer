@@ -1,7 +1,8 @@
 #!/bin/sh
 # shellcheck disable=SC2004
 
-set -eu
+# Disabled to refresh and log when some command fails
+# set -eu
 
 LOG_PATH="/home/ubuntu/.log/ip-observer"
 PING_COUNT="1"
