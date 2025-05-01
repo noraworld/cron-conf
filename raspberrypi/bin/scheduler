@@ -574,6 +574,9 @@ recurrent() {
   # Observe the system clock not lagging
   clock-observer
 
+  # Observe the hostapd
+  hostapd-observer
+
   # Observe the daemons running
   daemon-health --abandon
 

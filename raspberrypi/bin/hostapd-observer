@@ -1,0 +1,46 @@
+#!/bin/sh
+
+LOG_PATH="/home/ubuntu/.log/hostapd_observer.log"
+WLAN_IF="wlan0"
+SLEEP_INTERVAL="3"
+
+main() {
+  check_hostapd
+  check_wlan_state
+  check_address
+}
+
+check_hostapd() {
+  if ! systemctl is-active --quiet hostapd; then
+    echo "hostapd not active! restarting..." >> "$LOG_PATH"
+    sudo systemctl restart hostapd
+  fi
+}
+
+check_wlan_state() {
+  if ! ip link show "$WLAN_IF" | grep -q "state UP"; then
+    echo "$WLAN_IF is DOWN! bringing it up..." >> "$LOG_PATH"
+    up_wlan
+    sudo systemctl restart hostapd
+  fi
+}
+
+check_address() {
+  if ! ip -4 addr show "$WLAN_IF" | grep -q "inet "; then
+    echo "$WLAN_IF has no IP! reapplying netplan..." >> "$LOG_PATH"
+    refresh_netplan
+    sudo systemctl restart hostapd
+  fi
+}
+
+up_wlan() {
+  sudo ip link set "$WLAN_IF" up
+  sleep "$SLEEP_INTERVAL"
+}
+
+refresh_netplan() {
+  sudo netplan apply
+  sleep "$SLEEP_INTERVAL"
+}
+
+main "$@"
