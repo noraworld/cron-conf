@@ -1,259 +1,335 @@
 {
-  "loss_based": {
-    "discipline": {
-      "day": {
+  "discipline": {
+    "day": {
+      "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 0 --retry 1 --checked 4 $force",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
-      },
-      "night": {
+      }
+    },
+    "night": {
+      "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 0 --retry 1 --checked 6 $force",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
-      },
-      "midnight": {
+      }
+    },
+    "midnight": {
+      "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 0 --retry 1 --checked 10 $force",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
       }
-    },
-    "gaming": {
-      "day": {
-        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 1 --retry 1 --checked 12 --unchecked 0 $force",
-        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 1 --todo-repo \"noraworld/to-do\" $force",
-        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 1 --retry 1 --unchecked 0 $force",
-        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 1 --todo-repo \"noraworld/work-scraps\" $force"
-      },
-      "night": {
-        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 1 --retry 1 --checked 12 --unchecked 0 $force",
-        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 1 --todo-repo \"noraworld/to-do\" $force",
-        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 1 --retry 1 --unchecked 0 $force",
-        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 1 --todo-repo \"noraworld/work-scraps\" $force"
-      },
-      "midnight": {
+    }
+  },
+  "gaming": {
+    "day": {
+      "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 1 --retry 1 --checked 12 --unchecked 0 $force",
         "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 1 --todo-repo \"noraworld/to-do\" $force",
         "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 1 --retry 1 --unchecked 0 $force",
         "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 1 --todo-repo \"noraworld/work-scraps\" $force"
       }
     },
-    "netflix": {
-      "day": {
-        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 2 --retry 1 --checked 12 --unchecked 0 $force",
-        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 2 --todo-repo \"noraworld/to-do\" $force",
-        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 2 --retry 1 --unchecked 0 $force",
-        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 2 --todo-repo \"noraworld/work-scraps\" $force"
-      },
-      "night": {
-        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 2 --retry 1 --checked 12 --unchecked 0 $force",
-        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 2 --todo-repo \"noraworld/to-do\" $force",
-        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 2 --retry 1 --unchecked 0 $force",
-        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 2 --todo-repo \"noraworld/work-scraps\" $force"
-      },
-      "midnight": {
+    "night": {
+      "loss_based": {
+        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 1 --retry 1 --checked 12 --unchecked 0 $force",
+        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 1 --todo-repo \"noraworld/to-do\" $force",
+        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 1 --retry 1 --unchecked 0 $force",
+        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 1 --todo-repo \"noraworld/work-scraps\" $force"
+      }
+    },
+    "midnight": {
+      "loss_based": {
+        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 1 --retry 1 --checked 12 --unchecked 0 $force",
+        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 1 --todo-repo \"noraworld/to-do\" $force",
+        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 1 --retry 1 --unchecked 0 $force",
+        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 1 --todo-repo \"noraworld/work-scraps\" $force"
+      }
+    }
+  },
+  "netflix": {
+    "day": {
+      "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 2 --retry 1 --checked 12 --unchecked 0 $force",
         "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 2 --todo-repo \"noraworld/to-do\" $force",
         "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 2 --retry 1 --unchecked 0 $force",
         "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 2 --todo-repo \"noraworld/work-scraps\" $force"
       }
     },
-    "social-media": {
-      "day": {
+    "night": {
+      "loss_based": {
+        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 2 --retry 1 --checked 12 --unchecked 0 $force",
+        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 2 --todo-repo \"noraworld/to-do\" $force",
+        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 2 --retry 1 --unchecked 0 $force",
+        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 2 --todo-repo \"noraworld/work-scraps\" $force"
+      }
+    },
+    "midnight": {
+      "loss_based": {
+        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 2 --retry 1 --checked 12 --unchecked 0 $force",
+        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 2 --todo-repo \"noraworld/to-do\" $force",
+        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 2 --retry 1 --unchecked 0 $force",
+        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 2 --todo-repo \"noraworld/work-scraps\" $force"
+      }
+    }
+  },
+  "social-media": {
+    "day": {
+      "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 3 --retry 1 --checked 12 --unchecked 0 $force",
         "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 3 --todo-repo \"noraworld/to-do\" $force",
         "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 3 --retry 1 --unchecked 0 $force",
         "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 3 --todo-repo \"noraworld/work-scraps\" $force"
-      },
-      "night": {
+      }
+    },
+    "night": {
+      "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 3 --retry 1 --checked 12 --unchecked 0 $force",
         "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 3 --todo-repo \"noraworld/to-do\" $force",
         "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 3 --retry 1 --unchecked 0 $force",
         "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 3 --todo-repo \"noraworld/work-scraps\" $force"
-      },
-      "midnight": {
+      }
+    },
+    "midnight": {
+      "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 3 --retry 1 --checked 12 --unchecked 0 $force --include-today",
         "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 3 --todo-repo \"noraworld/to-do\" $force --include-today",
         "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 3 --retry 1 --unchecked 0 --include-today $force",
         "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 3 --todo-repo \"noraworld/work-scraps\" $force --include-today"
       }
-    },
-    "vod": {
-      "day": {
-        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 2 --retry 1 --checked 12 --unchecked 0 $force",
-        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 2 --todo-repo \"noraworld/to-do\" $force",
-        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 2 --retry 1 --unchecked 0 $force",
-        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 2 --todo-repo \"noraworld/work-scraps\" $force"
-      },
-      "night": {
-        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 2 --retry 1 --checked 12 --unchecked 0 $force",
-        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 2 --todo-repo \"noraworld/to-do\" $force",
-        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 2 --retry 1 --unchecked 0 $force",
-        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 2 --todo-repo \"noraworld/work-scraps\" $force"
-      },
-      "midnight": {
+    }
+  },
+  "vod": {
+    "day": {
+      "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 2 --retry 1 --checked 12 --unchecked 0 $force",
         "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 2 --todo-repo \"noraworld/to-do\" $force",
         "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 2 --retry 1 --unchecked 0 $force",
         "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 2 --todo-repo \"noraworld/work-scraps\" $force"
       }
     },
-    "youtube": {
-      "day": {
-        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 4 --retry 1 --checked 12 --unchecked 0 $force",
-        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 4 --todo-repo \"noraworld/to-do\" $force",
-        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 4 --retry 1 --unchecked 0 $force",
-        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 4 --todo-repo \"noraworld/work-scraps\" $force"
-      },
-      "night": {
-        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 4 --retry 1 --checked 12 --unchecked 0 $force",
-        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 4 --todo-repo \"noraworld/to-do\" $force",
-        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 4 --retry 1 --unchecked 0 $force",
-        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 4 --todo-repo \"noraworld/work-scraps\" $force"
-      },
-      "midnight": {
+    "night": {
+      "loss_based": {
+        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 2 --retry 1 --checked 12 --unchecked 0 $force",
+        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 2 --todo-repo \"noraworld/to-do\" $force",
+        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 2 --retry 1 --unchecked 0 $force",
+        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 2 --todo-repo \"noraworld/work-scraps\" $force"
+      }
+    },
+    "midnight": {
+      "loss_based": {
+        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 2 --retry 1 --checked 12 --unchecked 0 $force",
+        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 2 --todo-repo \"noraworld/to-do\" $force",
+        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 2 --retry 1 --unchecked 0 $force",
+        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 2 --todo-repo \"noraworld/work-scraps\" $force"
+      }
+    }
+  },
+  "youtube": {
+    "day": {
+      "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 4 --retry 1 --checked 12 --unchecked 0 $force",
         "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 4 --todo-repo \"noraworld/to-do\" $force",
         "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 4 --retry 1 --unchecked 0 $force",
         "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 4 --todo-repo \"noraworld/work-scraps\" $force"
       }
     },
-    "youtube-alternative": {
-      "day": {
-        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 3 --retry 1 --checked 12 --unchecked 0 $force",
-        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 3 --todo-repo \"noraworld/to-do\" $force",
-        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 3 --retry 1 --unchecked 0 $force",
-        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 3 --todo-repo \"noraworld/work-scraps\" $force"
-      },
-      "night": {
-        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 3 --retry 1 --checked 12 --unchecked 0 $force",
-        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 3 --todo-repo \"noraworld/to-do\" $force",
-        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 3 --retry 1 --unchecked 0 $force",
-        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 3 --todo-repo \"noraworld/work-scraps\" $force"
-      },
-      "midnight": {
+    "night": {
+      "loss_based": {
+        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 4 --retry 1 --checked 12 --unchecked 0 $force",
+        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 4 --todo-repo \"noraworld/to-do\" $force",
+        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 4 --retry 1 --unchecked 0 $force",
+        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 4 --todo-repo \"noraworld/work-scraps\" $force"
+      }
+    },
+    "midnight": {
+      "loss_based": {
+        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 4 --retry 1 --checked 12 --unchecked 0 $force",
+        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 4 --todo-repo \"noraworld/to-do\" $force",
+        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 4 --retry 1 --unchecked 0 $force",
+        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 4 --todo-repo \"noraworld/work-scraps\" $force"
+      }
+    }
+  },
+  "youtube-alternative": {
+    "day": {
+      "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 3 --retry 1 --checked 12 --unchecked 0 $force",
         "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 3 --todo-repo \"noraworld/to-do\" $force",
         "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 3 --retry 1 --unchecked 0 $force",
         "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 3 --todo-repo \"noraworld/work-scraps\" $force"
       }
     },
-    "youtube-music-persistent": {
-      "day": {
+    "night": {
+      "loss_based": {
+        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 3 --retry 1 --checked 12 --unchecked 0 $force",
+        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 3 --todo-repo \"noraworld/to-do\" $force",
+        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 3 --retry 1 --unchecked 0 $force",
+        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 3 --todo-repo \"noraworld/work-scraps\" $force"
+      }
+    },
+    "midnight": {
+      "loss_based": {
+        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 3 --retry 1 --checked 12 --unchecked 0 $force",
+        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 3 --todo-repo \"noraworld/to-do\" $force",
+        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 3 --retry 1 --unchecked 0 $force",
+        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 3 --todo-repo \"noraworld/work-scraps\" $force"
+      }
+    }
+  },
+  "youtube-music-persistent": {
+    "day": {
+      "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 0 --retry 1 --checked 4 $force",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
-      },
-      "night": {
+      }
+    },
+    "night": {
+      "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 0 --retry 1 --checked 6 $force",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
-      },
-      "midnight": {
+      }
+    },
+    "midnight": {
+      "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 0 --retry 1 --checked 10 $force",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
       }
-    },
-    "deregulated-superman": {
-      "day": {
-        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 2 --retry 1 --checked 12 --unchecked 0 $force",
-        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 2 --todo-repo \"noraworld/to-do\" $force",
-        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 2 --retry 1 --unchecked 0 $force",
-        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 2 --todo-repo \"noraworld/work-scraps\" $force"
-      },
-      "night": {
-        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 2 --retry 1 --checked 12 --unchecked 0 $force",
-        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 2 --todo-repo \"noraworld/to-do\" $force",
-        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 2 --retry 1 --unchecked 0 $force",
-        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 2 --todo-repo \"noraworld/work-scraps\" $force"
-      },
-      "midnight": {
+    }
+  },
+  "deregulated-superman": {
+    "day": {
+      "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 2 --retry 1 --checked 12 --unchecked 0 $force",
         "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 2 --todo-repo \"noraworld/to-do\" $force",
         "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 2 --retry 1 --unchecked 0 $force",
         "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 2 --todo-repo \"noraworld/work-scraps\" $force"
       }
     },
-    "maeve": {
-      "day": {
-        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 3 --retry 1 --checked 12 --unchecked 0 $force",
-        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 3 --todo-repo \"noraworld/to-do\" $force",
-        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 3 --retry 1 --unchecked 0 $force",
-        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 3 --todo-repo \"noraworld/work-scraps\" $force"
-      },
-      "night": {
-        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 3 --retry 1 --checked 12 --unchecked 0 $force",
-        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 3 --todo-repo \"noraworld/to-do\" $force",
-        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 3 --retry 1 --unchecked 0 $force",
-        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 3 --todo-repo \"noraworld/work-scraps\" $force"
-      },
-      "midnight": {
+    "night": {
+      "loss_based": {
+        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 2 --retry 1 --checked 12 --unchecked 0 $force",
+        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 2 --todo-repo \"noraworld/to-do\" $force",
+        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 2 --retry 1 --unchecked 0 $force",
+        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 2 --todo-repo \"noraworld/work-scraps\" $force"
+      }
+    },
+    "midnight": {
+      "loss_based": {
+        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 2 --retry 1 --checked 12 --unchecked 0 $force",
+        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 2 --todo-repo \"noraworld/to-do\" $force",
+        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 2 --retry 1 --unchecked 0 $force",
+        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 2 --todo-repo \"noraworld/work-scraps\" $force"
+      }
+    }
+  },
+  "maeve": {
+    "day": {
+      "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 3 --retry 1 --checked 12 --unchecked 0 $force",
         "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 3 --todo-repo \"noraworld/to-do\" $force",
         "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 3 --retry 1 --unchecked 0 $force",
         "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 3 --todo-repo \"noraworld/work-scraps\" $force"
       }
     },
-    "ometeotl": {
-      "day": {
-        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 1 --retry 1 --checked 12 --unchecked 0 $force",
-        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 1 --todo-repo \"noraworld/to-do\" $force",
-        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 1 --retry 1 --unchecked 0 $force",
-        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 1 --todo-repo \"noraworld/work-scraps\" $force"
-      },
-      "night": {
-        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 1 --retry 1 --checked 12 --unchecked 0 $force",
-        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 1 --todo-repo \"noraworld/to-do\" $force",
-        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 1 --retry 1 --unchecked 0 $force",
-        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 1 --todo-repo \"noraworld/work-scraps\" $force"
-      },
-      "midnight": {
+    "night": {
+      "loss_based": {
+        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 3 --retry 1 --checked 12 --unchecked 0 $force",
+        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 3 --todo-repo \"noraworld/to-do\" $force",
+        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 3 --retry 1 --unchecked 0 $force",
+        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 3 --todo-repo \"noraworld/work-scraps\" $force"
+      }
+    },
+    "midnight": {
+      "loss_based": {
+        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 3 --retry 1 --checked 12 --unchecked 0 $force",
+        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 3 --todo-repo \"noraworld/to-do\" $force",
+        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 3 --retry 1 --unchecked 0 $force",
+        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 3 --todo-repo \"noraworld/work-scraps\" $force"
+      }
+    }
+  },
+  "ometeotl": {
+    "day": {
+      "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 1 --retry 1 --checked 12 --unchecked 0 $force",
         "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 1 --todo-repo \"noraworld/to-do\" $force",
         "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 1 --retry 1 --unchecked 0 $force",
         "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 1 --todo-repo \"noraworld/work-scraps\" $force"
       }
     },
-    "superman": {
-      "day": {
-        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 4 --retry 1 --checked 12 --unchecked 0 $force",
-        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 4 --todo-repo \"noraworld/to-do\" $force",
-        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 4 --retry 1 --unchecked 0 $force",
-        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 4 --todo-repo \"noraworld/work-scraps\" $force"
-      },
-      "night": {
-        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 4 --retry 1 --checked 12 --unchecked 0 $force",
-        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 4 --todo-repo \"noraworld/to-do\" $force",
-        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 4 --retry 1 --unchecked 0 $force",
-        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 4 --todo-repo \"noraworld/work-scraps\" $force"
-      },
-      "midnight": {
+    "night": {
+      "loss_based": {
+        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 1 --retry 1 --checked 12 --unchecked 0 $force",
+        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 1 --todo-repo \"noraworld/to-do\" $force",
+        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 1 --retry 1 --unchecked 0 $force",
+        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 1 --todo-repo \"noraworld/work-scraps\" $force"
+      }
+    },
+    "midnight": {
+      "loss_based": {
+        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 1 --retry 1 --checked 12 --unchecked 0 $force",
+        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 1 --todo-repo \"noraworld/to-do\" $force",
+        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 1 --retry 1 --unchecked 0 $force",
+        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 1 --todo-repo \"noraworld/work-scraps\" $force"
+      }
+    }
+  },
+  "superman": {
+    "day": {
+      "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 4 --retry 1 --checked 12 --unchecked 0 $force",
         "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 4 --todo-repo \"noraworld/to-do\" $force",
         "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 4 --retry 1 --unchecked 0 $force",
         "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 4 --todo-repo \"noraworld/work-scraps\" $force"
       }
     },
-    "upstream": {
-      "day": {
+    "night": {
+      "loss_based": {
+        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 4 --retry 1 --checked 12 --unchecked 0 $force",
+        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 4 --todo-repo \"noraworld/to-do\" $force",
+        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 4 --retry 1 --unchecked 0 $force",
+        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 4 --todo-repo \"noraworld/work-scraps\" $force"
+      }
+    },
+    "midnight": {
+      "loss_based": {
+        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 4 --retry 1 --checked 12 --unchecked 0 $force",
+        "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 4 --todo-repo \"noraworld/to-do\" $force",
+        "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 4 --retry 1 --unchecked 0 $force",
+        "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 4 --todo-repo \"noraworld/work-scraps\" $force"
+      }
+    }
+  },
+  "upstream": {
+    "day": {
+      "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 3 --retry 1 --checked 12 --unchecked 0 $force",
         "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 3 --todo-repo \"noraworld/to-do\" $force",
         "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 3 --retry 1 --unchecked 0 $force",
         "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 3 --todo-repo \"noraworld/work-scraps\" $force"
-      },
-      "night": {
+      }
+    },
+    "night": {
+      "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 3 --retry 1 --checked 12 --unchecked 0 $force",
         "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 3 --todo-repo \"noraworld/to-do\" $force",
         "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 3 --retry 1 --unchecked 0 $force",
         "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 3 --todo-repo \"noraworld/work-scraps\" $force"
-      },
-      "midnight": {
+      }
+    },
+    "midnight": {
+      "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 3 --retry 1 --checked 12 --unchecked 0 $force",
         "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 3 --todo-repo \"noraworld/to-do\" $force",
         "todo_work": "todo-accomplished     --repo \"noraworld/daily-report\"   --past 3 --retry 1 --unchecked 0 $force",
