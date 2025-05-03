@@ -13,10 +13,10 @@ main() {
     force=""
   fi
 
-  todo_personal=$(eval $(cat "$STRATEGY_FILE" | jq ".${SERVICE}.${TIMEFRAME}.${STRATEGY}.todo_personal" | sed -e 's/^"//' -e 's/"$//' -e 's/\\"/"/g'))
-  task_personal=$(eval $(cat "$STRATEGY_FILE" | jq ".${SERVICE}.${TIMEFRAME}.${STRATEGY}.task_personal" | sed -e 's/^"//' -e 's/"$//' -e 's/\\"/"/g'))
-  todo_work=$(eval $(cat "$STRATEGY_FILE" | jq ".${SERVICE}.${TIMEFRAME}.${STRATEGY}.todo_work" | sed -e 's/^"//' -e 's/"$//' -e 's/\\"/"/g'))
-  task_work=$(eval $(cat "$STRATEGY_FILE" | jq ".${SERVICE}.${TIMEFRAME}.${STRATEGY}.task_work" | sed -e 's/^"//' -e 's/"$//' -e 's/\\"/"/g'))
+  todo_personal=$(eval $(cat "$STRATEGY_FILE" | jq ".\"${SERVICE}\".${TIMEFRAME}.${STRATEGY}.todo_personal" | sed -e 's/^"//' -e 's/"$//' -e 's/\\"/"/g'))
+  task_personal=$(eval $(cat "$STRATEGY_FILE" | jq ".\"${SERVICE}\".${TIMEFRAME}.${STRATEGY}.task_personal" | sed -e 's/^"//' -e 's/"$//' -e 's/\\"/"/g'))
+  todo_work=$(eval $(cat "$STRATEGY_FILE" | jq ".\"${SERVICE}\".${TIMEFRAME}.${STRATEGY}.todo_work" | sed -e 's/^"//' -e 's/"$//' -e 's/\\"/"/g'))
+  task_work=$(eval $(cat "$STRATEGY_FILE" | jq ".\"${SERVICE}\".${TIMEFRAME}.${STRATEGY}.task_work" | sed -e 's/^"//' -e 's/"$//' -e 's/\\"/"/g'))
 
   sum=$(( $todo_personal + $todo_work + $task_personal + $task_work ))
   product=$(( $todo_personal * $todo_work * $task_personal * $task_work ))
