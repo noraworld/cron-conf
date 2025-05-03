@@ -8,7 +8,7 @@ CHECK_INTERVAL="3600"
 GUESSED_ISSUES_LIST_FILE="guessed_issues_list"
 ISSUES_LIST_INTERVAL="21600"
 LEGITIMATE_ISSUES_LIST_FILE="legitimate_issues_list"
-NEW_DAY_OFFSET="2 hours ago"
+NEW_DAY_OFFSET="9 hours ago"
 
 main() {
   parse "$@"
