@@ -1,6 +1,6 @@
 #!/bin/sh
 
-STRATEGY="loss_based"
+STRATEGY="scraping_by"
 STRATEGY_FILE="/home/ubuntu/workspace/cron-conf/raspberrypi/config/quotarget.json"
 
 main() {
