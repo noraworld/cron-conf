@@ -7,7 +7,7 @@
 LOG_PATH="/home/ubuntu/.log/ip-observer"
 SLEEP_INTERVAL="3"
 PING_COUNT="1"
-PING_WAIT="5"
+PING_WAIT="6"
 GLOBAL_IP="8.8.8.8"
 
 main() {
