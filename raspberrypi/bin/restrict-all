@@ -3,6 +3,7 @@
 
 TOGGLE_DIR="/etc/dnsmasq.toggle"
 PRIV_TOGGLE_DIR="/etc/dnsmasq.priv/toggle"
+PROG_NAME="restrict-all"
 
 main() {
   parse "$@"
@@ -91,8 +92,12 @@ reset() {
   #   On top of that, restarting the Dnsmasq daemon is not executed
   #   without the "--immediately" option for some reason,
   #   even though it is performed in a current shell.
+  # sudo systemctl restart dnsmasq
 
-  sudo systemctl restart dnsmasq
+  # TODO:
+  #   Delete the above comment if the below one works fine.
+
+  exrd --log /home/ubuntu/.log/exrd.log --from "$(echo "$PROG_NAME $@")"
 }
 
 build() {
