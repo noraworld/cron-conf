@@ -611,6 +611,9 @@ periodic() {
       "/home/ubuntu/workspace/systemd-units" &
   fi
 
+  # Auto back up log
+  git -C "/home/ubuntu/workspace/log" push --set-upstream origin main
+
   # Notify each time you achieve your daily digital detox
   digital-detox-notifier
 
