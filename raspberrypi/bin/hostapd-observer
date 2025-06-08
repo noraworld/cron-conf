@@ -1,6 +1,6 @@
 #!/bin/sh
 
-LOG_PATH="/home/ubuntu/.log/hostapd_observer.log"
+LOG_PATH="/home/ubuntu/workspace/log/pi/log/hostapd_observer.log"
 WLAN_IF="wlan0"
 SLEEP_INTERVAL="3"
 

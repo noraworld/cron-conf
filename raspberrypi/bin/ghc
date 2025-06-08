@@ -1,6 +1,6 @@
 #!/bin/sh
 
-LOG_PATH="/home/ubuntu/.log/gh_api_invoked.log"
+LOG_PATH="/home/ubuntu/workspace/log/pi/log/gh_api_invoked.log"
 
 main() {
   # Include a blank line for each date.

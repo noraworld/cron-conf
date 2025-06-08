@@ -25,7 +25,7 @@ main() {
   done
 
   if [ "$new_commits" = "true" ]; then
-    exrd --log "/home/ubuntu/.log/exrd.log" --from "$PROG_NAME $*"
+    exrd --log "/home/ubuntu/workspace/log/pi/log/exrd.log" --from "$PROG_NAME $*"
   fi
 
   # NOTE: The process here has not been confirmed to work yet, which means it potentially contains severe bugs.

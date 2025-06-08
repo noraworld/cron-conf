@@ -1,6 +1,6 @@
 #!/bin/sh
 
-LOG_PATH="/home/ubuntu/.log/cron-daemonctl.log"
+LOG_PATH="/home/ubuntu/workspace/log/pi/log/cron-daemonctl.log"
 UPTIME_THRESHOLD="5"
 
 # how long before sshd starts

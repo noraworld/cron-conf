@@ -640,7 +640,7 @@ startup() {
   clock-observer
   metronome set full
   search-stoppable-observer-daemons --skip --delay 30
-  # marlin autoconnect all --retry 2 --only iPhone,Mac # --log /home/ubuntu/.log/bluetooth_autoconnect.log
+  # marlin autoconnect all --retry 2 --only iPhone,Mac # --log /home/ubuntu/workspace/log/pi/log/bluetooth_autoconnect.log
 }
 
 superman() {

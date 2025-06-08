@@ -103,7 +103,7 @@ perform() {
       sudo systemctl restart dnsmasq
     else
       # It is performed in the background.
-      exrd --skip --log /home/ubuntu/.log/exrd.log --from "$PROG_NAME $*" &
+      exrd --skip --log /home/ubuntu/workspace/log/pi/log/exrd.log --from "$PROG_NAME $*" &
     fi
   fi
 }

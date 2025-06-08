@@ -1,6 +1,6 @@
 #!/bin/sh
 
-LOG_PATH="/home/ubuntu/.log/daemon_health.log"
+LOG_PATH="/home/ubuntu/workspace/log/pi/log/daemon_health.log"
 NORMAL_COLOR="\033[0m"
 STATE_PATH="/home/ubuntu/.tmp/daemon_health"
 

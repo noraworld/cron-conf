@@ -4,7 +4,7 @@
 # Disabled to refresh and log when some command fails
 # set -eu
 
-LOG_PATH="/home/ubuntu/.log/ip-observer"
+LOG_PATH="/home/ubuntu/workspace/log/pi/log/ip-observer"
 SLEEP_INTERVAL="3"
 PING_COUNT="1"
 PING_WAIT="6"
