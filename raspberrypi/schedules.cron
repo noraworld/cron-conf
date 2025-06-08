@@ -55,6 +55,11 @@ NON_ROOT_USER=ubuntu
 
 
 
+# Keep track of log-related files
+57 23 * * * scheduler report
+
+
+
 # Perform periodic tasks
 */1  * * * * scheduler recurrent
 */10 * * * * scheduler periodic

@@ -84,6 +84,9 @@ main() {
     "morning")
       morning
       ;;
+    "report")
+      report
+      ;;
     "netflix")
       netflix
       ;;
@@ -285,6 +288,12 @@ morning() {
 
   # Network
   # vpnctl disconnect --skipdns
+}
+
+report() {
+  git -C "/home/ubuntu/workspace/log" add --all
+  git -C "/home/ubuntu/workspace/log" commit --message "Periodic backup: $(date '+%Y-%m-%d')"
+  git -C "/home/ubuntu/workspace/log" push --set-upstream origin main
 }
 
 deregulated_superman() {
