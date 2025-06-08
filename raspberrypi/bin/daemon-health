@@ -2,7 +2,7 @@
 
 LOG_PATH="/home/ubuntu/workspace/log/pi/log/daemon_health.log"
 NORMAL_COLOR="\033[0m"
-STATE_PATH="/home/ubuntu/.tmp/daemon_health"
+STATE_PATH="/home/ubuntu/workspace/log/pi/tmp/daemon_health"
 
 main() {
   parse "$@"
