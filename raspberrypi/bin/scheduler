@@ -587,7 +587,7 @@ recurrent() {
   hostapd-observer
 
   # Observe the daemons running
-  daemon-health --daemon-restart-threshold 3 --reboot-threshold 5
+  daemon-health --daemon-restart-threshold 3 --reboot-threshold 5 --check-delay 5
 
   # Empty "at -l" to prevent illegal batches
   batch-remover
