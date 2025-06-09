@@ -12,9 +12,9 @@ main() {
   setup
 
   sleep "$CHECK_DELAY"
-  check_daemon "ssh"
   check_daemon "dnsmasq"
   check_daemon "hostapd"
+  check_daemon "ssh"
 }
 
 check_daemon() {
