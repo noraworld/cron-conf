@@ -35,13 +35,17 @@ main() {
     pause "$DELAY" "$COOLDOWN_MESSAGE"
   fi
 
+  if [ "$INTERVAL" = "" ]; then
+    # 5 is not enough for observe-dnsmasq-toggle-conf
+    # Even 10 is not sufficient sometimes
+    INTERVAL=10
+  fi
+
   log_before_execution "$@"
 
   for service in $services; do
     reference_minute=0
-    # 5 is not enough for observe-dnsmasq-toggle-conf
-    # Even 10 is not sufficient sometimes
-    waiting_interval=10
+    waiting_interval="$INTERVAL"
     linkage_succeeded=0
     retry_count=0
 
@@ -1445,6 +1449,7 @@ parser_definition() {
   flag  DEBUG         --debug     -- "write debugging information to a file (disabled if --times is specified)"
   param DELAY         --delay     -- "wait the execution for a given time"
   flag  DRY_RUN       --dry-run   -- "just show remaining time"
+  param INTERVAL      --interval  -- "wait for the given number of seconds each time"
   flag  NO_RESTART    --norestart -- "skip to restart the daemon"
   flag  RECONNECT_VPN --reconnect -- "force to reconnect the VPN server"
   flag  SKIP          --skip      -- "skip the first sleep and retry"
@@ -1462,6 +1467,7 @@ parser_definition() {
 DEBUG=''
 DELAY=''
 DRY_RUN=''
+INTERVAL=''
 NO_RESTART=''
 RECONNECT_VPN=''
 SKIP=''
@@ -1497,6 +1503,11 @@ parse() {
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
         DRY_RUN="$OPTARG"
         ;;
+      '--interval')
+        [ $# -le 1 ] && set "required" "$1" && break
+        OPTARG=$2
+        INTERVAL="$OPTARG"
+        shift ;;
       '--norestart')
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
@@ -1566,6 +1577,7 @@ Options:
       --debug                 write debugging information to a file (disabled if --times is specified)
       --delay DELAY           wait the execution for a given time
       --dry-run               just show remaining time
+      --interval INTERVAL     wait for the given number of seconds each time
       --norestart             skip to restart the daemon
       --reconnect             force to reconnect the VPN server
       --skip                  skip the first sleep and retry
