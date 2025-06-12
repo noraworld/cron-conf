@@ -11,7 +11,6 @@ COOLDOWN_INTERVAL=0 # ideal: 10 (this may be unnecessary)
 DELAY_INTERVAL=5    # ideal: 5
 RETRY_INTERVAL=10   # ideal: 10
 TIMES_LIMIT=-1      # disabled by https://github.com/noraworld/cron-conf/commit/57be24fbe3ffb9b95ad55f7b8ef3dfaae6846551
-RETRY_THRESOLD=5
 
 COOLDOWN_MESSAGE="to avoid excessive execution"
 WAITING_MESSAGE="for the observer daemon to be effective"
@@ -41,6 +40,10 @@ main() {
     INTERVAL=10
   fi
 
+  if [ "$RETRY" = "" ]; then
+    RETRY=5
+  fi
+
   log_before_execution "$@"
 
   for service in $services; do
@@ -49,7 +52,7 @@ main() {
     linkage_succeeded=0
     retry_count=0
 
-    while [ "$linkage_succeeded" = "0" ] && [ "$retry_count" -lt "$RETRY_THRESOLD" ]; do
+    while [ "$linkage_succeeded" = "0" ] && [ "$retry_count" -lt "$RETRY" ]; do
       case "$service" in
         "all")
           all
@@ -1452,6 +1455,7 @@ parser_definition() {
   param INTERVAL      --interval  -- "wait for the given number of seconds each time"
   flag  NO_RESTART    --norestart -- "skip to restart the daemon"
   flag  RECONNECT_VPN --reconnect -- "force to reconnect the VPN server"
+  param RETRY         --retry     -- "try to create or delete symlinks the given number of times"
   flag  SKIP          --skip      -- "skip the first sleep and retry"
   param TIMES         --times     -- "how many times unlock in a row"
   flag  VERBOSE       --verbose   -- "show the redundant information"
@@ -1470,6 +1474,7 @@ DRY_RUN=''
 INTERVAL=''
 NO_RESTART=''
 RECONNECT_VPN=''
+RETRY=''
 SKIP=''
 TIMES=''
 VERBOSE=''
@@ -1518,6 +1523,11 @@ parse() {
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
         RECONNECT_VPN="$OPTARG"
         ;;
+      '--retry')
+        [ $# -le 1 ] && set "required" "$1" && break
+        OPTARG=$2
+        RETRY="$OPTARG"
+        shift ;;
       '--skip')
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
@@ -1580,6 +1590,7 @@ Options:
       --interval INTERVAL     wait for the given number of seconds each time
       --norestart             skip to restart the daemon
       --reconnect             force to reconnect the VPN server
+      --retry RETRY           try to create or delete symlinks the given number of times
       --skip                  skip the first sleep and retry
       --times TIMES           how many times unlock in a row
       --verbose               show the redundant information
