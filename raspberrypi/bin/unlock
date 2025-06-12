@@ -40,6 +40,7 @@ main() {
   for service in $services; do
     reference_minute=0
     # 5 is not enough for observe-dnsmasq-toggle-conf
+    # Even 10 is not sufficient sometimes
     waiting_interval=10
     linkage_succeeded=0
     retry_count=0
