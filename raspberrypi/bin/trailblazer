@@ -30,6 +30,14 @@ main() {
     force=""
   fi
 
+  if [ "$INTERVAL" = "" ]; then
+    INTERVAL=10
+  fi
+
+  if [ "$RETRY" = "" ]; then
+    RETRY=5
+  fi
+
   if [ "$MORNING" = 1 ]; then
     garnish prep
     echo
@@ -84,7 +92,7 @@ main() {
 
   # value: positive
   if [ "$DRY_RUN" != "1" ]; then
-    unlock $services --skip
+    unlock $services --skip --interval $INTERVAL --retry $RETRY
   else
     echo "Accomplished!!"
   fi
@@ -94,13 +102,15 @@ main() {
 parser_definition() {
   setup   REST help:usage -- "Usage: trailblazer [options]... [arguments]..." ''
   msg -- 'Options:'
-  flag    DRY_RUN    --dry-run -- "just show the success message instead of unlocking the services"
-  flag    FORCE      --force   -- "get content from APIs even if cache exists"
-  flag    MORNING    --morning -- "skip quotarget, and ask to prepare a piece of garlic"
-  flag    REFRESH    --refresh -- "restart todo-list daemon before check"
-  param   SLEEP      --sleep   -- "how many seconds to wait for the next attempt"
-  disp    :usage  -h --help
-  disp    VERSION    --version
+  flag    DRY_RUN     --dry-run  -- "just show the success message instead of unlocking the services"
+  flag    FORCE       --force    -- "get content from APIs even if cache exists"
+  param   INTERVAL    --interval -- "wait for the given number of seconds each time (unlock)"
+  flag    MORNING     --morning  -- "skip quotarget, and ask to prepare a piece of garlic"
+  flag    REFRESH     --refresh  -- "restart todo-list daemon before check"
+  param   RETRY       --retry    -- "try to create or delete symlinks the given number of times (unlock)"
+  param   SLEEP       --sleep    -- "how many seconds to wait for the next attempt"
+  disp    :usage   -h --help
+  disp    VERSION     --version
 }
 # @end
 
@@ -109,8 +119,10 @@ parser_definition() {
 # URL: https://github.com/ko1nksm/getoptions (v3.3.0)
 DRY_RUN=''
 FORCE=''
+INTERVAL=''
 MORNING=''
 REFRESH=''
+RETRY=''
 SLEEP=''
 REST=''
 parse() {
@@ -136,6 +148,11 @@ parse() {
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
         FORCE="$OPTARG"
         ;;
+      '--interval')
+        [ $# -le 1 ] && set "required" "$1" && break
+        OPTARG=$2
+        INTERVAL="$OPTARG"
+        shift ;;
       '--morning')
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
@@ -146,6 +163,11 @@ parse() {
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
         REFRESH="$OPTARG"
         ;;
+      '--retry')
+        [ $# -le 1 ] && set "required" "$1" && break
+        OPTARG=$2
+        RETRY="$OPTARG"
+        shift ;;
       '--sleep')
         [ $# -le 1 ] && set "required" "$1" && break
         OPTARG=$2
@@ -189,8 +211,10 @@ Usage: trailblazer [options]... [arguments]...
 Options:
       --dry-run               just show the success message instead of unlocking the services
       --force                 get content from APIs even if cache exists
+      --interval INTERVAL     wait for the given number of seconds each time (unlock)
       --morning               skip quotarget, and ask to prepare a piece of garlic
       --refresh               restart todo-list daemon before check
+      --retry RETRY           try to create or delete symlinks the given number of times (unlock)
       --sleep SLEEP           how many seconds to wait for the next attempt
   -h, --help
       --version
