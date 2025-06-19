@@ -62,7 +62,7 @@ EOF
 build_true_tasklist() {
   if { [ "$(
     echo "$1" |
-    grep -cE "\*\s*\[x\]\s*\[.*\]\(https\:\/\/github\.com\/$(echo $TEMPLATE_REPO | sed -r "s|/|\\\/|g")\/issues\/[0-9]*\)"
+    grep -cE "\*\s*\[x\].*\[.*\]\(https\:\/\/github\.com\/$(echo $TEMPLATE_REPO | sed -r "s|/|\\\/|g")\/issues\/[0-9]*\)"
   )" -ne 0 ] && [ "$(
     ghc issue view \
       --json comments \
