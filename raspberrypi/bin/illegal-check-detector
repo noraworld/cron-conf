@@ -60,15 +60,32 @@ EOF
 
 # I wonder if there is a better way to suppress the number of calls of the APIs 🤔
 build_true_tasklist() {
-  if { [ \
-  "$(echo "$1" | grep -cE "\*\s*\[x\]\s*\[.*\]\(https\:\/\/github\.com\/$(echo $TEMPLATE_REPO | sed -r "s|/|\\\/|g")\/issues\/[0-9]*\)")" -ne 0 \
-  ] && [ \
-  "$(ghc issue view --json comments --jq .comments.[].body "$(echo "$1" | grep -oP '\(https?://[^\)]*\)' | sed 's/[()]//g')" || echo "something")" = "" \
-  ]; } || { [ \
-  "$(echo "$1" | grep -cE "\*\s*\[x\]\s*\[.*\]\(https\:\/\/github\.com\/$(echo $TODO_REPO | sed -r "s|/|\\\/|g")\/issues\/[0-9]*\)")" -ne 0 \
-  ] && [ \
-  "$(ghc issue view --json state --jq .state "$(echo "$1" | grep -oP '\(https?://[^\)]*\)' | sed 's/[()]//g')")" = "OPEN" \
-  ]; }; then
+  if { [ "$(
+    echo "$1" |
+    grep -cE "\*\s*\[x\]\s*\[.*\]\(https\:\/\/github\.com\/$(echo $TEMPLATE_REPO | sed -r "s|/|\\\/|g")\/issues\/[0-9]*\)"
+  )" -ne 0 ] && [ "$(
+    ghc issue view \
+      --json comments \
+      --jq .comments.[].body \
+      "$(echo "$1" | grep -oP '\(https?://[^\)]*\)' | sed 's/[()]//g')" ||
+    echo "something"
+  )" = "" ]; }; then
+    illegal=true
+  fi
+
+  if { [ "$(
+    echo "$1" |
+    grep -cE "\*\s*\[x\]\s*\[.*\]\(https\:\/\/github\.com\/$(echo $TODO_REPO | sed -r "s|/|\\\/|g")\/issues\/[0-9]*\)"
+  )" -ne 0 ] && [ "$(
+    ghc issue view \
+      --json state \
+      --jq .state \
+      "$(echo "$1" | grep -oP '\(https?://[^\)]*\)' | sed 's/[()]//g')"
+  )" = "OPEN" ]; }; then
+    illegal=true
+  fi
+
+  if [ "$illegal" = "true" ]; then
     echo "$1" | sed -r "s/^\*\s*\[x\]/\* \[ \]/g"
   else
     echo "$1"
