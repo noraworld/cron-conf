@@ -40,19 +40,35 @@ main() {
 
 # DO NOT INDENT THESE LINES!
 while IFS= read -r line; do
-  result="$result$(build_true_tasklist "$line")\n"
+  true_body="$true_body$(build_true_tasklist "$line")\n"
 done <<EOF
 $body
 EOF
 
-  if [ "$body" != "$(echo "$result" | sed '${/^$/d}')" ]; then
+  if [ "$body" != "$(echo "$true_body" | sed '${/^$/d}')" ]; then
     # Update the body because it was illegal!
     number=$(ghc issue list --repo "$MAIN_REPO" --limit 1 | awk '{ print $1 }')
-    ghc issue edit --repo "$MAIN_REPO" "$number" --body "$(echo "$result" | sed '${/^$/d}')" > /dev/null 2>&1
+    ghc issue edit --repo "$MAIN_REPO" "$number" --body "$(echo "$true_body" | sed '${/^$/d}')" > /dev/null 2>&1
+    result="-1"
+  fi
+
+  template_body=$(ghc api "repos/$MAIN_REPO/contents/.github/ISSUE_TEMPLATE/general.md" --jq .content | base64 --decode)
+
+# DO NOT INDENT THESE LINES!
+while IFS= read -r line; do
+  mandatory_task_status=$(detect_mandatory_tasks "$line")
+  if [ "$mandatory_task_status" = "-1" ]; then
+    result="-1"
+    return
+  fi
+done <<EOF
+$template_body
+EOF
+
+  if [ "$result" = "-1" ]; then
     echo "-1" > "$RESULT_FILE"
     echo "-1"
   else
-    # Do nothing because the body was legal.
     echo "1" > "$RESULT_FILE"
     echo "1"
   fi
@@ -89,6 +105,22 @@ build_true_tasklist() {
     echo "$1" | sed -r "s/^\*\s*\[x\]/\* \[ \]/g"
   else
     echo "$1"
+  fi
+}
+
+detect_mandatory_tasks() {
+  if [ "$(echo "$1" | grep -cE "\*\s*\[\s\]")" -gt 0 ]; then
+    diary_template_title=$(echo "$1" | sed -E 's/^\* \[[ x]?\]( [^ ]+)? //')
+
+    if [ "$(
+      echo "$body" |
+      grep -cE "\*\s*\[[ x]\].*\[$diary_template_title\]\(https\:\/\/github\.com\/$(
+        echo $TEMPLATE_REPO |
+        sed -r "s|/|\\\/|g"
+      )\/issues\/[0-9]*\)"
+    )" -eq 0 ]; then
+      echo "-1"
+    fi
   fi
 }
 
