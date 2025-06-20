@@ -19,7 +19,7 @@ set -e
 
 export GHC_FROM="$(basename "$0") $*"
 
-CHECK_INTERVAL="7200"
+CHECK_INTERVAL="3600"
 NEW_DAY_OFFSET="9 hours ago"
 
 main() {
