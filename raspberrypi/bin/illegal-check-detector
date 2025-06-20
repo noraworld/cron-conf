@@ -59,7 +59,7 @@ while IFS= read -r line; do
   mandatory_task_status=$(detect_mandatory_tasks "$line")
   if [ "$mandatory_task_status" = "-1" ]; then
     result="-1"
-    return
+    break
   fi
 done <<EOF
 $template_body
