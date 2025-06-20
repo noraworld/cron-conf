@@ -81,6 +81,8 @@ EOF
 
 # I wonder if there is a better way to suppress the number of calls of the APIs 🤔
 build_true_tasklist() {
+  # Check if a target diary templates has a comment when the checkbox is checked.
+  # Mark an illegal flag if the list of comments is empty.
   if { [ "$(
     echo "$1" |
     grep -cE "\*\s*\[x\].*\[.*\]\(https\:\/\/github\.com\/$(echo $TEMPLATE_REPO | sed -r "s|/|\\\/|g")\/issues\/[0-9]*\)"
@@ -94,6 +96,8 @@ build_true_tasklist() {
     illegal=true
   fi
 
+  # Check if a target to-do issue is closed when the checkbox is checked.
+  # Mark an illegal flag is the issue is open.
   if { [ "$(
     echo "$1" |
     grep -cE "\*\s*\[x\]\s*\[.*\]\(https\:\/\/github\.com\/$(echo $TODO_REPO | sed -r "s|/|\\\/|g")\/issues\/[0-9]*\)"
@@ -106,6 +110,8 @@ build_true_tasklist() {
     illegal=true
   fi
 
+  # Uncheck the checkbox if it's illegal.
+  # Otherwise do nothing (return the same value.)
   if [ "$illegal" = "true" ]; then
     echo "$1" | sed -r "s/^\*\s*\[x\]/\* \[ \]/g"
   else
@@ -114,6 +120,17 @@ build_true_tasklist() {
 }
 
 detect_mandatory_tasks() {
+  # Return "-1" if mandatory tasks' checkbox doesn't exist.
+  # It is the responsibility of build_true_tasklist() to determine whether the URL is valid.
+  #
+  #   OK:
+  #     * [x] 🌱 [瞑想](https://github.com/noraworld/diary-templates/issues/8083)
+  #     * [ ] 🌱 [瞑想](https://github.com/noraworld/diary-templates/issues/8083)
+  #
+  #   NG:
+  #     * 🌱 [瞑想](https://github.com/noraworld/diary-templates/issues/8083)
+  #     (doesn't exist on the checklist)
+  #
   if [ "$(echo "$1" | grep -cE "\*\s*\[\s\]")" -gt 0 ]; then
     diary_template_title=$(echo "$1" | sed -E 's/^\* \[[ x]?\]( [^ ]+)? //')
 
