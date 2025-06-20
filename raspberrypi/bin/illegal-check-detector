@@ -49,28 +49,33 @@ EOF
     # Update the body because it was illegal!
     number=$(ghc issue list --repo "$MAIN_REPO" --limit 1 | awk '{ print $1 }')
     ghc issue edit --repo "$MAIN_REPO" "$number" --body "$(echo "$true_body" | sed '${/^$/d}')" > /dev/null 2>&1
-    result="-1"
+    true_body_result="-1"
+  else
+    true_body_result="1"
   fi
 
   template_body=$(ghc api "repos/$MAIN_REPO/contents/.github/ISSUE_TEMPLATE/general.md" --jq .content | base64 --decode)
 
 # DO NOT INDENT THESE LINES!
+mandatory_tasks_result="1"
 while IFS= read -r line; do
-  mandatory_task_status=$(detect_mandatory_tasks "$line")
-  if [ "$mandatory_task_status" = "-1" ]; then
-    result="-1"
+  if [ "$(detect_mandatory_tasks "$line")" = "-1" ]; then
+    mandatory_tasks_result="-1"
     break
   fi
 done <<EOF
 $template_body
 EOF
 
-  if [ "$result" = "-1" ]; then
+  if [ "$true_body_result" = "1" ] && [ "$mandatory_tasks_result" = "1" ]; then
+    echo "1" > "$RESULT_FILE"
+    echo "1"
+  elif [ "$true_body_result" = "-1" ] || [ "$mandatory_tasks_result" = "-1" ]; then
     echo "-1" > "$RESULT_FILE"
     echo "-1"
   else
-    echo "1" > "$RESULT_FILE"
-    echo "1"
+    echo "0" > "$RESULT_FILE"
+    echo "0"
   fi
 }
 
