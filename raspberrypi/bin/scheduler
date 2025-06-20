@@ -590,7 +590,7 @@ recurrent() {
   batch-remover
 
   # Observe the daemons running
-  daemon-health --daemon-restart-threshold 3 --reboot-threshold 5 --check-delay 5
+  daemon-health --daemon-restart-threshold 3 --reboot-threshold 5 --check-delay 10
 }
 
 periodic() {
