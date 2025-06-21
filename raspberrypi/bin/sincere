@@ -14,10 +14,10 @@ main() {
   work=""
 
   personal=$(
-    illegal-check-detector                      \
-      --main-repo     noraworld/reserved-diary  \
-      --template-repo noraworld/diary-templates \
-      --todo-repo     noraworld/to-do           \
+    illegal-check-detector                                         \
+      --main-repo     noraworld/reserved-diary                     \
+      --template-repo noraworld/diary-templates                    \
+      --todo-repo     noraworld/to-do,noraworld/writing-manuscript \
       $force
   )
   work=$(
