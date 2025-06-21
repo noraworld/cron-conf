@@ -68,11 +68,11 @@ main() {
 judge() {
   completed=$(
     echo "$1" |
-    grep -cE "\* \[x\] \[.*\]\(https\:\/\/github\.com\/$(echo $TODO_REPO | sed -r "s|/|\\\/|g")\/issues\/[0-9]*\)"
+    grep -cE "\* \[x\] \[.*\]\(https\:\/\/github\.com\/$(echo $TODO_REPO | sed -r "s|/|\\\/|g" | sed -E 's/,/|/g')\/issues\/[0-9]*\)"
   )
   stacked=$(
     echo "$1" |
-    grep -cE "\* \[.\] \[.*\]\(https\:\/\/github\.com\/$(echo $TODO_REPO | sed -r "s|/|\\\/|g")\/issues\/[0-9]*\)"
+    grep -cE "\* \[.\] \[.*\]\(https\:\/\/github\.com\/$(echo $TODO_REPO | sed -r "s|/|\\\/|g" | sed -E 's/,/|/g')\/issues\/[0-9]*\)"
   )
   nothing=$(
     echo "$1" |
