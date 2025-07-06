@@ -90,6 +90,15 @@ main() {
     done
   fi
 
+  if [ "$SINCERE" = "1" ]; then
+    sincerely=$(sincere)
+
+    echo "sincere: $sincerely"
+    if [ "$sincerely" -le 0 ]; then
+      exit 1
+    fi
+  fi
+
   # value: positive
   if [ "$DRY_RUN" != "1" ]; then
     unlock $services --skip --interval $INTERVAL --retry $RETRY
@@ -108,6 +117,7 @@ parser_definition() {
   flag    MORNING     --morning  -- "skip quotarget, and ask to prepare a piece of garlic"
   flag    REFRESH     --refresh  -- "restart todo-list daemon before check"
   param   RETRY       --retry    -- "try to create or delete symlinks the given number of times (unlock)"
+  flag    SINCERE     --sincere  -- "execute sincere before running"
   param   SLEEP       --sleep    -- "how many seconds to wait for the next attempt"
   disp    :usage   -h --help
   disp    VERSION     --version
@@ -123,6 +133,7 @@ INTERVAL=''
 MORNING=''
 REFRESH=''
 RETRY=''
+SINCERE=''
 SLEEP=''
 REST=''
 parse() {
@@ -168,6 +179,11 @@ parse() {
         OPTARG=$2
         RETRY="$OPTARG"
         shift ;;
+      '--sincere')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        SINCERE="$OPTARG"
+        ;;
       '--sleep')
         [ $# -le 1 ] && set "required" "$1" && break
         OPTARG=$2
@@ -215,6 +231,7 @@ Options:
       --morning               skip quotarget, and ask to prepare a piece of garlic
       --refresh               restart todo-list daemon before check
       --retry RETRY           try to create or delete symlinks the given number of times (unlock)
+      --sincere               execute sincere before running
       --sleep SLEEP           how many seconds to wait for the next attempt
   -h, --help
       --version
