@@ -91,12 +91,10 @@ main() {
   fi
 
   if [ "$SINCERE" = "1" ]; then
+    printf "sincere: "
     sincerely=$(sincere)
-
-    echo "sincere: $sincerely"
-    if [ "$sincerely" -le 0 ]; then
-      exit 1
-    fi
+    echo "$sincerely"
+    [ "$sincerely" -le 0 ] && exit 1
   fi
 
   # value: positive
