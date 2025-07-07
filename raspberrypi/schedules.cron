@@ -123,32 +123,32 @@ NON_ROOT_USER=ubuntu
 
 # Ometeotl
 */5 * * * * scheduler ometeotl allow
-0   8 * * * scheduler ometeotl deny --safe
+# 0   8 * * * scheduler ometeotl deny --safe
 
 
 
 # Deregulated Superman
 #   I want to replace with "Countess" in the future.
 */5 * * * * scheduler deregulated-superman allow
-0   8 * * * scheduler deregulated-superman deny --safe
+# 0   8 * * * scheduler deregulated-superman deny --safe
 
 
 
 # Upstream
 */5 * * * * scheduler upstream allow
-0   8 * * * scheduler upstream deny --safe
+# 0   8 * * * scheduler upstream deny --safe
 
 
 
 # Maeve
 */5 * * * * scheduler maeve allow
-0   8 * * * scheduler maeve deny --safe
+# 0   8 * * * scheduler maeve deny --safe
 
 
 
 # Superman
 */5    0-7  * * * scheduler superman deny --purple-kryptonite --vampire
-0      8    * * * scheduler superman deny --safe
+# 0      8    * * * scheduler superman deny --safe
 */5    8-22 * * * scheduler superman allow
 0      23   * * * scheduler superman deny --purple-kryptonite --vampire --safe
 5-55/5 23   * * * scheduler superman deny --purple-kryptonite --vampire
