@@ -272,7 +272,7 @@
         "task_work": "task-stacked     --main-repo \"noraworld/daily-report\"   --past 3 --todo-repo \"noraworld/work-scraps\" $force"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 0 --retry 1 --checked 4 $force",
+        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 0 --retry 1 --checked 6 $force",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -316,7 +316,7 @@
         "task_work": "echo 2"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 0 --retry 1 --checked 2 $force",
+        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 0 --retry 1 --checked 6 $force",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
