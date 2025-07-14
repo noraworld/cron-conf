@@ -344,7 +344,7 @@
         "task_work": "echo 2"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 0 --retry 1 --checked 18 --unchecked 1 $force",
+        "todo_personal": "gh issue view --repo noraworld/diary-templates --json comments --jq 'if .comments | length > 0 then 1 else 0 end' $(gh issue list --repo noraworld/diary-templates --search \"walking ウォーキング\" --limit 1 --json number --jq '.[].number') 2>/dev/null || echo 0",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
