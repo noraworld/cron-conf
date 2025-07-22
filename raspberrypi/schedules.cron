@@ -114,11 +114,11 @@ NON_ROOT_USER=ubuntu
 # Chime
 #   Limit email and message checks to three times a day.
 */30 *  * * * scheduler chime deny
-1    3  * * * scheduler chime allow
-1    8  * * * scheduler chime allow
-1    13 * * * scheduler chime allow
-1    18 * * * scheduler chime allow
-1    23 * * * scheduler chime allow
+# 1    3  * * * scheduler chime allow
+# 1    8  * * * scheduler chime allow
+# 1    13 * * * scheduler chime allow
+# 1    18 * * * scheduler chime allow
+# 1    23 * * * scheduler chime allow
 
 
 
