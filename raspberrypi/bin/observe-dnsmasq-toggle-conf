@@ -306,7 +306,6 @@ check_todo() {
   set +u
   eval "todo_skipped=\${${service_name}_skipped}"
   eval "todo_quota_refresh=\${${service_name}_quota_refresh}"
-  eval "todo_accomplished_last_checked_at=\${${service_name}_accomplished_last_checked_at}"
 
   if [ "$todo_skipped" = "" ]; then
     eval "${service_name}_skipped=false"
@@ -347,7 +346,12 @@ check_todo() {
     fi
   else
     set +u
-    [ "$todo_accomplished_last_checked_at" = "" ] && eval "${service_name}_accomplished_last_checked_at=$(date +%s)"
+    eval "todo_accomplished_last_checked_at=\${${service_name}_accomplished_last_checked_at}"
+
+    if [ "$todo_accomplished_last_checked_at" = "" ]; then
+      eval "${service_name}_accomplished_last_checked_at=$(date +%s)"
+      todo_accomplished_last_checked_at=$(date +%s)
+    fi
     set -u
 
     if [ "$(echo $(( $(date +%s) - $todo_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
