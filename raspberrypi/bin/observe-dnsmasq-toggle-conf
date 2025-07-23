@@ -291,13 +291,21 @@ todo_mode() {
 
 check_todo() {
   service_name="$1"
+
+  set +u
   eval "todo_skipped=\${${service_name}_skipped}"
   eval "todo_quota_refresh=\${${service_name}_quota_refresh}"
   eval "todo_accomplished_last_checked_at=\${${service_name}_accomplished_last_checked_at}"
 
-  set +u
-  [ "$todo_skipped" = "" ] && eval "${service_name}_skipped=false"
-  [ "$todo_quota_refresh" = "" ] && eval "${service_name}_quota_refresh=false"
+  if [ "$todo_skipped" = "" ]; then
+    eval "${service_name}_skipped=false"
+    todo_skipped=false
+  fi
+
+  if [ "$todo_quota_refresh" = "" ]; then
+    eval "${service_name}_quota_refresh=false"
+    todo_quota_refresh=false
+  fi
   set -u
 
   if [ "$todo_skipped" = "false" ]; then
