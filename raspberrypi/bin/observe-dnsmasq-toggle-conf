@@ -137,48 +137,56 @@ todo_mode() {
   discipline_todo
 
   # ln_mode & unlink_mode (gaming)
+  # shellcheck disable=SC2154
   if [ "$gaming_skipped" = "false" ] && [ "$(restrict-all check "observe-gaming-conf")" -le 0 ]; then
     restrict-all reset "observe-gaming-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-gaming-conf"
   fi
 
   # ln_mode & unlink_mode (netflix)
+  # shellcheck disable=SC2154
   if [ "$netflix_skipped" = "false" ] && [ "$(restrict-all check "observe-netflix-conf")" -le 0 ]; then
     restrict-all reset "observe-netflix-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-netflix-conf"
   fi
 
   # ln_mode & unlink_mode (social-media)
+  # shellcheck disable=SC2154
   if [ "$social_media_skipped" = "false" ] && [ "$(restrict-all check "observe-social-media-conf")" -le 0 ]; then
     restrict-all reset "observe-social-media-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-social-media-conf"
   fi
 
   # ln_mode & unlink_mode (vod)
+  # shellcheck disable=SC2154
   if [ "$vod_skipped" = "false" ] && [ "$(restrict-all check "observe-vod-conf")" -le 0 ]; then
     restrict-all reset "observe-vod-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-vod-conf"
   fi
 
   # ln_mode & unlink_mode (youtube)
+  # shellcheck disable=SC2154
   if [ "$youtube_skipped" = "false" ] && [ "$(restrict-all check "observe-youtube-conf")" -le 0 ]; then
     restrict-all reset "observe-youtube-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-youtube-conf"
   fi
 
   # ln_mode & unlink_mode (youtube-alternative)
+  # shellcheck disable=SC2154
   if [ "$youtube_alternative_skipped" = "false" ] && [ "$(restrict-all check "observe-youtube-alternative-conf")" -le 0 ]; then
     restrict-all reset "observe-youtube-alternative-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-youtube-alternative-conf"
   fi
 
   # ln_mode & unlink_mode (youtube-music-persistent)
+  # shellcheck disable=SC2154
   if [ "$youtube_music_persistent_skipped" = "false" ] && [ "$(restrict-all check "observe-youtube-music-persistent-conf")" -le 0 ]; then
     restrict-all reset "observe-youtube-music-persistent-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-youtube-music-persistent-conf"
   fi
 
   # ln_mode & unlink_mode (deregulated-superman)
+  # shellcheck disable=SC2154
   if [ "$deregulated_superman_skipped" = "false" ] && [ "$(restrict-all check "observe-deregulated-superman-conf")" -le 0 ]; then
     restrict-all reset "observe-deregulated-superman-conf"
     restrict-all reset "observe-deregulated-superman-allow-conf"
@@ -186,18 +194,21 @@ todo_mode() {
   fi
 
   # ln_mode & unlink_mode (maeve)
+  # shellcheck disable=SC2154
   if [ "$maeve_skipped" = "false" ] && [ "$(restrict-all check "observe-maeve-conf")" -le 0 ]; then
     restrict-all reset "observe-maeve-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-maeve-conf"
   fi
 
   # ln_mode & unlink_mode (ometeotl)
+  # shellcheck disable=SC2154
   if [ "$ometeotl_skipped" = "false" ] && [ "$(restrict-all check "observe-ometeotl-conf")" -le 0 ]; then
     restrict-all reset "observe-ometeotl-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-ometeotl-conf"
   fi
 
   # ln_mode & unlink_mode (superman)
+  # shellcheck disable=SC2154
   if [ "$superman_skipped" = "false" ] && [ "$(restrict-all check "observe-superman-conf")" -le 0 ]; then
     restrict-all reset "observe-superman-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-superman-conf"
