@@ -1,6 +1,6 @@
 {
   "discipline": {
-    "day": {
+    "morning": {
       "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 0 --retry 1 --checked 3 $force",
         "task_personal": "echo 2",
@@ -44,7 +44,7 @@
     }
   },
   "gaming": {
-    "day": {
+    "morning": {
       "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 1 --retry 1 --checked 12 --unchecked 0 $force",
         "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 1 --todo-repo \"noraworld/to-do,noraworld/writing-manuscript\" $force",
@@ -88,7 +88,7 @@
     }
   },
   "netflix": {
-    "day": {
+    "morning": {
       "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 2 --retry 1 --checked 12 --unchecked 0 $force",
         "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 2 --todo-repo \"noraworld/to-do,noraworld/writing-manuscript\" $force",
@@ -132,7 +132,7 @@
     }
   },
   "social-media": {
-    "day": {
+    "morning": {
       "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 3 --retry 1 --checked 12 --unchecked 0 $force",
         "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 3 --todo-repo \"noraworld/to-do,noraworld/writing-manuscript\" $force",
@@ -176,7 +176,7 @@
     }
   },
   "vod": {
-    "day": {
+    "morning": {
       "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 2 --retry 1 --checked 12 --unchecked 0 $force",
         "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 2 --todo-repo \"noraworld/to-do,noraworld/writing-manuscript\" $force",
@@ -220,7 +220,7 @@
     }
   },
   "youtube": {
-    "day": {
+    "morning": {
       "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 4 --retry 1 --checked 12 --unchecked 0 $force",
         "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 4 --todo-repo \"noraworld/to-do,noraworld/writing-manuscript\" $force",
@@ -264,7 +264,7 @@
     }
   },
   "youtube-alternative": {
-    "day": {
+    "morning": {
       "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 3 --retry 1 --checked 12 --unchecked 0 $force",
         "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 3 --todo-repo \"noraworld/to-do,noraworld/writing-manuscript\" $force",
@@ -308,7 +308,7 @@
     }
   },
   "youtube-music-persistent": {
-    "day": {
+    "morning": {
       "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 0 --retry 1 --checked 3 $force",
         "task_personal": "echo 2",
@@ -352,7 +352,7 @@
     }
   },
   "deregulated-superman": {
-    "day": {
+    "morning": {
       "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 2 --retry 1 --checked 12 --unchecked 0 $force",
         "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 2 --todo-repo \"noraworld/to-do,noraworld/writing-manuscript\" $force",
@@ -396,7 +396,7 @@
     }
   },
   "maeve": {
-    "day": {
+    "morning": {
       "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 3 --retry 1 --checked 12 --unchecked 0 $force",
         "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 3 --todo-repo \"noraworld/to-do,noraworld/writing-manuscript\" $force",
@@ -440,7 +440,7 @@
     }
   },
   "ometeotl": {
-    "day": {
+    "morning": {
       "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 1 --retry 1 --checked 12 --unchecked 0 $force",
         "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 1 --todo-repo \"noraworld/to-do,noraworld/writing-manuscript\" $force",
@@ -484,7 +484,7 @@
     }
   },
   "superman": {
-    "day": {
+    "morning": {
       "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 4 --retry 1 --checked 12 --unchecked 0 $force",
         "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 4 --todo-repo \"noraworld/to-do,noraworld/writing-manuscript\" $force",
@@ -528,7 +528,7 @@
     }
   },
   "upstream": {
-    "day": {
+    "morning": {
       "loss_based": {
         "todo_personal": "todo-accomplished --repo \"noraworld/reserved-diary\" --past 3 --retry 1 --checked 12 --unchecked 0 $force",
         "task_personal": "task-stacked --main-repo \"noraworld/reserved-diary\" --past 3 --todo-repo \"noraworld/to-do,noraworld/writing-manuscript\" $force",
