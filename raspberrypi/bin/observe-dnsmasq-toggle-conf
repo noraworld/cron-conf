@@ -499,7 +499,7 @@ validate() {
   fi
 
   if [ "$TIMEFRAME" = "" ]; then
-    TIMEFRAME="day"
+    TIMEFRAME="morning"
   fi
 }
 
