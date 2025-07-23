@@ -321,30 +321,12 @@ check_todo() {
   set -u
 
   if [ "$todo_skipped" = "false" ]; then
-    if [ "$NIGHT" != "1" ] && [ "$MIDNIGHT" != "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-${observer_service_name}-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe day --service "${service_name}")" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        eval "${service_name}_skipped=true"
-      fi
-    elif [ "$NIGHT" = "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-${observer_service_name}-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe night --service "${service_name}")" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        eval "${service_name}_skipped=true"
-      fi
-    elif [ "$MIDNIGHT" = "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-${observer_service_name}-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe midnight --service "${service_name}")" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        eval "${service_name}_skipped=true"
-      fi
+    if \
+      [ "$(restrict-all check "observe-${observer_service_name}-conf")" -le 0 ] &&
+      [ "$(quotarget --timeframe "$TIMEFRAME" --service "${service_name}")" -gt 0 ] &&
+      [ "$(sincere)" -gt 0 ];
+    then
+      eval "${service_name}_skipped=true"
     fi
   else
     set +u
@@ -359,41 +341,15 @@ check_todo() {
     if [ "$(echo $(( $(date +%s) - $todo_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
       eval "${service_name}_accomplished_last_checked_at=$(date +%s)"
 
-      if [ "$NIGHT" != 1 ] && [ "$MIDNIGHT" != 1 ]; then
-        if [ "$(quotarget --timeframe day --service "${service_name}")" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          eval "${service_name}_skipped=false"
+      if [ "$(quotarget --timeframe "$TIMEFRAME" --service "${service_name}")" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+        eval "${service_name}_skipped=false"
 
-          if [ "$todo_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            eval "${service_name}_quota_refresh=true"
-          fi
-        fi
-      elif [ "$NIGHT" = 1 ]; then
-        if [ "$(quotarget --timeframe night --service "${service_name}")" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          eval "${service_name}_skipped=false"
-
-          if [ "$todo_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            eval "${service_name}_quota_refresh=true"
-          fi
-        fi
-      elif [ "$MIDNIGHT" = 1 ]; then
-        if [ "$(quotarget --timeframe midnight --service "${service_name}")" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          eval "${service_name}_skipped=false"
-
-          if [ "$todo_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            eval "${service_name}_quota_refresh=true"
-          fi
+        if [ "$todo_quota_refresh" = "true" ]; then
+          /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+            --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+            --duration "$PUNISHMENT_DURATION"
+        else
+          eval "${service_name}_quota_refresh=true"
         fi
       fi
     fi
@@ -409,86 +365,30 @@ discipline_todo() {
   set -u
 
   if [ "$discipline_skipped" = "false" ]; then
-    if [ "$NIGHT" != "1" ] && [ "$MIDNIGHT" != "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-discipline-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe day --service discipline)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        discipline_skipped=true
+    if \
+      [ "$(restrict-all check "observe-discipline-conf")" -le 0 ] &&
+      [ "$(quotarget --timeframe "$TIMEFRAME" --service discipline)" -gt 0 ] &&
+      [ "$(sincere)" -gt 0 ];
+    then
+      discipline_skipped=true
 
-        if [ "$(systemctl --user is-active observe-firewall)" != "active" ] && [ "$(observe-firewall check)" -gt 0 ]; then
-          observe-firewall allow
-        fi
-
-        if [ "$(systemctl --user is-active observe-crontab)"             = "active" ] ||
-           [ "$(systemctl --user is-active observe-cron-conf)"           = "active" ] ||
-           [ "$(systemctl --user is-active observe-dnsmasq-conf)"        = "active" ] ||
-           [ "$(systemctl --user is-active observe-dnsmasq-priv-conf)"   = "active" ] ||
-           [ "$(systemctl --user is-active observe-dnsmasq-toggle)"      = "active" ] ||
-           [ "$(systemctl --user is-active observe-dnsmasq-priv-toggle)" = "active" ]
-        then
-          systemctl --user stop observe-crontab
-          systemctl --user stop observe-cron-conf
-          systemctl --user stop observe-dnsmasq-conf
-          systemctl --user stop observe-dnsmasq-priv-conf
-          systemctl --user stop observe-dnsmasq-toggle
-          systemctl --user stop observe-dnsmasq-priv-toggle
-        fi
+      if [ "$(systemctl --user is-active observe-firewall)" != "active" ] && [ "$(observe-firewall check)" -gt 0 ]; then
+        observe-firewall allow
       fi
-    elif [ "$NIGHT" = "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-discipline-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe night --service discipline)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
+
+      if [ "$(systemctl --user is-active observe-crontab)"             = "active" ] ||
+          [ "$(systemctl --user is-active observe-cron-conf)"           = "active" ] ||
+          [ "$(systemctl --user is-active observe-dnsmasq-conf)"        = "active" ] ||
+          [ "$(systemctl --user is-active observe-dnsmasq-priv-conf)"   = "active" ] ||
+          [ "$(systemctl --user is-active observe-dnsmasq-toggle)"      = "active" ] ||
+          [ "$(systemctl --user is-active observe-dnsmasq-priv-toggle)" = "active" ]
       then
-        discipline_skipped=true
-
-        if [ "$(systemctl --user is-active observe-firewall)" != "active" ] && [ "$(observe-firewall check)" -gt 0 ]; then
-          observe-firewall allow
-        fi
-
-        if [ "$(systemctl --user is-active observe-crontab)"             = "active" ] ||
-           [ "$(systemctl --user is-active observe-cron-conf)"           = "active" ] ||
-           [ "$(systemctl --user is-active observe-dnsmasq-conf)"        = "active" ] ||
-           [ "$(systemctl --user is-active observe-dnsmasq-priv-conf)"   = "active" ] ||
-           [ "$(systemctl --user is-active observe-dnsmasq-toggle)"      = "active" ] ||
-           [ "$(systemctl --user is-active observe-dnsmasq-priv-toggle)" = "active" ]
-        then
-          systemctl --user stop observe-crontab
-          systemctl --user stop observe-cron-conf
-          systemctl --user stop observe-dnsmasq-conf
-          systemctl --user stop observe-dnsmasq-priv-conf
-          systemctl --user stop observe-dnsmasq-toggle
-          systemctl --user stop observe-dnsmasq-priv-toggle
-        fi
-      fi
-    elif [ "$MIDNIGHT" = "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-discipline-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe midnight --service discipline)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        discipline_skipped=true
-
-        if [ "$(systemctl --user is-active observe-firewall)" != "active" ] && [ "$(observe-firewall check)" -gt 0 ]; then
-          observe-firewall allow
-        fi
-
-        if [ "$(systemctl --user is-active observe-crontab)"             = "active" ] ||
-           [ "$(systemctl --user is-active observe-cron-conf)"           = "active" ] ||
-           [ "$(systemctl --user is-active observe-dnsmasq-conf)"        = "active" ] ||
-           [ "$(systemctl --user is-active observe-dnsmasq-priv-conf)"   = "active" ] ||
-           [ "$(systemctl --user is-active observe-dnsmasq-toggle)"      = "active" ] ||
-           [ "$(systemctl --user is-active observe-dnsmasq-priv-toggle)" = "active" ]
-        then
-          systemctl --user stop observe-crontab
-          systemctl --user stop observe-cron-conf
-          systemctl --user stop observe-dnsmasq-conf
-          systemctl --user stop observe-dnsmasq-priv-conf
-          systemctl --user stop observe-dnsmasq-toggle
-          systemctl --user stop observe-dnsmasq-priv-toggle
-        fi
+        systemctl --user stop observe-crontab
+        systemctl --user stop observe-cron-conf
+        systemctl --user stop observe-dnsmasq-conf
+        systemctl --user stop observe-dnsmasq-priv-conf
+        systemctl --user stop observe-dnsmasq-toggle
+        systemctl --user stop observe-dnsmasq-priv-toggle
       fi
     fi
   else
@@ -518,41 +418,15 @@ discipline_todo() {
     if [ "$(echo $(( $(date +%s) - $discipline_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
       discipline_accomplished_last_checked_at=$(date +%s)
 
-      if [ "$NIGHT" != 1 ] && [ "$MIDNIGHT" != 1 ]; then
-        if [ "$(quotarget --timeframe day --service discipline)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          discipline_skipped=false
+      if [ "$(quotarget --timeframe "$TIMEFRAME" --service discipline)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+        discipline_skipped=false
 
-          if [ "$discipline_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            discipline_quota_refresh=true
-          fi
-        fi
-      elif [ "$NIGHT" = 1 ]; then
-        if [ "$(quotarget --timeframe night --service discipline)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          discipline_skipped=false
-
-          if [ "$discipline_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            discipline_quota_refresh=true
-          fi
-        fi
-      elif [ "$MIDNIGHT" = 1 ]; then
-        if [ "$(quotarget --timeframe midnight --service discipline)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          discipline_skipped=false
-
-          if [ "$discipline_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            discipline_quota_refresh=true
-          fi
+        if [ "$discipline_quota_refresh" = "true" ]; then
+          /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+            --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+            --duration "$PUNISHMENT_DURATION"
+        else
+          discipline_quota_refresh=true
         fi
       fi
     fi
@@ -631,18 +505,17 @@ validate() {
 parser_definition() {
   setup REST help:usage -- "Usage: observe-dnsmasq-toggle-conf [options]... [arguments]..." ""
   msg -- "Options:"
-  flag   DEBUG   -d --debug    -- "debug mode"
-  param  EVENT   -e --event    -- "TBD"
-  param  FILE    -f --file     -- "observe only a specific file (all files in a directory by default)"
-  param  SOURCE  -s --source   -- "TBD"
-  param  TARGET  -t --target   -- "target directory to observe (current directory by default)"
-  flag   NIGHT      --night    -- "if you specify this, the option for quotarget is changed"
-  flag   MIDNIGHT   --midnight -- "if you specify this, the option for quotarget is changed"
-  flag   SUDO       --sudo     -- "TBD"
-  param  MODE    -m --mode     -- "git, ln, unlink, cron, or sync"
-  flag   VPN        --vpn      -- "only if you are connected to a VPN and have a foreign IP address, you will be exempt from the restrictions"
-  disp   :usage  -h --help     -- "print help message and exit"
-  disp   VERSION    --version  -- "show the current version"
+  flag   DEBUG     -d --debug     -- "debug mode"
+  param  EVENT     -e --event     -- "TBD"
+  param  FILE      -f --file      -- "observe only a specific file (all files in a directory by default)"
+  param  SOURCE    -s --source    -- "TBD"
+  param  TARGET    -t --target    -- "target directory to observe (current directory by default)"
+  param  TIMEFRAME    --timeframe -- "timeframe"
+  flag   SUDO         --sudo      -- "TBD"
+  param  MODE      -m --mode      -- "git, ln, unlink, cron, or sync"
+  flag   VPN          --vpn       -- "only if you are connected to a VPN and have a foreign IP address, you will be exempt from the restrictions"
+  disp   :usage    -h --help      -- "print help message and exit"
+  disp   VERSION      --version   -- "show the current version"
 }
 # @end
 
@@ -656,8 +529,7 @@ EVENT=''
 FILE=''
 SOURCE=''
 TARGET=''
-NIGHT=''
-MIDNIGHT=''
+TIMEFRAME=''
 SUDO=''
 MODE=''
 VPN=''
@@ -703,16 +575,11 @@ parse() {
         OPTARG=$2
         TARGET="$OPTARG"
         shift ;;
-      '--night')
-        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
-        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
-        NIGHT="$OPTARG"
-        ;;
-      '--midnight')
-        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
-        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
-        MIDNIGHT="$OPTARG"
-        ;;
+      '--timeframe')
+        [ $# -le 1 ] && set "required" "$1" && break
+        OPTARG=$2
+        TIMEFRAME="$OPTARG"
+        shift ;;
       '--sudo')
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
@@ -769,8 +636,7 @@ Options:
   -f, --file FILE             observe only a specific file (all files in a directory by default)
   -s, --source SOURCE         TBD
   -t, --target TARGET         target directory to observe (current directory by default)
-      --night                 if you specify this, the option for quotarget is changed
-      --midnight              if you specify this, the option for quotarget is changed
+      --timeframe TIMEFRAME   timeframe
       --sudo                  TBD
   -m, --mode MODE             git, ln, unlink, cron, or sync
       --vpn                   only if you are connected to a VPN and have a foreign IP address, you will be exempt from the restrictions
