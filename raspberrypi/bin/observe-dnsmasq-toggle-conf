@@ -122,20 +122,18 @@ firewall_mode() {
 
 
 todo_mode() {
-  gaming_todo
-  netflix_todo
-  social_media_todo
-  vod_todo
-  youtube_todo
-  youtube_alternative_todo
-  youtube_music_persistent_todo
-
-  deregulated_superman_todo
-  maeve_todo
-  ometeotl_todo
-  superman_todo
+  check_todo "gaming"
+  check_todo "netflix"
+  check_todo "social_media"
+  check_todo "vod"
+  check_todo "youtube"
+  check_todo "youtube_alternative"
+  check_todo "youtube_music_persistent"
+  check_todo "deregulated_superman"
+  check_todo "maeve"
+  check_todo "ometeotl"
+  check_todo "superman"
   upstream_todo
-
   discipline_todo
 
   # ln_mode & unlink_mode (gaming)
