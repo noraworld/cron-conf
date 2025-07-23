@@ -114,8 +114,23 @@ main() {
     "superman")
       superman
       ;;
+    "todo-predawn")
+      todo "predawn"
+      ;;
+    "todo-dawn")
+      todo "dawn"
+      ;;
     "todo-morning")
       todo "morning"
+      ;;
+    "todo-midday")
+      todo "midday"
+      ;;
+    "todo-afternoon")
+      todo "afternoon"
+      ;;
+    "todo-evening")
+      todo "evening"
       ;;
     "todo-night")
       todo "night"
