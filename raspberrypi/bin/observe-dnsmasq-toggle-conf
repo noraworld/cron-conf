@@ -122,18 +122,18 @@ firewall_mode() {
 
 
 todo_mode() {
-  check_todo "gaming"
-  check_todo "netflix"
-  check_todo "social_media"
-  check_todo "vod"
-  check_todo "youtube"
-  check_todo "youtube_alternative"
-  check_todo "youtube_music_persistent"
-  check_todo "deregulated_superman"
-  check_todo "maeve"
-  check_todo "ometeotl"
-  check_todo "superman"
-  upstream_todo
+  check_todo "gaming"                   "gaming"
+  check_todo "netflix"                  "netflix"
+  check_todo "social_media"             "social_media"
+  check_todo "vod"                      "vod"
+  check_todo "youtube"                  "youtube"
+  check_todo "youtube_alternative"      "youtube_alternative"
+  check_todo "youtube_music_persistent" "youtube_music_persistent"
+  check_todo "deregulated_superman"     "deregulated_superman"
+  check_todo "maeve"                    "maeve"
+  check_todo "ometeotl"                 "ometeotl"
+  check_todo "superman"                 "superman"
+  check_todo "upstream"                 "adguard-upstream"
   discipline_todo
 
   # ln_mode & unlink_mode (gaming)
@@ -302,6 +302,7 @@ todo_mode() {
 
 check_todo() {
   service_name="$1"
+  observer_service_name="$2"
 
   set +u
   eval "todo_skipped=\${${service_name}_skipped}"
@@ -321,7 +322,7 @@ check_todo() {
   if [ "$todo_skipped" = "false" ]; then
     if [ "$NIGHT" != "1" ] && [ "$MIDNIGHT" != "1" ]; then
       if \
-        [ "$(restrict-all check "observe-${service_name}-conf")" -le 0 ] &&
+        [ "$(restrict-all check "observe-${observer_service_name}-conf")" -le 0 ] &&
         [ "$(quotarget --timeframe day --service "${service_name}")" -gt 0 ] &&
         [ "$(sincere)" -gt 0 ];
       then
@@ -329,7 +330,7 @@ check_todo() {
       fi
     elif [ "$NIGHT" = "1" ]; then
       if \
-        [ "$(restrict-all check "observe-${service_name}-conf")" -le 0 ] &&
+        [ "$(restrict-all check "observe-${observer_service_name}-conf")" -le 0 ] &&
         [ "$(quotarget --timeframe night --service "${service_name}")" -gt 0 ] &&
         [ "$(sincere)" -gt 0 ];
       then
@@ -337,7 +338,7 @@ check_todo() {
       fi
     elif [ "$MIDNIGHT" = "1" ]; then
       if \
-        [ "$(restrict-all check "observe-${service_name}-conf")" -le 0 ] &&
+        [ "$(restrict-all check "observe-${observer_service_name}-conf")" -le 0 ] &&
         [ "$(quotarget --timeframe midnight --service "${service_name}")" -gt 0 ] &&
         [ "$(sincere)" -gt 0 ];
       then
@@ -391,89 +392,6 @@ check_todo() {
               --duration "$PUNISHMENT_DURATION"
           else
             eval "${service_name}_quota_refresh=true"
-          fi
-        fi
-      fi
-    fi
-  fi
-}
-
-
-
-upstream_todo() {
-  set +u
-  [ "$upstream_skipped" = "" ] && upstream_skipped=false
-  [ "$upstream_quota_refresh" = "" ] && upstream_quota_refresh=false
-  set -u
-
-  if [ "$upstream_skipped" = "false" ]; then
-    if [ "$NIGHT" != "1" ] && [ "$MIDNIGHT" != "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-adguard-upstream-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe day --service upstream)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        upstream_skipped=true
-      fi
-    elif [ "$NIGHT" = "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-adguard-upstream-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe night --service upstream)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        upstream_skipped=true
-      fi
-    elif [ "$MIDNIGHT" = "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-adguard-upstream-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe midnight --service upstream)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        upstream_skipped=true
-      fi
-    fi
-  else
-    set +u
-    [ "$upstream_accomplished_last_checked_at" = "" ] && upstream_accomplished_last_checked_at=$(date +%s)
-    set -u
-
-    if [ "$(echo $(( $(date +%s) - $upstream_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
-      upstream_accomplished_last_checked_at=$(date +%s)
-
-      if [ "$NIGHT" != 1 ] && [ "$MIDNIGHT" != 1 ]; then
-        if [ "$(quotarget --timeframe day --service upstream)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          upstream_skipped=false
-
-          if [ "$upstream_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            upstream_quota_refresh=true
-          fi
-        fi
-      elif [ "$NIGHT" = 1 ]; then
-        if [ "$(quotarget --timeframe night --service upstream)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          upstream_skipped=false
-
-          if [ "$upstream_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            upstream_quota_refresh=true
-          fi
-        fi
-      elif [ "$MIDNIGHT" = 1 ]; then
-        if [ "$(quotarget --timeframe midnight --service upstream)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          upstream_skipped=false
-
-          if [ "$upstream_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            upstream_quota_refresh=true
           fi
         fi
       fi
