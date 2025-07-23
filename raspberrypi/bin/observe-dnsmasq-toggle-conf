@@ -122,65 +122,71 @@ firewall_mode() {
 
 
 todo_mode() {
-  gaming_todo
-  netflix_todo
-  social_media_todo
-  vod_todo
-  youtube_todo
-  youtube_alternative_todo
-  youtube_music_persistent_todo
-
-  deregulated_superman_todo
-  maeve_todo
-  ometeotl_todo
-  superman_todo
-  upstream_todo
-
+  check_todo "gaming"                   "gaming"
+  check_todo "netflix"                  "netflix"
+  check_todo "social_media"             "social_media"
+  check_todo "vod"                      "vod"
+  check_todo "youtube"                  "youtube"
+  check_todo "youtube_alternative"      "youtube_alternative"
+  check_todo "youtube_music_persistent" "youtube_music_persistent"
+  check_todo "deregulated_superman"     "deregulated_superman"
+  check_todo "maeve"                    "maeve"
+  check_todo "ometeotl"                 "ometeotl"
+  check_todo "superman"                 "superman"
+  check_todo "upstream"                 "adguard-upstream"
   discipline_todo
 
   # ln_mode & unlink_mode (gaming)
+  # shellcheck disable=SC2154
   if [ "$gaming_skipped" = "false" ] && [ "$(restrict-all check "observe-gaming-conf")" -le 0 ]; then
     restrict-all reset "observe-gaming-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-gaming-conf"
   fi
 
   # ln_mode & unlink_mode (netflix)
+  # shellcheck disable=SC2154
   if [ "$netflix_skipped" = "false" ] && [ "$(restrict-all check "observe-netflix-conf")" -le 0 ]; then
     restrict-all reset "observe-netflix-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-netflix-conf"
   fi
 
   # ln_mode & unlink_mode (social-media)
+  # shellcheck disable=SC2154
   if [ "$social_media_skipped" = "false" ] && [ "$(restrict-all check "observe-social-media-conf")" -le 0 ]; then
     restrict-all reset "observe-social-media-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-social-media-conf"
   fi
 
   # ln_mode & unlink_mode (vod)
+  # shellcheck disable=SC2154
   if [ "$vod_skipped" = "false" ] && [ "$(restrict-all check "observe-vod-conf")" -le 0 ]; then
     restrict-all reset "observe-vod-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-vod-conf"
   fi
 
   # ln_mode & unlink_mode (youtube)
+  # shellcheck disable=SC2154
   if [ "$youtube_skipped" = "false" ] && [ "$(restrict-all check "observe-youtube-conf")" -le 0 ]; then
     restrict-all reset "observe-youtube-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-youtube-conf"
   fi
 
   # ln_mode & unlink_mode (youtube-alternative)
+  # shellcheck disable=SC2154
   if [ "$youtube_alternative_skipped" = "false" ] && [ "$(restrict-all check "observe-youtube-alternative-conf")" -le 0 ]; then
     restrict-all reset "observe-youtube-alternative-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-youtube-alternative-conf"
   fi
 
   # ln_mode & unlink_mode (youtube-music-persistent)
+  # shellcheck disable=SC2154
   if [ "$youtube_music_persistent_skipped" = "false" ] && [ "$(restrict-all check "observe-youtube-music-persistent-conf")" -le 0 ]; then
     restrict-all reset "observe-youtube-music-persistent-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-youtube-music-persistent-conf"
   fi
 
   # ln_mode & unlink_mode (deregulated-superman)
+  # shellcheck disable=SC2154
   if [ "$deregulated_superman_skipped" = "false" ] && [ "$(restrict-all check "observe-deregulated-superman-conf")" -le 0 ]; then
     restrict-all reset "observe-deregulated-superman-conf"
     restrict-all reset "observe-deregulated-superman-allow-conf"
@@ -188,24 +194,28 @@ todo_mode() {
   fi
 
   # ln_mode & unlink_mode (maeve)
+  # shellcheck disable=SC2154
   if [ "$maeve_skipped" = "false" ] && [ "$(restrict-all check "observe-maeve-conf")" -le 0 ]; then
     restrict-all reset "observe-maeve-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-maeve-conf"
   fi
 
   # ln_mode & unlink_mode (ometeotl)
+  # shellcheck disable=SC2154
   if [ "$ometeotl_skipped" = "false" ] && [ "$(restrict-all check "observe-ometeotl-conf")" -le 0 ]; then
     restrict-all reset "observe-ometeotl-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-ometeotl-conf"
   fi
 
   # ln_mode & unlink_mode (superman)
+  # shellcheck disable=SC2154
   if [ "$superman_skipped" = "false" ] && [ "$(restrict-all check "observe-superman-conf")" -le 0 ]; then
     restrict-all reset "observe-superman-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-superman-conf"
   fi
 
   # ln_mode & unlink_mode (upstream)
+  # shellcheck disable=SC2154
   if [ "$upstream_skipped" = "false" ] && [ "$(restrict-all check "observe-adguard-upstream-conf")" -le 0 ]; then
     restrict-all reset                 \
       observe-adguard-upstream-conf    \
@@ -291,994 +301,55 @@ todo_mode() {
 
 
 
-gaming_todo() {
+check_todo() {
+  service_name="$1"
+  observer_service_name="$2"
+
   set +u
-  [ "$gaming_skipped" = "" ] && gaming_skipped=false
-  [ "$gaming_quota_refresh" = "" ] && gaming_quota_refresh=false
-  set -u
+  eval "todo_skipped=\${${service_name}_skipped}"
+  eval "todo_quota_refresh=\${${service_name}_quota_refresh}"
 
-  if [ "$gaming_skipped" = "false" ]; then
-    if [ "$NIGHT" != "1" ] && [ "$MIDNIGHT" != "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-gaming-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe day --service gaming)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        gaming_skipped=true
-      fi
-    elif [ "$NIGHT" = "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-gaming-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe night --service gaming)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        gaming_skipped=true
-      fi
-    elif [ "$MIDNIGHT" = "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-gaming-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe midnight --service gaming)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        gaming_skipped=true
-      fi
-    fi
-  else
-    set +u
-    [ "$gaming_accomplished_last_checked_at" = "" ] && gaming_accomplished_last_checked_at=$(date +%s)
-    set -u
-
-    if [ "$(echo $(( $(date +%s) - $gaming_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
-      gaming_accomplished_last_checked_at=$(date +%s)
-
-      if [ "$NIGHT" != 1 ] && [ "$MIDNIGHT" != 1 ]; then
-        if [ "$(quotarget --timeframe day --service gaming)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          gaming_skipped=false
-
-          if [ "$gaming_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            gaming_quota_refresh=true
-          fi
-        fi
-      elif [ "$NIGHT" = 1 ]; then
-        if [ "$(quotarget --timeframe night --service gaming)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          gaming_skipped=false
-
-          if [ "$gaming_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            gaming_quota_refresh=true
-          fi
-        fi
-      elif [ "$MIDNIGHT" = 1 ]; then
-        if [ "$(quotarget --timeframe midnight --service gaming)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          gaming_skipped=false
-
-          if [ "$gaming_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            gaming_quota_refresh=true
-          fi
-        fi
-      fi
-    fi
+  if [ "$todo_skipped" = "" ]; then
+    eval "${service_name}_skipped=false"
+    todo_skipped=false
   fi
-}
 
-
-
-netflix_todo() {
-  set +u
-  [ "$netflix_skipped" = "" ] && netflix_skipped=false
-  [ "$netflix_quota_refresh" = "" ] && netflix_quota_refresh=false
-  set -u
-
-  if [ "$netflix_skipped" = "false" ]; then
-    if [ "$NIGHT" != "1" ] && [ "$MIDNIGHT" != "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-netflix-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe day --service netflix)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        netflix_skipped=true
-      fi
-    elif [ "$NIGHT" = "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-netflix-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe night --service netflix)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        netflix_skipped=true
-      fi
-    elif [ "$MIDNIGHT" = "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-netflix-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe midnight --service netflix)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        netflix_skipped=true
-      fi
-    fi
-  else
-    set +u
-    [ "$netflix_accomplished_last_checked_at" = "" ] && netflix_accomplished_last_checked_at=$(date +%s)
-    set -u
-
-    if [ "$(echo $(( $(date +%s) - $netflix_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
-      netflix_accomplished_last_checked_at=$(date +%s)
-
-      if [ "$NIGHT" != 1 ] && [ "$MIDNIGHT" != 1 ]; then
-        if [ "$(quotarget --timeframe day --service netflix)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          netflix_skipped=false
-
-          if [ "$netflix_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            netflix_quota_refresh=true
-          fi
-        fi
-      elif [ "$NIGHT" = 1 ]; then
-        if [ "$(quotarget --timeframe night --service netflix)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          netflix_skipped=false
-
-          if [ "$netflix_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            netflix_quota_refresh=true
-          fi
-        fi
-      elif [ "$MIDNIGHT" = 1 ]; then
-        if [ "$(quotarget --timeframe midnight --service netflix)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          netflix_skipped=false
-
-          if [ "$netflix_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            netflix_quota_refresh=true
-          fi
-        fi
-      fi
-    fi
+  if [ "$todo_quota_refresh" = "" ]; then
+    eval "${service_name}_quota_refresh=false"
+    todo_quota_refresh=false
   fi
-}
-
-
-
-social_media_todo() {
-  set +u
-  [ "$social_media_skipped" = "" ] && social_media_skipped=false
-  [ "$social_media_quota_refresh" = "" ] && social_media_quota_refresh=false
   set -u
 
-  if [ "$social_media_skipped" = "false" ]; then
-    if [ "$NIGHT" != "1" ] && [ "$MIDNIGHT" != "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-social-media-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe day --service social-media)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        social_media_skipped=true
-      fi
-    elif [ "$NIGHT" = "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-social-media-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe night --service social-media)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        social_media_skipped=true
-      fi
-    elif [ "$MIDNIGHT" = "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-social-media-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe midnight --service social-media)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        social_media_skipped=true
-      fi
+  if [ "$todo_skipped" = "false" ]; then
+    if \
+      [ "$(restrict-all check "observe-${observer_service_name}-conf")" -le 0 ] &&
+      [ "$(quotarget --timeframe "$TIMEFRAME" --service "${service_name}")" -gt 0 ] &&
+      [ "$(sincere)" -gt 0 ];
+    then
+      eval "${service_name}_skipped=true"
     fi
   else
     set +u
-    [ "$social_media_accomplished_last_checked_at" = "" ] && social_media_accomplished_last_checked_at=$(date +%s)
+    eval "todo_accomplished_last_checked_at=\${${service_name}_accomplished_last_checked_at}"
+
+    if [ "$todo_accomplished_last_checked_at" = "" ]; then
+      eval "${service_name}_accomplished_last_checked_at=$(date +%s)"
+      todo_accomplished_last_checked_at=$(date +%s)
+    fi
     set -u
 
-    if [ "$(echo $(( $(date +%s) - $social_media_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
-      social_media_accomplished_last_checked_at=$(date +%s)
-
-      if [ "$NIGHT" != 1 ] && [ "$MIDNIGHT" != 1 ]; then
-        if [ "$(quotarget --timeframe day --service social-media)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          social_media_skipped=false
-
-          if [ "$social_media_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            social_media_quota_refresh=true
-          fi
-        fi
-      elif [ "$NIGHT" = 1 ]; then
-        if [ "$(quotarget --timeframe night --service social-media)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          social_media_skipped=false
-
-          if [ "$social_media_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            social_media_quota_refresh=true
-          fi
-        fi
-      elif [ "$MIDNIGHT" = 1 ]; then
-        if [ "$(quotarget --timeframe midnight --service social-media)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          social_media_skipped=false
-
-          if [ "$social_media_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            social_media_quota_refresh=true
-          fi
-        fi
-      fi
-    fi
-  fi
-}
-
-
-
-vod_todo() {
-  set +u
-  [ "$vod_skipped" = "" ] && vod_skipped=false
-  [ "$vod_quota_refresh" = "" ] && vod_quota_refresh=false
-  set -u
-
-  if [ "$vod_skipped" = "false" ]; then
-    if [ "$NIGHT" != "1" ] && [ "$MIDNIGHT" != "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-vod-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe day --service vod)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        vod_skipped=true
-      fi
-    elif [ "$NIGHT" = "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-vod-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe night --service vod)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        vod_skipped=true
-      fi
-    elif [ "$MIDNIGHT" = "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-vod-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe midnight --service vod)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        vod_skipped=true
-      fi
-    fi
-  else
-    set +u
-    [ "$vod_accomplished_last_checked_at" = "" ] && vod_accomplished_last_checked_at=$(date +%s)
-    set -u
-
-    if [ "$(echo $(( $(date +%s) - $vod_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
-      vod_accomplished_last_checked_at=$(date +%s)
-
-      if [ "$NIGHT" != 1 ] && [ "$MIDNIGHT" != 1 ]; then
-        if [ "$(quotarget --timeframe day --service vod)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          vod_skipped=false
-
-          if [ "$vod_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            vod_quota_refresh=true
-          fi
-        fi
-      elif [ "$NIGHT" = 1 ]; then
-        if [ "$(quotarget --timeframe night --service vod)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          vod_skipped=false
-
-          if [ "$vod_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            vod_quota_refresh=true
-          fi
-        fi
-      elif [ "$MIDNIGHT" = 1 ]; then
-        if [ "$(quotarget --timeframe midnight --service vod)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          vod_skipped=false
-
-          if [ "$vod_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            vod_quota_refresh=true
-          fi
-        fi
-      fi
-    fi
-  fi
-}
-
-
-
-youtube_todo() {
-  set +u
-  [ "$youtube_skipped" = "" ] && youtube_skipped=false
-  [ "$youtube_quota_refresh" = "" ] && youtube_quota_refresh=false
-  set -u
-
-  if [ "$youtube_skipped" = "false" ]; then
-    if [ "$NIGHT" != "1" ] && [ "$MIDNIGHT" != "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-youtube-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe day --service youtube)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        youtube_skipped=true
-      fi
-    elif [ "$NIGHT" = "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-youtube-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe night --service youtube)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        youtube_skipped=true
-      fi
-    elif [ "$MIDNIGHT" = "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-youtube-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe midnight --service youtube)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        youtube_skipped=true
-      fi
-    fi
-  else
-    set +u
-    [ "$youtube_accomplished_last_checked_at" = "" ] && youtube_accomplished_last_checked_at=$(date +%s)
-    set -u
-
-    if [ "$(echo $(( $(date +%s) - $youtube_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
-      youtube_accomplished_last_checked_at=$(date +%s)
-
-      if [ "$NIGHT" != 1 ] && [ "$MIDNIGHT" != 1 ]; then
-        if [ "$(quotarget --timeframe day --service youtube)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          youtube_skipped=false
-
-          if [ "$youtube_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            youtube_quota_refresh=true
-          fi
-        fi
-      elif [ "$NIGHT" = 1 ]; then
-        if [ "$(quotarget --timeframe night --service youtube)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          youtube_skipped=false
-
-          if [ "$youtube_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            youtube_quota_refresh=true
-          fi
-        fi
-      elif [ "$MIDNIGHT" = 1 ]; then
-        if [ "$(quotarget --timeframe midnight --service youtube)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          youtube_skipped=false
-
-          if [ "$youtube_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            youtube_quota_refresh=true
-          fi
-        fi
-      fi
-    fi
-  fi
-}
-
-
-
-youtube_alternative_todo() {
-  set +u
-  [ "$youtube_alternative_skipped" = "" ] && youtube_alternative_skipped=false
-  [ "$youtube_alternative_quota_refresh" = "" ] && youtube_alternative_quota_refresh=false
-  set -u
-
-  if [ "$youtube_alternative_skipped" = "false" ]; then
-    if [ "$NIGHT" != "1" ] && [ "$MIDNIGHT" != "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-youtube-alternative-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe day --service youtube-alternative)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        youtube_alternative_skipped=true
-      fi
-    elif [ "$NIGHT" = "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-youtube-alternative-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe night --service youtube-alternative)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        youtube_alternative_skipped=true
-      fi
-    elif [ "$MIDNIGHT" = "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-youtube-alternative-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe midnight --service youtube-alternative)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        youtube_alternative_skipped=true
-      fi
-    fi
-  else
-    set +u
-    [ "$youtube_alternative_accomplished_last_checked_at" = "" ] && youtube_alternative_accomplished_last_checked_at=$(date +%s)
-    set -u
-
-    if [ "$(echo $(( $(date +%s) - $youtube_alternative_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
-      youtube_alternative_accomplished_last_checked_at=$(date +%s)
-
-      if [ "$NIGHT" != 1 ] && [ "$MIDNIGHT" != 1 ]; then
-        if [ "$(quotarget --timeframe day --service youtube-alternative)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          youtube_alternative_skipped=false
-
-          if [ "$youtube_alternative_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            youtube_alternative_quota_refresh=true
-          fi
-        fi
-      elif [ "$NIGHT" = 1 ]; then
-        if [ "$(quotarget --timeframe night --service youtube-alternative)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          youtube_alternative_skipped=false
-
-          if [ "$youtube_alternative_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            youtube_alternative_quota_refresh=true
-          fi
-        fi
-      elif [ "$MIDNIGHT" = 1 ]; then
-        if [ "$(quotarget --timeframe midnight --service youtube-alternative)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          youtube_alternative_skipped=false
-
-          if [ "$youtube_alternative_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            youtube_alternative_quota_refresh=true
-          fi
-        fi
-      fi
-    fi
-  fi
-}
-
-
-
-youtube_music_persistent_todo() {
-  set +u
-  [ "$youtube_music_persistent_skipped" = "" ] && youtube_music_persistent_skipped=false
-  [ "$youtube_music_persistent_quota_refresh" = "" ] && youtube_music_persistent_quota_refresh=false
-  set -u
-
-  if [ "$youtube_music_persistent_skipped" = "false" ]; then
-    if [ "$NIGHT" != "1" ] && [ "$MIDNIGHT" != "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-youtube-music-persistent-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe day --service youtube-music-persistent)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        youtube_music_persistent_skipped=true
-      fi
-    elif [ "$NIGHT" = "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-youtube-music-persistent-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe night --service youtube-music-persistent)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        youtube_music_persistent_skipped=true
-      fi
-    elif [ "$MIDNIGHT" = "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-youtube-music-persistent-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe midnight --service youtube-music-persistent)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        youtube_music_persistent_skipped=true
-      fi
-    fi
-  else
-    set +u
-    [ "$youtube_music_persistent_accomplished_last_checked_at" = "" ] && youtube_music_persistent_accomplished_last_checked_at=$(date +%s)
-    set -u
-
-    if [ "$(echo $(( $(date +%s) - $youtube_music_persistent_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
-      youtube_music_persistent_accomplished_last_checked_at=$(date +%s)
-
-      if [ "$NIGHT" != 1 ] && [ "$MIDNIGHT" != 1 ]; then
-        if [ "$(quotarget --timeframe day --service youtube-music-persistent)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          youtube_music_persistent_skipped=false
-
-          if [ "$youtube_music_persistent_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            youtube_music_persistent_quota_refresh=true
-          fi
-        fi
-      elif [ "$NIGHT" = 1 ]; then
-        if [ "$(quotarget --timeframe night --service youtube-music-persistent)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          youtube_music_persistent_skipped=false
-
-          if [ "$youtube_music_persistent_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            youtube_music_persistent_quota_refresh=true
-          fi
-        fi
-      elif [ "$MIDNIGHT" = 1 ]; then
-        if [ "$(quotarget --timeframe midnight --service youtube-music-persistent)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          youtube_music_persistent_skipped=false
-
-          if [ "$youtube_music_persistent_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            youtube_music_persistent_quota_refresh=true
-          fi
-        fi
-      fi
-    fi
-  fi
-}
-
-
-
-deregulated_superman_todo() {
-  set +u
-  [ "$deregulated_superman_skipped" = "" ] && deregulated_superman_skipped=false
-  [ "$deregulated_superman_quota_refresh" = "" ] && deregulated_superman_quota_refresh=false
-  set -u
-
-  if [ "$deregulated_superman_skipped" = "false" ]; then
-    if [ "$NIGHT" != "1" ] && [ "$MIDNIGHT" != "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-deregulated-superman-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe day --service deregulated-superman)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        deregulated_superman_skipped=true
-      fi
-    elif [ "$NIGHT" = "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-deregulated-superman-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe night --service deregulated-superman)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        deregulated_superman_skipped=true
-      fi
-    elif [ "$MIDNIGHT" = "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-deregulated-superman-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe midnight --service deregulated-superman)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        deregulated_superman_skipped=true
-      fi
-    fi
-  else
-    set +u
-    [ "$deregulated_superman_accomplished_last_checked_at" = "" ] && deregulated_superman_accomplished_last_checked_at=$(date +%s)
-    set -u
-
-    if [ "$(echo $(( $(date +%s) - $deregulated_superman_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
-      deregulated_superman_accomplished_last_checked_at=$(date +%s)
-
-      if [ "$NIGHT" != 1 ] && [ "$MIDNIGHT" != 1 ]; then
-        if [ "$(quotarget --timeframe day --service deregulated-superman)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          deregulated_superman_skipped=false
-
-          if [ "$deregulated_superman_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            deregulated_superman_quota_refresh=true
-          fi
-        fi
-      elif [ "$NIGHT" = 1 ]; then
-        if [ "$(quotarget --timeframe night --service deregulated-superman)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          deregulated_superman_skipped=false
-
-          if [ "$deregulated_superman_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            deregulated_superman_quota_refresh=true
-          fi
-        fi
-      elif [ "$MIDNIGHT" = 1 ]; then
-        if [ "$(quotarget --timeframe midnight --service deregulated-superman)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          deregulated_superman_skipped=false
-
-          if [ "$deregulated_superman_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            deregulated_superman_quota_refresh=true
-          fi
-        fi
-      fi
-    fi
-  fi
-}
-
-
-
-maeve_todo() {
-  set +u
-  [ "$maeve_skipped" = "" ] && maeve_skipped=false
-  [ "$maeve_quota_refresh" = "" ] && maeve_quota_refresh=false
-  set -u
-
-  if [ "$maeve_skipped" = "false" ]; then
-    if [ "$NIGHT" != "1" ] && [ "$MIDNIGHT" != "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-maeve-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe day --service maeve)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        maeve_skipped=true
-      fi
-    elif [ "$NIGHT" = "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-maeve-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe night --service maeve)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        maeve_skipped=true
-      fi
-    elif [ "$MIDNIGHT" = "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-maeve-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe midnight --service maeve)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        maeve_skipped=true
-      fi
-    fi
-  else
-    set +u
-    [ "$maeve_accomplished_last_checked_at" = "" ] && maeve_accomplished_last_checked_at=$(date +%s)
-    set -u
-
-    if [ "$(echo $(( $(date +%s) - $maeve_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
-      maeve_accomplished_last_checked_at=$(date +%s)
-
-      if [ "$NIGHT" != 1 ] && [ "$MIDNIGHT" != 1 ]; then
-        if [ "$(quotarget --timeframe day --service maeve)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          maeve_skipped=false
-
-          if [ "$maeve_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            maeve_quota_refresh=true
-          fi
-        fi
-      elif [ "$NIGHT" = 1 ]; then
-        if [ "$(quotarget --timeframe night --service maeve)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          maeve_skipped=false
-
-          if [ "$maeve_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            maeve_quota_refresh=true
-          fi
-        fi
-      elif [ "$MIDNIGHT" = 1 ]; then
-        if [ "$(quotarget --timeframe midnight --service maeve)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          maeve_skipped=false
-
-          if [ "$maeve_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            maeve_quota_refresh=true
-          fi
-        fi
-      fi
-    fi
-  fi
-}
-
-
-
-ometeotl_todo() {
-  set +u
-  [ "$ometeotl_skipped" = "" ] && ometeotl_skipped=false
-  [ "$ometeotl_quota_refresh" = "" ] && ometeotl_quota_refresh=false
-  set -u
-
-  if [ "$ometeotl_skipped" = "false" ]; then
-    if [ "$NIGHT" != "1" ] && [ "$MIDNIGHT" != "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-ometeotl-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe day --service ometeotl)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        ometeotl_skipped=true
-      fi
-    elif [ "$NIGHT" = "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-ometeotl-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe night --service ometeotl)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        ometeotl_skipped=true
-      fi
-    elif [ "$MIDNIGHT" = "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-ometeotl-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe midnight --service ometeotl)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        ometeotl_skipped=true
-      fi
-    fi
-  else
-    set +u
-    [ "$ometeotl_accomplished_last_checked_at" = "" ] && ometeotl_accomplished_last_checked_at=$(date +%s)
-    set -u
-
-    if [ "$(echo $(( $(date +%s) - $ometeotl_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
-      ometeotl_accomplished_last_checked_at=$(date +%s)
-
-      if [ "$NIGHT" != 1 ] && [ "$MIDNIGHT" != 1 ]; then
-        if [ "$(quotarget --timeframe day --service ometeotl)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          ometeotl_skipped=false
-
-          if [ "$ometeotl_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            ometeotl_quota_refresh=true
-          fi
-        fi
-      elif [ "$NIGHT" = 1 ]; then
-        if [ "$(quotarget --timeframe night --service ometeotl)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          ometeotl_skipped=false
-
-          if [ "$ometeotl_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            ometeotl_quota_refresh=true
-          fi
-        fi
-      elif [ "$MIDNIGHT" = 1 ]; then
-        if [ "$(quotarget --timeframe midnight --service ometeotl)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          ometeotl_skipped=false
-
-          if [ "$ometeotl_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            ometeotl_quota_refresh=true
-          fi
-        fi
-      fi
-    fi
-  fi
-}
-
-
-
-superman_todo() {
-  set +u
-  [ "$superman_skipped" = "" ] && superman_skipped=false
-  [ "$superman_quota_refresh" = "" ] && superman_quota_refresh=false
-  set -u
-
-  if [ "$superman_skipped" = "false" ]; then
-    if [ "$NIGHT" != "1" ] && [ "$MIDNIGHT" != "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-superman-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe day --service superman)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        superman_skipped=true
-      fi
-    elif [ "$NIGHT" = "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-superman-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe night --service superman)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        superman_skipped=true
-      fi
-    elif [ "$MIDNIGHT" = "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-superman-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe midnight --service superman)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        superman_skipped=true
-      fi
-    fi
-  else
-    set +u
-    [ "$superman_accomplished_last_checked_at" = "" ] && superman_accomplished_last_checked_at=$(date +%s)
-    set -u
-
-    if [ "$(echo $(( $(date +%s) - $superman_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
-      superman_accomplished_last_checked_at=$(date +%s)
-
-      if [ "$NIGHT" != 1 ] && [ "$MIDNIGHT" != 1 ]; then
-        if [ "$(quotarget --timeframe day --service superman)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          superman_skipped=false
-
-          if [ "$superman_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            superman_quota_refresh=true
-          fi
-        fi
-      elif [ "$NIGHT" = 1 ]; then
-        if [ "$(quotarget --timeframe night --service superman)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          superman_skipped=false
-
-          if [ "$superman_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            superman_quota_refresh=true
-          fi
-        fi
-      elif [ "$MIDNIGHT" = 1 ]; then
-        if [ "$(quotarget --timeframe midnight --service superman)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          superman_skipped=false
-
-          if [ "$superman_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            superman_quota_refresh=true
-          fi
-        fi
-      fi
-    fi
-  fi
-}
-
-
-
-upstream_todo() {
-  set +u
-  [ "$upstream_skipped" = "" ] && upstream_skipped=false
-  [ "$upstream_quota_refresh" = "" ] && upstream_quota_refresh=false
-  set -u
-
-  if [ "$upstream_skipped" = "false" ]; then
-    if [ "$NIGHT" != "1" ] && [ "$MIDNIGHT" != "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-adguard-upstream-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe day --service upstream)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        upstream_skipped=true
-      fi
-    elif [ "$NIGHT" = "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-adguard-upstream-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe night --service upstream)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        upstream_skipped=true
-      fi
-    elif [ "$MIDNIGHT" = "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-adguard-upstream-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe midnight --service upstream)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        upstream_skipped=true
-      fi
-    fi
-  else
-    set +u
-    [ "$upstream_accomplished_last_checked_at" = "" ] && upstream_accomplished_last_checked_at=$(date +%s)
-    set -u
-
-    if [ "$(echo $(( $(date +%s) - $upstream_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
-      upstream_accomplished_last_checked_at=$(date +%s)
-
-      if [ "$NIGHT" != 1 ] && [ "$MIDNIGHT" != 1 ]; then
-        if [ "$(quotarget --timeframe day --service upstream)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          upstream_skipped=false
-
-          if [ "$upstream_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            upstream_quota_refresh=true
-          fi
-        fi
-      elif [ "$NIGHT" = 1 ]; then
-        if [ "$(quotarget --timeframe night --service upstream)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          upstream_skipped=false
-
-          if [ "$upstream_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            upstream_quota_refresh=true
-          fi
-        fi
-      elif [ "$MIDNIGHT" = 1 ]; then
-        if [ "$(quotarget --timeframe midnight --service upstream)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          upstream_skipped=false
-
-          if [ "$upstream_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            upstream_quota_refresh=true
-          fi
+    if [ "$(echo $(( $(date +%s) - $todo_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
+      eval "${service_name}_accomplished_last_checked_at=$(date +%s)"
+
+      if [ "$(quotarget --timeframe "$TIMEFRAME" --service "${service_name}")" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+        eval "${service_name}_skipped=false"
+
+        if [ "$todo_quota_refresh" = "true" ]; then
+          /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+            --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+            --duration "$PUNISHMENT_DURATION"
+        else
+          eval "${service_name}_quota_refresh=true"
         fi
       fi
     fi
@@ -1294,86 +365,30 @@ discipline_todo() {
   set -u
 
   if [ "$discipline_skipped" = "false" ]; then
-    if [ "$NIGHT" != "1" ] && [ "$MIDNIGHT" != "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-discipline-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe day --service discipline)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        discipline_skipped=true
+    if \
+      [ "$(restrict-all check "observe-discipline-conf")" -le 0 ] &&
+      [ "$(quotarget --timeframe "$TIMEFRAME" --service discipline)" -gt 0 ] &&
+      [ "$(sincere)" -gt 0 ];
+    then
+      discipline_skipped=true
 
-        if [ "$(systemctl --user is-active observe-firewall)" != "active" ] && [ "$(observe-firewall check)" -gt 0 ]; then
-          observe-firewall allow
-        fi
-
-        if [ "$(systemctl --user is-active observe-crontab)"             = "active" ] ||
-           [ "$(systemctl --user is-active observe-cron-conf)"           = "active" ] ||
-           [ "$(systemctl --user is-active observe-dnsmasq-conf)"        = "active" ] ||
-           [ "$(systemctl --user is-active observe-dnsmasq-priv-conf)"   = "active" ] ||
-           [ "$(systemctl --user is-active observe-dnsmasq-toggle)"      = "active" ] ||
-           [ "$(systemctl --user is-active observe-dnsmasq-priv-toggle)" = "active" ]
-        then
-          systemctl --user stop observe-crontab
-          systemctl --user stop observe-cron-conf
-          systemctl --user stop observe-dnsmasq-conf
-          systemctl --user stop observe-dnsmasq-priv-conf
-          systemctl --user stop observe-dnsmasq-toggle
-          systemctl --user stop observe-dnsmasq-priv-toggle
-        fi
+      if [ "$(systemctl --user is-active observe-firewall)" != "active" ] && [ "$(observe-firewall check)" -gt 0 ]; then
+        observe-firewall allow
       fi
-    elif [ "$NIGHT" = "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-discipline-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe night --service discipline)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
+
+      if [ "$(systemctl --user is-active observe-crontab)"             = "active" ] ||
+          [ "$(systemctl --user is-active observe-cron-conf)"           = "active" ] ||
+          [ "$(systemctl --user is-active observe-dnsmasq-conf)"        = "active" ] ||
+          [ "$(systemctl --user is-active observe-dnsmasq-priv-conf)"   = "active" ] ||
+          [ "$(systemctl --user is-active observe-dnsmasq-toggle)"      = "active" ] ||
+          [ "$(systemctl --user is-active observe-dnsmasq-priv-toggle)" = "active" ]
       then
-        discipline_skipped=true
-
-        if [ "$(systemctl --user is-active observe-firewall)" != "active" ] && [ "$(observe-firewall check)" -gt 0 ]; then
-          observe-firewall allow
-        fi
-
-        if [ "$(systemctl --user is-active observe-crontab)"             = "active" ] ||
-           [ "$(systemctl --user is-active observe-cron-conf)"           = "active" ] ||
-           [ "$(systemctl --user is-active observe-dnsmasq-conf)"        = "active" ] ||
-           [ "$(systemctl --user is-active observe-dnsmasq-priv-conf)"   = "active" ] ||
-           [ "$(systemctl --user is-active observe-dnsmasq-toggle)"      = "active" ] ||
-           [ "$(systemctl --user is-active observe-dnsmasq-priv-toggle)" = "active" ]
-        then
-          systemctl --user stop observe-crontab
-          systemctl --user stop observe-cron-conf
-          systemctl --user stop observe-dnsmasq-conf
-          systemctl --user stop observe-dnsmasq-priv-conf
-          systemctl --user stop observe-dnsmasq-toggle
-          systemctl --user stop observe-dnsmasq-priv-toggle
-        fi
-      fi
-    elif [ "$MIDNIGHT" = "1" ]; then
-      if \
-        [ "$(restrict-all check "observe-discipline-conf")" -le 0 ] &&
-        [ "$(quotarget --timeframe midnight --service discipline)" -gt 0 ] &&
-        [ "$(sincere)" -gt 0 ];
-      then
-        discipline_skipped=true
-
-        if [ "$(systemctl --user is-active observe-firewall)" != "active" ] && [ "$(observe-firewall check)" -gt 0 ]; then
-          observe-firewall allow
-        fi
-
-        if [ "$(systemctl --user is-active observe-crontab)"             = "active" ] ||
-           [ "$(systemctl --user is-active observe-cron-conf)"           = "active" ] ||
-           [ "$(systemctl --user is-active observe-dnsmasq-conf)"        = "active" ] ||
-           [ "$(systemctl --user is-active observe-dnsmasq-priv-conf)"   = "active" ] ||
-           [ "$(systemctl --user is-active observe-dnsmasq-toggle)"      = "active" ] ||
-           [ "$(systemctl --user is-active observe-dnsmasq-priv-toggle)" = "active" ]
-        then
-          systemctl --user stop observe-crontab
-          systemctl --user stop observe-cron-conf
-          systemctl --user stop observe-dnsmasq-conf
-          systemctl --user stop observe-dnsmasq-priv-conf
-          systemctl --user stop observe-dnsmasq-toggle
-          systemctl --user stop observe-dnsmasq-priv-toggle
-        fi
+        systemctl --user stop observe-crontab
+        systemctl --user stop observe-cron-conf
+        systemctl --user stop observe-dnsmasq-conf
+        systemctl --user stop observe-dnsmasq-priv-conf
+        systemctl --user stop observe-dnsmasq-toggle
+        systemctl --user stop observe-dnsmasq-priv-toggle
       fi
     fi
   else
@@ -1403,41 +418,15 @@ discipline_todo() {
     if [ "$(echo $(( $(date +%s) - $discipline_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
       discipline_accomplished_last_checked_at=$(date +%s)
 
-      if [ "$NIGHT" != 1 ] && [ "$MIDNIGHT" != 1 ]; then
-        if [ "$(quotarget --timeframe day --service discipline)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          discipline_skipped=false
+      if [ "$(quotarget --timeframe "$TIMEFRAME" --service discipline)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+        discipline_skipped=false
 
-          if [ "$discipline_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            discipline_quota_refresh=true
-          fi
-        fi
-      elif [ "$NIGHT" = 1 ]; then
-        if [ "$(quotarget --timeframe night --service discipline)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          discipline_skipped=false
-
-          if [ "$discipline_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            discipline_quota_refresh=true
-          fi
-        fi
-      elif [ "$MIDNIGHT" = 1 ]; then
-        if [ "$(quotarget --timeframe midnight --service discipline)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
-          discipline_skipped=false
-
-          if [ "$discipline_quota_refresh" = "true" ]; then
-            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
-              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
-              --duration "$PUNISHMENT_DURATION"
-          else
-            discipline_quota_refresh=true
-          fi
+        if [ "$discipline_quota_refresh" = "true" ]; then
+          /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+            --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+            --duration "$PUNISHMENT_DURATION"
+        else
+          discipline_quota_refresh=true
         fi
       fi
     fi
@@ -1508,6 +497,10 @@ validate() {
     echo "error: unrecognized mode $MODE" >&2
     exit 1
   fi
+
+  if [ "$TIMEFRAME" = "" ]; then
+    TIMEFRAME="morning"
+  fi
 }
 
 
@@ -1516,18 +509,17 @@ validate() {
 parser_definition() {
   setup REST help:usage -- "Usage: observe-dnsmasq-toggle-conf [options]... [arguments]..." ""
   msg -- "Options:"
-  flag   DEBUG   -d --debug    -- "debug mode"
-  param  EVENT   -e --event    -- "TBD"
-  param  FILE    -f --file     -- "observe only a specific file (all files in a directory by default)"
-  param  SOURCE  -s --source   -- "TBD"
-  param  TARGET  -t --target   -- "target directory to observe (current directory by default)"
-  flag   NIGHT      --night    -- "if you specify this, the option for quotarget is changed"
-  flag   MIDNIGHT   --midnight -- "if you specify this, the option for quotarget is changed"
-  flag   SUDO       --sudo     -- "TBD"
-  param  MODE    -m --mode     -- "git, ln, unlink, cron, or sync"
-  flag   VPN        --vpn      -- "only if you are connected to a VPN and have a foreign IP address, you will be exempt from the restrictions"
-  disp   :usage  -h --help     -- "print help message and exit"
-  disp   VERSION    --version  -- "show the current version"
+  flag   DEBUG     -d --debug     -- "debug mode"
+  param  EVENT     -e --event     -- "TBD"
+  param  FILE      -f --file      -- "observe only a specific file (all files in a directory by default)"
+  param  SOURCE    -s --source    -- "TBD"
+  param  TARGET    -t --target    -- "target directory to observe (current directory by default)"
+  param  TIMEFRAME    --timeframe -- "timeframe"
+  flag   SUDO         --sudo      -- "TBD"
+  param  MODE      -m --mode      -- "git, ln, unlink, cron, or sync"
+  flag   VPN          --vpn       -- "only if you are connected to a VPN and have a foreign IP address, you will be exempt from the restrictions"
+  disp   :usage    -h --help      -- "print help message and exit"
+  disp   VERSION      --version   -- "show the current version"
 }
 # @end
 
@@ -1541,8 +533,7 @@ EVENT=''
 FILE=''
 SOURCE=''
 TARGET=''
-NIGHT=''
-MIDNIGHT=''
+TIMEFRAME=''
 SUDO=''
 MODE=''
 VPN=''
@@ -1588,16 +579,11 @@ parse() {
         OPTARG=$2
         TARGET="$OPTARG"
         shift ;;
-      '--night')
-        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
-        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
-        NIGHT="$OPTARG"
-        ;;
-      '--midnight')
-        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
-        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
-        MIDNIGHT="$OPTARG"
-        ;;
+      '--timeframe')
+        [ $# -le 1 ] && set "required" "$1" && break
+        OPTARG=$2
+        TIMEFRAME="$OPTARG"
+        shift ;;
       '--sudo')
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
@@ -1654,8 +640,7 @@ Options:
   -f, --file FILE             observe only a specific file (all files in a directory by default)
   -s, --source SOURCE         TBD
   -t, --target TARGET         target directory to observe (current directory by default)
-      --night                 if you specify this, the option for quotarget is changed
-      --midnight              if you specify this, the option for quotarget is changed
+      --timeframe TIMEFRAME   timeframe
       --sudo                  TBD
   -m, --mode MODE             git, ln, unlink, cron, or sync
       --vpn                   only if you are connected to a VPN and have a foreign IP address, you will be exempt from the restrictions
