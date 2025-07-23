@@ -291,6 +291,89 @@ todo_mode() {
 
 
 
+check_todo() {
+  set +u
+  [ "$gaming_skipped" = "" ] && gaming_skipped=false
+  [ "$gaming_quota_refresh" = "" ] && gaming_quota_refresh=false
+  set -u
+
+  if [ "$gaming_skipped" = "false" ]; then
+    if [ "$NIGHT" != "1" ] && [ "$MIDNIGHT" != "1" ]; then
+      if \
+        [ "$(restrict-all check "observe-gaming-conf")" -le 0 ] &&
+        [ "$(quotarget --timeframe day --service gaming)" -gt 0 ] &&
+        [ "$(sincere)" -gt 0 ];
+      then
+        gaming_skipped=true
+      fi
+    elif [ "$NIGHT" = "1" ]; then
+      if \
+        [ "$(restrict-all check "observe-gaming-conf")" -le 0 ] &&
+        [ "$(quotarget --timeframe night --service gaming)" -gt 0 ] &&
+        [ "$(sincere)" -gt 0 ];
+      then
+        gaming_skipped=true
+      fi
+    elif [ "$MIDNIGHT" = "1" ]; then
+      if \
+        [ "$(restrict-all check "observe-gaming-conf")" -le 0 ] &&
+        [ "$(quotarget --timeframe midnight --service gaming)" -gt 0 ] &&
+        [ "$(sincere)" -gt 0 ];
+      then
+        gaming_skipped=true
+      fi
+    fi
+  else
+    set +u
+    [ "$gaming_accomplished_last_checked_at" = "" ] && gaming_accomplished_last_checked_at=$(date +%s)
+    set -u
+
+    if [ "$(echo $(( $(date +%s) - $gaming_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
+      gaming_accomplished_last_checked_at=$(date +%s)
+
+      if [ "$NIGHT" != 1 ] && [ "$MIDNIGHT" != 1 ]; then
+        if [ "$(quotarget --timeframe day --service gaming)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+          gaming_skipped=false
+
+          if [ "$gaming_quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            gaming_quota_refresh=true
+          fi
+        fi
+      elif [ "$NIGHT" = 1 ]; then
+        if [ "$(quotarget --timeframe night --service gaming)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+          gaming_skipped=false
+
+          if [ "$gaming_quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            gaming_quota_refresh=true
+          fi
+        fi
+      elif [ "$MIDNIGHT" = 1 ]; then
+        if [ "$(quotarget --timeframe midnight --service gaming)" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+          gaming_skipped=false
+
+          if [ "$gaming_quota_refresh" = "true" ]; then
+            /home/ubuntu/workspace/cron-conf/bin/lib/punish                \
+              --from "$(echo "$(basename "$0")" "$*" | sed -r 's/\s$//g')" \
+              --duration "$PUNISHMENT_DURATION"
+          else
+            gaming_quota_refresh=true
+          fi
+        fi
+      fi
+    fi
+  fi
+}
+
+
+
 gaming_todo() {
   set +u
   [ "$gaming_skipped" = "" ] && gaming_skipped=false
