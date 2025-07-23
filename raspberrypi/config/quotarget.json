@@ -1,5 +1,33 @@
 {
   "discipline": {
+    "predawn": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "dawn": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
     "morning": {
       "loss_based": {
         "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 3 $force",
@@ -9,6 +37,48 @@
       },
       "scraping_by": {
         "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 4 $force",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "midday": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "afternoon": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "evening": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -44,6 +114,34 @@
     }
   },
   "gaming": {
+    "predawn": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "dawn": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
     "morning": {
       "loss_based": {
         "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 1 --retry 1 --checked 12 --unchecked 0 $force",
@@ -53,6 +151,48 @@
       },
       "scraping_by": {
         "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 4 $force",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "midday": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "afternoon": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "evening": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -88,6 +228,34 @@
     }
   },
   "netflix": {
+    "predawn": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "dawn": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
     "morning": {
       "loss_based": {
         "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 2 --retry 1 --checked 12 --unchecked 0 $force",
@@ -97,6 +265,48 @@
       },
       "scraping_by": {
         "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 6 $force",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "midday": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "afternoon": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "evening": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -132,6 +342,34 @@
     }
   },
   "social-media": {
+    "predawn": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "dawn": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
     "morning": {
       "loss_based": {
         "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 3 --retry 1 --checked 12 --unchecked 0 $force",
@@ -141,6 +379,48 @@
       },
       "scraping_by": {
         "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 6 $force",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "midday": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "afternoon": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "evening": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -176,6 +456,34 @@
     }
   },
   "vod": {
+    "predawn": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "dawn": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
     "morning": {
       "loss_based": {
         "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 2 --retry 1 --checked 12 --unchecked 0 $force",
@@ -185,6 +493,48 @@
       },
       "scraping_by": {
         "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 6 $force",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "midday": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "afternoon": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "evening": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -220,6 +570,34 @@
     }
   },
   "youtube": {
+    "predawn": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "dawn": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
     "morning": {
       "loss_based": {
         "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 4 --retry 1 --checked 12 --unchecked 0 $force",
@@ -230,6 +608,48 @@
       "scraping_by": {
         "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 8 $force",
         "task_personal": "task-stacked --main-repo 'noraworld/reserved-diary' --past 0 --todo-repo 'noraworld/to-do,noraworld/writing-manuscript' $force",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "midday": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "afternoon": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "evening": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
       }
@@ -264,6 +684,34 @@
     }
   },
   "youtube-alternative": {
+    "predawn": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "dawn": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
     "morning": {
       "loss_based": {
         "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 3 --retry 1 --checked 12 --unchecked 0 $force",
@@ -273,6 +721,48 @@
       },
       "scraping_by": {
         "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 6 $force",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "midday": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "afternoon": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "evening": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -308,6 +798,34 @@
     }
   },
   "youtube-music-persistent": {
+    "predawn": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "dawn": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
     "morning": {
       "loss_based": {
         "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 3 $force",
@@ -317,6 +835,48 @@
       },
       "scraping_by": {
         "todo_personal": "gh issue view --repo noraworld/diary-templates --json comments --jq 'if .comments | length > 0 then 1 else 0 end' $(gh issue list --repo noraworld/diary-templates --search 'walking ウォーキング' --limit 1 --json number --jq '.[].number') 2>/dev/null || echo 0",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "midday": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "afternoon": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "evening": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -352,6 +912,34 @@
     }
   },
   "deregulated-superman": {
+    "predawn": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "dawn": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
     "morning": {
       "loss_based": {
         "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 2 --retry 1 --checked 12 --unchecked 0 $force",
@@ -361,6 +949,48 @@
       },
       "scraping_by": {
         "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 2 $force",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "midday": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "afternoon": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "evening": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -396,6 +1026,34 @@
     }
   },
   "maeve": {
+    "predawn": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "dawn": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
     "morning": {
       "loss_based": {
         "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 3 --retry 1 --checked 12 --unchecked 0 $force",
@@ -405,6 +1063,48 @@
       },
       "scraping_by": {
         "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 6 $force",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "midday": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "afternoon": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "evening": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -440,6 +1140,34 @@
     }
   },
   "ometeotl": {
+    "predawn": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "dawn": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
     "morning": {
       "loss_based": {
         "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 1 --retry 1 --checked 12 --unchecked 0 $force",
@@ -449,6 +1177,48 @@
       },
       "scraping_by": {
         "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 4 $force",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "midday": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "afternoon": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "evening": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -484,6 +1254,34 @@
     }
   },
   "superman": {
+    "predawn": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "dawn": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
     "morning": {
       "loss_based": {
         "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 4 --retry 1 --checked 12 --unchecked 0 $force",
@@ -494,6 +1292,48 @@
       "scraping_by": {
         "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 8 $force",
         "task_personal": "task-stacked --main-repo 'noraworld/reserved-diary' --past 0 --todo-repo 'noraworld/to-do,noraworld/writing-manuscript' $force",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "midday": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "afternoon": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "evening": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
       }
@@ -528,6 +1368,34 @@
     }
   },
   "upstream": {
+    "predawn": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "dawn": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
     "morning": {
       "loss_based": {
         "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 3 --retry 1 --checked 12 --unchecked 0 $force",
@@ -537,6 +1405,48 @@
       },
       "scraping_by": {
         "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 6 $force",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "midday": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "afternoon": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "evening": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
