@@ -497,6 +497,10 @@ validate() {
     echo "error: unrecognized mode $MODE" >&2
     exit 1
   fi
+
+  if [ "$TIMEFRAME" = "" ]; then
+    TIMEFRAME="day"
+  fi
 }
 
 
