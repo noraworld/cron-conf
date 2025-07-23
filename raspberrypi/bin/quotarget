@@ -2,6 +2,7 @@
 
 STRATEGY="scraping_by"
 STRATEGY_FILE="/home/ubuntu/workspace/cron-conf/raspberrypi/config/quotarget.json"
+TIMEFRAME_LIST="predawn dawn morning midday afternoon evening night midnight"
 
 main() {
   prepare "$@"
@@ -45,8 +46,17 @@ prepare() {
 }
 
 validate() {
-  if [ "$TIMEFRAME" != "day" ] && [ "$TIMEFRAME" != "night" ] && [ "$TIMEFRAME" != "midnight" ]; then
-    echo "invalid timeframe: $TIMEFRAME" >&2
+  valid_tf=false
+
+  for tf in $TIMEFRAME_LIST; do
+    if [ "$TIMEFRAME" = "$tf" ]; then
+      valid_tf=true
+      break
+    fi
+  done
+
+  if [ "$valid_tf" != "true" ]; then
+    echo "Error: Invalid TIMEFRAME: $TIMEFRAME" >&2
     exit 1
   fi
 }
@@ -58,7 +68,7 @@ parser_definition() {
   flag  DEBUG        --debug     -- "show debug messages"
   flag  FORCE        --force     -- "get content from APIs even if cache exists"
   param SERVICE      --service   -- "youtube, vod, ..."
-  param TIMEFRAME    --timeframe -- "day, night, or midnight"
+  param TIMEFRAME    --timeframe -- "timeframe"
   disp  :usage    -h --help
   disp  VERSION      --version
 }
@@ -144,7 +154,7 @@ Options:
       --debug                 show debug messages
       --force                 get content from APIs even if cache exists
       --service SERVICE       youtube, vod, ...
-      --timeframe TIMEFRAME   day, night, or midnight
+      --timeframe TIMEFRAME   timeframe
   -h, --help
       --version
 GETOPTIONSHERE
