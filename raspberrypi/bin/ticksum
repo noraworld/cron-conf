@@ -29,7 +29,7 @@ validate() {
 
 # @getoptions
 parser_definition() {
-  setup   REST help:usage -- "Usage: example.sh [options]... [arguments]..." ''
+  setup   REST help:usage -- "Usage: ticksum [options]... [arguments]..." ''
   msg -- 'Options:'
   flag    DEBUG      --debug   -- "debug"
   param   PAST       --past    -- "past (default: 0)"
@@ -107,7 +107,7 @@ parse() {
 }
 usage() {
 cat<<'GETOPTIONSHERE'
-Usage: example.sh [options]... [arguments]...
+Usage: ticksum [options]... [arguments]...
 
 Options:
       --debug                 debug
