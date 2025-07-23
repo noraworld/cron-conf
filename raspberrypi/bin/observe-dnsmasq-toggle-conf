@@ -215,6 +215,7 @@ todo_mode() {
   fi
 
   # ln_mode & unlink_mode (upstream)
+  # shellcheck disable=SC2154
   if [ "$upstream_skipped" = "false" ] && [ "$(restrict-all check "observe-adguard-upstream-conf")" -le 0 ]; then
     restrict-all reset                 \
       observe-adguard-upstream-conf    \
