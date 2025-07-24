@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# shellcheck disable=SC2004
+
 STRATEGY="scraping_by"
 STRATEGY_FILE="/home/ubuntu/workspace/cron-conf/raspberrypi/config/quotarget.json"
 TIMEFRAME_LIST="predawn dawn morning midday afternoon evening night midnight"
@@ -11,6 +13,8 @@ main() {
   if [ "$FORCE" = "1" ]; then
     force="--force"
   else
+    # $force doesn't seem to be used, but it's actually used within quotarget.json
+    # shellcheck disable=SC2034
     force=""
   fi
 
