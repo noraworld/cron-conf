@@ -514,7 +514,7 @@ amazon() {
 }
 
 chime() {
-  reference_minute=30
+  reference_minute=20
   waiting_interval=1
   [ "$DRY_RUN" = 1 ] && exit 0
 
