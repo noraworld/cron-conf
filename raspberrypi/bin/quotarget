@@ -8,6 +8,7 @@ TIMEFRAME_LIST="predawn dawn morning midday afternoon evening night midnight"
 
 main() {
   prepare "$@"
+  list_info "$@"
   validate "$@"
 
   if [ "$FORCE" = "1" ]; then
@@ -77,6 +78,18 @@ prepare() {
   eval "set -- $REST"
 }
 
+list_info() {
+  if [ "$LIST_TIMEFRAMES" = "1" ]; then
+    for tf in $TIMEFRAME_LIST; do
+      printf '%s\n' "$tf"
+    done
+    exit 0
+  elif [ "$LIST_SERVICES" = "1" ]; then
+    jq -r 'keys[]' "$STRATEGY_FILE"
+    exit 0
+  fi
+}
+
 validate() {
   valid_tf=false
 
@@ -97,12 +110,14 @@ validate() {
 parser_definition() {
   setup REST help:usage -- "Usage: quotarget [options]... [arguments]..." ''
   msg -- 'Options:'
-  flag  DEBUG        --debug     -- "show debug messages"
-  flag  FORCE        --force     -- "get content from APIs even if cache exists"
-  param SERVICE      --service   -- "youtube, vod, ..."
-  param TIMEFRAME    --timeframe -- "timeframe"
-  disp  :usage    -h --help
-  disp  VERSION      --version
+  flag  DEBUG              --debug           -- "show debug messages"
+  flag  FORCE              --force           -- "get content from APIs even if cache exists"
+  flag  LIST_TIMEFRAMES    --list-timeframes -- "get list of timeframes"
+  flag  LIST_SERVICES      --list-services   -- "get list of services"
+  param SERVICE            --service         -- "youtube, vod, ..."
+  param TIMEFRAME          --timeframe       -- "timeframe"
+  disp  :usage          -h --help
+  disp  VERSION            --version
 }
 # @end
 
@@ -111,6 +126,8 @@ parser_definition() {
 # URL: https://github.com/ko1nksm/getoptions (v3.3.0)
 DEBUG=''
 FORCE=''
+LIST_TIMEFRAMES=''
+LIST_SERVICES=''
 SERVICE=''
 TIMEFRAME=''
 REST=''
@@ -136,6 +153,16 @@ parse() {
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
         FORCE="$OPTARG"
+        ;;
+      '--list-timeframes')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        LIST_TIMEFRAMES="$OPTARG"
+        ;;
+      '--list-services')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        LIST_SERVICES="$OPTARG"
         ;;
       '--service')
         [ $# -le 1 ] && set "required" "$1" && break
@@ -185,6 +212,8 @@ Usage: quotarget [options]... [arguments]...
 Options:
       --debug                 show debug messages
       --force                 get content from APIs even if cache exists
+      --list-timeframes       get list of timeframes
+      --list-services         get list of services
       --service SERVICE       youtube, vod, ...
       --timeframe TIMEFRAME   timeframe
   -h, --help
