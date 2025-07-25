@@ -323,7 +323,7 @@ check_todo() {
   if [ "$todo_skipped" = "false" ]; then
     if \
       [ "$(restrict-all check "observe-${observer_service_name}-conf")" -le 0 ] &&
-      [ "$(quotarget --timeframe "$TIMEFRAME" --service "${service_name}")" -gt 0 ] &&
+      [ "$(quotarget --timeframe "$TIMEFRAME" --service "${observer_service_name}")" -gt 0 ] &&
       [ "$(sincere)" -gt 0 ];
     then
       eval "${service_name}_skipped=true"
@@ -341,7 +341,7 @@ check_todo() {
     if [ "$(echo $(( $(date +%s) - $todo_accomplished_last_checked_at )))" -gt "$ACCOMPLISHED_CHECK_INTERVAL" ]; then
       eval "${service_name}_accomplished_last_checked_at=$(date +%s)"
 
-      if [ "$(quotarget --timeframe "$TIMEFRAME" --service "${service_name}")" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
+      if [ "$(quotarget --timeframe "$TIMEFRAME" --service "${observer_service_name}")" -lt 0 ] || [ "$(sincere)" -lt 0 ]; then
         eval "${service_name}_skipped=false"
 
         if [ "$todo_quota_refresh" = "true" ]; then
