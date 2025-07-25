@@ -1,0 +1,25 @@
+#compdef quotarget
+
+_timeframes() {
+  local -a timeframes
+  timeframes=("${(f)$(quotarget --list-timeframes 2>/dev/null)}")
+  _describe 'timeframe' timeframes
+}
+
+_services() {
+  local -a services
+  services=("${(f)$(quotarget --list-services 2>/dev/null)}")
+  _describe 'service' services
+}
+
+_arguments -s \
+  '--debug[Show debug messages]' \
+  '--force[Force API fetch even if cache exists]' \
+  '--list-timeframes[List available timeframes]' \
+  '--list-services[List available services]' \
+  '--service[Specify service]:service:_services' \
+  '--timeframe[Specify timeframe]:timeframe:_timeframes' \
+  '--help[Show help]' \
+  '-h[Show help]' \
+  '--version[Show version]' \
+  '*:filename:_files'
