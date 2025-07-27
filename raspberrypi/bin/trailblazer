@@ -40,13 +40,17 @@ main() {
     RETRY=5
   fi
 
+  force_retry_flag="false"
+
   if [ "$MORNING" = 1 ]; then
     garnish prep
     echo
   else
     accomplished="0"
 
-    while [ "$accomplished" -eq 0 ]; do
+    while [ "$accomplished" -eq 0 ] || [ "$force_retry_flag" = "true" ]; do
+      force_retry_flag="false"
+
       for tf in $TIMEFRAME_LIST; do
         if [ "$(systemctl --user is-active observe-dnsmasq-todo-list-"$tf" | grep -c inactive)" -eq 0 ]; then
           # There is an unknown phenomenon the restrictions are not regulated even though the tasks have been accomplished.
@@ -67,7 +71,15 @@ main() {
       # value: negative
       if [ "$accomplished" -lt 0 ]; then
         echo "Not accomplished yet." >&2
-        exit
+
+        if [ "$FORCE_RETRY" = "1" ]; then
+          echo "Trying again with --force" >&2
+          force="--force"
+          force_retry_flag="true"
+          FORCE_RETRY="0"
+        else
+          exit
+        fi
       fi
 
       # value: zero
@@ -97,16 +109,17 @@ main() {
 parser_definition() {
   setup   REST help:usage -- "Usage: trailblazer [options]... [arguments]..." ''
   msg -- 'Options:'
-  flag    DRY_RUN     --dry-run  -- "just show the success message instead of unlocking the services"
-  flag    FORCE       --force    -- "get content from APIs even if cache exists"
-  param   INTERVAL    --interval -- "wait for the given number of seconds each time (unlock)"
-  flag    MORNING     --morning  -- "skip quotarget, and ask to prepare a piece of garlic"
-  flag    REFRESH     --refresh  -- "restart todo-list daemon before check"
-  param   RETRY       --retry    -- "try to create or delete symlinks the given number of times (unlock)"
-  flag    SINCERE     --sincere  -- "execute sincere before running"
-  param   SLEEP       --sleep    -- "how many seconds to wait for the next attempt"
-  disp    :usage   -h --help
-  disp    VERSION     --version
+  flag    DRY_RUN        --dry-run     -- "just show the success message instead of unlocking the services"
+  flag    FORCE          --force       -- "get content from APIs even if cache exists"
+  flag    FORCE_RETRY    --force-retry -- "perform without force option first, then execute with force option if the first attempt fails"
+  param   INTERVAL       --interval    -- "wait for the given number of seconds each time (unlock)"
+  flag    MORNING        --morning     -- "skip quotarget, and ask to prepare a piece of garlic"
+  flag    REFRESH        --refresh     -- "restart todo-list daemon before check"
+  param   RETRY          --retry       -- "try to create or delete symlinks the given number of times (unlock)"
+  flag    SINCERE        --sincere     -- "execute sincere before running"
+  param   SLEEP          --sleep       -- "how many seconds to wait for the next attempt"
+  disp    :usage      -h --help
+  disp    VERSION        --version
 }
 # @end
 
@@ -115,6 +128,7 @@ parser_definition() {
 # URL: https://github.com/ko1nksm/getoptions (v3.3.0)
 DRY_RUN=''
 FORCE=''
+FORCE_RETRY=''
 INTERVAL=''
 MORNING=''
 REFRESH=''
@@ -144,6 +158,11 @@ parse() {
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
         FORCE="$OPTARG"
+        ;;
+      '--force-retry')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        FORCE_RETRY="$OPTARG"
         ;;
       '--interval')
         [ $# -le 1 ] && set "required" "$1" && break
@@ -213,6 +232,7 @@ Usage: trailblazer [options]... [arguments]...
 Options:
       --dry-run               just show the success message instead of unlocking the services
       --force                 get content from APIs even if cache exists
+      --force-retry           perform without force option first, then execute with force option if the first attempt fails
       --interval INTERVAL     wait for the given number of seconds each time (unlock)
       --morning               skip quotarget, and ask to prepare a piece of garlic
       --refresh               restart todo-list daemon before check
