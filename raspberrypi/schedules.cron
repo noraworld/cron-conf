@@ -138,19 +138,15 @@ NON_ROOT_USER=ubuntu
 
 
 # Chime
-#   Limit email and message checks to three times a day.
-*/20 0-19,21-23 * * * scheduler chime deny
-55   19         * * * scheduler chime allow
-# 1    3  * * * scheduler chime allow
-# 1    8  * * * scheduler chime allow
-# 1    13 * * * scheduler chime allow
-# 1    18 * * * scheduler chime allow
-# 1    23 * * * scheduler chime allow
+*/5  *          * * * scheduler chime allow
+*/20 0-19,21-23 * * * scheduler chime deny --soft
+55   19         * * * scheduler chime allow --strong
 
 
 
 # Crimson
-0 * * * * scheduler crimson deny --soft
+*/5 * * * * scheduler crimson allow
+0   * * * * scheduler crimson deny --soft
 
 
 
@@ -221,6 +217,7 @@ NON_ROOT_USER=ubuntu
 
 
 # Social Media Allow
+*/5 * * * * scheduler social-media-allow allow
 */5 * * * * scheduler social-media-allow deny --soft
 
 
@@ -242,6 +239,7 @@ NON_ROOT_USER=ubuntu
 
 
 # YouTube Music
+*/5  * * * * scheduler youtube-music allow
 */20 * * * * scheduler youtube-music deny --soft
 
 

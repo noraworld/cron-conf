@@ -205,10 +205,19 @@ amazon() {
 chime() {
   case "$operation" in
     "deny")
+      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
+      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
+      [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
+        cron-daemonctl stop observe-chime-conf "$safe"
+        return
+      fi
+
+      [ "$SOFT" = 1 ] || cron-daemonctl start observe-chime-conf "$safe"
       create-dnsmasq-toggle-conf public chime
       ;;
     "allow")
-      remove-dnsmasq-toggle-conf public chime
+      cron-daemonctl stop observe-chime-conf "$safe"
+      [ "$STRONG" = 1 ] && remove-dnsmasq-toggle-conf public chime
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2
@@ -220,6 +229,13 @@ chime() {
 crimson() {
   case "$operation" in
     "deny")
+      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
+      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
+      [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
+        cron-daemonctl stop observe-crimson-conf "$safe"
+        return
+      fi
+
       [ "$SOFT" = 1 ] || cron-daemonctl start observe-crimson-conf "$safe"
       remove-dnsmasq-toggle-conf private crimson
       ;;
@@ -1095,6 +1111,7 @@ parser_definition() {
   flag    MORNING              --morning           -- "whether to exempt the restriction in the morning"
   flag    SAFE                 --safe              -- "not getting punished"
   flag    SOFT                 --soft              -- "deny resources without starting a daemon"
+  flag    STRONG               --strong            -- "force to allow resources (not only start a daemon but create/delete a resource file)"
   flag    VAMPIRE              --vampire           -- "exempt the restriction if you beat your drowsiness in the morning"
   flag    VERBOSE              --verbose           -- "show detailed information"
   disp    :usage            -h --help              -- "show help message and exit"
@@ -1111,6 +1128,7 @@ YELLOW_KRYPTONITE=''
 MORNING=''
 SAFE=''
 SOFT=''
+STRONG=''
 VAMPIRE=''
 VERBOSE=''
 REST=''
@@ -1156,6 +1174,11 @@ parse() {
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
         SOFT="$OPTARG"
+        ;;
+      '--strong')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        STRONG="$OPTARG"
         ;;
       '--vampire')
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
@@ -1209,6 +1232,7 @@ Options:
       --morning               whether to exempt the restriction in the morning
       --safe                  not getting punished
       --soft                  deny resources without starting a daemon
+      --strong                force to allow resources (not only start a daemon but create/delete a resource file)
       --vampire               exempt the restriction if you beat your drowsiness in the morning
       --verbose               show detailed information
   -h, --help                  show help message and exit

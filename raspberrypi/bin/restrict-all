@@ -180,6 +180,18 @@ build() {
       [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf public"
       [ "$1" = "name"      ] && echo "youtube"
       ;;
+    "observe-chime-conf")
+      [ "$1" = "existence" ] && echo "true"
+      [ "$1" = "path"      ] && echo "$TOGGLE_DIR/chime.conf"
+      [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf public"
+      [ "$1" = "name"      ] && echo "chime"
+      ;;
+    "observe-crimson-conf")
+      [ "$1" = "existence" ] && echo "false"
+      [ "$1" = "path"      ] && echo "$PRIV_TOGGLE_DIR/crimson.conf"
+      [ "$1" = "command"   ] && echo "remove-dnsmasq-toggle-conf private"
+      [ "$1" = "name"      ] && echo "crimson"
+      ;;
     "observe-gaming-conf")
       [ "$1" = "existence" ] && echo "true"
       [ "$1" = "path"      ] && echo "$TOGGLE_DIR/gaming.conf"

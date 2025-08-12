@@ -123,13 +123,17 @@ firewall_mode() {
 
 todo_mode() {
   #           service_name_for_variable   service_name_for_observer   service_name_for_quotarget
+  check_todo  "chime"                     "chime"                     "chime"
+  check_todo  "crimson"                   "crimson"                   "crimson"
   check_todo  "gaming"                    "gaming"                    "gaming"
   check_todo  "minerva"                   "minerva"                   "minerva"
   check_todo  "netflix"                   "netflix"                   "netflix"
   check_todo  "social_media"              "social-media"              "social-media"
+  check_todo  "social_media_allow"        "social-media-allow"        "social-media-allow"
   check_todo  "vod"                       "vod"                       "vod"
   check_todo  "youtube"                   "youtube"                   "youtube"
   check_todo  "youtube_alternative"       "youtube-alternative"       "youtube-alternative"
+  check_todo  "youtube_music"             "youtube-music"             "youtube-music"
   check_todo  "youtube_music_persistent"  "youtube-music-persistent"  "youtube-music-persistent"
   check_todo  "deregulated_superman"      "deregulated-superman"      "deregulated-superman"
   check_todo  "maeve"                     "maeve"                     "maeve"
@@ -137,6 +141,20 @@ todo_mode() {
   check_todo  "superman"                  "superman"                  "superman"
   check_todo  "upstream"                  "adguard-upstream"          "upstream"
   discipline_todo
+
+  # ln_mode & unlink_mode (chime)
+  # shellcheck disable=SC2154
+  if [ "$chime_skipped" = "false" ] && [ "$(restrict-all check "observe-chime-conf")" -le 0 ]; then
+    restrict-all reset "observe-chime-conf"
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-chime-conf"
+  fi
+
+  # ln_mode & unlink_mode (crimson)
+  # shellcheck disable=SC2154
+  if [ "$crimson_skipped" = "false" ] && [ "$(restrict-all check "observe-crimson-conf")" -le 0 ]; then
+    restrict-all reset "observe-crimson-conf"
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-crimson-conf"
+  fi
 
   # ln_mode & unlink_mode (gaming)
   # shellcheck disable=SC2154
@@ -166,6 +184,13 @@ todo_mode() {
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-social-media-conf"
   fi
 
+  # ln_mode & unlink_mode (social-media-allow)
+  # shellcheck disable=SC2154
+  if [ "$social_media_allow_skipped" = "false" ] && [ "$(restrict-all check "observe-social-media-allow-conf")" -le 0 ]; then
+    restrict-all reset "observe-social-media-allow-conf"
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-social-media-allow-conf"
+  fi
+
   # ln_mode & unlink_mode (vod)
   # shellcheck disable=SC2154
   if [ "$vod_skipped" = "false" ] && [ "$(restrict-all check "observe-vod-conf")" -le 0 ]; then
@@ -185,6 +210,13 @@ todo_mode() {
   if [ "$youtube_alternative_skipped" = "false" ] && [ "$(restrict-all check "observe-youtube-alternative-conf")" -le 0 ]; then
     restrict-all reset "observe-youtube-alternative-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-youtube-alternative-conf"
+  fi
+
+  # ln_mode & unlink_mode (youtube-music)
+  # shellcheck disable=SC2154
+  if [ "$youtube_music_skipped" = "false" ] && [ "$(restrict-all check "observe-youtube-music-conf")" -le 0 ]; then
+    restrict-all reset "observe-youtube-music-conf"
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-youtube-music-conf"
   fi
 
   # ln_mode & unlink_mode (youtube-music-persistent)
