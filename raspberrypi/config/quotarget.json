@@ -227,6 +227,120 @@
       }
     }
   },
+  "minerva": {
+    "predawn": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "ticksum --repo noraworld/reserved-diary 読書 --pass-stamp 1 --fail-stamp -1",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "dawn": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "ticksum --repo noraworld/reserved-diary 読書 --pass-stamp 1 --fail-stamp -1",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "morning": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "ticksum --repo noraworld/reserved-diary 読書 --pass-stamp 1 --fail-stamp -1",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "midday": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "ticksum --repo noraworld/reserved-diary 読書 --pass-stamp 1 --fail-stamp -1",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "afternoon": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "ticksum --repo noraworld/reserved-diary 読書 --pass-stamp 1 --fail-stamp -1",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "evening": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "ticksum --repo noraworld/reserved-diary 読書 --pass-stamp 1 --fail-stamp -1",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "night": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "ticksum --repo noraworld/reserved-diary 読書 --pass-stamp 1 --fail-stamp -1",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    },
+    "midnight": {
+      "loss_based": {
+        "todo_personal": "echo -1",
+        "task_personal": "echo -1",
+        "todo_work": "echo -1",
+        "task_work": "echo -1"
+      },
+      "scraping_by": {
+        "todo_personal": "ticksum --repo noraworld/reserved-diary 読書 --pass-stamp 1 --fail-stamp -1",
+        "task_personal": "echo 2",
+        "todo_work": "echo 1",
+        "task_work": "echo 2"
+      }
+    }
+  },
   "netflix": {
     "predawn": {
       "loss_based": {

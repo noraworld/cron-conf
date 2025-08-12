@@ -124,6 +124,7 @@ firewall_mode() {
 todo_mode() {
   #           service_name_for_variable   service_name_for_observer   service_name_for_quotarget
   check_todo  "gaming"                    "gaming"                    "gaming"
+  check_todo  "minerva"                   "minerva"                   "minerva"
   check_todo  "netflix"                   "netflix"                   "netflix"
   check_todo  "social_media"              "social-media"              "social-media"
   check_todo  "vod"                       "vod"                       "vod"
@@ -142,6 +143,13 @@ todo_mode() {
   if [ "$gaming_skipped" = "false" ] && [ "$(restrict-all check "observe-gaming-conf")" -le 0 ]; then
     restrict-all reset "observe-gaming-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-gaming-conf"
+  fi
+
+  # ln_mode & unlink_mode (minerva)
+  # shellcheck disable=SC2154
+  if [ "$minerva_skipped" = "false" ] && [ "$(restrict-all check "observe-minerva-conf")" -le 0 ]; then
+    restrict-all reset "observe-minerva-conf"
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-minerva-conf"
   fi
 
   # ln_mode & unlink_mode (netflix)

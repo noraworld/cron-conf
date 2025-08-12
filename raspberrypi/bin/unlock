@@ -93,6 +93,9 @@ main() {
         "gaming")
           gaming
           ;;
+        "minerva")
+          minerva
+          ;;
         "social-media")
           social_media
           ;;
@@ -230,6 +233,10 @@ all() {
 
   if [ -L /etc/dnsmasq.toggle/gaming.conf ]; then
     sudo unlink /etc/dnsmasq.toggle/gaming.conf
+  fi
+
+  if [ -L /etc/dnsmasq.toggle/minerva.conf ]; then
+    sudo unlink /etc/dnsmasq.toggle/minerva.conf
   fi
 
   if [ -L /etc/dnsmasq.toggle/social_media.conf ]; then
@@ -383,6 +390,14 @@ all() {
   if [ -L /etc/dnsmasq.toggle/gaming.conf ]; then
     error_color
     echo "error: /etc/dnsmasq.toggle/gaming.conf still exists" >&2
+    no_color
+    echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
+    not_all_linkage_succeeded=1
+  fi
+
+  if [ -L /etc/dnsmasq.toggle/minerva.conf ]; then
+    error_color
+    echo "error: /etc/dnsmasq.toggle/minerva.conf still exists" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
     not_all_linkage_succeeded=1
@@ -889,6 +904,26 @@ gaming() {
   if [ -L /etc/dnsmasq.toggle/gaming.conf ]; then
     error_color
     echo "error: /etc/dnsmasq.toggle/gaming.conf still exists" >&2
+    no_color
+    echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
+  else
+    linkage_succeeded=1
+  fi
+}
+
+minerva() {
+  reference_minute=60
+  [ "$DRY_RUN" = 1 ] && exit 0
+
+  warning_color
+  sudo unlink /etc/dnsmasq.toggle/minerva.conf
+  no_color
+
+  pause "$waiting_interval" "$WAITING_MESSAGE"
+
+  if [ -L /etc/dnsmasq.toggle/minerva.conf ]; then
+    error_color
+    echo "error: /etc/dnsmasq.toggle/minerva.conf still exists" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
   else
