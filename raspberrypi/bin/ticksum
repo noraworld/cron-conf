@@ -18,12 +18,12 @@ main() {
   [ "$DEBUG" = "1" ] && echo "DEBUG: argc:     $#"            >&2
   [ "$DEBUG" = "1" ] && echo "DEBUG: passed:   $passed_count" >&2
 
-  if [ "$PASS_STAMP" = "" ] || [ "$FAIL_STAMP" = "" ]; then
-    echo "$passed_count"
-  elif [ "$#" -eq "$passed_count" ]; then
+  if [ "$PASS_STAMP" != "" ] && [ "$#" -eq "$passed_count" ]; then
     echo "$PASS_STAMP"
-  else
+  elif [ "$FAIL_STAMP" != "" ] && [ "$#" -ne "$passed_count" ]; then
     echo "$FAIL_STAMP"
+  else
+    echo "$passed_count"
   fi
 }
 
@@ -37,13 +37,14 @@ validate() {
     PAST=0
   fi
 
-  if \
-    { [ "$PASS_STAMP" != "" ] && [ "$FAIL_STAMP"  = "" ]; } ||
-    { [ "$PASS_STAMP"  = "" ] && [ "$FAIL_STAMP" != "" ]; }
-  then
-    echo "both --pass-stamp and --fail-stamp are necessary" >&2
-    exit 1
-  fi
+  # Delete if any problem doesn't happen.
+  # if \
+  #   { [ "$PASS_STAMP" != "" ] && [ "$FAIL_STAMP"  = "" ]; } ||
+  #   { [ "$PASS_STAMP"  = "" ] && [ "$FAIL_STAMP" != "" ]; }
+  # then
+  #   echo "both --pass-stamp and --fail-stamp are necessary" >&2
+  #   exit 1
+  # fi
 }
 
 # @getoptions
