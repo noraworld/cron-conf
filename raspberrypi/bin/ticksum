@@ -18,7 +18,9 @@ main() {
   [ "$DEBUG" = "1" ] && echo "DEBUG: argc:     $#"            >&2
   [ "$DEBUG" = "1" ] && echo "DEBUG: passed:   $passed_count" >&2
 
-  if [ "$PASS_STAMP" != "" ] && [ "$#" -eq "$passed_count" ]; then
+  if [ "$ZERO_STAMP" != "" ] && [ "$passed_count" -eq 0 ]; then
+    echo "$ZERO_STAMP"
+  elif [ "$PASS_STAMP" != "" ] && [ "$#" -eq "$passed_count" ]; then
     echo "$PASS_STAMP"
   elif [ "$FAIL_STAMP" != "" ] && [ "$#" -ne "$passed_count" ]; then
     echo "$FAIL_STAMP"
@@ -56,6 +58,7 @@ parser_definition() {
   param   PASS_STAMP    --pass-stamp -- "return a given value instead of the number of checked tasks when all the tasks have been passed"
   param   PAST          --past       -- "past (default: 0)"
   param   REPO          --repo       -- "repo"
+  param   ZERO_STAMP    --zero-stamp -- "return a given value instead of zero (none of the tasks has not been accomplished)"
   disp    :usage     -h --help
   disp    VERSION       --version
 }
@@ -69,6 +72,7 @@ FAIL_STAMP=''
 PASS_STAMP=''
 PAST=''
 REPO=''
+ZERO_STAMP=''
 REST=''
 parse() {
   OPTIND=$(($#+1))
@@ -107,6 +111,11 @@ parse() {
         [ $# -le 1 ] && set "required" "$1" && break
         OPTARG=$2
         REPO="$OPTARG"
+        shift ;;
+      '--zero-stamp')
+        [ $# -le 1 ] && set "required" "$1" && break
+        OPTARG=$2
+        ZERO_STAMP="$OPTARG"
         shift ;;
       '-h'|'--help')
         usage
@@ -149,6 +158,7 @@ Options:
       --pass-stamp PASS_STAMP return a given value instead of the number of checked tasks when all the tasks have been passed
       --past PAST             past (default: 0)
       --repo REPO             repo
+      --zero-stamp ZERO_STAMP return a given value instead of zero (none of the tasks has not been accomplished)
   -h, --help
       --version
 GETOPTIONSHERE
