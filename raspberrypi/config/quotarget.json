@@ -8,7 +8,7 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 12 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -22,7 +22,7 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 14 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -36,7 +36,7 @@
         "task_work": "echo 2"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 0 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -50,7 +50,7 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 2 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -64,7 +64,7 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 4 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -78,7 +78,7 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 6 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -92,7 +92,7 @@
         "task_work": "echo 2"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 8 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -106,7 +106,7 @@
         "task_work": "echo 2"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 10 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -1490,7 +1490,7 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 10 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary ウォーキング --pass-stamp 1 --fail-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -1504,7 +1504,7 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 12 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary ウォーキング --pass-stamp 1 --fail-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -1518,7 +1518,7 @@
         "task_work": "task-stacked     --main-repo 'noraworld/daily-report'   --past 2 --todo-repo 'noraworld/work-scraps' $force"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 0 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary ウォーキング --pass-stamp 1 --fail-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -1532,7 +1532,7 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 0 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary ウォーキング --pass-stamp 1 --fail-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -1546,7 +1546,7 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 2 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary ウォーキング --pass-stamp 1 --fail-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -1560,7 +1560,7 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 4 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary ウォーキング --pass-stamp 1 --fail-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -1574,7 +1574,7 @@
         "task_work": "task-stacked     --main-repo 'noraworld/daily-report'   --past 2 --todo-repo 'noraworld/work-scraps' $force"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 6 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary ウォーキング --pass-stamp 1 --fail-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -1588,7 +1588,7 @@
         "task_work": "task-stacked     --main-repo 'noraworld/daily-report'   --past 2 --todo-repo 'noraworld/work-scraps' $force"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 8 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary ウォーキング --pass-stamp 1 --fail-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -1604,7 +1604,7 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 14 --unchecked 1 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary ワークアウト --pass-stamp 1 --fail-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -1618,7 +1618,7 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 16 --unchecked 1 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary ワークアウト --pass-stamp 1 --fail-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -1632,7 +1632,7 @@
         "task_work": "task-stacked     --main-repo 'noraworld/daily-report'   --past 3 --todo-repo 'noraworld/work-scraps' $force"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 2 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary ワークアウト --pass-stamp 1 --fail-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -1646,7 +1646,7 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 4 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary ワークアウト --pass-stamp 1 --fail-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -1660,7 +1660,7 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 6 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary ワークアウト --pass-stamp 1 --fail-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -1674,7 +1674,7 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 8 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary ワークアウト --pass-stamp 1 --fail-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -1688,7 +1688,7 @@
         "task_work": "task-stacked     --main-repo 'noraworld/daily-report'   --past 3 --todo-repo 'noraworld/work-scraps' $force"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 10 --unchecked 5 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary ワークアウト --pass-stamp 1 --fail-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -1702,7 +1702,7 @@
         "task_work": "task-stacked     --main-repo 'noraworld/daily-report'   --past 3 --todo-repo 'noraworld/work-scraps' $force"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 12 --unchecked 1 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary ワークアウト --pass-stamp 1 --fail-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -1718,7 +1718,7 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 12 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -1732,7 +1732,7 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 14 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -1746,7 +1746,7 @@
         "task_work": "task-stacked     --main-repo 'noraworld/daily-report'   --past 1 --todo-repo 'noraworld/work-scraps' $force"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 0 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -1760,7 +1760,7 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 2 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -1774,7 +1774,7 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 4 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -1788,7 +1788,7 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 6 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -1802,7 +1802,7 @@
         "task_work": "task-stacked     --main-repo 'noraworld/daily-report'   --past 1 --todo-repo 'noraworld/work-scraps' $force"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 8 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -1816,7 +1816,7 @@
         "task_work": "task-stacked     --main-repo 'noraworld/daily-report'   --past 1 --todo-repo 'noraworld/work-scraps' $force"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 10 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -1946,7 +1946,7 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 14 --unchecked 1 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary ワークアウト --pass-stamp 1 --fail-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -1960,7 +1960,7 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 16 --unchecked 1 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary ワークアウト --pass-stamp 1 --fail-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -1974,7 +1974,7 @@
         "task_work": "task-stacked     --main-repo 'noraworld/daily-report'   --past 3 --todo-repo 'noraworld/work-scraps' $force"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 2 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary ワークアウト --pass-stamp 1 --fail-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -1988,7 +1988,7 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 4 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary ワークアウト --pass-stamp 1 --fail-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -2002,7 +2002,7 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 6 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary ワークアウト --pass-stamp 1 --fail-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -2016,7 +2016,7 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 8 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary ワークアウト --pass-stamp 1 --fail-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -2030,7 +2030,7 @@
         "task_work": "task-stacked     --main-repo 'noraworld/daily-report'   --past 3 --todo-repo 'noraworld/work-scraps' $force"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 10 --unchecked 5 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary ワークアウト --pass-stamp 1 --fail-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
@@ -2044,7 +2044,7 @@
         "task_work": "task-stacked     --main-repo 'noraworld/daily-report'   --past 3 --todo-repo 'noraworld/work-scraps' $force"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 12 --unchecked 1 $force",
+        "todo_personal": "ticksum --repo noraworld/reserved-diary ワークアウト --pass-stamp 1 --fail-stamp -1",
         "task_personal": "echo 2",
         "todo_work": "echo 1",
         "task_work": "echo 2"
