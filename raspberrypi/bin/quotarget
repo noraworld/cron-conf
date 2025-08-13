@@ -29,6 +29,11 @@ main() {
     sed -e 's/^"//' -e 's/"$//' -e 's/\\"/"/g'
   )
 
+  tick_personal_cmd=$(
+    jq ".\"${SERVICE}\".${TIMEFRAME}.${STRATEGY}.tick_personal" "$STRATEGY_FILE" |
+    sed -e 's/^"//' -e 's/"$//' -e 's/\\"/"/g'
+  )
+
   todo_work_cmd=$(
     jq ".\"${SERVICE}\".${TIMEFRAME}.${STRATEGY}.todo_work" "$STRATEGY_FILE" |
     sed -e 's/^"//' -e 's/"$//' -e 's/\\"/"/g'
@@ -41,11 +46,12 @@ main() {
 
   todo_personal_result=$(eval "$todo_personal_cmd")
   task_personal_result=$(eval "$task_personal_cmd")
+  tick_personal_result=$(eval "$tick_personal_cmd")
   todo_work_result=$(eval "$todo_work_cmd")
   task_work_result=$(eval "$task_work_cmd")
 
-  sum=$(( todo_personal_result + todo_work_result + task_personal_result + task_work_result ))
-  product=$(( todo_personal_result * todo_work_result * task_personal_result * task_work_result ))
+  sum=$(( todo_personal_result + task_personal_result + tick_personal_result + todo_work_result + task_work_result ))
+  product=$(( todo_personal_result * task_personal_result * tick_personal_result * todo_work_result * task_work_result ))
 
   if [ "$DEBUG" = "1" ]; then
     echo "DEBUG: todo_personal_cmd:    $todo_personal_cmd"    >&2
@@ -53,6 +59,9 @@ main() {
     echo "DEBUG:"                                             >&2
     echo "DEBUG: task_personal_cmd:    $task_personal_cmd"    >&2
     echo "DEBUG: task_personal_result: $task_personal_result" >&2
+    echo "DEBUG:"                                             >&2
+    echo "DEBUG: tick_personal_cmd:    $tick_personal_cmd"    >&2
+    echo "DEBUG: tick_personal_result: $tick_personal_result" >&2
     echo "DEBUG:"                                             >&2
     echo "DEBUG: todo_work_cmd:        $todo_work_cmd"        >&2
     echo "DEBUG: todo_work_result:     $todo_work_result"     >&2
@@ -64,7 +73,7 @@ main() {
     echo "DEBUG: product:              $product"              >&2
   fi
 
-  if [ "$sum" = "6" ] && [ "$product" = "4" ]; then
+  if [ "$sum" = "7" ] && [ "$product" = "4" ]; then
     echo "1"
   elif [ "$product" = "0" ]; then
     echo "0"
