@@ -145,8 +145,8 @@ NON_ROOT_USER=ubuntu
 
 
 # Crimson
-*/5 * * * * scheduler crimson allow
-0   * * * * scheduler crimson deny --soft
+*/5  * * * * scheduler crimson allow
+*/20 * * * * scheduler crimson deny --soft
 
 
 
