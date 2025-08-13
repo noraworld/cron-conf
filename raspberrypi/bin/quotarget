@@ -6,6 +6,9 @@ STRATEGY="scraping_by"
 STRATEGY_FILE="/home/ubuntu/workspace/cron-conf/raspberrypi/config/quotarget.json"
 TIMEFRAME_LIST="predawn dawn morning midday afternoon evening night midnight"
 
+STANDARD_SUM=7
+STANDARD_PRODUCT=4
+
 main() {
   prepare "$@"
   list_info "$@"
@@ -70,10 +73,12 @@ main() {
     echo "DEBUG: task_work_result:     $task_work_result"     >&2
     echo "DEBUG:"                                             >&2
     echo "DEBUG: sum:                  $sum"                  >&2
+    echo "DEBUG: standard(sum):        $STANDARD_SUM"         >&2
     echo "DEBUG: product:              $product"              >&2
+    echo "DEBUG: standard(product):    $STANDARD_PRODUCT"     >&2
   fi
 
-  if [ "$sum" = "7" ] && [ "$product" = "4" ]; then
+  if [ "$sum" = "$STANDARD_SUM" ] && [ "$product" = "$STANDARD_PRODUCT" ]; then
     echo "1"
   elif [ "$product" = "0" ]; then
     echo "0"
