@@ -57,25 +57,24 @@ main() {
   product=$(( todo_personal_result * task_personal_result * tick_personal_result * todo_work_result * task_work_result ))
 
   if [ "$DEBUG" = "1" ]; then
-    echo "DEBUG: todo_personal_cmd:    $todo_personal_cmd"    >&2
-    echo "DEBUG: todo_personal_result: $todo_personal_result" >&2
-    echo "DEBUG:"                                             >&2
-    echo "DEBUG: task_personal_cmd:    $task_personal_cmd"    >&2
-    echo "DEBUG: task_personal_result: $task_personal_result" >&2
-    echo "DEBUG:"                                             >&2
-    echo "DEBUG: tick_personal_cmd:    $tick_personal_cmd"    >&2
-    echo "DEBUG: tick_personal_result: $tick_personal_result" >&2
-    echo "DEBUG:"                                             >&2
-    echo "DEBUG: todo_work_cmd:        $todo_work_cmd"        >&2
-    echo "DEBUG: todo_work_result:     $todo_work_result"     >&2
-    echo "DEBUG:"                                             >&2
-    echo "DEBUG: task_work_cmd:        $task_work_cmd"        >&2
-    echo "DEBUG: task_work_result:     $task_work_result"     >&2
-    echo "DEBUG:"                                             >&2
-    echo "DEBUG: sum:                  $sum"                  >&2
-    echo "DEBUG: standard(sum):        $STANDARD_SUM"         >&2
-    echo "DEBUG: product:              $product"              >&2
-    echo "DEBUG: standard(product):    $STANDARD_PRODUCT"     >&2
+    printf  "DEBUG: todo_personal_cmd:    %s\n"        "$todo_personal_cmd"                          >&2
+    printf  "DEBUG: todo_personal_result: %6s (%s)\n"  "$todo_personal_result"  "1"                  >&2
+    printf  "\n"                                                                                     >&2
+    printf  "DEBUG: task_personal_cmd:    %s\n"        "$task_personal_cmd"                          >&2
+    printf  "DEBUG: task_personal_result: %6s (%s)\n"  "$task_personal_result"  "2"                  >&2
+    printf  "\n"                                                                                     >&2
+    printf  "DEBUG: tick_personal_cmd:    %s\n"        "$tick_personal_cmd"                          >&2
+    printf  "DEBUG: tick_personal_result: %6s (%s)\n"  "$tick_personal_result"  "1"                  >&2
+    printf  "\n"                                                                                     >&2
+    printf  "DEBUG: todo_work_cmd:        %s\n"        "$todo_work_cmd"                              >&2
+    printf  "DEBUG: todo_work_result:     %6s (%s)\n"  "$todo_work_result"      "1"                  >&2
+    printf  "\n"                                                                                     >&2
+    printf  "DEBUG: task_work_cmd:        %s\n"        "$task_work_cmd"                              >&2
+    printf  "DEBUG: task_work_result:     %6s (%s)\n"  "$task_work_result"      "2"                  >&2
+    printf  "\n"                                                                                     >&2
+    printf  "DEBUG: sum:                  %6s (%s)\n"  "$sum"                   "$STANDARD_SUM"      >&2
+    printf  "DEBUG: product:              %6s (%s)\n"  "$product"               "$STANDARD_PRODUCT"  >&2
+    printf  "\n"                                                                                     >&2
   fi
 
   if [ "$sum" = "$STANDARD_SUM" ] && [ "$product" = "$STANDARD_PRODUCT" ]; then
