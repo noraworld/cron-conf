@@ -6,8 +6,17 @@ STRATEGY="scraping_by"
 STRATEGY_FILE="/home/ubuntu/workspace/cron-conf/raspberrypi/config/quotarget.json"
 TIMEFRAME_LIST="predawn dawn morning midday afternoon evening night midnight"
 
-STANDARD_SUM=7
-STANDARD_PRODUCT=4
+RESET_COLOR="\033[m"
+RED_COLOR="\033[31m"
+GREEN_COLOR="\033[32m"
+
+STANDARD_TODO_PERSONAL=1
+STANDARD_TASK_PERSONAL=2
+STANDARD_TICK_PERSONAL=1
+STANDARD_TODO_WORK=1
+STANDARD_TASK_WORK=2
+STANDARD_SUM=$(( STANDARD_TODO_PERSONAL + STANDARD_TASK_PERSONAL + STANDARD_TICK_PERSONAL + STANDARD_TODO_WORK + STANDARD_TASK_WORK ))
+STANDARD_PRODUCT=$(( STANDARD_TODO_PERSONAL * STANDARD_TASK_PERSONAL * STANDARD_TICK_PERSONAL * STANDARD_TODO_WORK * STANDARD_TASK_WORK ))
 
 main() {
   prepare "$@"
@@ -56,26 +65,7 @@ main() {
   sum=$(( todo_personal_result + task_personal_result + tick_personal_result + todo_work_result + task_work_result ))
   product=$(( todo_personal_result * task_personal_result * tick_personal_result * todo_work_result * task_work_result ))
 
-  if [ "$DEBUG" = "1" ]; then
-    printf  "DEBUG: todo_personal_cmd:    %s\n"        "$todo_personal_cmd"                          >&2
-    printf  "DEBUG: todo_personal_result: %6s (%s)\n"  "$todo_personal_result"  "1"                  >&2
-    printf  "\n"                                                                                     >&2
-    printf  "DEBUG: task_personal_cmd:    %s\n"        "$task_personal_cmd"                          >&2
-    printf  "DEBUG: task_personal_result: %6s (%s)\n"  "$task_personal_result"  "2"                  >&2
-    printf  "\n"                                                                                     >&2
-    printf  "DEBUG: tick_personal_cmd:    %s\n"        "$tick_personal_cmd"                          >&2
-    printf  "DEBUG: tick_personal_result: %6s (%s)\n"  "$tick_personal_result"  "1"                  >&2
-    printf  "\n"                                                                                     >&2
-    printf  "DEBUG: todo_work_cmd:        %s\n"        "$todo_work_cmd"                              >&2
-    printf  "DEBUG: todo_work_result:     %6s (%s)\n"  "$todo_work_result"      "1"                  >&2
-    printf  "\n"                                                                                     >&2
-    printf  "DEBUG: task_work_cmd:        %s\n"        "$task_work_cmd"                              >&2
-    printf  "DEBUG: task_work_result:     %6s (%s)\n"  "$task_work_result"      "2"                  >&2
-    printf  "\n"                                                                                     >&2
-    printf  "DEBUG: sum:                  %6s (%s)\n"  "$sum"                   "$STANDARD_SUM"      >&2
-    printf  "DEBUG: product:              %6s (%s)\n"  "$product"               "$STANDARD_PRODUCT"  >&2
-    printf  "\n"                                                                                     >&2
-  fi
+  [ "$DEBUG" = "1" ] && debug_info
 
   if [ "$sum" = "$STANDARD_SUM" ] && [ "$product" = "$STANDARD_PRODUCT" ]; then
     echo "1"
@@ -101,6 +91,69 @@ list_info() {
     jq -r 'keys[]' "$STRATEGY_FILE"
     exit 0
   fi
+}
+
+debug_info() {
+  if [ "$todo_personal_result" -eq "$STANDARD_TODO_PERSONAL" ]; then
+    todo_personal_result_color="$GREEN_COLOR"
+  else
+    todo_personal_result_color="$RED_COLOR"
+  fi
+
+  if [ "$task_personal_result" -eq "$STANDARD_TASK_PERSONAL" ]; then
+    task_personal_result_color="$GREEN_COLOR"
+  else
+    task_personal_result_color="$RED_COLOR"
+  fi
+
+  if [ "$tick_personal_result" -eq "$STANDARD_TICK_PERSONAL" ]; then
+    tick_personal_result_color="$GREEN_COLOR"
+  else
+    tick_personal_result_color="$RED_COLOR"
+  fi
+
+  if [ "$todo_work_result" -eq "$STANDARD_TODO_WORK" ]; then
+    todo_work_result_color="$GREEN_COLOR"
+  else
+    todo_work_result_color="$RED_COLOR"
+  fi
+
+  if [ "$task_work_result" -eq "$STANDARD_TASK_WORK" ]; then
+    task_work_result_color="$GREEN_COLOR"
+  else
+    task_work_result_color="$RED_COLOR"
+  fi
+
+  if [ "$sum" -eq "$STANDARD_SUM" ]; then
+    sum_color="$GREEN_COLOR"
+  else
+    sum_color="$RED_COLOR"
+  fi
+
+  if [ "$product" -eq "$STANDARD_PRODUCT" ]; then
+    product_color="$GREEN_COLOR"
+  else
+    product_color="$RED_COLOR"
+  fi
+
+  printf  "DEBUG: todo_personal_cmd:     %s\n"                                               "$todo_personal_cmd"                                >&2
+  printf  "DEBUG: todo_personal_result:  $todo_personal_result_color%6s (%s)$RESET_COLOR\n"  "$todo_personal_result"  "$STANDARD_TODO_PERSONAL"  >&2
+  printf  "\n"                                                                                                                                   >&2
+  printf  "DEBUG: task_personal_cmd:     %s\n"                                               "$task_personal_cmd"                                >&2
+  printf  "DEBUG: task_personal_result:  $task_personal_result_color%6s (%s)$RESET_COLOR\n"  "$task_personal_result"  "$STANDARD_TASK_PERSONAL"  >&2
+  printf  "\n"                                                                                                                                   >&2
+  printf  "DEBUG: tick_personal_cmd:     %s\n"                                               "$tick_personal_cmd"                                >&2
+  printf  "DEBUG: tick_personal_result:  $tick_personal_result_color%6s (%s)$RESET_COLOR\n"  "$tick_personal_result"  "$STANDARD_TICK_PERSONAL"  >&2
+  printf  "\n"                                                                                                                                   >&2
+  printf  "DEBUG: todo_work_cmd:         %s\n"                                               "$todo_work_cmd"                                    >&2
+  printf  "DEBUG: todo_work_result:      $todo_work_result_color%6s (%s)$RESET_COLOR\n"      "$todo_work_result"      "$STANDARD_TODO_WORK"      >&2
+  printf  "\n"                                                                                                                                   >&2
+  printf  "DEBUG: task_work_cmd:         %s\n"                                               "$task_work_cmd"                                    >&2
+  printf  "DEBUG: task_work_result:      $task_work_result_color%6s (%s)$RESET_COLOR\n"      "$task_work_result"      "$STANDARD_TASK_WORK"      >&2
+  printf  "\n"                                                                                                                                   >&2
+  printf  "DEBUG: sum:                   $sum_color%6s (%s)$RESET_COLOR\n"                   "$sum"                   "$STANDARD_SUM"            >&2
+  printf  "DEBUG: product:               $product_color%6s (%s)$RESET_COLOR\n"               "$product"               "$STANDARD_PRODUCT"        >&2
+  printf  "\n"                                                                                                                                   >&2
 }
 
 validate() {
