@@ -11,7 +11,7 @@
       "scraping_by": {
         "todo_personal": "echo 1",
         "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1",
+        "tick_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1 --maxi-stamp 1",
         "todo_work": "echo 1",
         "task_work": "echo 2"
       }
@@ -27,7 +27,7 @@
       "scraping_by": {
         "todo_personal": "echo 1",
         "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1",
+        "tick_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1 --maxi-stamp 1",
         "todo_work": "echo 1",
         "task_work": "echo 2"
       }
@@ -43,7 +43,7 @@
       "scraping_by": {
         "todo_personal": "echo 1",
         "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1",
+        "tick_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1 --maxi-stamp 1",
         "todo_work": "echo 1",
         "task_work": "echo 2"
       }
@@ -59,7 +59,7 @@
       "scraping_by": {
         "todo_personal": "echo 1",
         "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1",
+        "tick_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1 --maxi-stamp 1",
         "todo_work": "echo 1",
         "task_work": "echo 2"
       }
@@ -75,7 +75,7 @@
       "scraping_by": {
         "todo_personal": "echo 1",
         "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1",
+        "tick_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1 --maxi-stamp 1",
         "todo_work": "echo 1",
         "task_work": "echo 2"
       }
@@ -91,7 +91,7 @@
       "scraping_by": {
         "todo_personal": "echo 1",
         "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1",
+        "tick_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1 --maxi-stamp 1",
         "todo_work": "echo 1",
         "task_work": "echo 2"
       }
@@ -107,7 +107,7 @@
       "scraping_by": {
         "todo_personal": "echo 1",
         "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1",
+        "tick_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1 --maxi-stamp 1",
         "todo_work": "echo 1",
         "task_work": "echo 2"
       }
@@ -123,7 +123,7 @@
       "scraping_by": {
         "todo_personal": "echo 1",
         "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1",
+        "tick_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1 --maxi-stamp 1",
         "todo_work": "echo 1",
         "task_work": "echo 2"
       }
