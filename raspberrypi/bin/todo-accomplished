@@ -3,7 +3,7 @@
 # shellcheck disable=SC2004
 
 LOG_PATH="/home/ubuntu/workspace/log/pi/log/todo_accomplished.log"
-NEW_DAY_OFFSET="9 hours ago"
+NEW_DAY_OFFSET="8 hours ago"
 
 export GHC_FROM="$(basename "$0") $*"
 
