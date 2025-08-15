@@ -1,0 +1,24 @@
+#compdef trailblazer
+
+_services() {
+  local -a services
+  services=("${(f)$(quotarget --list-services 2>/dev/null)}")
+  _describe 'service' services
+}
+
+_arguments -s \
+  '--dry-run[just show the success message instead of unlocking the services]' \
+  '--force[get content from APIs even if cache exists]' \
+  '--force-retry[perform without force option first, then execute with force option if the first attempt fails]' \
+  '--interval[wait for the given number of seconds each time (unlock)]' \
+  '--morning[skip quotarget, and ask to prepare a piece of garlic]' \
+  '--refresh[restart todo-list daemon before check]' \
+  '--retry[try to create or delete symlinks the given number of times (unlock)]' \
+  '--sincere[execute sincere before running]' \
+  '--sleep[how many seconds to wait for the next attempt]' \
+  '--help[Show help]' \
+  '-h[Show help]' \
+  '--version[Show version]' \
+  '*:services:_services'
+
+compdef _trailblazer trailblazer
