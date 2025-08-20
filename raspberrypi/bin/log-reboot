@@ -2,7 +2,7 @@
 
 SLEEP_INTERVAL=5   # one minute
 RETRY_SHRESHOLD=11 # one minute
-LOG_PATH=$HOME/.log/reboot.log
+LOG_PATH=/home/ubuntu/workspace/log/pi/log/reboot.log
 
 main() {
   # shellcheck disable=SC2034
