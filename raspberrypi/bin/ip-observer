@@ -4,6 +4,9 @@
 # Disabled to refresh and log when some command fails
 # set -eu
 
+# a troubleshooting log when the network issue was the ISP's fault:
+#   https://chatgpt.com/share/68aa8f62-986c-8004-9471-814c3e0c2f83 (2025-08-24)
+
 LOG_PATH="/home/ubuntu/workspace/log/pi/log/ip-observer"
 SLEEP_INTERVAL="3"
 PING_COUNT="1"
