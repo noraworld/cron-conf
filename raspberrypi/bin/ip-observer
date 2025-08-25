@@ -4,50 +4,96 @@
 # Disabled to refresh and log when some command fails
 # set -eu
 
+# a troubleshooting log when the network issue was the ISP's fault:
+#   https://chatgpt.com/share/68aa8f62-986c-8004-9471-814c3e0c2f83 (2025-08-24)
+
 LOG_PATH="/home/ubuntu/workspace/log/pi/log/ip-observer"
-SLEEP_INTERVAL="3"
+SLEEP_AFTER_NETPLAN_APPLY_INTERVAL="5"
 PING_COUNT="1"
-PING_WAIT="6"
+PING_WAIT="10"
 GLOBAL_IP="8.8.8.8"
 
 main() {
   parse "$@"
   eval "set -- $REST"
 
-  networkd_aliver
-  routing_exists
-  addresses_exist
+  # MEMO:
+  #   Both systemd-networkd and NetworkManager shouldn't be activated; otherwise they will have a conflict.
+  #   On Ubuntu server, use systemd-networkd. On Ubuntu Desktop, use NetworkManager instead.
+  daemon_alive "systemd-networkd" "1"
+  daemon_dead "NetworkManager" "8"
+  daemon_dead "systemd-resolved" "9"
+
+  routing_exists "eth0" "6"
+  routing_exists "wlan0" "7"
+
+  address_exists "eth0" "5"
+  address_valid "wlan0" "3"
+
   check_connectivity
 
-  if [ "$DEBUG" = 1 ]; then
-    print_log "0" "nothing wrong was detected"
+  [ "$DEBUG" = 1 ] && print_log "0" "nothing wrong was detected"
+}
+
+daemon_alive() {
+  daemon="$1"
+  code="$2"
+
+  if [ "$(systemctl is-active  "$daemon")" != "active"  ] ||
+     [ "$(systemctl is-enabled "$daemon")" != "enabled" ]
+  then
+    print_log "$code" "$daemon was not active or enabled"
+    sudo systemctl unmask "$daemon"
+    sudo systemctl enable "$daemon"
+    sudo systemctl start  "$daemon"
   fi
 }
 
-networkd_aliver() {
-  if [ "$(systemctl is-enabled systemd-networkd)" != "enabled" ] ||
-     [ "$(systemctl is-active  systemd-networkd)" != "active"  ]
+daemon_dead() {
+  daemon="$1"
+  code="$2"
+
+  if [ "$(systemctl is-active  "$daemon")" != "inactive" ] ||
+     [ "$(systemctl is-enabled "$daemon")" != "disabled" ]
   then
-    print_log "1" "systemd-networkd was not active or enabled"
-    sudo systemctl unmask systemd-networkd
-    sudo systemctl enable systemd-networkd
-    sudo systemctl start systemd-networkd
+    print_log "$code" "$daemon was not inactive or disabled"
+    sudo systemctl mask    "$daemon"
+    sudo systemctl disable "$daemon"
+    sudo systemctl stop    "$daemon"
   fi
 }
 
 routing_exists() {
-  if [ "$(ip route show)" = "" ]; then
-    print_log "2" "routing was lost"
+  nic="$1"
+  code="$2"
+
+  if [ "$(ip route show dev "$nic")" = "" ]; then
+    print_log "$code" "routing for $nic was lost"
     refresh_netplan
   fi
 }
 
-addresses_exist() {
-  expected_wifi_ip=$(sudo netplan get ethernets.wlan0.addresses | grep -oE "[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[^255]")
-  actual_wifi_ip=$(ip -f inet address show wlan0 | grep -oE "[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[^255]")
+address_exists() {
+  nic="$1"
+  code="$2"
 
-  if [ "$expected_wifi_ip" != "$actual_wifi_ip" ]; then
-    print_log "3" "expected Wi-Fi IP address did not match actual one"
+  ip_address=$(ip -f inet address show "$nic" | grep -oE "[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[^255]" || true)
+
+  if [ "$ip_address" = "" ]; then
+    print_log "$code" "the address for $nic was not found (perhaps it's the upstream router's or DHCP server's, or the ISP's fault)"
+    renew_ip_address "$nic"
+  fi
+}
+
+address_valid() {
+  nic="$1"
+  code="$2"
+
+  expected_ip=$(sudo netplan get ethernets."$nic".addresses | grep -oE "[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[^255]" || true)
+  actual_ip=$(ip -f inet address show "$nic" | grep -oE "[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[^255]" || true)
+
+  if [ "$expected_ip" != "$actual_ip" ]; then
+    print_log "$code" "the expected IP address for $nic did not match the actual one"
     refresh_netplan
   fi
 }
@@ -61,11 +107,18 @@ check_connectivity() {
 
 refresh_netplan() {
   sudo netplan apply
-  sleep "$SLEEP_INTERVAL" # ping fails immediately after "sudo netplan apply"
+  sleep "$SLEEP_AFTER_NETPLAN_APPLY_INTERVAL" # ping fails immediately after "sudo netplan apply"
+}
+
+renew_ip_address() {
+  nic="$1"
+
+  sudo networkctl renew "$nic"
+  sudo networkctl reconfigure "$nic"
 }
 
 print_log() {
-  echo "{ \"code\": $1, \"date\": \"$(date)\", \"reason\": \"$2\" }," >> "$LOG_PATH"
+  echo "{ \"code\": $1, \"date\": \"$(date)\", \"reason\": \"$2\" }" >> "$LOG_PATH"
 }
 
 # @getoptions
