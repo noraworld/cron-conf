@@ -19,13 +19,12 @@ main() {
   now=$(date +%s)
 
   validate_args
+  build_path
   create_directory
   print_log
 }
 
 print_log() {
-  full_path="$full_dir/$file"
-
   echo "{ \"created_at\": \"$(date --date @"$now" '+%Y-%m-%d %H:%M:%S')\", $log }" >> "$full_path"
 }
 
@@ -35,6 +34,12 @@ yield_self() {
 }
 
 create_directory() {
+  if ! mkdir -p "$full_dir" 2>/dev/null; then
+    yield_self "failed to create directories: $full_dir"
+  fi
+}
+
+build_path() {
   year=$(date  --date @"$now" +%Y)
   month=$(date --date @"$now" +%m)
   day=$(date   --date @"$now" +%d)
@@ -59,10 +64,7 @@ create_directory() {
   esac
 
   full_dir="$BASE_DIR/$relative_dir"
-
-  if ! mkdir -p "$full_dir" 2>/dev/null; then
-    yield_self "failed to create directories: $full_dir"
-  fi
+  full_path="$full_dir/$file"
 }
 
 validate_args() {
