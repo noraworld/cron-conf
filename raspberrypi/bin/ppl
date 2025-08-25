@@ -31,13 +31,13 @@ SELF_LOG_PATH="$BASE_DIR/$(basename "$0").log"
 NOW=$(date +%s)
 
 # !IMPORTANT!
-#   Do not call another function in here. This function should be independent.
+#   Do not call another function in here. These functions should be independent.
+#   These functions shouldn't be integrated to avoid DI (dependency injection).
 yield_self() {
   # It doesn't matter if '$1' is missing. Checking that it's not empty and making it complicated should be more meticulous.
   echo "{ \"created_at\": \"$(date --date @"$NOW" '+%Y-%m-%d %H:%M:%S')\", \"error\": \"$1\" }" >> "$SELF_LOG_PATH"
   exit 1
 }
-
 print_log() {
   echo "{ \"created_at\": \"$(date --date @"$NOW" '+%Y-%m-%d %H:%M:%S')\", $log }" >> "$full_path"
 }
