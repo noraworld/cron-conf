@@ -2,13 +2,15 @@
 
 SLEEP_INTERVAL=5   # one minute
 RETRY_THRESHOLD=11 # one minute
-LOG_PATH=/home/ubuntu/workspace/log/pi/log/reboot.log
+
+PPLOGGER_COMMAND=$(basename "$0")
+PPLOGGER_GRANULARITY="yearly"
 
 main() {
   # shellcheck disable=SC2034
   for i in $(seq 0 "$RETRY_THRESHOLD"); do
     if [ "$(timedatectl | grep -c "System clock synchronized: yes")" -eq 1 ]; then
-      echo "System rebooted on $(date)" >> "$LOG_PATH"
+      pplogger "$PPLOGGER_COMMAND" "$PPLOGGER_GRANULARITY" "\"system_clock_synchronized\": true"
       exit 0
     else
       # echo "$i" # debug
@@ -17,11 +19,11 @@ main() {
   done
 
   if [ "$(timedatectl | grep -c "System clock synchronized: yes")" -eq 1 ]; then
-    echo "System rebooted on $(date)" >> "$LOG_PATH"
+    pplogger "$PPLOGGER_COMMAND" "$PPLOGGER_GRANULARITY" "\"system_clock_synchronized\": true"
     exit 0
   else
     # It seems to fail to synchronize the system clock
-    echo "System rebooted on $(date) (System clock synchronized: no)" >> "$LOG_PATH"
+    pplogger "$PPLOGGER_COMMAND" "$PPLOGGER_GRANULARITY" "\"system_clock_synchronized\": false"
   fi
 }
 
