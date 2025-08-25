@@ -19,24 +19,24 @@ BASE_DIR="/home/ubuntu/workspace/log/pi/log"
 SELF_LOG_PATH="$BASE_DIR/$(basename "$0").log"
 NOW=$(date +%s)
 
-main() {
-  declare_variables "$@"
-  validate_args
-  build_path
-  create_directory
-  print_log
-}
-
-print_log() {
-  echo "{ \"created_at\": \"$(date --date @"$NOW" '+%Y-%m-%d %H:%M:%S')\", $log }" >> "$full_path"
-}
-
 # !IMPORTANT!
 #   Do not call another function in here. This function should be independent.
 yield_self() {
   # It doesn't matter if '$1' is missing. Checking that it's not empty and making it complicated should be more meticulous.
   echo "{ \"created_at\": \"$(date --date @"$NOW" '+%Y-%m-%d %H:%M:%S')\", \"error\": \"$1\" }" >> "$SELF_LOG_PATH"
   exit 1
+}
+
+print_log() {
+  echo "{ \"created_at\": \"$(date --date @"$NOW" '+%Y-%m-%d %H:%M:%S')\", $log }" >> "$full_path"
+}
+
+main() {
+  declare_variables "$@"
+  validate_args
+  build_path
+  create_directory
+  print_log
 }
 
 create_directory() {
