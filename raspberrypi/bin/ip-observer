@@ -63,6 +63,17 @@ routing_exists() {
   fi
 }
 
+address_exists() {
+  nic="$1"
+  code="$2"
+
+  ip_address=$(ip -f inet address show "$nic" | grep -oE "[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[^255]" || true)
+
+  if [ "$ip_address" = "" ]; then
+    print_log "$code" "the address for $nic was not found (perhaps it's the upstream router's or DHCP server's, or the ISP's fault)"
+    renew_ip_address "$nic"
+  fi
+}
 
 address_valid() {
   nic="$1"
