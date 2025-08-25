@@ -8,7 +8,7 @@
 #   https://chatgpt.com/share/68aa8f62-986c-8004-9471-814c3e0c2f83 (2025-08-24)
 
 LOG_PATH="/home/ubuntu/workspace/log/pi/log/ip-observer"
-SLEEP_INTERVAL="3"
+SLEEP_AFTER_NETPLAN_APPLY_INTERVAL="5"
 PING_COUNT="1"
 PING_WAIT="6"
 GLOBAL_IP="8.8.8.8"
@@ -64,7 +64,7 @@ check_connectivity() {
 
 refresh_netplan() {
   sudo netplan apply
-  sleep "$SLEEP_INTERVAL" # ping fails immediately after "sudo netplan apply"
+  sleep "$SLEEP_AFTER_NETPLAN_APPLY_INTERVAL" # ping fails immediately after "sudo netplan apply"
 }
 
 print_log() {
