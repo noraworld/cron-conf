@@ -23,10 +23,13 @@ main() {
   daemon_alive "systemd-networkd" "1"
   daemon_dead "NetworkManager" "8"
   daemon_dead "systemd-resolved" "9"
-  addresses_exist
 
   routing_exists "eth0" "6"
   routing_exists "wlan0" "7"
+
+  address_exists "eth0" "5"
+  address_valid "wlan0" "3"
+
   check_connectivity
 
   [ "$DEBUG" = 1 ] && print_log "0" "nothing wrong was detected"
