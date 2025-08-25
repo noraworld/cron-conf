@@ -56,7 +56,8 @@ daemon_dead() {
   code="$2"
 
   if [ "$(systemctl is-active  "$daemon")" != "inactive" ] ||
-     [ "$(systemctl is-enabled "$daemon")" != "disabled" ]
+   { [ "$(systemctl is-enabled "$daemon")" != "disabled" ] &&
+     [ "$(systemctl is-enabled "$daemon")" != "masked"   ]; }
   then
     print_log "$code" "$daemon was not inactive or disabled"
     sudo systemctl mask    "$daemon"
