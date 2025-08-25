@@ -63,12 +63,16 @@ routing_exists() {
   fi
 }
 
-addresses_exist() {
-  expected_wifi_ip=$(sudo netplan get ethernets.wlan0.addresses | grep -oE "[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[^255]")
-  actual_wifi_ip=$(ip -f inet address show wlan0 | grep -oE "[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[^255]")
 
-  if [ "$expected_wifi_ip" != "$actual_wifi_ip" ]; then
-    print_log "3" "expected Wi-Fi IP address did not match actual one"
+address_valid() {
+  nic="$1"
+  code="$2"
+
+  expected_ip=$(sudo netplan get ethernets."$nic".addresses | grep -oE "[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[^255]" || true)
+  actual_ip=$(ip -f inet address show "$nic" | grep -oE "[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[^255]" || true)
+
+  if [ "$expected_ip" != "$actual_ip" ]; then
+    print_log "$code" "the expected IP address for $nic did not match the actual one"
     refresh_netplan
   fi
 }
