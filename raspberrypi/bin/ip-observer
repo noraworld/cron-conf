@@ -68,7 +68,7 @@ refresh_netplan() {
 }
 
 print_log() {
-  echo "{ \"code\": $1, \"date\": \"$(date)\", \"reason\": \"$2\" }," >> "$LOG_PATH"
+  echo "{ \"code\": $1, \"date\": \"$(date)\", \"reason\": \"$2\" }" >> "$LOG_PATH"
 }
 
 # @getoptions
