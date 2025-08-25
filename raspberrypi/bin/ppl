@@ -72,18 +72,19 @@ build_path() {
   month=$(date --date @"$NOW" +%m)
   day=$(date   --date @"$NOW" +%d)
 
+  # Note that the file is separated if the path is changed.
   case "$granularity" in
     "yearly")
       relative_dir="$command"
-      file="$year.log"
+      file="${command}_$year.log"
       ;;
     "monthly")
       relative_dir="$command/$year"
-      file="$year-$month.log"
+      file="${command}_$year-$month.log"
       ;;
     "daily")
       relative_dir="$command/$year/$month"
-      file="$year-$month-$day.log"
+      file="${command}_$year-$month-$day.log"
       ;;
     *)
       # It's redundant because it's already validated, but just to be safe
@@ -92,6 +93,19 @@ build_path() {
   esac
 
   full_dir="$BASE_DIR/$relative_dir"
+
+  # e.g.
+  #   yearly:  ip-observer/ip-observer_2025.log
+  #   monthly: ip-observer/2025/ip-observer_2025-08.log
+  #   daily:   ip-observer/2025/08/ip-observer_2025-08-24.log
+  #
+  # Key points:
+  #   Including the command name and date in the file name improves portability;
+  #   it doesn't matter even if all log files are in the same directory.
+  #
+  #   By placing the command name first, it's possible to unify the order of logs even if they are in the same directory.
+  #
+  #   Including hyphens between the year, month, and day improves human-readability.
   full_path="$full_dir/$file"
 }
 
