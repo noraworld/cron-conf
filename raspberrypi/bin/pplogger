@@ -2,7 +2,7 @@
 # shellcheck disable=SC2004
 
 # Usage:
-#   ppl \
+#   pplogger \
 #     "$(basename "$0")" \
 #     "monthly" \
 #     "\"code\": \"CONNECTION_REFUSED\", \"error\": \"failed to connect to the Internet\""
