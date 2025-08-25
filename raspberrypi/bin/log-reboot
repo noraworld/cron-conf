@@ -1,12 +1,12 @@
 #!/bin/sh
 
 SLEEP_INTERVAL=5   # one minute
-RETRY_SHRESHOLD=11 # one minute
+RETRY_THRESHOLD=11 # one minute
 LOG_PATH=/home/ubuntu/workspace/log/pi/log/reboot.log
 
 main() {
   # shellcheck disable=SC2034
-  for i in $(seq 0 "$RETRY_SHRESHOLD"); do
+  for i in $(seq 0 "$RETRY_THRESHOLD"); do
     if [ "$(timedatectl | grep -c "System clock synchronized: yes")" -eq 1 ]; then
       echo "System rebooted on $(date)" >> "$LOG_PATH"
       exit 0
