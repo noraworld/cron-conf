@@ -1,0 +1,148 @@
+#!/bin/sh
+# shellcheck disable=SC2004
+
+# Usage:
+#   pplogger \
+#     "$(basename "$0")" \
+#     "monthly" \
+#     "\"code\": \"CONNECTION_REFUSED\", \"error\": \"failed to connect to the Internet\""
+
+# Disable this to avoid failing to log
+# set -eu
+
+
+
+
+
+# =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+# =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+# =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+# =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+# =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+# =*=*=*=*=*=*=*=*=*=*=*=*=*=* PLEASE EXERCISE EXTREME CAUTION WHEN EDITING THE CODE BELOW. =*=*=*=*=*=*=*=*=*=*=*=*=*=*
+
+# !IMPORTANT!
+#   These constants are used within yield_self().
+#   All values except for an error message within this function should be declared here
+#   because how arguments work in Shell Script and global variables declared within another function are so ambiguous.
+#   This function is the most important because it logs an error that might happen in this script itself,
+#   so it should be implemented securely.
+BASE_DIR="/home/ubuntu/workspace/log/pi/log"
+SELF_LOG_PATH="$BASE_DIR/$(basename "$0").log"
+NOW=$(date +%s)
+
+# !IMPORTANT!
+#   Do not call another function in here. These functions should be independent.
+#   These functions shouldn't be integrated to avoid DI (dependency injection).
+yield_self() {
+  # It doesn't matter if '$1' is missing. Checking it's not empty and making it complicated should be more meticulous.
+  echo "{ \"created_at\": \"$(date --date @"$NOW" '+%Y-%m-%d %H:%M:%S')\", \"error\": \"$1\" }" >> "$SELF_LOG_PATH"
+  exit 1
+}
+print_log() {
+  echo "{ \"created_at\": \"$(date --date @"$NOW" '+%Y-%m-%d %H:%M:%S')\", $log }" >> "$full_path"
+}
+
+# =*=*=*=*=*=*=*=*=*=*=*=*=*=* PLEASE EXERCISE EXTREME CAUTION WHEN EDITING THE CODE ABOVE. =*=*=*=*=*=*=*=*=*=*=*=*=*=*
+# =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+# =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+# =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+# =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+# =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+
+
+
+
+
+main() {
+  declare_variables "$@"
+  validate_args
+  build_path
+  create_directory
+  print_log
+}
+
+create_directory() {
+  if ! mkdir -p "$full_dir" 2>/dev/null; then
+    yield_self "failed to create directories: $full_dir"
+  fi
+}
+
+build_path() {
+  year=$(date  --date @"$NOW" +%Y)
+  month=$(date --date @"$NOW" +%m)
+  day=$(date   --date @"$NOW" +%d)
+
+  # Key points:
+  #   Including the command name and date in the file name improves portability;
+  #   it doesn't matter even if all log files are in the same directory.
+  #
+  #   By placing the command name first,
+  #   it's possible to unify the order of logs even if they are in the same directory.
+  #
+  #   Including hyphens between the year, month, and day improves human-readability.
+  #
+  # !IMPORTANT!
+  #   The file will be separated if the path is changed.
+  case "$granularity" in
+    "yearly")
+      # e.g. ip-observer/ip-observer_2025.log
+      relative_dir="$command"
+      file="${command}_$year.log"
+      ;;
+    "monthly")
+      # e.g. ip-observer/2025/ip-observer_2025-08.log
+      relative_dir="$command/$year"
+      file="${command}_$year-$month.log"
+      ;;
+    "daily")
+      # e.g. ip-observer/2025/08/ip-observer_2025-08-24.log
+      relative_dir="$command/$year/$month"
+      file="${command}_$year-$month-$day.log"
+      ;;
+    *)
+      # It's redundant because it's already validated, but just to be safe
+      yield_self "invalid granularity: $granularity"
+      ;;
+  esac
+
+  full_dir="$BASE_DIR/$relative_dir"
+  full_path="$full_dir/$file"
+}
+
+validate_args() {
+  # Do not use '||' or '&&' instead of 'if' just to be safe
+
+  if [ "$command" = "" ]; then
+    yield_self "empty command"
+  fi
+
+  if [ "$granularity" = "" ]; then
+    yield_self "empty granularity"
+  fi
+
+  if [ "$log" = "" ]; then
+    yield_self "empty log"
+  fi
+
+  if [ "$extra" != "" ]; then
+    yield_self "too many args"
+  fi
+
+  if [ "$(echo "$command" | grep -cE '(^-)|[[:cntrl:][:space:]/]' || true)" -ne 0 ]; then
+    yield_self "unavailable characters for a directory are included in $command"
+  fi
+
+  if [ "$granularity" != "yearly" ] && [ "$granularity" != "monthly" ] && [ "$granularity" != "daily" ]; then
+    yield_self "invalid granularity: $granularity"
+  fi
+}
+
+declare_variables() {
+  command="$1"
+  granularity="$2"
+  log="$3"
+  extra="$4"
+}
+
+main "$@"
