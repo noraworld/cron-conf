@@ -40,7 +40,9 @@ yield_self() {
   exit 1
 }
 print_log() {
-  echo "{ \"created_at\": \"$(date --date @"$NOW" '+%Y-%m-%d %H:%M:%S')\", $log }" >> "$full_path"
+  if ! echo "{ \"created_at\": \"$(date --date @"$NOW" '+%Y-%m-%d %H:%M:%S')\", $log }" >> "$full_path" 2>/dev/null; then
+    yield_self "failed to write to file: $full_path"
+  fi
 }
 
 # =*=*=*=*=*=*=*=*=*=*=*=*=*=* PLEASE EXERCISE EXTREME CAUTION WHEN EDITING THE CODE ABOVE. =*=*=*=*=*=*=*=*=*=*=*=*=*=*
