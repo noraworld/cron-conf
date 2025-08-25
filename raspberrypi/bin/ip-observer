@@ -10,7 +10,7 @@
 LOG_PATH="/home/ubuntu/workspace/log/pi/log/ip-observer"
 SLEEP_AFTER_NETPLAN_APPLY_INTERVAL="5"
 PING_COUNT="1"
-PING_WAIT="6"
+PING_WAIT="10"
 GLOBAL_IP="8.8.8.8"
 
 main() {
