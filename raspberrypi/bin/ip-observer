@@ -7,11 +7,13 @@
 # a troubleshooting log when the network issue was the ISP's fault:
 #   https://chatgpt.com/share/68aa8f62-986c-8004-9471-814c3e0c2f83 (2025-08-24)
 
-LOG_PATH="/home/ubuntu/workspace/log/pi/log/ip-observer"
 SLEEP_AFTER_NETPLAN_APPLY_INTERVAL="5"
 PING_COUNT="1"
 PING_WAIT="10"
 GLOBAL_IP="8.8.8.8"
+
+PPLOGGER_COMMAND=$(basename "$0")
+PPLOGGER_GRANULARITY="monthly"
 
 main() {
   parse "$@"
@@ -118,7 +120,7 @@ renew_ip_address() {
 }
 
 print_log() {
-  echo "{ \"code\": $1, \"date\": \"$(date)\", \"reason\": \"$2\" }" >> "$LOG_PATH"
+  pplogger "$PPLOGGER_COMMAND" "$PPLOGGER_GRANULARITY" "\"code\": $1, \"reason\": \"$2\""
 }
 
 # @getoptions
