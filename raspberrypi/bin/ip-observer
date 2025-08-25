@@ -22,8 +22,7 @@ main() {
   addresses_exist
   check_connectivity
 
-  if [ "$DEBUG" = 1 ]; then
-    print_log "0" "nothing wrong was detected"
+  [ "$DEBUG" = 1 ] && print_log "0" "nothing wrong was detected"
   fi
 }
 
