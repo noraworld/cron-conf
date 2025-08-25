@@ -17,7 +17,11 @@ main() {
   parse "$@"
   eval "set -- $REST"
 
+  # MEMO:
+  #   Both systemd-networkd and NetworkManager shouldn't be activated; otherwise they will have a conflict.
+  #   On Ubuntu server, use systemd-networkd. On Ubuntu Desktop, use NetworkManager instead.
   daemon_alive "systemd-networkd" "1"
+  daemon_dead "NetworkManager" "8"
   routing_exists
   addresses_exist
   check_connectivity
