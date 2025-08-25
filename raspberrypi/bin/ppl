@@ -1,8 +1,6 @@
 #!/bin/sh
 # shellcheck disable=SC2004
 
-# Print Pretty Log
-#
 # Usage:
 #   ppl \
 #     "$(basename "$0")" \
