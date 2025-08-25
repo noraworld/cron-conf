@@ -12,12 +12,7 @@
 BASE_DIR="/home/ubuntu/workspace/log/pi/log"
 
 main() {
-  command="$1"
-  granularity="$2"
-  log="$3"
-  extra="$4"
-  now=$(date +%s)
-
+  declare_variables "$@"
   validate_args
   build_path
   create_directory
@@ -93,6 +88,14 @@ validate_args() {
   if [ "$granularity" != "yearly" ] && [ "$granularity" != "monthly" ] && [ "$granularity" != "daily" ]; then
     yield_self "invalid granularity: $granularity"
   fi
+}
+
+declare_variables() {
+  command="$1"
+  granularity="$2"
+  log="$3"
+  extra="$4"
+  now=$(date +%s)
 }
 
 main "$@"
