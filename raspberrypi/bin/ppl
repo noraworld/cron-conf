@@ -9,7 +9,15 @@
 # Disable this to avoid failing to log
 # set -eu
 
+# !IMPORTANT!
+#   These constants are used within yield_self().
+#   All values except for an error message within this function should be declared here
+#   because how arguments work in Shell Script and global variables declared within another function are so ambiguous.
+#   This function is the most important because it logs an error that might happen in this script itself,
+#   so it should be implemented securely.
 BASE_DIR="/home/ubuntu/workspace/log/pi/log"
+SELF_LOG_PATH="$BASE_DIR/$(basename "$0").log"
+NOW=$(date +%s)
 
 main() {
   declare_variables "$@"
@@ -20,11 +28,14 @@ main() {
 }
 
 print_log() {
-  echo "{ \"created_at\": \"$(date --date @"$now" '+%Y-%m-%d %H:%M:%S')\", $log }" >> "$full_path"
+  echo "{ \"created_at\": \"$(date --date @"$NOW" '+%Y-%m-%d %H:%M:%S')\", $log }" >> "$full_path"
 }
 
+# !IMPORTANT!
+#   Do not call another function in here. This function should be independent.
 yield_self() {
-  echo "{ \"created_at\": \"$(date --date @"$now" '+%Y-%m-%d %H:%M:%S')\", \"error\": \"$1\" }" >> "$BASE_DIR/$0.log"
+  # It doesn't matter if '$1' is missing. Checking that it's not empty and making it complicated should be more meticulous.
+  echo "{ \"created_at\": \"$(date --date @"$NOW" '+%Y-%m-%d %H:%M:%S')\", \"error\": \"$1\" }" >> "$SELF_LOG_PATH"
   exit 1
 }
 
@@ -35,9 +46,9 @@ create_directory() {
 }
 
 build_path() {
-  year=$(date  --date @"$now" +%Y)
-  month=$(date --date @"$now" +%m)
-  day=$(date   --date @"$now" +%d)
+  year=$(date  --date @"$NOW" +%Y)
+  month=$(date --date @"$NOW" +%m)
+  day=$(date   --date @"$NOW" +%d)
 
   case "$granularity" in
     "yearly")
@@ -95,7 +106,6 @@ declare_variables() {
   granularity="$2"
   log="$3"
   extra="$4"
-  now=$(date +%s)
 }
 
 main "$@"
