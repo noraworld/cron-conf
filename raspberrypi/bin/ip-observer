@@ -54,8 +54,11 @@ daemon_dead() {
 }
 
 routing_exists() {
-  if [ "$(ip route show)" = "" ]; then
-    print_log "2" "routing was lost"
+  nic="$1"
+  code="$2"
+
+  if [ "$(ip route show dev "$nic")" = "" ]; then
+    print_log "$code" "routing for $nic was lost"
     refresh_netplan
   fi
 }
