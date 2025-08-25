@@ -100,6 +100,13 @@ refresh_netplan() {
   sleep "$SLEEP_AFTER_NETPLAN_APPLY_INTERVAL" # ping fails immediately after "sudo netplan apply"
 }
 
+renew_ip_address() {
+  nic="$1"
+
+  sudo networkctl renew "$nic"
+  sudo networkctl reconfigure "$nic"
+}
+
 print_log() {
   echo "{ \"code\": $1, \"date\": \"$(date)\", \"reason\": \"$2\" }" >> "$LOG_PATH"
 }
