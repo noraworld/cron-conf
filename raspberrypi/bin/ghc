@@ -1,16 +1,10 @@
 #!/bin/sh
 
-LOG_PATH="/home/ubuntu/workspace/log/pi/log/gh_api_invoked.log"
+PPLOGGER_COMMAND=$(basename "$0")
+PPLOGGER_GRANULARITY="daily"
 
 main() {
-  # Include a blank line for each date.
-  if [ "$(tail -n 1 "$LOG_PATH" | grep -cE "^\[$(date '+%Y-%m-%dT' --date '-1 day')")" -eq 1 ]; then
-    echo "" >> "$LOG_PATH"
-  fi
-
-  echo "[$(date '+%Y-%m-%dT%H:%M:%S%z')] Invoked GitHub API from" \
-       "\"$(echo "$GHC_FROM" | sed 's/[[:space:]]*$//')\"" >> "$LOG_PATH"
-
+  pplogger "$PPLOGGER_COMMAND" "$PPLOGGER_GRANULARITY" "\"command\": \"$(echo "$GHC_FROM" | sed 's/[[:space:]]*$//')\""
   gh "$@"
 }
 
