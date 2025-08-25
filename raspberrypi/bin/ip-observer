@@ -23,17 +23,23 @@ main() {
   check_connectivity
 
   [ "$DEBUG" = 1 ] && print_log "0" "nothing wrong was detected"
+}
+
+daemon_alive() {
+  daemon="$1"
+  code="$2"
+
+  if [ "$(systemctl is-active  "$daemon")" != "active"  ] ||
+     [ "$(systemctl is-enabled "$daemon")" != "enabled" ]
+  then
+    print_log "$code" "$daemon was not active or enabled"
+    sudo systemctl unmask "$daemon"
+    sudo systemctl enable "$daemon"
+    sudo systemctl start  "$daemon"
   fi
 }
 
-networkd_aliver() {
-  if [ "$(systemctl is-enabled systemd-networkd)" != "enabled" ] ||
-     [ "$(systemctl is-active  systemd-networkd)" != "active"  ]
   then
-    print_log "1" "systemd-networkd was not active or enabled"
-    sudo systemctl unmask systemd-networkd
-    sudo systemctl enable systemd-networkd
-    sudo systemctl start systemd-networkd
   fi
 }
 
