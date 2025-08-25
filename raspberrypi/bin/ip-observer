@@ -22,6 +22,7 @@ main() {
   #   On Ubuntu server, use systemd-networkd. On Ubuntu Desktop, use NetworkManager instead.
   daemon_alive "systemd-networkd" "1"
   daemon_dead "NetworkManager" "8"
+  daemon_dead "systemd-resolved" "9"
   routing_exists
   addresses_exist
   check_connectivity
