@@ -17,7 +17,7 @@ main() {
   parse "$@"
   eval "set -- $REST"
 
-  networkd_aliver
+  daemon_alive "systemd-networkd" "1"
   routing_exists
   addresses_exist
   check_connectivity
