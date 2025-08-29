@@ -102,7 +102,7 @@ prepare() {
 
 list_info() {
   if [ "$LIST_TIMEFRAMES" = "1" ]; then
-    for tf in $TIMEFRAME_LIST $TIMEFRAME_RELATIVE_LIST; do
+    for tf in $TIMEFRAME_RELATIVE_LIST $TIMEFRAME_LIST; do
       printf '%s\n' "$tf"
     done
     exit 0
