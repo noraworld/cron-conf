@@ -108,57 +108,57 @@ list_info() {
 }
 
 debug_info() {
-  if [ "$todo_personal_result" -eq "$STANDARD_TODO_PERSONAL" ]; then
+  if [ "$todo_personal_result" = "$STANDARD_TODO_PERSONAL" ]; then
     todo_personal_result_color="$OK_COLOR"
-  elif [ "$todo_personal_result" -eq "$DRY_RUN_STATUS_MARK" ]; then
+  elif [ "$todo_personal_result" = "$DRY_RUN_STATUS_MARK" ]; then
     todo_personal_result_color="$DRY_COLOR"
   else
     todo_personal_result_color="$NG_COLOR"
   fi
 
-  if [ "$task_personal_result" -eq "$STANDARD_TASK_PERSONAL" ]; then
+  if [ "$task_personal_result" = "$STANDARD_TASK_PERSONAL" ]; then
     task_personal_result_color="$OK_COLOR"
-  elif [ "$task_personal_result" -eq "$DRY_RUN_STATUS_MARK" ]; then
+  elif [ "$task_personal_result" = "$DRY_RUN_STATUS_MARK" ]; then
     task_personal_result_color="$DRY_COLOR"
   else
     task_personal_result_color="$NG_COLOR"
   fi
 
-  if [ "$tick_personal_result" -eq "$STANDARD_TICK_PERSONAL" ]; then
+  if [ "$tick_personal_result" = "$STANDARD_TICK_PERSONAL" ]; then
     tick_personal_result_color="$OK_COLOR"
-  elif [ "$tick_personal_result" -eq "$DRY_RUN_STATUS_MARK" ]; then
+  elif [ "$tick_personal_result" = "$DRY_RUN_STATUS_MARK" ]; then
     tick_personal_result_color="$DRY_COLOR"
   else
     tick_personal_result_color="$NG_COLOR"
   fi
 
-  if [ "$todo_work_result" -eq "$STANDARD_TODO_WORK" ]; then
+  if [ "$todo_work_result" = "$STANDARD_TODO_WORK" ]; then
     todo_work_result_color="$OK_COLOR"
-  elif [ "$todo_work_result" -eq "$DRY_RUN_STATUS_MARK" ]; then
+  elif [ "$todo_work_result" = "$DRY_RUN_STATUS_MARK" ]; then
     todo_work_result_color="$DRY_COLOR"
   else
     todo_work_result_color="$NG_COLOR"
   fi
 
-  if [ "$task_work_result" -eq "$STANDARD_TASK_WORK" ]; then
+  if [ "$task_work_result" = "$STANDARD_TASK_WORK" ]; then
     task_work_result_color="$OK_COLOR"
-  elif [ "$task_work_result" -eq "$DRY_RUN_STATUS_MARK" ]; then
+  elif [ "$task_work_result" = "$DRY_RUN_STATUS_MARK" ]; then
     task_work_result_color="$DRY_COLOR"
   else
     task_work_result_color="$NG_COLOR"
   fi
 
-  if [ "$sum" -eq "$STANDARD_SUM" ]; then
+  if [ "$sum" = "$STANDARD_SUM" ]; then
     sum_color="$OK_COLOR"
-  elif [ "$sum" -eq "$DRY_RUN_STATUS_MARK" ]; then
+  elif [ "$sum" = "$DRY_RUN_STATUS_MARK" ]; then
     sum_color="$DRY_COLOR"
   else
     sum_color="$NG_COLOR"
   fi
 
-  if [ "$product" -eq "$STANDARD_PRODUCT" ]; then
+  if [ "$product" = "$STANDARD_PRODUCT" ]; then
     product_color="$OK_COLOR"
-  elif [ "$product" -eq "$DRY_RUN_STATUS_MARK" ]; then
+  elif [ "$product" = "$DRY_RUN_STATUS_MARK" ]; then
     product_color="$DRY_COLOR"
   else
     product_color="$NG_COLOR"
