@@ -4,7 +4,11 @@
 
 STRATEGY="scraping_by"
 STRATEGY_FILE="/home/ubuntu/workspace/cron-conf/raspberrypi/config/quotarget.json"
+
+# The number of elements and the order of each element for TIMEFRAME_LIST and TIMEFRAME_BOUNDARIES must match.
 TIMEFRAME_LIST="predawn dawn morning midday afternoon evening night midnight"
+TIMEFRAME_BOUNDARIES="2 5 8 11 14 17 20 23"
+TIMEFRAME_RELATIVE_LIST="now next"
 
 RESET_COLOR="\033[m"
 OK_COLOR="\033[32m"
@@ -24,6 +28,7 @@ STANDARD_PRODUCT=$(( STANDARD_TODO_PERSONAL * STANDARD_TASK_PERSONAL * STANDARD_
 main() {
   prepare "$@"
   list_info "$@"
+  convert_timeframe_relative "$@"
   validate "$@"
 
   if [ "$FORCE" = "1" ]; then
@@ -97,7 +102,7 @@ prepare() {
 
 list_info() {
   if [ "$LIST_TIMEFRAMES" = "1" ]; then
-    for tf in $TIMEFRAME_LIST; do
+    for tf in $TIMEFRAME_LIST $TIMEFRAME_RELATIVE_LIST; do
       printf '%s\n' "$tf"
     done
     exit 0
@@ -164,6 +169,8 @@ debug_info() {
     product_color="$NG_COLOR"
   fi
 
+  printf  "DEBUG: TIMEFRAME:             %s\n"                                               "$TIMEFRAME"                                        >&2
+  printf  "\n"                                                                                                                                   >&2
   printf  "DEBUG: todo_personal_cmd:     %s\n"                                               "$todo_personal_cmd"                                >&2
   printf  "DEBUG: todo_personal_result:  $todo_personal_result_color%6s (%s)$RESET_COLOR\n"  "$todo_personal_result"  "$STANDARD_TODO_PERSONAL"  >&2
   printf  "\n"                                                                                                                                   >&2
@@ -182,6 +189,37 @@ debug_info() {
   printf  "DEBUG: sum:                   $sum_color%6s (%s)$RESET_COLOR\n"                   "$sum"                   "$STANDARD_SUM"            >&2
   printf  "DEBUG: product:               $product_color%6s (%s)$RESET_COLOR\n"               "$product"               "$STANDARD_PRODUCT"        >&2
   printf  "\n"                                                                                                                                   >&2
+}
+
+convert_timeframe_relative() {
+  should_convert_tf=false
+  for tf in $TIMEFRAME_RELATIVE_LIST; do
+    if [ "$TIMEFRAME" = "$tf" ]; then
+      should_convert_tf=true
+      break
+    fi
+  done
+
+  # https://chatgpt.com/share/68b191e2-4504-8004-a34e-e68c717ca1f5
+  if [ "$should_convert_tf" = "true" ]; then
+    now_hour=$(date +%H | sed 's/^0*//')
+    [ "$now_hour" = "" ] && now_hour=0
+
+    i=1
+    for boundary in $TIMEFRAME_BOUNDARIES; do
+      if [ "$now_hour" -le "$boundary" ]; then
+        if [ "$TIMEFRAME" = "next" ]; then
+          i=$((i + 1))
+          [ "$i" -gt "$(echo "$TIMEFRAME_LIST" | awk '{ print NF }')" ] && i=1
+        fi
+
+        TIMEFRAME="$(echo "$TIMEFRAME_LIST" | awk "{ print \$$i }")"
+        break
+      fi
+
+      i=$((i + 1))
+    done
+  fi
 }
 
 validate() {
