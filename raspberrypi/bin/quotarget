@@ -8,7 +8,7 @@ STRATEGY_FILE="/home/ubuntu/workspace/cron-conf/raspberrypi/config/quotarget.jso
 # The number of elements and the order of each element for TIMEFRAME_LIST and TIMEFRAME_BOUNDARIES must match.
 TIMEFRAME_LIST="predawn dawn morning midday afternoon evening night midnight"
 TIMEFRAME_BOUNDARIES="2 5 8 11 14 17 20 23"
-TIMEFRAME_RELATIVE_LIST="now next"
+TIMEFRAME_RELATIVE_LIST="prev now next"
 
 RESET_COLOR="\033[m"
 OK_COLOR="\033[32m"
@@ -211,7 +211,10 @@ convert_timeframe_relative() {
         i=$((i - 1))
         [ "$i" -eq 0 ] && i=$(echo "$TIMEFRAME_LIST" | awk '{ print NF }')
 
-        if [ "$TIMEFRAME" = "next" ]; then
+        if [ "$TIMEFRAME" = "prev" ]; then
+          i=$((i - 1))
+          [ "$i" -eq 0 ] && i=$(echo "$TIMEFRAME_LIST" | awk '{ print NF }')
+        elif [ "$TIMEFRAME" = "next" ]; then
           i=$((i + 1))
           [ "$i" -gt "$(echo "$TIMEFRAME_LIST" | awk '{ print NF }')" ] && i=1
         fi
