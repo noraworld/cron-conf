@@ -207,7 +207,10 @@ convert_timeframe_relative() {
 
     i=1
     for boundary in $TIMEFRAME_BOUNDARIES; do
-      if [ "$now_hour" -le "$boundary" ]; then
+      if [ "$now_hour" -lt "$boundary" ]; then
+        i=$((i - 1))
+        [ "$i" -eq 0 ] && i=$(echo "$TIMEFRAME_LIST" | awk '{ print NF }')
+
         if [ "$TIMEFRAME" = "next" ]; then
           i=$((i + 1))
           [ "$i" -gt "$(echo "$TIMEFRAME_LIST" | awk '{ print NF }')" ] && i=1
