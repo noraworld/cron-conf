@@ -7,8 +7,11 @@ STRATEGY_FILE="/home/ubuntu/workspace/cron-conf/raspberrypi/config/quotarget.jso
 TIMEFRAME_LIST="predawn dawn morning midday afternoon evening night midnight"
 
 RESET_COLOR="\033[m"
-RED_COLOR="\033[31m"
-GREEN_COLOR="\033[32m"
+OK_COLOR="\033[32m"
+NG_COLOR="\033[31m"
+DRY_COLOR="\033[33m"
+
+DRY_RUN_STATUS_MARK=-
 
 STANDARD_TODO_PERSONAL=1
 STANDARD_TASK_PERSONAL=2
@@ -56,14 +59,25 @@ main() {
     sed -e 's/^"//' -e 's/"$//' -e 's/\\"/"/g'
   )
 
-  todo_personal_result=$(eval "$todo_personal_cmd")
-  task_personal_result=$(eval "$task_personal_cmd")
-  tick_personal_result=$(eval "$tick_personal_cmd")
-  todo_work_result=$(eval "$todo_work_cmd")
-  task_work_result=$(eval "$task_work_cmd")
+  if [ "$DRY_RUN" = "1" ]; then
+    todo_personal_result=$DRY_RUN_STATUS_MARK
+    task_personal_result=$DRY_RUN_STATUS_MARK
+    tick_personal_result=$DRY_RUN_STATUS_MARK
+    todo_work_result=$DRY_RUN_STATUS_MARK
+    task_work_result=$DRY_RUN_STATUS_MARK
 
-  sum=$(( todo_personal_result + task_personal_result + tick_personal_result + todo_work_result + task_work_result ))
-  product=$(( todo_personal_result * task_personal_result * tick_personal_result * todo_work_result * task_work_result ))
+    sum=$DRY_RUN_STATUS_MARK
+    product=$DRY_RUN_STATUS_MARK
+  else
+    todo_personal_result=$(eval "$todo_personal_cmd")
+    task_personal_result=$(eval "$task_personal_cmd")
+    tick_personal_result=$(eval "$tick_personal_cmd")
+    todo_work_result=$(eval "$todo_work_cmd")
+    task_work_result=$(eval "$task_work_cmd")
+
+    sum=$(( todo_personal_result + task_personal_result + tick_personal_result + todo_work_result + task_work_result ))
+    product=$(( todo_personal_result * task_personal_result * tick_personal_result * todo_work_result * task_work_result ))
+  fi
 
   [ "$DEBUG" = "1" ] && debug_info
 
@@ -95,45 +109,59 @@ list_info() {
 
 debug_info() {
   if [ "$todo_personal_result" -eq "$STANDARD_TODO_PERSONAL" ]; then
-    todo_personal_result_color="$GREEN_COLOR"
+    todo_personal_result_color="$OK_COLOR"
+  elif [ "$todo_personal_result" -eq "$DRY_RUN_STATUS_MARK" ]; then
+    todo_personal_result_color="$DRY_COLOR"
   else
-    todo_personal_result_color="$RED_COLOR"
+    todo_personal_result_color="$NG_COLOR"
   fi
 
   if [ "$task_personal_result" -eq "$STANDARD_TASK_PERSONAL" ]; then
-    task_personal_result_color="$GREEN_COLOR"
+    task_personal_result_color="$OK_COLOR"
+  elif [ "$task_personal_result" -eq "$DRY_RUN_STATUS_MARK" ]; then
+    task_personal_result_color="$DRY_COLOR"
   else
-    task_personal_result_color="$RED_COLOR"
+    task_personal_result_color="$NG_COLOR"
   fi
 
   if [ "$tick_personal_result" -eq "$STANDARD_TICK_PERSONAL" ]; then
-    tick_personal_result_color="$GREEN_COLOR"
+    tick_personal_result_color="$OK_COLOR"
+  elif [ "$tick_personal_result" -eq "$DRY_RUN_STATUS_MARK" ]; then
+    tick_personal_result_color="$DRY_COLOR"
   else
-    tick_personal_result_color="$RED_COLOR"
+    tick_personal_result_color="$NG_COLOR"
   fi
 
   if [ "$todo_work_result" -eq "$STANDARD_TODO_WORK" ]; then
-    todo_work_result_color="$GREEN_COLOR"
+    todo_work_result_color="$OK_COLOR"
+  elif [ "$todo_work_result" -eq "$DRY_RUN_STATUS_MARK" ]; then
+    todo_work_result_color="$DRY_COLOR"
   else
-    todo_work_result_color="$RED_COLOR"
+    todo_work_result_color="$NG_COLOR"
   fi
 
   if [ "$task_work_result" -eq "$STANDARD_TASK_WORK" ]; then
-    task_work_result_color="$GREEN_COLOR"
+    task_work_result_color="$OK_COLOR"
+  elif [ "$task_work_result" -eq "$DRY_RUN_STATUS_MARK" ]; then
+    task_work_result_color="$DRY_COLOR"
   else
-    task_work_result_color="$RED_COLOR"
+    task_work_result_color="$NG_COLOR"
   fi
 
   if [ "$sum" -eq "$STANDARD_SUM" ]; then
-    sum_color="$GREEN_COLOR"
+    sum_color="$OK_COLOR"
+  elif [ "$sum" -eq "$DRY_RUN_STATUS_MARK" ]; then
+    sum_color="$DRY_COLOR"
   else
-    sum_color="$RED_COLOR"
+    sum_color="$NG_COLOR"
   fi
 
   if [ "$product" -eq "$STANDARD_PRODUCT" ]; then
-    product_color="$GREEN_COLOR"
+    product_color="$OK_COLOR"
+  elif [ "$product" -eq "$DRY_RUN_STATUS_MARK" ]; then
+    product_color="$DRY_COLOR"
   else
-    product_color="$RED_COLOR"
+    product_color="$NG_COLOR"
   fi
 
   printf  "DEBUG: todo_personal_cmd:     %s\n"                                               "$todo_personal_cmd"                                >&2
@@ -177,6 +205,7 @@ parser_definition() {
   setup REST help:usage -- "Usage: quotarget [options]... [arguments]..." ''
   msg -- 'Options:'
   flag  DEBUG              --debug           -- "show debug messages"
+  flag  DRY_RUN            --dry-run         -- "check only the standard (used when preventing it from calling the APIs)"
   flag  FORCE              --force           -- "get content from APIs even if cache exists"
   flag  LIST_TIMEFRAMES    --list-timeframes -- "get list of timeframes"
   flag  LIST_SERVICES      --list-services   -- "get list of services"
@@ -191,6 +220,7 @@ parser_definition() {
 # Generated by getoptions (BEGIN)
 # URL: https://github.com/ko1nksm/getoptions (v3.3.0)
 DEBUG=''
+DRY_RUN=''
 FORCE=''
 LIST_TIMEFRAMES=''
 LIST_SERVICES=''
@@ -214,6 +244,11 @@ parse() {
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
         DEBUG="$OPTARG"
+        ;;
+      '--dry-run')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        DRY_RUN="$OPTARG"
         ;;
       '--force')
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
@@ -277,6 +312,7 @@ Usage: quotarget [options]... [arguments]...
 
 Options:
       --debug                 show debug messages
+      --dry-run               check only the standard (used when preventing it from calling the APIs)
       --force                 get content from APIs even if cache exists
       --list-timeframes       get list of timeframes
       --list-services         get list of services
