@@ -15,7 +15,7 @@ OK_COLOR="\033[32m"
 NG_COLOR="\033[31m"
 DRY_COLOR="\033[33m"
 
-DRY_RUN_STATUS_MARK=-
+DRY_RUN_RESULT=-
 
 STANDARD_TODO_PERSONAL=1
 STANDARD_TASK_PERSONAL=2
@@ -65,14 +65,14 @@ main() {
   )
 
   if [ "$DRY_RUN" = "1" ]; then
-    todo_personal_result=$DRY_RUN_STATUS_MARK
-    task_personal_result=$DRY_RUN_STATUS_MARK
-    tick_personal_result=$DRY_RUN_STATUS_MARK
-    todo_work_result=$DRY_RUN_STATUS_MARK
-    task_work_result=$DRY_RUN_STATUS_MARK
+    todo_personal_result=$DRY_RUN_RESULT
+    task_personal_result=$DRY_RUN_RESULT
+    tick_personal_result=$DRY_RUN_RESULT
+    todo_work_result=$DRY_RUN_RESULT
+    task_work_result=$DRY_RUN_RESULT
 
-    sum=$DRY_RUN_STATUS_MARK
-    product=$DRY_RUN_STATUS_MARK
+    sum=$DRY_RUN_RESULT
+    product=$DRY_RUN_RESULT
   else
     todo_personal_result=$(eval "$todo_personal_cmd")
     task_personal_result=$(eval "$task_personal_cmd")
@@ -115,7 +115,7 @@ list_info() {
 debug_info() {
   if [ "$todo_personal_result" = "$STANDARD_TODO_PERSONAL" ]; then
     todo_personal_result_color="$OK_COLOR"
-  elif [ "$todo_personal_result" = "$DRY_RUN_STATUS_MARK" ]; then
+  elif [ "$todo_personal_result" = "$DRY_RUN_RESULT" ]; then
     todo_personal_result_color="$DRY_COLOR"
   else
     todo_personal_result_color="$NG_COLOR"
@@ -123,7 +123,7 @@ debug_info() {
 
   if [ "$task_personal_result" = "$STANDARD_TASK_PERSONAL" ]; then
     task_personal_result_color="$OK_COLOR"
-  elif [ "$task_personal_result" = "$DRY_RUN_STATUS_MARK" ]; then
+  elif [ "$task_personal_result" = "$DRY_RUN_RESULT" ]; then
     task_personal_result_color="$DRY_COLOR"
   else
     task_personal_result_color="$NG_COLOR"
@@ -131,7 +131,7 @@ debug_info() {
 
   if [ "$tick_personal_result" = "$STANDARD_TICK_PERSONAL" ]; then
     tick_personal_result_color="$OK_COLOR"
-  elif [ "$tick_personal_result" = "$DRY_RUN_STATUS_MARK" ]; then
+  elif [ "$tick_personal_result" = "$DRY_RUN_RESULT" ]; then
     tick_personal_result_color="$DRY_COLOR"
   else
     tick_personal_result_color="$NG_COLOR"
@@ -139,7 +139,7 @@ debug_info() {
 
   if [ "$todo_work_result" = "$STANDARD_TODO_WORK" ]; then
     todo_work_result_color="$OK_COLOR"
-  elif [ "$todo_work_result" = "$DRY_RUN_STATUS_MARK" ]; then
+  elif [ "$todo_work_result" = "$DRY_RUN_RESULT" ]; then
     todo_work_result_color="$DRY_COLOR"
   else
     todo_work_result_color="$NG_COLOR"
@@ -147,7 +147,7 @@ debug_info() {
 
   if [ "$task_work_result" = "$STANDARD_TASK_WORK" ]; then
     task_work_result_color="$OK_COLOR"
-  elif [ "$task_work_result" = "$DRY_RUN_STATUS_MARK" ]; then
+  elif [ "$task_work_result" = "$DRY_RUN_RESULT" ]; then
     task_work_result_color="$DRY_COLOR"
   else
     task_work_result_color="$NG_COLOR"
@@ -155,7 +155,7 @@ debug_info() {
 
   if [ "$sum" = "$STANDARD_SUM" ]; then
     sum_color="$OK_COLOR"
-  elif [ "$sum" = "$DRY_RUN_STATUS_MARK" ]; then
+  elif [ "$sum" = "$DRY_RUN_RESULT" ]; then
     sum_color="$DRY_COLOR"
   else
     sum_color="$NG_COLOR"
@@ -163,7 +163,7 @@ debug_info() {
 
   if [ "$product" = "$STANDARD_PRODUCT" ]; then
     product_color="$OK_COLOR"
-  elif [ "$product" = "$DRY_RUN_STATUS_MARK" ]; then
+  elif [ "$product" = "$DRY_RUN_RESULT" ]; then
     product_color="$DRY_COLOR"
   else
     product_color="$NG_COLOR"
