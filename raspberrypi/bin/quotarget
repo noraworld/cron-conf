@@ -192,6 +192,8 @@ debug_info() {
 }
 
 convert_timeframe_relative() {
+  original_timeframe="$TIMEFRAME"
+
   should_convert_tf=false
   for tf in $TIMEFRAME_RELATIVE_LIST; do
     if [ "$TIMEFRAME" = "$tf" ]; then
@@ -225,6 +227,23 @@ convert_timeframe_relative() {
 
       i=$((i + 1))
     done
+
+    # 23 (11 p.m.) doesn't match the above logic.
+    if [ "$TIMEFRAME" = "$original_timeframe" ]; then
+      case "$TIMEFRAME" in
+        "prev")
+          i=$(echo "$TIMEFRAME_LIST" | awk '{ print NF - 1 }')
+          ;;
+        "now")
+          i=$(echo "$TIMEFRAME_LIST" | awk '{ print NF }')
+          ;;
+        "next")
+          i=1
+          ;;
+      esac
+
+      TIMEFRAME="$(echo "$TIMEFRAME_LIST" | awk "{ print \$$i }")"
+    fi
   fi
 }
 
