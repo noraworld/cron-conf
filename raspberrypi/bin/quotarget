@@ -4,6 +4,7 @@
 
 STRATEGY="scraping_by"
 STRATEGY_FILE="/home/ubuntu/workspace/cron-conf/raspberrypi/config/quotarget.json"
+INHERIT_KEYWORD_REGEXP="^INHERIT "
 
 # The number of elements and the order of each element for TIMEFRAME_LIST and TIMEFRAME_BOUNDARIES must match.
 TIMEFRAME_LIST="predawn dawn morning midday afternoon evening night midnight"
@@ -39,30 +40,11 @@ main() {
     force=""
   fi
 
-  todo_personal_cmd=$(
-    jq ".\"${SERVICE}\".${TIMEFRAME}.${STRATEGY}.todo_personal" "$STRATEGY_FILE" |
-    sed -e 's/^"//' -e 's/"$//' -e 's/\\"/"/g'
-  )
-
-  task_personal_cmd=$(
-    jq ".\"${SERVICE}\".${TIMEFRAME}.${STRATEGY}.task_personal" "$STRATEGY_FILE" |
-    sed -e 's/^"//' -e 's/"$//' -e 's/\\"/"/g'
-  )
-
-  tick_personal_cmd=$(
-    jq ".\"${SERVICE}\".${TIMEFRAME}.${STRATEGY}.tick_personal" "$STRATEGY_FILE" |
-    sed -e 's/^"//' -e 's/"$//' -e 's/\\"/"/g'
-  )
-
-  todo_work_cmd=$(
-    jq ".\"${SERVICE}\".${TIMEFRAME}.${STRATEGY}.todo_work" "$STRATEGY_FILE" |
-    sed -e 's/^"//' -e 's/"$//' -e 's/\\"/"/g'
-  )
-
-  task_work_cmd=$(
-    jq ".\"${SERVICE}\".${TIMEFRAME}.${STRATEGY}.task_work" "$STRATEGY_FILE" |
-    sed -e 's/^"//' -e 's/"$//' -e 's/\\"/"/g'
-  )
+  todo_personal_cmd=$(get_cmd "todo_personal")
+  task_personal_cmd=$(get_cmd "task_personal")
+  tick_personal_cmd=$(get_cmd "tick_personal")
+  todo_work_cmd=$(get_cmd "todo_work")
+  task_work_cmd=$(get_cmd "task_work")
 
   if [ "$DRY_RUN" = "1" ]; then
     todo_personal_result=$DRY_RUN_RESULT
@@ -93,6 +75,20 @@ main() {
   else
     echo "-1"
   fi
+}
+
+get_cmd() {
+  # TODO: sed -e 's/\\"/"/g' might be unnecessary.
+  cmd=$(jq -r ".\"${SERVICE}\".${TIMEFRAME}.${STRATEGY}.$1" "$STRATEGY_FILE" | sed -e 's/\\"/"/g')
+
+  # e.g.
+  #   BEFORE: INHERIT .youtube.predawn.scraping_by.todo_personal
+  #   AFTER:  todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 22 --unchecked 0 $force
+  if [ "$(echo "$cmd" | grep -cE "$INHERIT_KEYWORD_REGEXP")" -eq 1 ]; then
+    cmd=$(jq -r "$(echo "$cmd" | sed -e "s/$INHERIT_KEYWORD_REGEXP//")" "$STRATEGY_FILE")
+  fi
+
+  echo "$cmd"
 }
 
 prepare() {
