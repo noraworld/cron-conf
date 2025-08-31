@@ -659,11 +659,11 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 14 --unchecked 1 $force",
-        "task_personal": "echo 2",
-        "tick_personal": "echo 1",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .vod.predawn.scraping_by.todo_personal",
+        "task_personal": "INHERIT .vod.predawn.scraping_by.task_personal",
+        "tick_personal": "INHERIT .vod.predawn.scraping_by.tick_personal",
+        "todo_work": "INHERIT .vod.predawn.scraping_by.todo_work",
+        "task_work": "INHERIT .vod.predawn.scraping_by.task_work"
       }
     },
     "dawn": {
@@ -675,11 +675,11 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 16 --unchecked 1 $force",
-        "task_personal": "echo 2",
-        "tick_personal": "echo 1",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .vod.dawn.scraping_by.todo_personal",
+        "task_personal": "INHERIT .vod.dawn.scraping_by.task_personal",
+        "tick_personal": "INHERIT .vod.dawn.scraping_by.tick_personal",
+        "todo_work": "INHERIT .vod.dawn.scraping_by.todo_work",
+        "task_work": "INHERIT .vod.dawn.scraping_by.task_work"
       }
     },
     "morning": {
@@ -691,11 +691,11 @@
         "task_work": "task-stacked     --main-repo 'noraworld/daily-report'   --past 2 --todo-repo 'noraworld/work-scraps' $force"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 2 $force",
-        "task_personal": "echo 2",
-        "tick_personal": "echo 1",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .vod.morning.scraping_by.todo_personal",
+        "task_personal": "INHERIT .vod.morning.scraping_by.task_personal",
+        "tick_personal": "INHERIT .vod.morning.scraping_by.tick_personal",
+        "todo_work": "INHERIT .vod.morning.scraping_by.todo_work",
+        "task_work": "INHERIT .vod.morning.scraping_by.task_work"
       }
     },
     "midday": {
@@ -707,11 +707,11 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 4 $force",
-        "task_personal": "echo 2",
-        "tick_personal": "echo 1",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .vod.midday.scraping_by.todo_personal",
+        "task_personal": "INHERIT .vod.midday.scraping_by.task_personal",
+        "tick_personal": "INHERIT .vod.midday.scraping_by.tick_personal",
+        "todo_work": "INHERIT .vod.midday.scraping_by.todo_work",
+        "task_work": "INHERIT .vod.midday.scraping_by.task_work"
       }
     },
     "afternoon": {
@@ -723,11 +723,11 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 6 $force",
-        "task_personal": "echo 2",
-        "tick_personal": "echo 1",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .vod.afternoon.scraping_by.todo_personal",
+        "task_personal": "INHERIT .vod.afternoon.scraping_by.task_personal",
+        "tick_personal": "INHERIT .vod.afternoon.scraping_by.tick_personal",
+        "todo_work": "INHERIT .vod.afternoon.scraping_by.todo_work",
+        "task_work": "INHERIT .vod.afternoon.scraping_by.task_work"
       }
     },
     "evening": {
@@ -739,11 +739,11 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 8 $force",
-        "task_personal": "echo 2",
-        "tick_personal": "echo 1",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .vod.evening.scraping_by.todo_personal",
+        "task_personal": "INHERIT .vod.evening.scraping_by.task_personal",
+        "tick_personal": "INHERIT .vod.evening.scraping_by.tick_personal",
+        "todo_work": "INHERIT .vod.evening.scraping_by.todo_work",
+        "task_work": "INHERIT .vod.evening.scraping_by.task_work"
       }
     },
     "night": {
@@ -755,11 +755,11 @@
         "task_work": "task-stacked     --main-repo 'noraworld/daily-report'   --past 2 --todo-repo 'noraworld/work-scraps' $force"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 10 --unchecked 5 $force",
-        "task_personal": "echo 2",
-        "tick_personal": "echo 1",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .vod.night.scraping_by.todo_personal",
+        "task_personal": "INHERIT .vod.night.scraping_by.task_personal",
+        "tick_personal": "INHERIT .vod.night.scraping_by.tick_personal",
+        "todo_work": "INHERIT .vod.night.scraping_by.todo_work",
+        "task_work": "INHERIT .vod.night.scraping_by.task_work"
       }
     },
     "midnight": {
@@ -771,11 +771,11 @@
         "task_work": "task-stacked     --main-repo 'noraworld/daily-report'   --past 2 --todo-repo 'noraworld/work-scraps' $force"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 12 --unchecked 1 $force",
-        "task_personal": "echo 2",
-        "tick_personal": "echo 1",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .vod.midnight.scraping_by.todo_personal",
+        "task_personal": "INHERIT .vod.midnight.scraping_by.task_personal",
+        "tick_personal": "INHERIT .vod.midnight.scraping_by.tick_personal",
+        "todo_work": "INHERIT .vod.midnight.scraping_by.todo_work",
+        "task_work": "INHERIT .vod.midnight.scraping_by.task_work"
       }
     }
   },
