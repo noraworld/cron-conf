@@ -9,11 +9,11 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
+        "todo_personal": "INHERIT .youtube.predawn.scraping_by.todo_personal",
+        "task_personal": "INHERIT .youtube.predawn.scraping_by.task_personal",
         "tick_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1 --maxi-stamp 1 $force",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_work": "INHERIT .youtube.predawn.scraping_by.todo_work",
+        "task_work": "INHERIT .youtube.predawn.scraping_by.task_work"
       }
     },
     "dawn": {
@@ -25,11 +25,11 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
+        "todo_personal": "INHERIT .youtube.dawn.scraping_by.todo_personal",
+        "task_personal": "INHERIT .youtube.dawn.scraping_by.task_personal",
         "tick_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1 --maxi-stamp 1 $force",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_work": "INHERIT .youtube.dawn.scraping_by.todo_work",
+        "task_work": "INHERIT .youtube.dawn.scraping_by.task_work"
       }
     },
     "morning": {
@@ -41,11 +41,11 @@
         "task_work": "echo 2"
       },
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
+        "todo_personal": "INHERIT .youtube.morning.scraping_by.todo_personal",
+        "task_personal": "INHERIT .youtube.morning.scraping_by.task_personal",
         "tick_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1 --maxi-stamp 1 $force",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_work": "INHERIT .youtube.morning.scraping_by.todo_work",
+        "task_work": "INHERIT .youtube.morning.scraping_by.task_work"
       }
     },
     "midday": {
@@ -57,11 +57,11 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
+        "todo_personal": "INHERIT .youtube.midday.scraping_by.todo_personal",
+        "task_personal": "INHERIT .youtube.midday.scraping_by.task_personal",
         "tick_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1 --maxi-stamp 1 $force",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_work": "INHERIT .youtube.midday.scraping_by.todo_work",
+        "task_work": "INHERIT .youtube.midday.scraping_by.task_work"
       }
     },
     "afternoon": {
@@ -73,11 +73,11 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
+        "todo_personal": "INHERIT .youtube.afternoon.scraping_by.todo_personal",
+        "task_personal": "INHERIT .youtube.afternoon.scraping_by.task_personal",
         "tick_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1 --maxi-stamp 1 $force",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_work": "INHERIT .youtube.afternoon.scraping_by.todo_work",
+        "task_work": "INHERIT .youtube.afternoon.scraping_by.task_work"
       }
     },
     "evening": {
@@ -89,11 +89,11 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
+        "todo_personal": "INHERIT .youtube.evening.scraping_by.todo_personal",
+        "task_personal": "INHERIT .youtube.evening.scraping_by.task_personal",
         "tick_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1 --maxi-stamp 1 $force",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_work": "INHERIT .youtube.evening.scraping_by.todo_work",
+        "task_work": "INHERIT .youtube.evening.scraping_by.task_work"
       }
     },
     "night": {
@@ -105,11 +105,11 @@
         "task_work": "echo 2"
       },
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
+        "todo_personal": "INHERIT .youtube.night.scraping_by.todo_personal",
+        "task_personal": "INHERIT .youtube.night.scraping_by.task_personal",
         "tick_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1 --maxi-stamp 1 $force",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_work": "INHERIT .youtube.night.scraping_by.todo_work",
+        "task_work": "INHERIT .youtube.night.scraping_by.task_work"
       }
     },
     "midnight": {
@@ -121,11 +121,11 @@
         "task_work": "echo 2"
       },
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
+        "todo_personal": "INHERIT .youtube.midnight.scraping_by.todo_personal",
+        "task_personal": "INHERIT .youtube.midnight.scraping_by.task_personal",
         "tick_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1 --maxi-stamp 1 $force",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_work": "INHERIT .youtube.midnight.scraping_by.todo_work",
+        "task_work": "INHERIT .youtube.midnight.scraping_by.task_work"
       }
     }
   },
