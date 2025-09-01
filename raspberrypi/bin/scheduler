@@ -670,6 +670,12 @@ periodic() {
   # Auto back up log
   git -C "/home/ubuntu/workspace/log" push --set-upstream origin main
 
+  # Auto allow cron apply, cron edit, dnsmasq settings change, git pull, git push, etc. if possible
+  if [ "$(quotarget --timeframe now --service discipline --no-fetch)" -gt 0 ]; then
+    # Is calling 'trailblazer' or 'unlock' here legitimate? 🤔
+    sudo unlink /etc/dnsmasq.toggle/discipline.conf
+  fi
+
   # Notify each time you achieve your daily digital detox
   digital-detox-notifier
 
