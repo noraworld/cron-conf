@@ -13,10 +13,16 @@ main() {
     force=""
   fi
 
+  if [ "$NO_FETCH" = "1" ]; then
+    no_fetch="--no-fetch"
+  else
+    no_fetch=""
+  fi
+
   keywords=$(printf '%s\n' "$@" | paste -sd '|')
   pattern='\\*\\s*\\[x\\].*\\[('"$keywords"')\\]\\(https://github.com/noraworld/diary-templates/issues/[0-9]*\\)'
 
-  passed_count=$(eval "todo-cache --repo $REPO --past $PAST $force | grep -cE \"$pattern\"" || true)
+  passed_count=$(eval "todo-cache --repo $REPO --past $PAST $force $no_fetch | grep -cE \"$pattern\"" || true)
 
   [ "$DEBUG" = "1" ] && echo "DEBUG: keywords: $keywords"     >&2
   [ "$DEBUG" = "1" ] && echo "DEBUG: pattern:  $pattern"      >&2
@@ -65,6 +71,7 @@ parser_definition() {
   param   FAIL_STAMP    --fail-stamp -- "[PRIORITY:2] return a given value instead of the number of checked tasks when not all the tasks have been passed"
   flag    FORCE         --force      -- "get todo list without cache"
   param   MAXI_STAMP    --maxi-stamp -- "[PRIORITY:3] return a given value if the actual result is more than 1"
+  flag    NO_FETCH      --no-fetch   -- "use cache even if cache is stale (ignore check interval)"
   param   PASS_STAMP    --pass-stamp -- "[PRIORITY:2] return a given value instead of the number of checked tasks when all the tasks have been passed"
   param   PAST          --past       -- "past (default: 0)"
   param   REPO          --repo       -- "repo"
@@ -84,6 +91,7 @@ DEBUG=''
 FAIL_STAMP=''
 FORCE=''
 MAXI_STAMP=''
+NO_FETCH=''
 PASS_STAMP=''
 PAST=''
 REPO=''
@@ -122,6 +130,11 @@ parse() {
         OPTARG=$2
         MAXI_STAMP="$OPTARG"
         shift ;;
+      '--no-fetch')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        NO_FETCH="$OPTARG"
+        ;;
       '--pass-stamp')
         [ $# -le 1 ] && set "required" "$1" && break
         OPTARG=$2
@@ -182,6 +195,7 @@ Options:
       --fail-stamp FAIL_STAMP [PRIORITY:2] return a given value instead of the number of checked tasks when not all the tasks have been passed
       --force                 get todo list without cache
       --maxi-stamp MAXI_STAMP [PRIORITY:3] return a given value if the actual result is more than 1
+      --no-fetch              use cache even if cache is stale (ignore check interval)
       --pass-stamp PASS_STAMP [PRIORITY:2] return a given value instead of the number of checked tasks when all the tasks have been passed
       --past PAST             past (default: 0)
       --repo REPO             repo

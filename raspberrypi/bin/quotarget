@@ -40,6 +40,14 @@ main() {
     force=""
   fi
 
+  if [ "$NO_FETCH" = "1" ]; then
+    no_fetch="--no-fetch"
+  else
+    # same as $force
+    # shellcheck disable=SC2034
+    no_fetch=""
+  fi
+
   todo_personal_cmd=$(get_cmd "todo_personal")
   task_personal_cmd=$(get_cmd "task_personal")
   tick_personal_cmd=$(get_cmd "tick_personal")
@@ -268,6 +276,7 @@ parser_definition() {
   flag  FORCE              --force           -- "get content from APIs even if cache exists"
   flag  LIST_TIMEFRAMES    --list-timeframes -- "get list of timeframes"
   flag  LIST_SERVICES      --list-services   -- "get list of services"
+  flag  NO_FETCH           --no-fetch        -- "use cache even if cache is stale (ignore check interval)"
   param SERVICE            --service         -- "youtube, vod, ..."
   param TIMEFRAME          --timeframe       -- "timeframe"
   disp  :usage          -h --help
@@ -283,6 +292,7 @@ DRY_RUN=''
 FORCE=''
 LIST_TIMEFRAMES=''
 LIST_SERVICES=''
+NO_FETCH=''
 SERVICE=''
 TIMEFRAME=''
 REST=''
@@ -323,6 +333,11 @@ parse() {
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
         LIST_SERVICES="$OPTARG"
+        ;;
+      '--no-fetch')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        NO_FETCH="$OPTARG"
         ;;
       '--service')
         [ $# -le 1 ] && set "required" "$1" && break
@@ -375,6 +390,7 @@ Options:
       --force                 get content from APIs even if cache exists
       --list-timeframes       get list of timeframes
       --list-services         get list of services
+      --no-fetch              use cache even if cache is stale (ignore check interval)
       --service SERVICE       youtube, vod, ...
       --timeframe TIMEFRAME   timeframe
   -h, --help

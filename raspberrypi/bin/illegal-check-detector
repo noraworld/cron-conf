@@ -36,7 +36,7 @@ main() {
 
   validate "$@"
 
-  body=$(todo-cache --repo "$MAIN_REPO" --date "$(date -d "$NEW_DAY_OFFSET" +%F)" "$force")
+  body=$(todo-cache --repo "$MAIN_REPO" --date "$(date -d "$NEW_DAY_OFFSET" +%F)" "$force" "$no_fetch")
 
 # DO NOT INDENT THESE LINES!
 while IFS= read -r line; do
@@ -159,6 +159,12 @@ prepare() {
     force=""
   fi
 
+  if [ "$NO_FETCH" = "1" ]; then
+    no_fetch="--no-fetch"
+  else
+    no_fetch=""
+  fi
+
   CHECK_FILE="/home/ubuntu/workspace/log/pi/tmp/illegal_check_detector_$(echo "$MAIN_REPO" | cut -d '/' -f2 | tr '-' '_')_last_update"
   RESULT_FILE="/home/ubuntu/workspace/log/pi/tmp/illegal_check_detector_$(echo "$MAIN_REPO" | cut -d '/' -f2 | tr '-' '_')_last_result"
   [ -e "$CHECK_FILE"  ] || date +%s  > "$CHECK_FILE"
@@ -223,6 +229,7 @@ parser_definition() {
   flag    FORCE            --force         -- "ignore check interval and get content from APIs even if cache exists"
   flag    STRICT           --strict        -- "check repo existence strictly"
   param   MAIN_REPO        --main-repo     -- "main repo"
+  flag    NO_FETCH         --no-fetch      -- "use cache even if cache is stale (ignore check interval)"
   param   TEMPLATE_REPO    --template-repo -- "template repo"
   param   TODO_REPO        --todo-repo     -- "todo repo"
   flag    VERBOSE          --verbose       -- "verbose output for debug"
@@ -237,6 +244,7 @@ parser_definition() {
 FORCE=''
 STRICT=''
 MAIN_REPO=''
+NO_FETCH=''
 TEMPLATE_REPO=''
 TODO_REPO=''
 VERBOSE=''
@@ -269,6 +277,11 @@ parse() {
         OPTARG=$2
         MAIN_REPO="$OPTARG"
         shift ;;
+      '--no-fetch')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        NO_FETCH="$OPTARG"
+        ;;
       '--template-repo')
         [ $# -le 1 ] && set "required" "$1" && break
         OPTARG=$2
@@ -323,6 +336,7 @@ Options:
       --force                 ignore check interval and get content from APIs even if cache exists
       --strict                check repo existence strictly
       --main-repo MAIN_REPO   main repo
+      --no-fetch              use cache even if cache is stale (ignore check interval)
       --template-repo TEMPLATE_REPO
                               template repo
       --todo-repo TODO_REPO   todo repo

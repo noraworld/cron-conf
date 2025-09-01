@@ -19,7 +19,10 @@ main() {
 
   filepath="$CACHE_BASE_PATH/$(echo "$REPO" | sed 's#.*/##' | tr '-' '_')/$DATE"
 
-  if [ -e "$filepath" ] && [ "$(echo $(( $(date '+%s') - $(cat "$filepath" | awk 'NR == 2') )) )" -lt "$CHECK_INTERVAL" ] && [ "$FORCE" != "1" ]; then
+  if [ -e "$filepath" ] && [ "$NO_FETCH" = "1" ]; then
+    [ "$DEBUG" = "1" ] && echo "info: ignore check interval and use cache anyway because --no-fetch is specified" >&2
+    tail -n +4 "$filepath"
+  elif [ -e "$filepath" ] && [ "$(echo $(( $(date '+%s') - $(cat "$filepath" | awk 'NR == 2') )) )" -lt "$CHECK_INTERVAL" ] && [ "$FORCE" != "1" ]; then
     [ "$DEBUG" = "1" ] && echo "info: cache found!" >&2
     tail -n +4 "$filepath"
   else
@@ -110,11 +113,12 @@ setup() {
 parser_definition() {
   setup   REST help:usage -- "Usage: todo-cache [options]... [arguments]..." ''
   msg -- 'Options:'
-  param   DATE       --date  -- "target date (mutually exclusive with --past)"
-  flag    DEBUG      --debug -- "debug mode"
-  flag    FORCE      --force -- "get todo from API even if cache exists"
-  param   PAST       --past  -- "how many days ago (mutually exclusive with --date)"
-  param   REPO       --repo  -- "target repo"
+  param   DATE       --date     -- "target date (mutually exclusive with --past)"
+  flag    DEBUG      --debug    -- "debug mode"
+  flag    FORCE      --force    -- "get todo from API even if cache exists"
+  flag    NO_FETCH   --no-fetch -- "use cache even if cache is stale (ignore check interval)"
+  param   PAST       --past     -- "how many days ago (mutually exclusive with --date)"
+  param   REPO       --repo     -- "target repo"
   disp    :usage  -h --help
   disp    VERSION    --version
 }
@@ -126,6 +130,7 @@ parser_definition() {
 DATE=''
 DEBUG=''
 FORCE=''
+NO_FETCH=''
 PAST=''
 REPO=''
 REST=''
@@ -156,6 +161,11 @@ parse() {
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
         FORCE="$OPTARG"
+        ;;
+      '--no-fetch')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        NO_FETCH="$OPTARG"
         ;;
       '--past')
         [ $# -le 1 ] && set "required" "$1" && break
@@ -206,6 +216,7 @@ Options:
       --date DATE             target date (mutually exclusive with --past)
       --debug                 debug mode
       --force                 get todo from API even if cache exists
+      --no-fetch              use cache even if cache is stale (ignore check interval)
       --past PAST             how many days ago (mutually exclusive with --date)
       --repo REPO             target repo
   -h, --help
