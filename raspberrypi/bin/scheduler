@@ -327,7 +327,6 @@ morning() {
 report() {
   git -C "/home/ubuntu/workspace/log" add --all
   git -C "/home/ubuntu/workspace/log" commit --message "Periodic backup: $(date '+%Y-%m-%d')"
-  git -C "/home/ubuntu/workspace/log" push --set-upstream origin main
 }
 
 deregulated_superman() {
