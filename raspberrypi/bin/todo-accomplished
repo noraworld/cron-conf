@@ -22,11 +22,17 @@ main() {
     force=""
   fi
 
+  if [ "$NO_FETCH" = "1" ]; then
+    no_fetch="--no-fetch"
+  else
+    no_fetch=""
+  fi
+
   count=0
   result="100"
   while [ "$body_with_tasks" = "" ] && [ "$count" -lt "$RETRY" ]; do
     if [ "$PAST" -eq 0 ] || [ "$INCLUDE_TODAY" = "1" ]; then
-      body_with_tasks=$(todo-cache --repo "$REPO" --date "$(date -d "$NEW_DAY_OFFSET" +%F)" "$force")
+      body_with_tasks=$(todo-cache --repo "$REPO" --date "$(date -d "$NEW_DAY_OFFSET" +%F)" "$force" "$no_fetch")
       body_without_tasks=$(echo "$body_with_tasks" | awk '!found {print} /## 🐯 今日やること/ {found=1}')
 
       checked_count=$(  echo "$body_with_tasks"    | grep -c "\[x\]")
@@ -37,7 +43,7 @@ main() {
 
     if [ "$PAST" -ge 1 ]; then
       for i in $(seq 1 "$PAST"); do
-        body_with_tasks=$(todo-cache --repo "$REPO" --date "$(date -d "$i days ago $NEW_DAY_OFFSET" +%F)" "$force")
+        body_with_tasks=$(todo-cache --repo "$REPO" --date "$(date -d "$i days ago $NEW_DAY_OFFSET" +%F)" "$force" "$no_fetch")
         body_without_tasks=$(echo "$body_with_tasks" | awk '!found {print} /## 🐯 今日やること/ {found=1}')
 
         checked_count=$(  echo "$body_with_tasks"    | grep -c "\[x\]")
@@ -118,6 +124,7 @@ parser_definition() {
   param CHECKED          --checked       -- "count how many to-dos have been accomplished (it is possible to use this with --unchecked together)"
   flag  FORCE            --force         -- "get content from APIs even if cache exists"
   flag  INCLUDE_TODAY    --include-today -- "whether to include today's task (only enabled when --past)"
+  flag  NO_FETCH         --no-fetch      -- "use cache even if cache is stale (ignore check interval)"
   param PAST             --past          -- "determine whether to check the past list as well and specify how many days to go back"
   param REPO             --repo          -- "a target repository name"
   param RETRY            --retry         -- "how many times to retry"
@@ -134,6 +141,7 @@ parser_definition() {
 CHECKED=''
 FORCE=''
 INCLUDE_TODAY=''
+NO_FETCH=''
 PAST=''
 REPO=''
 RETRY=''
@@ -167,6 +175,11 @@ parse() {
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
         INCLUDE_TODAY="$OPTARG"
+        ;;
+      '--no-fetch')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        NO_FETCH="$OPTARG"
         ;;
       '--past')
         [ $# -le 1 ] && set "required" "$1" && break
@@ -232,6 +245,7 @@ Options:
       --checked CHECKED       count how many to-dos have been accomplished (it is possible to use this with --unchecked together)
       --force                 get content from APIs even if cache exists
       --include-today         whether to include today's task (only enabled when --past)
+      --no-fetch              use cache even if cache is stale (ignore check interval)
       --past PAST             determine whether to check the past list as well and specify how many days to go back
       --repo REPO             a target repository name
       --retry RETRY           how many times to retry

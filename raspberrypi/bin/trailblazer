@@ -32,6 +32,12 @@ main() {
     force=""
   fi
 
+  if [ "$NO_FETCH" = "1" ]; then
+    no_fetch="--no-fetch"
+  else
+    no_fetch=""
+  fi
+
   if [ "$INTERVAL" = "" ]; then
     INTERVAL=10
   fi
@@ -61,7 +67,7 @@ main() {
             sleep "10"
           fi
 
-          accomplished=$(quotarget --timeframe "$tf" --service $quotarget_service $force)
+          accomplished=$(quotarget --timeframe "$tf" --service $quotarget_service $force $no_fetch)
           [ "$?" != "0" ] && exit 1
 
           break
@@ -92,7 +98,7 @@ main() {
 
   if [ "$SINCERE" = "1" ]; then
     printf "sincere: "
-    sincerely=$(sincere)
+    sincerely=$(sincere $force $no_fetch)
     echo "$sincerely"
     [ "$sincerely" -le 0 ] && exit 1
   fi
@@ -114,6 +120,7 @@ parser_definition() {
   flag    FORCE_RETRY    --force-retry -- "perform without force option first, then execute with force option if the first attempt fails"
   param   INTERVAL       --interval    -- "wait for the given number of seconds each time (unlock)"
   flag    MORNING        --morning     -- "skip quotarget, and ask to prepare a piece of garlic"
+  flag    NO_FETCH       --no-fetch    -- "use cache even if cache is stale (ignore check interval)"
   flag    REFRESH        --refresh     -- "restart todo-list daemon before check"
   param   RETRY          --retry       -- "try to create or delete symlinks the given number of times (unlock)"
   flag    SINCERE        --sincere     -- "execute sincere before running"
@@ -131,6 +138,7 @@ FORCE=''
 FORCE_RETRY=''
 INTERVAL=''
 MORNING=''
+NO_FETCH=''
 REFRESH=''
 RETRY=''
 SINCERE=''
@@ -173,6 +181,11 @@ parse() {
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
         MORNING="$OPTARG"
+        ;;
+      '--no-fetch')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        NO_FETCH="$OPTARG"
         ;;
       '--refresh')
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
@@ -235,6 +248,7 @@ Options:
       --force-retry           perform without force option first, then execute with force option if the first attempt fails
       --interval INTERVAL     wait for the given number of seconds each time (unlock)
       --morning               skip quotarget, and ask to prepare a piece of garlic
+      --no-fetch              use cache even if cache is stale (ignore check interval)
       --refresh               restart todo-list daemon before check
       --retry RETRY           try to create or delete symlinks the given number of times (unlock)
       --sincere               execute sincere before running
