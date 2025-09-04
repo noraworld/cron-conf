@@ -11,7 +11,7 @@
       "scraping_by": {
         "todo_personal": "INHERIT .youtube.predawn.scraping_by.todo_personal",
         "task_personal": "INHERIT .youtube.predawn.scraping_by.task_personal",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1 --maxi-stamp 1 $force $cache_only",
+        "tick_personal": "INHERIT .youtube.predawn.scraping_by.tick_personal",
         "todo_work": "INHERIT .youtube.predawn.scraping_by.todo_work",
         "task_work": "INHERIT .youtube.predawn.scraping_by.task_work"
       }
@@ -27,7 +27,7 @@
       "scraping_by": {
         "todo_personal": "INHERIT .youtube.dawn.scraping_by.todo_personal",
         "task_personal": "INHERIT .youtube.dawn.scraping_by.task_personal",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1 --maxi-stamp 1 $force $cache_only",
+        "tick_personal": "INHERIT .youtube.dawn.scraping_by.tick_personal",
         "todo_work": "INHERIT .youtube.dawn.scraping_by.todo_work",
         "task_work": "INHERIT .youtube.dawn.scraping_by.task_work"
       }
@@ -59,7 +59,7 @@
       "scraping_by": {
         "todo_personal": "INHERIT .youtube.midday.scraping_by.todo_personal",
         "task_personal": "INHERIT .youtube.midday.scraping_by.task_personal",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1 --maxi-stamp 1 $force $cache_only",
+        "tick_personal": "ticksum --repo noraworld/reserved-diary リスニング --pass-stamp 1 --fail-stamp -1 $force $cache_only",
         "todo_work": "INHERIT .youtube.midday.scraping_by.todo_work",
         "task_work": "INHERIT .youtube.midday.scraping_by.task_work"
       }
@@ -75,7 +75,7 @@
       "scraping_by": {
         "todo_personal": "INHERIT .youtube.afternoon.scraping_by.todo_personal",
         "task_personal": "INHERIT .youtube.afternoon.scraping_by.task_personal",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1 --maxi-stamp 1 $force $cache_only",
+        "tick_personal": "ticksum --repo noraworld/reserved-diary リスニング --pass-stamp 1 --fail-stamp -1 $force $cache_only",
         "todo_work": "INHERIT .youtube.afternoon.scraping_by.todo_work",
         "task_work": "INHERIT .youtube.afternoon.scraping_by.task_work"
       }
@@ -91,7 +91,7 @@
       "scraping_by": {
         "todo_personal": "INHERIT .youtube.evening.scraping_by.todo_personal",
         "task_personal": "INHERIT .youtube.evening.scraping_by.task_personal",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1 --maxi-stamp 1 $force $cache_only",
+        "tick_personal": "ticksum --repo noraworld/reserved-diary リスニング --pass-stamp 1 --fail-stamp -1 $force $cache_only",
         "todo_work": "INHERIT .youtube.evening.scraping_by.todo_work",
         "task_work": "INHERIT .youtube.evening.scraping_by.task_work"
       }
@@ -107,7 +107,7 @@
       "scraping_by": {
         "todo_personal": "INHERIT .youtube.night.scraping_by.todo_personal",
         "task_personal": "INHERIT .youtube.night.scraping_by.task_personal",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1 --maxi-stamp 1 $force $cache_only",
+        "tick_personal": "ticksum --repo noraworld/reserved-diary リスニング 筆記開示 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
         "todo_work": "INHERIT .youtube.night.scraping_by.todo_work",
         "task_work": "INHERIT .youtube.night.scraping_by.task_work"
       }
@@ -123,7 +123,7 @@
       "scraping_by": {
         "todo_personal": "INHERIT .youtube.midnight.scraping_by.todo_personal",
         "task_personal": "INHERIT .youtube.midnight.scraping_by.task_personal",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary オンライン英会話 リスニング --zero-stamp -1 --maxi-stamp 1 $force $cache_only",
+        "tick_personal": "ticksum --repo noraworld/reserved-diary リスニング 筆記開示 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
         "todo_work": "INHERIT .youtube.midnight.scraping_by.todo_work",
         "task_work": "INHERIT .youtube.midnight.scraping_by.task_work"
       }
