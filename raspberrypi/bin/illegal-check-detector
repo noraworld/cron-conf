@@ -35,7 +35,7 @@ main() {
 
   validate "$@"
 
-  body=$(todo-cache --repo "$MAIN_REPO" --date "$(date -d "$NEW_DAY_OFFSET" +%F)" "$force" "$no_fetch")
+  body=$(todo-cache --repo "$MAIN_REPO" --date "$(date -d "$NEW_DAY_OFFSET" +%F)" "$force" "$cache_only")
 
 # DO NOT INDENT THESE LINES!
 while IFS= read -r line; do
@@ -158,10 +158,10 @@ prepare() {
     force=""
   fi
 
-  if [ "$NO_FETCH" = "1" ]; then
-    no_fetch="--no-fetch"
+  if [ "$CACHE_ONLY" = "1" ]; then
+    cache_only="--cache-only"
   else
-    no_fetch=""
+    cache_only=""
   fi
 
   CHECK_FILE="/home/ubuntu/workspace/log/pi/tmp/illegal_check_detector_$(echo "$MAIN_REPO" | cut -d '/' -f2 | tr '-' '_')_last_update"
@@ -179,8 +179,8 @@ police() {
 }
 
 updatable() {
-  if [ "$NO_FETCH" = "1" ]; then
-    [ "$VERBOSE" = "1" ] && echo "It did nothing because --no-fetch is passed." >&2
+  if [ "$CACHE_ONLY" = "1" ]; then
+    [ "$VERBOSE" = "1" ] && echo "It did nothing because --cache-only is passed." >&2
     echo "-1"
   elif [ "$(cat "$RESULT_FILE")" -eq 0 ] ||
      [ "$(echo $(( $(date +%s) - $(cat "$CHECK_FILE") )) )" -gt "$CHECK_INTERVAL" ]; then
@@ -232,7 +232,7 @@ parser_definition() {
   flag    FORCE            --force         -- "ignore check interval and get content from APIs even if cache exists"
   flag    STRICT           --strict        -- "check repo existence strictly"
   param   MAIN_REPO        --main-repo     -- "main repo"
-  flag    NO_FETCH         --no-fetch      -- "use cache even if cache is stale (ignore check interval)"
+  flag    CACHE_ONLY       --cache-only    -- "use cache even if cache is stale (ignore check interval)"
   param   TEMPLATE_REPO    --template-repo -- "template repo"
   param   TODO_REPO        --todo-repo     -- "todo repo"
   flag    VERBOSE          --verbose       -- "verbose output for debug"
@@ -247,7 +247,7 @@ parser_definition() {
 FORCE=''
 STRICT=''
 MAIN_REPO=''
-NO_FETCH=''
+CACHE_ONLY=''
 TEMPLATE_REPO=''
 TODO_REPO=''
 VERBOSE=''
@@ -280,10 +280,10 @@ parse() {
         OPTARG=$2
         MAIN_REPO="$OPTARG"
         shift ;;
-      '--no-fetch')
+      '--cache-only')
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
-        NO_FETCH="$OPTARG"
+        CACHE_ONLY="$OPTARG"
         ;;
       '--template-repo')
         [ $# -le 1 ] && set "required" "$1" && break
@@ -339,7 +339,7 @@ Options:
       --force                 ignore check interval and get content from APIs even if cache exists
       --strict                check repo existence strictly
       --main-repo MAIN_REPO   main repo
-      --no-fetch              use cache even if cache is stale (ignore check interval)
+      --cache-only            use cache even if cache is stale (ignore check interval)
       --template-repo TEMPLATE_REPO
                               template repo
       --todo-repo TODO_REPO   todo repo

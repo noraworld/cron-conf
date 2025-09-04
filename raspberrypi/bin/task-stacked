@@ -16,7 +16,7 @@ main() {
 
   if [ "$PAST" -eq 0 ] || [ "$INCLUDE_TODAY" = "1" ]; then
     check_list=$(
-      todo-cache --repo "$MAIN_REPO" --date "$(date -d "$NEW_DAY_OFFSET" +%F)" "$force" "$no_fetch" |
+      todo-cache --repo "$MAIN_REPO" --date "$(date -d "$NEW_DAY_OFFSET" +%F)" "$force" "$cache_only" |
       awk '/## 🐯 今日やること/{ flag=1; next } flag'
     )
 
@@ -32,7 +32,7 @@ main() {
 
     for i in $(seq 1 "$PAST"); do
       check_list=$(
-        todo-cache --repo "$MAIN_REPO" --date "$(date -d "$i days ago $NEW_DAY_OFFSET" +%F)" "$force" "$no_fetch" |
+        todo-cache --repo "$MAIN_REPO" --date "$(date -d "$i days ago $NEW_DAY_OFFSET" +%F)" "$force" "$cache_only" |
         awk '/## 🐯 今日やること/{ flag=1; next } flag'
       )
 
@@ -132,10 +132,10 @@ prepare() {
     force=""
   fi
 
-  if [ "$NO_FETCH" = "1" ]; then
-    no_fetch="--no-fetch"
+  if [ "$CACHE_ONLY" = "1" ]; then
+    cache_only="--cache-only"
   else
-    no_fetch=""
+    cache_only=""
   fi
 }
 
@@ -155,7 +155,7 @@ parser_definition() {
   flag  FORCE            --force         -- "get content from APIs even if cache exists"
   flag  INCLUDE_TODAY    --include-today -- "whether to include today's task (only enabled when --past)"
   param MAIN_REPO        --main-repo     -- "main repo"
-  flag  NO_FETCH         --no-fetch      -- "use cache even if cache is stale (ignore check interval)"
+  flag  CACHE_ONLY       --cache-only    -- "use cache even if cache is stale (ignore check interval)"
   param PAST             --past          -- "get the past tasks instead of today"
   flag  STRICT           --strict        -- "check repo existence strictly"
   param TODO_REPO        --todo-repo     -- "todo repo"
@@ -171,7 +171,7 @@ DEBUG=''
 FORCE=''
 INCLUDE_TODAY=''
 MAIN_REPO=''
-NO_FETCH=''
+CACHE_ONLY=''
 PAST=''
 STRICT=''
 TODO_REPO=''
@@ -209,10 +209,10 @@ parse() {
         OPTARG=$2
         MAIN_REPO="$OPTARG"
         shift ;;
-      '--no-fetch')
+      '--cache-only')
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
-        NO_FETCH="$OPTARG"
+        CACHE_ONLY="$OPTARG"
         ;;
       '--past')
         [ $# -le 1 ] && set "required" "$1" && break
@@ -269,7 +269,7 @@ Options:
       --force                 get content from APIs even if cache exists
       --include-today         whether to include today's task (only enabled when --past)
       --main-repo MAIN_REPO   main repo
-      --no-fetch              use cache even if cache is stale (ignore check interval)
+      --cache-only            use cache even if cache is stale (ignore check interval)
       --past PAST             get the past tasks instead of today
       --strict                check repo existence strictly
       --todo-repo TODO_REPO   todo repo
