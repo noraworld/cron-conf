@@ -674,7 +674,7 @@ periodic() {
   # to back up the logs and so forth on a regular basis even if it is not allowed manually
   if [ "$(quotarget --timeframe now --service discipline --cache-only)" -gt 0 ] && [ "$(sincere --cache-only)" -gt 0 ]; then
     # Is calling 'trailblazer' or 'unlock' here legitimate? 🤔
-    sudo unlink /etc/dnsmasq.toggle/discipline.conf
+    remove-dnsmasq-toggle-conf public discipline
   fi
 
   # Notify each time you achieve your daily digital detox
