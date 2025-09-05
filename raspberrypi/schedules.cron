@@ -138,9 +138,9 @@ NON_ROOT_USER=ubuntu
 
 
 # Chime
-*/5  *          * * * scheduler chime allow
+*/5  0-19,21-23 * * * scheduler chime allow
 */20 0-19,21-23 * * * scheduler chime deny --soft
-55   19         * * * scheduler chime allow --strong
+*/5  20         * * * scheduler chime allow --strong
 
 
 
