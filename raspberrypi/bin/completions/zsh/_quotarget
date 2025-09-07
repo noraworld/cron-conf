@@ -14,9 +14,11 @@ _services() {
 
 _arguments -s \
   '--debug[Show debug messages]' \
+  '--dry-run[Check only the standard]' \
   '--force[Force API fetch even if cache exists]' \
   '--list-timeframes[List available timeframes]' \
   '--list-services[List available services]' \
+  '--cache-only[Use cache even if cache is stale]' \
   '--service[Specify service]:service:_services' \
   '--timeframe[Specify timeframe]:timeframe:_timeframes' \
   '--help[Show help]' \
