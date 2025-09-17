@@ -1699,11 +1699,11 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary ウォーキング --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .\"youtube-music\".predawn.scraping_by.todo_personal",
+        "task_personal": "INHERIT .\"youtube-music\".predawn.scraping_by.task_personal",
+        "tick_personal": "INHERIT .\"youtube-music\".predawn.scraping_by.tick_personal",
+        "todo_work": "INHERIT .\"youtube-music\".predawn.scraping_by.todo_work",
+        "task_work": "INHERIT .\"youtube-music\".predawn.scraping_by.task_work"
       }
     },
     "dawn": {
@@ -1715,11 +1715,11 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary ウォーキング --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .\"youtube-music\".dawn.scraping_by.todo_personal",
+        "task_personal": "INHERIT .\"youtube-music\".dawn.scraping_by.task_personal",
+        "tick_personal": "INHERIT .\"youtube-music\".dawn.scraping_by.tick_personal",
+        "todo_work": "INHERIT .\"youtube-music\".dawn.scraping_by.todo_work",
+        "task_work": "INHERIT .\"youtube-music\".dawn.scraping_by.task_work"
       }
     },
     "morning": {
@@ -1731,11 +1731,11 @@
         "task_work": "task-stacked     --main-repo 'noraworld/daily-report'   --past 2 --todo-repo 'noraworld/work-scraps' $force $cache_only"
       },
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary ウォーキング --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .\"youtube-music\".morning.scraping_by.todo_personal",
+        "task_personal": "INHERIT .\"youtube-music\".morning.scraping_by.task_personal",
+        "tick_personal": "INHERIT .\"youtube-music\".morning.scraping_by.tick_personal",
+        "todo_work": "INHERIT .\"youtube-music\".morning.scraping_by.todo_work",
+        "task_work": "INHERIT .\"youtube-music\".morning.scraping_by.task_work"
       }
     },
     "midday": {
@@ -1747,11 +1747,11 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary ウォーキング --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .\"youtube-music\".midday.scraping_by.todo_personal",
+        "task_personal": "INHERIT .\"youtube-music\".midday.scraping_by.task_personal",
+        "tick_personal": "INHERIT .\"youtube-music\".midday.scraping_by.tick_personal",
+        "todo_work": "INHERIT .\"youtube-music\".midday.scraping_by.todo_work",
+        "task_work": "INHERIT .\"youtube-music\".midday.scraping_by.task_work"
       }
     },
     "afternoon": {
@@ -1763,11 +1763,11 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary ウォーキング --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .\"youtube-music\".afternoon.scraping_by.todo_personal",
+        "task_personal": "INHERIT .\"youtube-music\".afternoon.scraping_by.task_personal",
+        "tick_personal": "INHERIT .\"youtube-music\".afternoon.scraping_by.tick_personal",
+        "todo_work": "INHERIT .\"youtube-music\".afternoon.scraping_by.todo_work",
+        "task_work": "INHERIT .\"youtube-music\".afternoon.scraping_by.task_work"
       }
     },
     "evening": {
@@ -1779,11 +1779,11 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary ウォーキング --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .\"youtube-music\".evening.scraping_by.todo_personal",
+        "task_personal": "INHERIT .\"youtube-music\".evening.scraping_by.task_personal",
+        "tick_personal": "INHERIT .\"youtube-music\".evening.scraping_by.tick_personal",
+        "todo_work": "INHERIT .\"youtube-music\".evening.scraping_by.todo_work",
+        "task_work": "INHERIT .\"youtube-music\".evening.scraping_by.task_work"
       }
     },
     "night": {
@@ -1795,11 +1795,11 @@
         "task_work": "task-stacked     --main-repo 'noraworld/daily-report'   --past 2 --todo-repo 'noraworld/work-scraps' $force $cache_only"
       },
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary ウォーキング --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .\"youtube-music\".night.scraping_by.todo_personal",
+        "task_personal": "INHERIT .\"youtube-music\".night.scraping_by.task_personal",
+        "tick_personal": "INHERIT .\"youtube-music\".night.scraping_by.tick_personal",
+        "todo_work": "INHERIT .\"youtube-music\".night.scraping_by.todo_work",
+        "task_work": "INHERIT .\"youtube-music\".night.scraping_by.task_work"
       }
     },
     "midnight": {
@@ -1811,11 +1811,11 @@
         "task_work": "task-stacked     --main-repo 'noraworld/daily-report'   --past 2 --todo-repo 'noraworld/work-scraps' $force $cache_only"
       },
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary ウォーキング --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .\"youtube-music\".midnight.scraping_by.todo_personal",
+        "task_personal": "INHERIT .\"youtube-music\".midnight.scraping_by.task_personal",
+        "tick_personal": "INHERIT .\"youtube-music\".midnight.scraping_by.tick_personal",
+        "todo_work": "INHERIT .\"youtube-music\".midnight.scraping_by.todo_work",
+        "task_work": "INHERIT .\"youtube-music\".midnight.scraping_by.task_work"
       }
     }
   },
