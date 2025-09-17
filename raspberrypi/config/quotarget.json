@@ -1309,7 +1309,7 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 14 --unchecked 1 $force $cache_only",
+        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 9914 --unchecked 1 $force $cache_only",
         "task_personal": "task-stacked --main-repo 'noraworld/reserved-diary' --past 0 --todo-repo 'noraworld/to-do,noraworld/writing-manuscript' $force $cache_only",
         "tick_personal": "echo 1",
         "todo_work": "echo 1",
@@ -1325,7 +1325,7 @@
         "task_work": "echo -1"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 16 --unchecked 1 $force $cache_only",
+        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 9916 --unchecked 1 $force $cache_only",
         "task_personal": "task-stacked --main-repo 'noraworld/reserved-diary' --past 0 --todo-repo 'noraworld/to-do,noraworld/writing-manuscript' $force $cache_only",
         "tick_personal": "echo 1",
         "todo_work": "echo 1",
@@ -1421,7 +1421,7 @@
         "task_work": "task-stacked     --main-repo 'noraworld/daily-report'   --past 3 --todo-repo 'noraworld/work-scraps' $force $cache_only"
       },
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 12 --unchecked 1 $force $cache_only",
+        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 9912 --unchecked 1 $force $cache_only",
         "task_personal": "task-stacked --main-repo 'noraworld/reserved-diary' --past 0 --todo-repo 'noraworld/to-do,noraworld/writing-manuscript' $force $cache_only",
         "tick_personal": "echo 1",
         "todo_work": "echo 1",
