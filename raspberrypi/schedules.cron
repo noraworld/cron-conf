@@ -218,8 +218,8 @@ NON_ROOT_USER=ubuntu
 
 
 # Social Media Allow
-*/5 * * * * scheduler social-media-allow allow
-*/5 * * * * scheduler social-media-allow deny --soft
+*/5  * * * * scheduler social-media-allow allow
+*/20 * * * * scheduler social-media-allow deny --soft
 
 
 
