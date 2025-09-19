@@ -1,6 +1,6 @@
 #!/bin/sh
 
-TIMEFRAME_LIST="predawn dawn morning midday afternoon evening night midnight"
+TIMEFRAME_LIST="qtg0000 qtg0100 qtg0200 qtg0300 qtg0400 qtg0500 qtg0600 qtg0700 qtg0800 qtg0900 qtg1000 qtg1100 qtg1200 qtg1300 qtg1400 qtg1500 qtg1600 qtg1700 qtg1800 qtg1900 qtg2000 qtg2100 qtg2200 qtg2300"
 
 main() {
   parse "$@"
