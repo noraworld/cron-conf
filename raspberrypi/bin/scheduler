@@ -117,29 +117,9 @@ main() {
     "superman")
       superman
       ;;
-    "todo-predawn")
-      todo "predawn"
-      ;;
-    "todo-dawn")
-      todo "dawn"
-      ;;
-    "todo-morning")
-      todo "morning"
-      ;;
-    "todo-midday")
-      todo "midday"
-      ;;
-    "todo-afternoon")
-      todo "afternoon"
-      ;;
-    "todo-evening")
-      todo "evening"
-      ;;
-    "todo-night")
-      todo "night"
-      ;;
-    "todo-midnight")
-      todo "midnight"
+    todo-qtg0[0-9]00|todo-qtg1[0-9]00|todo-qtg2[0-3]00)
+      timeframe="${service#todo-}"
+      todo "$timeframe"
       ;;
     "upstream")
       upstream

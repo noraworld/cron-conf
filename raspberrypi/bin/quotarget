@@ -7,8 +7,8 @@ STRATEGY_FILE="/home/ubuntu/workspace/cron-conf/raspberrypi/config/quotarget.jso
 INHERIT_KEYWORD_REGEXP="^INHERIT "
 
 # The number of elements and the order of each element for TIMEFRAME_LIST and TIMEFRAME_BOUNDARIES must match.
-TIMEFRAME_LIST="predawn dawn morning midday afternoon evening night midnight"
-TIMEFRAME_BOUNDARIES="2 5 8 11 14 17 20 23"
+TIMEFRAME_LIST="qtg0000 qtg0100 qtg0200 qtg0300 qtg0400 qtg0500 qtg0600 qtg0700 qtg0800 qtg0900 qtg1000 qtg1100 qtg1200 qtg1300 qtg1400 qtg1500 qtg1600 qtg1700 qtg1800 qtg1900 qtg2000 qtg2100 qtg2200 qtg2300"
+TIMEFRAME_BOUNDARIES="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23"
 TIMEFRAME_RELATIVE_LIST="prev now next"
 
 RESET_COLOR="\033[m"
