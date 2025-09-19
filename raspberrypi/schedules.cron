@@ -93,78 +93,78 @@ NON_ROOT_USER=ubuntu
 
 
 # Todo
-0-10/1  0 * * * scheduler todo-qtg0000 start --safe
-11-59/1 0 * * * scheduler todo-qtg0000 start
-*/10    1 * * * scheduler todo-qtg0000 stop
-0-10/1  0 * * * scheduler todo-qtg0100 start --safe
-11-59/1 0 * * * scheduler todo-qtg0100 start
-*/10    1 * * * scheduler todo-qtg0100 stop
-0-10/1  0 * * * scheduler todo-qtg0200 start --safe
-11-59/1 0 * * * scheduler todo-qtg0200 start
-*/10    1 * * * scheduler todo-qtg0200 stop
-0-10/1  0 * * * scheduler todo-qtg0300 start --safe
-11-59/1 0 * * * scheduler todo-qtg0300 start
-*/10    1 * * * scheduler todo-qtg0300 stop
-0-10/1  0 * * * scheduler todo-qtg0400 start --safe
-11-59/1 0 * * * scheduler todo-qtg0400 start
-*/10    1 * * * scheduler todo-qtg0400 stop
-0-10/1  0 * * * scheduler todo-qtg0500 start --safe
-11-59/1 0 * * * scheduler todo-qtg0500 start
-*/10    1 * * * scheduler todo-qtg0500 stop
-0-10/1  0 * * * scheduler todo-qtg0600 start --safe
-11-59/1 0 * * * scheduler todo-qtg0600 start
-*/10    1 * * * scheduler todo-qtg0600 stop
-0-10/1  0 * * * scheduler todo-qtg0700 start --safe
-11-59/1 0 * * * scheduler todo-qtg0700 start
-*/10    1 * * * scheduler todo-qtg0700 stop
-0-10/1  0 * * * scheduler todo-qtg0800 start --safe --morning
-11-59/1 0 * * * scheduler todo-qtg0800 start        --morning
-*/10    1 * * * scheduler todo-qtg0800 stop
-0-10/1  0 * * * scheduler todo-qtg0900 start --safe --morning
-11-59/1 0 * * * scheduler todo-qtg0900 start        --morning
-*/10    1 * * * scheduler todo-qtg0900 stop
-0-10/1  0 * * * scheduler todo-qtg1000 start --safe --morning
-11-59/1 0 * * * scheduler todo-qtg1000 start        --morning
-*/10    1 * * * scheduler todo-qtg1000 stop
-0-10/1  0 * * * scheduler todo-qtg1100 start --safe
-11-59/1 0 * * * scheduler todo-qtg1100 start
-*/10    1 * * * scheduler todo-qtg1100 stop
-0-10/1  0 * * * scheduler todo-qtg1200 start --safe
-11-59/1 0 * * * scheduler todo-qtg1200 start
-*/10    1 * * * scheduler todo-qtg1200 stop
-0-10/1  0 * * * scheduler todo-qtg1300 start --safe
-11-59/1 0 * * * scheduler todo-qtg1300 start
-*/10    1 * * * scheduler todo-qtg1300 stop
-0-10/1  0 * * * scheduler todo-qtg1400 start --safe
-11-59/1 0 * * * scheduler todo-qtg1400 start
-*/10    1 * * * scheduler todo-qtg1400 stop
-0-10/1  0 * * * scheduler todo-qtg1500 start --safe
-11-59/1 0 * * * scheduler todo-qtg1500 start
-*/10    1 * * * scheduler todo-qtg1500 stop
-0-10/1  0 * * * scheduler todo-qtg1600 start --safe
-11-59/1 0 * * * scheduler todo-qtg1600 start
-*/10    1 * * * scheduler todo-qtg1600 stop
-0-10/1  0 * * * scheduler todo-qtg1700 start --safe
-11-59/1 0 * * * scheduler todo-qtg1700 start
-*/10    1 * * * scheduler todo-qtg1700 stop
-0-10/1  0 * * * scheduler todo-qtg1800 start --safe
-11-59/1 0 * * * scheduler todo-qtg1800 start
-*/10    1 * * * scheduler todo-qtg1800 stop
-0-10/1  0 * * * scheduler todo-qtg1900 start --safe
-11-59/1 0 * * * scheduler todo-qtg1900 start
-*/10    1 * * * scheduler todo-qtg1900 stop
-0-10/1  0 * * * scheduler todo-qtg2000 start --safe
-11-59/1 0 * * * scheduler todo-qtg2000 start
-*/10    1 * * * scheduler todo-qtg2000 stop
-0-10/1  0 * * * scheduler todo-qtg2100 start --safe
-11-59/1 0 * * * scheduler todo-qtg2100 start
-*/10    1 * * * scheduler todo-qtg2100 stop
-0-10/1  0 * * * scheduler todo-qtg2200 start --safe
-11-59/1 0 * * * scheduler todo-qtg2200 start
-*/10    1 * * * scheduler todo-qtg2200 stop
-0-10/1  0 * * * scheduler todo-qtg2300 start --safe
-11-59/1 0 * * * scheduler todo-qtg2300 start
-*/10    1 * * * scheduler todo-qtg2300 stop
+0-10/1  0  * * * scheduler todo-qtg0000 start --safe
+11-59/1 0  * * * scheduler todo-qtg0000 start
+*/10    1  * * * scheduler todo-qtg0000 stop
+0-10/1  1  * * * scheduler todo-qtg0100 start --safe
+11-59/1 1  * * * scheduler todo-qtg0100 start
+*/10    2  * * * scheduler todo-qtg0100 stop
+0-10/1  2  * * * scheduler todo-qtg0200 start --safe
+11-59/1 2  * * * scheduler todo-qtg0200 start
+*/10    3  * * * scheduler todo-qtg0200 stop
+0-10/1  3  * * * scheduler todo-qtg0300 start --safe
+11-59/1 3  * * * scheduler todo-qtg0300 start
+*/10    4  * * * scheduler todo-qtg0300 stop
+0-10/1  4  * * * scheduler todo-qtg0400 start --safe
+11-59/1 4  * * * scheduler todo-qtg0400 start
+*/10    5  * * * scheduler todo-qtg0400 stop
+0-10/1  5  * * * scheduler todo-qtg0500 start --safe
+11-59/1 5  * * * scheduler todo-qtg0500 start
+*/10    6  * * * scheduler todo-qtg0500 stop
+0-10/1  6  * * * scheduler todo-qtg0600 start --safe
+11-59/1 6  * * * scheduler todo-qtg0600 start
+*/10    7  * * * scheduler todo-qtg0600 stop
+0-10/1  7  * * * scheduler todo-qtg0700 start --safe
+11-59/1 7  * * * scheduler todo-qtg0700 start
+*/10    8  * * * scheduler todo-qtg0700 stop
+0-10/1  8  * * * scheduler todo-qtg0800 start --safe --morning
+11-59/1 8  * * * scheduler todo-qtg0800 start        --morning
+*/10    9  * * * scheduler todo-qtg0800 stop
+0-10/1  9  * * * scheduler todo-qtg0900 start --safe --morning
+11-59/1 9  * * * scheduler todo-qtg0900 start        --morning
+*/10    10 * * * scheduler todo-qtg0900 stop
+0-10/1  10 * * * scheduler todo-qtg1000 start --safe --morning
+11-59/1 10 * * * scheduler todo-qtg1000 start        --morning
+*/10    11 * * * scheduler todo-qtg1000 stop
+0-10/1  11 * * * scheduler todo-qtg1100 start --safe
+11-59/1 11 * * * scheduler todo-qtg1100 start
+*/10    12 * * * scheduler todo-qtg1100 stop
+0-10/1  12 * * * scheduler todo-qtg1200 start --safe
+11-59/1 12 * * * scheduler todo-qtg1200 start
+*/10    13 * * * scheduler todo-qtg1200 stop
+0-10/1  13 * * * scheduler todo-qtg1300 start --safe
+11-59/1 13 * * * scheduler todo-qtg1300 start
+*/10    14 * * * scheduler todo-qtg1300 stop
+0-10/1  14 * * * scheduler todo-qtg1400 start --safe
+11-59/1 14 * * * scheduler todo-qtg1400 start
+*/10    15 * * * scheduler todo-qtg1400 stop
+0-10/1  15 * * * scheduler todo-qtg1500 start --safe
+11-59/1 15 * * * scheduler todo-qtg1500 start
+*/10    16 * * * scheduler todo-qtg1500 stop
+0-10/1  16 * * * scheduler todo-qtg1600 start --safe
+11-59/1 16 * * * scheduler todo-qtg1600 start
+*/10    17 * * * scheduler todo-qtg1600 stop
+0-10/1  17 * * * scheduler todo-qtg1700 start --safe
+11-59/1 17 * * * scheduler todo-qtg1700 start
+*/10    18 * * * scheduler todo-qtg1700 stop
+0-10/1  18 * * * scheduler todo-qtg1800 start --safe
+11-59/1 18 * * * scheduler todo-qtg1800 start
+*/10    19 * * * scheduler todo-qtg1800 stop
+0-10/1  19 * * * scheduler todo-qtg1900 start --safe
+11-59/1 19 * * * scheduler todo-qtg1900 start
+*/10    20 * * * scheduler todo-qtg1900 stop
+0-10/1  20 * * * scheduler todo-qtg2000 start --safe
+11-59/1 20 * * * scheduler todo-qtg2000 start
+*/10    21 * * * scheduler todo-qtg2000 stop
+0-10/1  21 * * * scheduler todo-qtg2100 start --safe
+11-59/1 21 * * * scheduler todo-qtg2100 start
+*/10    22 * * * scheduler todo-qtg2100 stop
+0-10/1  22 * * * scheduler todo-qtg2200 start --safe
+11-59/1 22 * * * scheduler todo-qtg2200 start
+*/10    23 * * * scheduler todo-qtg2200 stop
+0-10/1  23 * * * scheduler todo-qtg2300 start --safe
+11-59/1 23 * * * scheduler todo-qtg2300 start
+*/10    0  * * * scheduler todo-qtg2300 stop
 
 
 
