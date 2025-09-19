@@ -101,29 +101,29 @@
     },
     "qtg1100": {
       "scraping_by": {
-        "todo_personal": "INHERIT .youtube.midday.scraping_by.todo_personal",
-        "task_personal": "INHERIT .youtube.midday.scraping_by.task_personal",
+        "todo_personal": "INHERIT .youtube.qtg1100.scraping_by.todo_personal",
+        "task_personal": "INHERIT .youtube.qtg1100.scraping_by.task_personal",
         "tick_personal": "ticksum --repo noraworld/reserved-diary リスニング --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "INHERIT .youtube.midday.scraping_by.todo_work",
-        "task_work": "INHERIT .youtube.midday.scraping_by.task_work"
+        "todo_work": "INHERIT .youtube.qtg1100.scraping_by.todo_work",
+        "task_work": "INHERIT .youtube.qtg1100.scraping_by.task_work"
       }
     },
     "qtg1200": {
       "scraping_by": {
-        "todo_personal": "INHERIT .youtube.midday.scraping_by.todo_personal",
-        "task_personal": "INHERIT .youtube.midday.scraping_by.task_personal",
+        "todo_personal": "INHERIT .youtube.qtg1200.scraping_by.todo_personal",
+        "task_personal": "INHERIT .youtube.qtg1200.scraping_by.task_personal",
         "tick_personal": "ticksum --repo noraworld/reserved-diary リスニング --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "INHERIT .youtube.midday.scraping_by.todo_work",
-        "task_work": "INHERIT .youtube.midday.scraping_by.task_work"
+        "todo_work": "INHERIT .youtube.qtg1200.scraping_by.todo_work",
+        "task_work": "INHERIT .youtube.qtg1200.scraping_by.task_work"
       }
     },
     "qtg1300": {
       "scraping_by": {
-        "todo_personal": "INHERIT .youtube.midday.scraping_by.todo_personal",
-        "task_personal": "INHERIT .youtube.midday.scraping_by.task_personal",
+        "todo_personal": "INHERIT .youtube.qtg1300.scraping_by.todo_personal",
+        "task_personal": "INHERIT .youtube.qtg1300.scraping_by.task_personal",
         "tick_personal": "ticksum --repo noraworld/reserved-diary リスニング --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "INHERIT .youtube.midday.scraping_by.todo_work",
-        "task_work": "INHERIT .youtube.midday.scraping_by.task_work"
+        "todo_work": "INHERIT .youtube.qtg1300.scraping_by.todo_work",
+        "task_work": "INHERIT .youtube.qtg1300.scraping_by.task_work"
       }
     },
     "qtg1400": {
@@ -1191,29 +1191,29 @@
     },
     "qtg1100": {
       "scraping_by": {
-        "todo_personal": "INHERIT .vod.midday.scraping_by.todo_personal",
-        "task_personal": "INHERIT .vod.midday.scraping_by.task_personal",
-        "tick_personal": "INHERIT .vod.midday.scraping_by.tick_personal",
-        "todo_work": "INHERIT .vod.midday.scraping_by.todo_work",
-        "task_work": "INHERIT .vod.midday.scraping_by.task_work"
+        "todo_personal": "INHERIT .vod.qtg1100.scraping_by.todo_personal",
+        "task_personal": "INHERIT .vod.qtg1100.scraping_by.task_personal",
+        "tick_personal": "INHERIT .vod.qtg1100.scraping_by.tick_personal",
+        "todo_work": "INHERIT .vod.qtg1100.scraping_by.todo_work",
+        "task_work": "INHERIT .vod.qtg1100.scraping_by.task_work"
       }
     },
     "qtg1200": {
       "scraping_by": {
-        "todo_personal": "INHERIT .vod.midday.scraping_by.todo_personal",
-        "task_personal": "INHERIT .vod.midday.scraping_by.task_personal",
-        "tick_personal": "INHERIT .vod.midday.scraping_by.tick_personal",
-        "todo_work": "INHERIT .vod.midday.scraping_by.todo_work",
-        "task_work": "INHERIT .vod.midday.scraping_by.task_work"
+        "todo_personal": "INHERIT .vod.qtg1200.scraping_by.todo_personal",
+        "task_personal": "INHERIT .vod.qtg1200.scraping_by.task_personal",
+        "tick_personal": "INHERIT .vod.qtg1200.scraping_by.tick_personal",
+        "todo_work": "INHERIT .vod.qtg1200.scraping_by.todo_work",
+        "task_work": "INHERIT .vod.qtg1200.scraping_by.task_work"
       }
     },
     "qtg1300": {
       "scraping_by": {
-        "todo_personal": "INHERIT .vod.midday.scraping_by.todo_personal",
-        "task_personal": "INHERIT .vod.midday.scraping_by.task_personal",
-        "tick_personal": "INHERIT .vod.midday.scraping_by.tick_personal",
-        "todo_work": "INHERIT .vod.midday.scraping_by.todo_work",
-        "task_work": "INHERIT .vod.midday.scraping_by.task_work"
+        "todo_personal": "INHERIT .vod.qtg1300.scraping_by.todo_personal",
+        "task_personal": "INHERIT .vod.qtg1300.scraping_by.task_personal",
+        "tick_personal": "INHERIT .vod.qtg1300.scraping_by.tick_personal",
+        "todo_work": "INHERIT .vod.qtg1300.scraping_by.todo_work",
+        "task_work": "INHERIT .vod.qtg1300.scraping_by.task_work"
       }
     },
     "qtg1400": {
@@ -2935,29 +2935,29 @@
     },
     "qtg1100": {
       "scraping_by": {
-        "todo_personal": "INHERIT .\"youtube-music\".midday.scraping_by.todo_personal",
-        "task_personal": "INHERIT .\"youtube-music\".midday.scraping_by.task_personal",
-        "tick_personal": "INHERIT .\"youtube-music\".midday.scraping_by.tick_personal",
-        "todo_work": "INHERIT .\"youtube-music\".midday.scraping_by.todo_work",
-        "task_work": "INHERIT .\"youtube-music\".midday.scraping_by.task_work"
+        "todo_personal": "INHERIT .\"youtube-music\".qtg1100.scraping_by.todo_personal",
+        "task_personal": "INHERIT .\"youtube-music\".qtg1100.scraping_by.task_personal",
+        "tick_personal": "INHERIT .\"youtube-music\".qtg1100.scraping_by.tick_personal",
+        "todo_work": "INHERIT .\"youtube-music\".qtg1100.scraping_by.todo_work",
+        "task_work": "INHERIT .\"youtube-music\".qtg1100.scraping_by.task_work"
       }
     },
     "qtg1200": {
       "scraping_by": {
-        "todo_personal": "INHERIT .\"youtube-music\".midday.scraping_by.todo_personal",
-        "task_personal": "INHERIT .\"youtube-music\".midday.scraping_by.task_personal",
-        "tick_personal": "INHERIT .\"youtube-music\".midday.scraping_by.tick_personal",
-        "todo_work": "INHERIT .\"youtube-music\".midday.scraping_by.todo_work",
-        "task_work": "INHERIT .\"youtube-music\".midday.scraping_by.task_work"
+        "todo_personal": "INHERIT .\"youtube-music\".qtg1200.scraping_by.todo_personal",
+        "task_personal": "INHERIT .\"youtube-music\".qtg1200.scraping_by.task_personal",
+        "tick_personal": "INHERIT .\"youtube-music\".qtg1200.scraping_by.tick_personal",
+        "todo_work": "INHERIT .\"youtube-music\".qtg1200.scraping_by.todo_work",
+        "task_work": "INHERIT .\"youtube-music\".qtg1200.scraping_by.task_work"
       }
     },
     "qtg1300": {
       "scraping_by": {
-        "todo_personal": "INHERIT .\"youtube-music\".midday.scraping_by.todo_personal",
-        "task_personal": "INHERIT .\"youtube-music\".midday.scraping_by.task_personal",
-        "tick_personal": "INHERIT .\"youtube-music\".midday.scraping_by.tick_personal",
-        "todo_work": "INHERIT .\"youtube-music\".midday.scraping_by.todo_work",
-        "task_work": "INHERIT .\"youtube-music\".midday.scraping_by.task_work"
+        "todo_personal": "INHERIT .\"youtube-music\".qtg1300.scraping_by.todo_personal",
+        "task_personal": "INHERIT .\"youtube-music\".qtg1300.scraping_by.task_personal",
+        "tick_personal": "INHERIT .\"youtube-music\".qtg1300.scraping_by.tick_personal",
+        "todo_work": "INHERIT .\"youtube-music\".qtg1300.scraping_by.todo_work",
+        "task_work": "INHERIT .\"youtube-music\".qtg1300.scraping_by.task_work"
       }
     },
     "qtg1400": {
