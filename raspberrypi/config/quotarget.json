@@ -2253,7 +2253,7 @@
       "scraping_by": {
         "todo_personal": "echo 1",
         "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary ワークアウト --pass-stamp 1 --fail-stamp -1 $force $cache_only",
+        "tick_personal": "echo 1",
         "todo_work": "echo 1",
         "task_work": "echo 2"
       }
