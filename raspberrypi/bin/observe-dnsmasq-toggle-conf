@@ -541,7 +541,7 @@ validate() {
   fi
 
   if [ "$TIMEFRAME" = "" ]; then
-    TIMEFRAME="morning"
+    TIMEFRAME="qtg0800"
   fi
 }
 
