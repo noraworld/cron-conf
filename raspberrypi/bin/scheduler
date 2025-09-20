@@ -648,7 +648,10 @@ periodic() {
   fi
 
   # Auto back up log
-  git -C "/home/ubuntu/workspace/log" push --set-upstream origin main
+  if [ -n "$(git --no-pager log "@{u}"..HEAD --oneline 2>/dev/null)" ]; then
+    git -C "/home/ubuntu/workspace/log" -c pull.rebase=true -c rebase.autoStash=true pull --rebase --autostash --no-edit
+    git -C "/home/ubuntu/workspace/log" push --set-upstream origin main
+  fi
 
   # Auto allow cron apply, cron edit, dnsmasq settings change, git pull, git push, etc. if possible
   # to back up the logs and so forth on a regular basis even if it is not allowed manually
