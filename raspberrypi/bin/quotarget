@@ -92,9 +92,9 @@ get_cmd() {
   # e.g.
   #   BEFORE: INHERIT .youtube.qtg0200.scraping_by.todo_personal
   #   AFTER:  todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 24 --unchecked 0 $force $cache_only
-  if [ "$(echo "$cmd" | grep -cE "$INHERIT_KEYWORD_REGEXP")" -eq 1 ]; then
+  while [ "$(echo "$cmd" | grep -cE "$INHERIT_KEYWORD_REGEXP")" -eq 1 ]; do
     cmd=$(jq -r "$(echo "$cmd" | sed -e "s/$INHERIT_KEYWORD_REGEXP//")" "$STRATEGY_FILE")
-  fi
+  done
 
   echo "$cmd"
 }
@@ -117,6 +117,33 @@ list_info() {
 }
 
 debug_info() {
+  # https://chatgpt.com/share/68cff0fa-0234-8004-bcce-cfa2797ce950
+  # https://gemini.google.com/app/7dacfcda212451f3
+  daemon_status=$(systemctl is-active --user observe-"$SERVICE"-conf)
+  case "$daemon_status" in
+    "active")
+      daemon_status_color="$NG_COLOR"
+      ;;
+    "reloading")
+      daemon_status_color="$DRY_COLOR"
+      ;;
+    "inactive")
+      daemon_status_color="$OK_COLOR"
+      ;;
+    "failed")
+      daemon_status_color="$NG_COLOR"
+      ;;
+    "activating")
+      daemon_status_color="$DRY_COLOR"
+      ;;
+    "deactivating")
+      daemon_status_color="$DRY_COLOR"
+      ;;
+    *)
+      daemon_status_color="$NG_COLOR"
+      ;;
+  esac
+
   if [ "$todo_personal_result" = "$STANDARD_TODO_PERSONAL" ]; then
     todo_personal_result_color="$OK_COLOR"
   elif [ "$todo_personal_result" = "$DRY_RUN_RESULT" ]; then
@@ -174,6 +201,7 @@ debug_info() {
   fi
 
   printf  "DEBUG: TIMEFRAME:             %s\n"                                               "$TIMEFRAME"                                        >&2
+  printf  "DEBUG: daemon:                $daemon_status_color%s$RESET_COLOR\n"               "     $daemon_status"                               >&2
   printf  "\n"                                                                                                                                   >&2
   printf  "DEBUG: todo_personal_cmd:     %s\n"                                               "$todo_personal_cmd"                                >&2
   printf  "DEBUG: todo_personal_result:  $todo_personal_result_color%6s (%s)$RESET_COLOR\n"  "$todo_personal_result"  "$STANDARD_TODO_PERSONAL"  >&2
