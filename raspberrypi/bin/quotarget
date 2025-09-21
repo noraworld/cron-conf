@@ -117,6 +117,31 @@ list_info() {
 }
 
 debug_info() {
+  daemon_status=$(systemctl is-active --user observe-"$SERVICE"-conf)
+  case "$daemon_status" in
+    "active")
+      daemon_status_color="$NG_COLOR"
+      ;;
+    "reloading")
+      daemon_status_color="$DRY_COLOR"
+      ;;
+    "inactive")
+      daemon_status_color="$OK_COLOR"
+      ;;
+    "failed")
+      daemon_status_color="$NG_COLOR"
+      ;;
+    "activating")
+      daemon_status_color="$DRY_COLOR"
+      ;;
+    "deactivating")
+      daemon_status_color="$DRY_COLOR"
+      ;;
+    *)
+      daemon_status_color="$NG_COLOR"
+      ;;
+  esac
+
   if [ "$todo_personal_result" = "$STANDARD_TODO_PERSONAL" ]; then
     todo_personal_result_color="$OK_COLOR"
   elif [ "$todo_personal_result" = "$DRY_RUN_RESULT" ]; then
@@ -174,6 +199,7 @@ debug_info() {
   fi
 
   printf  "DEBUG: TIMEFRAME:             %s\n"                                               "$TIMEFRAME"                                        >&2
+  printf  "DEBUG: daemon:                $daemon_status_color%s$RESET_COLOR\n"               "     $daemon_status"                               >&2
   printf  "\n"                                                                                                                                   >&2
   printf  "DEBUG: todo_personal_cmd:     %s\n"                                               "$todo_personal_cmd"                                >&2
   printf  "DEBUG: todo_personal_result:  $todo_personal_result_color%6s (%s)$RESET_COLOR\n"  "$todo_personal_result"  "$STANDARD_TODO_PERSONAL"  >&2
