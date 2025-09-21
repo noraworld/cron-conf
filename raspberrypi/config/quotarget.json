@@ -13,7 +13,7 @@
       "scraping_by": {
         "todo_personal": "INHERIT .youtube.qtg0100.scraping_by.todo_personal",
         "task_personal": "INHERIT .youtube.qtg0100.scraping_by.task_personal",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary リスニング 筆記開示 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
+        "tick_personal": "INHERIT .discipline.qtg0000.scraping_by.tick_personal",
         "todo_work": "INHERIT .youtube.qtg0100.scraping_by.todo_work",
         "task_work": "INHERIT .youtube.qtg0100.scraping_by.task_work"
       }
@@ -83,27 +83,27 @@
     },
     "qtg0900": {
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "echo 1",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .youtube.qtg0900.scraping_by.todo_personal",
+        "task_personal": "INHERIT .youtube.qtg0900.scraping_by.task_personal",
+        "tick_personal": "ticksum --repo noraworld/reserved-diary リスニング --pass-stamp 1 --fail-stamp -1 $force $cache_only",
+        "todo_work": "INHERIT .youtube.qtg0900.scraping_by.todo_work",
+        "task_work": "INHERIT .youtube.qtg0900.scraping_by.task_work"
       }
     },
     "qtg1000": {
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "echo 1",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .youtube.qtg1000.scraping_by.todo_personal",
+        "task_personal": "INHERIT .youtube.qtg1000.scraping_by.task_personal",
+        "tick_personal": "INHERIT .discipline.qtg0900.scraping_by.tick_personal",
+        "todo_work": "INHERIT .youtube.qtg1000.scraping_by.todo_work",
+        "task_work": "INHERIT .youtube.qtg1000.scraping_by.task_work"
       }
     },
     "qtg1100": {
       "scraping_by": {
         "todo_personal": "INHERIT .youtube.qtg1100.scraping_by.todo_personal",
         "task_personal": "INHERIT .youtube.qtg1100.scraping_by.task_personal",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary リスニング --pass-stamp 1 --fail-stamp -1 $force $cache_only",
+        "tick_personal": "INHERIT .discipline.qtg0900.scraping_by.tick_personal",
         "todo_work": "INHERIT .youtube.qtg1100.scraping_by.todo_work",
         "task_work": "INHERIT .youtube.qtg1100.scraping_by.task_work"
       }
@@ -112,7 +112,7 @@
       "scraping_by": {
         "todo_personal": "INHERIT .youtube.qtg1200.scraping_by.todo_personal",
         "task_personal": "INHERIT .youtube.qtg1200.scraping_by.task_personal",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary リスニング --pass-stamp 1 --fail-stamp -1 $force $cache_only",
+        "tick_personal": "INHERIT .discipline.qtg0900.scraping_by.tick_personal",
         "todo_work": "INHERIT .youtube.qtg1200.scraping_by.todo_work",
         "task_work": "INHERIT .youtube.qtg1200.scraping_by.task_work"
       }
@@ -121,7 +121,7 @@
       "scraping_by": {
         "todo_personal": "INHERIT .youtube.qtg1300.scraping_by.todo_personal",
         "task_personal": "INHERIT .youtube.qtg1300.scraping_by.task_personal",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary リスニング --pass-stamp 1 --fail-stamp -1 $force $cache_only",
+        "tick_personal": "INHERIT .discipline.qtg0900.scraping_by.tick_personal",
         "todo_work": "INHERIT .youtube.qtg1300.scraping_by.todo_work",
         "task_work": "INHERIT .youtube.qtg1300.scraping_by.task_work"
       }
@@ -130,7 +130,7 @@
       "scraping_by": {
         "todo_personal": "INHERIT .youtube.qtg1400.scraping_by.todo_personal",
         "task_personal": "INHERIT .youtube.qtg1400.scraping_by.task_personal",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary リスニング --pass-stamp 1 --fail-stamp -1 $force $cache_only",
+        "tick_personal": "INHERIT .discipline.qtg0900.scraping_by.tick_personal",
         "todo_work": "INHERIT .youtube.qtg1400.scraping_by.todo_work",
         "task_work": "INHERIT .youtube.qtg1400.scraping_by.task_work"
       }
@@ -139,7 +139,7 @@
       "scraping_by": {
         "todo_personal": "INHERIT .youtube.qtg1500.scraping_by.todo_personal",
         "task_personal": "INHERIT .youtube.qtg1500.scraping_by.task_personal",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary リスニング --pass-stamp 1 --fail-stamp -1 $force $cache_only",
+        "tick_personal": "INHERIT .discipline.qtg0900.scraping_by.tick_personal",
         "todo_work": "INHERIT .youtube.qtg1500.scraping_by.todo_work",
         "task_work": "INHERIT .youtube.qtg1500.scraping_by.task_work"
       }
@@ -148,7 +148,7 @@
       "scraping_by": {
         "todo_personal": "INHERIT .youtube.qtg1600.scraping_by.todo_personal",
         "task_personal": "INHERIT .youtube.qtg1600.scraping_by.task_personal",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary リスニング --pass-stamp 1 --fail-stamp -1 $force $cache_only",
+        "tick_personal": "INHERIT .discipline.qtg0900.scraping_by.tick_personal",
         "todo_work": "INHERIT .youtube.qtg1600.scraping_by.todo_work",
         "task_work": "INHERIT .youtube.qtg1600.scraping_by.task_work"
       }
@@ -157,7 +157,7 @@
       "scraping_by": {
         "todo_personal": "INHERIT .youtube.qtg1700.scraping_by.todo_personal",
         "task_personal": "INHERIT .youtube.qtg1700.scraping_by.task_personal",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary リスニング --pass-stamp 1 --fail-stamp -1 $force $cache_only",
+        "tick_personal": "INHERIT .discipline.qtg0900.scraping_by.tick_personal",
         "todo_work": "INHERIT .youtube.qtg1700.scraping_by.todo_work",
         "task_work": "INHERIT .youtube.qtg1700.scraping_by.task_work"
       }
@@ -166,7 +166,7 @@
       "scraping_by": {
         "todo_personal": "INHERIT .youtube.qtg1800.scraping_by.todo_personal",
         "task_personal": "INHERIT .youtube.qtg1800.scraping_by.task_personal",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary リスニング --pass-stamp 1 --fail-stamp -1 $force $cache_only",
+        "tick_personal": "INHERIT .discipline.qtg0900.scraping_by.tick_personal",
         "todo_work": "INHERIT .youtube.qtg1800.scraping_by.todo_work",
         "task_work": "INHERIT .youtube.qtg1800.scraping_by.task_work"
       }
@@ -175,7 +175,7 @@
       "scraping_by": {
         "todo_personal": "INHERIT .youtube.qtg1900.scraping_by.todo_personal",
         "task_personal": "INHERIT .youtube.qtg1900.scraping_by.task_personal",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary リスニング --pass-stamp 1 --fail-stamp -1 $force $cache_only",
+        "tick_personal": "INHERIT .discipline.qtg0900.scraping_by.tick_personal",
         "todo_work": "INHERIT .youtube.qtg1900.scraping_by.todo_work",
         "task_work": "INHERIT .youtube.qtg1900.scraping_by.task_work"
       }
@@ -184,7 +184,7 @@
       "scraping_by": {
         "todo_personal": "INHERIT .youtube.qtg2000.scraping_by.todo_personal",
         "task_personal": "INHERIT .youtube.qtg2000.scraping_by.task_personal",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary リスニング 筆記開示 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
+        "tick_personal": "INHERIT .discipline.qtg0000.scraping_by.tick_personal",
         "todo_work": "INHERIT .youtube.qtg2000.scraping_by.todo_work",
         "task_work": "INHERIT .youtube.qtg2000.scraping_by.task_work"
       }
@@ -193,7 +193,7 @@
       "scraping_by": {
         "todo_personal": "INHERIT .youtube.qtg2100.scraping_by.todo_personal",
         "task_personal": "INHERIT .youtube.qtg2100.scraping_by.task_personal",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary リスニング 筆記開示 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
+        "tick_personal": "INHERIT .discipline.qtg0000.scraping_by.tick_personal",
         "todo_work": "INHERIT .youtube.qtg2100.scraping_by.todo_work",
         "task_work": "INHERIT .youtube.qtg2100.scraping_by.task_work"
       }
@@ -202,7 +202,7 @@
       "scraping_by": {
         "todo_personal": "INHERIT .youtube.qtg2200.scraping_by.todo_personal",
         "task_personal": "INHERIT .youtube.qtg2200.scraping_by.task_personal",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary リスニング 筆記開示 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
+        "tick_personal": "INHERIT .discipline.qtg0000.scraping_by.tick_personal",
         "todo_work": "INHERIT .youtube.qtg2200.scraping_by.todo_work",
         "task_work": "INHERIT .youtube.qtg2200.scraping_by.task_work"
       }
@@ -211,7 +211,7 @@
       "scraping_by": {
         "todo_personal": "INHERIT .youtube.qtg2300.scraping_by.todo_personal",
         "task_personal": "INHERIT .youtube.qtg2300.scraping_by.task_personal",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary リスニング 筆記開示 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
+        "tick_personal": "INHERIT .discipline.qtg0000.scraping_by.tick_personal",
         "todo_work": "INHERIT .youtube.qtg2300.scraping_by.todo_work",
         "task_work": "INHERIT .youtube.qtg2300.scraping_by.task_work"
       }
