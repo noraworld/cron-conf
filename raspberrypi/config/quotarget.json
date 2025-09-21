@@ -3281,209 +3281,209 @@
     },
     "qtg0100": {
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .ometeotl.qtg0000.scraping_by.todo_personal",
+        "task_personal": "INHERIT .ometeotl.qtg0000.scraping_by.task_personal",
+        "tick_personal": "INHERIT .ometeotl.qtg0000.scraping_by.tick_personal",
+        "todo_work": "INHERIT .ometeotl.qtg0000.scraping_by.todo_work",
+        "task_work": "INHERIT .ometeotl.qtg0000.scraping_by.task_work"
       }
     },
     "qtg0200": {
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .ometeotl.qtg0000.scraping_by.todo_personal",
+        "task_personal": "INHERIT .ometeotl.qtg0000.scraping_by.task_personal",
+        "tick_personal": "INHERIT .ometeotl.qtg0000.scraping_by.tick_personal",
+        "todo_work": "INHERIT .ometeotl.qtg0000.scraping_by.todo_work",
+        "task_work": "INHERIT .ometeotl.qtg0000.scraping_by.task_work"
       }
     },
     "qtg0300": {
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .ometeotl.qtg0000.scraping_by.todo_personal",
+        "task_personal": "INHERIT .ometeotl.qtg0000.scraping_by.task_personal",
+        "tick_personal": "INHERIT .ometeotl.qtg0000.scraping_by.tick_personal",
+        "todo_work": "INHERIT .ometeotl.qtg0000.scraping_by.todo_work",
+        "task_work": "INHERIT .ometeotl.qtg0000.scraping_by.task_work"
       }
     },
     "qtg0400": {
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .ometeotl.qtg0000.scraping_by.todo_personal",
+        "task_personal": "INHERIT .ometeotl.qtg0000.scraping_by.task_personal",
+        "tick_personal": "INHERIT .ometeotl.qtg0000.scraping_by.tick_personal",
+        "todo_work": "INHERIT .ometeotl.qtg0000.scraping_by.todo_work",
+        "task_work": "INHERIT .ometeotl.qtg0000.scraping_by.task_work"
       }
     },
     "qtg0500": {
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .ometeotl.qtg0000.scraping_by.todo_personal",
+        "task_personal": "INHERIT .ometeotl.qtg0000.scraping_by.task_personal",
+        "tick_personal": "INHERIT .ometeotl.qtg0000.scraping_by.tick_personal",
+        "todo_work": "INHERIT .ometeotl.qtg0000.scraping_by.todo_work",
+        "task_work": "INHERIT .ometeotl.qtg0000.scraping_by.task_work"
       }
     },
     "qtg0600": {
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .ometeotl.qtg0000.scraping_by.todo_personal",
+        "task_personal": "INHERIT .ometeotl.qtg0000.scraping_by.task_personal",
+        "tick_personal": "INHERIT .ometeotl.qtg0000.scraping_by.tick_personal",
+        "todo_work": "INHERIT .ometeotl.qtg0000.scraping_by.todo_work",
+        "task_work": "INHERIT .ometeotl.qtg0000.scraping_by.task_work"
       }
     },
     "qtg0700": {
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .ometeotl.qtg0000.scraping_by.todo_personal",
+        "task_personal": "INHERIT .ometeotl.qtg0000.scraping_by.task_personal",
+        "tick_personal": "INHERIT .ometeotl.qtg0000.scraping_by.tick_personal",
+        "todo_work": "INHERIT .ometeotl.qtg0000.scraping_by.todo_work",
+        "task_work": "INHERIT .ometeotl.qtg0000.scraping_by.task_work"
       }
     },
     "qtg0800": {
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .ometeotl.qtg0000.scraping_by.todo_personal",
+        "task_personal": "INHERIT .ometeotl.qtg0000.scraping_by.task_personal",
+        "tick_personal": "INHERIT .ometeotl.qtg0000.scraping_by.tick_personal",
+        "todo_work": "INHERIT .ometeotl.qtg0000.scraping_by.todo_work",
+        "task_work": "INHERIT .ometeotl.qtg0000.scraping_by.task_work"
       }
     },
     "qtg0900": {
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .ometeotl.qtg0000.scraping_by.todo_personal",
+        "task_personal": "INHERIT .ometeotl.qtg0000.scraping_by.task_personal",
+        "tick_personal": "INHERIT .ometeotl.qtg0000.scraping_by.tick_personal",
+        "todo_work": "INHERIT .ometeotl.qtg0000.scraping_by.todo_work",
+        "task_work": "INHERIT .ometeotl.qtg0000.scraping_by.task_work"
       }
     },
     "qtg1000": {
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .ometeotl.qtg0000.scraping_by.todo_personal",
+        "task_personal": "INHERIT .ometeotl.qtg0000.scraping_by.task_personal",
+        "tick_personal": "INHERIT .ometeotl.qtg0000.scraping_by.tick_personal",
+        "todo_work": "INHERIT .ometeotl.qtg0000.scraping_by.todo_work",
+        "task_work": "INHERIT .ometeotl.qtg0000.scraping_by.task_work"
       }
     },
     "qtg1100": {
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .ometeotl.qtg0000.scraping_by.todo_personal",
+        "task_personal": "INHERIT .ometeotl.qtg0000.scraping_by.task_personal",
+        "tick_personal": "INHERIT .ometeotl.qtg0000.scraping_by.tick_personal",
+        "todo_work": "INHERIT .ometeotl.qtg0000.scraping_by.todo_work",
+        "task_work": "INHERIT .ometeotl.qtg0000.scraping_by.task_work"
       }
     },
     "qtg1200": {
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .ometeotl.qtg0000.scraping_by.todo_personal",
+        "task_personal": "INHERIT .ometeotl.qtg0000.scraping_by.task_personal",
+        "tick_personal": "INHERIT .ometeotl.qtg0000.scraping_by.tick_personal",
+        "todo_work": "INHERIT .ometeotl.qtg0000.scraping_by.todo_work",
+        "task_work": "INHERIT .ometeotl.qtg0000.scraping_by.task_work"
       }
     },
     "qtg1300": {
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .ometeotl.qtg0000.scraping_by.todo_personal",
+        "task_personal": "INHERIT .ometeotl.qtg0000.scraping_by.task_personal",
+        "tick_personal": "INHERIT .ometeotl.qtg0000.scraping_by.tick_personal",
+        "todo_work": "INHERIT .ometeotl.qtg0000.scraping_by.todo_work",
+        "task_work": "INHERIT .ometeotl.qtg0000.scraping_by.task_work"
       }
     },
     "qtg1400": {
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .ometeotl.qtg0000.scraping_by.todo_personal",
+        "task_personal": "INHERIT .ometeotl.qtg0000.scraping_by.task_personal",
+        "tick_personal": "INHERIT .ometeotl.qtg0000.scraping_by.tick_personal",
+        "todo_work": "INHERIT .ometeotl.qtg0000.scraping_by.todo_work",
+        "task_work": "INHERIT .ometeotl.qtg0000.scraping_by.task_work"
       }
     },
     "qtg1500": {
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .ometeotl.qtg0000.scraping_by.todo_personal",
+        "task_personal": "INHERIT .ometeotl.qtg0000.scraping_by.task_personal",
+        "tick_personal": "INHERIT .ometeotl.qtg0000.scraping_by.tick_personal",
+        "todo_work": "INHERIT .ometeotl.qtg0000.scraping_by.todo_work",
+        "task_work": "INHERIT .ometeotl.qtg0000.scraping_by.task_work"
       }
     },
     "qtg1600": {
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .ometeotl.qtg0000.scraping_by.todo_personal",
+        "task_personal": "INHERIT .ometeotl.qtg0000.scraping_by.task_personal",
+        "tick_personal": "INHERIT .ometeotl.qtg0000.scraping_by.tick_personal",
+        "todo_work": "INHERIT .ometeotl.qtg0000.scraping_by.todo_work",
+        "task_work": "INHERIT .ometeotl.qtg0000.scraping_by.task_work"
       }
     },
     "qtg1700": {
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .ometeotl.qtg0000.scraping_by.todo_personal",
+        "task_personal": "INHERIT .ometeotl.qtg0000.scraping_by.task_personal",
+        "tick_personal": "INHERIT .ometeotl.qtg0000.scraping_by.tick_personal",
+        "todo_work": "INHERIT .ometeotl.qtg0000.scraping_by.todo_work",
+        "task_work": "INHERIT .ometeotl.qtg0000.scraping_by.task_work"
       }
     },
     "qtg1800": {
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .ometeotl.qtg0000.scraping_by.todo_personal",
+        "task_personal": "INHERIT .ometeotl.qtg0000.scraping_by.task_personal",
+        "tick_personal": "INHERIT .ometeotl.qtg0000.scraping_by.tick_personal",
+        "todo_work": "INHERIT .ometeotl.qtg0000.scraping_by.todo_work",
+        "task_work": "INHERIT .ometeotl.qtg0000.scraping_by.task_work"
       }
     },
     "qtg1900": {
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .ometeotl.qtg0000.scraping_by.todo_personal",
+        "task_personal": "INHERIT .ometeotl.qtg0000.scraping_by.task_personal",
+        "tick_personal": "INHERIT .ometeotl.qtg0000.scraping_by.tick_personal",
+        "todo_work": "INHERIT .ometeotl.qtg0000.scraping_by.todo_work",
+        "task_work": "INHERIT .ometeotl.qtg0000.scraping_by.task_work"
       }
     },
     "qtg2000": {
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .ometeotl.qtg0000.scraping_by.todo_personal",
+        "task_personal": "INHERIT .ometeotl.qtg0000.scraping_by.task_personal",
+        "tick_personal": "INHERIT .ometeotl.qtg0000.scraping_by.tick_personal",
+        "todo_work": "INHERIT .ometeotl.qtg0000.scraping_by.todo_work",
+        "task_work": "INHERIT .ometeotl.qtg0000.scraping_by.task_work"
       }
     },
     "qtg2100": {
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .ometeotl.qtg0000.scraping_by.todo_personal",
+        "task_personal": "INHERIT .ometeotl.qtg0000.scraping_by.task_personal",
+        "tick_personal": "INHERIT .ometeotl.qtg0000.scraping_by.tick_personal",
+        "todo_work": "INHERIT .ometeotl.qtg0000.scraping_by.todo_work",
+        "task_work": "INHERIT .ometeotl.qtg0000.scraping_by.task_work"
       }
     },
     "qtg2200": {
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .ometeotl.qtg0000.scraping_by.todo_personal",
+        "task_personal": "INHERIT .ometeotl.qtg0000.scraping_by.task_personal",
+        "tick_personal": "INHERIT .ometeotl.qtg0000.scraping_by.tick_personal",
+        "todo_work": "INHERIT .ometeotl.qtg0000.scraping_by.todo_work",
+        "task_work": "INHERIT .ometeotl.qtg0000.scraping_by.task_work"
       }
     },
     "qtg2300": {
       "scraping_by": {
-        "todo_personal": "echo 1",
-        "task_personal": "echo 2",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "echo 1",
-        "task_work": "echo 2"
+        "todo_personal": "INHERIT .ometeotl.qtg0000.scraping_by.todo_personal",
+        "task_personal": "INHERIT .ometeotl.qtg0000.scraping_by.task_personal",
+        "tick_personal": "INHERIT .ometeotl.qtg0000.scraping_by.tick_personal",
+        "todo_work": "INHERIT .ometeotl.qtg0000.scraping_by.todo_work",
+        "task_work": "INHERIT .ometeotl.qtg0000.scraping_by.task_work"
       }
     }
   },
