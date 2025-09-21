@@ -117,6 +117,8 @@ list_info() {
 }
 
 debug_info() {
+  # https://chatgpt.com/share/68cff0fa-0234-8004-bcce-cfa2797ce950
+  # https://gemini.google.com/app/7dacfcda212451f3
   daemon_status=$(systemctl is-active --user observe-"$SERVICE"-conf)
   case "$daemon_status" in
     "active")
