@@ -274,8 +274,11 @@ NON_ROOT_USER=ubuntu
 
 
 # YouTube Music
-*/5  * * * * scheduler youtube-music allow
-*/20 * * * * scheduler youtube-music deny --soft
+*/5    0-1,8-23 * * * scheduler youtube-music allow
+*/20   0-1,8-23 * * * scheduler youtube-music deny --soft
+0      2        * * * scheduler youtube-music deny --yellow-kryptonite --safe
+5-55/5 2        * * * scheduler youtube-music deny --yellow-kryptonite
+*/5    3-7      * * * scheduler youtube-music deny --yellow-kryptonite
 
 
 
