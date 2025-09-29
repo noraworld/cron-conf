@@ -280,7 +280,10 @@ NON_ROOT_USER=ubuntu
 
 
 # YouTube Music Persistent
-*/5 * * * * scheduler youtube-music-persistent allow
+*/5    0,8-23 * * * scheduler youtube-music-persistent allow
+0      1      * * * scheduler youtube-music-persistent deny --yellow-kryptonite --safe
+5-55/5 1      * * * scheduler youtube-music-persistent deny --yellow-kryptonite
+*/5    2-7    * * * scheduler youtube-music-persistent deny --yellow-kryptonite
 
 
 
