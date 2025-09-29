@@ -626,7 +626,7 @@ recurrent() {
   batch-remover
 
   # Observe the daemons running
-  daemon-health --daemon-restart-threshold 3 --reboot-threshold 5 --check-delay 10
+  daemon-health --daemons "dnsmasq,hostapd" --daemon-restart-threshold 3 --reboot-threshold 5 --check-delay 10
 }
 
 periodic() {
@@ -674,6 +674,8 @@ periodic() {
   #     [ -e "/home/ubuntu/workspace/log/pi/tmp/marlin_autoconnect" ] && rm "/home/ubuntu/workspace/log/pi/tmp/marlin_autoconnect"
   #   fi
   # fi
+
+  daemon-health --daemons "ssh" --daemon-restart-threshold 3 --reboot-threshold 5 --check-delay 10
 }
 
 snorlax() {
