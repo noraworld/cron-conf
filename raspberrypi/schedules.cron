@@ -73,106 +73,106 @@ NON_ROOT_USER=ubuntu
 #   Note 2:
 #     Remember that the shorter the time is, the more it can take effect.
 #
-*/1     0-7  * * * scheduler firewall deny --red-kryptonite
-*/10    8-22 * * * scheduler firewall allow
-0-10/1  23   * * * scheduler firewall deny --red-kryptonite --safe
-11-59/1 23   * * * scheduler firewall deny --red-kryptonite
+*/1    0-7  * * * scheduler firewall deny --red-kryptonite
+*/5    8-22 * * * scheduler firewall allow
+0-4/1  23   * * * scheduler firewall deny --red-kryptonite --safe
+5-59/1 23   * * * scheduler firewall deny --red-kryptonite
 
 # Observe conf changes
-*/1     0-7  * * * scheduler observe start --red-kryptonite
-*/10    8-22 * * * scheduler observe stop
-0-10/1  23   * * * scheduler observe start --red-kryptonite --safe
-11-59/1 23   * * * scheduler observe start --red-kryptonite
+*/1    0-7  * * * scheduler observe start --red-kryptonite
+*/5    8-22 * * * scheduler observe stop
+0-4/1  23   * * * scheduler observe start --red-kryptonite --safe
+5-59/1 23   * * * scheduler observe start --red-kryptonite
 
 # Discipline
-*/5    0-7  * * * scheduler discipline deny --red-kryptonite
+*/1    0-7  * * * scheduler discipline deny --red-kryptonite
 */5    8-22 * * * scheduler discipline allow
-0      23   * * * scheduler discipline deny --red-kryptonite --safe
-5-55/5 23   * * * scheduler discipline deny --red-kryptonite
+0-4/1  23   * * * scheduler discipline deny --red-kryptonite --safe
+5-59/1 23   * * * scheduler discipline deny --red-kryptonite
 
 
 
 # Todo
-0-10/1  0  * * * scheduler todo-qtg0000 start --safe
-11-59/1 0  * * * scheduler todo-qtg0000 start
-*/10    1  * * * scheduler todo-qtg0000 stop
-0-10/1  1  * * * scheduler todo-qtg0100 start --safe
-11-59/1 1  * * * scheduler todo-qtg0100 start
-*/10    2  * * * scheduler todo-qtg0100 stop
-0-10/1  2  * * * scheduler todo-qtg0200 start --safe
-11-59/1 2  * * * scheduler todo-qtg0200 start
-*/10    3  * * * scheduler todo-qtg0200 stop
-0-10/1  3  * * * scheduler todo-qtg0300 start --safe
-11-59/1 3  * * * scheduler todo-qtg0300 start
-*/10    4  * * * scheduler todo-qtg0300 stop
-0-10/1  4  * * * scheduler todo-qtg0400 start --safe
-11-59/1 4  * * * scheduler todo-qtg0400 start
-*/10    5  * * * scheduler todo-qtg0400 stop
-0-10/1  5  * * * scheduler todo-qtg0500 start --safe
-11-59/1 5  * * * scheduler todo-qtg0500 start
-*/10    6  * * * scheduler todo-qtg0500 stop
-0-10/1  6  * * * scheduler todo-qtg0600 start --safe
-11-59/1 6  * * * scheduler todo-qtg0600 start
-*/10    7  * * * scheduler todo-qtg0600 stop
-0-10/1  7  * * * scheduler todo-qtg0700 start --safe
-11-59/1 7  * * * scheduler todo-qtg0700 start
-*/10    8  * * * scheduler todo-qtg0700 stop
-0-10/1  8  * * * scheduler todo-qtg0800 start --safe --morning
-11-59/1 8  * * * scheduler todo-qtg0800 start        --morning
-*/10    9  * * * scheduler todo-qtg0800 stop
-0-10/1  9  * * * scheduler todo-qtg0900 start --safe --morning
-11-59/1 9  * * * scheduler todo-qtg0900 start        --morning
-*/10    10 * * * scheduler todo-qtg0900 stop
-0-10/1  10 * * * scheduler todo-qtg1000 start --safe --morning
-11-59/1 10 * * * scheduler todo-qtg1000 start        --morning
-*/10    11 * * * scheduler todo-qtg1000 stop
-0-10/1  11 * * * scheduler todo-qtg1100 start --safe
-11-59/1 11 * * * scheduler todo-qtg1100 start
-*/10    12 * * * scheduler todo-qtg1100 stop
-0-10/1  12 * * * scheduler todo-qtg1200 start --safe
-11-59/1 12 * * * scheduler todo-qtg1200 start
-*/10    13 * * * scheduler todo-qtg1200 stop
-0-10/1  13 * * * scheduler todo-qtg1300 start --safe
-11-59/1 13 * * * scheduler todo-qtg1300 start
-*/10    14 * * * scheduler todo-qtg1300 stop
-0-10/1  14 * * * scheduler todo-qtg1400 start --safe
-11-59/1 14 * * * scheduler todo-qtg1400 start
-*/10    15 * * * scheduler todo-qtg1400 stop
-0-10/1  15 * * * scheduler todo-qtg1500 start --safe
-11-59/1 15 * * * scheduler todo-qtg1500 start
-*/10    16 * * * scheduler todo-qtg1500 stop
-0-10/1  16 * * * scheduler todo-qtg1600 start --safe
-11-59/1 16 * * * scheduler todo-qtg1600 start
-*/10    17 * * * scheduler todo-qtg1600 stop
-0-10/1  17 * * * scheduler todo-qtg1700 start --safe
-11-59/1 17 * * * scheduler todo-qtg1700 start
-*/10    18 * * * scheduler todo-qtg1700 stop
-0-10/1  18 * * * scheduler todo-qtg1800 start --safe
-11-59/1 18 * * * scheduler todo-qtg1800 start
-*/10    19 * * * scheduler todo-qtg1800 stop
-0-10/1  19 * * * scheduler todo-qtg1900 start --safe
-11-59/1 19 * * * scheduler todo-qtg1900 start
-*/10    20 * * * scheduler todo-qtg1900 stop
-0-10/1  20 * * * scheduler todo-qtg2000 start --safe
-11-59/1 20 * * * scheduler todo-qtg2000 start
-*/10    21 * * * scheduler todo-qtg2000 stop
-0-10/1  21 * * * scheduler todo-qtg2100 start --safe
-11-59/1 21 * * * scheduler todo-qtg2100 start
-*/10    22 * * * scheduler todo-qtg2100 stop
-0-10/1  22 * * * scheduler todo-qtg2200 start --safe
-11-59/1 22 * * * scheduler todo-qtg2200 start
-*/10    23 * * * scheduler todo-qtg2200 stop
-0-10/1  23 * * * scheduler todo-qtg2300 start --safe
-11-59/1 23 * * * scheduler todo-qtg2300 start
-*/10    0  * * * scheduler todo-qtg2300 stop
+0-4/1  0  * * * scheduler todo-qtg0000 start --safe
+5-59/1 0  * * * scheduler todo-qtg0000 start
+*/5    1  * * * scheduler todo-qtg0000 stop
+0-4/1  1  * * * scheduler todo-qtg0100 start --safe
+5-59/1 1  * * * scheduler todo-qtg0100 start
+*/5    2  * * * scheduler todo-qtg0100 stop
+0-4/1  2  * * * scheduler todo-qtg0200 start --safe
+5-59/1 2  * * * scheduler todo-qtg0200 start
+*/5    3  * * * scheduler todo-qtg0200 stop
+0-4/1  3  * * * scheduler todo-qtg0300 start --safe
+5-59/1 3  * * * scheduler todo-qtg0300 start
+*/5    4  * * * scheduler todo-qtg0300 stop
+0-4/1  4  * * * scheduler todo-qtg0400 start --safe
+5-59/1 4  * * * scheduler todo-qtg0400 start
+*/5    5  * * * scheduler todo-qtg0400 stop
+0-4/1  5  * * * scheduler todo-qtg0500 start --safe
+5-59/1 5  * * * scheduler todo-qtg0500 start
+*/5    6  * * * scheduler todo-qtg0500 stop
+0-4/1  6  * * * scheduler todo-qtg0600 start --safe
+5-59/1 6  * * * scheduler todo-qtg0600 start
+*/5    7  * * * scheduler todo-qtg0600 stop
+0-4/1  7  * * * scheduler todo-qtg0700 start --safe
+5-59/1 7  * * * scheduler todo-qtg0700 start
+*/5    8  * * * scheduler todo-qtg0700 stop
+0-4/1  8  * * * scheduler todo-qtg0800 start --safe --morning
+5-59/1 8  * * * scheduler todo-qtg0800 start        --morning
+*/5    9  * * * scheduler todo-qtg0800 stop
+0-4/1  9  * * * scheduler todo-qtg0900 start --safe --morning
+5-59/1 9  * * * scheduler todo-qtg0900 start        --morning
+*/5    10 * * * scheduler todo-qtg0900 stop
+0-4/1  10 * * * scheduler todo-qtg1000 start --safe --morning
+5-59/1 10 * * * scheduler todo-qtg1000 start        --morning
+*/5    11 * * * scheduler todo-qtg1000 stop
+0-4/1  11 * * * scheduler todo-qtg1100 start --safe
+5-59/1 11 * * * scheduler todo-qtg1100 start
+*/5    12 * * * scheduler todo-qtg1100 stop
+0-4/1  12 * * * scheduler todo-qtg1200 start --safe
+5-59/1 12 * * * scheduler todo-qtg1200 start
+*/5    13 * * * scheduler todo-qtg1200 stop
+0-4/1  13 * * * scheduler todo-qtg1300 start --safe
+5-59/1 13 * * * scheduler todo-qtg1300 start
+*/5    14 * * * scheduler todo-qtg1300 stop
+0-4/1  14 * * * scheduler todo-qtg1400 start --safe
+5-59/1 14 * * * scheduler todo-qtg1400 start
+*/5    15 * * * scheduler todo-qtg1400 stop
+0-4/1  15 * * * scheduler todo-qtg1500 start --safe
+5-59/1 15 * * * scheduler todo-qtg1500 start
+*/5    16 * * * scheduler todo-qtg1500 stop
+0-4/1  16 * * * scheduler todo-qtg1600 start --safe
+5-59/1 16 * * * scheduler todo-qtg1600 start
+*/5    17 * * * scheduler todo-qtg1600 stop
+0-4/1  17 * * * scheduler todo-qtg1700 start --safe
+5-59/1 17 * * * scheduler todo-qtg1700 start
+*/5    18 * * * scheduler todo-qtg1700 stop
+0-4/1  18 * * * scheduler todo-qtg1800 start --safe
+5-59/1 18 * * * scheduler todo-qtg1800 start
+*/5    19 * * * scheduler todo-qtg1800 stop
+0-4/1  19 * * * scheduler todo-qtg1900 start --safe
+5-59/1 19 * * * scheduler todo-qtg1900 start
+*/5    20 * * * scheduler todo-qtg1900 stop
+0-4/1  20 * * * scheduler todo-qtg2000 start --safe
+5-59/1 20 * * * scheduler todo-qtg2000 start
+*/5    21 * * * scheduler todo-qtg2000 stop
+0-4/1  21 * * * scheduler todo-qtg2100 start --safe
+5-59/1 21 * * * scheduler todo-qtg2100 start
+*/5    22 * * * scheduler todo-qtg2100 stop
+0-4/1  22 * * * scheduler todo-qtg2200 start --safe
+5-59/1 22 * * * scheduler todo-qtg2200 start
+*/5    23 * * * scheduler todo-qtg2200 stop
+0-4/1  23 * * * scheduler todo-qtg2300 start --safe
+5-59/1 23 * * * scheduler todo-qtg2300 start
+*/5    0  * * * scheduler todo-qtg2300 stop
 
 
 
 # Chime
-*/5     0-19,21-23 * * * scheduler chime allow
-*/20    0-19,21-23 * * * scheduler chime deny --soft
-0-10/1  20         * * * scheduler chime allow --strong
-11-59/5 20         * * * scheduler chime allow --strong
+*/5    0-19,21-23 * * * scheduler chime allow
+*/20   0-19,21-23 * * * scheduler chime deny --soft
+0-4/1  20         * * * scheduler chime allow --strong
+5-59/5 20         * * * scheduler chime allow --strong
 
 
 
@@ -208,101 +208,101 @@ NON_ROOT_USER=ubuntu
 
 
 # Superman
-*/5    0-7  * * * scheduler superman deny --purple-kryptonite --vampire
+*/1    0-7  * * * scheduler superman deny --purple-kryptonite --vampire
 # 0      8    * * * scheduler superman deny --safe
 */5    8-22 * * * scheduler superman allow
-0      23   * * * scheduler superman deny --purple-kryptonite --vampire --safe
-5-55/5 23   * * * scheduler superman deny --purple-kryptonite --vampire
+0-4/1  23   * * * scheduler superman deny --purple-kryptonite --vampire --safe
+5-59/1 23   * * * scheduler superman deny --purple-kryptonite --vampire
 
 
 
 # Gaming
-*/5    0-7  * * * scheduler gaming deny --yellow-kryptonite
+*/1    0-7  * * * scheduler gaming deny --yellow-kryptonite
 */5    8-22 * * * scheduler gaming allow
-0      23   * * * scheduler gaming deny --yellow-kryptonite --safe
-5-55/5 23   * * * scheduler gaming deny --yellow-kryptonite
+0-4/1  23   * * * scheduler gaming deny --yellow-kryptonite --safe
+5-59/1 23   * * * scheduler gaming deny --yellow-kryptonite
 
 
 
 # Minerva
-*/5    0-7  * * * scheduler minerva deny --yellow-kryptonite
+*/1    0-7  * * * scheduler minerva deny --yellow-kryptonite
 */5    8-22 * * * scheduler minerva allow
-0      23   * * * scheduler minerva deny --yellow-kryptonite --safe
-5-55/5 23   * * * scheduler minerva deny --yellow-kryptonite
+0-4/1  23   * * * scheduler minerva deny --yellow-kryptonite --safe
+5-59/1 23   * * * scheduler minerva deny --yellow-kryptonite
 
 
 
 # Netflix
-*/5    0-7  * * * scheduler netflix deny --yellow-kryptonite
+*/1    0-7  * * * scheduler netflix deny --yellow-kryptonite
 */5    8-22 * * * scheduler netflix allow
-0      23   * * * scheduler netflix deny --yellow-kryptonite --safe
-5-55/5 23   * * * scheduler netflix deny --yellow-kryptonite
+0-4/1  23   * * * scheduler netflix deny --yellow-kryptonite --safe
+5-59/1 23   * * * scheduler netflix deny --yellow-kryptonite
 
 
 
 # Social Media
-*/5    0-7  * * * scheduler social-media deny --red-kryptonite
+*/1    0-7  * * * scheduler social-media deny --red-kryptonite
 */5    8-22 * * * scheduler social-media allow
-0      23   * * * scheduler social-media deny --red-kryptonite --safe
-5-55/5 23   * * * scheduler social-media deny --red-kryptonite
+0-4/1  23   * * * scheduler social-media deny --red-kryptonite --safe
+5-59/1 23   * * * scheduler social-media deny --red-kryptonite
 
 
 
 # Social Media Allow
-*/5    0-7  * * * scheduler social-media-allow deny --yellow-kryptonite
+*/1    0-7  * * * scheduler social-media-allow deny --yellow-kryptonite
 */5    8-22 * * * scheduler social-media-allow allow
 */20   8-22 * * * scheduler social-media-allow deny --soft
-0      23   * * * scheduler social-media-allow deny --yellow-kryptonite --safe
-5-55/5 23   * * * scheduler social-media-allow deny --yellow-kryptonite
+0-4/1  23   * * * scheduler social-media-allow deny --yellow-kryptonite --safe
+5-59/1 23   * * * scheduler social-media-allow deny --yellow-kryptonite
 
 
 
 # VOD
-*/5    0-7  * * * scheduler vod deny --yellow-kryptonite
+*/1    0-7  * * * scheduler vod deny --yellow-kryptonite
 */5    8-22 * * * scheduler vod allow
-0      23   * * * scheduler vod deny --yellow-kryptonite --safe
-5-55/5 23   * * * scheduler vod deny --yellow-kryptonite
+0-4/1  23   * * * scheduler vod deny --yellow-kryptonite --safe
+5-59/1 23   * * * scheduler vod deny --yellow-kryptonite
 
 
 
 # Amazon
-*/5    0-7  * * * scheduler amazon deny --yellow-kryptonite
+*/1    0-7  * * * scheduler amazon deny --yellow-kryptonite
 */5    8-22 * * * scheduler amazon allow
-0      23   * * * scheduler amazon deny --yellow-kryptonite --safe
-5-55/5 23   * * * scheduler amazon deny --yellow-kryptonite
+0-4/1  23   * * * scheduler amazon deny --yellow-kryptonite --safe
+5-59/1 23   * * * scheduler amazon deny --yellow-kryptonite
 
 
 
 # YouTube Music
 */5    0-1,8-23 * * * scheduler youtube-music allow
 */20   0-1,8-23 * * * scheduler youtube-music deny --soft
-0      2        * * * scheduler youtube-music deny --yellow-kryptonite --safe
-5-55/5 2        * * * scheduler youtube-music deny --yellow-kryptonite
-*/5    3-7      * * * scheduler youtube-music deny --yellow-kryptonite
+0-4/1  2        * * * scheduler youtube-music deny --yellow-kryptonite --safe
+5-59/1 2        * * * scheduler youtube-music deny --yellow-kryptonite
+*/1    3-7      * * * scheduler youtube-music deny --yellow-kryptonite
 
 
 
 # YouTube Music Persistent
 */5    0,8-23 * * * scheduler youtube-music-persistent allow
-0      1      * * * scheduler youtube-music-persistent deny --yellow-kryptonite --safe
-5-55/5 1      * * * scheduler youtube-music-persistent deny --yellow-kryptonite
-*/5    2-7    * * * scheduler youtube-music-persistent deny --yellow-kryptonite
+0-4/1  1      * * * scheduler youtube-music-persistent deny --yellow-kryptonite --safe
+5-59/1 1      * * * scheduler youtube-music-persistent deny --yellow-kryptonite
+*/1    2-7    * * * scheduler youtube-music-persistent deny --yellow-kryptonite
 
 
 
 # YouTube Alternative
-*/5    0-7  * * * scheduler youtube-alternative deny --yellow-kryptonite
+*/1    0-7  * * * scheduler youtube-alternative deny --yellow-kryptonite
 */5    8-22 * * * scheduler youtube-alternative allow
-0      23   * * * scheduler youtube-alternative deny --yellow-kryptonite --safe
-5-55/5 23   * * * scheduler youtube-alternative deny --yellow-kryptonite
+0-4/1  23   * * * scheduler youtube-alternative deny --yellow-kryptonite --safe
+5-59/1 23   * * * scheduler youtube-alternative deny --yellow-kryptonite
 
 
 
 # YouTube
-*/5    0-7  * * * scheduler youtube deny --red-kryptonite
+*/1    0-7  * * * scheduler youtube deny --red-kryptonite
 */5    8-22 * * * scheduler youtube deny --vampire
-0      23   * * * scheduler youtube deny --red-kryptonite --safe
-5-55/5 23   * * * scheduler youtube deny --red-kryptonite
+0-4/1  23   * * * scheduler youtube deny --red-kryptonite --safe
+5-59/1 23   * * * scheduler youtube deny --red-kryptonite
 
 
 
