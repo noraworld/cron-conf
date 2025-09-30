@@ -655,7 +655,11 @@ periodic() {
 
   # Auto allow cron apply, cron edit, dnsmasq settings change, git pull, git push, etc. if possible
   # to back up the logs and so forth on a regular basis even if it is not allowed manually
-  if [ "$(quotarget --timeframe now --service discipline --cache-only)" -gt 0 ] && [ "$(sincere --cache-only)" -gt 0 ]; then
+  if
+    [ "$(systemctl --user is-active observe-discipline-conf)" != "active" ] &&
+    [ "$(quotarget --timeframe now --service discipline --cache-only)" -gt 0 ] &&
+    [ "$(sincere --cache-only)" -gt 0 ]
+  then
     remove-dnsmasq-toggle-conf public discipline
   fi
 
