@@ -53,6 +53,12 @@ check() {
 
 perform() {
   for TARGET; do
+    # delete index.lock
+    # to avoid git operations failure, restarting the Dnsmasq daemon repeatedly, and causing the system crash
+    if [ -f "$(git -C "$TARGET" rev-parse --git-dir)/index.lock" ]; then
+      rm -f "$(git -C "$TARGET" rev-parse --git-dir)/index.lock"
+    fi
+
     # untracked new files
     if [ "$(git -C "$TARGET" status --porcelain | grep "^??")" != "" ]; then
       changed=true
