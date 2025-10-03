@@ -301,6 +301,14 @@ NON_ROOT_USER=ubuntu
 
 
 
+# YouTube Accessories
+*/1    0-7,13-23 * * * scheduler youtube-accessories deny --red-kryptonite
+*/5    8-11      * * * scheduler youtube-accessories deny --vampire
+0-4/1  12        * * * scheduler youtube-accessories deny --red-kryptonite --safe
+5-59/1 12        * * * scheduler youtube-accessories deny --red-kryptonite
+
+
+
 ## Snorlax
 ##
 ##   Note 1:
