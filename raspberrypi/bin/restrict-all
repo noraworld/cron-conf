@@ -204,6 +204,12 @@ build() {
       [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf public"
       [ "$1" = "name"      ] && echo "minerva"
       ;;
+    "observe-youtube-accessories-conf")
+      [ "$1" = "existence" ] && echo "true"
+      [ "$1" = "path"      ] && echo "$TOGGLE_DIR/youtube_accessories.conf"
+      [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf public"
+      [ "$1" = "name"      ] && echo "youtube_accessories"
+      ;;
     "observe-youtube-alternative-conf")
       [ "$1" = "existence" ] && echo "false"
       [ "$1" = "path"      ] && echo "$TOGGLE_DIR/youtube_alternative.conf"
