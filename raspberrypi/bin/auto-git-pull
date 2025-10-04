@@ -8,7 +8,7 @@ main() {
 
   for TARGET; do
     commit_count_before=$(git -C "$TARGET" log --oneline | wc -l | awk '{ print $1 }')
-    git -C "$TARGET" pull 2>/dev/null
+    git -C "$TARGET" pull 2>/dev/null # concern: what if .git/index.lock exists and there are upstream changes?
     commit_count_after=$(git -C "$TARGET" log --oneline | wc -l | awk '{ print $1 }')
 
     if [ "$commit_count_after" -gt "$commit_count_before" ]; then
