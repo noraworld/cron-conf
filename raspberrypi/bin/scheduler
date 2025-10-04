@@ -652,6 +652,7 @@ periodic() {
 
   # Auto back up log
   if [ -n "$(git -C "/home/ubuntu/workspace/log" --no-pager log "@{u}"..HEAD --oneline 2>/dev/null)" ]; then
+    rm -f "/home/ubuntu/workspace/log/$(git -C "/home/ubuntu/workspace/log" rev-parse --git-dir)/index.lock"
     git -C "/home/ubuntu/workspace/log" -c pull.rebase=true -c rebase.autoStash=true pull --rebase --autostash --no-edit
     git -C "/home/ubuntu/workspace/log" push --set-upstream origin main
   fi
