@@ -11,7 +11,7 @@ main() {
     git -C "$TARGET" pull 2>/dev/null
     commit_count_after=$(git -C "$TARGET" log --oneline | wc -l | awk '{ print $1 }')
 
-    if [ "$commit_count_before" -gt "$commit_count_after" ]; then
+    if [ "$commit_count_after" -gt "$commit_count_before" ]; then
       if [ "$TARGET" != "/home/ubuntu/workspace/diary" ]          &&
          [ "$TARGET" != "/home/ubuntu/workspace/diary/_private" ] &&
          [ "$TARGET" != "/home/ubuntu/workspace/diary/_daily_report" ]; then
