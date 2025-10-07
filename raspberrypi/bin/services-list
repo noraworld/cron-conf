@@ -1,0 +1,261 @@
+#!/bin/sh
+
+TOGGLE_DIR="/etc/dnsmasq.toggle"
+PRIV_TOGGLE_DIR="/etc/dnsmasq.priv/toggle"
+
+ALL_SERVICES="deregulated-superman deregulated-superman-allow maeve ometeotl superman adguard-upstream superman-upstream social-media social-media-allow vod youtube chime crimson gaming minerva youtube-accessories youtube-alternative youtube-music youtube-music-persistent discipline"
+ALL_NAMES="deregulated_superman deregulated_superman_allow maeve ometeotl superman adguard_upstream superman_upstream social_media social_media_allow vod youtube chime crimson gaming minerva youtube_accessories youtube_alternative youtube_music youtube_music_persistent discipline"
+ALL_PATHS="$PRIV_TOGGLE_DIR/deregulated_superman.conf $PRIV_TOGGLE_DIR/deregulated_superman_allow.conf $PRIV_TOGGLE_DIR/maeve.conf $PRIV_TOGGLE_DIR/ometeotl.conf $PRIV_TOGGLE_DIR/superman.conf $PRIV_TOGGLE_DIR/adguard_upstream.conf $PRIV_TOGGLE_DIR/superman_upstream.conf $TOGGLE_DIR/social_media.conf $TOGGLE_DIR/social_media_allow.conf $TOGGLE_DIR/vod.conf $TOGGLE_DIR/youtube.conf $TOGGLE_DIR/chime.conf $PRIV_TOGGLE_DIR/crimson.conf $TOGGLE_DIR/gaming.conf $TOGGLE_DIR/minerva.conf $TOGGLE_DIR/youtube_accessories.conf $TOGGLE_DIR/youtube_alternative.conf $TOGGLE_DIR/youtube_music.conf $TOGGLE_DIR/youtube_music_persistent.conf $TOGGLE_DIR/discipline.conf"
+ALL_OBSERVERS="observe-deregulated-superman-conf observe-deregulated-superman-allow-conf observe-maeve-conf observe-ometeotl-conf observe-superman-conf observe-adguard-upstream-conf observe-superman-upstream-conf observe-social-media-conf observe-social-media-allow-conf observe-vod-conf observe-youtube-conf observe-chime-conf observe-crimson-conf observe-gaming-conf observe-minerva-conf observe-youtube-accessories-conf observe-youtube-alternative-conf observe-youtube-music-conf observe-youtube-music-persistent-conf observe-discipline-conf"
+
+GENERAL_SERVICES="deregulated-superman deregulated-superman-allow maeve ometeotl superman adguard-upstream superman-upstream social-media vod youtube gaming minerva youtube-accessories youtube-alternative youtube-music-persistent discipline"
+GENERAL_NAMES="deregulated_superman deregulated_superman_allow maeve ometeotl superman adguard_upstream superman_upstream social_media vod youtube gaming minerva youtube_accessories youtube_alternative youtube_music_persistent discipline"
+GENERAL_PATHS="$PRIV_TOGGLE_DIR/deregulated_superman.conf $PRIV_TOGGLE_DIR/deregulated_superman_allow.conf $PRIV_TOGGLE_DIR/maeve.conf $PRIV_TOGGLE_DIR/ometeotl.conf $PRIV_TOGGLE_DIR/superman.conf $PRIV_TOGGLE_DIR/adguard_upstream.conf $PRIV_TOGGLE_DIR/superman_upstream.conf $TOGGLE_DIR/social_media.conf $TOGGLE_DIR/vod.conf $TOGGLE_DIR/youtube.conf $TOGGLE_DIR/gaming.conf $TOGGLE_DIR/minerva.conf $TOGGLE_DIR/youtube_accessories.conf $TOGGLE_DIR/youtube_alternative.conf $TOGGLE_DIR/youtube_music_persistent.conf $TOGGLE_DIR/discipline.conf"
+GENERAL_OBSERVERS="observe-deregulated-superman-conf observe-deregulated-superman-allow-conf observe-maeve-conf observe-ometeotl-conf observe-superman-conf observe-adguard-upstream-conf observe-superman-upstream-conf observe-social-media-conf observe-vod-conf observe-youtube-conf observe-gaming-conf observe-minerva-conf observe-youtube-accessories-conf observe-youtube-alternative-conf observe-youtube-music-persistent-conf observe-discipline-conf"
+
+main() {
+  case "$2" in
+    "all")
+      [ "$1" = "service"    ] && echo "$ALL_SERVICES"
+      [ "$1" = "name"       ] && echo "$ALL_NAMES"
+      [ "$1" = "existence"  ] && echo "undefined" >&2
+      [ "$1" = "path"       ] && echo "$ALL_PATHS"
+      [ "$1" = "lock"       ] && echo "undefined" >&2
+      [ "$1" = "unlock"     ] && echo "undefined" >&2
+      [ "$1" = "visibility" ] && echo "undefined" >&2
+      [ "$1" = "observer"   ] && echo "$ALL_OBSERVERS"
+      ;;
+    "general")
+      [ "$1" = "service"    ] && echo "$GENERAL_SERVICES"
+      [ "$1" = "name"       ] && echo "$GENERAL_NAMES"
+      [ "$1" = "existence"  ] && echo "undefined" >&2
+      [ "$1" = "path"       ] && echo "$GENERAL_PATHS"
+      [ "$1" = "lock"       ] && echo "undefined" >&2
+      [ "$1" = "unlock"     ] && echo "undefined" >&2
+      [ "$1" = "visibility" ] && echo "undefined" >&2
+      [ "$1" = "observer"   ] && echo "$GENERAL_OBSERVERS"
+      ;;
+    "deregulated-superman")
+      [ "$1" = "service"    ] && echo "deregulated-superman"
+      [ "$1" = "name"       ] && echo "deregulated_superman"
+      [ "$1" = "existence"  ] && echo "true"
+      [ "$1" = "path"       ] && echo "$PRIV_TOGGLE_DIR/deregulated_superman.conf"
+      [ "$1" = "lock"       ] && echo "create-dnsmasq-toggle-conf"
+      [ "$1" = "unlock"     ] && echo "remove-dnsmasq-toggle-conf"
+      [ "$1" = "visibility" ] && echo "private"
+      [ "$1" = "observer"   ] && echo "observe-deregulated-superman-conf"
+      ;;
+    "deregulated-superman-allow")
+      [ "$1" = "service"    ] && echo "deregulated-superman"
+      [ "$1" = "name"       ] && echo "deregulated_superman_allow"
+      [ "$1" = "existence"  ] && echo "false"
+      [ "$1" = "path"       ] && echo "$PRIV_TOGGLE_DIR/deregulated_superman_allow.conf"
+      [ "$1" = "lock"       ] && echo "remove-dnsmasq-toggle-conf"
+      [ "$1" = "unlock"     ] && echo "create-dnsmasq-toggle-conf"
+      [ "$1" = "visibility" ] && echo "private"
+      [ "$1" = "observer"   ] && echo "observe-deregulated-superman-allow-conf"
+      ;;
+    "maeve")
+      [ "$1" = "service"    ] && echo "maeve"
+      [ "$1" = "name"       ] && echo "maeve"
+      [ "$1" = "existence"  ] && echo "true"
+      [ "$1" = "path"       ] && echo "$PRIV_TOGGLE_DIR/maeve.conf"
+      [ "$1" = "lock"       ] && echo "create-dnsmasq-toggle-conf"
+      [ "$1" = "unlock"     ] && echo "remove-dnsmasq-toggle-conf"
+      [ "$1" = "visibility" ] && echo "private"
+      [ "$1" = "observer"   ] && echo "observe-maeve-conf"
+      ;;
+    "ometeotl")
+      [ "$1" = "service"    ] && echo "ometeotl"
+      [ "$1" = "name"       ] && echo "ometeotl"
+      [ "$1" = "existence"  ] && echo "true"
+      [ "$1" = "path"       ] && echo "$PRIV_TOGGLE_DIR/ometeotl.conf"
+      [ "$1" = "lock"       ] && echo "create-dnsmasq-toggle-conf"
+      [ "$1" = "unlock"     ] && echo "remove-dnsmasq-toggle-conf"
+      [ "$1" = "visibility" ] && echo "private"
+      [ "$1" = "observer"   ] && echo "observe-ometeotl-conf"
+      ;;
+    "superman")
+      [ "$1" = "service"    ] && echo "superman"
+      [ "$1" = "name"       ] && echo "superman"
+      [ "$1" = "existence"  ] && echo "true"
+      [ "$1" = "path"       ] && echo "$PRIV_TOGGLE_DIR/superman.conf"
+      [ "$1" = "lock"       ] && echo "create-dnsmasq-toggle-conf"
+      [ "$1" = "unlock"     ] && echo "remove-dnsmasq-toggle-conf"
+      [ "$1" = "visibility" ] && echo "private"
+      [ "$1" = "observer"   ] && echo "observe-superman-conf"
+      ;;
+    "adguard-upstream")
+      [ "$1" = "service"    ] && echo "upstream"
+      [ "$1" = "name"       ] && echo "adguard_upstream"
+      [ "$1" = "existence"  ] && echo "false"
+      [ "$1" = "path"       ] && echo "$PRIV_TOGGLE_DIR/adguard_upstream.conf"
+      [ "$1" = "lock"       ] && echo "remove-dnsmasq-toggle-conf"
+      [ "$1" = "unlock"     ] && echo "create-dnsmasq-toggle-conf"
+      [ "$1" = "visibility" ] && echo "private"
+      [ "$1" = "observer"   ] && echo "observe-adguard-upstream-conf"
+      ;;
+    "cloudflare-upstream")
+      [ "$1" = "service"    ] && echo "upstream"
+      [ "$1" = "name"       ] && echo "cloudflare_upstream"
+      [ "$1" = "existence"  ] && echo "false"
+      [ "$1" = "path"       ] && echo "$PRIV_TOGGLE_DIR/cloudflare_upstream.conf"
+      [ "$1" = "lock"       ] && echo "remove-dnsmasq-toggle-conf"
+      [ "$1" = "unlock"     ] && echo "create-dnsmasq-toggle-conf"
+      [ "$1" = "visibility" ] && echo "private"
+      [ "$1" = "observer"   ] && echo "observe-cloudflare-upstream-conf"
+      ;;
+    "nordvpn-upstream")
+      [ "$1" = "service"    ] && echo "upstream"
+      [ "$1" = "name"       ] && echo "nordvpn_upstream"
+      [ "$1" = "existence"  ] && echo "false"
+      [ "$1" = "path"       ] && echo "$PRIV_TOGGLE_DIR/nordvpn_upstream.conf"
+      [ "$1" = "lock"       ] && echo "remove-dnsmasq-toggle-conf"
+      [ "$1" = "unlock"     ] && echo "create-dnsmasq-toggle-conf"
+      [ "$1" = "visibility" ] && echo "private"
+      [ "$1" = "observer"   ] && echo "observe-nordvpn-upstream-conf"
+      ;;
+    "superman-upstream")
+      [ "$1" = "service"    ] && echo "upstream"
+      [ "$1" = "name"       ] && echo "superman_upstream"
+      [ "$1" = "existence"  ] && echo "true"
+      [ "$1" = "path"       ] && echo "$PRIV_TOGGLE_DIR/superman_upstream.conf"
+      [ "$1" = "lock"       ] && echo "create-dnsmasq-toggle-conf"
+      [ "$1" = "unlock"     ] && echo "remove-dnsmasq-toggle-conf"
+      [ "$1" = "visibility" ] && echo "private"
+      [ "$1" = "observer"   ] && echo "observe-superman-upstream-conf"
+      ;;
+    "social-media")
+      [ "$1" = "service"    ] && echo "social-media"
+      [ "$1" = "name"       ] && echo "social_media"
+      [ "$1" = "existence"  ] && echo "true"
+      [ "$1" = "path"       ] && echo "$TOGGLE_DIR/social_media.conf"
+      [ "$1" = "lock"       ] && echo "create-dnsmasq-toggle-conf"
+      [ "$1" = "unlock"     ] && echo "remove-dnsmasq-toggle-conf"
+      [ "$1" = "visibility" ] && echo "public"
+      [ "$1" = "observer"   ] && echo "observe-social-media-conf"
+      ;;
+    "social-media-allow")
+      [ "$1" = "service"    ] && echo "social-media-allow"
+      [ "$1" = "name"       ] && echo "social_media_allow"
+      [ "$1" = "existence"  ] && echo "false"
+      [ "$1" = "path"       ] && echo "$TOGGLE_DIR/social_media_allow.conf"
+      [ "$1" = "lock"       ] && echo "remove-dnsmasq-toggle-conf"
+      [ "$1" = "unlock"     ] && echo "create-dnsmasq-toggle-conf"
+      [ "$1" = "visibility" ] && echo "public"
+      [ "$1" = "observer"   ] && echo "observe-social-media-allow-conf"
+      ;;
+    "vod")
+      [ "$1" = "service"    ] && echo "vod"
+      [ "$1" = "name"       ] && echo "vod"
+      [ "$1" = "existence"  ] && echo "true"
+      [ "$1" = "path"       ] && echo "$TOGGLE_DIR/vod.conf"
+      [ "$1" = "lock"       ] && echo "create-dnsmasq-toggle-conf"
+      [ "$1" = "unlock"     ] && echo "remove-dnsmasq-toggle-conf"
+      [ "$1" = "visibility" ] && echo "public"
+      [ "$1" = "observer"   ] && echo "observe-vod-conf"
+      ;;
+    "youtube")
+      [ "$1" = "service"    ] && echo "youtube"
+      [ "$1" = "name"       ] && echo "youtube"
+      [ "$1" = "existence"  ] && echo "true"
+      [ "$1" = "path"       ] && echo "$TOGGLE_DIR/youtube.conf"
+      [ "$1" = "lock"       ] && echo "create-dnsmasq-toggle-conf"
+      [ "$1" = "unlock"     ] && echo "remove-dnsmasq-toggle-conf"
+      [ "$1" = "visibility" ] && echo "public"
+      [ "$1" = "observer"   ] && echo "observe-youtube-conf"
+      ;;
+    "chime")
+      [ "$1" = "service"    ] && echo "chime"
+      [ "$1" = "name"       ] && echo "chime"
+      [ "$1" = "existence"  ] && echo "true"
+      [ "$1" = "path"       ] && echo "$TOGGLE_DIR/chime.conf"
+      [ "$1" = "lock"       ] && echo "create-dnsmasq-toggle-conf"
+      [ "$1" = "unlock"     ] && echo "remove-dnsmasq-toggle-conf"
+      [ "$1" = "visibility" ] && echo "public"
+      [ "$1" = "observer"   ] && echo "observe-chime-conf"
+      ;;
+    "crimson")
+      [ "$1" = "service"    ] && echo "crimson"
+      [ "$1" = "name"       ] && echo "crimson"
+      [ "$1" = "existence"  ] && echo "false"
+      [ "$1" = "path"       ] && echo "$PRIV_TOGGLE_DIR/crimson.conf"
+      [ "$1" = "lock"       ] && echo "remove-dnsmasq-toggle-conf"
+      [ "$1" = "unlock"     ] && echo "create-dnsmasq-toggle-conf"
+      [ "$1" = "visibility" ] && echo "private"
+      [ "$1" = "observer"   ] && echo "observe-crimson-conf"
+      ;;
+    "gaming")
+      [ "$1" = "service"    ] && echo "gaming"
+      [ "$1" = "name"       ] && echo "gaming"
+      [ "$1" = "existence"  ] && echo "true"
+      [ "$1" = "path"       ] && echo "$TOGGLE_DIR/gaming.conf"
+      [ "$1" = "lock"       ] && echo "create-dnsmasq-toggle-conf"
+      [ "$1" = "unlock"     ] && echo "remove-dnsmasq-toggle-conf"
+      [ "$1" = "visibility" ] && echo "public"
+      [ "$1" = "observer"   ] && echo "observe-gaming-conf"
+      ;;
+    "minerva")
+      [ "$1" = "service"    ] && echo "minerva"
+      [ "$1" = "name"       ] && echo "minerva"
+      [ "$1" = "existence"  ] && echo "true"
+      [ "$1" = "path"       ] && echo "$TOGGLE_DIR/minerva.conf"
+      [ "$1" = "lock"       ] && echo "create-dnsmasq-toggle-conf"
+      [ "$1" = "unlock"     ] && echo "remove-dnsmasq-toggle-conf"
+      [ "$1" = "visibility" ] && echo "public"
+      [ "$1" = "observer"   ] && echo "observe-minerva-conf"
+      ;;
+    "youtube-accessories")
+      [ "$1" = "service"    ] && echo "youtube-accessories"
+      [ "$1" = "name"       ] && echo "youtube_accessories"
+      [ "$1" = "existence"  ] && echo "true"
+      [ "$1" = "path"       ] && echo "$TOGGLE_DIR/youtube_accessories.conf"
+      [ "$1" = "lock"       ] && echo "create-dnsmasq-toggle-conf"
+      [ "$1" = "unlock"     ] && echo "remove-dnsmasq-toggle-conf"
+      [ "$1" = "visibility" ] && echo "public"
+      [ "$1" = "observer"   ] && echo "observe-youtube-accessories-conf"
+      ;;
+    "youtube-alternative")
+      [ "$1" = "service"    ] && echo "youtube-alternative"
+      [ "$1" = "name"       ] && echo "youtube_alternative"
+      [ "$1" = "existence"  ] && echo "false"
+      [ "$1" = "path"       ] && echo "$TOGGLE_DIR/youtube_alternative.conf"
+      [ "$1" = "lock"       ] && echo "remove-dnsmasq-toggle-conf"
+      [ "$1" = "unlock"     ] && echo "create-dnsmasq-toggle-conf"
+      [ "$1" = "visibility" ] && echo "public"
+      [ "$1" = "observer"   ] && echo "observe-youtube-alternative-conf"
+      ;;
+    "youtube-music")
+      [ "$1" = "service"    ] && echo "youtube-music"
+      [ "$1" = "name"       ] && echo "youtube_music"
+      [ "$1" = "existence"  ] && echo "false"
+      [ "$1" = "path"       ] && echo "$TOGGLE_DIR/youtube_music.conf"
+      [ "$1" = "lock"       ] && echo "remove-dnsmasq-toggle-conf"
+      [ "$1" = "unlock"     ] && echo "create-dnsmasq-toggle-conf"
+      [ "$1" = "visibility" ] && echo "public"
+      [ "$1" = "observer"   ] && echo "observe-youtube-music-conf"
+      ;;
+    "youtube-music-persistent")
+      [ "$1" = "service"    ] && echo "youtube-music-persistent"
+      [ "$1" = "name"       ] && echo "youtube_music_persistent"
+      [ "$1" = "existence"  ] && echo "false"
+      [ "$1" = "path"       ] && echo "$TOGGLE_DIR/youtube_music_persistent.conf"
+      [ "$1" = "lock"       ] && echo "remove-dnsmasq-toggle-conf"
+      [ "$1" = "unlock"     ] && echo "create-dnsmasq-toggle-conf"
+      [ "$1" = "visibility" ] && echo "public"
+      [ "$1" = "observer"   ] && echo "observe-youtube-music-persistent-conf"
+      ;;
+    "discipline")
+      [ "$1" = "service"    ] && echo "discipline"
+      [ "$1" = "name"       ] && echo "discipline"
+      [ "$1" = "existence"  ] && echo "true"
+      [ "$1" = "path"       ] && echo "$TOGGLE_DIR/discipline.conf"
+      [ "$1" = "lock"       ] && echo "create-dnsmasq-toggle-conf"
+      [ "$1" = "unlock"     ] && echo "remove-dnsmasq-toggle-conf"
+      [ "$1" = "visibility" ] && echo "public"
+      [ "$1" = "observer"   ] && echo "observe-discipline-conf"
+      ;;
+  esac
+}
+
+main "$@"
