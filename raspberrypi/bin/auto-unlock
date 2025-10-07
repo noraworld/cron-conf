@@ -5,11 +5,17 @@ PROG_NAME="auto-unlock"
 main() {
   changed=false
 
-  if [ "$*" = "all" ]; then
-    targets="$(services-list service all)"
-  else
-    targets="$*"
-  fi
+  case "$*" in
+    "all")
+      targets="$(services-list service all)"
+      ;;
+    "general")
+      targets="$(services-list service general)"
+      ;;
+    *)
+      targets="$*"
+      ;;
+  esac
 
   for target in $targets; do
     observer=$(services-list observer "$target")
