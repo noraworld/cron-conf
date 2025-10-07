@@ -24,7 +24,7 @@ main() {
       visibility=$(services-list visibility "$target")
       name=$(services-list name "$target")
 
-      eval "$unlock_command" "$visibility" "$name" --skip
+      eval "$unlock_command" "$visibility" "$name" --quiet --skip
       changed=true
     fi
   done
