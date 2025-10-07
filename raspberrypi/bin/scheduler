@@ -657,15 +657,13 @@ periodic() {
     git -C "/home/ubuntu/workspace/log" push --set-upstream origin main
   fi
 
-  # Auto allow cron apply, cron edit, dnsmasq settings change, git pull, git push, etc. if possible
-  # to back up the logs and so forth on a regular basis even if it is not allowed manually
-  if
-    [ "$(systemctl --user is-active observe-discipline-conf)" != "active" ] &&
-    [ "$(quotarget --timeframe now --service discipline --cache-only)" -gt 0 ] &&
-    [ "$(sincere --cache-only)" -gt 0 ]
-  then
-    remove-dnsmasq-toggle-conf public discipline
-  fi
+  # Auto allow general services
+  #
+  #   This include Discipline, which means cron apply, cron edit, dnsmasq settings change, git pull, git push, etc. are
+  #   allowed automatically if possible to back up the logs and so forth on a regular basis even if it is not allowed
+  #   manually. It takes 30 - 60 seconds to apply.
+  #
+  auto-unlock general
 
   # Notify each time you achieve your daily digital detox
   digital-detox-notifier
