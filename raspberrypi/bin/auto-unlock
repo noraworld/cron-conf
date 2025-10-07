@@ -1,0 +1,37 @@
+#!/bin/sh
+
+PROG_NAME="auto-unlock"
+
+main() {
+  changed=false
+
+  if [ "$*" = "all" ]; then
+    targets="$(services-list service all)"
+  else
+    targets="$*"
+  fi
+
+  for target in $targets; do
+    observer=$(services-list observer "$target")
+    service=$(services-list service "$target")
+
+    if
+      [ "$(systemctl --user is-active "$observer")" != "active" ] &&
+      [ "$(quotarget --timeframe now --service "$service" --cache-only)" -gt 0 ] &&
+      [ "$(sincere --cache-only)" -gt 0 ]
+    then
+      unlock_command=$(services-list unlock "$target")
+      visibility=$(services-list visibility "$target")
+      name=$(services-list name "$target")
+
+      eval "$unlock_command" "$visibility" "$name" --skip
+      changed=true
+    fi
+  done
+
+  if [ "$changed" = "true" ]; then
+    /home/ubuntu/workspace/dnsmasq-conf/bin/exrd --log /home/ubuntu/workspace/log/pi/log/exrd.log --from "$PROG_NAME $*"
+  fi
+}
+
+main "$@"
