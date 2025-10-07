@@ -1,0 +1,143 @@
+#!/bin/sh
+
+TOGGLE_DIR="/etc/dnsmasq.toggle"
+PRIV_TOGGLE_DIR="/etc/dnsmasq.priv/toggle"
+
+build() {
+  case "$2" in
+    "observe-deregulated-superman-conf")
+      [ "$1" = "existence" ] && echo "true"
+      [ "$1" = "path"      ] && echo "$PRIV_TOGGLE_DIR/deregulated_superman.conf"
+      [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf private"
+      [ "$1" = "name"      ] && echo "deregulated_superman"
+      ;;
+    "observe-deregulated-superman-allow-conf")
+      [ "$1" = "existence" ] && echo "false"
+      [ "$1" = "path"      ] && echo "$PRIV_TOGGLE_DIR/deregulated_superman_allow.conf"
+      [ "$1" = "command"   ] && echo "remove-dnsmasq-toggle-conf private"
+      [ "$1" = "name"      ] && echo "deregulated_superman_allow"
+      ;;
+    "observe-maeve-conf")
+      [ "$1" = "existence" ] && echo "true"
+      [ "$1" = "path"      ] && echo "$PRIV_TOGGLE_DIR/maeve.conf"
+      [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf private"
+      [ "$1" = "name"      ] && echo "maeve"
+      ;;
+    "observe-ometeotl-conf")
+      [ "$1" = "existence" ] && echo "true"
+      [ "$1" = "path"      ] && echo "$PRIV_TOGGLE_DIR/ometeotl.conf"
+      [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf private"
+      [ "$1" = "name"      ] && echo "ometeotl"
+      ;;
+    "observe-superman-conf")
+      [ "$1" = "existence" ] && echo "true"
+      [ "$1" = "path"      ] && echo "$PRIV_TOGGLE_DIR/superman.conf"
+      [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf private"
+      [ "$1" = "name"      ] && echo "superman"
+      ;;
+    "observe-adguard-upstream-conf")
+      [ "$1" = "existence" ] && echo "false"
+      [ "$1" = "path"      ] && echo "$PRIV_TOGGLE_DIR/adguard_upstream.conf"
+      [ "$1" = "command"   ] && echo "remove-dnsmasq-toggle-conf private"
+      [ "$1" = "name"      ] && echo "adguard_upstream"
+      ;;
+    "observe-cloudflare-upstream-conf")
+      [ "$1" = "existence" ] && echo "false"
+      [ "$1" = "path"      ] && echo "$PRIV_TOGGLE_DIR/cloudflare_upstream.conf"
+      [ "$1" = "command"   ] && echo "remove-dnsmasq-toggle-conf private"
+      [ "$1" = "name"      ] && echo "cloudflare_upstream"
+      ;;
+    "observe-nordvpn-upstream-conf")
+      [ "$1" = "existence" ] && echo "false"
+      [ "$1" = "path"      ] && echo "$PRIV_TOGGLE_DIR/nordvpn_upstream.conf"
+      [ "$1" = "command"   ] && echo "remove-dnsmasq-toggle-conf private"
+      [ "$1" = "name"      ] && echo "nordvpn_upstream"
+      ;;
+    "observe-superman-upstream-conf")
+      [ "$1" = "existence" ] && echo "true"
+      [ "$1" = "path"      ] && echo "$PRIV_TOGGLE_DIR/superman_upstream.conf"
+      [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf private"
+      [ "$1" = "name"      ] && echo "superman_upstream"
+      ;;
+    "observe-social-media-conf")
+      [ "$1" = "existence" ] && echo "true"
+      [ "$1" = "path"      ] && echo "$TOGGLE_DIR/social_media.conf"
+      [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf public"
+      [ "$1" = "name"      ] && echo "social_media"
+      ;;
+    "observe-social-media-allow-conf")
+      [ "$1" = "existence" ] && echo "false"
+      [ "$1" = "path"      ] && echo "$TOGGLE_DIR/social_media_allow.conf"
+      [ "$1" = "command"   ] && echo "remove-dnsmasq-toggle-conf public"
+      [ "$1" = "name"      ] && echo "social_media_allow"
+      ;;
+    "observe-vod-conf")
+      [ "$1" = "existence" ] && echo "true"
+      [ "$1" = "path"      ] && echo "$TOGGLE_DIR/vod.conf"
+      [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf public"
+      [ "$1" = "name"      ] && echo "vod"
+      ;;
+    "observe-youtube-conf")
+      [ "$1" = "existence" ] && echo "true"
+      [ "$1" = "path"      ] && echo "$TOGGLE_DIR/youtube.conf"
+      [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf public"
+      [ "$1" = "name"      ] && echo "youtube"
+      ;;
+    "observe-chime-conf")
+      [ "$1" = "existence" ] && echo "true"
+      [ "$1" = "path"      ] && echo "$TOGGLE_DIR/chime.conf"
+      [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf public"
+      [ "$1" = "name"      ] && echo "chime"
+      ;;
+    "observe-crimson-conf")
+      [ "$1" = "existence" ] && echo "false"
+      [ "$1" = "path"      ] && echo "$PRIV_TOGGLE_DIR/crimson.conf"
+      [ "$1" = "command"   ] && echo "remove-dnsmasq-toggle-conf private"
+      [ "$1" = "name"      ] && echo "crimson"
+      ;;
+    "observe-gaming-conf")
+      [ "$1" = "existence" ] && echo "true"
+      [ "$1" = "path"      ] && echo "$TOGGLE_DIR/gaming.conf"
+      [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf public"
+      [ "$1" = "name"      ] && echo "gaming"
+      ;;
+    "observe-minerva-conf")
+      [ "$1" = "existence" ] && echo "true"
+      [ "$1" = "path"      ] && echo "$TOGGLE_DIR/minerva.conf"
+      [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf public"
+      [ "$1" = "name"      ] && echo "minerva"
+      ;;
+    "observe-youtube-accessories-conf")
+      [ "$1" = "existence" ] && echo "true"
+      [ "$1" = "path"      ] && echo "$TOGGLE_DIR/youtube_accessories.conf"
+      [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf public"
+      [ "$1" = "name"      ] && echo "youtube_accessories"
+      ;;
+    "observe-youtube-alternative-conf")
+      [ "$1" = "existence" ] && echo "false"
+      [ "$1" = "path"      ] && echo "$TOGGLE_DIR/youtube_alternative.conf"
+      [ "$1" = "command"   ] && echo "remove-dnsmasq-toggle-conf public"
+      [ "$1" = "name"      ] && echo "youtube_alternative"
+      ;;
+    "observe-youtube-music-conf")
+      [ "$1" = "existence" ] && echo "false"
+      [ "$1" = "path"      ] && echo "$TOGGLE_DIR/youtube_music.conf"
+      [ "$1" = "command"   ] && echo "remove-dnsmasq-toggle-conf public"
+      [ "$1" = "name"      ] && echo "youtube_music"
+      ;;
+    "observe-youtube-music-persistent-conf")
+      [ "$1" = "existence" ] && echo "false"
+      [ "$1" = "path"      ] && echo "$TOGGLE_DIR/youtube_music_persistent.conf"
+      [ "$1" = "command"   ] && echo "remove-dnsmasq-toggle-conf public"
+      [ "$1" = "name"      ] && echo "youtube_music_persistent"
+      ;;
+    "observe-discipline-conf")
+      [ "$1" = "existence" ] && echo "true"
+      [ "$1" = "path"      ] && echo "$TOGGLE_DIR/discipline.conf"
+      [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf public"
+      [ "$1" = "name"      ] && echo "discipline"
+      ;;
+  esac
+}
+
+main "$@"
