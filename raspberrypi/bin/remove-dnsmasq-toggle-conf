@@ -33,6 +33,7 @@ main() {
   sudo mkdir -p "$TOGGLE_DIR"
   operate "$@"
   restart_dnsmasq "$@"
+  bye
 }
 
 operate() {
@@ -57,6 +58,14 @@ restart_dnsmasq() {
       # It is performed in the background.
       exrd --skip --log /home/ubuntu/workspace/log/pi/log/exrd.log --from "$(echo "$PROG_NAME $@")" &
     fi
+  fi
+}
+
+bye() {
+  if $unlinked; then
+    true
+  else
+    false
   fi
 }
 
