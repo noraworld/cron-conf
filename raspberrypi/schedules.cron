@@ -204,10 +204,10 @@ NON_ROOT_USER=ubuntu
 
 
 # Superman
-*/5    0,8-23 * * * scheduler superman allow
-0-4/1  1      * * * scheduler superman deny --purple-kryptonite --vampire --safe
-5-59/1 1      * * * scheduler superman deny --purple-kryptonite --vampire
-*/1    2-7    * * * scheduler superman deny --purple-kryptonite --vampire
+0-4/1  0    * * * scheduler superman deny --purple-kryptonite --vampire --safe
+5-59/1 0    * * * scheduler superman deny --purple-kryptonite --vampire
+*/1    1-7  * * * scheduler superman deny --purple-kryptonite --vampire
+*/5    8-23 * * * scheduler superman allow
 
 
 
