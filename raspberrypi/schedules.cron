@@ -212,18 +212,18 @@ NON_ROOT_USER=ubuntu
 
 
 # Gaming
-0-4/1  0    * * * scheduler gaming deny --yellow-kryptonite --safe
-5-59/1 0    * * * scheduler gaming deny --yellow-kryptonite
-*/1    1-7  * * * scheduler gaming deny --yellow-kryptonite
-*/5    8-23 * * * scheduler gaming allow
+*/1    0-7  * * * scheduler gaming deny --yellow-kryptonite
+*/5    8-22 * * * scheduler gaming allow
+0-4/1  23   * * * scheduler gaming deny --yellow-kryptonite --safe
+5-59/1 23   * * * scheduler gaming deny --yellow-kryptonite
 
 
 
 # Minerva
-0-4/1  0    * * * scheduler minerva deny --yellow-kryptonite --safe
-5-59/1 0    * * * scheduler minerva deny --yellow-kryptonite
-*/1    1-7  * * * scheduler minerva deny --yellow-kryptonite
-*/5    8-23 * * * scheduler minerva allow
+*/1    0-7  * * * scheduler minerva deny --yellow-kryptonite
+*/5    8-22 * * * scheduler minerva allow
+0-4/1  23   * * * scheduler minerva deny --yellow-kryptonite --safe
+5-59/1 23   * * * scheduler minerva deny --yellow-kryptonite
 
 
 
@@ -244,11 +244,11 @@ NON_ROOT_USER=ubuntu
 
 
 # Social Media Allow
-0-4/1  0    * * * scheduler social-media-allow deny --yellow-kryptonite --safe
-5-59/1 0    * * * scheduler social-media-allow deny --yellow-kryptonite
-*/1    1-7  * * * scheduler social-media-allow deny --yellow-kryptonite
-*/5    8-23 * * * scheduler social-media-allow allow
-*/20   8-23 * * * scheduler social-media-allow deny --soft
+*/1    0-7  * * * scheduler social-media-allow deny --yellow-kryptonite
+*/5    8-22 * * * scheduler social-media-allow allow
+*/20   8-22 * * * scheduler social-media-allow deny --soft
+0-4/1  23   * * * scheduler social-media-allow deny --yellow-kryptonite --safe
+5-59/1 23   * * * scheduler social-media-allow deny --yellow-kryptonite
 
 
 
@@ -261,10 +261,10 @@ NON_ROOT_USER=ubuntu
 
 
 # Amazon
-0-4/1  0    * * * scheduler amazon deny --yellow-kryptonite --safe
-5-59/1 0    * * * scheduler amazon deny --yellow-kryptonite
-*/1    1-7  * * * scheduler amazon deny --yellow-kryptonite
-*/5    8-23 * * * scheduler amazon allow
+*/1    0-7  * * * scheduler amazon deny --yellow-kryptonite
+*/5    8-22 * * * scheduler amazon allow
+0-4/1  23   * * * scheduler amazon deny --yellow-kryptonite --safe
+5-59/1 23   * * * scheduler amazon deny --yellow-kryptonite
 
 
 
@@ -277,10 +277,10 @@ NON_ROOT_USER=ubuntu
 
 
 # YouTube Accessories
-*/1    0-7,13-23 * * * scheduler youtube-accessories deny --red-kryptonite
-*/5    8-11      * * * scheduler youtube-accessories deny --vampire
-0-4/1  12        * * * scheduler youtube-accessories deny --red-kryptonite --safe
-5-59/1 12        * * * scheduler youtube-accessories deny --red-kryptonite
+*/1    0-7,12-23 * * * scheduler youtube-accessories deny --red-kryptonite
+*/5    8-10      * * * scheduler youtube-accessories deny --vampire
+0-4/1  11        * * * scheduler youtube-accessories deny --red-kryptonite --safe
+5-59/1 11        * * * scheduler youtube-accessories deny --red-kryptonite
 
 
 
@@ -293,11 +293,11 @@ NON_ROOT_USER=ubuntu
 
 
 # YouTube Music
-0-4/1  0    * * * scheduler youtube-music deny --yellow-kryptonite --safe
-5-59/1 0    * * * scheduler youtube-music deny --yellow-kryptonite
-*/1    1-7  * * * scheduler youtube-music deny --yellow-kryptonite
-*/5    8-23 * * * scheduler youtube-music allow
-*/20   8-23 * * * scheduler youtube-music deny --soft
+*/1    0-7  * * * scheduler youtube-music deny --yellow-kryptonite
+*/5    8-22 * * * scheduler youtube-music allow
+*/20   8-22 * * * scheduler youtube-music deny --soft
+0-4/1  23   * * * scheduler youtube-music deny --yellow-kryptonite --safe
+5-59/1 23   * * * scheduler youtube-music deny --yellow-kryptonite
 
 
 
