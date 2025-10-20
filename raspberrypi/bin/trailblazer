@@ -48,6 +48,13 @@ main() {
 
   force_retry_flag="false"
 
+  if ! echo "$IGNORE" | grep -Eq "(^|,)daemon(,|$)" &&
+     [ "$(systemctl is-active --user observe-"$quotarget_service"-conf)" != "inactive" ]
+  then
+    echo "The daemon is not inactive." >&2
+    exit 1
+  fi
+
   if [ "$MORNING" = 1 ]; then
     garnish prep
     echo
