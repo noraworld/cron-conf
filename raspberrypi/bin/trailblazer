@@ -120,7 +120,7 @@ parser_definition() {
   flag    FORCE_RETRY    --force-retry -- "perform without force option first, then execute with force option if the first attempt fails"
   param   INTERVAL       --interval    -- "wait for the given number of seconds each time (unlock)"
   flag    MORNING        --morning     -- "skip quotarget, and ask to prepare a piece of garlic"
-  flag    CACHE_ONLY     --cache-only    -- "use cache even if cache is stale (ignore check interval)"
+  flag    CACHE_ONLY     --cache-only  -- "use cache even if cache is stale (ignore check interval)"
   flag    REFRESH        --refresh     -- "restart todo-list daemon before check"
   param   RETRY          --retry       -- "try to create or delete symlinks the given number of times (unlock)"
   flag    SINCERE        --sincere     -- "execute sincere before running"
