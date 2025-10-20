@@ -51,7 +51,7 @@ main() {
   if [ "$MORNING" = 1 ]; then
     garnish prep
     echo
-  else
+  elif ! echo "$IGNORE" | grep -Eq "(^|,)quotarget(,|$)"; then
     accomplished="0"
 
     while [ "$accomplished" -eq 0 ] || [ "$force_retry_flag" = "true" ]; do
@@ -100,7 +100,10 @@ main() {
     printf "sincere: "
     sincerely=$(sincere $force $cache_only)
     echo "$sincerely"
-    [ "$sincerely" -le 0 ] && exit 1
+
+    if [ "$sincerely" -le 0 ] && ! echo "$IGNORE" | grep -Eq "(^|,)sincere(,|$)"; then
+      exit 1
+    fi
   fi
 
   # value: positive
@@ -118,6 +121,7 @@ parser_definition() {
   flag    DRY_RUN        --dry-run     -- "just show the success message instead of unlocking the services"
   flag    FORCE          --force       -- "get content from APIs even if cache exists"
   flag    FORCE_RETRY    --force-retry -- "perform without force option first, then execute with force option if the first attempt fails"
+  param   IGNORE         --ignore      -- "skip specific check processes (ones in daemon, quotarget, sincere)"
   param   INTERVAL       --interval    -- "wait for the given number of seconds each time (unlock)"
   flag    MORNING        --morning     -- "skip quotarget, and ask to prepare a piece of garlic"
   flag    CACHE_ONLY     --cache-only  -- "use cache even if cache is stale (ignore check interval)"
@@ -136,6 +140,7 @@ parser_definition() {
 DRY_RUN=''
 FORCE=''
 FORCE_RETRY=''
+IGNORE=''
 INTERVAL=''
 MORNING=''
 CACHE_ONLY=''
@@ -172,6 +177,11 @@ parse() {
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
         FORCE_RETRY="$OPTARG"
         ;;
+      '--ignore')
+        [ $# -le 1 ] && set "required" "$1" && break
+        OPTARG=$2
+        IGNORE="$OPTARG"
+        shift ;;
       '--interval')
         [ $# -le 1 ] && set "required" "$1" && break
         OPTARG=$2
@@ -246,6 +256,7 @@ Options:
       --dry-run               just show the success message instead of unlocking the services
       --force                 get content from APIs even if cache exists
       --force-retry           perform without force option first, then execute with force option if the first attempt fails
+      --ignore IGNORE         skip specific check processes (ones in daemon, quotarget, sincere)
       --interval INTERVAL     wait for the given number of seconds each time (unlock)
       --morning               skip quotarget, and ask to prepare a piece of garlic
       --cache-only            use cache even if cache is stale (ignore check interval)
