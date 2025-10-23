@@ -269,10 +269,10 @@ NON_ROOT_USER=ubuntu
 
 
 # YouTube
-*/1    0-7,23 * * * scheduler youtube deny --red-kryptonite
-*/5    8-21   * * * scheduler youtube deny --vampire
-0-4/1  22     * * * scheduler youtube deny --red-kryptonite --safe
-5-59/1 22     * * * scheduler youtube deny --red-kryptonite
+*/1    0-7  * * * scheduler youtube deny --red-kryptonite
+*/5    8-22 * * * scheduler youtube deny --vampire
+0-4/1  23   * * * scheduler youtube deny --red-kryptonite --safe
+5-59/1 23   * * * scheduler youtube deny --red-kryptonite
 
 
 
