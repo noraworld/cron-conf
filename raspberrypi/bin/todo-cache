@@ -4,7 +4,7 @@ set -eu
 export GHC_FROM="$(basename "$0") $*"
 
 CACHE_BASE_PATH="/home/ubuntu/workspace/log/pi/tmp/todo_caches"
-CHECK_INTERVAL="3600"
+CHECK_INTERVAL="1800"
 GUESSED_ISSUES_LIST_FILE="guessed_issues_list"
 ISSUES_LIST_INTERVAL="21600"
 LEGITIMATE_ISSUES_LIST_FILE="legitimate_issues_list"
