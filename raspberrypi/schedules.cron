@@ -187,8 +187,7 @@ NON_ROOT_USER=ubuntu
 
 
 
-# Deregulated Superman
-#   I want to replace with "Countess" in the future.
+# Deregulated Superman ("Countess" in the future)
 */5 * * * * scheduler deregulated-superman allow
 
 
