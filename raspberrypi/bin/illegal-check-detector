@@ -182,9 +182,10 @@ updatable() {
   if [ "$CACHE_ONLY" = "1" ]; then
     [ "$VERBOSE" = "1" ] && echo "It did nothing because --cache-only is passed." >&2
     echo "-1"
-  elif [ "$(cat "$RESULT_FILE")" -le 0 ] ||
-     [ "$(echo $(( $(date +%s) - $(cat "$CHECK_FILE") )) )" -gt "$CHECK_INTERVAL" ]; then
-
+  elif
+    [ "$(cat "$RESULT_FILE")" -le 0 ] ||
+    [ "$(echo $(( $(date +%s) - $(cat "$CHECK_FILE") )) )" -gt "$CHECK_INTERVAL" ]
+  then
     [ "$VERBOSE" = "1" ] && echo "It has not taken $CHECK_INTERVAL seconds since the last update." >&2
     date +%s > "$CHECK_FILE"
     echo "1"
