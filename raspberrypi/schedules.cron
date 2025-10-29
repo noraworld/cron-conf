@@ -309,10 +309,8 @@ NON_ROOT_USER=ubuntu
 
 
 # Snorlax
-0      0     * * * scheduler snorlax deny --soft
-5-55/5 0     * * * scheduler snorlax deny --soft
-*/5    1-9   * * * scheduler snorlax deny --soft
-*/10   10-23 * * * scheduler snorlax allow
+*/20 0-7  * * * scheduler snorlax deny --soft
+*/5  8-23 * * * scheduler snorlax allow --strong
 
 
 
