@@ -69,15 +69,6 @@ validate() {
   if [ "$PAST" = "" ]; then
     PAST=0
   fi
-
-  # Delete if any problem doesn't happen.
-  # if \
-  #   { [ "$PASS_STAMP" != "" ] && [ "$FAIL_STAMP"  = "" ]; } ||
-  #   { [ "$PASS_STAMP"  = "" ] && [ "$FAIL_STAMP" != "" ]; }
-  # then
-  #   echo "both --pass-stamp and --fail-stamp are necessary" >&2
-  #   exit 1
-  # fi
 }
 
 # shellcheck disable=SC2329
