@@ -2838,7 +2838,7 @@
       "scraping_by": {
         "todo_personal": "echo 1",
         "task_personal": "echo 1",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary 瞑想 ワークアウト 読書 発音練習 単語学習 筆記開示 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
+        "tick_personal": "ticksum --repo noraworld/reserved-diary 瞑想 ワークアウト 読書 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
         "todo_work": "echo 1",
         "task_work": "echo 1"
       }
