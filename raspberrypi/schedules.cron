@@ -51,7 +51,7 @@ NON_ROOT_USER=ubuntu
 
 
 # Detect illegal checks on diary
-40 8 * * * sincere
+40 7 * * * sincere
 
 
 
@@ -73,22 +73,34 @@ NON_ROOT_USER=ubuntu
 #   Note 2:
 #     Remember that the shorter the time is, the more it can take effect.
 #
-*/1    0-7,23 * * * scheduler firewall deny --red-kryptonite
-*/5    8-21   * * * scheduler firewall allow
-0-4/1  22     * * * scheduler firewall deny --red-kryptonite --safe
-5-59/1 22     * * * scheduler firewall deny --red-kryptonite
+*/5    8-9    * * * scheduler firewall allow
+0-4/1  10     * * * scheduler firewall deny --white-kryptonite --safe
+5-59/1 10     * * * scheduler firewall deny --white-kryptonite
+*/1    11-19  * * * scheduler firewall deny --white-kryptonite
+*/5    20-21  * * * scheduler firewall allow
+0-4/1  22     * * * scheduler firewall deny --black-kryptonite --safe
+5-59/1 22     * * * scheduler firewall deny --black-kryptonite
+*/1    23,0-7 * * * scheduler firewall deny --black-kryptonite
 
 # Observe conf changes
-*/1    0-7,23 * * * scheduler observe start --red-kryptonite
-*/5    8-21   * * * scheduler observe stop
-0-4/1  22     * * * scheduler observe start --red-kryptonite --safe
-5-59/1 22     * * * scheduler observe start --red-kryptonite
+*/5    8-9    * * * scheduler observe stop
+0-4/1  10     * * * scheduler observe start --white-kryptonite --safe
+5-59/1 10     * * * scheduler observe start --white-kryptonite
+*/1    11-19  * * * scheduler observe start --white-kryptonite
+*/5    20-21  * * * scheduler observe stop
+0-4/1  22     * * * scheduler observe start --black-kryptonite --safe
+5-59/1 22     * * * scheduler observe start --black-kryptonite
+*/1    23,0-7 * * * scheduler observe start --black-kryptonite
 
 # Discipline
-*/1    0-7,23 * * * scheduler discipline deny --red-kryptonite
-*/5    8-21   * * * scheduler discipline allow
-0-4/1  22     * * * scheduler discipline deny --red-kryptonite --safe
-5-59/1 22     * * * scheduler discipline deny --red-kryptonite
+*/5    8-9    * * * scheduler discipline allow
+0-4/1  10     * * * scheduler discipline deny --white-kryptonite --safe
+5-59/1 10     * * * scheduler discipline deny --white-kryptonite
+*/1    11-19  * * * scheduler discipline deny --white-kryptonite
+*/5    20-21  * * * scheduler discipline allow
+0-4/1  22     * * * scheduler discipline deny --black-kryptonite --safe
+5-59/1 22     * * * scheduler discipline deny --black-kryptonite
+*/1    23,0-7 * * * scheduler discipline deny --black-kryptonite
 
 
 
@@ -123,8 +135,8 @@ NON_ROOT_USER=ubuntu
 0-4/1  9  * * * scheduler todo-qtg0900 start --safe --morning
 5-59/1 9  * * * scheduler todo-qtg0900 start        --morning
 */5    10 * * * scheduler todo-qtg0900 stop
-0-4/1  10 * * * scheduler todo-qtg1000 start --safe --morning
-5-59/1 10 * * * scheduler todo-qtg1000 start        --morning
+0-4/1  10 * * * scheduler todo-qtg1000 start --safe
+5-59/1 10 * * * scheduler todo-qtg1000 start
 */5    11 * * * scheduler todo-qtg1000 stop
 0-4/1  11 * * * scheduler todo-qtg1100 start --safe
 5-59/1 11 * * * scheduler todo-qtg1100 start
@@ -188,176 +200,193 @@ NON_ROOT_USER=ubuntu
 
 
 # Deregulated Superman ("Countess" in the future)
-0-4/1  0    * * * scheduler deregulated-superman deny --purple-kryptonite --safe
-5-59/1 0    * * * scheduler deregulated-superman deny --purple-kryptonite
-*/1    1-7  * * * scheduler deregulated-superman deny --purple-kryptonite
-*/5    8-23 * * * scheduler deregulated-superman allow
+0-4/1  8     * * * scheduler deregulated-superman deny --violet-kryptonite --safe
+5-59/1 8     * * * scheduler deregulated-superman deny --violet-kryptonite
+*/1    9     * * * scheduler deregulated-superman deny --violet-kryptonite
+0-4/1  10    * * * scheduler deregulated-superman deny --white-kryptonite --safe
+5-59/1 10    * * * scheduler deregulated-superman deny --white-kryptonite
+*/1    11-19 * * * scheduler deregulated-superman deny --white-kryptonite
+*/5    20-23 * * * scheduler deregulated-superman allow
+0-4/1  0     * * * scheduler deregulated-superman deny --purple-kryptonite --safe
+5-59/1 0     * * * scheduler deregulated-superman deny --purple-kryptonite
+*/1    1-7   * * * scheduler deregulated-superman deny --purple-kryptonite
 
 
 
 # Upstream
-0-4/1  0    * * * scheduler upstream deny --purple-kryptonite --safe
-5-59/1 0    * * * scheduler upstream deny --purple-kryptonite
-*/1    1-7  * * * scheduler upstream deny --purple-kryptonite
-*/5    8-23 * * * scheduler upstream allow
+0-4/1  8     * * * scheduler upstream deny --violet-kryptonite --safe
+5-59/1 8     * * * scheduler upstream deny --violet-kryptonite
+*/1    9     * * * scheduler upstream deny --violet-kryptonite
+0-4/1  10    * * * scheduler upstream deny --white-kryptonite --safe
+5-59/1 10    * * * scheduler upstream deny --white-kryptonite
+*/1    11-19 * * * scheduler upstream deny --white-kryptonite
+*/5    20-23 * * * scheduler upstream allow
+0-4/1  0     * * * scheduler upstream deny --purple-kryptonite --safe
+5-59/1 0     * * * scheduler upstream deny --purple-kryptonite
+*/1    1-7   * * * scheduler upstream deny --purple-kryptonite
 
 
 
 # Maeve
-######################### ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ ########################
-# */5    8-19  * * * scheduler maeve allow
-######################### ↑ CHOOSE EITHER ↓ ########################
-*/1    8-19  * * * scheduler maeve deny --purple-kryptonite
-######################### ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ ########################
+0-4/1  8     * * * scheduler maeve deny --violet-kryptonite --safe
+5-59/1 8     * * * scheduler maeve deny --violet-kryptonite
+*/1    9     * * * scheduler maeve deny --violet-kryptonite
+0-4/1  10    * * * scheduler maeve deny --white-kryptonite --safe
+5-59/1 10    * * * scheduler maeve deny --white-kryptonite
+*/1    11-19 * * * scheduler maeve deny --white-kryptonite
 */5    20-23 * * * scheduler maeve allow
-######################### ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ ########################
-*/5    0-3   * * * scheduler maeve allow
-0-4/1  4     * * * scheduler maeve deny --purple-kryptonite --safe
-5-59/1 4     * * * scheduler maeve deny --purple-kryptonite
-*/1    5-7   * * * scheduler maeve deny --purple-kryptonite
-######################### ↑ CHOOSE EITHER ↓ ########################
-# 0-4/1  0     * * * scheduler maeve deny --purple-kryptonite --safe
-# 5-59/1 0     * * * scheduler maeve deny --purple-kryptonite
-# */1    1-7   * * * scheduler maeve deny --purple-kryptonite
-######################### ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ ########################
+0-4/1  0     * * * scheduler maeve deny --purple-kryptonite --safe
+5-59/1 0     * * * scheduler maeve deny --purple-kryptonite
+*/1    1-7   * * * scheduler maeve deny --purple-kryptonite
 
 
 
 # Superman
-########################### ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ ##########################
-# */5    8-19   * * * scheduler superman allow
-########################### ↑ CHOOSE EITHER ↓ ##########################
-*/1    8-19   * * * scheduler superman deny --purple-kryptonite
-########################### ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ ##########################
-*/5    20-22  * * * scheduler superman allow
-########################### ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ ##########################
-*/5    23,0-2 * * * scheduler superman allow
-0-4/1  3      * * * scheduler superman deny --purple-kryptonite --safe
-5-59/1 3      * * * scheduler superman deny --purple-kryptonite
-*/1    4-7    * * * scheduler superman deny --purple-kryptonite
-########################### ↑ CHOOSE EITHER ↓ ##########################
-# 0-4/1  23     * * * scheduler superman deny --purple-kryptonite --safe
-# 5-59/1 23     * * * scheduler superman deny --purple-kryptonite
-# */1    0-7    * * * scheduler superman deny --purple-kryptonite
-########################### ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ ##########################
+0-4/1  8     * * * scheduler superman deny --violet-kryptonite --safe
+5-59/1 8     * * * scheduler superman deny --violet-kryptonite
+*/1    9     * * * scheduler superman deny --violet-kryptonite
+0-4/1  10    * * * scheduler superman deny --white-kryptonite --safe
+5-59/1 10    * * * scheduler superman deny --white-kryptonite
+*/1    11-19 * * * scheduler superman deny --white-kryptonite
+*/5    20-22 * * * scheduler superman allow
+0-4/1  23    * * * scheduler superman deny --purple-kryptonite --safe
+5-59/1 23    * * * scheduler superman deny --purple-kryptonite
+*/1    0-7   * * * scheduler superman deny --purple-kryptonite
 
 
 
 # Gaming
-*/1    0-7  * * * scheduler gaming deny --yellow-kryptonite
-*/5    8-22 * * * scheduler gaming allow
-0-4/1  23   * * * scheduler gaming deny --yellow-kryptonite --safe
-5-59/1 23   * * * scheduler gaming deny --yellow-kryptonite
+*/5    8-9   * * * scheduler gaming allow
+0-4/1  10    * * * scheduler gaming deny --white-kryptonite --safe
+5-59/1 10    * * * scheduler gaming deny --white-kryptonite
+*/1    11-19 * * * scheduler gaming deny --white-kryptonite
+*/5    20-22 * * * scheduler gaming allow
+0-4/1  23    * * * scheduler gaming deny --yellow-kryptonite --safe
+5-59/1 23    * * * scheduler gaming deny --yellow-kryptonite
+*/1    0-7   * * * scheduler gaming deny --yellow-kryptonite
 
 
 
 # Minerva
-*/1    0-7  * * * scheduler minerva deny --yellow-kryptonite
-*/5    8-22 * * * scheduler minerva allow
-0-4/1  23   * * * scheduler minerva deny --yellow-kryptonite --safe
-5-59/1 23   * * * scheduler minerva deny --yellow-kryptonite
+*/5    8-9   * * * scheduler minerva allow
+0-4/1  10    * * * scheduler minerva deny --white-kryptonite --safe
+5-59/1 10    * * * scheduler minerva deny --white-kryptonite
+*/1    11-19 * * * scheduler minerva deny --white-kryptonite
+*/5    20-22 * * * scheduler minerva allow
+0-4/1  23    * * * scheduler minerva deny --yellow-kryptonite --safe
+5-59/1 23    * * * scheduler minerva deny --yellow-kryptonite
+*/1    0-7   * * * scheduler minerva deny --yellow-kryptonite
 
 
 
 # Netflix
-*/1    0-7  * * * scheduler netflix deny --yellow-kryptonite
-*/5    8-22 * * * scheduler netflix allow
-0-4/1  23   * * * scheduler netflix deny --yellow-kryptonite --safe
-5-59/1 23   * * * scheduler netflix deny --yellow-kryptonite
+*/5    8-9   * * * scheduler netflix allow
+0-4/1  10    * * * scheduler netflix deny --white-kryptonite --safe
+5-59/1 10    * * * scheduler netflix deny --white-kryptonite
+*/1    11-19 * * * scheduler netflix deny --white-kryptonite
+*/5    20-22 * * * scheduler netflix allow
+0-4/1  23    * * * scheduler netflix deny --yellow-kryptonite --safe
+5-59/1 23    * * * scheduler netflix deny --yellow-kryptonite
+*/1    0-7   * * * scheduler netflix deny --yellow-kryptonite
 
 
 
 # Social Media
-*/1    0-7  * * * scheduler social-media deny --red-kryptonite
-*/5    8-22 * * * scheduler social-media allow
-0-4/1  23   * * * scheduler social-media deny --red-kryptonite --safe
-5-59/1 23   * * * scheduler social-media deny --red-kryptonite
+*/5    8-9   * * * scheduler social-media allow
+0-4/1  10    * * * scheduler social-media deny --white-kryptonite --safe
+5-59/1 10    * * * scheduler social-media deny --white-kryptonite
+*/1    11-19 * * * scheduler social-media deny --white-kryptonite
+*/5    20-22 * * * scheduler social-media allow
+0-4/1  23    * * * scheduler social-media deny --red-kryptonite --safe
+5-59/1 23    * * * scheduler social-media deny --red-kryptonite
+*/1    0-7   * * * scheduler social-media deny --red-kryptonite
 
 
 
 # Social Media Allow
-*/1    0-7  * * * scheduler social-media-allow deny --yellow-kryptonite
 */5    8-22 * * * scheduler social-media-allow allow
 */20   8-22 * * * scheduler social-media-allow deny --soft
 0-4/1  23   * * * scheduler social-media-allow deny --yellow-kryptonite --safe
 5-59/1 23   * * * scheduler social-media-allow deny --yellow-kryptonite
+*/1    0-7  * * * scheduler social-media-allow deny --yellow-kryptonite
 
 
 
 # VOD
-*/1    0-7  * * * scheduler vod deny --yellow-kryptonite
-*/5    8-22 * * * scheduler vod allow
-0-4/1  23   * * * scheduler vod deny --yellow-kryptonite --safe
-5-59/1 23   * * * scheduler vod deny --yellow-kryptonite
+*/5    8-9   * * * scheduler vod allow
+0-4/1  10    * * * scheduler vod deny --white-kryptonite --safe
+5-59/1 10    * * * scheduler vod deny --white-kryptonite
+*/1    11-19 * * * scheduler vod deny --white-kryptonite
+*/5    20-22 * * * scheduler vod allow
+0-4/1  23    * * * scheduler vod deny --yellow-kryptonite --safe
+5-59/1 23    * * * scheduler vod deny --yellow-kryptonite
+*/1    0-7   * * * scheduler vod deny --yellow-kryptonite
 
 
 
 # Amazon
-*/1    0-7  * * * scheduler amazon deny --yellow-kryptonite
-*/5    8-22 * * * scheduler amazon allow
-0-4/1  23   * * * scheduler amazon deny --yellow-kryptonite --safe
-5-59/1 23   * * * scheduler amazon deny --yellow-kryptonite
+*/5    8-9   * * * scheduler amazon allow
+0-4/1  10    * * * scheduler amazon deny --white-kryptonite --safe
+5-59/1 10    * * * scheduler amazon deny --white-kryptonite
+*/1    11-19 * * * scheduler amazon deny --white-kryptonite
+*/5    20-22 * * * scheduler amazon allow
+0-4/1  23    * * * scheduler amazon deny --yellow-kryptonite --safe
+5-59/1 23    * * * scheduler amazon deny --yellow-kryptonite
+*/1    0-7   * * * scheduler amazon deny --yellow-kryptonite
 
 
 
 # YouTube
-*/5    8-9       * * * scheduler youtube deny --vampire
-########################### ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ #########################
-# */5    10-19     * * * scheduler youtube deny --vampire
-########################### ↑ CHOOSE EITHER ↓ #########################
-0-4/1  10        * * * scheduler youtube deny --red-kryptonite --safe
-5-59/1 10        * * * scheduler youtube deny --red-kryptonite
-*/1    11-19     * * * scheduler youtube deny --red-kryptonite
-########################### ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ #########################
-*/5    20-21     * * * scheduler youtube deny --vampire
-########################### ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ #########################
-*/5    22-23,0-1 * * * scheduler youtube deny --vampire
-0-4/1  2         * * * scheduler youtube deny --red-kryptonite --safe
-5-59/1 2         * * * scheduler youtube deny --red-kryptonite
-*/1    3-7       * * * scheduler youtube deny --red-kryptonite
-########################### ↑ CHOOSE EITHER ↓ #########################
-# 0-4/1  22        * * * scheduler youtube deny --red-kryptonite --safe
-# 5-59/1 22        * * * scheduler youtube deny --red-kryptonite
-# */1    23,0-7    * * * scheduler youtube deny --red-kryptonite
-########################### ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ #########################
+*/5    8-9    * * * scheduler youtube deny --vampire
+0-4/1  10     * * * scheduler youtube deny --white-kryptonite --safe
+5-59/1 10     * * * scheduler youtube deny --white-kryptonite
+*/1    11-19  * * * scheduler youtube deny --white-kryptonite
+*/5    20-21  * * * scheduler youtube deny --vampire
+0-4/1  22     * * * scheduler youtube deny --red-kryptonite --safe
+5-59/1 22     * * * scheduler youtube deny --red-kryptonite
+*/1    23,0-7 * * * scheduler youtube deny --red-kryptonite
 
 
 
 # YouTube Accessories
-*/1    0-7,12-23 * * * scheduler youtube-accessories deny --red-kryptonite
-*/5    8-10      * * * scheduler youtube-accessories deny --vampire
-0-4/1  11        * * * scheduler youtube-accessories deny --red-kryptonite --safe
-5-59/1 11        * * * scheduler youtube-accessories deny --red-kryptonite
+*/5    8-9       * * * scheduler youtube-accessories deny --vampire
+0-4/1  10        * * * scheduler youtube-accessories deny --black-kryptonite --safe
+5-59/1 10        * * * scheduler youtube-accessories deny --black-kryptonite
+*/1    11-23,0-7 * * * scheduler youtube-accessories deny --black-kryptonite
 
 
 
 # YouTube Alternative
-*/1    0-7,23 * * * scheduler youtube-alternative deny --yellow-kryptonite
-*/5    8-21   * * * scheduler youtube-alternative allow
+*/5    8-9    * * * scheduler youtube-alternative allow
+0-4/1  10     * * * scheduler youtube-alternative deny --white-kryptonite --safe
+5-59/1 10     * * * scheduler youtube-alternative deny --white-kryptonite
+*/1    11-19  * * * scheduler youtube-alternative deny --white-kryptonite
+*/5    20-21  * * * scheduler youtube-alternative allow
 0-4/1  22     * * * scheduler youtube-alternative deny --yellow-kryptonite --safe
 5-59/1 22     * * * scheduler youtube-alternative deny --yellow-kryptonite
+*/1    23,0-7 * * * scheduler youtube-alternative deny --yellow-kryptonite
 
 
 
 # YouTube Music
-*/1    0-7,23 * * * scheduler youtube-music deny --yellow-kryptonite
 */20   8-21   * * * scheduler youtube-music deny --soft
 */5    8-21   * * * scheduler youtube-music allow
 0-4/1  22     * * * scheduler youtube-music deny --yellow-kryptonite --safe
 5-59/1 22     * * * scheduler youtube-music deny --yellow-kryptonite
+*/1    23,0-7 * * * scheduler youtube-music deny --yellow-kryptonite
 
 
 
 # YouTube Music Persistent
-*/1    0-7,23 * * * scheduler youtube-music-persistent deny --yellow-kryptonite
 */5    8-21   * * * scheduler youtube-music-persistent allow
 0-4/1  22     * * * scheduler youtube-music-persistent deny --yellow-kryptonite --safe
 5-59/1 22     * * * scheduler youtube-music-persistent deny --yellow-kryptonite
+*/1    23,0-7 * * * scheduler youtube-music-persistent deny --yellow-kryptonite
 
 
 
 # Snorlax
-*/20 0-7  * * * scheduler snorlax deny  --soft
+*/20 0-7  * * * scheduler snorlax deny  --strong --red-kryptonite --soft
 */5  8-23 * * * scheduler snorlax allow --strong
 
 
