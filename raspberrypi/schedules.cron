@@ -78,9 +78,9 @@ NON_ROOT_USER=ubuntu
 5-59/1 10     * * * scheduler firewall deny --white-kryptonite
 */1    11-19  * * * scheduler firewall deny --white-kryptonite
 */5    20-21  * * * scheduler firewall allow
-0-4/1  22     * * * scheduler firewall deny --red-kryptonite --safe
-5-59/1 22     * * * scheduler firewall deny --red-kryptonite
-*/1    23,0-7 * * * scheduler firewall deny --red-kryptonite
+0-4/1  22     * * * scheduler firewall deny --black-kryptonite --safe
+5-59/1 22     * * * scheduler firewall deny --black-kryptonite
+*/1    23,0-7 * * * scheduler firewall deny --black-kryptonite
 
 # Observe conf changes
 */5    8-9    * * * scheduler observe stop
@@ -88,9 +88,9 @@ NON_ROOT_USER=ubuntu
 5-59/1 10     * * * scheduler observe start --white-kryptonite
 */1    11-19  * * * scheduler observe start --white-kryptonite
 */5    20-21  * * * scheduler observe stop
-0-4/1  22     * * * scheduler observe start --red-kryptonite --safe
-5-59/1 22     * * * scheduler observe start --red-kryptonite
-*/1    23,0-7 * * * scheduler observe start --red-kryptonite
+0-4/1  22     * * * scheduler observe start --black-kryptonite --safe
+5-59/1 22     * * * scheduler observe start --black-kryptonite
+*/1    23,0-7 * * * scheduler observe start --black-kryptonite
 
 # Discipline
 */5    8-9    * * * scheduler discipline allow
@@ -98,9 +98,9 @@ NON_ROOT_USER=ubuntu
 5-59/1 10     * * * scheduler discipline deny --white-kryptonite
 */1    11-19  * * * scheduler discipline deny --white-kryptonite
 */5    20-21  * * * scheduler discipline allow
-0-4/1  22     * * * scheduler discipline deny --red-kryptonite --safe
-5-59/1 22     * * * scheduler discipline deny --red-kryptonite
-*/1    23,0-7 * * * scheduler discipline deny --red-kryptonite
+0-4/1  22     * * * scheduler discipline deny --black-kryptonite --safe
+5-59/1 22     * * * scheduler discipline deny --black-kryptonite
+*/1    23,0-7 * * * scheduler discipline deny --black-kryptonite
 
 
 
@@ -342,9 +342,9 @@ NON_ROOT_USER=ubuntu
 
 # YouTube Accessories
 */5    8-9       * * * scheduler youtube-accessories deny --vampire
-0-4/1  10        * * * scheduler youtube-accessories deny --red-kryptonite --safe
-5-59/1 10        * * * scheduler youtube-accessories deny --red-kryptonite
-*/1    11-23,0-7 * * * scheduler youtube-accessories deny --red-kryptonite
+0-4/1  10        * * * scheduler youtube-accessories deny --black-kryptonite --safe
+5-59/1 10        * * * scheduler youtube-accessories deny --black-kryptonite
+*/1    11-23,0-7 * * * scheduler youtube-accessories deny --black-kryptonite
 
 
 
