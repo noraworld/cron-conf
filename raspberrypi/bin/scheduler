@@ -44,8 +44,8 @@ main() {
   # line (remove "#" at the beginning of this line if it exists) if you want to DISABLE the kryptonite mode.
   #
   [ "$BLACK_KRYPTONITE"  = "1" ] && BLACK_KRYPTONITE="-1"
-  [ "$PURPLE_KRYPTONITE" = "1" ] && PURPLE_KRYPTONITE="-1"
-  [ "$RED_KRYPTONITE"    = "1" ] && RED_KRYPTONITE="-1"
+  # [ "$PURPLE_KRYPTONITE" = "1" ] && PURPLE_KRYPTONITE="-1"
+  # [ "$RED_KRYPTONITE"    = "1" ] && RED_KRYPTONITE="-1"
   [ "$VIOLET_KRYPTONITE" = "1" ] && VIOLET_KRYPTONITE="-1"
   [ "$WHITE_KRYPTONITE"  = "1" ] && WHITE_KRYPTONITE="-1"
   [ "$YELLOW_KRYPTONITE" = "1" ] && YELLOW_KRYPTONITE="-1"
