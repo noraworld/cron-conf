@@ -691,6 +691,7 @@ snorlax() {
       [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
       [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-snorlax-conf "$safe"
+        [ "$STRONG" = 1 ] && remove-dnsmasq-toggle-conf public snorlax
         return
       fi
 
