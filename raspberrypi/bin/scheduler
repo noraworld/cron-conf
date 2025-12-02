@@ -781,13 +781,25 @@ upstream() {
       [ "$BLACK_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-adguard-upstream-conf "$safe"
         cron-daemonctl stop observe-nordvpn-upstream-conf "$safe"
+        # DELETE THIS COMMENT IF THESE TWO WORK FINE
+        cron-daemonctl stop observe-superman-upstream-conf "$safe"
+        cron-daemonctl stop observe-cloudflare-upstream-conf "$safe"
+        ############################################
         return
       fi
 
       [ "$SOFT" = 1 ] || cron-daemonctl start observe-adguard-upstream-conf "$safe"
       [ "$SOFT" = 1 ] || cron-daemonctl start observe-nordvpn-upstream-conf "$safe"
+      # DELETE THIS COMMENT IF THESE TWO WORK FINE
+      [ "$SOFT" = 1 ] || cron-daemonctl start observe-superman-upstream-conf "$safe"
+      [ "$SOFT" = 1 ] || cron-daemonctl start observe-cloudflare-upstream-conf "$safe"
+      ############################################
       remove-dnsmasq-toggle-conf private adguard_upstream --skip
-      remove-dnsmasq-toggle-conf private nordvpn_upstream
+      remove-dnsmasq-toggle-conf private nordvpn_upstream --skip
+      # DELETE THIS COMMENT IF THESE TWO WORK FINE
+      remove-dnsmasq-toggle-conf private superman_upstream --skip
+      remove-dnsmasq-toggle-conf private cloudflare_upstream
+      ############################################
 
       # Do nothing if either of them exists, even if the existing one is not prioritized,
       # because sometimes you may want to use the non-prioritized one.
@@ -800,6 +812,10 @@ upstream() {
     "allow")
       cron-daemonctl stop observe-adguard-upstream-conf "$safe"
       cron-daemonctl stop observe-nordvpn-upstream-conf "$safe"
+      # DELETE THIS COMMENT IF THESE TWO WORK FINE
+      cron-daemonctl stop observe-superman-upstream-conf "$safe"
+      cron-daemonctl stop observe-cloudflare-upstream-conf "$safe"
+      ############################################
       # remove-dnsmasq-toggle-conf private cloudflare_upstream --skip
       # remove-dnsmasq-toggle-conf private nordvpn_upstream    --skip
       # remove-dnsmasq-toggle-conf private superman_upstream   --skip
