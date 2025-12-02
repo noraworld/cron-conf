@@ -117,9 +117,10 @@ list_info() {
 }
 
 debug_info() {
+  observer=$(get_observer "$SERVICE")
   # https://chatgpt.com/share/68cff0fa-0234-8004-bcce-cfa2797ce950
   # https://gemini.google.com/app/7dacfcda212451f3
-  daemon_status=$(systemctl is-active --user observe-"$SERVICE"-conf)
+  daemon_status=$(systemctl is-active --user observe-"$observer"-conf)
   case "$daemon_status" in
     "active")
       daemon_status_color="$NG_COLOR"
@@ -276,6 +277,15 @@ convert_timeframe_relative() {
 
       TIMEFRAME="$(echo "$TIMEFRAME_LIST" | awk "{ print \$$i }")"
     fi
+  fi
+}
+
+get_observer() {
+  if [ "$1" = "upstream" ]; then
+    # any upstream name will do as long as it's active
+    echo "adguard-upstream"
+  else
+    echo "$1"
   fi
 }
 
