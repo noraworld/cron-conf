@@ -52,7 +52,7 @@ main() {
   # [ "$SCARLET_KRYPTONITE" = "1" ] && SCARLET_KRYPTONITE="-1"
   [ "$VIOLET_KRYPTONITE"  = "1" ] && VIOLET_KRYPTONITE="-1"
   [ "$WHITE_KRYPTONITE"   = "1" ] && WHITE_KRYPTONITE="-1"
-  [ "$YELLOW_KRYPTONITE"  = "1" ] && YELLOW_KRYPTONITE="-1"
+  # [ "$YELLOW_KRYPTONITE"  = "1" ] && YELLOW_KRYPTONITE="-1"
 
   case "$service" in
     "amazon")
