@@ -12,6 +12,8 @@ ALARM_DISABLED_DURATION="60 min" # The SSH connection is lost for the time given
 
 UPTIME_THRESHOLD="5"
 
+MAX_SLEEP_TIME="30"
+
 export GHC_FROM="$(basename "$0") $*"
 
 main() {
@@ -26,6 +28,13 @@ main() {
 
   if [ "$SAFE" = 1 ]; then
     safe="--safe"
+
+    # https://github.com/noraworld/to-do/issues/2086
+    sleep_time=$(( $(od -An -N1 -t u1 /dev/urandom) % $MAX_SLEEP_TIME + 1 ))
+    if [ "$VERBOSE" = "1" ]; then
+      echo "To avoid restarting Dnsmasq repetitively in a short period of time, waiting for $sleep_time seconds before executing..." >&2
+    fi
+    sleep "$sleep_time"
   else
     # shellcheck disable=SC2034
     safe=""
