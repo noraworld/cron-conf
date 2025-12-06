@@ -797,16 +797,23 @@ upstream() {
 
       [ "$SOFT" = 1 ] || cron-daemonctl start observe-adguard-upstream-conf "$safe"
       [ "$SOFT" = 1 ] || cron-daemonctl start observe-nordvpn-upstream-conf "$safe"
-      # DELETE THIS BLOCK IF THESE TWO ARE UNNECESSARY
+      #
+      # DO NOT ENABLE THESE TWO DAEMONS!
+      #   https://github.com/noraworld/to-do/issues/2069
+      #   https://github.com/noraworld/to-do/issues/2085
+      #
       # [ "$SOFT" = 1 ] || cron-daemonctl start observe-superman-upstream-conf "$safe"
       # [ "$SOFT" = 1 ] || cron-daemonctl start observe-cloudflare-upstream-conf "$safe"
-      ############################################
+
       remove-dnsmasq-toggle-conf private adguard_upstream
       remove-dnsmasq-toggle-conf private nordvpn_upstream
-      # DELETE THIS BLOCK IF THESE TWO ARE UNNECESSARY
+      #
+      # YOU DO NOT HAVE TO ENABLE THESE TWO UPSTREAM IN THIS WAY
+      # BECAUSE THE BELOW CODES SATISFY THE REQUIREMENTS
+      #   https://github.com/noraworld/to-do/issues/2085#issuecomment-3619633400
+      #
       # create-dnsmasq-toggle-conf private superman_upstream
       # create-dnsmasq-toggle-conf private cloudflare_upstream
-      ############################################
 
       # Do nothing if either of them exists, even if the existing one is not prioritized,
       # because sometimes you may want to use the non-prioritized one.
