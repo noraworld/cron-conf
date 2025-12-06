@@ -632,6 +632,9 @@ recurrent() {
   # Observe the hostapd
   hostapd-observer
 
+  # Observe the upstream DNS files
+  upstream-observer
+
   # Empty "at -l" to prevent illegal batches
   batch-remover
 
@@ -774,8 +777,6 @@ todo() {
 upstream() {
   PRIORITIZED_RESTRICTED_UPSTREAM="superman_upstream"
   NON_PRIORITIZED_RESTRICTED_UPSTREAM="cloudflare_upstream"
-  PRIORITIZED_UNRESTRICTED_UPSTREAM="adguard_upstream"
-  NON_PRIORITIZED_UNRESTRICTED_UPSTREAM="nordvpn_upstream"
 
   # Every upstream DNS file should be updated in succession without any interval.
   # When the previous file is deleted and the new file is not yet created, none of the upstream DNS files will be set,
@@ -791,21 +792,6 @@ upstream() {
         cron-daemonctl stop observe-superman-upstream-conf "$safe"
         cron-daemonctl stop observe-cloudflare-upstream-conf "$safe"
         ############################################
-
-        # Do nothing if either of them exists, even if the existing one is not prioritized,
-        # because sometimes you may want to use the non-prioritized one.
-        if \
-          [ -e "$PRIV_TOGGLE_DIR/$PRIORITIZED_UNRESTRICTED_UPSTREAM.conf" ] &&
-          [ -e "$PRIV_TOGGLE_DIR/$NON_PRIORITIZED_UNRESTRICTED_UPSTREAM.conf" ];
-        then
-          remove-dnsmasq-toggle-conf private "$NON_PRIORITIZED_UNRESTRICTED_UPSTREAM"
-        elif \
-          ! [ -e "$PRIV_TOGGLE_DIR/$PRIORITIZED_UNRESTRICTED_UPSTREAM.conf" ] &&
-          ! [ -e "$PRIV_TOGGLE_DIR/$NON_PRIORITIZED_UNRESTRICTED_UPSTREAM.conf" ];
-        then
-          create-dnsmasq-toggle-conf private "$PRIORITIZED_UNRESTRICTED_UPSTREAM"
-        fi
-
         return
       fi
 
@@ -847,20 +833,6 @@ upstream() {
       # remove-dnsmasq-toggle-conf private nordvpn_upstream    --skip
       # remove-dnsmasq-toggle-conf private superman_upstream   --skip
       # create-dnsmasq-toggle-conf private adguard_upstream
-
-      # Do nothing if either of them exists, even if the existing one is not prioritized,
-      # because sometimes you may want to use the non-prioritized one.
-      if \
-        [ -e "$PRIV_TOGGLE_DIR/$PRIORITIZED_UNRESTRICTED_UPSTREAM.conf" ] &&
-        [ -e "$PRIV_TOGGLE_DIR/$NON_PRIORITIZED_UNRESTRICTED_UPSTREAM.conf" ];
-      then
-        remove-dnsmasq-toggle-conf private "$NON_PRIORITIZED_UNRESTRICTED_UPSTREAM"
-      elif \
-        ! [ -e "$PRIV_TOGGLE_DIR/$PRIORITIZED_UNRESTRICTED_UPSTREAM.conf" ] &&
-        ! [ -e "$PRIV_TOGGLE_DIR/$NON_PRIORITIZED_UNRESTRICTED_UPSTREAM.conf" ];
-      then
-        create-dnsmasq-toggle-conf private "$PRIORITIZED_UNRESTRICTED_UPSTREAM"
-      fi
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2

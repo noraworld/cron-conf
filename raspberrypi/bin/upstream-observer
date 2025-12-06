@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# shellcheck disable=SC2004
+
+main() {
+  upstream_count=$(find /etc/dnsmasq.priv/toggle -maxdepth 1 -name "*_upstream.conf" -print | wc -l)
+
+  if [ "$upstream_count" -eq 0 ]; then
+    create-dnsmasq-toggle-conf private superman_upstream
+  elif [ "$upstream_count" -ge 2 ]; then
+    find /etc/dnsmasq.priv/toggle -maxdepth 1 -name "*_upstream.conf" -exec sudo unlink {} \;
+    create-dnsmasq-toggle-conf private superman_upstream
+  fi
+}
+
+main "$@"
