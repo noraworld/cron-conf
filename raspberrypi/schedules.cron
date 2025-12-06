@@ -284,9 +284,9 @@ NON_ROOT_USER=ubuntu
 
 # Minerva
 */5    8-9   * * * scheduler minerva allow
-0-4/1  10    * * * scheduler minerva deny --white-kryptonite --safe
-5-59/1 10    * * * scheduler minerva deny --white-kryptonite
-*/1    11-18 * * * scheduler minerva deny --white-kryptonite
+0-4/1  10    * * * scheduler minerva deny --ivory-kryptonite --safe
+5-59/1 10    * * * scheduler minerva deny --ivory-kryptonite
+*/1    11-18 * * * scheduler minerva deny --ivory-kryptonite
 */5    19-22 * * * scheduler minerva allow
 0-4/1  23    * * * scheduler minerva deny --yellow-kryptonite --safe
 5-59/1 23    * * * scheduler minerva deny --yellow-kryptonite
@@ -356,9 +356,9 @@ NON_ROOT_USER=ubuntu
 
 # Amazon
 */5    8-9   * * * scheduler amazon allow
-0-4/1  10    * * * scheduler amazon deny --white-kryptonite --safe
-5-59/1 10    * * * scheduler amazon deny --white-kryptonite
-*/1    11-18 * * * scheduler amazon deny --white-kryptonite
+0-4/1  10    * * * scheduler amazon deny --ivory-kryptonite --safe
+5-59/1 10    * * * scheduler amazon deny --ivory-kryptonite
+*/1    11-18 * * * scheduler amazon deny --ivory-kryptonite
 */5    19-22 * * * scheduler amazon allow
 0-4/1  23    * * * scheduler amazon deny --yellow-kryptonite --safe
 5-59/1 23    * * * scheduler amazon deny --yellow-kryptonite
