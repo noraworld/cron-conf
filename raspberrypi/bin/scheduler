@@ -632,6 +632,9 @@ recurrent() {
   # Observe the hostapd
   hostapd-observer
 
+  # Observe the upstream DNS files
+  upstream-observer
+
   # Empty "at -l" to prevent illegal batches
   batch-remover
 
@@ -772,12 +775,12 @@ todo() {
 }
 
 upstream() {
-  # "cloudflare_upstream" or "superman_upstream"
-  PRIORITY="superman_upstream"
-  NON_PRIORITY="cloudflare_upstream"
+  PRIORITIZED_RESTRICTED_UPSTREAM="superman_upstream"
+  NON_PRIORITIZED_RESTRICTED_UPSTREAM="cloudflare_upstream"
 
   # Every upstream DNS file should be updated in succession without any interval.
-  # When the previous file is deleted and the new file is not yet created, none of the upstream DNS files will be set, and the Internet connection will be blocked.
+  # When the previous file is deleted and the new file is not yet created, none of the upstream DNS files will be set,
+  # and the Internet connection will be blocked.
   case "$operation" in
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
@@ -794,23 +797,36 @@ upstream() {
 
       [ "$SOFT" = 1 ] || cron-daemonctl start observe-adguard-upstream-conf "$safe"
       [ "$SOFT" = 1 ] || cron-daemonctl start observe-nordvpn-upstream-conf "$safe"
-      # DELETE THIS COMMENT IF THESE TWO WORK FINE
-      [ "$SOFT" = 1 ] || cron-daemonctl start observe-superman-upstream-conf "$safe"
-      [ "$SOFT" = 1 ] || cron-daemonctl start observe-cloudflare-upstream-conf "$safe"
-      ############################################
-      remove-dnsmasq-toggle-conf private adguard_upstream --skip
-      remove-dnsmasq-toggle-conf private nordvpn_upstream --skip
-      # DELETE THIS COMMENT IF THESE TWO WORK FINE
-      remove-dnsmasq-toggle-conf private superman_upstream --skip
-      remove-dnsmasq-toggle-conf private cloudflare_upstream
-      ############################################
+      #
+      # DO NOT ENABLE THESE TWO DAEMONS!
+      #   https://github.com/noraworld/to-do/issues/2069
+      #   https://github.com/noraworld/to-do/issues/2085
+      #
+      # [ "$SOFT" = 1 ] || cron-daemonctl start observe-superman-upstream-conf "$safe"
+      # [ "$SOFT" = 1 ] || cron-daemonctl start observe-cloudflare-upstream-conf "$safe"
+
+      remove-dnsmasq-toggle-conf private adguard_upstream
+      remove-dnsmasq-toggle-conf private nordvpn_upstream
+      #
+      # YOU DO NOT HAVE TO ENABLE THESE TWO UPSTREAM IN THIS WAY
+      # BECAUSE THE BELOW CODES SATISFY THE REQUIREMENTS
+      #   https://github.com/noraworld/to-do/issues/2085#issuecomment-3619633400
+      #
+      # create-dnsmasq-toggle-conf private superman_upstream
+      # create-dnsmasq-toggle-conf private cloudflare_upstream
 
       # Do nothing if either of them exists, even if the existing one is not prioritized,
       # because sometimes you may want to use the non-prioritized one.
-      if [ -e "$PRIV_TOGGLE_DIR/$PRIORITY.conf" ] && [ -e "$PRIV_TOGGLE_DIR/$NON_PRIORITY.conf" ]; then
-        remove-dnsmasq-toggle-conf private "$NON_PRIORITY"
-      elif ! [ -e "$PRIV_TOGGLE_DIR/$PRIORITY.conf" ] && ! [ -e "$PRIV_TOGGLE_DIR/$NON_PRIORITY.conf" ]; then
-        create-dnsmasq-toggle-conf private "$PRIORITY"
+      if \
+        [ -e "$PRIV_TOGGLE_DIR/$PRIORITIZED_RESTRICTED_UPSTREAM.conf" ] &&
+        [ -e "$PRIV_TOGGLE_DIR/$NON_PRIORITIZED_RESTRICTED_UPSTREAM.conf" ];
+      then
+        remove-dnsmasq-toggle-conf private "$NON_PRIORITIZED_RESTRICTED_UPSTREAM"
+      elif \
+        ! [ -e "$PRIV_TOGGLE_DIR/$PRIORITIZED_RESTRICTED_UPSTREAM.conf" ] &&
+        ! [ -e "$PRIV_TOGGLE_DIR/$NON_PRIORITIZED_RESTRICTED_UPSTREAM.conf" ];
+      then
+        create-dnsmasq-toggle-conf private "$PRIORITIZED_RESTRICTED_UPSTREAM"
       fi
       ;;
     "allow")
