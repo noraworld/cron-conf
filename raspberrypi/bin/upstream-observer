@@ -1,13 +1,22 @@
 #!/bin/sh
 
 main() {
-  upstream_count=$(find /etc/dnsmasq.priv/toggle -maxdepth 1 -name "*_upstream.conf" -print | wc -l)
-
-  if [ "$upstream_count" -eq 0 ]; then
-    create-dnsmasq-toggle-conf private superman_upstream
-  elif [ "$upstream_count" -ge 2 ]; then
-    find /etc/dnsmasq.priv/toggle -maxdepth 1 -name "*_upstream.conf" -exec sudo unlink {} \;
-    create-dnsmasq-toggle-conf private superman_upstream
+  if
+    [ "$(systemctl --user is-active observe-adguard-upstream-conf)" != "active" ] &&
+    [ "$(quotarget --timeframe now --service upstream --cache-only)" -gt 0 ] &&
+    [ "$(sincere --cache-only)" -gt 0 ]
+  then
+    # They wouldn't restart Dnsmasq if there's no changes
+    create-dnsmasq-toggle-conf private adguard_upstream    --quiet
+    remove-dnsmasq-toggle-conf private nordvpn_upstream    --quiet
+    remove-dnsmasq-toggle-conf private superman_upstream   --quiet
+    remove-dnsmasq-toggle-conf private cloudflare_upstream --quiet
+  else
+    # They wouldn't restart Dnsmasq if there's no changes
+    create-dnsmasq-toggle-conf private superman_upstream   --quiet
+    remove-dnsmasq-toggle-conf private adguard_upstream    --quiet
+    remove-dnsmasq-toggle-conf private nordvpn_upstream    --quiet
+    remove-dnsmasq-toggle-conf private cloudflare_upstream --quiet
   fi
 }
 
