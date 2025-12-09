@@ -1,6 +1,7 @@
 #!/bin/sh
 
 PROG_NAME="auto-unlock"
+SLEEP_INTERVAL=5
 
 main() {
   changed=false
@@ -33,6 +34,8 @@ main() {
       if eval "$unlock_command" "$visibility" "$name" --quiet --skip; then
         changed=true
       fi
+
+      sleep "$SLEEP_INTERVAL"
     fi
   done
 
