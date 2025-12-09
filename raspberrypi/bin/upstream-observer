@@ -1,7 +1,5 @@
 #!/bin/sh
 
-# shellcheck disable=SC2004
-
 main() {
   upstream_count=$(find /etc/dnsmasq.priv/toggle -maxdepth 1 -name "*_upstream.conf" -print | wc -l)
 
