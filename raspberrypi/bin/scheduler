@@ -798,10 +798,8 @@ upstream() {
       [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-adguard-upstream-conf "$safe"
         cron-daemonctl stop observe-nordvpn-upstream-conf "$safe"
-        # DELETE THIS COMMENT IF THESE TWO WORK FINE
         cron-daemonctl stop observe-superman-upstream-conf "$safe"
         cron-daemonctl stop observe-cloudflare-upstream-conf "$safe"
-        ############################################
         return
       fi
 
@@ -842,14 +840,8 @@ upstream() {
     "allow")
       cron-daemonctl stop observe-adguard-upstream-conf "$safe"
       cron-daemonctl stop observe-nordvpn-upstream-conf "$safe"
-      # DELETE THIS COMMENT IF THESE TWO WORK FINE
       cron-daemonctl stop observe-superman-upstream-conf "$safe"
       cron-daemonctl stop observe-cloudflare-upstream-conf "$safe"
-      ############################################
-      # remove-dnsmasq-toggle-conf private cloudflare_upstream --skip
-      # remove-dnsmasq-toggle-conf private nordvpn_upstream    --skip
-      # remove-dnsmasq-toggle-conf private superman_upstream   --skip
-      # create-dnsmasq-toggle-conf private adguard_upstream
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2
