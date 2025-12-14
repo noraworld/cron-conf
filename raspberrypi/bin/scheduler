@@ -86,6 +86,9 @@ main() {
     "gaming")
       gaming
       ;;
+    "knock")
+      knock
+      ;;
     "minerva")
       minerva
       ;;
@@ -444,6 +447,29 @@ gaming() {
       ;;
     "allow")
       cron-daemonctl stop observe-gaming-conf "$safe"
+      ;;
+    *)
+      echo "error: no such operation: \"$operation\"" >&2
+      exit 1
+      ;;
+  esac
+}
+
+knock() {
+  case "$operation" in
+    "deny")
+      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
+      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
+      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
+        cron-daemonctl stop observe-knock-conf "$safe"
+        return
+      fi
+
+      [ "$SOFT" = 1 ] || cron-daemonctl start observe-knock-conf "$safe"
+      remove-dnsmasq-toggle-conf public knock
+      ;;
+    "allow")
+      cron-daemonctl stop observe-knock-conf "$safe"
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2

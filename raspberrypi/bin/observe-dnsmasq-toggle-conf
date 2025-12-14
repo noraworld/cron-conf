@@ -126,6 +126,7 @@ todo_mode() {
   check_todo  "chime"                     "chime"                     "chime"
   check_todo  "crimson"                   "crimson"                   "crimson"
   check_todo  "gaming"                    "gaming"                    "gaming"
+  check_todo  "knock"                     "knock"                     "knock"
   check_todo  "minerva"                   "minerva"                   "minerva"
   check_todo  "netflix"                   "netflix"                   "netflix"
   check_todo  "social_media"              "social-media"              "social-media"
@@ -162,6 +163,13 @@ todo_mode() {
   if [ "$gaming_skipped" = "false" ] && [ "$(restrict-all check "observe-gaming-conf")" -le 0 ]; then
     restrict-all reset "observe-gaming-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-gaming-conf"
+  fi
+
+  # ln_mode & unlink_mode (knock)
+  # shellcheck disable=SC2154
+  if [ "$knock_skipped" = "false" ] && [ "$(restrict-all check "observe-knock-conf")" -le 0 ]; then
+    restrict-all reset "observe-knock-conf"
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-knock-conf"
   fi
 
   # ln_mode & unlink_mode (minerva)
