@@ -3,10 +3,10 @@
 TOGGLE_DIR="/etc/dnsmasq.toggle"
 PRIV_TOGGLE_DIR="/etc/dnsmasq.priv/toggle"
 
-ALL_SERVICES="deregulated-superman deregulated-superman-allow maeve ometeotl superman adguard-upstream superman-upstream social-media social-media-allow vod youtube chime crimson gaming minerva youtube-accessories youtube-alternative youtube-music youtube-music-persistent discipline"
-ALL_NAMES="deregulated_superman deregulated_superman_allow maeve ometeotl superman adguard_upstream superman_upstream social_media social_media_allow vod youtube chime crimson gaming minerva youtube_accessories youtube_alternative youtube_music youtube_music_persistent discipline"
-ALL_PATHS="$PRIV_TOGGLE_DIR/deregulated_superman.conf $PRIV_TOGGLE_DIR/deregulated_superman_allow.conf $PRIV_TOGGLE_DIR/maeve.conf $PRIV_TOGGLE_DIR/ometeotl.conf $PRIV_TOGGLE_DIR/superman.conf $PRIV_TOGGLE_DIR/adguard_upstream.conf $PRIV_TOGGLE_DIR/superman_upstream.conf $TOGGLE_DIR/social_media.conf $TOGGLE_DIR/social_media_allow.conf $TOGGLE_DIR/vod.conf $TOGGLE_DIR/youtube.conf $TOGGLE_DIR/chime.conf $PRIV_TOGGLE_DIR/crimson.conf $TOGGLE_DIR/gaming.conf $TOGGLE_DIR/minerva.conf $TOGGLE_DIR/youtube_accessories.conf $TOGGLE_DIR/youtube_alternative.conf $TOGGLE_DIR/youtube_music.conf $TOGGLE_DIR/youtube_music_persistent.conf $TOGGLE_DIR/discipline.conf"
-ALL_OBSERVERS="observe-deregulated-superman-conf observe-deregulated-superman-allow-conf observe-maeve-conf observe-ometeotl-conf observe-superman-conf observe-adguard-upstream-conf observe-superman-upstream-conf observe-social-media-conf observe-social-media-allow-conf observe-vod-conf observe-youtube-conf observe-chime-conf observe-crimson-conf observe-gaming-conf observe-minerva-conf observe-youtube-accessories-conf observe-youtube-alternative-conf observe-youtube-music-conf observe-youtube-music-persistent-conf observe-discipline-conf"
+ALL_SERVICES="deregulated-superman deregulated-superman-allow maeve ometeotl superman adguard-upstream superman-upstream social-media social-media-allow vod youtube chime crimson gaming knock minerva youtube-accessories youtube-alternative youtube-music youtube-music-persistent discipline"
+ALL_NAMES="deregulated_superman deregulated_superman_allow maeve ometeotl superman adguard_upstream superman_upstream social_media social_media_allow vod youtube chime crimson gaming knock minerva youtube_accessories youtube_alternative youtube_music youtube_music_persistent discipline"
+ALL_PATHS="$PRIV_TOGGLE_DIR/deregulated_superman.conf $PRIV_TOGGLE_DIR/deregulated_superman_allow.conf $PRIV_TOGGLE_DIR/maeve.conf $PRIV_TOGGLE_DIR/ometeotl.conf $PRIV_TOGGLE_DIR/superman.conf $PRIV_TOGGLE_DIR/adguard_upstream.conf $PRIV_TOGGLE_DIR/superman_upstream.conf $TOGGLE_DIR/social_media.conf $TOGGLE_DIR/social_media_allow.conf $TOGGLE_DIR/vod.conf $TOGGLE_DIR/youtube.conf $TOGGLE_DIR/chime.conf $PRIV_TOGGLE_DIR/crimson.conf $TOGGLE_DIR/gaming.conf $TOGGLE_DIR/knock.conf $TOGGLE_DIR/minerva.conf $TOGGLE_DIR/youtube_accessories.conf $TOGGLE_DIR/youtube_alternative.conf $TOGGLE_DIR/youtube_music.conf $TOGGLE_DIR/youtube_music_persistent.conf $TOGGLE_DIR/discipline.conf"
+ALL_OBSERVERS="observe-deregulated-superman-conf observe-deregulated-superman-allow-conf observe-maeve-conf observe-ometeotl-conf observe-superman-conf observe-adguard-upstream-conf observe-superman-upstream-conf observe-social-media-conf observe-social-media-allow-conf observe-vod-conf observe-youtube-conf observe-chime-conf observe-crimson-conf observe-gaming-conf observe-knock-conf observe-minerva-conf observe-youtube-accessories-conf observe-youtube-alternative-conf observe-youtube-music-conf observe-youtube-music-persistent-conf observe-discipline-conf"
 
 # DO NOT ADD UPSTREAMS!!!!!
 #   They will have conflict unless they are considered simultaneously.
@@ -197,6 +197,16 @@ main() {
       [ "$1" = "unlock"     ] && echo "remove-dnsmasq-toggle-conf"
       [ "$1" = "visibility" ] && echo "public"
       [ "$1" = "observer"   ] && echo "observe-gaming-conf"
+      ;;
+    "knock")
+      [ "$1" = "service"    ] && echo "knock"
+      [ "$1" = "name"       ] && echo "knock"
+      [ "$1" = "existence"  ] && echo "false"
+      [ "$1" = "path"       ] && echo "$TOGGLE_DIR/knock.conf"
+      [ "$1" = "lock"       ] && echo "remove-dnsmasq-toggle-conf"
+      [ "$1" = "unlock"     ] && echo "create-dnsmasq-toggle-conf"
+      [ "$1" = "visibility" ] && echo "public"
+      [ "$1" = "observer"   ] && echo "observe-knock-conf"
       ;;
     "minerva")
       [ "$1" = "service"    ] && echo "minerva"

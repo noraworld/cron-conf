@@ -93,6 +93,9 @@ main() {
         "gaming")
           gaming
           ;;
+        "knock")
+          knock
+          ;;
         "minerva")
           minerva
           ;;
@@ -236,6 +239,10 @@ all() {
 
   if [ -L /etc/dnsmasq.toggle/gaming.conf ]; then
     sudo unlink /etc/dnsmasq.toggle/gaming.conf
+  fi
+
+  if ! [ -L /etc/dnsmasq.toggle/knock.conf ]; then
+    sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle/knock.conf /etc/dnsmasq.toggle
   fi
 
   if [ -L /etc/dnsmasq.toggle/minerva.conf ]; then
@@ -397,6 +404,14 @@ all() {
   if [ -L /etc/dnsmasq.toggle/gaming.conf ]; then
     error_color
     echo "error: /etc/dnsmasq.toggle/gaming.conf still exists" >&2
+    no_color
+    echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
+    not_all_linkage_succeeded=1
+  fi
+
+  if ! [ -L /etc/dnsmasq.toggle/knock.conf ]; then
+    error_color
+    echo "error: /etc/dnsmasq.toggle/knock.conf still doesn't exist" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
     not_all_linkage_succeeded=1
@@ -841,6 +856,28 @@ gaming() {
   if [ -L /etc/dnsmasq.toggle/gaming.conf ]; then
     error_color
     echo "error: /etc/dnsmasq.toggle/gaming.conf still exists" >&2
+    no_color
+    echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
+  else
+    linkage_succeeded=1
+  fi
+}
+
+knock() {
+  reference_minute=60
+  [ "$DRY_RUN" = 1 ] && exit 0
+
+  while ! [ -L "/etc/dnsmasq.toggle/knock.conf" ]; do
+    warning_color
+    sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle/knock.conf /etc/dnsmasq.toggle
+    no_color
+
+    pause "$waiting_interval" "$WAITING_MESSAGE"
+  done
+
+  if ! [ -L "/etc/dnsmasq.toggle/knock.conf" ]; then
+    error_color
+    echo "error: /etc/dnsmasq.toggle/knock.conf still doesn't exist" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
   else
