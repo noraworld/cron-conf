@@ -52,7 +52,7 @@ main() {
   # kryptonite mode. When enabling it, the restriction is exempted even after midnight. In other words, ACTIVATE this
   # line (remove "#" at the beginning of this line if it exists) if you want to DISABLE the kryptonite mode.
   #
-  # [ "$AMBER_KRYPTONITE"   = "1" ] && AMBER_KRYPTONITE="-1"
+  [ "$AMBER_KRYPTONITE"   = "1" ] && AMBER_KRYPTONITE="-1"
   [ "$BLACK_KRYPTONITE"   = "1" ] && BLACK_KRYPTONITE="-1"
   # [ "$COBALT_KRYPTONITE"  = "1" ] && COBALT_KRYPTONITE="-1"
   # [ "$INDIGO_KRYPTONITE"  = "1" ] && INDIGO_KRYPTONITE="-1"
