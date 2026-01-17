@@ -2838,7 +2838,7 @@
       "scraping_by": {
         "todo_personal": "echo 1",
         "task_personal": "echo 1",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary ワークアウト --pass-stamp 1 --fail-stamp -1 $force $cache_only",
+        "tick_personal": "ticksum --repo noraworld/reserved-diary ワークアウト ウォーキング --zero-stamp -1 --maxi-stamp 1 $force $cache_only",
         "todo_work": "todo-accomplished --repo 'noraworld/daily-report' --past 0 --retry 1 --checked 1 $force $cache_only",
         "task_work": "echo 1"
       }
