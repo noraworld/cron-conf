@@ -1036,8 +1036,8 @@ youtube_music() {
       # remove-iptables-toggle-conf public 135_youtube_music
       ;;
     "allow")
-      :
       cron-daemonctl stop observe-youtube-music-conf "$safe"
+      [ "$STRONG" = 1 ] && remove-dnsmasq-toggle-conf public youtube_music
       # create-dnsmasq-toggle-conf public youtube_music
       # create-iptables-toggle-conf public 135_youtube_music
       ;;
