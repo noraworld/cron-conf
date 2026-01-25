@@ -2827,7 +2827,7 @@
       "scraping_by": {
         "todo_personal": "INHERIT .\"youtube-alternative\".qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube-alternative\".qtg0000.scraping_by.task_personal",
-        "tick_personal": "INHERIT .\"youtube-alternative\".qtg0000.scraping_by.tick_personal",
+        "tick_personal": "INHERIT .youtube.qtg2300.scraping_by.tick_personal",
         "todo_work": "INHERIT .\"youtube-alternative\".qtg0000.scraping_by.todo_work",
         "task_work": "INHERIT .\"youtube-alternative\".qtg0000.scraping_by.task_work"
       }
@@ -3045,7 +3045,7 @@
       "scraping_by": {
         "todo_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.task_personal",
-        "tick_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.tick_personal",
+        "tick_personal": "INHERIT .youtube.qtg2300.scraping_by.tick_personal",
         "todo_work": "INHERIT .\"youtube-music\".qtg0000.scraping_by.todo_work",
         "task_work": "INHERIT .\"youtube-music\".qtg0000.scraping_by.task_work"
       }
@@ -3263,7 +3263,7 @@
       "scraping_by": {
         "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 11 $force $cache_only",
         "task_personal": "INHERIT .\"youtube-music-persistent\".qtg0000.scraping_by.task_personal",
-        "tick_personal": "INHERIT .\"youtube-music-persistent\".qtg0000.scraping_by.tick_personal",
+        "tick_personal": "INHERIT .youtube.qtg2300.scraping_by.tick_personal",
         "todo_work": "INHERIT .\"youtube-music-persistent\".qtg0000.scraping_by.todo_work",
         "task_work": "INHERIT .\"youtube-music-persistent\".qtg0000.scraping_by.task_work"
       }
