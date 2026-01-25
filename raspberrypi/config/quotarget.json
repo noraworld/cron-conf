@@ -2911,7 +2911,7 @@
         "todo_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.task_personal",
         "tick_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.tick_personal",
-        "todo_work": "echo 1",
+        "todo_work": "INHERIT .\"youtube-music\".qtg0000.scraping_by.todo_work",
         "task_work": "INHERIT .\"youtube-music\".qtg0000.scraping_by.task_work"
       }
     },
@@ -2920,7 +2920,7 @@
         "todo_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.task_personal",
         "tick_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.tick_personal",
-        "todo_work": "INHERIT .\"youtube-music\".qtg0800.scraping_by.todo_work",
+        "todo_work": "INHERIT .\"youtube-music\".qtg0000.scraping_by.todo_work",
         "task_work": "INHERIT .\"youtube-music\".qtg0000.scraping_by.task_work"
       }
     },
@@ -2929,7 +2929,7 @@
         "todo_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.task_personal",
         "tick_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.tick_personal",
-        "todo_work": "todo-accomplished --repo 'noraworld/daily-report' --past 0 --retry 1 --checked 1 $force $cache_only",
+        "todo_work": "INHERIT .\"youtube-music\".qtg0000.scraping_by.todo_work",
         "task_work": "INHERIT .\"youtube-music\".qtg0000.scraping_by.task_work"
       }
     },
@@ -2938,7 +2938,7 @@
         "todo_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.task_personal",
         "tick_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.tick_personal",
-        "todo_work": "INHERIT .\"youtube-music\".qtg1000.scraping_by.todo_work",
+        "todo_work": "INHERIT .\"youtube-music\".qtg0000.scraping_by.todo_work",
         "task_work": "INHERIT .\"youtube-music\".qtg0000.scraping_by.task_work"
       }
     },
@@ -2947,7 +2947,7 @@
         "todo_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.task_personal",
         "tick_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.tick_personal",
-        "todo_work": "INHERIT .\"youtube-music\".qtg1000.scraping_by.todo_work",
+        "todo_work": "INHERIT .\"youtube-music\".qtg0000.scraping_by.todo_work",
         "task_work": "INHERIT .\"youtube-music\".qtg0000.scraping_by.task_work"
       }
     },
@@ -2956,7 +2956,7 @@
         "todo_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.task_personal",
         "tick_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.tick_personal",
-        "todo_work": "INHERIT .\"youtube-music\".qtg1000.scraping_by.todo_work",
+        "todo_work": "INHERIT .\"youtube-music\".qtg0000.scraping_by.todo_work",
         "task_work": "INHERIT .\"youtube-music\".qtg0000.scraping_by.task_work"
       }
     },
@@ -2965,7 +2965,7 @@
         "todo_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.task_personal",
         "tick_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.tick_personal",
-        "todo_work": "INHERIT .\"youtube-music\".qtg1000.scraping_by.todo_work",
+        "todo_work": "INHERIT .\"youtube-music\".qtg0000.scraping_by.todo_work",
         "task_work": "INHERIT .\"youtube-music\".qtg0000.scraping_by.task_work"
       }
     },
@@ -2974,7 +2974,7 @@
         "todo_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.task_personal",
         "tick_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.tick_personal",
-        "todo_work": "INHERIT .\"youtube-music\".qtg1000.scraping_by.todo_work",
+        "todo_work": "INHERIT .\"youtube-music\".qtg0000.scraping_by.todo_work",
         "task_work": "INHERIT .\"youtube-music\".qtg0000.scraping_by.task_work"
       }
     },
@@ -2983,7 +2983,7 @@
         "todo_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.task_personal",
         "tick_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.tick_personal",
-        "todo_work": "INHERIT .\"youtube-music\".qtg1000.scraping_by.todo_work",
+        "todo_work": "INHERIT .\"youtube-music\".qtg0000.scraping_by.todo_work",
         "task_work": "INHERIT .\"youtube-music\".qtg0000.scraping_by.task_work"
       }
     },
@@ -2991,8 +2991,8 @@
       "scraping_by": {
         "todo_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.task_personal",
-        "tick_personal": "echo 1",
-        "todo_work": "INHERIT .\"youtube-music\".qtg1000.scraping_by.todo_work",
+        "tick_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.tick_personal",
+        "todo_work": "INHERIT .\"youtube-music\".qtg0000.scraping_by.todo_work",
         "task_work": "INHERIT .\"youtube-music\".qtg0000.scraping_by.task_work"
       }
     },
@@ -3000,8 +3000,8 @@
       "scraping_by": {
         "todo_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.task_personal",
-        "tick_personal": "echo 1",
-        "todo_work": "INHERIT .\"youtube-music\".qtg1000.scraping_by.todo_work",
+        "tick_personal": "INHERIT .\"youtube-music\".qtg0000.scraping_by.tick_personal",
+        "todo_work": "INHERIT .\"youtube-music\".qtg0000.scraping_by.todo_work",
         "task_work": "INHERIT .\"youtube-music\".qtg0000.scraping_by.task_work"
       }
     },
