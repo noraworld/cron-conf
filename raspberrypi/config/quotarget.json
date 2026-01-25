@@ -876,7 +876,7 @@
       "scraping_by": {
         "todo_personal": "echo 1",
         "task_personal": "echo 1",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary 瞑想 ワークアウト 読書 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
+        "tick_personal": "ticksum --repo noraworld/reserved-diary 瞑想 単語学習 発音練習 ワークアウト 読書 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
         "todo_work": "echo 1",
         "task_work": "echo 1"
       }
@@ -948,7 +948,7 @@
       "scraping_by": {
         "todo_personal": "INHERIT .knock.qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .knock.qtg0000.scraping_by.task_personal",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary 発音練習 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
+        "tick_personal": "ticksum --repo noraworld/reserved-diary 瞑想 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
         "todo_work": "INHERIT .knock.qtg0000.scraping_by.todo_work",
         "task_work": "INHERIT .knock.qtg0000.scraping_by.task_work"
       }
@@ -984,7 +984,7 @@
       "scraping_by": {
         "todo_personal": "INHERIT .knock.qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .knock.qtg0000.scraping_by.task_personal",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
+        "tick_personal": "ticksum --repo noraworld/reserved-diary 瞑想 単語学習 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
         "todo_work": "INHERIT .knock.qtg0000.scraping_by.todo_work",
         "task_work": "INHERIT .knock.qtg0000.scraping_by.task_work"
       }
@@ -1020,7 +1020,7 @@
       "scraping_by": {
         "todo_personal": "INHERIT .knock.qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .knock.qtg0000.scraping_by.task_personal",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary ワークアウト 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
+        "tick_personal": "ticksum --repo noraworld/reserved-diary 瞑想 単語学習 発音練習 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
         "todo_work": "INHERIT .knock.qtg0000.scraping_by.todo_work",
         "task_work": "INHERIT .knock.qtg0000.scraping_by.task_work"
       }
@@ -1056,7 +1056,7 @@
       "scraping_by": {
         "todo_personal": "INHERIT .knock.qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .knock.qtg0000.scraping_by.task_personal",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary 瞑想 ワークアウト 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
+        "tick_personal": "ticksum --repo noraworld/reserved-diary 瞑想 単語学習 発音練習 ワークアウト --pass-stamp 1 --fail-stamp -1 $force $cache_only",
         "todo_work": "INHERIT .knock.qtg0000.scraping_by.todo_work",
         "task_work": "INHERIT .knock.qtg0000.scraping_by.task_work"
       }
