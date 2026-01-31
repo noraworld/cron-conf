@@ -3055,7 +3055,7 @@
     "qtg0000": {
       "scraping_by": {
         "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 12 --unchecked 1 $force $cache_only",
-        "task_personal": "task-stacked --main-repo 'noraworld/reserved-diary' --past 0 --todo-repo 'noraworld/to-do,noraworld/writing-manuscript' $force $cache_only --completed-value 1 --stacked-value -1 --fall-through || ticksum --repo noraworld/reserved-diary ウォーキング オンライン英会話 リスニング 筆記開示 --zero-stamp -1 --maxi-stamp 1 $force $cache_only",
+        "task_personal": "task-stacked --main-repo 'noraworld/reserved-diary' --past 0 --todo-repo 'noraworld/to-do,noraworld/writing-manuscript' $force $cache_only --completed-value 1 --stacked-value -1 --fall-through || ticksum --repo noraworld/reserved-diary 読書 ワンステップチャレンジ 筆記開示 ウォーキング --zero-stamp -1 --maxi-stamp 1 $force $cache_only",
         "tick_personal": "echo 1",
         "todo_work": "todo-accomplished --repo 'noraworld/daily-report' --past 0 --retry 1 --unchecked 0 $force $cache_only",
         "task_work": "echo 1"
