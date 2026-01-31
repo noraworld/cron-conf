@@ -181,7 +181,7 @@ NON_ROOT_USER=ubuntu
 
 
 # Chime
-#   Scheduled Summary: 9:30 PM
+#   Scheduled Summary: 9:00 PM
 */5    0-20,23 * * * scheduler chime allow
 */20   0-20,23 * * * scheduler chime deny --soft
 0-4/1  21      * * * scheduler chime allow --strong
