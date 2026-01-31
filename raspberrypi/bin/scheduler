@@ -59,7 +59,9 @@ main() {
   # [ "$IVORY_KRYPTONITE"   = "1" ] && IVORY_KRYPTONITE="-1"
   # [ "$PURPLE_KRYPTONITE"  = "1" ] && PURPLE_KRYPTONITE="-1"
   # [ "$RED_KRYPTONITE"     = "1" ] && RED_KRYPTONITE="-1"
+  [ "$SALMON_KRYPTONITE"  = "1" ] && SALMON_KRYPTONITE="-1"
   # [ "$SCARLET_KRYPTONITE" = "1" ] && SCARLET_KRYPTONITE="-1"
+  [ "$TOMATO_KRYPTONITE"  = "1" ] && TOMATO_KRYPTONITE="-1"
   [ "$VIOLET_KRYPTONITE"  = "1" ] && VIOLET_KRYPTONITE="-1"
   [ "$WHITE_KRYPTONITE"   = "1" ] && WHITE_KRYPTONITE="-1"
   # [ "$YELLOW_KRYPTONITE"  = "1" ] && YELLOW_KRYPTONITE="-1"
@@ -183,7 +185,7 @@ amazon() {
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
       [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
-      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
+      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SALMON_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$TOMATO_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-amazon-conf "$safe"
         remove-dnsmasq-toggle-conf public amazon
         return
@@ -210,7 +212,7 @@ chime() {
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
       [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
-      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
+      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SALMON_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$TOMATO_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-chime-conf "$safe"
         return
       fi
@@ -234,7 +236,7 @@ crimson() {
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
       [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
-      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
+      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SALMON_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$TOMATO_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-crimson-conf "$safe"
         return
       fi
@@ -337,7 +339,7 @@ deregulated_superman() {
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
       [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
-      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
+      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SALMON_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$TOMATO_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-deregulated-superman-conf "$safe"
         cron-daemonctl stop observe-deregulated-superman-allow-conf "$safe"
         return
@@ -384,7 +386,7 @@ firewall() {
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
       [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
-      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
+      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SALMON_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$TOMATO_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-firewall "$safe"
         return
       fi
@@ -437,7 +439,7 @@ gaming() {
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
       [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
-      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
+      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SALMON_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$TOMATO_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-gaming-conf "$safe"
         return
       fi
@@ -460,7 +462,7 @@ knock() {
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
       [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
-      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
+      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SALMON_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$TOMATO_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-knock-conf "$safe"
         return
       fi
@@ -483,7 +485,7 @@ minerva() {
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
       [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
-      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
+      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SALMON_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$TOMATO_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-minerva-conf "$safe"
         return
       fi
@@ -527,7 +529,7 @@ maeve() {
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
       [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
-      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
+      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SALMON_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$TOMATO_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-maeve-conf "$safe"
         return
       fi
@@ -550,7 +552,7 @@ netflix() {
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
       [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
-      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
+      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SALMON_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$TOMATO_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-netflix-conf "$safe"
         cron-daemonctl stop observe-netflix-allow-conf "$safe"
         return
@@ -583,7 +585,7 @@ observe() {
     "start")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
       [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
-      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
+      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SALMON_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$TOMATO_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-crontab "$safe"
         cron-daemonctl stop observe-cron-conf "$safe"
         cron-daemonctl stop observe-dnsmasq-conf "$safe"
@@ -632,7 +634,7 @@ ometeotl() {
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
       [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
-      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
+      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SALMON_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$TOMATO_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-ometeotl-conf "$safe"
         return
       fi
@@ -734,7 +736,7 @@ snorlax() {
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
       [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
-      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
+      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SALMON_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$TOMATO_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-snorlax-conf "$safe"
         [ "$STRONG" = 1 ] && remove-dnsmasq-toggle-conf public snorlax
         return
@@ -767,7 +769,7 @@ superman() {
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
       [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
-      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
+      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SALMON_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$TOMATO_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-superman-conf "$safe"
         return
       fi
@@ -821,7 +823,7 @@ upstream() {
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
       [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
-      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
+      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SALMON_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$TOMATO_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-adguard-upstream-conf "$safe"
         cron-daemonctl stop observe-nordvpn-upstream-conf "$safe"
         cron-daemonctl stop observe-superman-upstream-conf "$safe"
@@ -881,7 +883,7 @@ social_media() {
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
       [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
-      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
+      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SALMON_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$TOMATO_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-social-media-conf "$safe"
         return
       fi
@@ -904,7 +906,7 @@ social_media_allow() {
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
       [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
-      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
+      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SALMON_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$TOMATO_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-social-media-allow-conf "$safe"
         return
       fi
@@ -927,7 +929,7 @@ vod() {
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
       [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
-      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
+      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SALMON_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$TOMATO_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-vod-conf "$safe"
         return
       fi
@@ -953,7 +955,7 @@ youtube() {
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
       [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
-      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
+      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SALMON_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$TOMATO_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-youtube-conf "$safe"
         return
       fi
@@ -979,7 +981,7 @@ youtube_accessories() {
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
       [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
-      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
+      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SALMON_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$TOMATO_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-youtube-accessories-conf "$safe"
         return
       fi
@@ -1002,7 +1004,7 @@ youtube_alternative() {
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
       [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
-      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
+      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SALMON_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$TOMATO_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-youtube-alternative-conf "$safe"
         return
       fi
@@ -1026,7 +1028,7 @@ youtube_music() {
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
       [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
-      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
+      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SALMON_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$TOMATO_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-youtube-music-conf "$safe"
         return
       fi
@@ -1053,7 +1055,7 @@ youtube_music_persistent() {
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
       [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
-      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
+      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SALMON_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$TOMATO_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-youtube-music-persistent-conf "$safe"
         return
       fi
@@ -1077,7 +1079,7 @@ discipline() {
     "deny")
       if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
       [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
-      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
+      [ "$AMBER_KRYPTONITE" = "1" ] || [ "$BLACK_KRYPTONITE" = "1" ] || [ "$COBALT_KRYPTONITE" = "1" ] || [ "$INDIGO_KRYPTONITE" = "1" ] || [ "$IVORY_KRYPTONITE" = "1" ] || [ "$PURPLE_KRYPTONITE" = "1" ] || [ "$RED_KRYPTONITE" = "1" ] || [ "$SALMON_KRYPTONITE" = "1" ] || [ "$SCARLET_KRYPTONITE" = "1" ] || [ "$TOMATO_KRYPTONITE" = "1" ] || [ "$VIOLET_KRYPTONITE" = "1" ] || [ "$WHITE_KRYPTONITE" = "1" ] || [ "$YELLOW_KRYPTONITE" = "1" ]; then
         cron-daemonctl stop observe-discipline-conf "$safe"
         return
       fi
@@ -1206,7 +1208,9 @@ parser_definition() {
   flag    IVORY_KRYPTONITE      --ivory-kryptonite   -- "exempt the restriction even during the day"
   flag    PURPLE_KRYPTONITE     --purple-kryptonite  -- "exempt the restriction even after midnight"
   flag    RED_KRYPTONITE        --red-kryptonite     -- "exempt the restriction even after midnight"
+  flag    SALMON_KRYPTONITE     --salmon-kryptonite  -- "exempt the restriction even after midnight"
   flag    SCARLET_KRYPTONITE    --scarlet-kryptonite -- "exempt the restriction even after midnight"
+  flag    TOMATO_KRYPTONITE     --tomato-kryptonite  -- "exempt the restriction even after midnight"
   flag    VIOLET_KRYPTONITE     --violet-kryptonite  -- "exempt the restriction even in the morning"
   flag    WHITE_KRYPTONITE      --white-kryptonite   -- "exempt the restriction even during the day"
   flag    YELLOW_KRYPTONITE     --yellow-kryptonite  -- "exempt the restriction even after midnight"
@@ -1231,7 +1235,9 @@ INDIGO_KRYPTONITE=''
 IVORY_KRYPTONITE=''
 PURPLE_KRYPTONITE=''
 RED_KRYPTONITE=''
+SALMON_KRYPTONITE=''
 SCARLET_KRYPTONITE=''
+TOMATO_KRYPTONITE=''
 VIOLET_KRYPTONITE=''
 WHITE_KRYPTONITE=''
 YELLOW_KRYPTONITE=''
@@ -1290,10 +1296,20 @@ parse() {
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
         RED_KRYPTONITE="$OPTARG"
         ;;
+      '--salmon-kryptonite')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        SALMON_KRYPTONITE="$OPTARG"
+        ;;
       '--scarlet-kryptonite')
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
         SCARLET_KRYPTONITE="$OPTARG"
+        ;;
+      '--tomato-kryptonite')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        TOMATO_KRYPTONITE="$OPTARG"
         ;;
       '--violet-kryptonite')
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
@@ -1383,7 +1399,9 @@ Options:
       --ivory-kryptonite      exempt the restriction even during the day
       --purple-kryptonite     exempt the restriction even after midnight
       --red-kryptonite        exempt the restriction even after midnight
+      --salmon-kryptonite     exempt the restriction even after midnight
       --scarlet-kryptonite    exempt the restriction even after midnight
+      --tomato-kryptonite     exempt the restriction even after midnight
       --violet-kryptonite     exempt the restriction even in the morning
       --white-kryptonite      exempt the restriction even during the day
       --yellow-kryptonite     exempt the restriction even after midnight
