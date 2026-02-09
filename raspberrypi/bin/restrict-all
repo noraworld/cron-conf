@@ -114,6 +114,12 @@ build() {
       [ "$1" = "command"   ] && echo "remove-dnsmasq-toggle-conf private"
       [ "$1" = "name"      ] && echo "deregulated_superman_allow"
       ;;
+    "observe-elena-conf")
+      [ "$1" = "existence" ] && echo "true"
+      [ "$1" = "path"      ] && echo "$PRIV_TOGGLE_DIR/elena.conf"
+      [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf private"
+      [ "$1" = "name"      ] && echo "elena"
+      ;;
     "observe-maeve-conf")
       [ "$1" = "existence" ] && echo "true"
       [ "$1" = "path"      ] && echo "$PRIV_TOGGLE_DIR/maeve.conf"

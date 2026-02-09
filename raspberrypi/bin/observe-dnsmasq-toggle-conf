@@ -125,6 +125,7 @@ todo_mode() {
   #           service_name_for_variable   service_name_for_observer   service_name_for_quotarget
   check_todo  "chime"                     "chime"                     "chime"
   check_todo  "crimson"                   "crimson"                   "crimson"
+  check_todo  "elena"                     "elena"                     "elena"
   check_todo  "gaming"                    "gaming"                    "gaming"
   check_todo  "knock"                     "knock"                     "knock"
   check_todo  "minerva"                   "minerva"                   "minerva"
@@ -156,6 +157,13 @@ todo_mode() {
   if [ "$crimson_skipped" = "false" ] && [ "$(restrict-all check "observe-crimson-conf")" -le 0 ]; then
     restrict-all reset "observe-crimson-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-crimson-conf"
+  fi
+
+  # ln_mode & unlink_mode (elena)
+  # shellcheck disable=SC2154
+  if [ "$elena_skipped" = "false" ] && [ "$(restrict-all check "observe-elena-conf")" -le 0 ]; then
+    restrict-all reset "observe-elena-conf"
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-elena-conf"
   fi
 
   # ln_mode & unlink_mode (gaming)

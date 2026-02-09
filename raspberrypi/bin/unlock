@@ -69,6 +69,9 @@ main() {
         "deregulated-superman")
           deregulated_superman
           ;;
+        "elena")
+          elena
+          ;;
         "focus")
           focus
           ;;
@@ -209,6 +212,10 @@ all() {
     sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/deregulated_superman_allow.conf /etc/dnsmasq.priv/toggle
   fi
 
+  if [ -L /etc/dnsmasq.priv/toggle/elena.conf ]; then
+    sudo unlink /etc/dnsmasq.priv/toggle/elena.conf
+  fi
+
   if [ -L /etc/dnsmasq.priv/toggle/focus.conf ]; then
     sudo unlink /etc/dnsmasq.priv/toggle/focus.conf
   fi
@@ -340,6 +347,14 @@ all() {
   if ! [ -L /etc/dnsmasq.priv/toggle/deregulated_superman_allow.conf ]; then
     error_color
     echo "error: /etc/dnsmasq.priv/toggle/deregulated_superman_allow.conf still doesn't exist" >&2
+    no_color
+    echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
+    not_all_linkage_succeeded=1
+  fi
+
+  if [ -L /etc/dnsmasq.priv/toggle/elena.conf ]; then
+    error_color
+    echo "error: /etc/dnsmasq.priv/toggle/elena.conf still exists" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
     not_all_linkage_succeeded=1
@@ -634,6 +649,52 @@ deregulated_superman() {
   fi
 }
 
+elena() {
+  reference_minute=60
+  [ "$DRY_RUN" = 1 ] && exit 0
+
+  if [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ]; then
+    sudo unlink /etc/dnsmasq.priv/toggle/superman_upstream.conf
+  fi
+
+  if ! [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ]; then
+    sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/adguard_upstream.conf /etc/dnsmasq.priv/toggle
+  fi
+
+  warning_color
+  sudo unlink /etc/dnsmasq.priv/toggle/elena.conf
+  no_color
+
+  pause "$waiting_interval" "$WAITING_MESSAGE"
+
+  if [ -L /etc/dnsmasq.priv/toggle/elena.conf ]; then
+    error_color
+    echo "error: /etc/dnsmasq.priv/toggle/elena.conf still exists" >&2
+    no_color
+    echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
+  else
+    linkage_succeeded=1
+  fi
+
+  if [ -L /etc/dnsmasq.priv/toggle/superman_upstream.conf ]; then
+    error_color
+    echo "error: /etc/dnsmasq.priv/toggle/superman_upstream.conf still exists" >&2
+    no_color
+    echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
+  else
+    linkage_succeeded=1
+  fi
+
+  if ! [ -L /etc/dnsmasq.priv/toggle/adguard_upstream.conf ]; then
+    error_color
+    echo "error: /etc/dnsmasq.priv/toggle/adguard_upstream.conf still doesn't exist" >&2
+    no_color
+    echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
+  else
+    linkage_succeeded=1
+  fi
+}
+
 focus() {
   reference_minute=5
   [ "$DRY_RUN" = 1 ] && exit 0
@@ -788,6 +849,10 @@ superman() {
   reference_minute=60
   [ "$DRY_RUN" = 1 ] && exit 0
 
+  if [ -L /etc/dnsmasq.priv/toggle/elena.conf ]; then
+    sudo unlink /etc/dnsmasq.priv/toggle/elena.conf
+  fi
+
   if [ -L /etc/dnsmasq.priv/toggle/maeve.conf ]; then
     sudo unlink /etc/dnsmasq.priv/toggle/maeve.conf
   fi
@@ -805,6 +870,15 @@ superman() {
   no_color
 
   pause "$waiting_interval" "$WAITING_MESSAGE"
+
+  if [ -L /etc/dnsmasq.priv/toggle/elena.conf ]; then
+    error_color
+    echo "error: /etc/dnsmasq.priv/toggle/elena.conf still exists" >&2
+    no_color
+    echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
+  else
+    linkage_succeeded=1
+  fi
 
   if [ -L /etc/dnsmasq.priv/toggle/maeve.conf ]; then
     error_color
