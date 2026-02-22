@@ -4145,8 +4145,8 @@
     "qtg0000": {
       "scraping_by": {
         "todo_personal": "echo 1",
-        "task_personal": "ticksum --repo noraworld/reserved-diary ウォーキング オンライン英会話 --zero-stamp -1 --maxi-stamp 1 $force $cache_only",
-        "tick_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 リスニング 読書 瞑想 ワークアウト ワンステップチャレンジ ジャーナル --pass-stamp 1 --fail-stamp -1 $force $cache_only",
+        "task_personal": "task-stacked --main-repo 'noraworld/reserved-diary' --past 0 --todo-repo 'noraworld/to-do,noraworld/writing-manuscript' $force $cache_only --completed-value 1 --stacked-value -1 --fall-through || ticksum --repo noraworld/reserved-diary オンライン英会話 --zero-stamp -1 --maxi-stamp 1 $force $cache_only",
+        "tick_personal": "ticksum --repo noraworld/reserved-diary 発音練習 単語学習 リスニング 読書 瞑想 ワークアウト ワンステップチャレンジ ジャーナル ウォーキング --pass-stamp 1 --fail-stamp -1 $force $cache_only",
         "todo_work": "echo 1",
         "task_work": "echo 1"
       }
