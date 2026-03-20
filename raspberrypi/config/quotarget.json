@@ -393,7 +393,7 @@
       "scraping_by": {
         "todo_personal": "INHERIT .chime.qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .chime.qtg0000.scraping_by.task_personal",
-        "tick_personal": "echo 1",
+        "tick_personal": "INHERIT .chime.qtg0000.scraping_by.tick_personal",
         "todo_work": "INHERIT .chime.qtg0000.scraping_by.todo_work",
         "task_work": "INHERIT .chime.qtg0000.scraping_by.task_work"
       }
@@ -411,7 +411,7 @@
       "scraping_by": {
         "todo_personal": "INHERIT .chime.qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .chime.qtg0000.scraping_by.task_personal",
-        "tick_personal": "INHERIT .chime.qtg0000.scraping_by.tick_personal",
+        "tick_personal": "echo 1",
         "todo_work": "INHERIT .chime.qtg0000.scraping_by.todo_work",
         "task_work": "INHERIT .chime.qtg0000.scraping_by.task_work"
       }
@@ -420,7 +420,7 @@
       "scraping_by": {
         "todo_personal": "INHERIT .chime.qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .chime.qtg0000.scraping_by.task_personal",
-        "tick_personal": "INHERIT .chime.qtg0000.scraping_by.tick_personal",
+        "tick_personal": "echo 1",
         "todo_work": "INHERIT .chime.qtg0000.scraping_by.todo_work",
         "task_work": "INHERIT .chime.qtg0000.scraping_by.task_work"
       }
@@ -429,7 +429,7 @@
       "scraping_by": {
         "todo_personal": "INHERIT .chime.qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .chime.qtg0000.scraping_by.task_personal",
-        "tick_personal": "INHERIT .chime.qtg0000.scraping_by.tick_personal",
+        "tick_personal": "echo 1",
         "todo_work": "INHERIT .chime.qtg0000.scraping_by.todo_work",
         "task_work": "INHERIT .chime.qtg0000.scraping_by.task_work"
       }
