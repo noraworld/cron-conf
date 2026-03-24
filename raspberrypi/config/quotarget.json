@@ -2389,7 +2389,7 @@
     },
     "qtg2300": {
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 12 $force $cache_only",
+        "todo_personal": "INHERIT .youtube.qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .youtube.qtg0800.scraping_by.task_personal",
         "tick_personal": "ticksum --repo noraworld/reserved-diary リスニング 瞑想 ワークアウト 発音練習 単語学習 --pass-stamp 1 --fail-stamp -1 $force $cache_only",
         "todo_work": "INHERIT .youtube.qtg0000.scraping_by.todo_work",
