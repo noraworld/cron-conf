@@ -37,7 +37,7 @@ main() {
   if [ "$INTERVAL" = "" ]; then
     # 5 is not enough for observe-dnsmasq-toggle-conf
     # Even 10 is not sufficient sometimes
-    INTERVAL=10
+    INTERVAL=15
   fi
 
   if [ "$RETRY" = "" ]; then
