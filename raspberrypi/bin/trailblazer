@@ -39,7 +39,8 @@ main() {
   fi
 
   if [ "$INTERVAL" = "" ]; then
-    INTERVAL=10
+    # You need to update the same value in 'unlock' side too if you want to change the default interval.
+    INTERVAL=15
   fi
 
   if [ "$RETRY" = "" ]; then

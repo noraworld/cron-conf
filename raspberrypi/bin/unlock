@@ -37,6 +37,7 @@ main() {
   if [ "$INTERVAL" = "" ]; then
     # 5 is not enough for observe-dnsmasq-toggle-conf
     # Even 10 is not sufficient sometimes
+    # You need to update the same value in 'trailblazer' side too if you want to change the default interval.
     INTERVAL=15
   fi
 
