@@ -2275,7 +2275,7 @@
         "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 7 $force $cache_only",
         "task_personal": "INHERIT .youtube.qtg0800.scraping_by.task_personal",
         "tick_personal": "ticksum --repo noraworld/reserved-diary リスニング --pass-stamp 1 --fail-stamp -1 $force $cache_only",
-        "todo_work": "todo-accomplished --repo 'noraworld/daily-report' --past 0 --retry 1 --checked 1 $force $cache_only",
+        "todo_work": "todo-accomplished --repo 'noraworld/daily-report' --past 0 --retry 1 --checked 0 $force $cache_only",
         "task_work": "INHERIT .youtube.qtg0000.scraping_by.task_work"
       }
     },
@@ -2839,7 +2839,7 @@
         "todo_personal": "echo 1",
         "task_personal": "echo 1",
         "tick_personal": "ticksum --repo noraworld/reserved-diary ワークアウト ウォーキング --zero-stamp -1 --maxi-stamp 1 $force $cache_only",
-        "todo_work": "todo-accomplished --repo 'noraworld/daily-report' --past 0 --retry 1 --checked 1 $force $cache_only",
+        "todo_work": "todo-accomplished --repo 'noraworld/daily-report' --past 0 --retry 1 --checked 0 $force $cache_only",
         "task_work": "echo 1"
       }
     },
