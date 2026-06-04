@@ -63,6 +63,7 @@ main() {
   # [ "$RED_KRYPTONITE"     = "1" ] && RED_KRYPTONITE="-1"
   [ "$SALMON_KRYPTONITE"  = "1" ] && SALMON_KRYPTONITE="-1"
   # [ "$SCARLET_KRYPTONITE" = "1" ] && SCARLET_KRYPTONITE="-1"
+  [ "$SILVER_KRYPTONITE"  = "1" ] && SILVER_KRYPTONITE="-1"
   [ "$TOMATO_KRYPTONITE"  = "1" ] && TOMATO_KRYPTONITE="-1"
   # [ "$VERMILION_KRYPTONITE" = "1" ] && VERMILION_KRYPTONITE="-1"
   # [ "$VIOLET_KRYPTONITE"  = "1" ] && VIOLET_KRYPTONITE="-1"
@@ -1239,6 +1240,7 @@ is_any_kryptonite() {
     [ "$RED_KRYPTONITE"       = "1" ] ||
     [ "$SALMON_KRYPTONITE"    = "1" ] ||
     [ "$SCARLET_KRYPTONITE"   = "1" ] ||
+    [ "$SILVER_KRYPTONITE"    = "1" ] ||
     [ "$TOMATO_KRYPTONITE"    = "1" ] ||
     [ "$VERMILION_KRYPTONITE" = "1" ] ||
     [ "$VIOLET_KRYPTONITE"    = "1" ] ||
@@ -1266,6 +1268,7 @@ parser_definition() {
   flag    RED_KRYPTONITE          --red-kryptonite       -- "exempt the restriction even after midnight"
   flag    SALMON_KRYPTONITE       --salmon-kryptonite    -- "exempt the restriction even after midnight"
   flag    SCARLET_KRYPTONITE      --scarlet-kryptonite   -- "exempt the restriction even after midnight"
+  flag    SILVER_KRYPTONITE       --silver-kryptonite    -- "exempt the restriction even after midnight"
   flag    TOMATO_KRYPTONITE       --tomato-kryptonite    -- "exempt the restriction even after midnight"
   flag    VERMILION_KRYPTONITE    --vermilion-kryptonite -- "exempt the restriction even after midnight"
   flag    VIOLET_KRYPTONITE       --violet-kryptonite    -- "exempt the restriction even in the morning"
@@ -1296,6 +1299,7 @@ PURPLE_KRYPTONITE=''
 RED_KRYPTONITE=''
 SALMON_KRYPTONITE=''
 SCARLET_KRYPTONITE=''
+SILVER_KRYPTONITE=''
 TOMATO_KRYPTONITE=''
 VERMILION_KRYPTONITE=''
 VIOLET_KRYPTONITE=''
@@ -1375,6 +1379,11 @@ parse() {
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
         SCARLET_KRYPTONITE="$OPTARG"
+        ;;
+      '--silver-kryptonite')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        SILVER_KRYPTONITE="$OPTARG"
         ;;
       '--tomato-kryptonite')
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
@@ -1478,6 +1487,7 @@ Options:
       --red-kryptonite        exempt the restriction even after midnight
       --salmon-kryptonite     exempt the restriction even after midnight
       --scarlet-kryptonite    exempt the restriction even after midnight
+      --silver-kryptonite     exempt the restriction even after midnight
       --tomato-kryptonite     exempt the restriction even after midnight
       --vermilion-kryptonite  exempt the restriction even after midnight
       --violet-kryptonite     exempt the restriction even in the morning
