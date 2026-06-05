@@ -166,8 +166,8 @@ prepare() {
 
   CHECK_FILE="/home/ubuntu/workspace/log/pi/tmp/illegal_check_detector_$(echo "$MAIN_REPO" | cut -d '/' -f2 | tr '-' '_')_last_update"
   RESULT_FILE="/home/ubuntu/workspace/log/pi/tmp/illegal_check_detector_$(echo "$MAIN_REPO" | cut -d '/' -f2 | tr '-' '_')_last_result"
-  [ -e "$CHECK_FILE"  ] || date +%s  > "$CHECK_FILE"
-  [ -e "$RESULT_FILE" ] || echo "-1" > "$RESULT_FILE"
+  [ -e "$CHECK_FILE"  ] || date +%s > "$CHECK_FILE"
+  [ -e "$RESULT_FILE" ] || echo "1" > "$RESULT_FILE" # had been "-1" since 2026-06-05 10:10
 }
 
 police() {
