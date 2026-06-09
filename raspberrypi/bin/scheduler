@@ -146,6 +146,9 @@ main() {
     "superman")
       superman
       ;;
+    "superman-accessories")
+      superman_accessories
+      ;;
     todo-qtg0[0-9]00|todo-qtg1[0-9]00|todo-qtg2[0-3]00)
       timeframe="${service#todo-}"
       todo "$timeframe"
@@ -812,6 +815,29 @@ superman() {
       cron-daemonctl stop observe-superman-conf "$safe"
       # remove-dnsmasq-toggle-conf private superman
       # remove-iptables-toggle-conf private 233_superman
+      ;;
+    *)
+      echo "error: no such operation: \"$operation\"" >&2
+      exit 1
+      ;;
+  esac
+}
+
+superman_accessories() {
+  case "$operation" in
+    "deny")
+      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
+      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
+      [ "$(is_any_kryptonite)" = "true" ]; then
+        cron-daemonctl stop observe-superman-accessories-conf "$safe"
+        return
+      fi
+
+      [ "$SOFT" = 1 ] || cron-daemonctl start observe-superman-accessories-conf "$safe"
+      create-dnsmasq-toggle-conf public superman_accessories
+      ;;
+    "allow")
+      cron-daemonctl stop observe-superman-accessories-conf "$safe"
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2
