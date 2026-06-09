@@ -138,6 +138,12 @@ build() {
       [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf private"
       [ "$1" = "name"      ] && echo "superman"
       ;;
+    "observe-superman-accessories-conf")
+      [ "$1" = "existence" ] && echo "true"
+      [ "$1" = "path"      ] && echo "$PRIV_TOGGLE_DIR/superman_accessories.conf"
+      [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf private"
+      [ "$1" = "name"      ] && echo "superman_accessories"
+      ;;
     "observe-adguard-upstream-conf")
       [ "$1" = "existence" ] && echo "false"
       [ "$1" = "path"      ] && echo "$PRIV_TOGGLE_DIR/adguard_upstream.conf"

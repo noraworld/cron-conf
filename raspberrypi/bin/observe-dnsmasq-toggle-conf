@@ -142,6 +142,7 @@ todo_mode() {
   check_todo  "maeve"                     "maeve"                     "maeve"
   check_todo  "ometeotl"                  "ometeotl"                  "ometeotl"
   check_todo  "superman"                  "superman"                  "superman"
+  check_todo  "superman_accessories"      "superman-accessories"      "superman-accessories"
   check_todo  "upstream"                  "adguard-upstream"          "upstream"
   discipline_todo
 
@@ -277,6 +278,13 @@ todo_mode() {
   if [ "$superman_skipped" = "false" ] && [ "$(restrict-all check "observe-superman-conf")" -le 0 ]; then
     restrict-all reset "observe-superman-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-superman-conf"
+  fi
+
+  # ln_mode & unlink_mode (superman-accessories)
+  # shellcheck disable=SC2154
+  if [ "$superman_accessories_skipped" = "false" ] && [ "$(restrict-all check "observe-superman-accessories-conf")" -le 0 ]; then
+    restrict-all reset "observe-superman-accessories-conf"
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-superman-accessories-conf"
   fi
 
   # ln_mode & unlink_mode (upstream)
