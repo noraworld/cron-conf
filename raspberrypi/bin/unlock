@@ -251,8 +251,8 @@ all() {
     sudo unlink /etc/dnsmasq.priv/toggle/superman.conf
   fi
 
-  if [ -L /etc/dnsmasq.toggle/superman_accessories.conf ]; then
-    sudo unlink /etc/dnsmasq.toggle/superman_accessories.conf
+  if [ -L /etc/dnsmasq.priv/toggle/superman_accessories.conf ]; then
+    sudo unlink /etc/dnsmasq.priv/toggle/superman_accessories.conf
   fi
 
   if [ -L /etc/dnsmasq.toggle/gaming.conf ]; then
@@ -427,9 +427,9 @@ all() {
     not_all_linkage_succeeded=1
   fi
 
-  if [ -L /etc/dnsmasq.toggle/superman_accessories.conf ]; then
+  if [ -L /etc/dnsmasq.priv/toggle/superman_accessories.conf ]; then
     error_color
-    echo "error: /etc/dnsmasq.toggle/superman_accessories.conf still exists" >&2
+    echo "error: /etc/dnsmasq.priv/toggle/superman_accessories.conf still exists" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
     not_all_linkage_succeeded=1
@@ -948,12 +948,12 @@ superman_accessories() {
     sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/adguard_upstream.conf /etc/dnsmasq.priv/toggle
   fi
 
-  if [ -L /etc/dnsmasq.toggle/superman.conf ]; then
-    sudo unlink /etc/dnsmasq.toggle/superman.conf
+  if [ -L /etc/dnsmasq.priv/toggle/superman.conf ]; then
+    sudo unlink /etc/dnsmasq.priv/toggle/superman.conf
   fi
 
   warning_color
-  sudo unlink /etc/dnsmasq.toggle/superman_accessories.conf
+  sudo unlink /etc/dnsmasq.priv/toggle/superman_accessories.conf
   no_color
 
   pause "$waiting_interval" "$WAITING_MESSAGE"
@@ -976,18 +976,18 @@ superman_accessories() {
     linkage_succeeded=1
   fi
 
-  if [ -L /etc/dnsmasq.toggle/superman.conf ]; then
+  if [ -L /etc/dnsmasq.priv/toggle/superman.conf ]; then
     error_color
-    echo "error: /etc/dnsmasq.toggle/superman.conf still exists" >&2
+    echo "error: /etc/dnsmasq.priv/toggle/superman.conf still exists" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
   else
     linkage_succeeded=1
   fi
 
-  if [ -L /etc/dnsmasq.toggle/superman_accessories.conf ]; then
+  if [ -L /etc/dnsmasq.priv/toggle/superman_accessories.conf ]; then
     error_color
-    echo "error: /etc/dnsmasq.toggle/superman_accessories.conf still exists" >&2
+    echo "error: /etc/dnsmasq.priv/toggle/superman_accessories.conf still exists" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
   else

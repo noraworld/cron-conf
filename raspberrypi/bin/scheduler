@@ -834,7 +834,7 @@ superman_accessories() {
       fi
 
       [ "$SOFT" = 1 ] || cron-daemonctl start observe-superman-accessories-conf "$safe"
-      create-dnsmasq-toggle-conf public superman_accessories
+      create-dnsmasq-toggle-conf private superman_accessories
       ;;
     "allow")
       cron-daemonctl stop observe-superman-accessories-conf "$safe"

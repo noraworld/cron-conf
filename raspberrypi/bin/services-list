@@ -102,10 +102,10 @@ main() {
       [ "$1" = "service"    ] && echo "superman-accessories"
       [ "$1" = "name"       ] && echo "superman_accessories"
       [ "$1" = "existence"  ] && echo "true"
-      [ "$1" = "path"       ] && echo "$TOGGLE_DIR/superman_accessories.conf"
+      [ "$1" = "path"       ] && echo "$PRIV_TOGGLE_DIR/superman_accessories.conf"
       [ "$1" = "lock"       ] && echo "create-dnsmasq-toggle-conf"
       [ "$1" = "unlock"     ] && echo "remove-dnsmasq-toggle-conf"
-      [ "$1" = "visibility" ] && echo "public"
+      [ "$1" = "visibility" ] && echo "private"
       [ "$1" = "observer"   ] && echo "observe-superman-accessories-conf"
       ;;
     "adguard-upstream")
