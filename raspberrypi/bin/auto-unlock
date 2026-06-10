@@ -4,6 +4,8 @@ PROG_NAME="auto-unlock"
 SLEEP_INTERVAL=5
 
 main() {
+  prepare
+
   changed=false
 
   case "$*" in
@@ -41,6 +43,15 @@ main() {
 
   if [ "$changed" = "true" ]; then
     /home/ubuntu/workspace/dnsmasq-conf/bin/exrd --log /home/ubuntu/workspace/log/pi/log/exrd.log --from "$PROG_NAME $*"
+  fi
+}
+
+prepare() {
+  # retrieves via GitHub API periodically between 8 AM and 10 AM
+  # because batch schedule often delays and it can't get the new issue info
+  now=$(date +%H%M)
+  if [ "$now" -ge 0800 ] && [ "$now" -le 1000 ]; then
+    sincere
   fi
 }
 
