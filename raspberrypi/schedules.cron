@@ -52,7 +52,7 @@ NON_ROOT_USER=ubuntu
 
 # Detect illegal checks on diary
 #   See batch.yml also
-30 7 * * * sincere
+00 7 * * * sincere
 
 
 
