@@ -153,6 +153,7 @@ prepare() {
 
   # retrieves via GitHub API frequently between 8 AM and 10 AM
   # because batch schedule often delays and it can't get the new issue info
+  # see also: https://github.com/noraworld/cron-conf/blob/82c55a1b961bc77399a8bd8defe830d75dd40ced/raspberrypi/bin/auto-unlock#L50-L55
   now=$(date +%H%M)
   if [ "$now" -ge 0800 ] && [ "$now" -le 1000 ]; then
     CHECK_INTERVAL="600"
