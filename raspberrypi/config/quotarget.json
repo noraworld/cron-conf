@@ -4362,7 +4362,7 @@
   "superman-accessories": {
     "qtg0000": {
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 26 --unchecked 0 $force $cache_only",
+        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 30 --unchecked 0 $force $cache_only",
         "task_personal": "echo 1",
         "tick_personal": "ticksum --repo noraworld/reserved-diary 瞑想 ワークアウト 読書 発音練習 単語学習 リスニング ジャーナル ワンステップチャレンジ ウォーキング --pass-stamp 1 --fail-stamp -1 $force $cache_only",
         "todo_work": "todo-accomplished --repo 'noraworld/daily-report' --past 0 --retry 1 --unchecked 0 $force $cache_only",
