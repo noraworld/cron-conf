@@ -214,9 +214,9 @@ NON_ROOT_USER=ubuntu
 0-4/1  8     * * * scheduler deregulated-superman deny --violet-kryptonite --safe
 5-59/1 8     * * * scheduler deregulated-superman deny --violet-kryptonite
 */1    9     * * * scheduler deregulated-superman deny --violet-kryptonite
-0-4/1  10    * * * scheduler deregulated-superman deny --sky-kryptonite --safe
-5-59/1 10    * * * scheduler deregulated-superman deny --sky-kryptonite
-*/1    11    * * * scheduler deregulated-superman deny --sky-kryptonite
+0-4/1  10    * * * scheduler deregulated-superman deny --lavender-kryptonite --safe
+5-59/1 10    * * * scheduler deregulated-superman deny --lavender-kryptonite
+*/1    11    * * * scheduler deregulated-superman deny --lavender-kryptonite
 */5    12-23 * * * scheduler deregulated-superman allow
 0-4/1  0     * * * scheduler deregulated-superman deny --purple-kryptonite --safe
 5-59/1 0     * * * scheduler deregulated-superman deny --purple-kryptonite
@@ -231,9 +231,9 @@ NON_ROOT_USER=ubuntu
 0-4/1  8     * * * scheduler ometeotl deny --violet-kryptonite --safe
 5-59/1 8     * * * scheduler ometeotl deny --violet-kryptonite
 */1    9     * * * scheduler ometeotl deny --violet-kryptonite
-0-4/1  10    * * * scheduler ometeotl deny --sky-kryptonite --safe
-5-59/1 10    * * * scheduler ometeotl deny --sky-kryptonite
-*/1    11-13 * * * scheduler ometeotl deny --sky-kryptonite
+0-4/1  10    * * * scheduler ometeotl deny --lavender-kryptonite --safe
+5-59/1 10    * * * scheduler ometeotl deny --lavender-kryptonite
+*/1    11-13 * * * scheduler ometeotl deny --lavender-kryptonite
 */5    14-23 * * * scheduler ometeotl allow
 0-4/1  0     * * * scheduler ometeotl deny --purple-kryptonite --safe
 5-59/1 0     * * * scheduler ometeotl deny --purple-kryptonite
@@ -248,9 +248,9 @@ NON_ROOT_USER=ubuntu
 0-4/1  8     * * * scheduler upstream deny --violet-kryptonite --safe
 5-59/1 8     * * * scheduler upstream deny --violet-kryptonite
 */1    9     * * * scheduler upstream deny --violet-kryptonite
-0-4/1  10    * * * scheduler upstream deny --sky-kryptonite --safe
-5-59/1 10    * * * scheduler upstream deny --sky-kryptonite
-*/1    11-17 * * * scheduler upstream deny --sky-kryptonite
+0-4/1  10    * * * scheduler upstream deny --lavender-kryptonite --safe
+5-59/1 10    * * * scheduler upstream deny --lavender-kryptonite
+*/1    11-17 * * * scheduler upstream deny --lavender-kryptonite
 */5    18-23 * * * scheduler upstream allow
 0-4/1  0     * * * scheduler upstream deny --purple-kryptonite --safe
 5-59/1 0     * * * scheduler upstream deny --purple-kryptonite
@@ -265,9 +265,9 @@ NON_ROOT_USER=ubuntu
 0-4/1  8     * * * scheduler elena deny --violet-kryptonite --safe
 5-59/1 8     * * * scheduler elena deny --violet-kryptonite
 */1    9     * * * scheduler elena deny --violet-kryptonite
-0-4/1  10    * * * scheduler elena deny --sky-kryptonite --safe
-5-59/1 10    * * * scheduler elena deny --sky-kryptonite
-*/1    11-19 * * * scheduler elena deny --sky-kryptonite
+0-4/1  10    * * * scheduler elena deny --lavender-kryptonite --safe
+5-59/1 10    * * * scheduler elena deny --lavender-kryptonite
+*/1    11-19 * * * scheduler elena deny --lavender-kryptonite
 */5    20-23 * * * scheduler elena allow
 0-4/1  0     * * * scheduler elena deny --purple-kryptonite --safe
 5-59/1 0     * * * scheduler elena deny --purple-kryptonite
@@ -282,9 +282,9 @@ NON_ROOT_USER=ubuntu
 0-4/1  8     * * * scheduler maeve deny --violet-kryptonite --safe
 5-59/1 8     * * * scheduler maeve deny --violet-kryptonite
 */1    9     * * * scheduler maeve deny --violet-kryptonite
-0-4/1  10    * * * scheduler maeve deny --sky-kryptonite --safe
-5-59/1 10    * * * scheduler maeve deny --sky-kryptonite
-*/1    11-21 * * * scheduler maeve deny --sky-kryptonite
+0-4/1  10    * * * scheduler maeve deny --lavender-kryptonite --safe
+5-59/1 10    * * * scheduler maeve deny --lavender-kryptonite
+*/1    11-21 * * * scheduler maeve deny --lavender-kryptonite
 */5    22-23 * * * scheduler maeve allow
 0-4/1  0     * * * scheduler maeve deny --purple-kryptonite --safe
 5-59/1 0     * * * scheduler maeve deny --purple-kryptonite
@@ -299,9 +299,9 @@ NON_ROOT_USER=ubuntu
 0-4/1  8     * * * scheduler superman deny --violet-kryptonite --safe
 5-59/1 8     * * * scheduler superman deny --violet-kryptonite
 */1    9     * * * scheduler superman deny --violet-kryptonite
-0-4/1  10    * * * scheduler superman deny --sky-kryptonite --safe
-5-59/1 10    * * * scheduler superman deny --sky-kryptonite
-*/1    11-23 * * * scheduler superman deny --sky-kryptonite
+0-4/1  10    * * * scheduler superman deny --lavender-kryptonite --safe
+5-59/1 10    * * * scheduler superman deny --lavender-kryptonite
+*/1    11-23 * * * scheduler superman deny --lavender-kryptonite
 */5    0-1   * * * scheduler superman allow
 0-4/1  2     * * * scheduler superman deny --purple-kryptonite --safe
 5-59/1 2     * * * scheduler superman deny --purple-kryptonite
