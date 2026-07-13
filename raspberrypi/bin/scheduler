@@ -53,7 +53,7 @@ main() {
   # line (remove "#" at the beginning of this line if it exists) if you want to DISABLE the kryptonite mode.
   #
   # [ "$AMBER_KRYPTONITE"   = "1" ] && AMBER_KRYPTONITE="-1"
-  # [ "$BLACK_KRYPTONITE"   = "1" ] && BLACK_KRYPTONITE="-1"
+  [ "$BLACK_KRYPTONITE"   = "1" ] && BLACK_KRYPTONITE="-1"
   # [ "$CARMINE_KRYPTONITE" = "1" ] && CARMINE_KRYPTONITE="-1"
   # [ "$COBALT_KRYPTONITE"  = "1" ] && COBALT_KRYPTONITE="-1"
   [ "$GOLD_KRYPTONITE"    = "1" ] && GOLD_KRYPTONITE="-1"
@@ -68,7 +68,7 @@ main() {
   [ "$TOMATO_KRYPTONITE"  = "1" ] && TOMATO_KRYPTONITE="-1"
   # [ "$VERMILION_KRYPTONITE" = "1" ] && VERMILION_KRYPTONITE="-1"
   [ "$VIOLET_KRYPTONITE"  = "1" ] && VIOLET_KRYPTONITE="-1"
-  # [ "$WHITE_KRYPTONITE"   = "1" ] && WHITE_KRYPTONITE="-1"
+  [ "$WHITE_KRYPTONITE"   = "1" ] && WHITE_KRYPTONITE="-1"
   # [ "$YELLOW_KRYPTONITE"  = "1" ] && YELLOW_KRYPTONITE="-1"
 
   case "$service" in
