@@ -213,6 +213,7 @@ NON_ROOT_USER=ubuntu
 
 
 # Deregulated Superman ("Countess" in the future)
+0      *     * * * scheduler deregulated-superman deny --soft
 0-4/1  8     * * * scheduler deregulated-superman deny --violet-kryptonite --safe
 5-59/1 8     * * * scheduler deregulated-superman deny --violet-kryptonite
 */1    9     * * * scheduler deregulated-superman deny --violet-kryptonite
@@ -232,6 +233,7 @@ NON_ROOT_USER=ubuntu
 
 
 # Ometeotl
+0      *     * * * scheduler ometeotl deny --soft
 0-4/1  8     * * * scheduler ometeotl deny --violet-kryptonite --safe
 5-59/1 8     * * * scheduler ometeotl deny --violet-kryptonite
 */1    9     * * * scheduler ometeotl deny --violet-kryptonite
@@ -251,6 +253,7 @@ NON_ROOT_USER=ubuntu
 
 
 # Upstream
+0      *     * * * scheduler upstream deny --soft
 0-4/1  8     * * * scheduler upstream deny --violet-kryptonite --safe
 5-59/1 8     * * * scheduler upstream deny --violet-kryptonite
 */1    9     * * * scheduler upstream deny --violet-kryptonite
@@ -270,6 +273,7 @@ NON_ROOT_USER=ubuntu
 
 
 # Elena
+0      *     * * * scheduler elena deny --soft
 0-4/1  8     * * * scheduler elena deny --violet-kryptonite --safe
 5-59/1 8     * * * scheduler elena deny --violet-kryptonite
 */1    9     * * * scheduler elena deny --violet-kryptonite
@@ -289,6 +293,7 @@ NON_ROOT_USER=ubuntu
 
 
 # Maeve
+0      *     * * * scheduler maeve deny --soft
 0-4/1  8     * * * scheduler maeve deny --violet-kryptonite --safe
 5-59/1 8     * * * scheduler maeve deny --violet-kryptonite
 */1    9     * * * scheduler maeve deny --violet-kryptonite
@@ -308,6 +313,7 @@ NON_ROOT_USER=ubuntu
 
 
 # Superman
+0      *     * * * scheduler superman deny --soft
 0-4/1  8     * * * scheduler superman deny --violet-kryptonite --safe
 5-59/1 8     * * * scheduler superman deny --violet-kryptonite
 */1    9     * * * scheduler superman deny --violet-kryptonite
@@ -327,6 +333,7 @@ NON_ROOT_USER=ubuntu
 
 
 # Superman Accessories
+0      *         * * * scheduler superman-accessories deny --soft
 0-4/1  8         * * * scheduler superman-accessories deny --gold-kryptonite --safe
 5-59/1 8         * * * scheduler superman-accessories deny --gold-kryptonite
 */5    9         * * * scheduler superman-accessories deny --gold-kryptonite
