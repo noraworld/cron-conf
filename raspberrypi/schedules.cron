@@ -473,6 +473,7 @@ NON_ROOT_USER=ubuntu
 
 
 # YouTube Accessories
+0      *         * * * scheduler youtube-accessories deny --soft
 0-4/1  8         * * * scheduler youtube-accessories deny --gold-kryptonite --safe
 5-59/1 8         * * * scheduler youtube-accessories deny --gold-kryptonite
 */5    9         * * * scheduler youtube-accessories deny --gold-kryptonite
