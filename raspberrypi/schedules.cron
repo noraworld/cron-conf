@@ -352,6 +352,7 @@ NON_ROOT_USER=ubuntu
 
 
 # Gaming
+# 30     *     * * * scheduler gaming deny --soft
 */5    8-9   * * * scheduler gaming allow
 0-4/1  10    * * * scheduler gaming deny --sky-kryptonite --safe
 5-59/1 10    * * * scheduler gaming deny --sky-kryptonite
