@@ -198,6 +198,12 @@ build() {
       [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf public"
       [ "$1" = "name"      ] && echo "chime"
       ;;
+    "observe-siren-conf")
+      [ "$1" = "existence" ] && echo "true"
+      [ "$1" = "path"      ] && echo "$TOGGLE_DIR/siren.conf"
+      [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf public"
+      [ "$1" = "name"      ] && echo "siren"
+      ;;
     "observe-crimson-conf")
       [ "$1" = "existence" ] && echo "false"
       [ "$1" = "path"      ] && echo "$PRIV_TOGGLE_DIR/crimson.conf"

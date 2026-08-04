@@ -64,6 +64,9 @@ main() {
         "chime")
           chime
           ;;
+        "siren")
+          siren
+          ;;
         "crimson")
           crimson
           ;;
@@ -207,6 +210,10 @@ all() {
     sudo unlink /etc/dnsmasq.toggle/chime.conf
   fi
 
+  if [ -L /etc/dnsmasq.toggle/siren.conf ]; then
+    sudo unlink /etc/dnsmasq.toggle/siren.conf
+  fi
+
   if ! [ -L /etc/dnsmasq.priv/toggle/crimson.conf ]; then
     sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.priv/toggle/crimson.conf /etc/dnsmasq.priv/toggle
   fi
@@ -334,6 +341,14 @@ all() {
   if [ -L /etc/dnsmasq.toggle/chime.conf ]; then
     error_color
     echo "error: /etc/dnsmasq.toggle/chime.conf still exists" >&2
+    no_color
+    echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
+    not_all_linkage_succeeded=1
+  fi
+
+  if [ -L /etc/dnsmasq.toggle/siren.conf ]; then
+    error_color
+    echo "error: /etc/dnsmasq.toggle/siren.conf still exists" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
     not_all_linkage_succeeded=1
@@ -608,6 +623,28 @@ chime() {
   if [ -L /etc/dnsmasq.toggle/chime.conf ]; then
     error_color
     echo "error: /etc/dnsmasq.toggle/chime.conf still exists" >&2
+    no_color
+    echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
+  else
+    linkage_succeeded=1
+  fi
+}
+
+siren() {
+  reference_minute=60
+  [ "$DRY_RUN" = 1 ] && exit 0
+
+  while [ -L "/etc/dnsmasq.toggle/siren.conf" ]; do
+    warning_color
+    sudo unlink /etc/dnsmasq.toggle/siren.conf
+    no_color
+
+    pause "$waiting_interval" "$WAITING_MESSAGE"
+  done
+
+  if [ -L "/etc/dnsmasq.toggle/siren.conf" ]; then
+    error_color
+    echo "error: /etc/dnsmasq.toggle/siren.conf still exists" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
   else

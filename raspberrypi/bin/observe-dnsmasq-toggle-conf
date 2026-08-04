@@ -130,6 +130,7 @@ todo_mode() {
   check_todo  "knock"                     "knock"                     "knock"
   check_todo  "minerva"                   "minerva"                   "minerva"
   check_todo  "netflix"                   "netflix"                   "netflix"
+  check_todo  "siren"                     "siren"                     "siren"
   check_todo  "social_media"              "social-media"              "social-media"
   check_todo  "social_media_allow"        "social-media-allow"        "social-media-allow"
   check_todo  "vod"                       "vod"                       "vod"
@@ -193,6 +194,13 @@ todo_mode() {
   if [ "$netflix_skipped" = "false" ] && [ "$(restrict-all check "observe-netflix-conf")" -le 0 ]; then
     restrict-all reset "observe-netflix-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-netflix-conf"
+  fi
+
+  # ln_mode & unlink_mode (siren)
+  # shellcheck disable=SC2154
+  if [ "$siren_skipped" = "false" ] && [ "$(restrict-all check "observe-siren-conf")" -le 0 ]; then
+    restrict-all reset "observe-siren-conf"
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-siren-conf"
   fi
 
   # ln_mode & unlink_mode (social-media)
