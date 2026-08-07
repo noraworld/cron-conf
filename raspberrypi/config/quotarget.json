@@ -2490,7 +2490,7 @@
     },
     "qtg1000": {
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 8 $force $cache_only",
+        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 0 $force $cache_only",
         "task_personal": "INHERIT .youtube.qtg0800.scraping_by.task_personal",
         "tick_personal": "echo 1",
         "todo_work": "todo-accomplished --repo 'noraworld/daily-report' --past 0 --retry 1 --checked 0 $force $cache_only",
@@ -2499,7 +2499,7 @@
     },
     "qtg1100": {
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 8 $force $cache_only",
+        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 0 $force $cache_only",
         "task_personal": "INHERIT .youtube.qtg0800.scraping_by.task_personal",
         "tick_personal": "INHERIT .youtube.qtg1000.scraping_by.tick_personal",
         "todo_work": "INHERIT .youtube.qtg1000.scraping_by.todo_work",
@@ -2508,7 +2508,7 @@
     },
     "qtg1200": {
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 9 $force $cache_only",
+        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 10 $force $cache_only",
         "task_personal": "INHERIT .youtube.qtg0800.scraping_by.task_personal",
         "tick_personal": "INHERIT .youtube.qtg1000.scraping_by.tick_personal",
         "todo_work": "INHERIT .youtube.qtg1000.scraping_by.todo_work",
@@ -2517,7 +2517,7 @@
     },
     "qtg1300": {
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 9 $force $cache_only",
+        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 10 $force $cache_only",
         "task_personal": "INHERIT .youtube.qtg0800.scraping_by.task_personal",
         "tick_personal": "INHERIT .youtube.qtg1000.scraping_by.tick_personal",
         "todo_work": "INHERIT .youtube.qtg1000.scraping_by.todo_work",
@@ -2526,7 +2526,7 @@
     },
     "qtg1400": {
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 10 $force $cache_only",
+        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 11 $force $cache_only",
         "task_personal": "INHERIT .youtube.qtg0800.scraping_by.task_personal",
         "tick_personal": "INHERIT .youtube.qtg1000.scraping_by.tick_personal",
         "todo_work": "INHERIT .youtube.qtg1000.scraping_by.todo_work",
@@ -2535,7 +2535,7 @@
     },
     "qtg1500": {
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 10 $force $cache_only",
+        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 11 $force $cache_only",
         "task_personal": "INHERIT .youtube.qtg0800.scraping_by.task_personal",
         "tick_personal": "INHERIT .youtube.qtg1000.scraping_by.tick_personal",
         "todo_work": "INHERIT .youtube.qtg1000.scraping_by.todo_work",
@@ -2544,7 +2544,7 @@
     },
     "qtg1600": {
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 11 $force $cache_only",
+        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 12 $force $cache_only",
         "task_personal": "INHERIT .youtube.qtg0800.scraping_by.task_personal",
         "tick_personal": "INHERIT .youtube.qtg1000.scraping_by.tick_personal",
         "todo_work": "INHERIT .youtube.qtg1000.scraping_by.todo_work",
@@ -2553,7 +2553,7 @@
     },
     "qtg1700": {
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 11 $force $cache_only",
+        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 12 $force $cache_only",
         "task_personal": "INHERIT .youtube.qtg0800.scraping_by.task_personal",
         "tick_personal": "INHERIT .youtube.qtg1000.scraping_by.tick_personal",
         "todo_work": "INHERIT .youtube.qtg1000.scraping_by.todo_work",
