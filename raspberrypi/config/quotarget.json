@@ -2400,7 +2400,7 @@
   "youtube": {
     "qtg0000": {
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 16 --unchecked 1 $force $cache_only",
+        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 18 --unchecked 1 $force $cache_only",
         "task_personal": "echo 1",
         "tick_personal": "ticksum 瞑想 ワークアウト 発音練習 単語学習 読書 ジャーナル --main-repo noraworld/reserved-diary --template-repo noraworld/diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only",
         "todo_work": "todo-accomplished --repo 'noraworld/daily-report' --past 0 --retry 1 --unchecked 0 $force $cache_only",
@@ -2409,7 +2409,7 @@
     },
     "qtg0100": {
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 17 --unchecked 1 $force $cache_only",
+        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 19 --unchecked 1 $force $cache_only",
         "task_personal": "INHERIT .youtube.qtg0000.scraping_by.task_personal",
         "tick_personal": "ticksum 瞑想 ワークアウト 発音練習 単語学習 読書 ジャーナル ワンステップチャレンジ --main-repo noraworld/reserved-diary --template-repo noraworld/diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only",
         "todo_work": "INHERIT .youtube.qtg0000.scraping_by.todo_work",
@@ -2418,7 +2418,7 @@
     },
     "qtg0200": {
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 18 --unchecked 1 $force $cache_only",
+        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 20 --unchecked 1 $force $cache_only",
         "task_personal": "INHERIT .youtube.qtg0000.scraping_by.task_personal",
         "tick_personal": "ticksum 瞑想 ワークアウト 発音練習 単語学習 読書 ジャーナル ワンステップチャレンジ --main-repo noraworld/reserved-diary --template-repo noraworld/diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only",
         "todo_work": "INHERIT .youtube.qtg0000.scraping_by.todo_work",
@@ -2427,7 +2427,7 @@
     },
     "qtg0300": {
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 19 --unchecked 1 $force $cache_only",
+        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 21 --unchecked 1 $force $cache_only",
         "task_personal": "INHERIT .youtube.qtg0000.scraping_by.task_personal",
         "tick_personal": "ticksum 瞑想 ワークアウト 発音練習 単語学習 読書 ジャーナル ワンステップチャレンジ --main-repo noraworld/reserved-diary --template-repo noraworld/diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only",
         "todo_work": "INHERIT .youtube.qtg0000.scraping_by.todo_work",
@@ -2436,7 +2436,7 @@
     },
     "qtg0400": {
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 20 --unchecked 1 $force $cache_only",
+        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 22 --unchecked 1 $force $cache_only",
         "task_personal": "INHERIT .youtube.qtg0000.scraping_by.task_personal",
         "tick_personal": "INHERIT .youtube.qtg0300.scraping_by.tick_personal",
         "todo_work": "INHERIT .youtube.qtg0000.scraping_by.todo_work",
@@ -2445,7 +2445,7 @@
     },
     "qtg0500": {
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 21 --unchecked 1 $force $cache_only",
+        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 23 --unchecked 1 $force $cache_only",
         "task_personal": "INHERIT .youtube.qtg0000.scraping_by.task_personal",
         "tick_personal": "INHERIT .youtube.qtg0300.scraping_by.tick_personal",
         "todo_work": "INHERIT .youtube.qtg0000.scraping_by.todo_work",
@@ -2454,7 +2454,7 @@
     },
     "qtg0600": {
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 22 --unchecked 1 $force $cache_only",
+        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 24 --unchecked 1 $force $cache_only",
         "task_personal": "INHERIT .youtube.qtg0000.scraping_by.task_personal",
         "tick_personal": "INHERIT .youtube.qtg0300.scraping_by.tick_personal",
         "todo_work": "INHERIT .youtube.qtg0000.scraping_by.todo_work",
@@ -2562,7 +2562,7 @@
     },
     "qtg1800": {
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 12 $force $cache_only",
+        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 13 $force $cache_only",
         "task_personal": "INHERIT .youtube.qtg0800.scraping_by.task_personal",
         "tick_personal": "INHERIT .youtube.qtg1000.scraping_by.tick_personal",
         "todo_work": "INHERIT .youtube.qtg1000.scraping_by.todo_work",
@@ -2571,7 +2571,7 @@
     },
     "qtg1900": {
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 12 $force $cache_only",
+        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 14 $force $cache_only",
         "task_personal": "INHERIT .youtube.qtg0800.scraping_by.task_personal",
         "tick_personal": "INHERIT .youtube.qtg1000.scraping_by.tick_personal",
         "todo_work": "INHERIT .youtube.qtg1000.scraping_by.todo_work",
@@ -2580,7 +2580,7 @@
     },
     "qtg2000": {
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 12 $force $cache_only",
+        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 10 $force $cache_only",
         "task_personal": "INHERIT .youtube.qtg0800.scraping_by.task_personal",
         "tick_personal": "INHERIT .youtube.qtg1000.scraping_by.tick_personal",
         "todo_work": "INHERIT .youtube.qtg0000.scraping_by.todo_work",
@@ -2589,7 +2589,7 @@
     },
     "qtg2100": {
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 12 $force $cache_only",
+        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 10 $force $cache_only",
         "task_personal": "INHERIT .youtube.qtg0800.scraping_by.task_personal",
         "tick_personal": "INHERIT .youtube.qtg1000.scraping_by.tick_personal",
         "todo_work": "INHERIT .youtube.qtg0000.scraping_by.todo_work",
@@ -2598,7 +2598,7 @@
     },
     "qtg2200": {
       "scraping_by": {
-        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 12 $force $cache_only",
+        "todo_personal": "todo-accomplished --repo 'noraworld/reserved-diary' --past 0 --retry 1 --checked 10 $force $cache_only",
         "task_personal": "INHERIT .youtube.qtg0800.scraping_by.task_personal",
         "tick_personal": "ticksum 瞑想 ワークアウト 発音練習 単語学習 読書 --main-repo noraworld/reserved-diary --template-repo noraworld/diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only",
         "todo_work": "INHERIT .youtube.qtg0000.scraping_by.todo_work",
