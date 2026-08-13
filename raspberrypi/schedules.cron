@@ -476,7 +476,7 @@ NON_ROOT_USER=ubuntu
 
 
 # YouTube
-0,30   10-19       * * * scheduler youtube deny --soft
+*/30   10-19       * * * scheduler youtube deny --soft
 */20   22-23       * * * scheduler youtube deny --soft
 */15   0-1         * * * scheduler youtube deny --soft
 */12   2-3         * * * scheduler youtube deny --soft
