@@ -442,7 +442,7 @@
         "task_personal": "echo 1",
         "tick_personal": "ticksum 発音練習 単語学習 --main-repo noraworld/reserved-diary --template-repo noraworld/diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only",
         "todo_work": "echo 1",
-        "task_work": "ticksum 心構え --main-repo noraworld/private-diary --template-repo noraworld/private-diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only"
+        "task_work": "ticksum 心構え ゲート・アルファ --main-repo noraworld/private-diary --template-repo noraworld/private-diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only"
       }
     },
     "qtg0100": {
@@ -3494,7 +3494,7 @@
         "task_personal": "echo 1",
         "tick_personal": "ticksum 瞑想 ワークアウト --main-repo noraworld/reserved-diary --template-repo noraworld/diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only",
         "todo_work": "echo 1",
-        "task_work": "ticksum 心構え --main-repo noraworld/private-diary --template-repo noraworld/private-diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only"
+        "task_work": "ticksum 心構え ゲート・アルファ --main-repo noraworld/private-diary --template-repo noraworld/private-diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only"
       }
     },
     "qtg0100": {
@@ -3712,7 +3712,7 @@
         "task_personal": "echo 1",
         "tick_personal": "ticksum 瞑想 ワークアウト 発音練習 単語学習 読書 リスニング --main-repo noraworld/reserved-diary --template-repo noraworld/diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only",
         "todo_work": "echo 1",
-        "task_work": "ticksum 心構え --main-repo noraworld/private-diary --template-repo noraworld/private-diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only"
+        "task_work": "ticksum 心構え ゲート・アルファ ゲート・ベータ ゲート・ガンマ ゲート・デルタ --main-repo noraworld/private-diary --template-repo noraworld/private-diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only"
       }
     },
     "qtg0100": {
@@ -3930,7 +3930,7 @@
         "task_personal": "echo 1",
         "tick_personal": "ticksum 瞑想 ワークアウト 発音練習 単語学習 読書 リスニング ジャーナル --main-repo noraworld/reserved-diary --template-repo noraworld/diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only --fall-through || ticksum 瞑想 ワークアウト 発音練習 単語学習 読書 リスニング ワンステップチャレンジ --main-repo noraworld/reserved-diary --template-repo noraworld/diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only --fall-through || ticksum ウォーキング --main-repo noraworld/reserved-diary --template-repo noraworld/diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only --fall-through || ticksum オンライン英会話 --main-repo noraworld/reserved-diary --template-repo noraworld/diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only",
         "todo_work": "echo 1",
-        "task_work": "ticksum 心構え --main-repo noraworld/private-diary --template-repo noraworld/private-diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only"
+        "task_work": "ticksum 心構え ゲート・アルファ ゲート・ベータ ゲート・ガンマ ゲート・デルタ ゲート・イプシロン --main-repo noraworld/private-diary --template-repo noraworld/private-diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only"
       }
     },
     "qtg0100": {
@@ -4148,7 +4148,7 @@
         "task_personal": "echo 1",
         "tick_personal": "ticksum 瞑想 ワークアウト 発音練習 単語学習 --main-repo noraworld/reserved-diary --template-repo noraworld/diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only",
         "todo_work": "echo 1",
-        "task_work": "ticksum 心構え --main-repo noraworld/private-diary --template-repo noraworld/private-diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only --fall-through || ticksum 健全閲覧宣言 --main-repo noraworld/private-diary --template-repo noraworld/private-diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only"
+        "task_work": "ticksum 心構え ゲート・アルファ ゲート・ベータ --main-repo noraworld/private-diary --template-repo noraworld/private-diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only --fall-through || ticksum 健全閲覧宣言 --main-repo noraworld/private-diary --template-repo noraworld/private-diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only"
       }
     },
     "qtg0100": {
@@ -4366,7 +4366,7 @@
         "task_personal": "echo 1",
         "tick_personal": "ticksum 瞑想 ワークアウト 発音練習 単語学習 読書 リスニング ジャーナル ワンステップチャレンジ --main-repo noraworld/reserved-diary --template-repo noraworld/diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only --fall-through || ticksum ウォーキング --main-repo noraworld/reserved-diary --template-repo noraworld/diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only",
         "todo_work": "echo 1",
-        "task_work": "ticksum 心構え --main-repo noraworld/private-diary --template-repo noraworld/private-diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only"
+        "task_work": "ticksum 心構え ゲート・アルファ ゲート・ベータ ゲート・ガンマ ゲート・デルタ ゲート・イプシロン ゲート・ゼータ --main-repo noraworld/private-diary --template-repo noraworld/private-diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only"
       }
     },
     "qtg0100": {
@@ -4584,7 +4584,7 @@
         "task_personal": "echo 1",
         "tick_personal": "ticksum 瞑想 ワークアウト 発音練習 単語学習 読書 リスニング ジャーナル ワンステップチャレンジ ウォーキング --main-repo noraworld/reserved-diary --template-repo noraworld/diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only",
         "todo_work": "todo-accomplished --repo 'noraworld/daily-report' --past 0 --retry 1 --unchecked 0 $force $cache_only",
-        "task_work": "ticksum 心構え --main-repo noraworld/private-diary --template-repo noraworld/private-diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only"
+        "task_work": "ticksum 心構え ゲート・アルファ ゲート・ベータ ゲート・ガンマ ゲート・デルタ ゲート・イプシロン ゲート・ゼータ --main-repo noraworld/private-diary --template-repo noraworld/private-diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only"
       }
     },
     "qtg0100": {
@@ -4802,7 +4802,7 @@
         "task_personal": "echo 1",
         "tick_personal": "ticksum 瞑想 ワークアウト 発音練習 単語学習 読書 --main-repo noraworld/reserved-diary --template-repo noraworld/diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only",
         "todo_work": "echo 1",
-        "task_work": "ticksum 心構え --main-repo noraworld/private-diary --template-repo noraworld/private-diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only --fall-through || ticksum 健全閲覧宣言 --main-repo noraworld/private-diary --template-repo noraworld/private-diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only"
+        "task_work": "ticksum 心構え ゲート・アルファ ゲート・ベータ ゲート・ガンマ --main-repo noraworld/private-diary --template-repo noraworld/private-diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only --fall-through || ticksum 健全閲覧宣言 --main-repo noraworld/private-diary --template-repo noraworld/private-diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only"
       }
     },
     "qtg0100": {
