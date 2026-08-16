@@ -1317,27 +1317,27 @@ is_any_kryptonite() {
 parser_definition() {
   setup   REST help:usage -- "Usage: scheduler [options]... [arguments]..." ''
   msg -- 'Options:'
-  flag    AMBER_KRYPTONITE        --amber-kryptonite     -- "exempt the restriction even after midnight"
-  flag    BLACK_KRYPTONITE        --black-kryptonite     -- "exempt the restriction even after midnight"
-  flag    CARMINE_KRYPTONITE      --carmine-kryptonite   -- "exempt the restriction even after midnight"
-  flag    COBALT_KRYPTONITE       --cobalt-kryptonite    -- "exempt the restriction even after midnight"
-  flag    GOLD_KRYPTONITE         --gold-kryptonite      -- "exempt the restriction even during the day"
-  flag    GRAY_KRYPTONITE         --gray-kryptonite      -- "exempt the restriction even during the night"
-  flag    INDIGO_KRYPTONITE       --indigo-kryptonite    -- "exempt the restriction even after midnight"
-  flag    IRIS_KRYPTONITE         --iris-kryptonite      -- "exempt the restriction even during the day"
-  flag    IVORY_KRYPTONITE        --ivory-kryptonite     -- "exempt the restriction even during the day"
-  flag    PURPLE_KRYPTONITE       --purple-kryptonite    -- "exempt the restriction even after midnight"
-  flag    RED_KRYPTONITE          --red-kryptonite       -- "exempt the restriction even after midnight"
-  flag    SALMON_KRYPTONITE       --salmon-kryptonite    -- "exempt the restriction even after midnight"
-  flag    SCARLET_KRYPTONITE      --scarlet-kryptonite   -- "exempt the restriction even after midnight"
-  flag    SILVER_KRYPTONITE       --silver-kryptonite    -- "exempt the restriction even after midnight"
-  flag    SKY_KRYPTONITE          --sky-kryptonite       -- "exempt the restriction even during the day"
-  flag    TOMATO_KRYPTONITE       --tomato-kryptonite    -- "exempt the restriction even after midnight"
-  flag    LAVENDER_KRYPTONITE     --lavender-kryptonite  -- "exempt the restriction even during the day"
-  flag    VERMILION_KRYPTONITE    --vermilion-kryptonite -- "exempt the restriction even after midnight"
-  flag    VIOLET_KRYPTONITE       --violet-kryptonite    -- "exempt the restriction even in the morning"
-  flag    WHITE_KRYPTONITE        --white-kryptonite     -- "exempt the restriction even during the day"
-  flag    YELLOW_KRYPTONITE       --yellow-kryptonite    -- "exempt the restriction even after midnight"
+  flag    AMBER_KRYPTONITE        --amber-kryptonite     -- "exempt the restriction even during the restricted time"
+  flag    BLACK_KRYPTONITE        --black-kryptonite     -- "exempt the restriction even during the restricted time"
+  flag    CARMINE_KRYPTONITE      --carmine-kryptonite   -- "exempt the restriction even during the restricted time"
+  flag    COBALT_KRYPTONITE       --cobalt-kryptonite    -- "exempt the restriction even during the restricted time"
+  flag    GOLD_KRYPTONITE         --gold-kryptonite      -- "exempt the restriction even during the restricted time"
+  flag    GRAY_KRYPTONITE         --gray-kryptonite      -- "exempt the restriction even during the restricted time"
+  flag    INDIGO_KRYPTONITE       --indigo-kryptonite    -- "exempt the restriction even during the restricted time"
+  flag    IRIS_KRYPTONITE         --iris-kryptonite      -- "exempt the restriction even during the restricted time"
+  flag    IVORY_KRYPTONITE        --ivory-kryptonite     -- "exempt the restriction even during the restricted time"
+  flag    PURPLE_KRYPTONITE       --purple-kryptonite    -- "exempt the restriction even during the restricted time"
+  flag    RED_KRYPTONITE          --red-kryptonite       -- "exempt the restriction even during the restricted time"
+  flag    SALMON_KRYPTONITE       --salmon-kryptonite    -- "exempt the restriction even during the restricted time"
+  flag    SCARLET_KRYPTONITE      --scarlet-kryptonite   -- "exempt the restriction even during the restricted time"
+  flag    SILVER_KRYPTONITE       --silver-kryptonite    -- "exempt the restriction even during the restricted time"
+  flag    SKY_KRYPTONITE          --sky-kryptonite       -- "exempt the restriction even during the restricted time"
+  flag    TOMATO_KRYPTONITE       --tomato-kryptonite    -- "exempt the restriction even during the restricted time"
+  flag    LAVENDER_KRYPTONITE     --lavender-kryptonite  -- "exempt the restriction even during the restricted time"
+  flag    VERMILION_KRYPTONITE    --vermilion-kryptonite -- "exempt the restriction even during the restricted time"
+  flag    VIOLET_KRYPTONITE       --violet-kryptonite    -- "exempt the restriction even during the restricted time"
+  flag    WHITE_KRYPTONITE        --white-kryptonite     -- "exempt the restriction even during the restricted time"
+  flag    YELLOW_KRYPTONITE       --yellow-kryptonite    -- "exempt the restriction even during the restricted time"
   flag    MORNING                 --morning              -- "whether to exempt the restriction in the morning"
   flag    SAFE                    --safe                 -- "not getting punished"
   flag    SOFT                    --soft                 -- "deny resources without starting a daemon"
@@ -1564,27 +1564,27 @@ cat<<'GETOPTIONSHERE'
 Usage: scheduler [options]... [arguments]...
 
 Options:
-      --amber-kryptonite      exempt the restriction even after midnight
-      --black-kryptonite      exempt the restriction even after midnight
-      --carmine-kryptonite    exempt the restriction even after midnight
-      --cobalt-kryptonite     exempt the restriction even after midnight
-      --gold-kryptonite       exempt the restriction even during the day
-      --gray-kryptonite       exempt the restriction even during the night
-      --indigo-kryptonite     exempt the restriction even after midnight
-      --iris-kryptonite       exempt the restriction even during the day
-      --ivory-kryptonite      exempt the restriction even during the day
-      --purple-kryptonite     exempt the restriction even after midnight
-      --red-kryptonite        exempt the restriction even after midnight
-      --salmon-kryptonite     exempt the restriction even after midnight
-      --scarlet-kryptonite    exempt the restriction even after midnight
-      --silver-kryptonite     exempt the restriction even after midnight
-      --sky-kryptonite        exempt the restriction even during the day
-      --tomato-kryptonite     exempt the restriction even after midnight
-      --lavender-kryptonite   exempt the restriction even during the day
-      --vermilion-kryptonite  exempt the restriction even after midnight
-      --violet-kryptonite     exempt the restriction even in the morning
-      --white-kryptonite      exempt the restriction even during the day
-      --yellow-kryptonite     exempt the restriction even after midnight
+      --amber-kryptonite      exempt the restriction even during the restricted time
+      --black-kryptonite      exempt the restriction even during the restricted time
+      --carmine-kryptonite    exempt the restriction even during the restricted time
+      --cobalt-kryptonite     exempt the restriction even during the restricted time
+      --gold-kryptonite       exempt the restriction even during the restricted time
+      --gray-kryptonite       exempt the restriction even during the restricted time
+      --indigo-kryptonite     exempt the restriction even during the restricted time
+      --iris-kryptonite       exempt the restriction even during the restricted time
+      --ivory-kryptonite      exempt the restriction even during the restricted time
+      --purple-kryptonite     exempt the restriction even during the restricted time
+      --red-kryptonite        exempt the restriction even during the restricted time
+      --salmon-kryptonite     exempt the restriction even during the restricted time
+      --scarlet-kryptonite    exempt the restriction even during the restricted time
+      --silver-kryptonite     exempt the restriction even during the restricted time
+      --sky-kryptonite        exempt the restriction even during the restricted time
+      --tomato-kryptonite     exempt the restriction even during the restricted time
+      --lavender-kryptonite   exempt the restriction even during the restricted time
+      --vermilion-kryptonite  exempt the restriction even during the restricted time
+      --violet-kryptonite     exempt the restriction even during the restricted time
+      --white-kryptonite      exempt the restriction even during the restricted time
+      --yellow-kryptonite     exempt the restriction even during the restricted time
       --morning               whether to exempt the restriction in the morning
       --safe                  not getting punished
       --soft                  deny resources without starting a daemon
