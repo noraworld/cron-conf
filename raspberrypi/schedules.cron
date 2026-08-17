@@ -484,10 +484,10 @@ NON_ROOT_USER=ubuntu
 
 # YouTube
 */30   10-19  * * * scheduler youtube deny --soft
-*/20   22-23  * * * scheduler youtube deny --soft
-*/15   0      * * * scheduler youtube deny --soft
-*/10   1      * * * scheduler youtube deny --soft
-*/5    2-7    * * * scheduler youtube deny --soft
+*/20   22     * * * scheduler youtube deny --soft
+*/15   23     * * * scheduler youtube deny --soft
+*/10   0      * * * scheduler youtube deny --soft
+*/5    1-7    * * * scheduler youtube deny --soft
 */5    8-9    * * * scheduler youtube deny --vampire
 0-4/1  10     * * * scheduler youtube deny --sky-kryptonite --safe
 5-59/1 10     * * * scheduler youtube deny --sky-kryptonite
