@@ -754,11 +754,15 @@ periodic() {
   # might not be changed for a while.
   #
   if [ "$(echo "$(awk '{print $1}' /proc/uptime)" / 60 | bc)" -gt "$UPTIME_THRESHOLD" ]; then
+    # Add the local repo paths on the Raspberry Pi here if you want to perform 'git pull' automatically.
+    # This is useful specifically when the Firewall restriction by cron is harsh and the changes are conducted on a regular basis.
+    # Do not forget to put '&' (done in background) at the end of the command.
     auto-git-pull                            \
       "/home/ubuntu/workspace/cron-conf"     \
       "/home/ubuntu/workspace/dnsmasq-conf"  \
       "/home/ubuntu/workspace/envsman"       \
-      "/home/ubuntu/workspace/systemd-units" &
+      "/home/ubuntu/workspace/systemd-units" \
+      "/home/ubuntu/workspace/dotfiles"      &
   fi
 
   # Auto back up log
