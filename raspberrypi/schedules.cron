@@ -395,6 +395,12 @@ NON_ROOT_USER=ubuntu
 
 
 
+# Athena
+*/5 * * * * scheduler athena allow
+0   * * * * scheduler athena deny --soft
+
+
+
 # Minerva
 */5    8-9   * * * scheduler minerva allow
 0-4/1  10    * * * scheduler minerva deny --ivory-kryptonite --safe

@@ -105,6 +105,9 @@ main() {
     "knock")
       knock
       ;;
+    "athena")
+      athena
+      ;;
     "minerva")
       minerva
       ;;
@@ -535,6 +538,29 @@ knock() {
       ;;
     "allow")
       cron-daemonctl stop observe-knock-conf "$safe"
+      ;;
+    *)
+      echo "error: no such operation: \"$operation\"" >&2
+      exit 1
+      ;;
+  esac
+}
+
+athena() {
+  case "$operation" in
+    "deny")
+      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
+      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
+      [ "$(is_any_kryptonite)" = "true" ]; then
+        cron-daemonctl stop observe-athena-conf "$safe"
+        return
+      fi
+
+      [ "$SOFT" = 1 ] || cron-daemonctl start observe-athena-conf "$safe"
+      create-dnsmasq-toggle-conf public athena
+      ;;
+    "allow")
+      cron-daemonctl stop observe-athena-conf "$safe"
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2

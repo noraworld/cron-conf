@@ -106,6 +106,9 @@ main() {
         "knock")
           knock
           ;;
+        "athena")
+          athena
+          ;;
         "minerva")
           minerva
           ;;
@@ -268,6 +271,10 @@ all() {
 
   if ! [ -L /etc/dnsmasq.toggle/knock.conf ]; then
     sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle/knock.conf /etc/dnsmasq.toggle
+  fi
+
+  if [ -L /etc/dnsmasq.toggle/athena.conf ]; then
+    sudo unlink /etc/dnsmasq.toggle/athena.conf
   fi
 
   if [ -L /etc/dnsmasq.toggle/minerva.conf ]; then
@@ -461,6 +468,14 @@ all() {
   if ! [ -L /etc/dnsmasq.toggle/knock.conf ]; then
     error_color
     echo "error: /etc/dnsmasq.toggle/knock.conf still doesn't exist" >&2
+    no_color
+    echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
+    not_all_linkage_succeeded=1
+  fi
+
+  if [ -L /etc/dnsmasq.toggle/athena.conf ]; then
+    error_color
+    echo "error: /etc/dnsmasq.toggle/athena.conf still exists" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
     not_all_linkage_succeeded=1
@@ -1067,6 +1082,26 @@ knock() {
   if ! [ -L "/etc/dnsmasq.toggle/knock.conf" ]; then
     error_color
     echo "error: /etc/dnsmasq.toggle/knock.conf still doesn't exist" >&2
+    no_color
+    echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
+  else
+    linkage_succeeded=1
+  fi
+}
+
+athena() {
+  reference_minute=60
+  [ "$DRY_RUN" = 1 ] && exit 0
+
+  warning_color
+  sudo unlink /etc/dnsmasq.toggle/athena.conf
+  no_color
+
+  pause "$waiting_interval" "$WAITING_MESSAGE"
+
+  if [ -L /etc/dnsmasq.toggle/athena.conf ]; then
+    error_color
+    echo "error: /etc/dnsmasq.toggle/athena.conf still exists" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
   else
