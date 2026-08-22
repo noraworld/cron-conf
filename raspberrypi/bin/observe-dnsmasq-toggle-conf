@@ -123,6 +123,7 @@ firewall_mode() {
 
 todo_mode() {
   #           service_name_for_variable   service_name_for_observer   service_name_for_quotarget
+  check_todo  "athena"                    "athena"                    "athena"
   check_todo  "chime"                     "chime"                     "chime"
   check_todo  "crimson"                   "crimson"                   "crimson"
   check_todo  "elena"                     "elena"                     "elena"
@@ -146,6 +147,13 @@ todo_mode() {
   check_todo  "superman_accessories"      "superman-accessories"      "superman-accessories"
   check_todo  "upstream"                  "adguard-upstream"          "upstream"
   discipline_todo
+
+  # ln_mode & unlink_mode (athena)
+  # shellcheck disable=SC2154
+  if [ "$athena_skipped" = "false" ] && [ "$(restrict-all check "observe-athena-conf")" -le 0 ]; then
+    restrict-all reset "observe-athena-conf"
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-athena-conf"
+  fi
 
   # ln_mode & unlink_mode (chime)
   # shellcheck disable=SC2154
