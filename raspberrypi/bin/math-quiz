@@ -1,0 +1,291 @@
+#!/bin/sh
+
+set -eu
+
+random_uint() {
+  if n=$(od -An -N4 -tu4 /dev/urandom 2>/dev/null); then
+    set -- $n
+    printf '%s\n' "$1"
+    return
+  fi
+
+  date '+%s'
+}
+
+random_int() {
+  min=$1
+  max=$2
+  span=$((max - min + 1))
+  n=$(random_uint)
+  printf '%s\n' $((min + n % span))
+}
+
+str_len() {
+  printf '%s' "$1" | wc -c | tr -d ' '
+}
+
+substr() {
+  value=$1
+  start=$2
+
+  if [ "$#" -eq 3 ]; then
+    end=$3
+    if [ "$start" -gt "$end" ]; then
+      printf ''
+      return
+    fi
+
+    printf '%s' "$value" | cut -c "$start-$end"
+    return
+  fi
+
+  printf '%s' "$value" | cut -c "$start-"
+}
+
+redraw_answer() {
+  len=$(str_len "$answer")
+
+  printf '\r> %s\033[K' "$answer" >&2
+
+  i=$cursor
+  while [ "$i" -lt "$len" ]; do
+    printf '\b' >&2
+    i=$((i + 1))
+  done
+}
+
+delete_before_cursor() {
+  if [ "$cursor" -eq 0 ]; then
+    return
+  fi
+
+  before=
+  if [ "$cursor" -gt 1 ]; then
+    before=$(substr "$answer" 1 "$((cursor - 1))")
+  fi
+
+  after=$(substr "$answer" "$((cursor + 1))")
+  answer=$before$after
+  cursor=$((cursor - 1))
+  redraw_answer
+}
+
+delete_at_cursor() {
+  len=$(str_len "$answer")
+
+  if [ "$cursor" -ge "$len" ]; then
+    return
+  fi
+
+  before=
+  if [ "$cursor" -gt 0 ]; then
+    before=$(substr "$answer" 1 "$cursor")
+  fi
+
+  after=$(substr "$answer" "$((cursor + 2))")
+  answer=$before$after
+  redraw_answer
+}
+
+insert_at_cursor() {
+  char=$1
+
+  before=
+  if [ "$cursor" -gt 0 ]; then
+    before=$(substr "$answer" 1 "$cursor")
+  fi
+
+  after=$(substr "$answer" "$((cursor + 1))")
+  answer=$before$char$after
+  cursor=$((cursor + 1))
+  redraw_answer
+}
+
+read_answer() {
+  if [ ! -t 0 ]; then
+    IFS= read -r answer || answer=
+    printf '%s\n' "$answer"
+    return
+  fi
+
+  old_stty=$(stty -g)
+  answer=
+  cursor=0
+
+  trap 'stty "$old_stty"; printf "\n" >&2; exit 130' INT TERM
+  stty -icanon -echo min 1 time 0
+  redraw_answer
+
+  while :; do
+    char=$(dd bs=1 count=1 2>/dev/null || printf '')
+
+    case $char in
+      "$(printf '\001')")
+        while [ "$cursor" -gt 0 ]; do
+          cursor=$((cursor - 1))
+        done
+        redraw_answer
+        ;;
+      "$(printf '\002')")
+        if [ "$cursor" -gt 0 ]; then
+          cursor=$((cursor - 1))
+          redraw_answer
+        fi
+        ;;
+      "$(printf '\003')")
+        stty "$old_stty"
+        printf '\n' >&2
+        exit 130
+        ;;
+      "$(printf '\004')")
+        if [ -z "$answer" ]; then
+          stty "$old_stty"
+          printf '\n' >&2
+          exit 1
+        fi
+
+        delete_at_cursor
+        ;;
+      "$(printf '\005')")
+        len=$(str_len "$answer")
+        if [ "$cursor" -lt "$len" ]; then
+          cursor=$len
+          redraw_answer
+        fi
+        ;;
+      "$(printf '\006')")
+        if [ "$cursor" -lt "$(str_len "$answer")" ]; then
+          cursor=$((cursor + 1))
+          redraw_answer
+        fi
+        ;;
+      "$(printf '\013')")
+        ;;
+      "$(printf '\012')"|"$(printf '\015')"|"")
+        stty "$old_stty"
+        trap - INT TERM
+        printf '\n' >&2
+        printf '%s\n' "$answer"
+        return
+        ;;
+      "$(printf '\025')")
+        if [ "$cursor" -gt 0 ]; then
+          len=$(str_len "$answer")
+          answer=$(substr "$answer" "$((cursor + 1))" "$len")
+          cursor=0
+          redraw_answer
+        fi
+        ;;
+      "$(printf '\010')"|"$(printf '\177')")
+        delete_before_cursor
+        ;;
+      "$(printf '\033')")
+        next=$(dd bs=1 count=1 2>/dev/null || printf '')
+        if [ "$next" = "[" ]; then
+          key=$(dd bs=1 count=1 2>/dev/null || printf '')
+          case $key in
+            D)
+              if [ "$cursor" -gt 0 ]; then
+                cursor=$((cursor - 1))
+                redraw_answer
+              fi
+              ;;
+            C)
+              if [ "$cursor" -lt "$(str_len "$answer")" ]; then
+                cursor=$((cursor + 1))
+                redraw_answer
+              fi
+              ;;
+          esac
+        fi
+        ;;
+      *)
+        insert_at_cursor "$char"
+        ;;
+    esac
+  done
+}
+
+print_correct() {
+  if [ -t 1 ] && [ "${TERM:-}" != "dumb" ]; then
+    printf '\033[1;32mcorrect\033[0m\n'
+    return
+  fi
+
+  printf 'correct\n'
+}
+
+print_incorrect() {
+  expected=$1
+
+  if [ -t 1 ] && [ "${TERM:-}" != "dumb" ]; then
+    printf '\033[1;31mincorrect\033[0m (%s)\n' "$expected"
+    return
+  fi
+
+  printf 'incorrect (%s)\n' "$expected"
+}
+
+ask() {
+  question=$1
+  expected=$2
+
+  printf '%s\n' "$question" >&2
+
+  answer=$(read_answer)
+
+  if [ "$answer" = "$expected" ]; then
+    print_correct
+    exit 0
+  fi
+
+  print_incorrect "$expected"
+  exit 1
+}
+
+main() {
+  kind=$(random_int 0 5)
+
+  case $kind in
+    0)
+      a=$(random_int 0 9999)
+      b=$(random_int 0 9999)
+      x=$((a + b))
+      ask "$a + $b = x" "$x"
+      ;;
+    1)
+      a=$(random_int 0 9999)
+      b=$(random_int 0 9999)
+      x=$((a - b))
+      ask "$a - $b = x" "$x"
+      ;;
+    2)
+      a=$(random_int 2 19)
+      b=$(random_int 2 19)
+      x=$((a * b))
+      ask "$a * $b = x" "$x"
+      ;;
+    3)
+      b=$(random_int 2 9)
+      q=$(random_int 2 99)
+      a=$((b * q))
+      ask "$a / $b = x" "$q"
+      ;;
+    4)
+      a=$(random_int 2 9)
+      x=$(random_int 2 99)
+      product=$((a * x))
+      left=$(random_int "$product" 9999)
+      right=$((left - product))
+      ask "${a}x = $left - $right" "$x"
+      ;;
+    *)
+      x=$(random_int -999 999)
+      b=$(random_int 0 999)
+      c=$((x - b))
+      ask "x - $b = $c" "$x"
+      ;;
+  esac
+}
+
+main "$@"

@@ -114,6 +114,8 @@ main() {
     fi
   fi
 
+  math-quiz || exit 1
+
   # value: positive
   if [ "$DRY_RUN" != "1" ]; then
     unlock $services --skip --interval $INTERVAL --retry $RETRY
