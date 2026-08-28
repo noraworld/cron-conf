@@ -8,11 +8,15 @@ ALL_NAMES="deregulated_superman deregulated_superman_allow elena maeve ometeotl 
 ALL_PATHS="$PRIV_TOGGLE_DIR/deregulated_superman.conf $PRIV_TOGGLE_DIR/deregulated_superman_allow.conf $PRIV_TOGGLE_DIR/elena.conf $PRIV_TOGGLE_DIR/maeve.conf $PRIV_TOGGLE_DIR/ometeotl.conf $PRIV_TOGGLE_DIR/superman.conf $PRIV_TOGGLE_DIR/superman_accessories.conf $PRIV_TOGGLE_DIR/adguard_upstream.conf $PRIV_TOGGLE_DIR/superman_upstream.conf $TOGGLE_DIR/social_media.conf $TOGGLE_DIR/social_media_allow.conf $TOGGLE_DIR/vod.conf $TOGGLE_DIR/youtube.conf $TOGGLE_DIR/chime.conf $TOGGLE_DIR/siren.conf $PRIV_TOGGLE_DIR/crimson.conf $TOGGLE_DIR/gaming.conf $TOGGLE_DIR/knock.conf $TOGGLE_DIR/athena.conf $TOGGLE_DIR/minerva.conf $TOGGLE_DIR/youtube_accessories.conf $TOGGLE_DIR/youtube_alternative.conf $TOGGLE_DIR/youtube_music.conf $TOGGLE_DIR/youtube_music_persistent.conf $TOGGLE_DIR/discipline.conf"
 ALL_OBSERVERS="observe-deregulated-superman-conf observe-deregulated-superman-allow-conf observe-elena-conf observe-maeve-conf observe-ometeotl-conf observe-superman-conf observe-superman-accessories-conf observe-adguard-upstream-conf observe-superman-upstream-conf observe-social-media-conf observe-social-media-allow-conf observe-vod-conf observe-youtube-conf observe-chime-conf observe-siren-conf observe-crimson-conf observe-gaming-conf observe-knock-conf observe-athena-conf observe-minerva-conf observe-youtube-accessories-conf observe-youtube-alternative-conf observe-youtube-music-conf observe-youtube-music-persistent-conf observe-discipline-conf"
 
-# DO NOT ADD UPSTREAMS!!!!!
+# IMPORTANT: DO NOT ADD UPSTREAMS!!!!!
 #   They will have conflict unless they are considered simultaneously.
 #   This list is used within auto-unlock, but upstream-observer does the trick when it comes to upstreams.
 #
-#   MEMO: It may be OK to add Netflix to general services list (it is needed to resolve the buggy behavior related to the VPN first)
+# WARNING:
+#   Deleting Discipline will prevent auto-git-pull from updating the changes even during the morning (bonus period.)
+#
+# MEMO:
+#   It may be OK to add Netflix to general services list (it is needed to resolve the buggy behavior related to the VPN first)
 GENERAL_SERVICES="social-media vod gaming"
 GENERAL_NAMES="social_media vod gaming"
 GENERAL_PATHS="$TOGGLE_DIR/social_media.conf $TOGGLE_DIR/vod.conf $TOGGLE_DIR/gaming.conf"
