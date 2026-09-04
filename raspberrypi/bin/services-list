@@ -17,10 +17,10 @@ ALL_OBSERVERS="observe-deregulated-superman-conf observe-deregulated-superman-al
 #
 # MEMO:
 #   It may be OK to add Netflix to general services list (it is needed to resolve the buggy behavior related to the VPN first)
-GENERAL_SERVICES="social-media vod gaming"
-GENERAL_NAMES="social_media vod gaming"
-GENERAL_PATHS="$TOGGLE_DIR/social_media.conf $TOGGLE_DIR/vod.conf $TOGGLE_DIR/gaming.conf"
-GENERAL_OBSERVERS="observe-social-media-conf observe-vod-conf observe-gaming-conf"
+GENERAL_SERVICES="social-media vod gaming discipline"
+GENERAL_NAMES="social_media vod gaming discipline"
+GENERAL_PATHS="$TOGGLE_DIR/social_media.conf $TOGGLE_DIR/vod.conf $TOGGLE_DIR/gaming.conf $TOGGLE_DIR/discipline.conf"
+GENERAL_OBSERVERS="observe-social-media-conf observe-vod-conf observe-gaming-conf observe-discipline-conf"
 
 main() {
   case "$2" in
