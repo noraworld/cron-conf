@@ -38,10 +38,16 @@ main() {
     sincere_force=""
   fi
 
-  if [ "$CACHE_ONLY" = "1" ]; then
-    cache_only="--cache-only"
+  if [ "$QUOTARGET_CACHE_ONLY" = "1" ]; then
+    quotarget_cache_only="--cache-only"
   else
-    cache_only=""
+    quotarget_cache_only=""
+  fi
+
+  if [ "$SINCERE_CACHE_ONLY" = "1" ]; then
+    sincere_cache_only="--cache-only"
+  else
+    sincere_cache_only=""
   fi
 
   if [ "$INTERVAL" = "" ]; then
@@ -81,7 +87,7 @@ main() {
             sleep "10"
           fi
 
-          accomplished=$(quotarget --timeframe "$tf" --service $quotarget_service $quotarget_force $cache_only)
+          accomplished=$(quotarget --timeframe "$tf" --service $quotarget_service $quotarget_force $quotarget_cache_only)
           [ "$?" != "0" ] && exit 1
 
           break
@@ -112,7 +118,7 @@ main() {
 
   if [ "$SINCERE" = "1" ]; then
     printf "sincere: "
-    sincerely=$(sincere $sincere_force $cache_only)
+    sincerely=$(sincere $sincere_force $sincere_cache_only)
     echo "$sincerely"
 
     if [ "$sincerely" -le 0 ] && ! echo "$IGNORE" | grep -Eq "(^|,)sincere(,|$)"; then
@@ -141,7 +147,8 @@ parser_definition() {
   param   IGNORE         --ignore      -- "skip specific check processes (ones in daemon, quotarget, sincere)"
   param   INTERVAL       --interval    -- "wait for the given number of seconds each time (unlock)"
   flag    MORNING        --morning     -- "skip quotarget, and ask to prepare a piece of garlic"
-  flag    CACHE_ONLY     --cache-only  -- "use cache even if cache is stale (ignore check interval)"
+  flag    QUOTARGET_CACHE_ONLY    --quotarget-cache-only -- "use cache even if cache is stale (ignore check interval)"
+  flag    SINCERE_CACHE_ONLY      --sincere-cache-only   -- "execute sincere with --cache-only option"
   flag    REFRESH        --refresh     -- "restart todo-list daemon before check"
   param   RETRY          --retry       -- "try to create or delete symlinks the given number of times (unlock)"
   flag    SINCERE        --sincere     -- "execute sincere before running"
@@ -161,7 +168,8 @@ FORCE_RETRY=''
 IGNORE=''
 INTERVAL=''
 MORNING=''
-CACHE_ONLY=''
+QUOTARGET_CACHE_ONLY=''
+SINCERE_CACHE_ONLY=''
 REFRESH=''
 RETRY=''
 SINCERE=''
@@ -215,10 +223,15 @@ parse() {
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
         MORNING="$OPTARG"
         ;;
-      '--cache-only')
+      '--quotarget-cache-only')
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
         eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
-        CACHE_ONLY="$OPTARG"
+        QUOTARGET_CACHE_ONLY="$OPTARG"
+        ;;
+      '--sincere-cache-only')
+        [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
+        eval '[ ${OPTARG+x} ] &&:' && OPTARG='1' || OPTARG=''
+        SINCERE_CACHE_ONLY="$OPTARG"
         ;;
       '--refresh')
         [ "${OPTARG:-}" ] && OPTARG=${OPTARG#*\=} && set "noarg" "$1" && break
@@ -283,7 +296,8 @@ Options:
       --ignore IGNORE         skip specific check processes (ones in daemon, quotarget, sincere)
       --interval INTERVAL     wait for the given number of seconds each time (unlock)
       --morning               skip quotarget, and ask to prepare a piece of garlic
-      --cache-only            use cache even if cache is stale (ignore check interval)
+      --quotarget-cache-only  use cache even if cache is stale (ignore check interval)
+      --sincere-cache-only    execute sincere with --cache-only option
       --refresh               restart todo-list daemon before check
       --retry RETRY           try to create or delete symlinks the given number of times (unlock)
       --sincere               execute sincere before running
