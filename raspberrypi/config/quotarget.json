@@ -2,7 +2,7 @@
   "discipline": {
     "qtg0000": {
       "scraping_by": {
-        "todo_personal": "INHERIT .\"youtube\".qtg0000.scraping_by.todo_personal",
+        "todo_personal": "INHERIT .youtube.qtg1900.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube\".qtg0000.scraping_by.task_personal",
         "tick_personal": "INHERIT .\"youtube-alternative\".qtg0000.scraping_by.tick_personal",
         "todo_work": "INHERIT .\"superman-accessories\".qtg0000.scraping_by.todo_work",
@@ -11,7 +11,7 @@
     },
     "qtg0100": {
       "scraping_by": {
-        "todo_personal": "INHERIT .\"youtube\".qtg0100.scraping_by.todo_personal",
+        "todo_personal": "INHERIT .discipline.qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube\".qtg0100.scraping_by.task_personal",
         "tick_personal": "INHERIT .discipline.qtg0000.scraping_by.tick_personal",
         "todo_work": "INHERIT .discipline.qtg0000.scraping_by.todo_work",
@@ -20,7 +20,7 @@
     },
     "qtg0200": {
       "scraping_by": {
-        "todo_personal": "INHERIT .\"youtube\".qtg0200.scraping_by.todo_personal",
+        "todo_personal": "INHERIT .discipline.qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube\".qtg0200.scraping_by.task_personal",
         "tick_personal": "INHERIT .discipline.qtg0000.scraping_by.tick_personal",
         "todo_work": "INHERIT .discipline.qtg0000.scraping_by.todo_work",
@@ -29,7 +29,7 @@
     },
     "qtg0300": {
       "scraping_by": {
-        "todo_personal": "INHERIT .\"youtube\".qtg0300.scraping_by.todo_personal",
+        "todo_personal": "INHERIT .discipline.qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube\".qtg0300.scraping_by.task_personal",
         "tick_personal": "INHERIT .discipline.qtg0000.scraping_by.tick_personal",
         "todo_work": "INHERIT .discipline.qtg0000.scraping_by.todo_work",
@@ -38,7 +38,7 @@
     },
     "qtg0400": {
       "scraping_by": {
-        "todo_personal": "INHERIT .\"youtube\".qtg0400.scraping_by.todo_personal",
+        "todo_personal": "INHERIT .discipline.qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube\".qtg0400.scraping_by.task_personal",
         "tick_personal": "INHERIT .discipline.qtg0000.scraping_by.tick_personal",
         "todo_work": "INHERIT .discipline.qtg0000.scraping_by.todo_work",
@@ -47,7 +47,7 @@
     },
     "qtg0500": {
       "scraping_by": {
-        "todo_personal": "INHERIT .\"youtube\".qtg0500.scraping_by.todo_personal",
+        "todo_personal": "INHERIT .discipline.qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube\".qtg0500.scraping_by.task_personal",
         "tick_personal": "INHERIT .discipline.qtg0000.scraping_by.tick_personal",
         "todo_work": "INHERIT .discipline.qtg0000.scraping_by.todo_work",
@@ -56,7 +56,7 @@
     },
     "qtg0600": {
       "scraping_by": {
-        "todo_personal": "INHERIT .\"youtube\".qtg0600.scraping_by.todo_personal",
+        "todo_personal": "INHERIT .discipline.qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube\".qtg0600.scraping_by.task_personal",
         "tick_personal": "INHERIT .discipline.qtg0000.scraping_by.tick_personal",
         "todo_work": "INHERIT .discipline.qtg0000.scraping_by.todo_work",
@@ -65,7 +65,7 @@
     },
     "qtg0700": {
       "scraping_by": {
-        "todo_personal": "INHERIT .\"youtube\".qtg0700.scraping_by.todo_personal",
+        "todo_personal": "INHERIT .discipline.qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube\".qtg0700.scraping_by.task_personal",
         "tick_personal": "INHERIT .discipline.qtg0000.scraping_by.tick_personal",
         "todo_work": "INHERIT .discipline.qtg0000.scraping_by.todo_work",
@@ -92,7 +92,7 @@
     },
     "qtg1000": {
       "scraping_by": {
-        "todo_personal": "INHERIT .\"youtube\".qtg1000.scraping_by.todo_personal",
+        "todo_personal": "INHERIT .discipline.qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube\".qtg1000.scraping_by.task_personal",
         "tick_personal": "INHERIT .discipline.qtg0000.scraping_by.tick_personal",
         "todo_work": "INHERIT .discipline.qtg0000.scraping_by.todo_work",
@@ -101,7 +101,7 @@
     },
     "qtg1100": {
       "scraping_by": {
-        "todo_personal": "INHERIT .\"youtube\".qtg1100.scraping_by.todo_personal",
+        "todo_personal": "INHERIT .discipline.qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube\".qtg1100.scraping_by.task_personal",
         "tick_personal": "INHERIT .discipline.qtg0000.scraping_by.tick_personal",
         "todo_work": "INHERIT .discipline.qtg0000.scraping_by.todo_work",
@@ -110,7 +110,7 @@
     },
     "qtg1200": {
       "scraping_by": {
-        "todo_personal": "INHERIT .\"youtube\".qtg1200.scraping_by.todo_personal",
+        "todo_personal": "INHERIT .discipline.qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube\".qtg1200.scraping_by.task_personal",
         "tick_personal": "INHERIT .discipline.qtg0000.scraping_by.tick_personal",
         "todo_work": "INHERIT .discipline.qtg0000.scraping_by.todo_work",
@@ -119,7 +119,7 @@
     },
     "qtg1300": {
       "scraping_by": {
-        "todo_personal": "INHERIT .\"youtube\".qtg1300.scraping_by.todo_personal",
+        "todo_personal": "INHERIT .discipline.qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube\".qtg1300.scraping_by.task_personal",
         "tick_personal": "INHERIT .discipline.qtg0000.scraping_by.tick_personal",
         "todo_work": "INHERIT .discipline.qtg0000.scraping_by.todo_work",
@@ -128,7 +128,7 @@
     },
     "qtg1400": {
       "scraping_by": {
-        "todo_personal": "INHERIT .\"youtube\".qtg1400.scraping_by.todo_personal",
+        "todo_personal": "INHERIT .discipline.qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube\".qtg1400.scraping_by.task_personal",
         "tick_personal": "INHERIT .discipline.qtg0000.scraping_by.tick_personal",
         "todo_work": "INHERIT .discipline.qtg0000.scraping_by.todo_work",
@@ -137,7 +137,7 @@
     },
     "qtg1500": {
       "scraping_by": {
-        "todo_personal": "INHERIT .\"youtube\".qtg1500.scraping_by.todo_personal",
+        "todo_personal": "INHERIT .discipline.qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube\".qtg1500.scraping_by.task_personal",
         "tick_personal": "INHERIT .discipline.qtg0000.scraping_by.tick_personal",
         "todo_work": "INHERIT .discipline.qtg0000.scraping_by.todo_work",
@@ -146,7 +146,7 @@
     },
     "qtg1600": {
       "scraping_by": {
-        "todo_personal": "INHERIT .\"youtube\".qtg1600.scraping_by.todo_personal",
+        "todo_personal": "INHERIT .discipline.qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube\".qtg1600.scraping_by.task_personal",
         "tick_personal": "INHERIT .discipline.qtg0000.scraping_by.tick_personal",
         "todo_work": "INHERIT .discipline.qtg0000.scraping_by.todo_work",
@@ -155,7 +155,7 @@
     },
     "qtg1700": {
       "scraping_by": {
-        "todo_personal": "INHERIT .\"youtube\".qtg1700.scraping_by.todo_personal",
+        "todo_personal": "INHERIT .discipline.qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube\".qtg1700.scraping_by.task_personal",
         "tick_personal": "INHERIT .discipline.qtg0000.scraping_by.tick_personal",
         "todo_work": "INHERIT .discipline.qtg0000.scraping_by.todo_work",
@@ -164,7 +164,7 @@
     },
     "qtg1800": {
       "scraping_by": {
-        "todo_personal": "INHERIT .\"youtube\".qtg1800.scraping_by.todo_personal",
+        "todo_personal": "INHERIT .discipline.qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube\".qtg1800.scraping_by.task_personal",
         "tick_personal": "INHERIT .discipline.qtg0000.scraping_by.tick_personal",
         "todo_work": "INHERIT .discipline.qtg0000.scraping_by.todo_work",
@@ -173,7 +173,7 @@
     },
     "qtg1900": {
       "scraping_by": {
-        "todo_personal": "INHERIT .\"youtube\".qtg1900.scraping_by.todo_personal",
+        "todo_personal": "INHERIT .discipline.qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube\".qtg1900.scraping_by.task_personal",
         "tick_personal": "INHERIT .discipline.qtg0000.scraping_by.tick_personal",
         "todo_work": "INHERIT .discipline.qtg0000.scraping_by.todo_work",
@@ -182,7 +182,7 @@
     },
     "qtg2000": {
       "scraping_by": {
-        "todo_personal": "INHERIT .\"youtube\".qtg2000.scraping_by.todo_personal",
+        "todo_personal": "INHERIT .discipline.qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube\".qtg2000.scraping_by.task_personal",
         "tick_personal": "INHERIT .discipline.qtg0000.scraping_by.tick_personal",
         "todo_work": "INHERIT .discipline.qtg0000.scraping_by.todo_work",
@@ -191,7 +191,7 @@
     },
     "qtg2100": {
       "scraping_by": {
-        "todo_personal": "INHERIT .\"youtube\".qtg2100.scraping_by.todo_personal",
+        "todo_personal": "INHERIT .discipline.qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube\".qtg2100.scraping_by.task_personal",
         "tick_personal": "INHERIT .discipline.qtg0000.scraping_by.tick_personal",
         "todo_work": "INHERIT .discipline.qtg0000.scraping_by.todo_work",
@@ -200,7 +200,7 @@
     },
     "qtg2200": {
       "scraping_by": {
-        "todo_personal": "INHERIT .\"youtube\".qtg2200.scraping_by.todo_personal",
+        "todo_personal": "INHERIT .discipline.qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube\".qtg2200.scraping_by.task_personal",
         "tick_personal": "INHERIT .discipline.qtg0000.scraping_by.tick_personal",
         "todo_work": "INHERIT .discipline.qtg0000.scraping_by.todo_work",
@@ -209,7 +209,7 @@
     },
     "qtg2300": {
       "scraping_by": {
-        "todo_personal": "INHERIT .\"youtube\".qtg2300.scraping_by.todo_personal",
+        "todo_personal": "INHERIT .discipline.qtg0000.scraping_by.todo_personal",
         "task_personal": "INHERIT .\"youtube\".qtg2300.scraping_by.task_personal",
         "tick_personal": "INHERIT .discipline.qtg0000.scraping_by.tick_personal",
         "todo_work": "INHERIT .discipline.qtg0000.scraping_by.todo_work",
