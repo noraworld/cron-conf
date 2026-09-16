@@ -152,6 +152,7 @@ todo_mode() {
   # shellcheck disable=SC2154
   if [ "$athena_skipped" = "false" ] && [ "$(restrict-all check "observe-athena-conf")" -le 0 ]; then
     restrict-all reset "observe-athena-conf"
+    restrict-all reset "observe-athena-allow-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-athena-conf"
   fi
 

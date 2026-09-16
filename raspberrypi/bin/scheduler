@@ -553,14 +553,19 @@ athena() {
       [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
       [ "$(is_any_kryptonite)" = "true" ]; then
         cron-daemonctl stop observe-athena-conf "$safe"
+        cron-daemonctl stop observe-athena-allow-conf "$safe"
         return
       fi
 
       [ "$SOFT" = 1 ] || cron-daemonctl start observe-athena-conf "$safe"
+      [ "$SOFT" = 1 ] || cron-daemonctl start observe-athena-allow-conf "$safe"
+      # it will take a few mintutes to finish these two process because the Dnsmasq daemon restarts twice
+      remove-dnsmasq-toggle-conf public athena_allow
       create-dnsmasq-toggle-conf public athena
       ;;
     "allow")
       cron-daemonctl stop observe-athena-conf "$safe"
+      cron-daemonctl stop observe-athena-allow-conf "$safe"
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2
