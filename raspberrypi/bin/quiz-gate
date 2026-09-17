@@ -1,0 +1,49 @@
+#!/bin/sh
+
+set -eu
+
+random_uint() {
+  if n=$(od -An -N4 -tu4 /dev/urandom 2>/dev/null); then
+    set -- $n
+    printf '%s\n' "$1"
+    return
+  fi
+
+  date '+%s'
+}
+
+random_int() {
+  min=$1
+  max=$2
+  span=$((max - min + 1))
+  n=$(random_uint)
+  printf '%s\n' $((min + n % span))
+}
+
+main() {
+  quiz_commands=${QUIZ_GATE_COMMANDS:-"math-quiz memory-quiz"}
+
+  # shellcheck disable=SC2086
+  set -- $quiz_commands
+
+  if [ "$#" -eq 0 ]; then
+    echo "error: no quiz commands configured" >&2
+    exit 1
+  fi
+
+  target=$(random_int 1 "$#")
+  i=1
+
+  for quiz in "$@"; do
+    if [ "$i" -eq "$target" ]; then
+      "$quiz"
+      exit "$?"
+    fi
+
+    i=$((i + 1))
+  done
+
+  exit 1
+}
+
+main "$@"

@@ -1,0 +1,90 @@
+#!/bin/sh
+
+set -eu
+
+random_uint() {
+  if n=$(od -An -N4 -tu4 /dev/urandom 2>/dev/null); then
+    set -- $n
+    printf '%s\n' "$1"
+    return
+  fi
+
+  date '+%s'
+}
+
+random_int() {
+  min=$1
+  max=$2
+  span=$((max - min + 1))
+  n=$(random_uint)
+  printf '%s\n' $((min + n % span))
+}
+
+clear_screen() {
+  if [ -t 2 ] && [ "${TERM:-}" != "dumb" ]; then
+    printf '\033[2J\033[H' >&2
+    return
+  fi
+
+  i=0
+  while [ "$i" -lt 40 ]; do
+    printf '\n' >&2
+    i=$((i + 1))
+  done
+}
+
+print_correct() {
+  if [ -t 1 ] && [ "${TERM:-}" != "dumb" ]; then
+    printf '\033[1;32mcorrect\033[0m\n'
+    return
+  fi
+
+  printf 'correct\n'
+}
+
+print_incorrect() {
+  expected=$1
+
+  if [ -t 1 ] && [ "${TERM:-}" != "dumb" ]; then
+    printf '\033[1;31mincorrect\033[0m (%s)\n' "$expected"
+    return
+  fi
+
+  printf 'incorrect (%s)\n' "$expected"
+}
+
+generate_code() {
+  length=$(random_int 5 7)
+  code=
+  i=0
+
+  while [ "$i" -lt "$length" ]; do
+    code=$code$(random_int 0 9)
+    i=$((i + 1))
+  done
+
+  printf '%s\n' "$code"
+}
+
+main() {
+  expected=$(generate_code)
+  seconds=${MEMORY_QUIZ_SECONDS:-3}
+
+  printf 'Remember: %s\n' "$expected" >&2
+  sleep "$seconds"
+  clear_screen
+  printf 'Enter the code you saw.\n' >&2
+  printf '> ' >&2
+
+  IFS= read -r answer || answer=
+
+  if [ "$answer" = "$expected" ]; then
+    print_correct
+    exit 0
+  fi
+
+  print_incorrect "$expected"
+  exit 1
+}
+
+main "$@"

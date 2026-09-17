@@ -140,7 +140,8 @@ main() {
     fi
   fi
 
-  math-quiz || exit 1
+  # Require a random quiz challenge before unlocking.
+  quiz-gate || exit 1
 
   # value: positive
   if [ "$DRY_RUN" != "1" ]; then
