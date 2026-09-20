@@ -132,6 +132,7 @@ todo_mode() {
   check_todo  "minerva"                   "minerva"                   "minerva"
   check_todo  "netflix"                   "netflix"                   "netflix"
   check_todo  "nicovideo"                 "nicovideo"                 "nicovideo"
+  check_todo  "nicovideo_accessories"     "nicovideo-accessories"     "nicovideo-accessories"
   check_todo  "siren"                     "siren"                     "siren"
   check_todo  "social_media"              "social-media"              "social-media"
   check_todo  "social_media_allow"        "social-media-allow"        "social-media-allow"
@@ -212,6 +213,13 @@ todo_mode() {
     restrict-all reset "observe-nicovideo-conf"
     restrict-all reset "observe-nicovideo-allow-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-nicovideo-conf"
+  fi
+
+  # ln_mode & unlink_mode (nicovideo-accessories)
+  # shellcheck disable=SC2154
+  if [ "$nicovideo_accessories_skipped" = "false" ] && [ "$(restrict-all check "observe-nicovideo-accessories-conf")" -le 0 ]; then
+    restrict-all reset "observe-nicovideo-accessories-conf"
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-nicovideo-accessories-conf"
   fi
 
   # ln_mode & unlink_mode (siren)

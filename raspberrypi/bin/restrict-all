@@ -198,6 +198,12 @@ build() {
       [ "$1" = "command"   ] && echo "remove-dnsmasq-toggle-conf public"
       [ "$1" = "name"      ] && echo "nicovideo_allow"
       ;;
+    "observe-nicovideo-accessories-conf")
+      [ "$1" = "existence" ] && echo "true"
+      [ "$1" = "path"      ] && echo "$TOGGLE_DIR/nicovideo_accessories.conf"
+      [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf public"
+      [ "$1" = "name"      ] && echo "nicovideo_accessories"
+      ;;
     "observe-youtube-conf")
       [ "$1" = "existence" ] && echo "true"
       [ "$1" = "path"      ] && echo "$TOGGLE_DIR/youtube.conf"

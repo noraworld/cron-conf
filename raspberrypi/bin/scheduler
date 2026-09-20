@@ -178,6 +178,9 @@ main() {
     "nicovideo")
       nicovideo
       ;;
+    "nicovideo-accessories")
+      nicovideo_accessories
+      ;;
     "youtube")
       youtube
       ;;
@@ -1094,6 +1097,29 @@ nicovideo() {
     "allow")
       cron-daemonctl stop observe-nicovideo-conf "$safe"
       cron-daemonctl stop observe-nicovideo-allow-conf "$safe"
+      ;;
+    *)
+      echo "error: no such operation: \"$operation\"" >&2
+      exit 1
+      ;;
+  esac
+}
+
+nicovideo_accessories() {
+  case "$operation" in
+    "deny")
+      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
+      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
+      [ "$(is_any_kryptonite)" = "true" ]; then
+        cron-daemonctl stop observe-nicovideo-accessories-conf "$safe"
+        return
+      fi
+
+      [ "$SOFT" = 1 ] || cron-daemonctl start observe-nicovideo-accessories-conf "$safe"
+      create-dnsmasq-toggle-conf public nicovideo_accessories
+      ;;
+    "allow")
+      cron-daemonctl stop observe-nicovideo-accessories-conf "$safe"
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2
