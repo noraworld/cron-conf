@@ -1061,7 +1061,7 @@ vod() {
         return
       fi
 
-      cron-daemonctl start observe-vod-conf "$safe"
+      [ "$SOFT" = 1 ] || cron-daemonctl start observe-vod-conf "$safe"
       create-dnsmasq-toggle-conf public vod
       # create-iptables-toggle-conf public 133_vod
       ;;
