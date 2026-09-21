@@ -168,6 +168,12 @@ build() {
       [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf private"
       [ "$1" = "name"      ] && echo "superman_upstream"
       ;;
+    "observe-netflix-accessories-conf")
+      [ "$1" = "existence" ] && echo "true"
+      [ "$1" = "path"      ] && echo "$TOGGLE_DIR/netflix_accessories.conf"
+      [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf public"
+      [ "$1" = "name"      ] && echo "netflix_accessories"
+      ;;
     "observe-social-media-conf")
       [ "$1" = "existence" ] && echo "true"
       [ "$1" = "path"      ] && echo "$TOGGLE_DIR/social_media.conf"
@@ -185,6 +191,12 @@ build() {
       [ "$1" = "path"      ] && echo "$TOGGLE_DIR/vod.conf"
       [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf public"
       [ "$1" = "name"      ] && echo "vod"
+      ;;
+    "observe-vod-accessories-conf")
+      [ "$1" = "existence" ] && echo "true"
+      [ "$1" = "path"      ] && echo "$TOGGLE_DIR/vod_accessories.conf"
+      [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf public"
+      [ "$1" = "name"      ] && echo "vod_accessories"
       ;;
     "observe-nicovideo-conf")
       [ "$1" = "existence" ] && echo "true"

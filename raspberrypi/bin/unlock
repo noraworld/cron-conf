@@ -91,6 +91,9 @@ main() {
         "netflix")
           netflix
           ;;
+        "netflix-accessories")
+          netflix_accessories
+          ;;
         "ometeotl")
           ometeotl
           ;;
@@ -120,6 +123,9 @@ main() {
           ;;
         "vod")
           vod
+          ;;
+        "vod-accessories")
+          vod_accessories
           ;;
         "nicovideo")
           nicovideo
@@ -259,6 +265,10 @@ all() {
     sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle/netflix_allow.conf /etc/dnsmasq.toggle
   fi
 
+  if [ -L /etc/dnsmasq.toggle/netflix_accessories.conf ]; then
+    sudo unlink /etc/dnsmasq.toggle/netflix_accessories.conf
+  fi
+
   if [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ]; then
     sudo unlink /etc/dnsmasq.priv/toggle/ometeotl.conf
   fi
@@ -301,6 +311,10 @@ all() {
 
   if [ -L /etc/dnsmasq.toggle/vod.conf ]; then
     sudo unlink /etc/dnsmasq.toggle/vod.conf
+  fi
+
+  if [ -L /etc/dnsmasq.toggle/vod_accessories.conf ]; then
+    sudo unlink /etc/dnsmasq.toggle/vod_accessories.conf
   fi
 
   if [ -L /etc/dnsmasq.toggle/nicovideo.conf ]; then
@@ -455,6 +469,14 @@ all() {
     not_all_linkage_succeeded=1
   fi
 
+  if [ -L /etc/dnsmasq.toggle/netflix_accessories.conf ]; then
+    error_color
+    echo "error: /etc/dnsmasq.toggle/netflix_accessories.conf still exists" >&2
+    no_color
+    echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
+    not_all_linkage_succeeded=1
+  fi
+
   if [ -L /etc/dnsmasq.priv/toggle/ometeotl.conf ]; then
     error_color
     echo "error: /etc/dnsmasq.priv/toggle/ometeotl.conf still exists" >&2
@@ -538,6 +560,14 @@ all() {
   if [ -L /etc/dnsmasq.toggle/vod.conf ]; then
     error_color
     echo "error: /etc/dnsmasq.toggle/vod.conf still exists" >&2
+    no_color
+    echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
+    not_all_linkage_succeeded=1
+  fi
+
+  if [ -L /etc/dnsmasq.toggle/vod_accessories.conf ]; then
+    error_color
+    echo "error: /etc/dnsmasq.toggle/vod_accessories.conf still exists" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
     not_all_linkage_succeeded=1
@@ -950,6 +980,52 @@ netflix() {
   fi
 }
 
+netflix_accessories() {
+  reference_minute=60
+  [ "$DRY_RUN" = 1 ] && exit 0
+
+  if [ -L /etc/dnsmasq.toggle/netflix.conf ]; then
+    sudo unlink /etc/dnsmasq.toggle/netflix.conf
+  fi
+
+  if ! [ -L /etc/dnsmasq.toggle/netflix_allow.conf ]; then
+    sudo ln -s /home/ubuntu/workspace/dnsmasq-conf/dnsmasq/dnsmasq.toggle/netflix_allow.conf /etc/dnsmasq.toggle
+  fi
+
+  warning_color
+  sudo unlink /etc/dnsmasq.toggle/netflix_accessories.conf
+  no_color
+
+  pause "$waiting_interval" "$WAITING_MESSAGE"
+
+  if ! [ -L /etc/dnsmasq.toggle/netflix_allow.conf ]; then
+    error_color
+    echo "error: /etc/dnsmasq.toggle/netflix_allow.conf still doesn't exist" >&2
+    no_color
+    echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
+  else
+    linkage_succeeded=1
+  fi
+
+  if [ -L /etc/dnsmasq.toggle/netflix.conf ]; then
+    error_color
+    echo "error: /etc/dnsmasq.toggle/netflix.conf still exists" >&2
+    no_color
+    echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
+  else
+    linkage_succeeded=1
+  fi
+
+  if [ -L /etc/dnsmasq.toggle/netflix_accessories.conf ]; then
+    error_color
+    echo "error: /etc/dnsmasq.toggle/netflix_accessories.conf still exists" >&2
+    no_color
+    echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
+  else
+    linkage_succeeded=1
+  fi
+}
+
 ometeotl() {
   reference_minute=60
   [ "$DRY_RUN" = 1 ] && exit 0
@@ -1273,6 +1349,39 @@ vod() {
   if [ -L /etc/dnsmasq.toggle/vod.conf ]; then
     error_color
     echo "error: /etc/dnsmasq.toggle/vod.conf still exists" >&2
+    no_color
+    echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
+  else
+    linkage_succeeded=1
+  fi
+}
+
+vod_accessories() {
+  reference_minute=60
+  [ "$DRY_RUN" = 1 ] && exit 0
+
+  if [ -L /etc/dnsmasq.toggle/vod.conf ]; then
+    sudo unlink /etc/dnsmasq.toggle/vod.conf
+  fi
+
+  warning_color
+  sudo unlink /etc/dnsmasq.toggle/vod_accessories.conf
+  no_color
+
+  pause "$waiting_interval" "$WAITING_MESSAGE"
+
+  if [ -L /etc/dnsmasq.toggle/vod.conf ]; then
+    error_color
+    echo "error: /etc/dnsmasq.toggle/vod.conf still exists" >&2
+    no_color
+    echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
+  else
+    linkage_succeeded=1
+  fi
+
+  if [ -L /etc/dnsmasq.toggle/vod_accessories.conf ]; then
+    error_color
+    echo "error: /etc/dnsmasq.toggle/vod_accessories.conf still exists" >&2
     no_color
     echo "info: dnsmasq.service: $(sudo systemctl is-active dnsmasq)"
   else

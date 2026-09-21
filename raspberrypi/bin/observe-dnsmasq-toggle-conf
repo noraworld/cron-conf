@@ -131,12 +131,14 @@ todo_mode() {
   check_todo  "knock"                     "knock"                     "knock"
   check_todo  "minerva"                   "minerva"                   "minerva"
   check_todo  "netflix"                   "netflix"                   "netflix"
+  check_todo  "netflix_accessories"       "netflix-accessories"       "netflix-accessories"
   check_todo  "nicovideo"                 "nicovideo"                 "nicovideo"
   check_todo  "nicovideo_accessories"     "nicovideo-accessories"     "nicovideo-accessories"
   check_todo  "siren"                     "siren"                     "siren"
   check_todo  "social_media"              "social-media"              "social-media"
   check_todo  "social_media_allow"        "social-media-allow"        "social-media-allow"
   check_todo  "vod"                       "vod"                       "vod"
+  check_todo  "vod_accessories"           "vod-accessories"           "vod-accessories"
   check_todo  "youtube"                   "youtube"                   "youtube"
   check_todo  "youtube_accessories"       "youtube-accessories"       "youtube-accessories"
   check_todo  "youtube_alternative"       "youtube-alternative"       "youtube-alternative"
@@ -207,6 +209,13 @@ todo_mode() {
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-netflix-conf"
   fi
 
+  # ln_mode & unlink_mode (netflix-accessories)
+  # shellcheck disable=SC2154
+  if [ "$netflix_accessories_skipped" = "false" ] && [ "$(restrict-all check "observe-netflix-accessories-conf")" -le 0 ]; then
+    restrict-all reset "observe-netflix-accessories-conf"
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-netflix-accessories-conf"
+  fi
+
   # ln_mode & unlink_mode (nicovideo)
   # shellcheck disable=SC2154
   if [ "$nicovideo_skipped" = "false" ] && [ "$(restrict-all check "observe-nicovideo-conf")" -le 0 ]; then
@@ -248,6 +257,13 @@ todo_mode() {
   if [ "$vod_skipped" = "false" ] && [ "$(restrict-all check "observe-vod-conf")" -le 0 ]; then
     restrict-all reset "observe-vod-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-vod-conf"
+  fi
+
+  # ln_mode & unlink_mode (vod-accessories)
+  # shellcheck disable=SC2154
+  if [ "$vod_accessories_skipped" = "false" ] && [ "$(restrict-all check "observe-vod-accessories-conf")" -le 0 ]; then
+    restrict-all reset "observe-vod-accessories-conf"
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-vod-accessories-conf"
   fi
 
   # ln_mode & unlink_mode (youtube)
