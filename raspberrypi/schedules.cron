@@ -80,10 +80,10 @@ NON_ROOT_USER=ubuntu
 */1    11-19  * * * scheduler firewall deny --white-kryptonite
 0-4/1  20     * * * scheduler firewall deny --gray-kryptonite --safe
 5-59/1 20     * * * scheduler firewall deny --gray-kryptonite
-*/1    21     * * * scheduler firewall deny --gray-kryptonite
-0-4/1  22     * * * scheduler firewall deny --black-kryptonite --safe
-5-59/1 22     * * * scheduler firewall deny --black-kryptonite
-*/1    23,0-7 * * * scheduler firewall deny --black-kryptonite
+*/1    21-23  * * * scheduler firewall deny --gray-kryptonite
+0-4/1  0      * * * scheduler firewall deny --black-kryptonite --safe
+5-59/1 0      * * * scheduler firewall deny --black-kryptonite
+*/1    1-7    * * * scheduler firewall deny --black-kryptonite
 
 # Observe conf changes
 */5    8-9    * * * scheduler observe stop
@@ -92,10 +92,10 @@ NON_ROOT_USER=ubuntu
 */1    11-19  * * * scheduler observe start --white-kryptonite
 0-4/1  20     * * * scheduler observe start --gray-kryptonite --safe
 5-59/1 20     * * * scheduler observe start --gray-kryptonite
-*/1    21     * * * scheduler observe start --gray-kryptonite
-0-4/1  22     * * * scheduler observe start --black-kryptonite --safe
-5-59/1 22     * * * scheduler observe start --black-kryptonite
-*/1    23,0-7 * * * scheduler observe start --black-kryptonite
+*/1    21-23  * * * scheduler observe start --gray-kryptonite
+0-4/1  0      * * * scheduler observe start --black-kryptonite --safe
+5-59/1 0      * * * scheduler observe start --black-kryptonite
+*/1    1-7    * * * scheduler observe start --black-kryptonite
 
 # Discipline
 #
@@ -109,10 +109,10 @@ NON_ROOT_USER=ubuntu
 */1    11-19  * * * scheduler discipline deny --white-kryptonite
 0-4/1  20     * * * scheduler discipline deny --gray-kryptonite --safe
 5-59/1 20     * * * scheduler discipline deny --gray-kryptonite
-*/1    21     * * * scheduler discipline deny --gray-kryptonite
-0-4/1  22     * * * scheduler discipline deny --black-kryptonite --safe
-5-59/1 22     * * * scheduler discipline deny --black-kryptonite
-*/1    23,0-7 * * * scheduler discipline deny --black-kryptonite
+*/1    21-23  * * * scheduler discipline deny --gray-kryptonite
+0-4/1  0      * * * scheduler discipline deny --black-kryptonite --safe
+5-59/1 0      * * * scheduler discipline deny --black-kryptonite
+*/1    1-7    * * * scheduler discipline deny --black-kryptonite
 
 
 
