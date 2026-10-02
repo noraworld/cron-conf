@@ -108,6 +108,9 @@ main() {
     "athena")
       athena
       ;;
+    "metis")
+      metis
+      ;;
     "minerva")
       minerva
       ;;
@@ -578,6 +581,29 @@ athena() {
     "allow")
       cron-daemonctl stop observe-athena-conf "$safe"
       cron-daemonctl stop observe-athena-allow-conf "$safe"
+      ;;
+    *)
+      echo "error: no such operation: \"$operation\"" >&2
+      exit 1
+      ;;
+  esac
+}
+
+metis() {
+  case "$operation" in
+    "deny")
+      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
+      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
+      [ "$(is_any_kryptonite)" = "true" ]; then
+        cron-daemonctl stop observe-metis-conf "$safe"
+        return
+      fi
+
+      [ "$SOFT" = 1 ] || cron-daemonctl start observe-metis-conf "$safe"
+      create-dnsmasq-toggle-conf public metis
+      ;;
+    "allow")
+      cron-daemonctl stop observe-metis-conf "$safe"
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2
