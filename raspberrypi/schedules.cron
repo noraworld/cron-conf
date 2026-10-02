@@ -401,6 +401,12 @@ NON_ROOT_USER=ubuntu
 
 
 
+# Metis
+*/5 * * * * scheduler metis allow
+0   * * * * scheduler metis deny --soft
+
+
+
 # Minerva
 */5    8-9   * * * scheduler minerva allow
 0-4/1  10    * * * scheduler minerva deny --ivory-kryptonite --safe
