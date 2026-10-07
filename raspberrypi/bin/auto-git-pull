@@ -26,7 +26,7 @@ main() {
   done
 
   if [ "$new_commits" = "true" ]; then
-    exrd --log "/home/ubuntu/workspace/log/pi/log/exrd.log" --from "$PROG_NAME $*"
+    /home/ubuntu/workspace/dnsmasq-conf/bin/exrd --log "/home/ubuntu/workspace/log/pi/log/exrd.log" --from "$PROG_NAME $*"
   fi
 
   # NOTE: The process here has not been confirmed to work yet, which means it potentially contains severe bugs.

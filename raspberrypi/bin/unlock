@@ -195,9 +195,9 @@ restart_dnsmasq() {
   echo "restarting dnsmasq"
 
   if [ "$SKIP" = 1 ]; then
-    exrd --log /home/ubuntu/workspace/log/pi/log/exrd.log --from "$(echo "$PROG_NAME $@")" --skip
+    /home/ubuntu/workspace/dnsmasq-conf/bin/exrd --log /home/ubuntu/workspace/log/pi/log/exrd.log --from "$(echo "$PROG_NAME $@")" --skip
   else
-    exrd --log /home/ubuntu/workspace/log/pi/log/exrd.log --from "$(echo "$PROG_NAME $@")"
+    /home/ubuntu/workspace/dnsmasq-conf/bin/exrd --log /home/ubuntu/workspace/log/pi/log/exrd.log --from "$(echo "$PROG_NAME $@")"
   fi
 
   if [ "$(sudo systemctl is-active dnsmasq)" != "active" ]; then
