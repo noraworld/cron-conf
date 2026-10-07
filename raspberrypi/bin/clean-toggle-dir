@@ -23,7 +23,12 @@ main () {
       sudo systemctl restart dnsmasq
     else
       # It is performed in the background.
-      /home/ubuntu/workspace/dnsmasq-conf/bin/exrd --skip --log /home/ubuntu/workspace/log/pi/log/exrd.log --from "$PROG_NAME $*" &
+      # /home/ubuntu/workspace/dnsmasq-conf/bin/exrd --skip --log /home/ubuntu/workspace/log/pi/log/exrd.log --from "$PROG_NAME $*" &
+
+      # MEMO:
+      #   Performing in the background (putting '&' at the end of the command) doesn't seem to work for some reason, so
+      #   it's being disabled experimentally.
+      /home/ubuntu/workspace/dnsmasq-conf/bin/exrd --skip --log /home/ubuntu/workspace/log/pi/log/exrd.log --from "$PROG_NAME $*"
     fi
   fi
 }
