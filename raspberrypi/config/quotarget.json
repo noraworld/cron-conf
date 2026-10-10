@@ -6,7 +6,7 @@
         "task_personal": "INHERIT .\"superman-accessories\".qtg0000.scraping_by.task_personal",
         "tick_personal": "INHERIT .superman.qtg0000.scraping_by.tick_personal",
         "todo_work": "INHERIT .\"superman-accessories\".qtg0000.scraping_by.todo_work",
-        "task_work": "ticksum 心構え ゲート・アルファ ゲート・ベータ ゲート・ガンマ ゲート・デルタ ゲート・イプシロン ゲート・ゼータ --main-repo noraworld/private-diary --template-repo noraworld/private-diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only --fall-through || ticksum 健全閲覧宣言 --main-repo noraworld/private-diary --template-repo noraworld/private-diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only --fall-through || echo 1"
+        "task_work": "ticksum 心構え ゲート・アルファ ゲート・ベータ ゲート・ガンマ ゲート・デルタ ゲート・イプシロン ゲート・ゼータ --main-repo noraworld/private-diary --template-repo noraworld/private-diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only --fall-through || ticksum 健全閲覧宣言 --main-repo noraworld/private-diary --template-repo noraworld/private-diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only --fall-through"
       }
     },
     "qtg0100": {
@@ -96,7 +96,7 @@
         "task_personal": "INHERIT .\"superman-accessories\".qtg0000.scraping_by.task_personal",
         "tick_personal": "INHERIT .\"youtube-alternative\".qtg0000.scraping_by.tick_personal",
         "todo_work": "INHERIT .\"superman-accessories\".qtg0000.scraping_by.todo_work",
-        "task_work": "ticksum 心構え ゲート・アルファ ゲート・ベータ ゲート・ガンマ ゲート・デルタ ゲート・イプシロン ゲート・ゼータ --main-repo noraworld/private-diary --template-repo noraworld/private-diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only --fall-through || ticksum 健全閲覧宣言 --main-repo noraworld/private-diary --template-repo noraworld/private-diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only --fall-through || echo 1"
+        "task_work": "ticksum 心構え ゲート・アルファ ゲート・ベータ ゲート・ガンマ ゲート・デルタ ゲート・イプシロン ゲート・ゼータ --main-repo noraworld/private-diary --template-repo noraworld/private-diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only --fall-through || ticksum 健全閲覧宣言 --main-repo noraworld/private-diary --template-repo noraworld/private-diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only --fall-through"
       }
     },
     "qtg1100": {
