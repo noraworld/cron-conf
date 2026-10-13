@@ -545,12 +545,14 @@ NON_ROOT_USER=ubuntu
 # YouTube
 */20 0-7         * * * scheduler youtube deny --soft
 */30 10-19,22-23 * * * scheduler youtube deny --soft
+#
 # */30   10-19  * * * scheduler youtube deny --soft
 # */20   22     * * * scheduler youtube deny --soft
 # */15   23     * * * scheduler youtube deny --soft
 # */10   0      * * * scheduler youtube deny --soft
 # */5    1      * * * scheduler youtube deny --soft
 # */1    2-7    * * * scheduler youtube deny --soft
+#
 */5    8-9    * * * scheduler youtube deny --vampire
 0-4/1  10     * * * scheduler youtube deny --sky-kryptonite --safe
 5-59/1 10     * * * scheduler youtube deny --sky-kryptonite
@@ -566,9 +568,11 @@ NON_ROOT_USER=ubuntu
 
 
 # YouTube Music
-*/20   8-23   * * * scheduler youtube-music deny --soft
 */20   0-7    * * * scheduler youtube-music deny --soft
+#
+*/20   8-23   * * * scheduler youtube-music deny --soft
 # */1    0-7    * * * scheduler youtube-music deny --soft
+#
 */5    8-21   * * * scheduler youtube-music allow
 0-4/1  22     * * * scheduler youtube-music deny --vermilion-kryptonite --safe
 5-59/1 22     * * * scheduler youtube-music deny --vermilion-kryptonite
