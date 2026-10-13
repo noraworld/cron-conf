@@ -832,7 +832,11 @@ recurrent() {
   batch-remover
 
   # Observe the daemons running
-  daemon-health --daemons "dnsmasq,hostapd" --daemon-restart-threshold 3 --reboot-threshold 5 --check-delay 10
+  # daemon-health --daemons "dnsmasq,hostapd" --daemon-restart-threshold 3 --reboot-threshold 5 --check-delay 10
+  #
+  # MEMO:
+  #   'ssh' was moved from 'periodic()'
+  daemon-health --daemons "dnsmasq,hostapd,ssh" --daemon-restart-threshold 3 --reboot-threshold 5 --check-delay 10
 }
 
 periodic() {
@@ -887,7 +891,10 @@ periodic() {
   #   fi
   # fi
 
-  daemon-health --daemons "ssh" --daemon-restart-threshold 3 --reboot-threshold 5 --check-delay 10
+  # MEMO:
+  #   Moved to 'recurrent()' temporarily because the SSH daemon is sometimes down for whatever reason and it's annoying
+  #   that persists 30 minutes long when this command is performed here...
+  # daemon-health --daemons "ssh" --daemon-restart-threshold 3 --reboot-threshold 5 --check-delay 10
 }
 
 snorlax() {
