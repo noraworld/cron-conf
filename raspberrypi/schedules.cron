@@ -407,6 +407,12 @@ NON_ROOT_USER=ubuntu
 
 
 
+# Themis
+*/5 *   * * * scheduler themis allow
+0   */4 * * * scheduler themis deny --soft
+
+
+
 # Minerva
 0      */2   * * * scheduler minerva deny --soft
 */5    8-9   * * * scheduler minerva allow

@@ -270,6 +270,12 @@ build() {
       [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf public"
       [ "$1" = "name"      ] && echo "metis"
       ;;
+    "observe-themis-conf")
+      [ "$1" = "existence" ] && echo "true"
+      [ "$1" = "path"      ] && echo "$TOGGLE_DIR/themis.conf"
+      [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf public"
+      [ "$1" = "name"      ] && echo "themis"
+      ;;
     "observe-minerva-conf")
       [ "$1" = "existence" ] && echo "true"
       [ "$1" = "path"      ] && echo "$TOGGLE_DIR/minerva.conf"

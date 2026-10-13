@@ -111,6 +111,9 @@ main() {
     "metis")
       metis
       ;;
+    "themis")
+      themis
+      ;;
     "minerva")
       minerva
       ;;
@@ -604,6 +607,29 @@ metis() {
       ;;
     "allow")
       cron-daemonctl stop observe-metis-conf "$safe"
+      ;;
+    *)
+      echo "error: no such operation: \"$operation\"" >&2
+      exit 1
+      ;;
+  esac
+}
+
+themis() {
+  case "$operation" in
+    "deny")
+      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
+      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
+      [ "$(is_any_kryptonite)" = "true" ]; then
+        cron-daemonctl stop observe-themis-conf "$safe"
+        return
+      fi
+
+      [ "$SOFT" = 1 ] || cron-daemonctl start observe-themis-conf "$safe"
+      create-dnsmasq-toggle-conf public themis
+      ;;
+    "allow")
+      cron-daemonctl stop observe-themis-conf "$safe"
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2
