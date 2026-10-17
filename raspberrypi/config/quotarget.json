@@ -5454,7 +5454,7 @@
       "scraping_by": {
         "todo_personal": "echo 1",
         "task_personal": "echo 1",
-        "tick_personal": "ticksum 瞑想 ワークアウト 発音練習 単語学習 読書 リスニング ジャーナル --main-repo noraworld/reserved-diary --template-repo noraworld/diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only --fall-through || ticksum 瞑想 ワークアウト 発音練習 単語学習 読書 リスニング ワンステップチャレンジ --main-repo noraworld/reserved-diary --template-repo noraworld/diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only --fall-through || ticksum ウォーキング --main-repo noraworld/reserved-diary --template-repo noraworld/diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only --fall-through || ticksum オンライン英会話 --main-repo noraworld/reserved-diary --template-repo noraworld/diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only",
+        "tick_personal": "ticksum 瞑想 ワークアウト 発音練習 単語学習 読書 リスニング ジャーナル --main-repo noraworld/reserved-diary --template-repo noraworld/diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only --fall-through || ticksum 瞑想 ワークアウト 発音練習 単語学習 読書 リスニング ワンステップチャレンジ --main-repo noraworld/reserved-diary --template-repo noraworld/diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only --fall-through || ticksum ウォーキング --main-repo noraworld/reserved-diary --template-repo noraworld/diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only",
         "todo_work": "echo 1",
         "task_work": "ticksum 心構え ゲート・アルファ ゲート・ベータ ゲート・ガンマ ゲート・デルタ ゲート・イプシロン --main-repo noraworld/private-diary --template-repo noraworld/private-diary-templates --pass-stamp 1 --fail-stamp -1 $force $cache_only"
       }
