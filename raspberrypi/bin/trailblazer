@@ -21,7 +21,7 @@ main() {
     quotarget_service="$services"
   fi
 
-  sleep_interval=30
+  sleep_interval=10
   if [ "$SLEEP" != "" ]; then
     sleep_interval="$SLEEP"
   fi
