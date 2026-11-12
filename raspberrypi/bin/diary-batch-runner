@@ -1,0 +1,19 @@
+#!/bin/sh
+
+GHC_FROM="$(basename "$0") $*"
+export GHC_FROM
+
+main() {
+  # The command says:
+  #
+  #   ✓ Created workflow_dispatch event for batch.yml at main
+  #
+  #   To see runs for this workflow, try: gh run list --workflow=batch.yml
+  #
+  # References:
+  #   * https://chatgpt.com/share/6af58281-81b0-83ec-82b9-cb370222a2d3
+  #   * https://github.com/noraworld/diary-templates-assistant/actions/runs/43188303027
+  ghc workflow run batch.yml --repo noraworld/diary-templates-assistant
+}
+
+main "$@"

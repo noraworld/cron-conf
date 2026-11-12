@@ -341,6 +341,7 @@ elena() {
 
 good() {
   garnish wipe --force
+  diary-batch-runner
 }
 
 morning() {
