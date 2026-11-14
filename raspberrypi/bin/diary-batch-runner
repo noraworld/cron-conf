@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# codex://threads/01a1d927-7de5-7ff1-8bd4-b0426b3f64f8
+
 GHC_FROM="$(basename "$0") $*"
 export GHC_FROM
 
