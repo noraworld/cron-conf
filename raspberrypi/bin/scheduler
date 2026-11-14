@@ -102,6 +102,9 @@ main() {
     "gaming")
       gaming
       ;;
+    "hermes")
+      hermes
+      ;;
     "knock")
       knock
       ;;
@@ -534,6 +537,29 @@ gaming() {
       ;;
     "allow")
       cron-daemonctl stop observe-gaming-conf "$safe"
+      ;;
+    *)
+      echo "error: no such operation: \"$operation\"" >&2
+      exit 1
+      ;;
+  esac
+}
+
+hermes() {
+  case "$operation" in
+    "deny")
+      if { [ "$VAMPIRE" = "1" ] && [ "$(garnish savor)" -gt 0 ] && [ "$MORNING" != "-1" ]; } ||
+      [ "$MORNING" = "1" ] || [ "$VAMPIRE" = "-1" ] ||
+      [ "$(is_any_kryptonite)" = "true" ]; then
+        cron-daemonctl stop observe-hermes-conf "$safe"
+        return
+      fi
+
+      [ "$SOFT" = 1 ] || cron-daemonctl start observe-hermes-conf "$safe"
+      create-dnsmasq-toggle-conf public hermes
+      ;;
+    "allow")
+      cron-daemonctl stop observe-hermes-conf "$safe"
       ;;
     *)
       echo "error: no such operation: \"$operation\"" >&2

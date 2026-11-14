@@ -246,6 +246,12 @@ build() {
       [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf public"
       [ "$1" = "name"      ] && echo "gaming"
       ;;
+    "observe-hermes-conf")
+      [ "$1" = "existence" ] && echo "true"
+      [ "$1" = "path"      ] && echo "$TOGGLE_DIR/hermes.conf"
+      [ "$1" = "command"   ] && echo "create-dnsmasq-toggle-conf public"
+      [ "$1" = "name"      ] && echo "hermes"
+      ;;
     "observe-knock-conf")
       [ "$1" = "existence" ] && echo "false"
       [ "$1" = "path"      ] && echo "$TOGGLE_DIR/knock.conf"

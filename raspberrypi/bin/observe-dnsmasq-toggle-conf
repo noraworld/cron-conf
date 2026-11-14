@@ -128,6 +128,7 @@ todo_mode() {
   check_todo  "crimson"                   "crimson"                   "crimson"
   check_todo  "elena"                     "elena"                     "elena"
   check_todo  "gaming"                    "gaming"                    "gaming"
+  check_todo  "hermes"                    "hermes"                    "hermes"
   check_todo  "knock"                     "knock"                     "knock"
   check_todo  "metis"                     "metis"                     "metis"
   check_todo  "minerva"                   "minerva"                   "minerva"
@@ -188,6 +189,13 @@ todo_mode() {
   if [ "$gaming_skipped" = "false" ] && [ "$(restrict-all check "observe-gaming-conf")" -le 0 ]; then
     restrict-all reset "observe-gaming-conf"
     [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-gaming-conf"
+  fi
+
+  # ln_mode & unlink_mode (hermes)
+  # shellcheck disable=SC2154
+  if [ "$hermes_skipped" = "false" ] && [ "$(restrict-all check "observe-hermes-conf")" -le 0 ]; then
+    restrict-all reset "observe-hermes-conf"
+    [ "$DEBUG" = 1 ] && echo "debug: $(date '+%s'): reset observe-hermes-conf"
   fi
 
   # ln_mode & unlink_mode (knock)
