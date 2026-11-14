@@ -13,6 +13,28 @@ The purpose is to reduce the amount of the digital dopamine in your brain and re
 
 For more details, see [a YouTube clip (Japanese)](https://www.youtube.com/watch?v=SWFRdY5E0B0).
 
+## Diary batch runner
+
+`bin/diary-batch-runner` dispatches `batch.yml` in
+`noraworld/diary-templates-assistant` and monitors that run using `ghc`.
+It requires an authenticated GitHub CLI through `ghc` and `flock` (util-linux).
+The dispatch uses GitHub REST API version `2026-03-10` to obtain the exact run ID.
+
+`MAX_ATTEMPTS=5` includes the initial execution, allowing up to four reruns.
+Reruns use `--failed` to resume failed jobs and their dependents. A successful
+run exits with status 0; exhausted attempts or API errors exit with status 1.
+Monitoring retries temporary API errors up to `MAX_API_FAILURES` consecutive
+failures, polling every `POLL_INTERVAL=60` seconds. `MAX_POLL_COUNT=1440`
+limits each attempt to roughly 24 hours of monitoring. These constants are
+defined at the top of the script.
+
+Overlapping invocations by the same OS user skip execution while the runner
+holds its lock. After a monitoring timeout, interrupted runner, or dispatch
+error, check GitHub Actions before launching another batch: the remote run
+may still be active.
+
+Offline tests: `python3 -m unittest discover -s raspberrypi/tests`.
+
 ## Usage
 
 ```shell

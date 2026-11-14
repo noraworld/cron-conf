@@ -3,17 +3,117 @@
 GHC_FROM="$(basename "$0") $*"
 export GHC_FROM
 
-main() {
-  # The command says:
-  #
-  #   ✓ Created workflow_dispatch event for batch.yml at main
-  #
-  #   To see runs for this workflow, try: gh run list --workflow=batch.yml
-  #
-  # References:
-  #   * https://chatgpt.com/share/6af58281-81b0-83ec-82b9-cb370222a2d3
-  #   * https://github.com/noraworld/diary-templates-assistant/actions/runs/43188303027
-  ghc workflow run batch.yml --repo noraworld/diary-templates-assistant
+REPO="noraworld/diary-templates-assistant"
+WORKFLOW="batch.yml"
+# Includes the initial execution (at most four reruns).
+MAX_ATTEMPTS=5
+POLL_INTERVAL=60
+MAX_POLL_COUNT=1440 # Roughly 24 hours per attempt, including queue time.
+MAX_API_FAILURES=5
+
+log() {
+  echo "diary-batch-runner: $*" >&2
 }
 
-main "$@"
+# Return 0 for success, 2 for a completed unsuccessful run, or 1 for
+# monitoring errors. A monitoring error must never trigger a rerun.
+wait_for_run() {
+  poll_count=0
+  api_failures=0
+  while [ "$poll_count" -lt "$MAX_POLL_COUNT" ]; do
+    poll_count=$((poll_count + 1))
+    if run_info=$(ghc api "repos/$REPO/actions/runs/$run_id" \
+      --jq '[.run_attempt, .status, (.conclusion // "pending")] | join(" ")'); then
+      api_failures=0
+      read -r observed_attempt status conclusion <<EOF
+$run_info
+EOF
+      case "$observed_attempt" in
+        ''|*[!0-9]*)
+          log "Invalid run status for $run_id."
+          return 1
+          ;;
+      esac
+      # GitHub can briefly return the previous attempt after accepting a rerun.
+      if [ "$observed_attempt" -ge "$expected_attempt" ] && [ "$status" = "completed" ]; then
+        log "Run $run_id attempt $observed_attempt: $conclusion."
+        [ "$conclusion" = "success" ] && return 0
+        return 2
+      fi
+    else
+      api_failures=$((api_failures + 1))
+      log "Unable to retrieve run $run_id ($api_failures/$MAX_API_FAILURES)."
+      [ "$api_failures" -ge "$MAX_API_FAILURES" ] && return 1
+    fi
+    sleep "$POLL_INTERVAL"
+  done
+  log "Timed out monitoring run $run_id; check it before starting another batch."
+  return 1
+}
+
+main() {
+  # flock is provided by util-linux on the Raspberry Pi. Do not queue cron
+  # invocations or unlink this file: the lock is released when this process exits.
+  command -v flock >/dev/null 2>&1 || {
+    log "flock is required."
+    return 1
+  }
+  flock -n -E 75 9 || {
+    lock_status=$?
+    if [ "$lock_status" -eq 75 ]; then
+      log "Another batch runner is active; skipping."
+      return 0
+    fi
+    log "Unable to acquire the batch runner lock."
+    return 1
+  }
+
+  ref=$(ghc api "repos/$REPO" --jq .default_branch) || return 1
+  [ -n "$ref" ] || return 1
+
+  # This API version returns the dispatched run's ID directly. Never select
+  # the latest run from a list: it might belong to another caller.
+  # Do not retry dispatch on errors: GitHub may already have accepted it.
+  run_id=$(ghc api --method POST "repos/$REPO/actions/workflows/$WORKFLOW/dispatches" \
+    -H 'X-GitHub-Api-Version: 2026-03-10' \
+    -f "ref=$ref" --jq .workflow_run_id) || {
+    log "Dispatch failed; check GitHub Actions before starting another batch."
+    return 1
+  }
+  case "$run_id" in
+    ''|*[!0-9]*|0)
+      log "Dispatch did not return a valid run ID; check GitHub Actions."
+      return 1
+      ;;
+  esac
+  log "Monitoring https://github.com/$REPO/actions/runs/$run_id"
+
+  attempt=1
+  expected_attempt=1
+  while [ "$attempt" -le "$MAX_ATTEMPTS" ]; do
+    wait_for_run
+    result=$?
+    case "$result" in
+      0) return 0 ;;
+      2) ;; # Only a confirmed unsuccessful completion permits a rerun.
+      *) return 1 ;;
+    esac
+    if [ "$attempt" -eq "$MAX_ATTEMPTS" ]; then
+      log "Run $run_id failed after $MAX_ATTEMPTS attempts."
+      return 1
+    fi
+
+    expected_attempt=$((observed_attempt + 1))
+    ghc run rerun "$run_id" --failed --repo "$REPO" || {
+      log "Unable to rerun $run_id; check GitHub Actions."
+      return 1
+    }
+    attempt=$((attempt + 1))
+    log "Requested attempt $attempt/$MAX_ATTEMPTS (failed jobs and their dependents only)."
+    sleep "$POLL_INTERVAL"
+  done
+}
+
+# A nonblocking lock prevents overlapping local cron runs without a waiting
+# process for each invocation. Keep the descriptor open throughout monitoring.
+main "$@" 9>"${TMPDIR:-/tmp}/diary-batch-runner-$(id -u).lock"
