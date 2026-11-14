@@ -61,7 +61,7 @@ class DiaryBatchRunnerTest(unittest.TestCase):
                 executable.chmod(0o755)
             # Shorten only the monitoring timeout; no real sleep or API calls.
             runner = root / "diary-batch-runner"
-            runner.write_text(RUNNER.read_text().replace("MAX_POLL_COUNT=1440", "MAX_POLL_COUNT=8"))
+            runner.write_text(RUNNER.read_text().replace("MAX_POLL_COUNT=180", "MAX_POLL_COUNT=8"))
             env = dict(os.environ, PATH=f"{root}:{os.environ['PATH']}",
                        TMPDIR=directory, MOCK_ROOT=directory)
             result = subprocess.run(["/bin/sh", str(runner)], env=env,

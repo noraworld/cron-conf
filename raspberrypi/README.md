@@ -24,8 +24,8 @@ The dispatch uses GitHub REST API version `2026-03-10` to obtain the exact run I
 Reruns use `--failed` to resume failed jobs and their dependents. A successful
 run exits with status 0; exhausted attempts or API errors exit with status 1.
 Monitoring retries temporary API errors up to `MAX_API_FAILURES` consecutive
-failures, polling every `POLL_INTERVAL=60` seconds. `MAX_POLL_COUNT=1440`
-limits each attempt to roughly 24 hours of monitoring. These constants are
+failures, polling every `POLL_INTERVAL=60` seconds. `MAX_POLL_COUNT=180`
+limits each attempt to roughly 3 hours of monitoring. These constants are
 defined at the top of the script.
 
 Overlapping invocations by the same OS user skip execution while the runner

@@ -8,7 +8,7 @@ WORKFLOW="batch.yml"
 # Includes the initial execution (at most four reruns).
 MAX_ATTEMPTS=5
 POLL_INTERVAL=60
-MAX_POLL_COUNT=1440 # Roughly 24 hours per attempt, including queue time.
+MAX_POLL_COUNT=180 # Roughly 3 hours per attempt, including queue time.
 MAX_API_FAILURES=5
 
 log() {
