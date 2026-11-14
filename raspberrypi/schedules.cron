@@ -373,6 +373,12 @@ NON_ROOT_USER=ubuntu
 
 
 
+# Hermes
+*/5 * * * * scheduler hermes allow
+0   * * * * scheduler hermes deny --soft
+
+
+
 # Knock
 */5    8-23 * * * scheduler knock allow
 0-4/1  0    * * * scheduler knock deny --yellow-kryptonite --safe
