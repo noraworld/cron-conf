@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# https://chatgpt.com/c/6af57ca6-fc38-83ee-8bc6-b17236e82307
 # codex://threads/01a1d927-7de5-7ff1-8bd4-b0426b3f64f8
 
 GHC_FROM="$(basename "$0") $*"
