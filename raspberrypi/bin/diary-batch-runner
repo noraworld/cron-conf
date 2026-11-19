@@ -6,8 +6,8 @@
 GHC_FROM="$(basename "$0") $*"
 export GHC_FROM
 
-REPO="noraworld/diary-templates-assistant"
-WORKFLOW="batch.yml"
+REPO=""
+WORKFLOW=""
 # Includes the initial execution (at most four reruns).
 MAX_ATTEMPTS=5
 POLL_INTERVAL=60
@@ -15,7 +15,84 @@ MAX_POLL_COUNT=180 # Roughly 3 hours per attempt, including queue time.
 MAX_API_FAILURES=5
 
 log() {
-  echo "diary-batch-runner: $*" >&2
+  printf 'diary-batch-runner [%s %s]: %s\n' "$REPO" "$WORKFLOW" "$*" >&2
+}
+
+usage() {
+  cat <<'EOF'
+Usage: diary-batch-runner --repo OWNER/REPO --workflow FILE_OR_ID [options]
+
+Required:
+  --repo OWNER/REPO       Repository containing the workflow
+  --workflow FILE_OR_ID  Workflow file name or numeric ID
+
+Options (positive integers):
+  --max-attempts N        Total attempts including the initial run (default: 5)
+  --poll-interval N       Seconds between status checks (default: 60)
+  --max-poll-count N      Maximum status checks per attempt (default: 180)
+  --max-api-failures N    Maximum consecutive API failures (default: 5)
+  -h, --help             Show this help
+
+Options accept both --name VALUE and --name=VALUE.
+EOF
+}
+
+positive_integer() {
+  case "$2" in
+    ''|*[!0-9]*)
+      log "$1 must be a positive integer."
+      return 1
+      ;;
+  esac
+  # Keep values within a range supported by both 32-bit and 64-bit shells.
+  if ! { [ "$2" -gt 0 ] && [ "$2" -le 2147483647 ]; } 2>/dev/null; then
+    log "$1 must be between 1 and 2147483647."
+    return 1
+  fi
+}
+
+parse_options() {
+  while [ "$#" -gt 0 ]; do
+    case "$1" in
+      --*=*)
+        option=${1%%=*}
+        value=${1#*=}
+        shift
+        set -- "$option" "$value" "$@"
+        ;;
+    esac
+    case "$1" in
+      --repo|--workflow|--max-attempts|--poll-interval|--max-poll-count|--max-api-failures)
+        if [ "$#" -lt 2 ] || [ -z "$2" ]; then
+          log "Missing value for $1."
+          return 1
+        fi
+        case "$2" in
+          --*) log "Missing value for $1."; return 1 ;;
+        esac
+        case "$1" in
+          --repo) REPO=$2 ;;
+          --workflow) WORKFLOW=$2 ;;
+          *)
+            positive_integer "$1" "$2" || return 1
+            case "$1" in
+              --max-attempts) MAX_ATTEMPTS=$2 ;;
+              --poll-interval) POLL_INTERVAL=$2 ;;
+              --max-poll-count) MAX_POLL_COUNT=$2 ;;
+              --max-api-failures) MAX_API_FAILURES=$2 ;;
+            esac
+            ;;
+        esac
+        shift 2
+        ;;
+      -h|--help) usage; return 2 ;;
+      *) log "Unknown option or unexpected argument: $1"; return 1 ;;
+    esac
+  done
+  if [ -z "$REPO" ] || [ -z "$WORKFLOW" ]; then
+    log "Both --repo and --workflow are required."
+    return 1
+  fi
 }
 
 # Return 0 for success, 2 for a completed unsuccessful run, or 1 for
@@ -54,7 +131,7 @@ EOF
   return 1
 }
 
-main() {
+run_workflow() {
   # flock is provided by util-linux on the Raspberry Pi. Do not queue cron
   # invocations or unlink this file: the lock is released when this process exits.
   command -v flock >/dev/null 2>&1 || {
@@ -117,6 +194,25 @@ main() {
   done
 }
 
-# A nonblocking lock prevents overlapping local cron runs without a waiting
-# process for each invocation. Keep the descriptor open throughout monitoring.
-main "$@" 9>"${TMPDIR:-/tmp}/diary-batch-runner-$(id -u).lock"
+main() {
+  parse_options "$@"
+  parse_status=$?
+  case "$parse_status" in
+    0) ;;
+    2) return 0 ;;
+    *) return 1 ;;
+  esac
+
+  # Hash the pair to keep arbitrary names out of paths and to avoid filename
+  # length limits. Different repositories/workflows must not share a lock.
+  command -v sha256sum >/dev/null 2>&1 || {
+    log "sha256sum is required."
+    return 1
+  }
+  lock_hash=$(printf '%s\000%s\000' "$REPO" "$WORKFLOW" | sha256sum) || return 1
+  lock_hash=${lock_hash%% *}
+  # Keep the descriptor open throughout monitoring; never unlink a lock file.
+  run_workflow 9>"${TMPDIR:-/tmp}/diary-batch-runner-$(id -u)-$lock_hash.lock"
+}
+
+main "$@"

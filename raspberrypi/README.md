@@ -15,21 +15,47 @@ For more details, see [a YouTube clip (Japanese)](https://www.youtube.com/watch?
 
 ## Diary batch runner
 
-`bin/diary-batch-runner` dispatches `batch.yml` in
-`noraworld/diary-templates-assistant` and monitors that run using `ghc`.
-It requires an authenticated GitHub CLI through `ghc` and `flock` (util-linux).
+`bin/diary-batch-runner` dispatches a workflow and monitors that run using `ghc`.
+Both `--repo` and `--workflow` are required:
+
+```shell
+diary-batch-runner --repo noraworld/diary-templates-assistant --workflow batch.yml
+diary-batch-runner --repo noraworld/diary-templates-assistant --workflow batch-work.yml --max-attempts 3
+```
+
+It requires an authenticated GitHub CLI through `ghc`, `flock` (util-linux),
+and `sha256sum` (coreutils).
 The dispatch uses GitHub REST API version `2026-03-10` to obtain the exact run ID.
 
-`MAX_ATTEMPTS=5` includes the initial execution, allowing up to four reruns.
+The following options are optional and accept positive integers:
+
+| Option | Default | Meaning |
+| --- | --- | --- |
+| `--max-attempts` | `5` | Total attempts, including the initial execution |
+| `--poll-interval` | `60` | Seconds between status checks |
+| `--max-poll-count` | `180` | Maximum status checks per attempt |
+| `--max-api-failures` | `5` | Maximum consecutive API failures |
+
+Values must be between 1 and 2147483647. Both `--option VALUE` and
+`--option=VALUE` are supported. Use `--help` to display usage.
+
+The default attempt limit includes the initial execution, allowing up to four reruns.
 Reruns use `--failed` to resume failed jobs and their dependents. A successful
 run exits with status 0; exhausted attempts or API errors exit with status 1.
-Monitoring retries temporary API errors up to `MAX_API_FAILURES` consecutive
-failures, polling every `POLL_INTERVAL=60` seconds. `MAX_POLL_COUNT=180`
-limits each attempt to roughly 3 hours of monitoring. These constants are
-defined at the top of the script.
+Missing required options, missing values, and invalid options also exit with
+status 1 before any GitHub requests. With the default polling interval and
+count, each attempt has roughly 3 hours of monitoring.
 
-Overlapping invocations by the same OS user skip execution while the runner
-holds its lock. After a monitoring timeout, interrupted runner, or dispatch
+Overlapping invocations by the same OS user for the same repository and
+workflow skip execution while the runner holds its lock. Different repositories
+or workflows use separate locks and can run concurrently. Use consistent
+repository spelling and workflow identifiers: file names and numeric IDs for
+the same workflow produce different locks.
+
+Callers must pass both required options; a bare `diary-batch-runner` invocation
+(including the existing call in `scheduler`'s `good()` function) now fails.
+
+After a monitoring timeout, interrupted runner, or dispatch
 error, check GitHub Actions before launching another batch: the remote run
 may still be active.
 

@@ -21,19 +21,24 @@ with (root / "calls").open("a") as f:
     f.write(json.dumps([name] + args) + "\n")
 config = json.loads((root / "config").read_text())
 if name == "flock":
+    with (root / "calls").open("a") as f:
+        f.write(json.dumps(["lock-path", next(root.glob("*.lock")).name]) + "\n")
     sys.exit(config.get("lock_status", 0))
 if name == "sleep":
     sys.exit(0)
 assert name == "ghc"
 assert os.environ["GHC_FROM"].startswith("diary-batch-runner")
-if args[:2] == ["api", "repos/noraworld/diary-templates-assistant"]:
+repo = config.get("repo", "noraworld/diary-templates-assistant")
+workflow = config.get("workflow", "batch.yml")
+if args[:2] == ["api", f"repos/{repo}"]:
     print("main")
 elif args[:3] == ["api", "--method", "POST"]:
+    assert args[3] == f"repos/{repo}/actions/workflows/{workflow}/dispatches"
     assert "X-GitHub-Api-Version: 2026-03-10" in args
     assert "ref=main" in args
     print(config.get("run_id", "123"))
     sys.exit(config.get("dispatch_status", 0))
-elif args[:2] == ["api", "repos/noraworld/diary-templates-assistant/actions/runs/123"]:
+elif args[:2] == ["api", f"repos/{repo}/actions/runs/123"]:
     counter = root / "poll_count"
     index = int(counter.read_text()) if counter.exists() else 0
     counter.write_text(str(index + 1))
@@ -43,7 +48,7 @@ elif args[:2] == ["api", "repos/noraworld/diary-templates-assistant/actions/runs
         sys.exit(1)
     print(state)
 elif args[:3] == ["run", "rerun", "123"]:
-    assert args[3:] == ["--failed", "--repo", "noraworld/diary-templates-assistant"]
+    assert args[3:] == ["--failed", "--repo", repo]
     sys.exit(config.get("rerun_status", 0))
 else:
     raise AssertionError(args)
@@ -51,7 +56,8 @@ else:
 
 
 class DiaryBatchRunnerTest(unittest.TestCase):
-    def run_case(self, states, expected_status=0, reruns=0, dispatches=1, **config):
+    def run_case(self, states, expected_status=0, reruns=0, dispatches=1,
+                 options=None, extra_options=(), **config):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             (root / "config").write_text(json.dumps(dict(states=states, **config)))
@@ -59,14 +65,15 @@ class DiaryBatchRunnerTest(unittest.TestCase):
                 executable = root / name
                 executable.write_text(f"#!{sys.executable}\n" + MOCK)
                 executable.chmod(0o755)
-            # Shorten only the monitoring timeout; no real sleep or API calls.
-            runner = root / "diary-batch-runner"
-            runner.write_text(RUNNER.read_text().replace("MAX_POLL_COUNT=180", "MAX_POLL_COUNT=8"))
             env = dict(os.environ, PATH=f"{root}:{os.environ['PATH']}",
                        TMPDIR=directory, MOCK_ROOT=directory)
-            result = subprocess.run(["/bin/sh", str(runner)], env=env,
+            if options is None:
+                options = ["--repo", config.get("repo", "noraworld/diary-templates-assistant"),
+                           "--workflow", config.get("workflow", "batch.yml")]
+            result = subprocess.run(["/bin/sh", str(RUNNER), *options, *extra_options], env=env,
                                     capture_output=True, text=True, timeout=15)
-            calls = [json.loads(line) for line in (root / "calls").read_text().splitlines()]
+            call_file = root / "calls"
+            calls = [json.loads(line) for line in call_file.read_text().splitlines()] if call_file.exists() else []
             self.assertEqual(result.returncode, expected_status, result.stderr)
             self.assertEqual(sum(c[:3] == ["ghc", "run", "rerun"] for c in calls), reruns)
             self.assertEqual(sum(c[:4] == ["ghc", "api", "--method", "POST"] for c in calls), dispatches)
@@ -105,16 +112,76 @@ class DiaryBatchRunnerTest(unittest.TestCase):
         self.run_case(["1 completed failure"], expected_status=1, reruns=1, rerun_status=1)
 
     def test_timeout_does_not_rerun(self):
-        self.run_case(["1 in_progress pending"], expected_status=1)
+        self.run_case(["1 in_progress pending"], expected_status=1,
+                      extra_options=["--max-poll-count", "3"])
 
     def test_stale_rerun_eventually_times_out(self):
-        self.run_case(["1 completed failure"], expected_status=1, reruns=1)
+        self.run_case(["1 completed failure"], expected_status=1, reruns=1,
+                      extra_options=["--max-poll-count", "3"])
 
     def test_overlapping_invocation_skips_dispatch(self):
         self.run_case([], dispatches=0, lock_status=75)
 
     def test_lock_error_exits_nonzero(self):
         self.run_case([], expected_status=1, dispatches=0, lock_status=1)
+
+    def test_required_options(self):
+        for options in ([], ["--repo", "owner/repo"], ["--workflow", "batch.yml"]):
+            with self.subTest(options=options):
+                calls, _ = self.run_case([], options=options, expected_status=1, dispatches=0)
+                self.assertEqual(calls, [])
+
+    def test_invalid_options_do_not_call_external_commands(self):
+        for extra in (["--workflow"], ["--repo="], ["--workflow", ""],
+                      ["--unknown", "1"], ["batch.yml"], ["--poll-interval", "--workflow"]):
+            with self.subTest(extra=extra):
+                calls, _ = self.run_case([], extra_options=extra, expected_status=1, dispatches=0)
+                self.assertEqual(calls, [])
+
+    def test_invalid_numeric_options(self):
+        for option in ("--max-attempts", "--poll-interval", "--max-poll-count", "--max-api-failures"):
+            for value in ("0", "-1", "1.5", "abc", "", "999999999999999999999"):
+                with self.subTest(option=option, value=value):
+                    calls, _ = self.run_case([], extra_options=[f"{option}={value}"],
+                                             expected_status=1, dispatches=0)
+                    self.assertEqual(calls, [])
+
+    def test_help_without_required_options(self):
+        for flag in ("-h", "--help"):
+            calls, _ = self.run_case([], options=[flag], dispatches=0)
+            self.assertEqual(calls, [])
+
+    def test_custom_repository_and_workflow(self):
+        self.run_case(["1 completed failure", "2 completed success"], reruns=1,
+                      repo="other/project", workflow="batch-work.yml")
+
+    def test_equals_syntax(self):
+        self.run_case(["1 completed success"],
+                      options=["--repo=noraworld/diary-templates-assistant", "--workflow=batch.yml"])
+
+    def test_custom_attempt_limit(self):
+        self.run_case(["1 completed failure", "2 completed failure"], expected_status=1,
+                      reruns=1, extra_options=["--max-attempts", "2"])
+
+    def test_custom_poll_interval_and_count(self):
+        calls, _ = self.run_case(["1 queued pending"], expected_status=1,
+                                 extra_options=["--poll-interval", "7", "--max-poll-count", "2"])
+        self.assertEqual(sum(c == ["sleep", "7"] for c in calls), 2)
+
+    def test_custom_api_failure_limit(self):
+        calls, _ = self.run_case(["API_ERROR"], expected_status=1,
+                                 extra_options=["--max-api-failures", "2"])
+        self.assertEqual(sum(c[:2] == ["ghc", "api"] for c in calls), 4)
+
+    def test_lock_is_scoped_to_repository_and_workflow(self):
+        def lock_name(**config):
+            calls, _ = self.run_case(["1 completed success"], **config)
+            return next(c[1] for c in calls if c[0] == "lock-path")
+
+        default = lock_name()
+        self.assertEqual(default, lock_name())
+        self.assertNotEqual(default, lock_name(workflow="batch-work.yml"))
+        self.assertNotEqual(default, lock_name(repo="other/project"))
 
 
 if __name__ == "__main__":
