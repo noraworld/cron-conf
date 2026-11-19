@@ -347,11 +347,11 @@ elena() {
 
 good() {
   garnish wipe --force
-  diary-batch-runner --repo noraworld/diary-templates-assistant --workflow batch.yml
+  gwr --repo noraworld/diary-templates-assistant --workflow batch.yml
 }
 
 good_work() {
-  diary-batch-runner --repo noraworld/diary-templates-assistant --workflow batch-work.yml
+  gwr --repo noraworld/diary-templates-assistant --workflow batch-work.yml
 }
 
 morning() {

@@ -13,14 +13,15 @@ The purpose is to reduce the amount of the digital dopamine in your brain and re
 
 For more details, see [a YouTube clip (Japanese)](https://www.youtube.com/watch?v=SWFRdY5E0B0).
 
-## Diary batch runner
+## GitHub Workflow Runner (gwr)
 
-`bin/diary-batch-runner` dispatches a workflow and monitors that run using `ghc`.
+`gwr` stands for **GitHub Workflow Runner**.
+`bin/gwr` dispatches a workflow and monitors that run using `ghc`.
 Both `--repo` and `--workflow` are required:
 
 ```shell
-diary-batch-runner --repo noraworld/diary-templates-assistant --workflow batch.yml
-diary-batch-runner --repo noraworld/diary-templates-assistant --workflow batch-work.yml --max-attempts 3
+gwr --repo noraworld/diary-templates-assistant --workflow batch.yml
+gwr --repo noraworld/diary-templates-assistant --workflow batch-work.yml --max-attempts 3
 ```
 
 It requires an authenticated GitHub CLI through `ghc`, `flock` (util-linux),
@@ -52,7 +53,7 @@ or workflows use separate locks and can run concurrently. Use consistent
 repository spelling and workflow identifiers: file names and numeric IDs for
 the same workflow produce different locks.
 
-Callers must pass both required options; a bare `diary-batch-runner` invocation
+Callers must pass both required options; a bare `gwr` invocation
 fails. `scheduler good` runs `batch.yml`, and `scheduler good-work` runs
 `batch-work.yml`, both in `noraworld/diary-templates-assistant`.
 Separate entries in `schedules.cron` start these commands daily at 06:59 in

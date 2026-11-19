@@ -15,12 +15,14 @@ MAX_POLL_COUNT=180 # Roughly 3 hours per attempt, including queue time.
 MAX_API_FAILURES=5
 
 log() {
-  printf 'diary-batch-runner [%s %s]: %s\n' "$REPO" "$WORKFLOW" "$*" >&2
+  printf 'gwr [%s %s]: %s\n' "$REPO" "$WORKFLOW" "$*" >&2
 }
 
 usage() {
   cat <<'EOF'
-Usage: diary-batch-runner --repo OWNER/REPO --workflow FILE_OR_ID [options]
+gwr stands for GitHub Workflow Runner.
+
+Usage: gwr --repo OWNER/REPO --workflow FILE_OR_ID [options]
 
 Required:
   --repo OWNER/REPO       Repository containing the workflow
@@ -127,7 +129,7 @@ EOF
     fi
     sleep "$POLL_INTERVAL"
   done
-  log "Timed out monitoring run $run_id; check it before starting another batch."
+  log "Timed out monitoring run $run_id; check it before dispatching another workflow run."
   return 1
 }
 
@@ -141,10 +143,10 @@ run_workflow() {
   flock -n -E 75 9 || {
     lock_status=$?
     if [ "$lock_status" -eq 75 ]; then
-      log "Another batch runner is active; skipping."
+      log "Another workflow runner is active; skipping."
       return 0
     fi
-    log "Unable to acquire the batch runner lock."
+    log "Unable to acquire the workflow runner lock."
     return 1
   }
 
@@ -157,7 +159,7 @@ run_workflow() {
   run_id=$(ghc api --method POST "repos/$REPO/actions/workflows/$WORKFLOW/dispatches" \
     -H 'X-GitHub-Api-Version: 2026-03-10' \
     -f "ref=$ref" --jq .workflow_run_id) || {
-    log "Dispatch failed; check GitHub Actions before starting another batch."
+    log "Dispatch failed; check GitHub Actions before dispatching another workflow run."
     return 1
   }
   case "$run_id" in
@@ -212,7 +214,7 @@ main() {
   lock_hash=$(printf '%s\000%s\000' "$REPO" "$WORKFLOW" | sha256sum) || return 1
   lock_hash=${lock_hash%% *}
   # Keep the descriptor open throughout monitoring; never unlink a lock file.
-  run_workflow 9>"${TMPDIR:-/tmp}/diary-batch-runner-$(id -u)-$lock_hash.lock"
+  run_workflow 9>"${TMPDIR:-/tmp}/gwr-$(id -u)-$lock_hash.lock"
 }
 
 main "$@"

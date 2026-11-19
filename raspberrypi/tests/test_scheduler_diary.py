@@ -45,7 +45,7 @@ class SchedulerDiaryTest(unittest.TestCase):
         for failed_workflow in ("", "batch.yml", "batch-work.yml"):
             with self.subTest(failed_workflow=failed_workflow), tempfile.TemporaryDirectory() as directory:
                 root = Path(directory)
-                runner = root / "diary-batch-runner"
+                runner = root / "gwr"
                 runner.write_text(f"#!{sys.executable}\n" + RUNNER_MOCK)
                 runner.chmod(0o755)
                 garnish = root / "garnish"

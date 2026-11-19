@@ -9,7 +9,7 @@ import tempfile
 import unittest
 
 
-RUNNER = Path(__file__).resolve().parents[1] / "bin" / "diary-batch-runner"
+RUNNER = Path(__file__).resolve().parents[1] / "bin" / "gwr"
 MOCK = r'''
 import json, os, sys
 from pathlib import Path
@@ -27,7 +27,7 @@ if name == "flock":
 if name == "sleep":
     sys.exit(0)
 assert name == "ghc"
-assert os.environ["GHC_FROM"].startswith("diary-batch-runner")
+assert os.environ["GHC_FROM"].startswith("gwr")
 repo = config.get("repo", "noraworld/diary-templates-assistant")
 workflow = config.get("workflow", "batch.yml")
 if args[:2] == ["api", f"repos/{repo}"]:
@@ -55,7 +55,7 @@ else:
 '''
 
 
-class DiaryBatchRunnerTest(unittest.TestCase):
+class GwrTest(unittest.TestCase):
     def run_case(self, states, expected_status=0, reruns=0, dispatches=1,
                  options=None, extra_options=(), **config):
         with tempfile.TemporaryDirectory() as directory:
