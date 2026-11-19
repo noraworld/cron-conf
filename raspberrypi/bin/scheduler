@@ -135,6 +135,9 @@ main() {
     "work-batch")
       work_batch
       ;;
+    "good")
+      good
+      ;;
     "morning")
       morning
       ;;
@@ -346,12 +349,15 @@ elena() {
 }
 
 diary_batch() {
-  garnish wipe --force
   gwr --repo noraworld/diary-templates-assistant --workflow batch.yml
 }
 
 work_batch() {
   gwr --repo noraworld/diary-templates-assistant --workflow batch-work.yml
+}
+
+good() {
+  garnish wipe --force
 }
 
 morning() {
