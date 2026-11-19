@@ -53,7 +53,10 @@ repository spelling and workflow identifiers: file names and numeric IDs for
 the same workflow produce different locks.
 
 Callers must pass both required options; a bare `diary-batch-runner` invocation
-(including the existing call in `scheduler`'s `good()` function) now fails.
+fails. `scheduler good` runs `batch.yml`, and `scheduler good-work` runs
+`batch-work.yml`, both in `noraworld/diary-templates-assistant`.
+Separate entries in `schedules.cron` start these commands daily at 06:59 in
+the cron daemon's timezone, allowing both workflows to run in parallel.
 
 After a monitoring timeout, interrupted runner, or dispatch
 error, check GitHub Actions before launching another batch: the remote run

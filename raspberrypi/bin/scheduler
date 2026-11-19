@@ -132,6 +132,9 @@ main() {
     "good")
       good
       ;;
+    "good-work")
+      good_work
+      ;;
     "morning")
       morning
       ;;
@@ -344,7 +347,11 @@ elena() {
 
 good() {
   garnish wipe --force
-  diary-batch-runner
+  diary-batch-runner --repo noraworld/diary-templates-assistant --workflow batch.yml
+}
+
+good_work() {
+  diary-batch-runner --repo noraworld/diary-templates-assistant --workflow batch-work.yml
 }
 
 morning() {
