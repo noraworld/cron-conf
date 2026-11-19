@@ -45,7 +45,6 @@ NON_ROOT_USER=ubuntu
 #       * other schedules (during the morning)
 #       * constants in garnish
 #
-# Separate cron entries start both diary workflows independently, in parallel.
 59 6  * * * scheduler diary-batch
 59 6  * * * scheduler work-batch
 59 7  * * * scheduler good
