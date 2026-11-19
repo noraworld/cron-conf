@@ -36,11 +36,11 @@ class SchedulerDiaryTest(unittest.TestCase):
         entries = []
         for line in (RASPBERRYPI / "schedules.cron").read_text().splitlines():
             fields = line.split()
-            if fields[5:7] in (["scheduler", "good"], ["scheduler", "good-work"]):
+            if fields[5:7] in (["scheduler", "diary-batch"], ["scheduler", "work-batch"]):
                 self.assertEqual(fields[:5], ["59", "6", "*", "*", "*"])
                 self.assertEqual(len(fields), 7)
                 entries.append(fields[6])
-        self.assertCountEqual(entries, ["good", "good-work"])
+        self.assertCountEqual(entries, ["diary-batch", "work-batch"])
 
         for failed_workflow in ("", "batch.yml", "batch-work.yml"):
             with self.subTest(failed_workflow=failed_workflow), tempfile.TemporaryDirectory() as directory:
@@ -62,7 +62,7 @@ class SchedulerDiaryTest(unittest.TestCase):
                         processes.append((service, process))
                     for service, process in processes:
                         _, stderr = process.communicate(timeout=10)
-                        workflow = "batch.yml" if service == "good" else "batch-work.yml"
+                        workflow = "batch.yml" if service == "diary-batch" else "batch-work.yml"
                         self.assertEqual(process.returncode, int(failed_workflow == workflow), stderr)
                     self.assertEqual((root / "garnish-calls").read_text(), "wipe --force\n")
                 finally:

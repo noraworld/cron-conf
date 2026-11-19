@@ -129,11 +129,11 @@ main() {
     "maeve")
       maeve
       ;;
-    "good")
-      good
+    "diary-batch")
+      diary_batch
       ;;
-    "good-work")
-      good_work
+    "work-batch")
+      work_batch
       ;;
     "morning")
       morning
@@ -345,12 +345,12 @@ elena() {
   esac
 }
 
-good() {
+diary_batch() {
   garnish wipe --force
   gwr --repo noraworld/diary-templates-assistant --workflow batch.yml
 }
 
-good_work() {
+work_batch() {
   gwr --repo noraworld/diary-templates-assistant --workflow batch-work.yml
 }
 
