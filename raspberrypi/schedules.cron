@@ -46,9 +46,9 @@ NON_ROOT_USER=ubuntu
 #       * constants in garnish
 #
 00 7  * * * sincere
-59 6  * * * scheduler diary-batch
-59 6  * * * scheduler work-batch
-59 7  * * * scheduler good
+30 7  * * * scheduler diary-batch
+30 7  * * * scheduler work-batch
+00 8  * * * scheduler good
 19 10 * * * scheduler morning
 
 
