@@ -894,9 +894,10 @@ recurrent() {
   # Observe the upstream DNS files
   #
   # MEMO:
-  #   Disabled temporarily because the automatic changes to the Upstream DNS servers may prevent accurate
-  #   network-related experiments from being conducted. Besides, it conflicts with the Upstream restriction in the cron.
-  #   Instead, you can perform it manually to unlock the restriction.
+  #   Disabled temporarily because the automatic changes to the Upstream DNS servers may prevent accurate network-related
+  #   experiments from being conducted. Besides, it conflicts with the Upstream hourly restriction in the cron. Using this
+  #   on the command line causes the display to break. Use 'trailblazer --quotarget-force-retry upstream' instead when you
+  #   want to unlock the restriction manually.
   # upstream-observer
 
   # Empty "at -l" to prevent illegal batches
