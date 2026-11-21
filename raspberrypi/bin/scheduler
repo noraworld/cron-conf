@@ -895,7 +895,8 @@ recurrent() {
   #
   # MEMO:
   #   Disabled temporarily because the automatic changes to the Upstream DNS servers may prevent accurate
-  #   network-related experiments from being conducted. Instead, you can perform it manually to unlock the restrictions.
+  #   network-related experiments from being conducted. Besides, it conflicts with the Upstream restriction in the cron.
+  #   Instead, you can perform it manually to unlock the restriction.
   # upstream-observer
 
   # Empty "at -l" to prevent illegal batches
